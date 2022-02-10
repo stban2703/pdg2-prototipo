@@ -41,5 +41,21 @@
     &__section {
         width: 100%;
         margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+
+        &--row {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__recoverPass {
+        a {
+            font-family: $poppins;
+            color: $normalGray;
+            font-size: $link;
+        }
     }
 }
