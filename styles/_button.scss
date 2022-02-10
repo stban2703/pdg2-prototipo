@@ -1,0 +1,23 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 40px;
+
+    p {
+        font-family: $poppins;
+        font-size: $subtitle;
+    }
+
+    &--darkGray {
+        background-color: $darkGray;
+
+        p {
+            color: white;
+        }
+    }
+}

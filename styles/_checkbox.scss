@@ -1,0 +1,15 @@
+.checkbox {
+    display: flex;
+    align-items: center;
+
+    input {
+        width: 20px;
+        height: 20px;
+    }
+
+    label {
+        margin-left: 10px;
+        font-family: $poppins;
+        font-size: $subtitle;
+    }
+}
