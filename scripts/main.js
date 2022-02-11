@@ -1,4 +1,5 @@
-import { checkAuthState, logOut } from "./modules/firebase.js";
+import { signIn, signUp, checkAuthState } from "./modules/auth.js";
+import { createUser } from "./modules/firestore.js"
 
-///signUp("s.t.ban1401@gmail.com", "123456")
-//signIn("s.t.ban1401@gmail.com", "123456")
+//createUser("121331", "Esteban", "s.t.ban1401@gmail.com", "teacher")
+//checkAuthState()

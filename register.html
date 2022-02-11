@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memo Login</title>
     <link rel="stylesheet" href="styles/main.css">
-    <script type="module" src="scripts/login.js" defer></script>
+    <script type="module" src="scripts/register.js" defer></script>
 </head>
 
 <body>
@@ -18,11 +18,17 @@
             </div>
         </article>
         <article class="login__fields">
-            <form class="login__form signInForm">
+            <form class="login__form signUpForm">
                 <section class="login__section">
                     <h1 class="login__title">
-                        Iniciar sesión
+                        Crear cuenta
                     </h1>
+                </section>
+                <section class="login__section">
+                    <div class="inputText">
+                        <label for="fullname">Nombre completo</label>
+                        <input type="text" name="fullname" placeholder="Nombre y apellidos">
+                    </div>
                 </section>
                 <section class="login__section">
                     <div class="inputText">
@@ -36,13 +42,10 @@
                         <input type="password" name="pass" placeholder="Tu contraseña">
                     </div>
                 </section>
-                <section class="login__section login__section--row">
+                <section class="login__section">
                     <div class="checkbox">
-                        <input type="checkbox" name="rememberme">
-                        <label for="rememberme">Recordarme</label>
-                    </div>
-                    <div class="login__recoverPass">
-                        <a href="">¿Olvidó su contraseña?</a>
+                        <input type="checkbox" name="agreement">
+                        <label for="agreement">Aceptar términos y condiciones</label>
                     </div>
                 </section>
                 <section class="login__section">
