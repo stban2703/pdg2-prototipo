@@ -6,15 +6,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memo</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="scripts/main.js" defer></script>
 </head>
 
 <body>
-    <main>
-        <nav>
-
+    <main class="content">
+        <nav class="navigation">
+            <section class="navigation__section">
+                <header class="navigation__logo">
+                    <h1>
+                        Nombreapp
+                    </h1>
+                </header>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <li>Inicio</li>
+                    <li>Reunión reflexiva</li>
+                </ol>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <li>Cerrar sesión</li>
+                </ol>
+            </section>
         </nav>
-        <article>
-            
+        <article class="home">
+            <header class="home__header">
+                <section>
+                    <h2 class="home__welcome">Hola, aaaa</h2>
+                    <p class="home__greetings">¡Bienvenide, es un placer verte de nuevo!</p>
+                </section>
+            </header>
+            <section class="home__section home__section--row">
+                <div class="home__memoProgress">
+                    <img src="./images/memobeta.png" alt="">
+                </div>
+                <div class="home__notes">
+                    <button class="addNoteBtn">
+                        <div class="addNoteBtn__icon">
+                            <img src="./images/addwhite.svg" alt="">
+                        </div>
+                        <p class="addNoteBtn__tag">Crear anotación</p>
+                    </button>
+                    <div class="notefiles hidden">
+                        <button class="notefiles__button">
+                            <div>
+                                <img src="./images/textnote.svg" alt="">
+                            </div>
+                            <p>Texto</p>
+                        </button>
+                        <button class="notefiles__button">
+                            <div>
+                                <img src="./images/audionote.svg" alt="">
+                            </div>
+                            <p>Audio</p>
+                        </button>
+                        <button class="notefiles__button">
+                            <div>
+                                <img src="./images/cameranote.svg" alt="">
+                            </div>
+                            <p>Imagen</p>
+                        </button>
+                        <button class="notefiles__button">
+                            <div>
+                                <img src="./images/videonote.svg" alt="">
+                            </div>
+                            <p>Video</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </article>
     </main>
 </body>

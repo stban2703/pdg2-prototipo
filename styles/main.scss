@@ -3,6 +3,11 @@
 @import 'colors';
 
 @import 'login';
+@import 'content';
+@import 'navigation';
+@import 'home';
+@import 'addNoteBtn';
+@import 'notefiles';
 @import 'inputText';
 @import 'checkbox';
 @import 'button';
@@ -10,5 +15,9 @@
 html, body, main {
     width: 100%;
     height: 100%;
+}
+
+.hidden {
+    display: none;
 }
 
