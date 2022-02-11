@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="scripts/createnote.js" defer></script>
+</head>
+
+<body>
+    <main class="content">
+        <nav class="navigation">
+            <section class="navigation__section">
+                <header class="navigation__logo">
+                    <h1>
+                        Nombreapp
+                    </h1>
+                </header>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <li>Inicio</li>
+                    <li>Reunión reflexiva</li>
+                </ol>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <li>Cerrar sesión</li>
+                </ol>
+            </section>
+        </nav>
+        <article class="createNote">
+            <header class="createNote__header">
+                <section>
+                    <h2 class="createNote__title">Nueva anotación</h2>
+                </section>
+            </header>
+            <form class="createNote__form noteForm">
+                <section class="createNote__section createNote__section--row">
+                    <section class="createNote__name">
+                        <div class="inputText">
+                            <label for="text">Nombre</label>
+                            <input type="text" name="title" placeholder="Nombre de la nota">
+                        </div>
+                    </section>
+                    <section class="createNote__week">
+                        <div class="inputText">
+                            <label for="week">Semana</label>
+                            <input type="number" name="week" placeholder="N° semana">
+                        </div>
+                    </section>
+                </section>
+                <section class="createNote__section">
+                    <p class="createNote__subtitle">Categoría</p>
+                    <section class="createNote__categories">
+                        <div class="categorie">
+                            <div class="categorie__color categorie__color--keep">
+                                
+                            </div>
+                            <p class="categorie__tag">Mantener</p>
+                        </div>
+                        <div class="categorie">
+                            <div class="categorie__color categorie__color--improve">
+                                
+                            </div>
+                            <p class="categorie__tag">Mejorar</p>
+                        </div>
+                        <div class="categorie">
+                            <div class="categorie__color categorie__color--remove">
+                                
+                            </div>
+                            <p class="categorie__tag">Quitar</p>
+                        </div>
+                    </section>
+                </section>
+                <section class="createNote__section">
+                    <p class="createNote__subtitle">Curso</p>
+                    <div class="select">
+                        <select name="subject">
+                            <option value="Fundamentos">Fundamentos</option>
+                            <option value="Algoritmos">Algoritmos</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="createNote__section createNote__files">
+                    <p class="createNote__subtitle">Archivo</p>
+                    <section class="createNote__filetype textfile hidden">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </section>
+                    <section class="createNote__filetype videofile hidden">
+                        <input type="file" accept="video/mp4,video/x-m4v,video/*" >
+                    </section>
+                </section>
+            </form>
+        </article>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+.select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        font-family: $poppins;
+        font-size: $subtitle;
+    }
+}

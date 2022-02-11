@@ -456,6 +456,132 @@ input[type=button] {
           align-items: center;
 }
 
+.createNote {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px 20px;
+}
+
+.createNote__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.createNote__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.1rem;
+  color: #363636;
+}
+
+.createNote__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.createNote__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.createNote__section--row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.createNote__name {
+  width: 100%;
+  max-width: 400px;
+}
+
+.createNote__week {
+  margin-left: 40px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.createNote__subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #363636;
+  margin-bottom: 10px;
+}
+
+.createNote__categories {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+}
+
+.categorie {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100px;
+}
+
+.categorie__color {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.categorie__color--keep {
+  background-color: #575757;
+}
+
+.categorie__color--improve {
+  background-color: #9E9E9E;
+}
+
+.categorie__color--remove {
+  background-color: #C4C4C4;
+}
+
+.categorie__tag {
+  font-family: "Poppins", sans-serif;
+}
+
 .addNoteBtn {
   background: none;
   border: none;
