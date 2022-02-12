@@ -5,11 +5,13 @@ import {
     doc,
     addDoc,
     setDoc,
+    updateDoc,
     query,
     getDoc,
     getDocs,
     where
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { submitFile } from "./storage.js";
 
 const firestore = getFirestore(firebase)
 
@@ -47,4 +49,36 @@ export const getUserFromDb = async function (uid) {
         //console.log(doc.id, " => ", doc.data());
     });*/
     //console.log(userList.length)
+}
+
+export const submitNote = async function(uid, name, week, subject, file) {
+    try {
+        const usernoteRef = doc(collection(firestore, "notes"))
+        const newNote = {
+            id: usernoteRef.id,
+            name: name,
+            week: week,
+            subject: subject,
+            fileReference: "",
+            userId: uid
+        }
+        await setDoc(usernoteRef, newNote).then(() => {
+            submitFile(file, usernoteRef.id)
+        }).catch((error) => {
+            console.log(error)
+        });
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const updateFileReference = async function(id, fileUrl) {
+    try {
+        const usernoteRef = doc(firestore, "notes", id)
+        await updateDoc(usernoteRef, {
+            fileReference: fileUrl
+        })
+    } catch(e) {
+        console.log(e)
+    }
 }

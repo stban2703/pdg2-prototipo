@@ -43,7 +43,7 @@
                     <section class="createNote__name">
                         <div class="inputText">
                             <label for="text">Nombre</label>
-                            <input type="text" name="title" placeholder="Nombre de la nota">
+                            <input type="text" name="name" placeholder="Nombre de la nota">
                         </div>
                     </section>
                     <section class="createNote__week">
@@ -91,8 +91,13 @@
                         <textarea name="" id="" cols="30" rows="10"></textarea>
                     </section>
                     <section class="createNote__filetype videofile hidden">
-                        <input type="file" accept="video/mp4,video/x-m4v,video/*" >
+                        <input name="file" type="file" accept="video/mp4,video/x-m4v,video/*" >
                     </section>
+                </section>
+                <section class="createNote__section">
+                    <button class="button">
+                        <p>Guardar</p>
+                    </button>
                 </section>
             </form>
         </article>
