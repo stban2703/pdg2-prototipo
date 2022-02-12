@@ -18,13 +18,19 @@ const firestore = getFirestore(firebase)
 export const createUser = async function (uid, name, lastname, email, role) {
     try {
         const userRef = doc(firestore, 'users', uid);
-        await setDoc(userRef, {
+
+        const newUser = {
             id: uid,
             name: name,
             lastname: lastname,
             email: email,
             role: role
-        }).then().catch((error) => {
+        }
+
+        await setDoc(userRef, newUser).then(() => {
+            localStorage.setItem('currentuser', JSON.stringify(newUser))
+            window.location = 'index.html'
+        }).catch((error) => {
             console.log(error)
         });
     } catch (e) {
@@ -37,12 +43,12 @@ export const getUserFromDb = async function (uid) {
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
         const user = docSnap.data()
+        localStorage.setItem('currentuser', JSON.stringify(user))
+        window.location = 'index.html'
         console.log("Document data: " + user.name + ", " + user.role);
     } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("No existe este usuario");
     }
-
     /*const q = query(collection(firebase, "users"))
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -52,7 +58,7 @@ export const getUserFromDb = async function (uid) {
     //console.log(userList.length)
 }
 
-export const submitNote = async function(uid, name, week, subject, file) {
+export const submitNote = async function (uid, name, week, subject, file) {
     try {
         const usernoteRef = doc(collection(firestore, "notes"))
         const newNote = {
@@ -73,13 +79,13 @@ export const submitNote = async function(uid, name, week, subject, file) {
     }
 }
 
-export const updateFileReference = async function(id, fileUrl) {
+export const updateFileReference = async function (id, fileUrl) {
     try {
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {
             fileReference: fileUrl
         })
-    } catch(e) {
+    } catch (e) {
         console.log(e)
     }
 }

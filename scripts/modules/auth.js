@@ -29,7 +29,6 @@ export const signIn = function (email, password) {
         // Signed in
         const user = userCredential.user;
         getUserFromDb(user.uid)
-        window.location = 'index.html'
         console.log(user.uid + " ha iniciado sesion")
     })
         .catch((error) => {
@@ -42,7 +41,7 @@ export const signIn = function (email, password) {
 
 export const logOut = function () {
     signOut(auth).then(() => {
-        console.log("Salio")
+        localStorage.removeItem('currentuser')
       }).catch((error) => {
         // An error happened.
         console.log("No salio")
@@ -53,9 +52,13 @@ export const checkAuthState = function() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
-          console.log(uid)
+          getUserFromDb(uid)
         } else {
           console.log("Empty")
         }
       });
+}
+
+export const currentSignedInUser = function() {
+    return auth.currentUser
 }
