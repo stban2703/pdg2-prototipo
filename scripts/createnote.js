@@ -21,10 +21,11 @@ noteForm.addEventListener('submit', function (event) {
     event.preventDefault()
     const name = noteForm.name.value
     const week = noteForm.week.value
+    const categorie = noteForm.categorie.value
     const subject = noteForm.subject.value
     if (videoFileSection) {
         const file = noteForm.file.files[0]
-        submitNote("stban1401", name, week, subject, file)
+        submitNote("stban1401", name, week, categorie, subject, file)
     }
 })
 

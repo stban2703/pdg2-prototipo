@@ -560,6 +560,74 @@ input[type=button] {
   width: 100px;
 }
 
+.categorie__radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background-color: #fff;
+  margin: 0;
+  appearance: none;
+  font: inherit;
+  color: black;
+  width: 40px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.categorie__radio::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  -webkit-box-shadow: inset 30px 30px black;
+          box-shadow: inset 30px 30px black;
+}
+
+.categorie__radio:checked::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.categorie__radio--keep {
+  color: #575757;
+  border: 2px solid #575757;
+}
+
+.categorie__radio--keep::before {
+  -webkit-box-shadow: inset 30px 30px #575757;
+          box-shadow: inset 30px 30px #575757;
+}
+
+.categorie__radio--improve {
+  color: #9E9E9E;
+  border: 2px solid #9E9E9E;
+}
+
+.categorie__radio--improve::before {
+  -webkit-box-shadow: inset 30px 30px #9E9E9E;
+          box-shadow: inset 30px 30px #9E9E9E;
+}
+
+.categorie__radio--remove {
+  color: #C4C4C4;
+  border: 2px solid #C4C4C4;
+}
+
+.categorie__radio--remove::before {
+  -webkit-box-shadow: inset 30px 30px #C4C4C4;
+          box-shadow: inset 30px 30px #C4C4C4;
+}
+
 .categorie__color {
   width: 40px;
   height: 40px;
