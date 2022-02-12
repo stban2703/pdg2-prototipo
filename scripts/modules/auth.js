@@ -11,11 +11,11 @@ import { createUser, getUserFromDb } from "./firestore.js";
 
 const auth = getAuth()
 
-export const signUp = function (email, password, name) {
+export const signUp = function (email, password, name, lastname) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            createUser(user.uid, name, email, "teacher")
+            createUser(user.uid, name, lastname, email, "teacher")
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -29,6 +29,7 @@ export const signIn = function (email, password) {
         // Signed in
         const user = userCredential.user;
         getUserFromDb(user.uid)
+        window.location = 'index.html'
         console.log(user.uid + " ha iniciado sesion")
     })
         .catch((error) => {

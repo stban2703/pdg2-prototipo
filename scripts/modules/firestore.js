@@ -15,12 +15,13 @@ import { submitFile } from "./storage.js";
 
 const firestore = getFirestore(firebase)
 
-export const createUser = async function (uid, name, email, role) {
+export const createUser = async function (uid, name, lastname, email, role) {
     try {
         const userRef = doc(firestore, 'users', uid);
         await setDoc(userRef, {
             id: uid,
             name: name,
+            lastname: lastname,
             email: email,
             role: role
         }).then().catch((error) => {
