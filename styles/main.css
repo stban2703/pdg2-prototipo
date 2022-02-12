@@ -701,6 +701,7 @@ input[type=button] {
   background-color: #F9F9F9;
   padding: 15px;
   border-radius: 20px;
+  margin-bottom: 15px;
 }
 
 .columnNoteItem__info {

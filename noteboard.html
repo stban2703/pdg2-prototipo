@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis anotaciones</title>
     <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="./scripts/noteboard.js" defer></script>
 </head>
 
 <body>
@@ -21,8 +22,8 @@
             </section>
             <section class="navigation__section">
                 <ol class="navigation__tabs">
-                    <li>Inicio</li>
-                    <li>Mis anotaciones</li>
+                    <a href="index.html"><li>Inicio</li></a>
+                    <a href="noteboard.html"><li>Mis anotaciones</li></a>
                     <li>Reunión reflexiva</li>
                 </ol>
             </section>
@@ -50,30 +51,8 @@
                         </div>
                         <p>Mantener</p>
                     </section>
-                    <section class="boardColumn__list">
-                        <div class="columnNoteItem">
-                            <section class="columnNoteItem__info">
-                                <section class="columnNoteItem__icon">
-                                    <img src="./images/videonoteview.svg" alt="">
-                                </section>
-                                <section class="columnNoteItem__summary">
-                                    <p>Nombre: Video clase 1</p>
-                                    <p>Curso: Introducción</p>
-                                    <p>Fecha: 27/01/2022</p>
-                                </section>
-                            </section>
-                            <section class="columnNoteItem__control">
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--left">
-                                    <img src="" alt="">
-                                </div>
-                                <button class="button columnNoteItem__button button columnNoteItem__button button--board button--dark">
-                                    <p>Ver detalle</p>
-                                </button>
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--right">
-                                    <img src="" alt="">
-                                </div>
-                            </section>
-                        </div>
+                    <section class="boardColumn__list boardColumn__list--keep">
+                    
                     </section>
                 </div>
                 <div class="boardColumn boardColumn--improve">
@@ -83,30 +62,8 @@
                         </div>
                         <p>Mejorar</p>
                     </section>
-                    <section class="boardColumn__list">
-                        <div class="columnNoteItem">
-                            <section class="columnNoteItem__info">
-                                <section class="columnNoteItem__icon">
-                                    <img src="./images/videonoteview.svg" alt="">
-                                </section>
-                                <section class="columnNoteItem__summary">
-                                    <p>Nombre: Video clase 1</p>
-                                    <p>Curso: Introducción</p>
-                                    <p>Fecha: 27/01/2022</p>
-                                </section>
-                            </section>
-                            <section class="columnNoteItem__control">
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--left">
-                                    <img src="" alt="">
-                                </div>
-                                <button class="button columnNoteItem__button button columnNoteItem__button button--board button--dark">
-                                    <p>Ver detalle</p>
-                                </button>
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--right">
-                                    <img src="" alt="">
-                                </div>
-                            </section>
-                        </div>
+                    <section class="boardColumn__list boardColumn__list--improve">
+                        
                     </section>
                 </div>
                 <div class="boardColumn boardColumn--remove">
@@ -116,30 +73,8 @@
                         </div>
                         <p>Quitar</p>
                     </section>
-                    <section class="boardColumn__list">
-                        <div class="columnNoteItem">
-                            <section class="columnNoteItem__info">
-                                <section class="columnNoteItem__icon">
-                                    <img src="./images/videonoteview.svg" alt="">
-                                </section>
-                                <section class="columnNoteItem__summary">
-                                    <p>Nombre: Video clase 1</p>
-                                    <p>Curso: Introducción</p>
-                                    <p>Fecha: 27/01/2022</p>
-                                </section>
-                            </section>
-                            <section class="columnNoteItem__control">
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--left">
-                                    <img src="" alt="">
-                                </div>
-                                <button class="button columnNoteItem__button button--board button--dark">
-                                    <p>Ver detalle</p>
-                                </button>
-                                <div class="columnNoteItem__arrow columnNoteItem__arrow--right">
-                                    <img src="" alt="">
-                                </div>
-                            </section>
-                        </div>
+                    <section class="boardColumn__list boardColumn__list--remove">
+                        
                     </section>
                 </div>
             </section>

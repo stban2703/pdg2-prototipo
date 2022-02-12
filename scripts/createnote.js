@@ -1,6 +1,14 @@
 import { checkAuthState, logOut } from "./modules/auth.js";
 import { submitNote } from "./modules/firestore.js";
-import { submitFile } from "./modules/storage.js";
+
+let ls = window.localStorage;
+let localUser = JSON.parse(ls.getItem('currentuser'))
+let currentUser = localUser
+if (currentUser != null || currentSignedInUser() != null) {
+
+}else {
+    window.location = "login.html"
+}
 
 const filetype = location.search.replace("?", "");
 const createNoteFiles = document.querySelector(".createNote__files")
@@ -25,7 +33,7 @@ noteForm.addEventListener('submit', function (event) {
     const subject = noteForm.subject.value
     if (videoFileSection) {
         const file = noteForm.file.files[0]
-        submitNote("stban1401", name, week, categorie, subject, file)
+        submitNote(currentUser.id, name, week, categorie, subject, file)
     }
 })
 

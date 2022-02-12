@@ -14,6 +14,7 @@ import {
 import { submitFile } from "./storage.js";
 
 const firestore = getFirestore(firebase)
+export const firestoreDb = firestore
 
 export const createUser = async function (uid, name, lastname, email, role) {
     try {
@@ -49,16 +50,9 @@ export const getUserFromDb = async function (uid) {
     } else {
         console.log("No existe este usuario");
     }
-    /*const q = query(collection(firebase, "users"))
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        
-        //console.log(doc.id, " => ", doc.data());
-    });*/
-    //console.log(userList.length)
 }
 
-export const submitNote = async function (uid, name, week, subject, file) {
+export const submitNote = async function (uid, name, week, category, subject, file) {
     try {
         const usernoteRef = doc(collection(firestore, "notes"))
         const newNote = {
@@ -66,6 +60,7 @@ export const submitNote = async function (uid, name, week, subject, file) {
             name: name,
             week: week,
             subject: subject,
+            category: category,
             fileReference: "",
             userId: uid,
             date: Date.now()
@@ -80,11 +75,26 @@ export const submitNote = async function (uid, name, week, subject, file) {
     }
 }
 
+/*export const getNotes = async function (uid) {
+    const q = query(collection(firestore, "notes"), where("userId", "==", uid))
+    const querySnapshot = await getDocs(q);
+    const noteList = []
+    querySnapshot.forEach((doc) => {
+        const note = doc.data()
+        noteList.push(note)
+        console.log(note.id)
+        //console.log(doc.id, " => ", doc.data());
+    });
+    renderBoardItems(noteList)
+}*/
+
 export const updateFileReference = async function (id, fileUrl) {
     try {
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {
             fileReference: fileUrl
+        }).then(() => {
+            window.location = "noteboard.html"
         })
     } catch (e) {
         console.log(e)
