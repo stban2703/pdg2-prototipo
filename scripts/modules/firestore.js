@@ -67,7 +67,8 @@ export const submitNote = async function (uid, name, week, subject, file) {
             week: week,
             subject: subject,
             fileReference: "",
-            userId: uid
+            userId: uid,
+            date: Date.now()
         }
         await setDoc(usernoteRef, newNote).then(() => {
             submitFile(file, usernoteRef.id)
