@@ -850,6 +850,92 @@ input[type=button] {
   margin-right: 20px !important;
 }
 
+.meetingview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.meetingview__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.meetingview__status {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+}
+
+.meetingview__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+}
+
+.meetingview__info p {
+  font-family: "Poppins", sans-serif;
+  color: #363636;
+}
+
+.meetingview__participants {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #F9F9F9;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 20px 30px;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.meetingview__confirmed {
+  font-family: "Poppins", sans-serif;
+  color: #363636;
+}
+
+.meetingview__total {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.meetingview__url {
+  font-family: "Poppins", sans-serif;
+}
+
+.meetingview__url a {
+  color: #363636;
+}
+
 .addMeetingButton {
   display: -webkit-box;
   display: -ms-flexbox;

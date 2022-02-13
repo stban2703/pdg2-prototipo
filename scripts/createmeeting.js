@@ -35,7 +35,9 @@ createMeetingForm.addEventListener('submit', function (event) {
         place: place,
         platform: platform,
         link: link,
-        status: "pending"
+        status: "pending",
+        totalParticipants: 6,
+        confirmedParticipants: 0
     }
 
     createMeeting(newMeeting)

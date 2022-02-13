@@ -6,8 +6,10 @@ import {
     getDocs,
     where
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
-const db = getFirestore(firebase)
 
+const db = getFirestore(firebase)
+const meetingsListPending = document.querySelector(".meetings__list--pending")
+const meetingsListFinished = document.querySelector(".meetings__list--finished")
 let meetingsList = []
 getMeetings()
 
@@ -26,8 +28,6 @@ async function getMeetings() {
 
 function renderMeeting(list) {
     let copy = [...list]
-    const meetingsListPending = document.querySelector(".meetings__list--pending")
-    const meetingsListFinished = document.querySelector(".meetings__list--finished")
     meetingsListPending.innerHTML = ``
     meetingsListFinished.innerHTML = ``
 
@@ -39,10 +39,19 @@ function renderMeeting(list) {
             <p class="meetingItem__date">Fecha: ${elem.date}</p>
             <p class="meetingItem__mode">${elem.mode}</p>
             <p class="meetingItem__place">${elem.place ? elem.place : elem.platform}</p>
-            <button class="meetingItem__button button button--dark button--board">
-                <p>Ver detalle</p>
-            </button>
         `
+        const meetingItemButton = document.createElement("button")
+        meetingItemButton.classList.add("meetingItem__button")
+        meetingItemButton.classList.add("button")
+        meetingItemButton.classList.add("button--dark")
+        meetingItemButton.classList.add("button--board")
+        meetingItemButton.innerHTML = `
+                <p>Ver detalle</p>
+        `
+        meetingItemButton.addEventListener('click', function () {
+            window.location = `meetingview.html?${elem.id}`
+        })
+        meetingItemDiv.appendChild(meetingItemButton)
 
         switch (elem.status) {
             case "pending":
