@@ -738,6 +738,163 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
 }
 
+.meetings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.meetings__column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0px 20px;
+}
+
+.meetings__column--left {
+  border-right: 1px dotted #363636;
+}
+
+.meetings__column--right {
+  border-left: 1px dotted #363636;
+}
+
+.meetings__title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.meetings__title p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #363636;
+}
+
+.meetings__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.meetingItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  background-color: #F9F9F9;
+  border-radius: 30px;
+  padding: 15px 30px;
+}
+
+.meetingItem p {
+  font-family: "Poppins", sans-serif;
+  color: #363636;
+}
+
+.meetingItem__button {
+  margin-top: 10px;
+}
+
+.createMeetingForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.createMeetingForm__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.createMeetingForm__section .inputText, .createMeetingForm__section .select {
+  margin-right: 20px !important;
+}
+
+.addMeetingButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.addMeetingButton__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #363636;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+
+.addMeetingButton__tag {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  color: #A0A0A0;
+  margin-top: 5px;
+}
+
+.addMeetingButton:hover {
+  cursor: pointer;
+}
+
 .categorie {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -948,6 +1105,7 @@ input[type=button] {
   border-radius: 40px;
   font-family: "Poppins", sans-serif;
   color: #A0A0A0;
+  margin-top: 5px;
 }
 
 .inputText input::-webkit-input-placeholder {
@@ -966,6 +1124,52 @@ input[type=button] {
 }
 
 .inputText input::placeholder {
+  font-family: "Poppins", sans-serif;
+  color: #C4C4C4;
+}
+
+.select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.select label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+}
+
+.select select {
+  margin-top: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  border: 1px solid #C4C4C4;
+  border-radius: 40px;
+  font-family: "Poppins", sans-serif;
+  color: #A0A0A0;
+}
+
+.select select::-webkit-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: #C4C4C4;
+}
+
+.select select:-ms-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: #C4C4C4;
+}
+
+.select select::-ms-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: #C4C4C4;
+}
+
+.select select::placeholder {
   font-family: "Poppins", sans-serif;
   color: #C4C4C4;
 }

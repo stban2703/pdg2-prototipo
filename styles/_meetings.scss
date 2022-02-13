@@ -1,0 +1,41 @@
+.meetings {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 0px 20px;
+
+        &--left {
+            border-right: 1px dotted $darkGray;
+        }
+
+        &--right {
+            border-left: 1px dotted $darkGray;
+        }
+    }
+
+    &__title {
+        width: 100%;
+        display: flex;
+        margin-bottom: 20px;
+        p {
+            font-family: $poppins;
+            font-size: $subtitle;
+            color: $darkGray;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+}

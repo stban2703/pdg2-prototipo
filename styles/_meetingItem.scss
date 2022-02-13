@@ -1,0 +1,17 @@
+.meetingItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: $navGray;
+    border-radius: 30px;
+    padding: 15px 30px;
+
+    p {
+        font-family: $poppins;
+        color: $darkGray;
+    }
+
+    &__button {
+        margin-top: 10px;
+    }
+}

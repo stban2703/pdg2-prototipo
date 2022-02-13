@@ -7,4 +7,19 @@
         font-family: $poppins;
         font-size: $subtitle;
     }
+    
+    select {
+        margin-top: 5px;
+        padding: 10px 20px;
+        width: 100%;
+        border: 1px solid $lightGray;
+        border-radius: 40px;
+        font-family: $poppins;
+        color: $normalGray;
+
+        &::placeholder {
+            font-family: $poppins;
+            color: $lightGray;
+        }
+    }
 }

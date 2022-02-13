@@ -75,19 +75,6 @@ export const submitNote = async function (uid, name, week, category, subject, fi
     }
 }
 
-/*export const getNotes = async function (uid) {
-    const q = query(collection(firestore, "notes"), where("userId", "==", uid))
-    const querySnapshot = await getDocs(q);
-    const noteList = []
-    querySnapshot.forEach((doc) => {
-        const note = doc.data()
-        noteList.push(note)
-        console.log(note.id)
-        //console.log(doc.id, " => ", doc.data());
-    });
-    renderBoardItems(noteList)
-}*/
-
 export const updateFileReference = async function (id, fileUrl) {
     try {
         const usernoteRef = doc(firestore, "notes", id)
@@ -98,5 +85,18 @@ export const updateFileReference = async function (id, fileUrl) {
         })
     } catch (e) {
         console.log(e)
+    }
+}
+
+export const createMeeting = async function(newMeeting) {
+    try {
+        const meetingRef = doc(collection(firestore, "meetings"))
+        await setDoc(meetingRef, newMeeting).then(() => {
+            window.location = "meetings.html"
+        }).catch((error) => {
+            console.log(error)
+        });
+    } catch(e) {
+
     }
 }

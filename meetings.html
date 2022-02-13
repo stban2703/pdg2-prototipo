@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión reflexiva</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <main class="content">
+        <nav class="navigation">
+            <section class="navigation__section">
+                <header class="navigation__logo">
+                    <h1>
+                        Nombreapp
+                    </h1>
+                </header>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <a href="index.html">
+                        <li>Inicio</li>
+                    </a>
+                    <a href="noteboard.html">
+                        <li>Mis anotaciones</li>
+                    </a>
+                    <a href="meetings.html">
+                        <li>Reunión reflexiva</li>
+                    </a>
+                </ol>
+            </section>
+            <section class="navigation__section">
+                <ol class="navigation__tabs">
+                    <li>Cerrar sesión</li>
+                </ol>
+            </section>
+        </nav>
+        <article class="board">
+            <header class="board__header">
+                <section>
+                    <h2 class="board__title">Reunión reflexiva</h2>
+                </section>
+            </header>
+            <section class="meetings">
+                <section class="meetings__column meetings__column--left">
+                    <section class="meetings__title">
+                        <p>Reuniones pendientes</p>
+                    </section>
+                    <section class="meetings__list">
+                        <div class="meetingItem">
+                            <p class="meettingItem__name">Reunión 4</p>
+                            <p class="meettingItem__date">Fecha: 22/02/2022</p>
+                            <p class="meettingItem__mode">Virtual</p>
+                            <p class="meettingItem__place">Zoom</p>
+                            <button class="meetingItem__button button button--dark button--board">
+                                <p>Ver detalle</p>
+                            </button>
+                        </div>
+                    </section>
+                </section>
+                <section class="meetings__column meetings__column--right">
+                    <section class="meetings__title">
+                        <p>Historial de reuniones</p>
+                    </section>
+                    <section class="meetings__list">
+                        <div class="meetingItem">
+                            <p class="meetingItem__name">Reunión 4</p>
+                            <p class="meetingItem__date">Fecha: 22/02/2022</p>
+                            <p class="meetingItem__mode">Virtual</p>
+                            <p class="meetingItem__place">Zoom</p>
+                            <button class="meetingItem__button button button--dark button--board">
+                                <p>Ver detalle</p>
+                            </button>
+                        </div>
+                    </section>
+                </section>
+            </section>
+            <a href="createmeeting.html" class="addMeetingButton">
+                <div class="addMeetingButton__icon">
+                    <img src="./images/addmeeting.svg" alt="">
+                </div>
+                <p class="addMeetingButton__tag">Crear reunión</p>
+            </a>
+        </article>
+    </main>
+</body>
+
+</html>
