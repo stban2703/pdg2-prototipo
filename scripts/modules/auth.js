@@ -41,7 +41,8 @@ export const signIn = function (email, password) {
 
 export const logOut = function () {
     signOut(auth).then(() => {
-        localStorage.removeItem('currentuser')
+        localStorage.clear()
+        window.location = 'login.html'
       }).catch((error) => {
         // An error happened.
         console.log("No salio")

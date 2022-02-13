@@ -29,4 +29,10 @@
             color: $darkGray;
         }
     }
+
+    .logoutButton {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
