@@ -7,6 +7,10 @@
         font-family: $poppins;
         font-size: $subtitle;
     }
+
+    &--small {
+        max-width: 400px;
+    }
     
     select {
         margin-top: 5px;

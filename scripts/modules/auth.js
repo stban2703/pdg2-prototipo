@@ -5,7 +5,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
-    
+
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 import { createUser, getUserFromDb } from "./firestore.js";
 
@@ -36,30 +36,29 @@ export const signIn = function (email, password) {
             const errorMessage = error.message;
             console.log(errorMessage)
         });
-
 }
 
 export const logOut = function () {
     signOut(auth).then(() => {
         localStorage.clear()
         window.location = 'login.html'
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
         console.log("No salio")
-      });
+    });
 }
 
-export const checkAuthState = function() {
+export const checkAuthState = function () {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          const uid = user.uid;
-          getUserFromDb(uid)
+            const uid = user.uid;
+            getUserFromDb(uid)
         } else {
-          console.log("Empty")
+            console.log("Empty")
         }
-      });
+    });
 }
 
-export const currentSignedInUser = function() {
+export const currentSignedInUser = function () {
     return auth.currentUser
 }

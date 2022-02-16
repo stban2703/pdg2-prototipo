@@ -12,6 +12,10 @@
         font-size: $subtitle;
     }
 
+    &--small {
+        max-width: 200px;
+    }
+
     &--dark {
         background-color: $darkGray;
     
