@@ -21,6 +21,15 @@ export const signUp = function (email, password, name, lastname) {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode + ": " + errorMessage)
+            switch (errorCode) {
+                case "auth/email-already-in-use":
+                    alert("Parece que el correo ya está registrado")
+                    break;
+            
+                default:
+                    alert("Ha ocurrido un error desconocido, intenta de nuevo más tarde")
+                    break;
+            }
         });
 }
 
@@ -30,12 +39,23 @@ export const signIn = function (email, password) {
         const user = userCredential.user;
         getUserFromDb(user.uid)
         console.log(user.uid + " ha iniciado sesion")
-    })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage)
-        });
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        switch (errorCode) {
+            case "auth/user-not-found":
+                alert("Parece que no hay un usuario registrado con este correo")
+                break;
+
+            case "auth/wrong-password":
+                alert("La contraseña es incorrecta")
+                break;
+
+            default:
+                break;
+        }
+    });
 }
 
 export const logOut = function () {

@@ -15,3 +15,12 @@ export function submitFile(file, id) {
         console.log(error)
     });
 }
+
+export function submitTestFile(file, id) {
+    const noteRef = ref(storage, id);
+    uploadBytes(noteRef, file).then((snapshot) => {
+        console.log('Archivo subido');
+    }).catch(error => {
+        console.log(error)
+    });
+}

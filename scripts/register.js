@@ -8,7 +8,14 @@ signUpForm.addEventListener('submit', function(event) {
     const lastname = signUpForm.lastname.value
     const email = signUpForm.email.value
     const pass = signUpForm.pass.value
+    const confirmpass = signUpForm.confirmpass.value
     if(name != "" && lastname != "" && email != "" && pass != ""){
-        signUp(email, pass, name, lastname)
+        if(pass === confirmpass) {
+            signUp(email, pass, name, lastname)
+        } else {
+            alert("Las contraseñas no coinciden")
+        }
+    } else {
+        alert("Por favor, completa todos los campos")
     }
 })
