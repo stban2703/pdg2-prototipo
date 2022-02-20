@@ -1,0 +1,24 @@
+@mixin button($background-color, $font-color) {
+    @extend %button;
+    background-color: $background-color;
+    &:hover {
+        background-color: lighten($background-color, 10%);
+    }
+}
+
+@mixin title($font-color) {
+    @extend %title;
+    color: $font-color
+}
+
+@mixin input-label($font-color) {
+    @extend %input-label;
+    color: $font-color;
+}
+
+@mixin text-input($focus-border-color) {
+    @extend %text-input;
+    &:focus {
+        border-color: $focus-border-color;
+    }
+}

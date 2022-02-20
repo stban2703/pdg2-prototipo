@@ -1,0 +1,29 @@
+%button {
+    border: none;
+    font-family: $poppins;
+    font-size: $button-text;
+    border-radius: $radius-button;
+    padding: $button-padding;
+    outline: none;
+}
+
+%title {
+    font-family: $poppins;
+    font-size: $title;
+}
+
+%input-label {
+    font-family: $poppins;
+    font-size: $input-label;
+}
+
+%text-input {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    font-family: $poppins;
+    font-size: $input-text;
+    color: $silver;
+    border-radius: $radius-text-input;
+    padding: $input-padding;
+    outline: none;
+}

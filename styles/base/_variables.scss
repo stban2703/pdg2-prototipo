@@ -1,0 +1,38 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+$poppins:'Poppins', sans-serif;
+$title: 3rem;
+$input-label: 1.8rem;
+$input-text: 1.8rem;
+$button-text: 2rem;
+$link: 1.5rem;
+
+// COLORS
+// // Base colors
+$geraldine: #FD797A;
+$malibu: #72B8FF;
+$melrose: #979DFF;
+$cheese: #FDB572;
+$white: #FFFFFF;
+$silver: #A0A0A0;
+$mineshaft: #363636;
+
+// // Button colors
+$button-primary: $malibu;
+$button-font-primary: $white;
+
+// // Input colors
+$input-border-color: $silver;
+$input-border-color-focused: $malibu;
+$input-color: $silver;
+
+// // Link colors
+$link-primary: $mineshaft;
+
+// RADIUS
+$radius-button: 40px;
+$radius-text-input: 14px;
+
+// PADDING
+$input-padding: 0.5rem 1rem;
+$button-padding: 0.5rem 1rem;

@@ -1,31 +1,16 @@
-@import 'reset';
-@import 'fonts';
-@import 'colors';
-
-@import 'login';
-@import 'content';
-@import 'navigation';
-@import 'home';
-@import 'createNote';
-@import 'board';
-@import 'boardColumn';
-@import 'columnNoteItem';
-@import 'meetings';
-@import 'meetingItem';
-@import 'createMeetingForm';
-@import 'meetingview';
-@import 'addMeetingButton';
-@import 'categorie';
-@import 'addNoteBtn';
-@import 'notefiles';
-@import 'inputText';
-@import 'select';
-@import 'checkbox';
-@import 'button';
+@import 'vendor/reset';
+@import 'base/variables';
+@import 'base/placeholders';
+@import 'base/mixins';
+@import 'modules/inputs';
+@import 'modules/buttons';
 
 html, body, main {
     width: 100%;
-    height: 100%;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 .hidden {

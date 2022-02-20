@@ -1,0 +1,5 @@
+.main-button {
+    &--primary {
+        @include button($button-primary, $input-color);
+    }
+}
