@@ -1,0 +1,26 @@
+.signinup-form {
+    width: 100%;
+    max-width: 38rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        
+        &--row {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__title {
+        @include title($mineshaft)
+    }
+
+    &__notaccount {
+        align-self: center;
+    }
+}

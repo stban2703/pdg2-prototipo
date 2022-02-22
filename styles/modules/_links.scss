@@ -1,3 +1,6 @@
 .link {
     @include link($link-primary);
+    &--dark {
+        color: $link-dark;
+    }
 }

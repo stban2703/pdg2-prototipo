@@ -247,12 +247,17 @@ input[type=button] {
   border: none;
   font-family: "Poppins", sans-serif;
   border-radius: 40px;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.3rem;
   outline: none;
 }
 
 .main-button--primary p {
   font-size: 2rem;
+}
+
+.signinup-form__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
 }
 
 .text-input__label {
@@ -269,6 +274,7 @@ input[type=button] {
   border-radius: 14px;
   padding: 0.5rem 1rem;
   outline: none;
+  width: 100%;
 }
 
 .link {
@@ -285,7 +291,6 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  max-width: 46rem;
 }
 
 .text-input__label {
@@ -372,8 +377,130 @@ input[type=button] {
   color: #A0A0A0;
 }
 
-html, body, main {
+.link--dark {
+  color: #363636;
+}
+
+.signinup-form {
   width: 100%;
+  max-width: 38rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+
+.signinup-form__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.signinup-form__section--row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.signinup-form__title {
+  color: #363636;
+}
+
+.signinup-form__notaccount {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.signinup-screen {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.signinup-screen__article {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.signinup-screen__logo {
+  width: 100%;
+  max-width: 38rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.signinup-screen__section {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.signinup-screen__dots {
+  width: 100%;
+}
+
+.signinup-screen__wave {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.signinup-screen__wave img {
+  max-width: none;
+  height: 100%;
+}
+
+html,
+body,
+main {
+  width: 100%;
+  height: 100%;
 }
 
 html {
