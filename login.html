@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
     <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="scripts/login.js" defer></script>
 </head>
 
 <body>
@@ -25,14 +26,14 @@
                 </section>
                 <section class="signinup-form__section">
                     <div class="text-input">
-                        <input class="text-input__field" type="email" name="email" placeholder=" " required
+                        <input id="email" class="text-input__field" type="email" name="email" placeholder=" " required
                             autocomplete="email">
                         <label class="text-input__label" for="email">Correo</label>
                     </div>
                 </section>
                 <section class="signinup-form__section">
                     <div class="text-input">
-                        <input class="text-input__field" type="password" name="pass" placeholder=" " required
+                        <input id="pass" class="text-input__field" type="password" name="pass" placeholder=" " required
                             autocomplete="">
                         <label class="text-input__label" for="pass">Contraseña</label>
                     </div>

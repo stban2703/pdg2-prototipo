@@ -1,21 +1,26 @@
 // FONTS
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 $poppins:'Poppins', sans-serif;
+
+// FONT SIZES
 $title: 3rem;
 $input-label: 1.8rem;
 $input-text: 1.8rem;
 $button-text: 2rem;
 $link: 1.5rem;
+$navigation-tag: 2rem;
 
 // COLORS
 // // Base colors
 $geraldine: #FD797A;
 $malibu: #72B8FF;
+$malibu-alt: #5BAAFB;
 $melrose: #979DFF;
 $cheese: #FDB572;
 $white: #FFFFFF;
 $silver: #A0A0A0;
 $mineshaft: #363636;
+$zircon: #FAFCFF;
 $invalid-color: #FE6163;
 
 // // Button colors
@@ -36,6 +41,14 @@ $input-label-invalid-color: $invalid-color;
 $link-primary: $silver;
 $link-dark: $mineshaft;
 
+// // Background colors
+$page-content-background: $zircon;
+
+// // Nav colors
+$nav-tag-noselected: $silver;
+$nav-tag-selected: $malibu-alt;
+$nav-item-selected: #E9F3FE;
+
 // RADIUS
 $radius-button: 40px;
 $radius-text-input: 10px;
@@ -43,3 +56,4 @@ $radius-text-input: 10px;
 // PADDING
 $input-padding: 1.2rem 1.5rem;
 $button-padding: 1rem 1.3rem;
+$navigation-padding: 6rem 4rem;
