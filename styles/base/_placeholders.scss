@@ -17,6 +17,7 @@
 }
 
 %input-label {
+    background-color: $white;
     font-family: $poppins;
     font-size: $input-label;
 }
@@ -25,12 +26,41 @@
     background-color: $white;
     border: 1px solid $input-border-color;
     font-family: $poppins;
-    font-size: $input-text;
+    font-size: $input-text !important;
     color: $mineshaft;
     border-radius: $radius-text-input;
     padding: $input-padding;
     outline: none;
     width: 100%;
+
+    &:-webkit-autofill {
+        -webkit-text-fill-color: $input-color;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:focus {
+        border-color: $input-border-color-focused;
+    }
+
+    &:focus + label {
+        top: 0%;
+        transition: all 0.1s ease-out;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $input-label-valid-color;
+    }
+
+    &:not(:placeholder-shown) {
+        border-color: $input-border-color-focused;
+    }
+
+    &:not(:placeholder-shown) + label {
+        top: 0%;
+        transition: all 0.1s ease-out;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $input-label-valid-color;
+    }
 }
 
 %link {

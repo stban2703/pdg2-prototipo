@@ -12,11 +12,8 @@
     color: $font-color;
 }
 
-@mixin text-input($focus-border-color) {
+@mixin text-input() {
     @extend %text-input;
-    &:focus {
-        border-color: $focus-border-color;
-    }
 }
 
 @mixin title($font-color) {

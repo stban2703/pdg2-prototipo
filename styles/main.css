@@ -261,6 +261,7 @@ input[type=button] {
 }
 
 .text-input__label {
+  background-color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
 }
@@ -269,12 +270,44 @@ input[type=button] {
   background-color: #FFFFFF;
   border: 1px solid #A0A0A0;
   font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.8rem !important;
   color: #363636;
-  border-radius: 14px;
-  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
   outline: none;
   width: 100%;
+}
+
+.text-input__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.text-input__field:focus {
+  border-color: #72B8FF;
+}
+
+.text-input__field:focus + label {
+  top: 0%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #72B8FF;
+}
+
+.text-input__field:not(:placeholder-shown) {
+  border-color: #72B8FF;
+}
+
+.text-input__field:not(:placeholder-shown) + label {
+  top: 0%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #72B8FF;
 }
 
 .link {
@@ -291,15 +324,19 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 .text-input__label {
-  margin-bottom: 0.5rem;
-  color: #363636;
-}
-
-.text-input__field:focus {
-  border-color: #72B8FF;
+  position: absolute;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  top: 45%;
+  left: 0.5rem;
+  padding: 0 1rem;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  color: #A0A0A0;
 }
 
 .checkbox-input {

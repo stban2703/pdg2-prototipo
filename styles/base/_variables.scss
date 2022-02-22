@@ -16,6 +16,7 @@ $cheese: #FDB572;
 $white: #FFFFFF;
 $silver: #A0A0A0;
 $mineshaft: #363636;
+$invalid-color: #FE6163;
 
 // // Button colors
 $button-primary: $malibu;
@@ -24,10 +25,12 @@ $button-text-primary: $white;
 // // Input colors
 $input-border-color: $silver;
 $input-border-color-focused: $malibu;
-$input-color: $silver;
+$input-color: $mineshaft;
 
 // // Label colors
-$input-label-color: $mineshaft;
+$input-label-color: $silver;
+$input-label-valid-color: $malibu;
+$input-label-invalid-color: $invalid-color;
 
 // // Link colors
 $link-primary: $silver;
@@ -35,8 +38,8 @@ $link-dark: $mineshaft;
 
 // RADIUS
 $radius-button: 40px;
-$radius-text-input: 14px;
+$radius-text-input: 10px;
 
 // PADDING
-$input-padding: 0.5rem 1rem;
+$input-padding: 1.2rem 1.5rem;
 $button-padding: 1rem 1.3rem;
