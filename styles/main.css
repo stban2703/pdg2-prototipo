@@ -255,7 +255,7 @@ input[type=button] {
   font-size: 2rem;
 }
 
-.signinup-form__title {
+.header__title, .signinup-form__title {
   font-family: "Poppins", sans-serif;
   font-size: 3rem;
 }
@@ -415,6 +415,31 @@ input[type=button] {
 }
 
 .link--dark {
+  color: #363636;
+}
+
+.header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.header__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.header__title {
   color: #363636;
 }
 
@@ -639,6 +664,14 @@ html {
   width: 100%;
   height: 100%;
   background-color: #FAFCFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 6rem 4rem;
 }
 
 .hidden {

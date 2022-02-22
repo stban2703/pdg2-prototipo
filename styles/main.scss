@@ -7,6 +7,7 @@
 @import "modules/inputs";
 @import "modules/buttons";
 @import "modules/links";
+@import "modules/header";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
@@ -33,6 +34,9 @@ html {
     width: 100%;
     height: 100%;
     background-color: $page-content-background;
+    display: flex;
+    flex-direction: column;
+    padding: $page-content-padding;
 }
 
 .hidden {
