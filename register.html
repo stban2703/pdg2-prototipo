@@ -17,11 +17,25 @@
                     <img src="./images/Nombreapp.svg" alt="">
                 </section>
             </section>
-            <form class="signinup-form signInForm">
+            <form class="signinup-form signUpForm">
                 <section class="signinup-form__section">
                     <h2 class="signinup-form__title">
-                        Iniciar sesión
+                        Crear cuenta
                     </h2>
+                </section>
+                <section class="signinup-form__section">
+                    <div class="text-input">
+                        <input class="text-input__field" type="text" name="name" placeholder=" " required
+                            autocomplete="">
+                        <label class="text-input__label" for="name">Nombre</label>
+                    </div>
+                </section>
+                <section class="signinup-form__section">
+                    <div class="text-input">
+                        <input class="text-input__field" type="text" name="lastname" placeholder=" " required
+                            autocomplete="">
+                        <label class="text-input__label" for="lastname">Apellidos</label>
+                    </div>
                 </section>
                 <section class="signinup-form__section">
                     <div class="text-input">
@@ -37,20 +51,26 @@
                         <label class="text-input__label" for="pass">Contraseña</label>
                     </div>
                 </section>
+                <section class="signinup-form__section">
+                    <div class="text-input">
+                        <input class="text-input__field" type="password" name="confirmpass" placeholder=" " required
+                            autocomplete="">
+                        <label class="text-input__label" for="confirmpass">Confirmar contraseña</label>
+                    </div>
+                </section>
                 <section class="signinup-form__section signinup-form__section--row">
                     <label class="checkbox-input">
-                        <input type="checkbox" name="checkbox-checked" name="rememberme" />
-                        Recordarme
+                        <input type="checkbox" name="checkbox-checked" name="terms" required />
+                        Términos y condiciones
                     </label>
-                    <a class="link" href="">¿Olvidó su contraseña?</a>
                 </section>
                 <section class="signinup-form__section">
                     <button class="main-button main-button--primary">
-                        <p>Iniciar sesión</p>
+                        <p>Crear cuenta</p>
                     </button>
                 </section>
                 <section class="signinup-form__notaccount">
-                    <p class="link">¿No tienes una cuenta? <a class="link link--dark" href="register.html">Crea tu cuenta</a></p>
+                    <p class="link">¿Ya tienes una cuenta? <a class="link link--dark" href="login.html">Iniciar sesión</a></p>
                 </section>
             </form>
             <section class="signinup-screen__dots">

@@ -3,13 +3,15 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    position: relative;
 
     &__article {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 2rem;
     }
 
     &__logo {
@@ -27,6 +29,10 @@
 
     &__dots {
         width: 100%;
+        max-width: 200px;
+        position: absolute;
+        bottom: 5%;
+        left: 0;
     }
 
     &__wave {
