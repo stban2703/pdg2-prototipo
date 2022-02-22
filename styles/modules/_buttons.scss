@@ -1,5 +1,5 @@
 .main-button {
     &--primary {
-        @include button($button-primary, $input-color);
+        @include button($button-primary, $button-text-primary);
     }
 }

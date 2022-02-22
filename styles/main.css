@@ -243,12 +243,16 @@ input[type=button] {
 }
 
 .main-button--primary {
+  width: 100%;
   border: none;
   font-family: "Poppins", sans-serif;
-  font-size: 2rem;
   border-radius: 40px;
   padding: 0.5rem 1rem;
   outline: none;
+}
+
+.main-button--primary p {
+  font-size: 2rem;
 }
 
 .text-input__label {
@@ -261,10 +265,15 @@ input[type=button] {
   border: 1px solid #A0A0A0;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
-  color: #A0A0A0;
+  color: #363636;
   border-radius: 14px;
   padding: 0.5rem 1rem;
   outline: none;
+}
+
+.link {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
 }
 
 .text-input {
@@ -288,12 +297,79 @@ input[type=button] {
   border-color: #72B8FF;
 }
 
+.checkbox-input {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: #363636;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1em auto;
+      grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+.checkbox-input input[type="checkbox"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #72B8FF;
+  border-radius: 0.15em;
+  -webkit-transform: translateY(-0.075em);
+          transform: translateY(-0.075em);
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox-input input[type="checkbox"]::before {
+  content: url("../images/checkwhite.svg");
+  width: 1em;
+  height: 1em;
+  background-color: #72B8FF;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  -webkit-box-shadow: inset 1em 1em #72B8FF;
+          box-shadow: inset 1em 1em #72B8FF;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.checkbox-input input[type="checkbox"]:checked {
+  border-color: #72B8FF;
+}
+
+.checkbox-input input[type="checkbox"]:checked::before {
+  background-color: #72B8FF;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.checkbox-input + .checkbox-input {
+  margin-top: 1em;
+}
+
 .main-button--primary {
   background-color: #72B8FF;
+  color: #FFFFFF;
 }
 
 .main-button--primary:hover {
   background-color: #a5d2ff;
+}
+
+.link {
+  color: #A0A0A0;
 }
 
 html, body, main {

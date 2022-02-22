@@ -19,15 +19,18 @@ $mineshaft: #363636;
 
 // // Button colors
 $button-primary: $malibu;
-$button-font-primary: $white;
+$button-text-primary: $white;
 
 // // Input colors
 $input-border-color: $silver;
 $input-border-color-focused: $malibu;
 $input-color: $silver;
 
+// // Label colors
+$input-label-color: $mineshaft;
+
 // // Link colors
-$link-primary: $mineshaft;
+$link-primary: $silver;
 
 // RADIUS
 $radius-button: 40px;
