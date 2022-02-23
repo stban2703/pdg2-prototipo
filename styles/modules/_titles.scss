@@ -16,4 +16,18 @@
     &--regular {
         @include subtitle($subtitle-color, $regular)
     }
+
+    &--dark {
+        color: $mineshaft;
+    }
+}
+
+.thirdtitle {
+    &--light {
+        @include thirdtitle($thirdtitle-color, $light)
+    }
+
+    &--regular {
+        @include thirdtitle($thirdtitle-color, $regular)
+    }
 }

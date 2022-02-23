@@ -5,9 +5,11 @@ $poppins:'Poppins', sans-serif;
 // FONT SIZES
 $title: 3rem;
 $subtitle: 2rem;
+$thirdtitle: 1.8rem;
 $input-label: 1.8rem;
 $input-text: 1.8rem;
-$button-text: 2rem;
+$main-button-text: 2rem;
+$small-button-text: 1.5rem;
 $link: 1.5rem;
 $navigation-tag: 2rem;
 
@@ -33,11 +35,14 @@ $invalid-color: #FE6163;
 
 // // Button colors
 $button-primary: $malibu;
-$button-text-primary: $white;
+$button-hover: #54A1EE;
+$button-text-color-primary: $white;
+$create-note-color: $geraldine;
 
 // // Title colors
 $title-color: $mineshaft;
 $subtitle-color: $boulder;
+$thirdtitle-color: $boulder;
 
 // // Input colors
 $input-border-color: $silver;
@@ -68,5 +73,9 @@ $radius-text-input: 10px;
 // PADDING
 $input-padding: 1.2rem 1.5rem;
 $button-padding: 1rem 1.3rem;
+$small-button-padding: 0.5rem 1rem;
 $navigation-padding: 6rem 4rem;
 $page-content-padding: 6rem 4rem;
+
+// DROP SHADOWS
+$memo-thumb-drop-shadow: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));

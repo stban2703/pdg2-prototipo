@@ -5,10 +5,17 @@
     border-radius: $radius-button;
     padding: $button-padding;
     outline: none;
+}
 
-    p {
-        font-size: $button-text;
-    }
+%create-button {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 %title {
@@ -19,6 +26,11 @@
 %subtitle {
     font-family: $poppins;
     font-size: $subtitle;
+}
+
+%thirdtitle {
+    font-family: $poppins;
+    font-size: $thirdtitle;
 }
 
 %input-label {
@@ -71,4 +83,10 @@
 %link {
     font-family: $poppins;
     font-size: $link;
+}
+
+%memo-subject-thumbnail {
+    width: 100%;
+    border-radius: 30px;
+    background-color: $white;
 }

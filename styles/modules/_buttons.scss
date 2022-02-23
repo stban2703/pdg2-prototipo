@@ -1,5 +1,33 @@
 .main-button {
     &--primary {
-        @include button($button-primary, $button-text-primary);
+        @include button($button-primary, $button-text-color-primary, $main-button-text);
+    }
+}
+
+.small-button {
+    &--primary {
+        @include button($button-primary, $button-text-color-primary, $small-button-text);
+    }
+    padding: $small-button-padding;
+}
+
+.create-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+
+    &--note {
+        .create-button__icon {
+            @include create-button($create-note-color);
+            img {
+                max-width: none;
+            }
+        }
+    }
+
+    &__tag {
+        margin-top: 10px;
     }
 }

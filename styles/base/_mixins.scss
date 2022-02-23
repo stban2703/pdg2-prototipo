@@ -1,10 +1,20 @@
-@mixin button($background-color, $font-color) {
+@mixin button($background-color, $font-color, $font-size) {
     @extend %button;
     background-color: $background-color;
     color: $font-color;
-    &:hover {
-        background-color: lighten($background-color, 10%);
+
+    p {
+        font-size: $font-size;
     }
+
+    &:hover {
+        background-color: darken($background-color, 10%);
+    }
+}
+
+@mixin create-button($background-color) {
+    @extend %create-button;
+    background-color: $background-color;
 }
 
 @mixin input-label($font-color) {
@@ -28,7 +38,18 @@
     font-weight: $font-weight;
 }
 
+@mixin thirdtitle($font-color, $font-weight) {
+    @extend %thirdtitle;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
 @mixin link($link-color) {
     @extend %link;
     color: $link-color;
+}
+
+@mixin memo-subject-thumbnail($drop-shadow) {
+    @extend %memo-subject-thumbnail;
+    filter: $drop-shadow;
 }
