@@ -1,0 +1,19 @@
+.title {
+    &--light {
+        @include title($title-color, $light)
+    }
+
+    &--regular {
+        @include title($title-color, $regular)
+    }
+}
+
+.subtitle {
+    &--light {
+        @include subtitle($subtitle-color, $light)
+    }
+
+    &--regular {
+        @include subtitle($subtitle-color, $regular)
+    }
+}

@@ -255,9 +255,14 @@ input[type=button] {
   font-size: 2rem;
 }
 
-.header__title, .signinup-form__title {
+.title--light, .title--regular {
   font-family: "Poppins", sans-serif;
   font-size: 3rem;
+}
+
+.subtitle--light, .subtitle--regular {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
 }
 
 .text-input__label {
@@ -418,6 +423,26 @@ input[type=button] {
   color: #363636;
 }
 
+.title--light {
+  color: #363636;
+  font-weight: 300;
+}
+
+.title--regular {
+  color: #363636;
+  font-weight: 400;
+}
+
+.subtitle--light {
+  color: #757575;
+  font-weight: 300;
+}
+
+.subtitle--regular {
+  color: #757575;
+  font-weight: 400;
+}
+
 .header {
   width: 100%;
   display: -webkit-box;
@@ -437,10 +462,26 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
 }
 
-.header__title {
-  color: #363636;
+.header__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 3rem;
+}
+
+.header__icon img {
+  max-width: none;
+}
+
+.header__icon:hover {
+  cursor: pointer;
 }
 
 .signinup-form {
@@ -477,10 +518,6 @@ input[type=button] {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.signinup-form__title {
-  color: #363636;
 }
 
 .signinup-form__notaccount {

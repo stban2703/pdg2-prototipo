@@ -16,10 +16,6 @@
         }
     }
 
-    &__title {
-        @include title($mineshaft)
-    }
-
     &__notaccount {
         align-self: center;
     }

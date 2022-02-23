@@ -4,11 +4,18 @@ $poppins:'Poppins', sans-serif;
 
 // FONT SIZES
 $title: 3rem;
+$subtitle: 2rem;
 $input-label: 1.8rem;
 $input-text: 1.8rem;
 $button-text: 2rem;
 $link: 1.5rem;
 $navigation-tag: 2rem;
+
+// FONT WEIGHT
+$regular: 400;
+$light: 300;
+$medium: 500;
+$semibold: 600;
 
 // COLORS
 // // Base colors
@@ -19,6 +26,7 @@ $melrose: #979DFF;
 $cheese: #FDB572;
 $white: #FFFFFF;
 $silver: #A0A0A0;
+$boulder: #757575;
 $mineshaft: #363636;
 $zircon: #FAFCFF;
 $invalid-color: #FE6163;
@@ -26,6 +34,10 @@ $invalid-color: #FE6163;
 // // Button colors
 $button-primary: $malibu;
 $button-text-primary: $white;
+
+// // Title colors
+$title-color: $mineshaft;
+$subtitle-color: $boulder;
 
 // // Input colors
 $input-border-color: $silver;

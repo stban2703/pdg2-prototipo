@@ -16,9 +16,16 @@
     @extend %text-input;
 }
 
-@mixin title($font-color) {
+@mixin title($font-color, $font-weight) {
     @extend %title;
-    color: $font-color
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
+@mixin subtitle($font-color, $font-weight) {
+    @extend %subtitle;
+    color: $font-color;
+    font-weight: $font-weight;
 }
 
 @mixin link($link-color) {

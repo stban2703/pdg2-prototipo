@@ -6,9 +6,22 @@
     &__info {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
-    &__title {
-        @include title($mineshaft)
+    &__options {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+    }
+
+    &__icon {
+        img {
+            max-width: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

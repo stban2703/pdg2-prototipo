@@ -16,6 +16,11 @@
     font-size: $title;
 }
 
+%subtitle {
+    font-family: $poppins;
+    font-size: $subtitle;
+}
+
 %input-label {
     background-color: $white;
     font-family: $poppins;
