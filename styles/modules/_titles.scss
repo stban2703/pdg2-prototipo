@@ -8,6 +8,10 @@
     }
 }
 
+.section-title {
+    @include section-title($title-color, $semibold)
+}
+
 .subtitle {
     &--light {
         @include subtitle($subtitle-color, $light)

@@ -25,7 +25,7 @@ class Page {
                 return Promise.reject(new NotFoundError('Page not found: ' + this.url));
             }
             return Promise.reject(new HttpError('HTTP error: ' + response.status));
-        } catch (error2) {
+       } catch (error2) {
             return Promise.reject(new NetworkError(error2.message));
         }
     }

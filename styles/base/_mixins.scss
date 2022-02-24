@@ -32,6 +32,12 @@
     font-weight: $font-weight;
 }
 
+@mixin section-title($font-color, $font-weight) {
+    @extend %section-title;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
 @mixin subtitle($font-color, $font-weight) {
     @extend %subtitle;
     color: $font-color;

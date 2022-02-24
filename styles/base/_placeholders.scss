@@ -4,7 +4,6 @@
     font-family: $poppins;
     border-radius: $radius-button;
     padding: $button-padding;
-    outline: none;
 }
 
 %create-button {
@@ -21,6 +20,11 @@
 %title {
     font-family: $poppins;
     font-size: $title;
+}
+
+%section-title {
+    font-family: $poppins;
+    font-size: $section-title;
 }
 
 %subtitle {
@@ -47,7 +51,6 @@
     color: $mineshaft;
     border-radius: $radius-text-input;
     padding: $input-padding;
-    outline: none;
     width: 100%;
 
     &:-webkit-autofill {
