@@ -16,7 +16,7 @@ if (currentUser != null || currentSignedInUser() != null) {
 const addNoteBtn = document.querySelector(".addNoteBtn")
 const notefiles = document.querySelector(".notefiles")
 
-addNoteBtn.addEventListener("click", function () {
+/*addNoteBtn.addEventListener("click", function () {
     notefiles.classList.toggle("hidden")
 })
 
@@ -31,6 +31,6 @@ textBtn.addEventListener("click", function (event) {
 
 videoBtn.addEventListener("click", function (event) {
     window.location = 'createnote.html?video'
-})
+})*/
 
 

@@ -21,11 +21,15 @@ html,
 body,
 main {
     width: 100%;
-    height: fit-content;
+    height: 100%;
 }
 
 html {
     font-size: 62.5%;
+}
+
+body {
+    position: relative;
 }
 
 .logged-content {
@@ -40,6 +44,7 @@ html {
     display: flex;
     flex-direction: column;
     padding: $page-content-padding;
+    margin-left: 36rem;
 }
 
 .hidden {

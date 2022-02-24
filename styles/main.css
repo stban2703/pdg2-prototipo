@@ -638,10 +638,8 @@ input[type=button] {
 }
 
 .navigation-menu {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 100vh;
+  width: 36rem;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -652,6 +650,9 @@ input[type=button] {
   background-color: #FFFFFF;
   padding: 6rem 4rem;
   gap: 4rem;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .navigation-menu__tabs {
@@ -684,10 +685,6 @@ input[type=button] {
   gap: 1.8rem;
 }
 
-.navigation-menu__item:hover {
-  cursor: pointer;
-}
-
 .navigation-menu__item p {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -709,6 +706,19 @@ input[type=button] {
 
 .navigation-menu__item--selected .navigation-icon g path {
   fill: #5BAAFB;
+}
+
+.navigation-menu__item:hover {
+  cursor: pointer;
+  background-color: #72B8FF;
+}
+
+.navigation-menu__item:hover p {
+  color: #FFFFFF;
+}
+
+.navigation-menu__item:hover .navigation-icon g path {
+  fill: #FFFFFF;
 }
 
 .header {
@@ -881,13 +891,15 @@ html,
 body,
 main {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 100%;
 }
 
 html {
   font-size: 62.5%;
+}
+
+body {
+  position: relative;
 }
 
 .logged-content {
@@ -912,6 +924,7 @@ html {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 6rem 4rem;
+  margin-left: 36rem;
 }
 
 .hidden {

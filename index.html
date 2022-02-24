@@ -13,11 +13,11 @@
 
 <body class="logged-content">
     <nav class="navigation-menu">
-        <a href="index.html">
+        <a href="#home">
             <img src="./images/Nombreapp-negro.svg" alt="">
         </a>
         <ol class="navigation-menu__tabs">
-            <li id="navhome-screen" class="navigation-menu__item navigation-menu__item--selected">
+            <a href="#home" id="navhome-screen" class="navigation-menu__item navigation-menu__item--selected">
                 <svg class="navigation-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_283_2084)">
@@ -32,8 +32,8 @@
                     </defs>
                 </svg>
                 <p>Inicio</p>
-            </li>
-            <li id="navprogress" class="navigation-menu__item">
+            </a>
+            <a id="navprogress" class="navigation-menu__item">
                 <svg class="navigation-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_256_3232)">
@@ -51,8 +51,8 @@
                     </defs>
                 </svg>
                 <p>Mi progreso</p>
-            </li>
-            <li id="navnotes" class="navigation-menu__item">
+            </a>
+            <a href="#notes" id="navnotes" class="navigation-menu__item">
                 <svg class="navigation-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_256_3318)">
@@ -70,7 +70,7 @@
                     </defs>
                 </svg>
                 <p href="noteboard.html">Mis anotaciones</p>
-            </li>
+            </a>
             <li id="navmemo" class="navigation-menu__item">
                 <svg class="navigation-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -175,97 +175,12 @@
         </ol>
     </nav>
     <main class="page-content">
-        <header class="header">
-            <section class="header__info">
-                <h2 class="header__title title--light">Hola, Juan Esteban</h2>
-                <p class="header__description subtitle--light">¡Es un placer verte de nuevo!</p>
-            </section>
-            <section class="header__options">
-                <div class="header__icon">
-                    <img src="./images/headerglass.svg" alt="">
-                </div>
-                <div class="header__icon">
-                    <img src="./images/headerbell.svg" alt="">
-                </div>
-                <div class="header__icon">
-                    <img src="./images/headeruser.svg" alt="">
-                </div>
-            </section>
-        </header>
-        <article class="home-screen">
-            <section class="home-screen__section home-screen__section--row">
-                <div class="memo-thumbnail">
-                    <section class="memo-thumbnail__progress">
-                        <img src="./images/placeholderprogress.svg" alt="">
-                    </section>
-                    <section class="memo-thumbnail__info">
-                        <p class="memo-thumbnail__title subtitle subtitle--regular subtitle--dark">Memorando reflexivo</p>
-                        <p class="memo-thumbnail__subtitle thirdtitle thirdtitle--light">Completado</p>
-                        <button class="small-button small-button--primary">
-                            <p>Continuar</p>
-                        </button>
-                    </section>
-                </div>
-                <div class="home-screen__notes">
-                    <button class="addNoteBtn create-button create-button--note">
-                        <div class="create-button__icon">
-                            <img src="./images/addwhite.svg" alt="">
-                        </div>
-                        <p class="create-button__tag subtitle subtitle--regular">Crear anotación</p>
-                    </button>
-                    <div class="notefiles hidden">
-                        <button class="notefiles__button text">
-                            <div>
-                                <img src="./images/textnote.svg" alt="">
-                            </div>
-                            <p>Texto</p>
-                        </button>
-                        <button class="notefiles__button audio">
-                            <div>
-                                <img src="./images/audionote.svg" alt="">
-                            </div>
-                            <p>Audio</p>
-                        </button>
-                        <button class="notefiles__button camera">
-                            <div>
-                                <img src="./images/cameranote.svg" alt="">
-                            </div>
-                            <p>Imagen</p>
-                        </button>
-                        <button class="notefiles__button video">
-                            <div>
-                                <img src="./images/videonote.svg" alt="">
-                            </div>
-                            <p>Video</p>
-                        </button>
-                    </div>
-                </div>
-            </section>
-            <section class="home-screen__section home-screen__section--column">
-                <h3 class="home-screen__subtitle subtitle subtitle--regular">Mis cursos</h3>
-                <section class="home-screen__courses">
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                    <div class="subject-thumbnail">
-                        <p class="subject-thumbnail__title">Fundamentos de programación</p>
-                    </div>
-                </section>
-            </section>
-        </article>
+        
     </main>
+    <script src="./scripts/model/_page.js"></script>
+    <script src="./scripts/model/_layout.js"></script>
+    <script src="./scripts/model/_router.js"></script>
+    <script src="./scripts/model/router.js"></script>
 </body>
 
 </html>
