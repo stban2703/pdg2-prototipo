@@ -763,8 +763,6 @@ input[type=button] {
 }
 
 .signinup-screen {
-  width: 100%;
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -823,14 +821,14 @@ input[type=button] {
 }
 
 .signinup-screen__wave {
-  width: 100%;
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  height: 100vh;
 }
 
 .signinup-screen__wave img {
@@ -887,13 +885,6 @@ input[type=button] {
   grid-gap: 3rem;
 }
 
-html,
-body,
-main {
-  width: 100%;
-  height: 100%;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -914,7 +905,6 @@ body {
 
 .page-content {
   width: 100%;
-  height: 100%;
   background-color: #FAFCFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -925,6 +915,16 @@ body {
           flex-direction: column;
   padding: 6rem 4rem;
   margin-left: 36rem;
+}
+
+.page-content__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .hidden {

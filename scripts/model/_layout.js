@@ -9,7 +9,8 @@ class Layout {
 
     show(el) {
         for (let page of this.pages) {
-            const div = document.createElement('div');
+            const div = document.createElement('main');
+            div.classList.add("page-content__container")
             page.show(div);
             el.appendChild(div);
         }
