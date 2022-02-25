@@ -1,14 +1,20 @@
 .main-button {
     &--primary {
-        @include button($button-primary, $button-text-color-primary, $main-button-text);
+        @include button($button-primary, $button-text-color-primary, $main-button-text, button-primary-box-shadow);
     }
 }
 
 .small-button {
     &--primary {
-        @include button($button-primary, $button-text-color-primary, $small-button-text);
+        @include button($button-primary, $button-text-color-primary, $small-button-text, button-primary-box-shadow);
     }
     padding: $small-button-padding;
+}
+
+.board-edit-button {
+    @include button($button-primary, $button-text-color-primary, $board-edit-text-btn, button-primary-box-shadow);
+    padding: $small-button-padding;
+    box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
 }
 
 .create-button {

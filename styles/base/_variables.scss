@@ -11,6 +11,7 @@ $input-label: 1.8rem;
 $input-text: 1.8rem;
 $main-button-text: 2rem;
 $small-button-text: 1.5rem;
+$board-edit-text-btn: 1.2rem;
 $link: 1.5rem;
 $navigation-tag: 2rem;
 
@@ -38,6 +39,9 @@ $invalid-color: #FE6163;
 $keep: #9BDE90;
 $improve: #FDB572;
 $remove: #FD797A;
+$keep-light: #CCF3C6;
+$improve-light: #FFEAD6;
+$remove-light: #FFEFEF;
 $divisor-line-color: #75ADE5;
 $dots-button-background: #FAFAFA;
 
@@ -88,3 +92,4 @@ $page-content-padding: 6rem 4rem;
 
 // DROP SHADOWS
 $memo-thumb-drop-shadow: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
+$button-primary-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);

@@ -1,16 +1,17 @@
 .note-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-top: 3rem;
 
     &__column {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         
         &:nth-child(2) {
-            border-left: 1.5px dotted $divisor-line-color;
-            border-right: 1.5px dotted $divisor-line-color;
+            border-left: 2px dotted $divisor-line-color;
+            border-right: 2px dotted $divisor-line-color;
         }
     }
 
@@ -46,6 +47,8 @@
     &__list {
         display: flex;
         flex-direction: column;
+        align-items: center;
         width: 100%;
+        margin-top: 3rem;
     }
 }

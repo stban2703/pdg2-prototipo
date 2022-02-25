@@ -1,7 +1,8 @@
-@mixin button($background-color, $font-color, $font-size) {
+@mixin button($background-color, $font-color, $font-size, $button-box-shadow) {
     @extend %button;
     background-color: $background-color;
     color: $font-color;
+    box-shadow: $button-box-shadow;
 
     p {
         font-size: $font-size;
