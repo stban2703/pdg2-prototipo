@@ -1,6 +1,7 @@
 .createnote-form {
     display: flex;
     flex-direction: column;
+    gap: 4rem;
 
     &__section {
         display: flex;
@@ -21,7 +22,14 @@
     &__radioList {
         display: flex;
         flex-direction: row;
+        gap: 1rem;
     }
 
+    &__label {
+        font-family: $poppins;
+        font-size: $categorie-label;
+        font-weight: $semibold;
+        color: $malibu;
+    }
     
 }

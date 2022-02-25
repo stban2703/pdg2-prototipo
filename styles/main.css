@@ -1165,6 +1165,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  gap: 4rem;
 }
 
 .createnote-form__section {
@@ -1198,6 +1199,14 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  gap: 1rem;
+}
+
+.createnote-form__label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #72B8FF;
 }
 
 .signinup-screen {
