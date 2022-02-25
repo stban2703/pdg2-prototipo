@@ -9,13 +9,16 @@
 @import "modules/links";
 @import "modules/titles";
 @import "modules/thumbnails";
+@import "modules/board-note-item";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
 @import "layouts/header";
+@import "layouts/note-board";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";
+@import "pages/note-screen";
 
 html {
     font-size: 62.5%;
@@ -28,6 +31,7 @@ body {
 .logged-content {
     display: flex;
     flex-direction: row;
+    background-color: $page-content-background;
 }
 
 .page-content {

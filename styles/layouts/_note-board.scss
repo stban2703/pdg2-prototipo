@@ -1,0 +1,51 @@
+.note-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+        
+        &:nth-child(2) {
+            border-left: 1.5px dotted $divisor-line-color;
+            border-right: 1.5px dotted $divisor-line-color;
+        }
+    }
+
+    &__categorie {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    &__color {
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 100%;
+
+        &--keep {
+            background-color: $keep;
+        }
+
+        &--improve {
+            background-color: $improve;
+        }
+
+        &--remove {
+            background-color: $remove;
+        }
+    }
+
+    &__subtitle {
+        @include subtitle($mineshaft, $regular)
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}

@@ -3,25 +3,72 @@
         <h2 class="header__title section-title">Anotaciones</h2>
     </section>
     <section class="header__options">
-        <div class="header__icon">
+        <a href="" class="header__icon">
             <img src="./images/headerglass.svg" alt="">
-        </div>
-        <div class="header__icon">
+        </a>
+        <a href="" class="header__icon">
             <img src="./images/headerbell.svg" alt="">
-        </div>
-        <div class="header__icon">
+        </a>
+        <a href="" class="header__icon">
             <img src="./images/headeruser.svg" alt="">
-        </div>
+        </a>
     </section>
 </header>
 <section class="note-screen">
     <section class="note-board">
         <div class="note-board__column">
             <section class="note-board__categorie">
-                <div class="note-board__color"></div>
+                <div class="note-board__color note-board__color--keep"></div>
                 <h4 class="note-board__subtitle">Mantener</h4>
             </section>
-            <section class="note-board__list">
+            <section class="note-board__list note-board__list--keep">
+                <div class="board-note-item">
+                    <div class="board-note-item__color">
+
+                    </div>
+                    <section class="board-note-item__info">
+                        <section class="board-note-item__header">
+                            <img class="board-note-item__type" src="./images/videonoteview.svg" alt="">
+                            <h4 class="board-note-item__title">Video Clase 1</h4>
+                            <button class="board-note-item__dotsBtn">
+                                <img src="./images/3dots.svg" alt="">
+                            </button>
+                        </section>
+                        <section class="board-note-item__details">
+                            <p class="board-note-item__subtitle">Curso: </p>
+                            <p class="board-note-item__date">Fecha: </p>
+                            <p class="board-note-item__duration">Duración: </p>
+                        </section>
+                        <section class="board-note-item__controls">
+                            <button class="board-note-item__moveBtn">
+                                <img src="./images/leftarrow.svg" alt="">
+                            </button>
+                            <button class="board-note-item__editBtn">
+                                <p>Editar</p>
+                            </button>
+                            <button class="board-note-item__moveBtn">
+                                <img src="./images/rightarrow.svg" alt="">
+                            </button>
+                        </section>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div class="note-board__column">
+            <section class="note-board__categorie">
+                <div class="note-board__color note-board__color--improve"></div>
+                <h4 class="note-board__subtitle">Mejorar</h4>
+            </section>
+            <section class="note-board__list note-board__list--improve">
+
+            </section>
+        </div>
+        <div class="note-board__column">
+            <section class="note-board__categorie">
+                <div class="note-board__color note-board__color--remove"></div>
+                <h4 class="note-board__subtitle">Quitar</h4>
+            </section>
+            <section class="note-board__list note-board__list--remove">
 
             </section>
         </div>
