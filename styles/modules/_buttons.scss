@@ -23,6 +23,7 @@
     align-items: center;
     background: none;
     border: none;
+    filter: drop-shadow(0px 4px 10px rgba(239, 81, 82, 0.4));
 
     &--note {
         .create-button__icon {
@@ -31,6 +32,12 @@
                 max-width: none;
             }
         }
+    }
+
+    &--fixed {
+        position: fixed;
+        right: 1%;
+        bottom: 1%;
     }
 
     &__tag {

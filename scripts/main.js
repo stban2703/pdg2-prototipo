@@ -21,7 +21,7 @@ const tabs = document.querySelectorAll(".navigation-menu__item")
 window.addEventListener("hashchange", function() {
     let currentTab = window.location.hash.replace("#", "")
     tabs.forEach(t => {
-        if(t.id.includes(currentTab)) {
+        if(currentTab.includes(t.id.replace("nav", ""))) {
             t.classList.add("navigation-menu__item--selected")
         } else {
             t.classList.remove("navigation-menu__item--selected")

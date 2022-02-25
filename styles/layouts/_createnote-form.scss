@@ -1,0 +1,27 @@
+.createnote-form {
+    display: flex;
+    flex-direction: column;
+
+    &__section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 3rem;
+    }
+
+    &__nameInput {
+        max-width: 35rem;
+    }
+
+    &__weekInput {
+        max-width: 18rem;
+    }
+
+    &__radioList {
+        display: flex;
+        flex-direction: row;
+    }
+
+    
+}

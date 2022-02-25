@@ -15,10 +15,12 @@
 @import "layouts/navigation-menu";
 @import "layouts/header";
 @import "layouts/note-board";
+@import "layouts/createnote-form";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";
 @import "pages/note-screen";
+@import "pages/createnote-screen";
 
 html {
     font-size: 62.5%;

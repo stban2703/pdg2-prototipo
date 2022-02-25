@@ -1,0 +1,49 @@
+<header class="header">
+    <section class="header__info">
+        <h2 class="header__title section-title">Crear anotación</h2>
+    </section>
+    <section class="header__options">
+        <a href="" class="header__icon">
+            <img src="./images/headerglass.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headerbell.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headeruser.svg" alt="">
+        </a>
+    </section>
+</header>
+<article class="createnote-screen">
+    <form class="createnote-form">
+        <section class="createnote-form__section">
+            <div class="text-input createnote-form__nameInput">
+                <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
+                    autocomplete="">
+                <label class="text-input__label" for="name">Nombre</label>
+            </div>
+            <div class="text-input createnote-form__weekInput">
+                <input id="week" class="text-input__field" type="number" name="week" placeholder=" " required
+                    autocomplete="">
+                <label class="text-input__label" for="week">Semana</label>
+            </div>
+        </section>
+        <section class="createnote-form__section">
+            <section class="createnote-form__radioList">
+                <label class="cre">Categoría</label>
+                <div class="radio-input radio-input--keep">
+                    <input id="categoriekeep" name="categorie" type="radio" value="keep">
+                    <label for="categoriekeep">Mantener</label>
+                </div>
+                <div class="radio-input radio-input--improve">
+                    <input id="categorieimprove" name="categorie" type="radio" value="improve">
+                    <label for="categorieimprove">Mejorar</label>
+                </div>
+                <div class="radio-input radio-input--remove">
+                    <input id="categorieremove" name="categorie" type="radio" value="remove">
+                    <label for="categorieremove">Quitar</label>
+                </div>
+            </section>
+        </section>
+    </form>
+</article>

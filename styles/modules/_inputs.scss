@@ -16,6 +16,7 @@
 
     &__field {
         @include text-input();
+        outline-color: $malibu;
     }
 }
 
@@ -67,4 +68,109 @@
 
 .checkbox-input + .checkbox-input {
     margin-top: 1em;
+}
+
+.radio-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 8rem;
+    font-size: 1.5rem;
+    font-family: $poppins;
+    color: $silver;
+
+    input[type="radio"] {
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 2.25em;
+        height: 2.25em;
+        border: 0.2em solid $silver;
+        border-radius: 100%;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::before {
+            content: "";
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 100%;
+            background-color: $malibu;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em $malibu;
+            transform-origin: center center;
+            //clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        &:checked {
+            border-color: $malibu;
+        }
+
+        &:checked::before {
+            background-color: $malibu;
+            transform: scale(1);
+        }
+    }
+
+    &--keep {
+        input[type="radio"] {
+
+            &::before {
+                background-color: $keep;
+                box-shadow: inset 1em 1em $keep;
+            }
+
+            &:checked {
+                border-color: $keep;
+            }
+
+            &:checked::before {
+                background-color: $keep;
+            }
+        }
+    }
+
+    &--improve {
+        input[type="radio"] {
+
+            &::before {
+                background-color: $improve;
+                box-shadow: inset 1em 1em $improve;
+            }
+
+            &:checked {
+                border-color: $improve;
+            }
+
+            &:checked::before {
+                background-color: $improve;
+            }
+        }
+    }
+
+    &--remove {
+        input[type="radio"] {
+
+            &::before {
+                background-color: $remove;
+                box-shadow: inset 1em 1em $remove;
+            }
+
+            &:checked {
+                border-color: $remove;
+            }
+
+            &:checked::before {
+                background-color: $remove;
+            }
+        }
+    }
 }
