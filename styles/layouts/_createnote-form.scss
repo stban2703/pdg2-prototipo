@@ -6,23 +6,28 @@
     &__section {
         display: flex;
         flex-direction: row;
-        align-items: center;
         width: 100%;
         gap: 3rem;
     }
 
     &__nameInput {
-        max-width: 35rem;
+        width: 100%;
+        max-width: 38rem;
+        min-width: 35rem;
     }
 
     &__weekInput {
-        max-width: 18rem;
+        width: 100%;
+        max-width: 15rem;
     }
 
     &__radioList {
         display: flex;
         flex-direction: row;
         gap: 1rem;
+        width: 100%;
+        min-width: 35rem;
+        max-width: 38rem;
     }
 
     &__label {
@@ -33,18 +38,42 @@
 
         &--regular {
             font-weight: $regular;
-            color: $boulder;
+            color: $silver;
         }
     }
 
     &__select {
         max-width: 35rem;
     }
+
+    &__filetype {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 38rem;
+        min-width: 35rem;
+    }
     
     &__fileList {
-        margin-top: 2rem;
+        margin-top: 1rem;
         display: flex;
         flex-direction: row;
         align-items: center;
     }
+
+    &__loadFile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__submit {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__file {
+        margin-top: 1rem;
+    }
+
 }

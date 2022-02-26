@@ -31,6 +31,10 @@
     @extend %select-input;
 }
 
+@mixin textarea-input() {
+    @extend %text-area-input;
+}
+
 @mixin title($font-color, $font-weight) {
     @extend %title;
     color: $font-color;

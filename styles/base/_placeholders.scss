@@ -41,6 +41,7 @@
     background-color: $white;
     font-family: $poppins;
     font-size: $input-label;
+    font-weight: lighter;
 }
 
 %text-input {
@@ -64,6 +65,7 @@
 
     &:focus + label {
         top: 0%;
+        left: 0.5rem;
         transition: all 0.1s ease-out;
         font-size: 1.5rem;
         font-weight: bold;
@@ -120,4 +122,30 @@
     width: 100%;
     border-radius: 30px;
     background-color: $white;
+}
+
+%text-area-input {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    border-radius: $radius-text-input;
+    font-family: $poppins;
+    font-size: $input-text;
+    color: $input-color;
+    width: 100%;
+    resize: none;
+    padding: $input-padding;
+    outline-color: $input-border-color-focused;
+
+    &::placeholder {
+        color: $silver;
+        font-weight: $light;
+    }
+
+    &:focus {
+        border-color: $input-border-color-focused;
+    }
+
+    &:not(:placeholder-shown) {
+        border-color: $input-border-color-focused;
+    }
 }
