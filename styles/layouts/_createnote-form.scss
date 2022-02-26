@@ -1,7 +1,7 @@
 .createnote-form {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 5rem;
 
     &__section {
         display: flex;
@@ -30,6 +30,21 @@
         font-size: $categorie-label;
         font-weight: $semibold;
         color: $malibu;
+
+        &--regular {
+            font-weight: $regular;
+            color: $boulder;
+        }
+    }
+
+    &__select {
+        max-width: 35rem;
     }
     
+    &__fileList {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 }

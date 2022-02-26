@@ -1,5 +1,6 @@
 import { checkAuthState, logOut, currentSignedInUser } from "./modules/auth.js";
 
+// Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
 let localUser = JSON.parse(ls.getItem('currentuser'))
 let currentUser = localUser
@@ -13,12 +14,17 @@ if (currentUser != null || currentSignedInUser() != null) {
     window.location = "login.html"
 }
 
-const addNoteBtn = document.querySelector(".addNoteBtn")
-const notefiles = document.querySelector(".notefiles")
+//const addNoteBtn = document.querySelector(".addNoteBtn")
+//const notefiles = document.querySelector(".notefiles")
 
-const tabs = document.querySelectorAll(".navigation-menu__item")
-
+// Verifica la pantalla actual en el menu
+checkCurrentTab()
 window.addEventListener("hashchange", function() {
+    checkCurrentTab()
+}, false)
+
+function checkCurrentTab() {
+    const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
     tabs.forEach(t => {
         if(currentTab.includes(t.id.replace("nav", ""))) {
@@ -27,7 +33,7 @@ window.addEventListener("hashchange", function() {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
-}, false)
+}
 
 /*addNoteBtn.addEventListener("click", function () {
     notefiles.classList.toggle("hidden")

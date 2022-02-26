@@ -83,6 +83,34 @@
     }
 }
 
+%select-input {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    font-family: $poppins;
+    font-size: $input-text !important;
+    color: $mineshaft;
+    border-radius: $radius-text-input;
+    padding: $input-padding;
+    width: 100%;
+    appearance: none;
+    background: url("./../../images/selectarrow.svg");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 50%;
+
+    &:focus {
+        border-color: $input-border-color-focused;
+    }
+
+    &:valid {
+        border-color: $input-border-color-focused;
+    }
+
+    &[required] option:first-child {
+        border-color: $input-border-color-focused;
+    }
+}
+
 %link {
     font-family: $poppins;
     font-size: $link;

@@ -44,6 +44,39 @@
                     <label for="categorieremove">Quitar</label>
                 </div>
             </section>
+            <div class="select-input createnote-form__select">
+                <label class="select-input__label" for="subject">Curso</label>
+                <select class="select-input__field" name="subject" id="subject" required>
+                    <option value="" selected>Seleccione el curso</option>
+                    <option value="Fundamentos de programación">Fundamentos de programación</option>
+                    <option value="Fundamentos de programación">Diseñando con algoritmos</option>
+                </select>
+            </div>
+        </section>
+        <section class="createnote-form__section">
+            <div class="createnote-form__filetype">
+                <p class="createnote-form__label createnote-form__label--regular">Selecciona el tipo de archivo que vas a subir</p>
+                <section class="createnote-form__fileList">
+                    <button type="button" class="file-type-button file-type-button--selected">
+                        <div class="file-type-button__icon">
+                            <img src="./images/createnotetext.svg" alt="">
+                        </div>
+                        <p class="file-type-button__tag">Texto</p>
+                    </button>
+                    <button type="button" class="file-type-button">
+                        <div class="file-type-button__icon">
+                            <img src="./images/createnoteaudio.svg" alt="">
+                        </div>
+                        <p class="file-type-button__tag">Audio</p>
+                    </button>
+                    <button type="button" class="file-type-button">
+                        <div class="file-type-button__icon">
+                            <img src="./images/createnotevideo.svg" alt="">
+                        </div>
+                        <p class="file-type-button__tag">Foto/Video</p>
+                    </button>
+                </section>
+            </div>
         </section>
     </form>
 </article>

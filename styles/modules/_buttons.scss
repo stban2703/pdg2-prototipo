@@ -44,3 +44,38 @@
         margin-top: 10px;
     }
 }
+
+.file-type-button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        background-color: $malibu;
+        padding: 1.5rem;
+        border-radius: 100%;
+        width: 6rem;
+        height: 6rem;
+        opacity: 0.5;
+
+        img {
+            max-width: none;
+        }
+    }
+
+    &__tag {
+        font-family: $poppins;
+        font-size: 1.4rem;
+        min-width: 8rem;
+        color: $boulder;
+    }
+
+    &--selected {
+        .file-type-button__icon {
+            opacity: 1;
+        }
+    }
+}
