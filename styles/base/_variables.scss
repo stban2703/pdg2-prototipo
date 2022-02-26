@@ -1,5 +1,5 @@
 // FONTS
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 $poppins:'Poppins', sans-serif;
 
 // FONT SIZES
@@ -48,7 +48,9 @@ $dots-button-background: #FAFAFA;
 
 // // Button colors
 $button-primary: $malibu;
+$button-secondary: $geraldine;
 $button-hover: #54A1EE;
+$button-secondary-hover: #da4e4e;
 $button-text-color-primary: $white;
 $create-note-color: $geraldine;
 
@@ -94,3 +96,4 @@ $page-content-padding: 6rem 4rem;
 // DROP SHADOWS
 $memo-thumb-drop-shadow: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
 $button-primary-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+$button-secondary-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
