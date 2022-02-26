@@ -1,3 +1,4 @@
+import { submitNote } from "./createnote.js";
 import { checkAuthState, logOut, currentSignedInUser } from "./modules/auth.js";
 
 // Verifica si el usuario ha  iniciado sesion
@@ -10,16 +11,18 @@ if (currentUser != null || currentSignedInUser() != null) {
     if (homeWelcome) {
         homeWelcome.innerHTML = `Hola, ${localUser.name}`
     }
-}else {
+} else {
     window.location = "login.html"
 }
-
-//const addNoteBtn = document.querySelector(".addNoteBtn")
-//const notefiles = document.querySelector(".notefiles")
+const logoutButton = document.querySelector('.logoutButton')
+logoutButton.addEventListener('click', function () {
+    logOut()
+})
+// ---------------------------------------------------------------
 
 // Verifica la pantalla actual en el menu
 checkCurrentTab()
-window.addEventListener("hashchange", function() {
+window.addEventListener("hashchange", function () {
     checkCurrentTab()
 }, false)
 
@@ -27,29 +30,22 @@ function checkCurrentTab() {
     const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
     tabs.forEach(t => {
-        if(currentTab.includes(t.id.replace("nav", ""))) {
+        if (currentTab.includes(t.id.replace("nav", ""))) {
             t.classList.add("navigation-menu__item--selected")
         } else {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
+    submitNote()
 }
+// ------------------------------------------------------------------
 
-/*addNoteBtn.addEventListener("click", function () {
-    notefiles.classList.toggle("hidden")
-})
-
-const textBtn = notefiles.querySelector(".text")
-const audioBtn = notefiles.querySelector(".audio")
-const cameraBtn = notefiles.querySelector(".camera")
-const videoBtn = notefiles.querySelector(".video")
-
-textBtn.addEventListener("click", function (event) {
-    window.location = 'createnote.html?text'
-})
-
-videoBtn.addEventListener("click", function (event) {
-    window.location = 'createnote.html?video'
-})*/
-
-
+// Detectar cambios de pantalla
+const pageContent = document.querySelector(".page-content")
+let observer = new MutationObserver(function(mutationsList, observer) {
+    mutationsList.forEach(e => {
+        //console.log(e);
+    })
+    submitNote()
+});
+observer.observe(pageContent, {characterData: false, childList: true, attributes: false});

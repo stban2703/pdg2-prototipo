@@ -1,20 +1,46 @@
 import { firebase } from "./firebase.js";
 import {
-    getFirestore,
-    collection,
-    doc,
-    addDoc,
-    setDoc,
-    updateDoc,
-    query,
-    getDoc,
-    getDocs,
-    where
+    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { submitFile } from "./storage.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
+
+// Notes functions
+export async function createNote(uid, name, week, subject, category) {
+    const usernoteRef = doc(collection(firestore, "notes"))
+    const newNote = {
+        id: usernoteRef.id,
+        name: name,
+        week: week,
+        subject: subject,
+        category: category,
+        fileReference: "",
+        userId: uid,
+        date: Date.now()
+    }
+    await setDoc(usernoteRef, newNote).then(() => {
+        submitFile(file, usernoteRef.id)
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+export async function updateFileReference (id, fileUrl) {
+    try {
+        const usernoteRef = doc(firestore, "notes", id)
+        await updateDoc(usernoteRef, {
+            fileReference: fileUrl
+        }).then(() => {
+            window.location = "noteboard.html"
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
+// ----------------------------------------------------------------------------------
+
 
 export const createUser = async function (uid, name, lastname, email, role) {
     try {
@@ -27,7 +53,6 @@ export const createUser = async function (uid, name, lastname, email, role) {
             email: email,
             role: role
         }
-
         await setDoc(userRef, newUser).then(() => {
             localStorage.setItem('currentuser', JSON.stringify(newUser))
             window.location = 'index.html'
@@ -52,7 +77,7 @@ export const getUserFromDb = async function (uid) {
     }
 }
 
-export const submitNote = async function (uid, name, week, category, subject, file) {
+/*export const submitNote = async function (uid, name, week, category, subject, file) {
     try {
         const usernoteRef = doc(collection(firestore, "notes"))
         const newNote = {
@@ -73,9 +98,9 @@ export const submitNote = async function (uid, name, week, category, subject, fi
     } catch (e) {
         console.log(e)
     }
-}
+}*/
 
-export const updateFileReference = async function (id, fileUrl) {
+/*export const updateFileReference = async function (id, fileUrl) {
     try {
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {
@@ -86,9 +111,9 @@ export const updateFileReference = async function (id, fileUrl) {
     } catch (e) {
         console.log(e)
     }
-}
+}*/
 
-export const createMeeting = async function(newMeeting) {
+export const createMeeting = async function (newMeeting) {
     try {
         const meetingRef = doc(collection(firestore, "meetings"))
         await setDoc(meetingRef, newMeeting).then(() => {
@@ -96,8 +121,7 @@ export const createMeeting = async function(newMeeting) {
         }).catch((error) => {
             console.log(error)
         });
-    } catch(e) {
+    } catch (e) {
 
     }
 }
- 

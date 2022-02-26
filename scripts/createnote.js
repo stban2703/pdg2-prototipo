@@ -1,46 +1,32 @@
-import { checkAuthState, logOut } from "./modules/auth.js";
-import { submitNote } from "./modules/firestore.js";
-import { submitTestFile } from "./modules/storage.js";
+import { createNote } from "./modules/firestore.js";
 
-let ls = window.localStorage;
-let localUser = JSON.parse(ls.getItem('currentuser'))
-let currentUser = localUser
-if (currentUser != null || currentSignedInUser() != null) {
+export function submitNote() {
+    const createNoteForm = document.querySelector('.createnote-form')
+    if (createNoteForm) {
+        createNoteForm.addEventListener('submit', function (event) {
+            event.preventDefault()
+            const name = createNoteForm.name.value
+            const week = createNoteForm.week.value
+            const categorie = createNoteForm.category.value
+            const subject = createNoteForm.subject.value
+            const textnote = createNoteForm.textnote.value
+            const fileNote = createNoteForm.fileNote.value
+            console.log(name + ", " + week + ", " + categorie + ", " + subject)
+            if (textnote != "") {
 
-} else {
-    window.location = "login.html"
-}
+            } else if (fileNote != null) {
 
-const filetype = location.search.replace("?", "");
-const createNoteFiles = document.querySelector(".createNote__files")
-const textFileSection = createNoteFiles.querySelector(".textfile")
-const videoFileSection = createNoteFiles.querySelector(".videofile")
-const noteForm = document.querySelector('.noteForm')
-
-switch (filetype) {
-    case "text":
-        textFileSection.classList.remove("hidden")
-        break;
-    case "video":
-        videoFileSection.classList.remove("hidden")
-        break;
-}
-
-noteForm.addEventListener('submit', function (event) {
-    event.preventDefault()
-    const name = noteForm.name.value
-    const week = noteForm.week.value
-    const categorie = noteForm.categorie.value
-    const subject = noteForm.subject.value
-    if (videoFileSection) {
-        const file = noteForm.file.files[0]
-        submitNote(currentUser.id, name, week, categorie, subject, file)
+            }
+            /*if (videoFileSection) {
+                const file = createNoteForm.file.files[0]
+                createNote(currentUser.id, name, week, categorie, subject, file)
+            }*/
+        })
     }
-})
+}
 
-
-const recordAudioButton = document.querySelector(".recordAudio")
-const stopAudioButton = document.querySelector(".stopAudio")
+/*const recordAudioButton = document.querySelector(".recordAudioBtn")
+const stopAudioButton = document.querySelector(".stopAudioBtn")
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     console.log('getUserMedia supported.');
@@ -58,7 +44,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 console.log(mediaRecorder.state);
                 console.log("Grabando audio")
             })
-            
+
             let chunks = [];
             mediaRecorder.ondataavailable = function (e) {
                 chunks.push(e.data);
@@ -85,5 +71,5 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         );
 } else {
     console.log('getUserMedia not supported on your browser!');
-}
+}*/
 

@@ -586,7 +586,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-width: 8rem;
+  min-width: 6rem;
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
   color: #A0A0A0;
@@ -1495,8 +1495,8 @@ input[type=button] {
 
 .createnote-form__nameInput {
   width: 100%;
-  max-width: 38rem;
   min-width: 35rem;
+  max-width: 35rem;
 }
 
 .createnote-form__weekInput {
@@ -1515,7 +1515,7 @@ input[type=button] {
   gap: 1rem;
   width: 100%;
   min-width: 35rem;
-  max-width: 38rem;
+  max-width: 35rem;
 }
 
 .createnote-form__label {
@@ -1543,8 +1543,11 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  max-width: 38rem;
-  min-width: 35rem;
+  max-width: 35rem;
+}
+
+.createnote-form__filetype .createnote-form__label--regular {
+  white-space: nowrap;
 }
 
 .createnote-form__fileList {
@@ -1594,6 +1597,9 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 2rem;
 }
 
