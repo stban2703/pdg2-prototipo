@@ -104,22 +104,25 @@
                 </div>
                 <div class="createnote-form__addFile createnote-form__addFile--gallery">
                     <label for="" class="createnote-form__label">Foto o video</label>
-                </div>
-                <div class="submit-file-input createnote-form__submitFile">
-                    <section class="submit-file-input__icon">
-                        <img src="./images/submitfileicon.svg" alt="">
-                    </section>
-                    <section class="submit-file-input__info">
-                        <p class="submit-file-input__label">Arrastra y suelta el archivo</p>
-                        <section class="submit-file-input__seudoInput">
-                            <button type="button" class="audio-pre-button">
-                                <p>Seleccionar archivo</p>
-                            </button>
-                            <p class="submit-file-input__title">No se ha subido un archivo</p>
+                    <div class="submit-file-input createnote-form__submitFile">
+                        <section class="submit-file-input__icon">
+                            <img src="./images/submitfileicon.svg" alt="">
                         </section>
-                    </section>
-                    <input type="file" name="file" accept="video/*,image/*">
+                        <section class="submit-file-input__info">
+                            <p class="submit-file-input__label">Arrastra y suelta el archivo</p>
+                            <section class="submit-file-input__seudoInput">
+                                <button type="button" class="audio-pre-button">
+                                    <p>Seleccionar archivo</p>
+                                </button>
+                                <p class="submit-file-input__title">No se ha subido un archivo</p>
+                            </section>
+                        </section>
+                        <input type="file" name="file" accept="video/*,image/*">
+                    </div>
                 </div>
+                <button class="main-button main-button--primary createnote-form__submitBtn">
+                    <p>Guardar</p>
+                </button>
             </div>
         </section>
     </form>

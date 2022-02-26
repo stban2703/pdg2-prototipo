@@ -80,7 +80,10 @@
         gap: 2rem;
     }
 
-    &__submitFile {
-        margin-top: 1rem;
+    &__submitBtn {
+        margin-top: 2rem;
+        padding: 0.8rem 1rem;
+        max-width: 23rem;
+        align-self: flex-end;
     }
 }
