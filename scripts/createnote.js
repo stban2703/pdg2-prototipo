@@ -29,7 +29,7 @@ export function submitNote(currentUser) {
         const fileTitle = document.querySelector(".submit-file-input__title")
         fileInput.addEventListener('change', function () {
             if (fileInput.files.length > 0) {
-                console.log(fileInput.files[0].name)
+                //console.log(fileInput.files[0].name)
                 fileTitle.innerText = fileInput.files[0].name
             } else {
                 fileTitle.innerText = "No se ha subido un archivo"
@@ -43,7 +43,7 @@ export function submitNote(currentUser) {
             const categorie = createNoteForm.category.value
             const subject = createNoteForm.subject.value
             const textNote = createNoteForm.textnote.value
-            const fileNote = createNoteForm.fileNote.value
+            const fileNote = createNoteForm.fileNote.files[0]
             console.log(name + ", " + week + ", " + categorie + ", " + subject)
 
             switch (selectedFileType) {

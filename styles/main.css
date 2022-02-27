@@ -704,10 +704,6 @@ input[type=button] {
   gap: 2rem;
 }
 
-.submit-file-input__icon img {
-  max-width: none;
-}
-
 .submit-file-input__info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -757,7 +753,8 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: 300;
   color: #A0A0A0;
-  width: 26ch;
+  width: 100%;
+  max-width: 26ch;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

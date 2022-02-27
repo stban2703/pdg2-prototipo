@@ -213,12 +213,6 @@
     padding: 2rem;
     gap: 2rem;
 
-    &__icon {
-        img {
-            max-width: none;
-        }
-    }
-
     &__info {
         display: flex;
         flex-direction: column;
@@ -255,7 +249,8 @@
         font-size: 1.5rem;
         font-weight: $light;
         color: $silver;
-        width: 26ch;
+        width: 100%;
+        max-width: 26ch;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
