@@ -4,7 +4,6 @@ import { updateFileReference } from "./firestore.js";
 
 const storage = getStorage()
 
-
 export function submitFile(file, id) {
     const noteRef = ref(storage, id);
     uploadBytes(noteRef, file).then((snapshot) => {

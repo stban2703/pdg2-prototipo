@@ -19,7 +19,7 @@
         <section class="createnote-form__section">
             <div class="text-input createnote-form__nameInput">
                 <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
-                    autocomplete="">
+                    autocomplete="off">
                 <label class="text-input__label" for="name">Nombre</label>
             </div>
             <div class="text-input createnote-form__weekInput">
@@ -58,19 +58,19 @@
                 <p class="createnote-form__label createnote-form__label--regular">Selecciona el tipo de archivo que vas
                     a subir</p>
                 <section class="createnote-form__fileList">
-                    <button type="button" class="file-type-button file-type-button--selected">
+                    <button type="button" class="file-type-button file-type-button--text file-type-button--selected">
                         <div class="file-type-button__icon">
                             <img src="./images/createnotetext.svg" alt="">
                         </div>
                         <p class="file-type-button__tag">Texto</p>
                     </button>
-                    <button type="button" class="file-type-button">
+                    <button type="button" class="file-type-button file-type-button--audio">
                         <div class="file-type-button__icon">
                             <img src="./images/createnoteaudio.svg" alt="">
                         </div>
                         <p class="file-type-button__tag">Audio</p>
                     </button>
-                    <button type="button" class="file-type-button">
+                    <button type="button" class="file-type-button file-type-button--file">
                         <div class="file-type-button__icon">
                             <img src="./images/createnotevideo.svg" alt="">
                         </div>
@@ -79,12 +79,12 @@
                 </section>
             </div>
             <div class="createnote-form__loadFile">
-                <div class="createnote-form__addFile createnote-form__addFile--text hidden">
+                <div class="createnote-form__addFile createnote-form__addFile--text">
                     <label for="textnote" class="createnote-form__label">Nota de texto</label>
                     <textarea class="text-area-input createnote-form__file" name="textnote" id="textnote" rows="5"
                         placeholder="Escribe el mensaje que deseas recordar"></textarea>
                 </div>
-                <div class="createnote-form__addFile createnote-form__addFile--audio">
+                <div class="createnote-form__addFile createnote-form__addFile--audio hidden">
                     <label for="" class="createnote-form__label">Nota de audio</label>
                     <p for="" class="createnote-form__label createnote-form__label--regular">Presiona el botón para
                         grabar el audio</p>
@@ -120,7 +120,7 @@
                                 <p class="submit-file-input__title">No se ha subido un archivo</p>
                             </section>
                         </section>
-                        <input type="file" name="fileNote" accept="video/*,image/*">
+                        <input type="file" name="fileNote" accept="video/mp4,video/x-m4v,video/avi,video/webm,video/*,image/png,image/jpg/image/jpeg,image/*">
                     </div>
                 </div>
                 <button class="main-button main-button--primary createnote-form__submitBtn">

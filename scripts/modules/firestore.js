@@ -7,39 +7,46 @@ import { submitFile } from "./storage.js";
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
 
-// Notes functions
-export async function createNote(uid, name, week, subject, category) {
+// Note functions
+export async function createNote(uid, name, week, category, subject, textNote, file) {
     const usernoteRef = doc(collection(firestore, "notes"))
     const newNote = {
         id: usernoteRef.id,
+        userId: uid,
         name: name,
-        week: week,
+        week: parseInt(week),
         subject: subject,
         category: category,
+        textNote: textNote,
         fileReference: "",
-        userId: uid,
         date: Date.now()
     }
+
     await setDoc(usernoteRef, newNote).then(() => {
-        submitFile(file, usernoteRef.id)
+        if (file != null) {
+            submitFile(file, usernoteRef.id)
+        } else {
+            updateFileReference(usernoteRef.id, null)
+        }
     }).catch((error) => {
         console.log(error)
     });
+
 }
 
-export async function updateFileReference (id, fileUrl) {
+export async function updateFileReference(id, fileUrl) {
     try {
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {
             fileReference: fileUrl
         }).then(() => {
-            window.location = "noteboard.html"
+            window.location = "index.html#notes"
         })
     } catch (e) {
         console.log(e)
     }
 }
-// ----------------------------------------------------------------------------------
+
 
 
 export const createUser = async function (uid, name, lastname, email, role) {
