@@ -118,12 +118,12 @@ export function submitNote(currentUser) {
             const subject = createNoteForm.subject.value
             const textNote = createNoteForm.textnote.value
             const fileNote = createNoteForm.fileNote.files[0]
-            console.log(name + ", " + week + ", " + categorie + ", " + subject)
-
+            console.log("Nota creada")
             if (mediaRecorder) {
                 if (mediaRecorder.state == "recording") {
                     console.log("Debes detener la grabación")
                 } else {
+                    stopRecorder()
                     switch (selectedFileType) {
                         case 0:
                             if (textNote != "") {
