@@ -102,6 +102,11 @@ export function submitNote(currentUser) {
             stopRecorder()
         })
 
+        // Detener recorder si se cambia de pantalla
+        window.addEventListener("hashchange", function () {
+            stopRecorder()
+        }, false)
+
         function stopRecorder() {
             if (mediaRecorder) {
                 mediaRecorder.stream.getAudioTracks().forEach(function (track) { track.stop(); });
