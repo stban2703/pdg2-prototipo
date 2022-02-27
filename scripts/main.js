@@ -1,7 +1,6 @@
 import { submitNote } from "./createnote.js";
-import { checkAuthState, logOut, currentSignedInUser } from "./modules/auth.js";
+import { logOut, currentSignedInUser } from "./modules/auth.js";
 import { renderNotes } from "./noteboard.js";
-
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -10,10 +9,7 @@ let currentUser = localUser
 
 if (currentUser != null || currentSignedInUser() != null) {
     currentUser = localUser
-    const homeWelcome = document.querySelector(".header__userName")
-    if (homeWelcome) {
-        homeWelcome.innerText = localUser.name
-    }
+    displayHomeUserName()
 } else {
     window.location = "login.html"
 }
@@ -22,7 +18,6 @@ const logoutButton = document.querySelector('.logoutButton')
 logoutButton.addEventListener('click', function () {
     logOut()
 })
-
 
 // Verifica la ventana actual en el menu
 checkCurrentTab()
@@ -40,7 +35,15 @@ let observer = new MutationObserver(function(mutationsList, observer) {
 });
 observer.observe(pageContent, {characterData: false, childList: true, attributes: false});
 
+function displayHomeUserName() {
+    const homeWelcome = document.querySelector(".header__userName")
+    if (homeWelcome) {
+        homeWelcome.innerText = localUser.name
+    }
+}
+
 function addPageFuncions() {
+    displayHomeUserName()
     submitNote(currentUser)
     renderNotes(currentUser.id)
 }
