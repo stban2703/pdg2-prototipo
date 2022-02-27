@@ -135,7 +135,6 @@ export function submitNote(currentUser) {
             const subject = createNoteForm.subject.value
             const textNote = createNoteForm.textnote.value
             const fileNote = createNoteForm.fileNote.files[0]
-            console.log("Nota creada")
             if (mediaRecorder) {
                 if (mediaRecorder.state == "recording") {
                     console.log("Debes detener la grabación")
@@ -144,17 +143,21 @@ export function submitNote(currentUser) {
                     switch (selectedFileType) {
                         case 0:
                             if (textNote != "") {
-                                createNote(currentUser.id, name, week, categorie, subject, textNote, null)
+                                createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text")
                             }
                             break;
                         case 1:
                             if (audioNote != null) {
-                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote)
+                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio")
                             }
                             break;
                         case 2:
                             if (fileNote != null) {
-                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote)
+                                if (fileNote.type.includes("video")) {
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video")
+                                } else {
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image")
+                                }
                             }
                             break;
                     }
