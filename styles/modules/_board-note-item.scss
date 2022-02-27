@@ -64,6 +64,13 @@
     &__details {
         display: flex;
         flex-direction: column;
+
+        p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 20ch;
+        }
     }
 
     &__subtitle {
@@ -101,6 +108,9 @@
         .board-note-item__color {
             background-color: $keep-light;
         }
+        .board-note-item__moveBtn--left {
+            visibility: hidden;
+        }
     }
 
     &--improve {
@@ -112,6 +122,9 @@
     &--remove {
         .board-note-item__color {
             background-color: $remove-light;
+        }
+        .board-note-item__moveBtn--right {
+            visibility: hidden;
         }
     }
 }

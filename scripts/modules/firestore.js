@@ -8,7 +8,7 @@ const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
 
 // Note functions
-export async function createNote(uid, name, week, category, subject, textNote, file) {
+export async function createNote(uid, name, week, category, subject, textNote, file, fileType) {
     const usernoteRef = doc(collection(firestore, "notes"))
     const newNote = {
         id: usernoteRef.id,
@@ -19,6 +19,7 @@ export async function createNote(uid, name, week, category, subject, textNote, f
         category: category,
         textNote: textNote,
         fileReference: "",
+        fileType: fileType,
         date: Date.now()
     }
 
@@ -47,8 +48,16 @@ export async function updateFileReference(id, fileUrl) {
     }
 }
 
+export async function getNotes(uid) {
+    const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
+    const querySnapshot = await getDocs(q);
+    const noteList = querySnapshot.docs.map(doc => doc.data());
+    return noteList
+}
 
 
+
+// User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     try {
         const userRef = doc(firestore, 'users', uid);
@@ -84,42 +93,8 @@ export const getUserFromDb = async function (uid) {
     }
 }
 
-/*export const submitNote = async function (uid, name, week, category, subject, file) {
-    try {
-        const usernoteRef = doc(collection(firestore, "notes"))
-        const newNote = {
-            id: usernoteRef.id,
-            name: name,
-            week: week,
-            subject: subject,
-            category: category,
-            fileReference: "",
-            userId: uid,
-            date: Date.now()
-        }
-        await setDoc(usernoteRef, newNote).then(() => {
-            submitFile(file, usernoteRef.id)
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch (e) {
-        console.log(e)
-    }
-}*/
 
-/*export const updateFileReference = async function (id, fileUrl) {
-    try {
-        const usernoteRef = doc(firestore, "notes", id)
-        await updateDoc(usernoteRef, {
-            fileReference: fileUrl
-        }).then(() => {
-            window.location = "noteboard.html"
-        })
-    } catch (e) {
-        console.log(e)
-    }
-}*/
-
+// Meeting functions
 export const createMeeting = async function (newMeeting) {
     try {
         const meetingRef = doc(collection(firestore, "meetings"))

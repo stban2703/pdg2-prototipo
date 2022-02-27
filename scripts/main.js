@@ -1,5 +1,6 @@
 import { submitNote } from "./createnote.js";
 import { checkAuthState, logOut, currentSignedInUser } from "./modules/auth.js";
+import { renderNotes } from "./noteboard.js";
 
 
 // Verifica si el usuario ha  iniciado sesion
@@ -29,6 +30,21 @@ window.addEventListener("hashchange", function () {
     checkCurrentTab()
 }, false)
 
+// Detectar cambios de pantalla
+const pageContent = document.querySelector(".page-content")
+let observer = new MutationObserver(function(mutationsList, observer) {
+    mutationsList.forEach(e => {
+        //console.log(e);
+    })
+    addPageFuncions()
+});
+observer.observe(pageContent, {characterData: false, childList: true, attributes: false});
+
+function addPageFuncions() {
+    submitNote(currentUser)
+    renderNotes(currentUser.id)
+}
+
 function checkCurrentTab() {
     const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
@@ -39,16 +55,5 @@ function checkCurrentTab() {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
-    submitNote(currentUser)
+    addPageFuncions()
 }
-
-
-// Detectar cambios de pantalla
-const pageContent = document.querySelector(".page-content")
-let observer = new MutationObserver(function(mutationsList, observer) {
-    mutationsList.forEach(e => {
-        //console.log(e);
-    })
-    submitNote(currentUser)
-});
-observer.observe(pageContent, {characterData: false, childList: true, attributes: false});

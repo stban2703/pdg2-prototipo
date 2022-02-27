@@ -1169,6 +1169,13 @@ input[type=button] {
           flex-direction: column;
 }
 
+.board-note-item__details p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+}
+
 .board-note-item__subtitle {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
@@ -1221,12 +1228,20 @@ input[type=button] {
   background-color: #CCF3C6;
 }
 
+.board-note-item--keep .board-note-item__moveBtn--left {
+  visibility: hidden;
+}
+
 .board-note-item--improve .board-note-item__color {
   background-color: #FFEAD6;
 }
 
 .board-note-item--remove .board-note-item__color {
   background-color: #FFEFEF;
+}
+
+.board-note-item--remove .board-note-item__moveBtn--right {
+  visibility: hidden;
 }
 
 .signinup-form {
@@ -1473,6 +1488,7 @@ input[type=button] {
           align-items: center;
   width: 100%;
   margin-top: 3rem;
+  gap: 2rem;
 }
 
 .createnote-form {
