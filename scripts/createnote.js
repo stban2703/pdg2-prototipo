@@ -36,6 +36,82 @@ export function submitNote(currentUser) {
             }
         })
 
+
+        // Recorder audio functions
+        const recordAudioButton = document.querySelector(".recordAudioBtn")
+        const stopAudioButton = document.querySelector(".stopAudioBtn")
+        let mediaRecorder = null
+
+        selectFileTypeButtons[1].addEventListener('click', () => {
+            console.log("audio")
+            console.log(mediaRecorder)
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(
+                    // constraints - only audio needed for this app
+                    {
+                        audio: true,
+                    })
+                    //Success callback
+                    .then(function (stream) {
+                        if (!mediaRecorder) {
+                            mediaRecorder = new MediaRecorder(stream);
+                        }
+                    })
+                    // Error callback
+                    .catch(function (err) {
+                        console.log('The following getUserMedia error occurred: ' + err);
+                    }
+                    );
+            } else {
+                console.log('getUserMedia not supported on your browser!');
+            }
+        })
+
+        recordAudioButton.addEventListener("click", () => {
+            if (mediaRecorder) {
+                mediaRecorder.start()
+                console.log(mediaRecorder.state);
+                recordAudioButton.classList.add("hidden")
+                stopAudioButton.classList.remove("hidden")
+                let chunks = [];
+                mediaRecorder.ondataavailable = function (e) {
+                    chunks.push(e.data);
+                }
+
+                mediaRecorder.onstop = function (e) {
+                    const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+                    audioNote = blob
+                    console.log(mediaRecorder.state);
+                    console.log(audioNote)
+                    chunks = [];
+                    recordAudioButton.classList.remove("hidden")
+                    stopAudioButton.classList.add("hidden")
+                }
+            }
+        })
+
+        stopAudioButton.addEventListener('click', () => {
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+            }
+        })
+
+        selectFileTypeButtons[0].addEventListener('click', () => {
+            stopRecorder()
+        })
+
+        selectFileTypeButtons[2].addEventListener('click', () => {
+            stopRecorder()
+        })
+
+        function stopRecorder() {
+            if (mediaRecorder) {
+                mediaRecorder.stream.getAudioTracks().forEach(function (track) { track.stop(); });
+            }
+            mediaRecorder = null
+        }
+
+        // Create a note
         createNoteForm.addEventListener('submit', function (event) {
             event.preventDefault()
             const name = createNoteForm.name.value
@@ -45,7 +121,7 @@ export function submitNote(currentUser) {
             const textNote = createNoteForm.textnote.value
             const fileNote = createNoteForm.fileNote.files[0]
             console.log(name + ", " + week + ", " + categorie + ", " + subject)
-
+            stopRecorder()
             switch (selectedFileType) {
                 case 0:
                     if (textNote != "") {
@@ -64,55 +140,5 @@ export function submitNote(currentUser) {
                     break;
             }
         })
-
-
-        // Audio functions
-        const recordAudioButton = document.querySelector(".recordAudioBtn")
-        const stopAudioButton = document.querySelector(".stopAudioBtn")
-
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia(
-                // constraints - only audio needed for this app
-                {
-                    audio: true,
-                })
-                //Success callback
-                .then(function (stream) {
-                    const mediaRecorder = new MediaRecorder(stream);
-                    recordAudioButton.addEventListener("click", () => {
-                        mediaRecorder.start()
-                        console.log(mediaRecorder.state);
-                        recordAudioButton.classList.add("hidden")
-                        stopAudioButton.classList.remove("hidden")
-                    })
-
-                    let chunks = [];
-                    mediaRecorder.ondataavailable = function (e) {
-                        chunks.push(e.data);
-                    }
-
-                    stopAudioButton.addEventListener('click', () => {
-                        mediaRecorder.stop();
-                    })
-
-                    mediaRecorder.onstop = function (e) {
-                        const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-                        audioNote = blob
-                        console.log(mediaRecorder.state);
-                        console.log(audioNote)
-                        chunks = [];
-                        recordAudioButton.classList.remove("hidden")
-                        stopAudioButton.classList.add("hidden")
-                        //submitTestFile(blob, "notadeaudioprueba")
-                    }
-                })
-                // Error callback
-                .catch(function (err) {
-                    console.log('The following getUserMedia error occurred: ' + err);
-                }
-                );
-        } else {
-            console.log('getUserMedia not supported on your browser!');
-        }
     }
-}   
+}
