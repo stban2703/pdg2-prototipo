@@ -9,9 +9,9 @@ let currentUser = localUser
 
 if (currentUser != null || currentSignedInUser() != null) {
     currentUser = localUser
-    const homeWelcome = document.querySelector(".home__welcome")
+    const homeWelcome = document.querySelector(".header__userName")
     if (homeWelcome) {
-        homeWelcome.innerHTML = `Hola, ${localUser.name}`
+        homeWelcome.innerText = localUser.name
     }
 } else {
     window.location = "login.html"
@@ -41,7 +41,6 @@ function checkCurrentTab() {
     })
     submitNote(currentUser)
 }
-
 
 
 // Detectar cambios de pantalla

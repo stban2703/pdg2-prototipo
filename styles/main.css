@@ -379,7 +379,7 @@ input[type=button] {
 
 .memo-thumbnail, .subject-thumbnail {
   width: 100%;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: #FFFFFF;
 }
 
@@ -849,11 +849,11 @@ input[type=button] {
           align-items: center;
   background: none;
   border: none;
-  -webkit-filter: drop-shadow(0px 4px 10px rgba(239, 81, 82, 0.4));
-          filter: drop-shadow(0px 4px 10px rgba(239, 81, 82, 0.4));
 }
 
 .create-button--note .create-button__icon {
+  -webkit-box-shadow: 0px 4px 10px rgba(239, 81, 82, 0.4);
+          box-shadow: 0px 4px 10px rgba(239, 81, 82, 0.4);
   background-color: #FD797A;
 }
 
