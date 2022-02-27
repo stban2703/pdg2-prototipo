@@ -43,8 +43,6 @@ export function submitNote(currentUser) {
         let mediaRecorder = null
 
         selectFileTypeButtons[1].addEventListener('click', () => {
-            console.log("audio")
-            console.log(mediaRecorder)
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia(
                     // constraints - only audio needed for this app
@@ -121,23 +119,47 @@ export function submitNote(currentUser) {
             const textNote = createNoteForm.textnote.value
             const fileNote = createNoteForm.fileNote.files[0]
             console.log(name + ", " + week + ", " + categorie + ", " + subject)
-            stopRecorder()
-            switch (selectedFileType) {
-                case 0:
-                    if (textNote != "") {
-                        createNote(currentUser.id, name, week, categorie, subject, textNote, null)
+
+            if (mediaRecorder) {
+                if (mediaRecorder.state == "recording") {
+                    console.log("Debes detener la grabación")
+                } else {
+                    switch (selectedFileType) {
+                        case 0:
+                            if (textNote != "") {
+                                createNote(currentUser.id, name, week, categorie, subject, textNote, null)
+                            }
+                            break;
+                        case 1:
+                            if (audioNote != null) {
+                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote)
+                            }
+                            break;
+                        case 2:
+                            if (fileNote != null) {
+                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote)
+                            }
+                            break;
                     }
-                    break;
-                case 1:
-                    if (audioNote != null) {
-                        createNote(currentUser.id, name, week, categorie, subject, null, audioNote)
-                    }
-                    break;
-                case 2:
-                    if (fileNote != null) {
-                        createNote(currentUser.id, name, week, categorie, subject, null, fileNote)
-                    }
-                    break;
+                }
+            } else {
+                switch (selectedFileType) {
+                    case 0:
+                        if (textNote != "") {
+                            createNote(currentUser.id, name, week, categorie, subject, textNote, null)
+                        }
+                        break;
+                    case 1:
+                        if (audioNote != null) {
+                            createNote(currentUser.id, name, week, categorie, subject, null, audioNote)
+                        }
+                        break;
+                    case 2:
+                        if (fileNote != null) {
+                            createNote(currentUser.id, name, week, categorie, subject, null, fileNote)
+                        }
+                        break;
+                }
             }
         })
     }
