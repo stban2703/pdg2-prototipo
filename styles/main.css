@@ -1173,7 +1173,7 @@ input[type=button] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 20ch;
+  max-width: 22ch;
 }
 
 .board-note-item__subtitle {
@@ -1764,6 +1764,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding-bottom: 13rem;
 }
 
 .createnote-screen {
