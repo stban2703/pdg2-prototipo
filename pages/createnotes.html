@@ -100,7 +100,9 @@
                             </div>
                             <div class="record-audio-button__recording"></div>
                         </button>
-                        <button type="button" class="audio-pre-button">
+                        <audio class="audio-player">
+                        </audio>
+                        <button type="button" class="audio-pre-button hidden">
                             <p>Escuchar audio</p>
                         </button>
                     </div>
@@ -120,7 +122,8 @@
                                 <p class="submit-file-input__title">No se ha subido un archivo</p>
                             </section>
                         </section>
-                        <input type="file" name="fileNote" accept="video/mp4,video/x-m4v,video/avi,video/webm,video/*,image/png,image/jpg/image/jpeg,image/*">
+                        <input type="file" name="fileNote"
+                            accept="video/mp4,video/x-m4v,video/avi,video/webm,video/*,image/png,image/jpg/image/jpeg,image/*">
                     </div>
                 </div>
                 <button class="main-button main-button--primary createnote-form__submitBtn">

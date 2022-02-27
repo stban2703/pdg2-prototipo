@@ -1,6 +1,7 @@
 import { createNote } from "./modules/firestore.js";
 
 let audioNote = null
+let audioURL = null
 
 export function submitNote(currentUser) {
     const createNoteForm = document.querySelector('.createnote-form')
@@ -40,6 +41,12 @@ export function submitNote(currentUser) {
         // Recorder audio functions
         const recordAudioButton = document.querySelector(".recordAudioBtn")
         const stopAudioButton = document.querySelector(".stopAudioBtn")
+        const playAudioBtn = document.querySelector(".audio-pre-button")
+        const audioPlayer = document.querySelector(".audio-player");
+        playAudioBtn.addEventListener('click', () => {
+            audioPlayer.play()
+        })
+
         let mediaRecorder = null
 
         selectFileTypeButtons[1].addEventListener('click', () => {
@@ -79,8 +86,13 @@ export function submitNote(currentUser) {
                 mediaRecorder.onstop = function (e) {
                     const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
                     audioNote = blob
+                    audioURL = window.URL.createObjectURL(audioNote);
+                    audioPlayer.src = audioURL
+                    playAudioBtn.classList.remove("hidden")
+                    
                     console.log(mediaRecorder.state);
                     console.log(audioNote)
+
                     chunks = [];
                     recordAudioButton.classList.remove("hidden")
                     stopAudioButton.classList.add("hidden")
