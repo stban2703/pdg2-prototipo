@@ -25,7 +25,7 @@ export const signUp = function (email, password, name, lastname) {
                 case "auth/email-already-in-use":
                     alert("Parece que el correo ya está registrado")
                     break;
-            
+
                 default:
                     alert("Ha ocurrido un error desconocido, intenta de nuevo más tarde")
                     break;
@@ -68,7 +68,7 @@ export const logOut = function () {
     });
 }
 
-export const checkAuthState = function () {
+/*export const checkAuthState = function () {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
@@ -77,7 +77,7 @@ export const checkAuthState = function () {
             console.log("Empty")
         }
     });
-}
+}*/
 
 export const currentSignedInUser = function () {
     return auth.currentUser

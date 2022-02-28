@@ -61,7 +61,6 @@ export async function getNotes(uid) {
 export const createUser = async function (uid, name, lastname, email, role) {
     try {
         const userRef = doc(firestore, 'users', uid);
-
         const newUser = {
             id: uid,
             name: name,
