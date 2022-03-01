@@ -8,8 +8,13 @@ class Router {
 
     async hashChanged(ev) {
         if (window.location.hash.length > 0) {
-            const pageName = window.location.hash.substring(1);
-            this.show(pageName);
+            let pageName = window.location.hash.substring(1);
+            if (pageName.includes("?")) {
+                let fragments = pageName.split("?")
+                this.show(fragments[0])
+            } else {
+                this.show(pageName);
+            }
         } else if (this.routes["#default"]) {
             this.show("#default");
         }

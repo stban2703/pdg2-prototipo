@@ -29,9 +29,9 @@ export async function renderMeetings() {
                         <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
                     </section>
                     <section class="meeting-item__controls">
-                        <button class="seeMeetingBtn board-edit-button">
+                        <a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                             <p>Ver detalle</p>
-                        </button>
+                        </a>
                     </section>
                 </section>
             `
@@ -46,4 +46,8 @@ export async function renderMeetings() {
             }
         })
     }
+}
+
+export function renderMeetingDetails() {
+    const url = window.location.search.substring(1)
 }
