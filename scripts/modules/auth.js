@@ -79,6 +79,6 @@ export const logOut = function () {
     });
 }*/
 
-export const currentSignedInUser = function () {
+export const getCurrentSignedInUser = function () {
     return auth.currentUser
 }

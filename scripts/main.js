@@ -1,5 +1,5 @@
 import { submitNote } from "./createnote.js";
-import { logOut, currentSignedInUser } from "./modules/auth.js";
+import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNotes } from "./noteboard.js";
 
 // Verifica si el usuario ha  iniciado sesion
@@ -7,7 +7,7 @@ let ls = window.localStorage;
 let localUser = JSON.parse(ls.getItem('currentuser'))
 let currentUser = localUser
 
-if (currentUser != null || currentSignedInUser() != null) {
+if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
     displayHomeUserName()
 } else {

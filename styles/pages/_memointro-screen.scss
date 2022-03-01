@@ -1,0 +1,10 @@
+.memointro-screen {
+    display: flex;
+    flex-direction: row;
+
+    &__article {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
