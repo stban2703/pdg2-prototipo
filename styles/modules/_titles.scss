@@ -21,6 +21,10 @@
         @include subtitle($subtitle-color, $regular)
     }
 
+    &--semibold {
+        @include subtitle($subtitle-color, $semibold)
+    }
+
     &--dark {
         color: $mineshaft;
     }
