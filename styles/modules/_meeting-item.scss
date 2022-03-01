@@ -1,0 +1,23 @@
+.meeting-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 39rem;
+
+    &__header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__details {
+        width: 100%;
+    }
+}

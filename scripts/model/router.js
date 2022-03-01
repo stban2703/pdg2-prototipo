@@ -4,6 +4,7 @@ const router = new Router(
         notes: new Layout(new Page("notes.html")),
         createnotes: new Layout(new Page("createnotes.html")),
         memointro: new Layout(new Page("memointro.html")),
+        meetinglist: new Layout(new Page("meetinglist.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")
