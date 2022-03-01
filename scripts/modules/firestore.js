@@ -36,16 +36,12 @@ export async function createNote(uid, name, week, category, subject, textNote, f
 }
 
 export async function updateFileReference(id, fileUrl) {
-    try {
-        const usernoteRef = doc(firestore, "notes", id)
-        await updateDoc(usernoteRef, {
-            fileReference: fileUrl
-        }).then(() => {
-            window.location = "index.html#notes"
-        })
-    } catch (e) {
-        console.log(e)
-    }
+    const usernoteRef = doc(firestore, "notes", id)
+    await updateDoc(usernoteRef, {
+        fileReference: fileUrl
+    }).then(() => {
+        window.location = "index.html#notes"
+    })
 }
 
 export async function getNotes(uid) {
@@ -56,27 +52,45 @@ export async function getNotes(uid) {
 }
 
 
+// Meetings functions
+export async function createMeeting(newMeeting) {
+    const meetingRef = doc(collection(firestore, "meetings"))
+    await setDoc(meetingRef, newMeeting).then(() => {
+        window.location = "meetings.html"
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+export async function getMeetings() {
+    const q = query(collection(firestore, "meetings"))
+    const querySnapshot = await getDocs(q);
+    let meetingList = []
+    querySnapshot.forEach((doc) => {
+        const meeting = doc.data()
+        meeting.id = doc.id
+        meetingList.push(meeting)
+    })
+    return meetingList
+}
+
 
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
-    try {
-        const userRef = doc(firestore, 'users', uid);
-        const newUser = {
-            id: uid,
-            name: name,
-            lastname: lastname,
-            email: email,
-            role: role
-        }
-        await setDoc(userRef, newUser).then(() => {
-            localStorage.setItem('currentuser', JSON.stringify(newUser))
-            window.location = 'index.html'
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch (e) {
-        console.log(e)
+    const userRef = doc(firestore, 'users', uid);
+    const newUser = {
+        id: uid,
+        name: name,
+        lastname: lastname,
+        email: email,
+        role: role
     }
+    await setDoc(userRef, newUser).then(() => {
+        localStorage.setItem('currentuser', JSON.stringify(newUser))
+        window.location = 'index.html'
+    }).catch((error) => {
+        console.log(error)
+    });
 }
 
 export const getUserFromDb = async function (uid) {
@@ -89,20 +103,5 @@ export const getUserFromDb = async function (uid) {
         console.log("Document data: " + user.name + ", " + user.role);
     } else {
         console.log("No existe este usuario");
-    }
-}
-
-
-// Meeting functions
-export const createMeeting = async function (newMeeting) {
-    try {
-        const meetingRef = doc(collection(firestore, "meetings"))
-        await setDoc(meetingRef, newMeeting).then(() => {
-            window.location = "meetings.html"
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch (e) {
-
     }
 }

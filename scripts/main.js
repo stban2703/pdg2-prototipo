@@ -1,4 +1,5 @@
 import { submitNote } from "./createnote.js";
+import { renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNotes } from "./noteboard.js";
 
@@ -46,6 +47,7 @@ function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
     renderNotes(currentUser.id)
+    renderMeetings()
 }
 
 function checkCurrentTab() {
