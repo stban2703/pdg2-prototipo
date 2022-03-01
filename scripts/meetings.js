@@ -48,6 +48,10 @@ export async function renderMeetings() {
     }
 }
 
-export function renderMeetingDetails() {
-    const url = window.location.search.substring(1)
+export async function renderMeetingDetails() {
+    const meetingdetailsScreen = document.querySelector(".meetingdetails-screen")
+    if (meetingdetailsScreen && window.location.href.includes("#meetingdetails")) {
+        const meetingId = window.location.hash.split("?")[1]
+        
+    }
 }

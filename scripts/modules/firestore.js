@@ -62,6 +62,20 @@ export async function createMeeting(newMeeting) {
     });
 }
 
+export async function getMeetingDetails(id) {
+    const meetingRef = doc(firestore, "meetings", id)
+    const docSnap = await getDoc(meetingRef)
+    if (docSnap.exists()) {
+        const meeting = docSnap.data()
+        console.log("Document data:", docSnap.data());
+        return meeting
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+      }
+}
+
 export async function getMeetings() {
     const q = query(collection(firestore, "meetings"))
     const querySnapshot = await getDocs(q);
