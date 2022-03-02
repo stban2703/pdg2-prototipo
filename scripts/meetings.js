@@ -1,4 +1,4 @@
-import { getMeetings } from "./modules/firestore.js"
+import { getMeetingDetails, getMeetings } from "./modules/firestore.js"
 
 export async function renderMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
@@ -49,9 +49,31 @@ export async function renderMeetings() {
 }
 
 export async function renderMeetingDetails() {
-    const meetingdetailsScreen = document.querySelector(".meetingdetails-screen")
-    if (meetingdetailsScreen && window.location.href.includes("#meetingdetails")) {
+    const meetingInfoSection = document.querySelector(".meeting-info-section")
+    const meetingAssistants = document.querySelector(".meeting__assistants")
+
+    if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
-        
+        const meeting = await getMeetingDetails(meetingId)
+        if (meeting) {
+            meetingInfoSection.innerHTML = `
+                <p class="subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
+                <p class="subtitle subtitle--semibold">Fecha: <span>${meeting.date}</span></p>
+                <p class="subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
+                <p class="subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
+                <p class="subtitle subtitle--semibold">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
+            `
+            meetingAssistants.innerHTML = `${meeting.confirmedParticipants}/${meeting.totalParticipants}`
+            if (meeting.mode == "Virtual") {
+                const linkElement = document.createElement('p')
+                linkElement.classList.add("subtitle")
+                linkElement.classList.add("subtitle--semibold")
+                linkElement.classList.add("meeting__link")
+                linkElement.innerHTML = `Link de la reunión: <a href=${meeting.link} target='_blank'>${meeting.link}</a>`
+                meetingInfoSection.appendChild(linkElement)
+            }
+        } else {
+            meetingInfoSection.innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
+        }
     }
 }

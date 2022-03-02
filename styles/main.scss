@@ -13,6 +13,7 @@
 @import "modules/board-note-item";
 @import "modules/memo-reminder";
 @import "modules/meeting-item";
+@import "modules/meeting";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
@@ -26,6 +27,7 @@
 @import "pages/createnote-screen";
 @import "pages/memointro-screen";
 @import "pages/meetinglist-screen";
+@import "pages/meetingdetails-screen";
 
 html {
     font-size: 62.5%;

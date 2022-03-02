@@ -1310,6 +1310,10 @@ input[type=button] {
 
 .meeting-item__title {
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22ch;
 }
 
 .meeting-item__date {
@@ -1356,6 +1360,44 @@ input[type=button] {
 
 .meeting-item .seeMeetingBtn p {
   white-space: nowrap;
+}
+
+.meeting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 2rem 2rem;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.meeting__title {
+  color: #72B8FF;
+}
+
+.meeting__link {
+  word-break: break-all;
+}
+
+.meeting__link a {
+  color: #757575;
+  font-weight: 400;
+}
+
+.meeting__link a:hover {
+  color: #72B8FF;
+}
+
+.meeting .downloadMeetBtn {
+  width: 100%;
+  max-width: 30rem;
 }
 
 .signinup-form {
@@ -1986,6 +2028,60 @@ input[type=button] {
           flex-direction: column;
   margin-top: 1.5rem;
   gap: 2rem;
+}
+
+.meetingdetails-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+}
+
+.meetingdetails-screen__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.meetingdetails-screen__confirmed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FD797A;
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 30rem;
+}
+
+.meetingdetails-screen__confirmed h4 {
+  color: #FFFFFF;
+}
+
+.meetingdetails-screen__confirmed p {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
 html {

@@ -1,0 +1,32 @@
+.meeting {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    border-radius: $radius-meeting-item;
+    padding: 2rem 2rem;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 40rem;
+
+    &__title {
+        color: $malibu;
+    }
+
+    &__link {
+        word-break: break-all;
+        
+        a {
+            color: $boulder;
+            font-weight: $regular;
+
+            &:hover {
+                color: $malibu;
+            }
+        }
+    }
+
+    .downloadMeetBtn {
+        width: 100%;
+        max-width: 30rem;
+    }
+}

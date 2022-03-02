@@ -16,13 +16,27 @@
 </header>
 <article class="meetingdetails-screen">
     <section class="meetingdetails-screen__section">
-        <div class="meeting-information">
-            <h4 class="">Detalle de la reunión</h4>
+        <div class="meeting">
+            <section class="meeting__header">
+                <h4 class="meeting__title subtitle subtitle--semibold">Detalle de la reunión</h4>
+            </section>
+            <section class="meeting__info meeting-info-section">
+                <p class="subtitle subtitle--semibold">Cargando...</span></p>
+            </section>
+            <section class="meeting__controls">
+                <button class="downloadMeetBtn main-button main-button--primary">
+                    <p>Descargar invitación</p>
+                </button>
+            </section>
         </div>
     </section>
     <section class="meetingdetails-screen__section">
-        <div>
-
+        <div class="meetingdetails-screen__picture">
+            <img src="./images/meetinglistreminder.svg" alt="">
+        </div>
+        <div class="meetingdetails-screen__confirmed">
+            <h4 class="subtitle subtitle--regular">Profesores confirmados</h4>
+            <p class="meeting__assistants"></p>
         </div>
     </section>
 </article>
