@@ -1,3 +1,4 @@
+import { onSelectMeetingMode } from "./createmeeting.js";
 import { submitNote } from "./createnote.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
@@ -49,6 +50,7 @@ function addPageFuncions() {
     renderNotes(currentUser.id)
     renderMeetings()
     renderMeetingDetails()
+    onSelectMeetingMode()
 }
 
 function checkCurrentTab() {

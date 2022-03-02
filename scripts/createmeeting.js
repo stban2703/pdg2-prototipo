@@ -1,20 +1,33 @@
 import { createMeeting } from "./modules/firestore.js"
 
-const createMeetingForm = document.querySelector('.createMeetingForm')
-const modeInput = createMeetingForm.mode
-const virtualMeeting = document.querySelector('.virtualMeeting')
-const inPersonMeeting = document.querySelector('.inPersonMeeting')
+export function onSelectMeetingMode() {
+    const createMeetingForm = document.querySelector('.createmeeting-form')
+    const modeInput = createMeetingForm.mode
+    const platformInput = createMeetingForm.platform
+    const urlInput = createMeetingForm.url
+    const placeInput = createMeetingForm.place
+    const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')
+    const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
 
-modeInput.addEventListener('input', function () {
-    if (modeInput.value == "Virtual") {
-        virtualMeeting.classList.remove("hidden")
-        inPersonMeeting.classList.add("hidden")
-    } else {
-        virtualMeeting.classList.add("hidden")
-        inPersonMeeting.classList.remove("hidden")
+    if (createMeetingForm && window.location.href.includes("#createmeeting")) {
+        modeInput.addEventListener('input', function () {
+            if (modeInput.value == "Virtual") {
+                virtualMeetingSection.classList.remove("hidden")
+                inPersonMeetingSection.classList.add("hidden")
+                platformInput.setAttribute('required', '')
+                urlInput.setAttribute('required', '')
+                placeInput.removeAttribute('required')
+            } else {
+                virtualMeetingSection.classList.add("hidden")
+                inPersonMeetingSection.classList.remove("hidden")
+                platformInput.removeAttribute('required')
+                urlInput.removeAttribute('required')
+                placeInput.setAttribute('required', '')
+            }
+        })
     }
-})
-
+}
+/*
 createMeetingForm.addEventListener('submit', function (event) {
     event.preventDefault()
     const name = createMeetingForm.name.value
@@ -42,4 +55,4 @@ createMeetingForm.addEventListener('submit', function (event) {
 
     createMeeting(newMeeting)
     createMeetingForm.reset()
-})
+})*/

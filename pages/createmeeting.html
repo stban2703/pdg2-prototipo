@@ -51,10 +51,10 @@
                 </select>
             </div>
         </section>
-        <section class="createmeeting-form__section createmeeting-form__section--virtual">
+        <section class="createmeeting-form__section createmeeting-form__section--virtual hidden">
             <div class="select-input createmeeting-form__select">
                 <label class="select-input__label" for="platform">Medio</label>
-                <select class="select-input__field" name="platform" id="platform" required>
+                <select class="select-input__field" name="platform" id="platform">
                     <option value="" selected>Seleccionar</option>
                     <option value="Microsoft Teams">Microsoft Teams</option>
                     <option value="Zoom">Zoom</option>
@@ -62,15 +62,13 @@
                 </select>
             </div>
             <div class="text-input createmeeting-form__linkInput">
-                <input id="url" class="text-input__field" type="url" name="url" placeholder=" " required
-                    autocomplete="off">
+                <input id="url" class="text-input__field" type="url" name="url" placeholder=" " autocomplete="off">
                 <label class="text-input__label" for="url">Url</label>
             </div>
         </section>
-        <section class="createmeeting-form__section createmeeting-form__section--inperson">
+        <section class="createmeeting-form__section createmeeting-form__section--inperson hidden">
             <div class="text-input createmeeting-form__placeInput">
-                <input id="place" class="text-input__field" type="text" name="place" placeholder=" " required
-                    autocomplete="off">
+                <input id="place" class="text-input__field" type="text" name="place" placeholder=" " autocomplete="off">
                 <label class="text-input__label" for="place">Lugar</label>
             </div>
         </section>
