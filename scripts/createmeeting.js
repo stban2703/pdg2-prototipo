@@ -1,15 +1,16 @@
 import { createMeeting } from "./modules/firestore.js"
+import { parseTimestampToDate } from "./utils/date-format.js"
 
 export function onSelectMeetingMode() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
-    const modeInput = createMeetingForm.mode
-    const platformInput = createMeetingForm.platform
-    const urlInput = createMeetingForm.url
-    const placeInput = createMeetingForm.place
-    const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')
-    const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
-
     if (createMeetingForm && window.location.href.includes("#createmeeting")) {
+        const modeInput = createMeetingForm.mode
+        const platformInput = createMeetingForm.platform
+        const urlInput = createMeetingForm.url
+        const placeInput = createMeetingForm.place
+        const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')
+        const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
+
         modeInput.addEventListener('input', function () {
             if (modeInput.value == "Virtual") {
                 virtualMeetingSection.classList.remove("hidden")
@@ -27,32 +28,34 @@ export function onSelectMeetingMode() {
         })
     }
 }
-/*
-createMeetingForm.addEventListener('submit', function (event) {
-    event.preventDefault()
-    const name = createMeetingForm.name.value
-    const date = createMeetingForm.date.value
-    const time = createMeetingForm.time.value
-    const duration = createMeetingForm.duration.value
-    const mode = createMeetingForm.mode.value
-    const place = createMeetingForm.place.value
-    const platform = createMeetingForm.platform.value
-    const link = createMeetingForm.link.value
 
-    const newMeeting = {
-        name: name,
-        date: date,
-        time: time,
-        duration: duration,
-        mode: mode,
-        place: place,
-        platform: platform,
-        link: link,
-        status: "pending",
-        totalParticipants: 6,
-        confirmedParticipants: 0
+export function submitMeeting() {
+    const createMeetingForm = document.querySelector('.createmeeting-form')
+    if (createMeetingForm && window.location.href.includes("#createmeeting")) {
+        const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')
+        const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
+
+        createMeetingForm.addEventListener('submit', (event) => {
+            event.preventDefault()
+            const name = createMeetingForm.name.value
+            const date = createMeetingForm.date.value
+            const time = createMeetingForm.time.value
+            const duration = createMeetingForm.duration.value
+            const mode = createMeetingForm.mode.value
+            const platform = createMeetingForm.platform.value
+            const url = createMeetingForm.url.value
+            const place = createMeetingForm.place.value
+
+            //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
+            //console.log(new Date("" + date + "T" + time + ":00").getTime()) // <========== Usar este
+            console.log(time)
+            /*if(inPersonMeetingSection.classList.contains("hidden")) {
+                console.log("Es virtual")
+                createMeeting(name, date, time, duration, mode, platform, url, null)
+            } else if(virtualMeetingSection.classList.contains("hidden")) {
+                console.log("Es presencial")
+                createMeeting(name, date, time, duration, mode, null, null, place)
+            }*/
+        })
     }
-
-    createMeeting(newMeeting)
-    createMeetingForm.reset()
-})*/
+}

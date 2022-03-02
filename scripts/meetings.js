@@ -69,7 +69,7 @@ export async function renderMeetingDetails() {
                 linkElement.classList.add("subtitle")
                 linkElement.classList.add("subtitle--semibold")
                 linkElement.classList.add("meeting__link")
-                linkElement.innerHTML = `Link de la reunión: <a href=${meeting.link} target='_blank'>${meeting.link}</a>`
+                linkElement.innerHTML = `Link de la reunión: <a href=${meeting.url} target='_blank'>${meeting.url}</a>`
                 meetingInfoSection.appendChild(linkElement)
             }
         } else {

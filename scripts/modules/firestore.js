@@ -53,10 +53,24 @@ export async function getNotes(uid) {
 
 
 // Meetings functions
-export async function createMeeting(newMeeting) {
+export async function createMeeting(name, date, time, duration, mode, place, platform, url) {
     const meetingRef = doc(collection(firestore, "meetings"))
+    const newMeeting = {
+        id: meetingRef.id,
+        name: name,
+        date: date,
+        time: time,
+        duration: duration,
+        mode: mode,
+        place: place,
+        platform: platform,
+        link: link,
+        status: "pending",
+        totalParticipants: 6,
+        confirmedParticipants: 0
+    }
     await setDoc(meetingRef, newMeeting).then(() => {
-        window.location = "meetings.html"
+        window.location = "index.html#meetinglist"
     }).catch((error) => {
         console.log(error)
     });
