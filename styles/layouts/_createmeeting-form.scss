@@ -1,0 +1,21 @@
+.createmeeting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 80rem;
+
+    &__section {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 2.5rem;
+    }
+
+    &__dateInput {
+        max-width: 25rem;
+    }
+
+    &__submitBtn {
+        max-width: 25rem;
+    }
+}

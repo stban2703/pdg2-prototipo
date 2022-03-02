@@ -20,6 +20,7 @@
 @import "layouts/header";
 @import "layouts/note-board";
 @import "layouts/createnote-form";
+@import "layouts/createmeeting-form";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";
@@ -28,6 +29,7 @@
 @import "pages/memointro-screen";
 @import "pages/meetinglist-screen";
 @import "pages/meetingdetails-screen";
+@import "pages/createmeeting-screen";
 
 html {
     font-size: 62.5%;

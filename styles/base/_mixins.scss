@@ -35,6 +35,10 @@
     @extend %text-area-input;
 }
 
+@mixin date-time-input() {
+    @extend %date-time-input;
+}
+
 @mixin title($font-color, $font-weight) {
     @extend %title;
     color: $font-color;

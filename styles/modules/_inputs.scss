@@ -46,6 +46,31 @@
     }
 }
 
+.date-time-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    
+    &__label {
+        position: absolute;
+        transform: translate(0%, -50%);
+        top: 0;
+        left: 0.5rem;
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        @include input-label($input-label-color);
+        color: $input-label-valid-color;
+    }
+
+    &__field {
+        @include date-time-input();
+        outline-color: $malibu;
+        text-overflow: ellipsis;
+    }
+}
+
 .text-area-input {
     @include textarea-input();
 }

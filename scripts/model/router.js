@@ -6,6 +6,7 @@ const router = new Router(
         memointro: new Layout(new Page("memointro.html")),
         meetinglist: new Layout(new Page("meetinglist.html")),
         meetingdetails: new Layout(new Page("meetingdetails.html")),
+        createmeeting: new Layout(new Page("createmeeting.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

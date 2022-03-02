@@ -1,0 +1,83 @@
+<header class="header">
+    <section class="header__info">
+        <h2 class="header__title section-title">Nueva reunión reflexiva</h2>
+    </section>
+    <section class="header__options">
+        <a href="" class="header__icon">
+            <img src="./images/headerglass.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headerbell.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headeruser.svg" alt="">
+        </a>
+    </section>
+</header>
+<article class="createmeeting-screen">
+    <form class="createmeeting-form">
+        <section class="createmeeting-form__section">
+            <div class="text-input createmeeting-form__nameInput">
+                <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
+                    autocomplete="off">
+                <label class="text-input__label" for="name">Nombre</label>
+            </div>
+            <div class="date-time-input createmeeting-form__dateInput">
+                <input id="date" class="date-time-input__field" type="date" name="date" placeholder=" " required
+                    autocomplete="off">
+                <label class="date-time-input__label" for="date">Fecha</label>
+            </div>
+        </section>
+        <section class="createmeeting-form__section">
+            <div class="date-time-input createmeeting-form__timeInput">
+                <input id="time" class="date-time-input__field" type="time" name="time" placeholder=" " required
+                    autocomplete="off">
+                <label class="date-time-input__label" for="time">Hora</label>
+            </div>
+            <div class="select-input createmeeting-form__select">
+                <label class="select-input__label" for="duration">Duración</label>
+                <select class="select-input__field" name="duration" id="duration" required>
+                    <option value="" selected>Seleccionar</option>
+                    <option value="1 hora">1 hora</option>
+                    <option value="2 horas">2 horas</option>
+                </select>
+            </div>
+            <div class="select-input createmeeting-form__select">
+                <label class="select-input__label" for="mode">Modalidad</label>
+                <select class="select-input__field" name="mode" id="mode" required>
+                    <option value="" selected>Seleccionar</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Presencial">Presencial</option>
+                </select>
+            </div>
+        </section>
+        <section class="createmeeting-form__section createmeeting-form__section--virtual">
+            <div class="select-input createmeeting-form__select">
+                <label class="select-input__label" for="platform">Medio</label>
+                <select class="select-input__field" name="platform" id="platform" required>
+                    <option value="" selected>Seleccionar</option>
+                    <option value="Microsoft Teams">Microsoft Teams</option>
+                    <option value="Zoom">Zoom</option>
+                    <option value="Google Meet">Google Meet</option>
+                </select>
+            </div>
+            <div class="text-input createmeeting-form__linkInput">
+                <input id="url" class="text-input__field" type="url" name="url" placeholder=" " required
+                    autocomplete="off">
+                <label class="text-input__label" for="url">Url</label>
+            </div>
+        </section>
+        <section class="createmeeting-form__section createmeeting-form__section--inperson">
+            <div class="text-input createmeeting-form__placeInput">
+                <input id="place" class="text-input__field" type="text" name="place" placeholder=" " required
+                    autocomplete="off">
+                <label class="text-input__label" for="place">Lugar</label>
+            </div>
+        </section>
+        <section class="createmeeting-form__section createmeeting-form__section--button">
+            <button class="main-button main-button--primary createmeeting-form__submitBtn">
+                <p>Guardar</p>
+            </button>
+        </section>
+    </form>
+</article>

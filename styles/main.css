@@ -290,7 +290,7 @@ input[type=button] {
   font-size: 1.8rem;
 }
 
-.text-input__label, .select-input__label {
+.text-input__label, .select-input__label, .date-time-input__label {
   background-color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
@@ -356,7 +356,8 @@ input[type=button] {
           appearance: none;
   background: url("./../../images/selectarrow.svg");
   background-repeat: no-repeat;
-  background-position-x: 95%;
+  background-position-x: 90%;
+  background-position-x: calc(100% - 1em);
   background-position-y: 50%;
 }
 
@@ -369,6 +370,25 @@ input[type=button] {
 }
 
 .select-input__field[required] option:first-child {
+  border-color: #72B8FF;
+}
+
+.date-time-input__field {
+  background-color: #FFFFFF;
+  border: 1px solid #A0A0A0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem !important;
+  color: #363636;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  width: 100%;
+}
+
+.date-time-input__field:focus {
+  border-color: #72B8FF;
+}
+
+.date-time-input__field:valid {
   border-color: #72B8FF;
 }
 
@@ -509,6 +529,36 @@ input[type=button] {
 
 .select-input__field {
   padding-right: 3rem;
+  outline-color: #72B8FF;
+  text-overflow: ellipsis;
+}
+
+.date-time-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.date-time-input__label {
+  position: absolute;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  top: 0;
+  left: 0.5rem;
+  padding: 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #A0A0A0;
+  color: #72B8FF;
+}
+
+.date-time-input__field {
   outline-color: #72B8FF;
   text-overflow: ellipsis;
 }
@@ -1796,6 +1846,38 @@ input[type=button] {
       align-self: flex-end;
 }
 
+.createmeeting-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+  max-width: 80rem;
+}
+
+.createmeeting-form__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+.createmeeting-form__dateInput {
+  max-width: 25rem;
+}
+
+.createmeeting-form__submitBtn {
+  max-width: 25rem;
+}
+
 .signinup-screen {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1927,7 +2009,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding-bottom: 13rem;
+  padding-bottom: 12rem;
 }
 
 .createnote-screen {
@@ -1968,6 +2050,7 @@ input[type=button] {
           flex-direction: column;
   margin-top: 2rem;
   gap: 4rem;
+  padding-bottom: 12rem;
 }
 
 .meetinglist-screen__intro {
@@ -2082,6 +2165,13 @@ input[type=button] {
   font-size: 3rem;
   font-weight: 600;
   color: #FFFFFF;
+}
+
+.createmeeting-screen {
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 2rem;
+  padding: 3rem;
 }
 
 html {
