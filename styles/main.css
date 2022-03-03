@@ -354,7 +354,7 @@ input[type=button] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background: url("./../../images/selectarrow.svg");
+  background: url("./../images/selectarrow.svg");
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-position-x: calc(100% - 1em);
