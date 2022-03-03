@@ -1,11 +1,6 @@
 import { firebase } from "./firebase.js";
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 import { createUser, getUserFromDb } from "./firestore.js";
 
