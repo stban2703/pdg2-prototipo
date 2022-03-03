@@ -1,5 +1,5 @@
 import { createMeeting } from "./modules/firestore.js"
-import { parseTimestampToDate } from "./utils/date-format.js"
+import { parseDateToTimestamp, parseMilitaryTimeToStandard, parseTimestampToDate } from "./utils/date-format.js"
 
 export function onSelectMeetingMode() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
@@ -18,12 +18,18 @@ export function onSelectMeetingMode() {
                 platformInput.setAttribute('required', '')
                 urlInput.setAttribute('required', '')
                 placeInput.removeAttribute('required')
-            } else {
+            } else if(modeInput.value == "Presencial") {
                 virtualMeetingSection.classList.add("hidden")
                 inPersonMeetingSection.classList.remove("hidden")
                 platformInput.removeAttribute('required')
                 urlInput.removeAttribute('required')
                 placeInput.setAttribute('required', '')
+            } else {
+                virtualMeetingSection.classList.add("hidden")
+                inPersonMeetingSection.classList.add("hidden")
+                platformInput.removeAttribute('required')
+                urlInput.removeAttribute('required')
+                placeInput.removeAttribute('required', '')
             }
         })
     }
@@ -46,16 +52,18 @@ export function submitMeeting() {
             const url = createMeetingForm.url.value
             const place = createMeetingForm.place.value
 
+            let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
+            let standarTime = parseMilitaryTimeToStandard(time)
+
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
-            //console.log(new Date("" + date + "T" + time + ":00").getTime()) // <========== Usar este
-            console.log(time)
-            /*if(inPersonMeetingSection.classList.contains("hidden")) {
+            // Carolina, francisco, andres
+            if(inPersonMeetingSection.classList.contains("hidden")) {
                 console.log("Es virtual")
-                createMeeting(name, date, time, duration, mode, platform, url, null)
+                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url)
             } else if(virtualMeetingSection.classList.contains("hidden")) {
                 console.log("Es presencial")
-                createMeeting(name, date, time, duration, mode, null, null, place)
-            }*/
+                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null)
+            }
         })
     }
 }

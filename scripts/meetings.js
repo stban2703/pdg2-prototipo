@@ -1,4 +1,5 @@
 import { getMeetingDetails, getMeetings } from "./modules/firestore.js"
+import { parseTimestampToDate } from "./utils/date-format.js"
 
 export async function renderMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
@@ -20,7 +21,7 @@ export async function renderMeetings() {
                 <section class="meeting-item__header">
                     <img class="meeting-item__icon" src="./images/meetingicon.svg" alt="">
                     <h4 class="meeting-item__title subtitle subtitle--semibold">${meeting.name}</h4>
-                    <p class="meeting-item__date">${meeting.date}</p>
+                    <p class="meeting-item__date">${parseTimestampToDate(meeting.date)}</p>
                 </section>
                 <section class="meeting-item__content">
                     <section class="meeting-item__details">
@@ -58,7 +59,7 @@ export async function renderMeetingDetails() {
         if (meeting) {
             meetingInfoSection.innerHTML = `
                 <p class="subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
-                <p class="subtitle subtitle--semibold">Fecha: <span>${meeting.date}</span></p>
+                <p class="subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
                 <p class="subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
                 <p class="subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
                 <p class="subtitle subtitle--semibold">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>

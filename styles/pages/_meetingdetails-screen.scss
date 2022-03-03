@@ -12,6 +12,12 @@
         max-width: 40rem;
     }
 
+    .meeting-info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
     &__confirmed {
         display: flex;
         flex-direction: column;

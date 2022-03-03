@@ -64,7 +64,7 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         mode: mode,
         place: place,
         platform: platform,
-        link: link,
+        url: url,
         status: "pending",
         totalParticipants: 6,
         confirmedParticipants: 0
@@ -81,7 +81,7 @@ export async function getMeetingDetails(id) {
     const docSnap = await getDoc(meetingRef)
     if (docSnap.exists()) {
         const meeting = docSnap.data()
-        console.log("Document data:", docSnap.data());
+        //console.log("Document data:", docSnap.data());
         return meeting
       } else {
         // doc.data() will be undefined in this case
