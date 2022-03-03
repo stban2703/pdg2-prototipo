@@ -1,6 +1,6 @@
 class Page {
     constructor(url) {
-        this.url = './../../pages/' + url;
+        this.url = './pages/' + url;
     }
 
     async load() {
