@@ -1,65 +1,80 @@
-import { firebase } from "./modules/firebase.js";
-import {
-    getFirestore,
-    collection,
-    query,
-    getDocs,
-    where
-} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { getMeetingDetails, getMeetings } from "./modules/firestore.js"
+import { parseTimestampToDate } from "./utils/date-format.js"
 
-const db = getFirestore(firebase)
-const meetingsListPending = document.querySelector(".meetings__list--pending")
-const meetingsListFinished = document.querySelector(".meetings__list--finished")
-let meetingsList = []
-getMeetings()
+export async function renderMeetings() {
+    const meetinglistScreen = document.querySelector(".meetinglist-screen")
 
-async function getMeetings() {
-    const q = query(collection(db, "meetings"))
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        const meeting = doc.data()
-        meeting.id = doc.id
-        meetingsList.push(meeting)
-        console.log(meeting.id)
-    });
-    console.log(meetingsList)
-    renderMeeting(meetingsList)
+    if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
+        const pendingList = document.querySelector(".meetinglist-screen__list--pending")
+        const finishedList = document.querySelector(".meetinglist-screen__list--finished")
+
+        pendingList.innerHTML = ``
+        finishedList.innerHTML = ``
+
+        const meetingList = await getMeetings()
+        const copy = [...meetingList]
+
+        copy.forEach(meeting => {
+            const meetingItem = document.createElement("div")
+            meetingItem.classList.add("meeting-item")
+            meetingItem.innerHTML = `
+                <section class="meeting-item__header">
+                    <img class="meeting-item__icon" src="./images/meetingicon.svg" alt="">
+                    <h4 class="meeting-item__title subtitle subtitle--semibold">${meeting.name}</h4>
+                    <p class="meeting-item__date">${parseTimestampToDate(meeting.date)}</p>
+                </section>
+                <section class="meeting-item__content">
+                    <section class="meeting-item__details">
+                        <p class="meeting-item__subtitle">Hora: <span>${meeting.time}</span></p>
+                        <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
+                        <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
+                    </section>
+                    <section class="meeting-item__controls">
+                        <a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                            <p>Ver detalle</p>
+                        </a>
+                    </section>
+                </section>
+            `
+
+            switch (meeting.status) {
+                case "pending":
+                    pendingList.appendChild(meetingItem)
+                    break;
+                case "finished":
+                    finishedList.appendChild(meetingItem)
+                    break;
+            }
+        })
+    }
 }
 
-function renderMeeting(list) {
-    let copy = [...list]
-    meetingsListPending.innerHTML = ``
-    meetingsListFinished.innerHTML = ``
+export async function renderMeetingDetails() {
+    const meetingInfoSection = document.querySelector(".meeting-info-section")
+    const meetingAssistants = document.querySelector(".meeting__assistants")
 
-    copy.forEach((elem, i) => {
-        const meetingItemDiv = document.createElement('div')
-        meetingItemDiv.classList.add("meetingItem")
-        meetingItemDiv.innerHTML = `
-            <p class="meetingItem__name">${elem.name}</p>
-            <p class="meetingItem__date">Fecha: ${elem.date}</p>
-            <p class="meetingItem__mode">${elem.mode}</p>
-            <p class="meetingItem__place">${elem.place ? elem.place : elem.platform}</p>
-        `
-        const meetingItemButton = document.createElement("button")
-        meetingItemButton.classList.add("meetingItem__button")
-        meetingItemButton.classList.add("button")
-        meetingItemButton.classList.add("button--dark")
-        meetingItemButton.classList.add("button--board")
-        meetingItemButton.innerHTML = `
-                <p>Ver detalle</p>
-        `
-        meetingItemButton.addEventListener('click', function () {
-            window.location = `meetingview.html?${elem.id}`
-        })
-        meetingItemDiv.appendChild(meetingItemButton)
-
-        switch (elem.status) {
-            case "pending":
-                meetingsListPending.appendChild(meetingItemDiv)
-                break
-            case "finished":
-                meetingsListFinished.appendChild(meetingItemDiv)
-                break
+    if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
+        const meetingId = window.location.hash.split("?")[1]
+        const meeting = await getMeetingDetails(meetingId)
+        if (meeting) {
+            meetingInfoSection.innerHTML = `
+                <p class="subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
+                <p class="subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
+                <p class="subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
+                <p class="subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
+                <p class="subtitle subtitle--semibold">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
+            `
+            meetingAssistants.innerHTML = `${meeting.confirmedParticipants}/${meeting.totalParticipants}`
+            if (meeting.mode == "Virtual") {
+                const linkElement = document.createElement('p')
+                linkElement.classList.add("subtitle")
+                linkElement.classList.add("subtitle--semibold")
+                linkElement.classList.add("meeting__link")
+                linkElement.innerHTML = `Link de la reunión: <a href=${meeting.url} target='_blank'>${meeting.url}</a>`
+                meetingInfoSection.appendChild(linkElement)
+            }
+        } else {
+            meetingInfoSection.innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
-    })
+    }
 }

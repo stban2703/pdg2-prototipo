@@ -1,0 +1,74 @@
+@mixin button($background-color, $font-color, $font-size, $button-box-shadow) {
+    @extend %button;
+    background-color: $background-color;
+    color: $font-color;
+    box-shadow: $button-box-shadow;
+
+    p {
+        font-size: $font-size;
+    }
+
+    &:hover {
+        background-color: darken($background-color, 10%);
+    }
+}
+
+@mixin create-button($background-color) {
+    @extend %create-button;
+    background-color: $background-color;
+}
+
+@mixin input-label($font-color) {
+    @extend %input-label;
+    color: $font-color;
+}
+
+@mixin text-input() {
+    @extend %text-input;
+}
+
+@mixin select-input() {
+    @extend %select-input;
+}
+
+@mixin textarea-input() {
+    @extend %text-area-input;
+}
+
+@mixin date-time-input() {
+    @extend %date-time-input;
+}
+
+@mixin title($font-color, $font-weight) {
+    @extend %title;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
+@mixin section-title($font-color, $font-weight) {
+    @extend %section-title;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
+@mixin subtitle($font-color, $font-weight) {
+    @extend %subtitle;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
+@mixin thirdtitle($font-color, $font-weight) {
+    @extend %thirdtitle;
+    color: $font-color;
+    font-weight: $font-weight;
+}
+
+@mixin link($link-color) {
+    @extend %link;
+    color: $link-color;
+}
+
+@mixin memo-subject-thumbnail($drop-shadow) {
+    @extend %memo-subject-thumbnail;
+    filter: $drop-shadow;
+}

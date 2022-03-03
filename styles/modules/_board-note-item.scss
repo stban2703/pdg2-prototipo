@@ -1,0 +1,130 @@
+.board-note-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: $white;
+    max-width: 30rem;
+    filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
+
+    &__color {
+        width: 100%;
+        height: 1.3rem;
+        background-color: $keep-light;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 1.5rem 2rem;
+        gap: 1.5rem;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0.65rem;
+    }
+
+    &__type {
+        width: 3rem;
+        max-width: none;
+    }
+
+    &__title {
+        @include thirdtitle($boulder, bolder);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    &__dotsBtn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $dots-button-background;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.5rem;
+
+        img {
+            height: 2rem;
+            max-width: none;
+        }
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 22ch;
+        }
+    }
+
+    &__subtitle {
+        font-family: $poppins;
+        font-size: $small-button-text;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__moveBtn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $geraldine;
+        border-radius: 40px;
+        border: none;
+        height: 100%;
+        padding: 0.5rem 2rem;
+        filter: drop-shadow(0px 5px 6px rgba(239, 81, 82, 0.2));
+
+        img {
+            max-width: none;
+        }
+    }
+
+    &--keep {
+        .board-note-item__color {
+            background-color: $keep-light;
+        }
+        .board-note-item__moveBtn--left {
+            visibility: hidden;
+        }
+    }
+
+    &--improve {
+        .board-note-item__color {
+            background-color: $improve-light;
+        }
+    }
+
+    &--remove {
+        .board-note-item__color {
+            background-color: $remove-light;
+        }
+        .board-note-item__moveBtn--right {
+            visibility: hidden;
+        }
+    }
+}

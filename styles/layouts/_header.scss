@@ -1,0 +1,27 @@
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__options {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+    }
+
+    &__icon {
+        img {
+            max-width: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

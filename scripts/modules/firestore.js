@@ -1,42 +1,124 @@
 import { firebase } from "./firebase.js";
 import {
-    getFirestore,
-    collection,
-    doc,
-    addDoc,
-    setDoc,
-    updateDoc,
-    query,
-    getDoc,
-    getDocs,
-    where
+    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { submitFile } from "./storage.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
 
-export const createUser = async function (uid, name, lastname, email, role) {
-    try {
-        const userRef = doc(firestore, 'users', uid);
-
-        const newUser = {
-            id: uid,
-            name: name,
-            lastname: lastname,
-            email: email,
-            role: role
-        }
-
-        await setDoc(userRef, newUser).then(() => {
-            localStorage.setItem('currentuser', JSON.stringify(newUser))
-            window.location = 'index.html'
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch (e) {
-        console.log(e)
+// Note functions
+export async function createNote(uid, name, week, category, subject, textNote, file, fileType) {
+    const usernoteRef = doc(collection(firestore, "notes"))
+    const newNote = {
+        id: usernoteRef.id,
+        userId: uid,
+        name: name,
+        week: parseInt(week),
+        subject: subject,
+        category: category,
+        textNote: textNote,
+        fileReference: "",
+        fileType: fileType,
+        date: Date.now()
     }
+
+    await setDoc(usernoteRef, newNote).then(() => {
+        if (file != null) {
+            submitFile(file, usernoteRef.id)
+        } else {
+            updateFileReference(usernoteRef.id, null)
+        }
+    }).catch((error) => {
+        console.log(error)
+    });
+
+}
+
+export async function updateFileReference(id, fileUrl) {
+    const usernoteRef = doc(firestore, "notes", id)
+    await updateDoc(usernoteRef, {
+        fileReference: fileUrl
+    }).then(() => {
+        window.location = "index.html#notes"
+    })
+}
+
+export async function getNotes(uid) {
+    const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
+    const querySnapshot = await getDocs(q);
+    const noteList = querySnapshot.docs.map(doc => doc.data());
+    return noteList
+}
+
+
+// Meetings functions
+export async function createMeeting(name, date, time, duration, mode, place, platform, url) {
+    const meetingRef = doc(collection(firestore, "meetings"))
+    const newMeeting = {
+        id: meetingRef.id,
+        name: name,
+        date: date,
+        time: time,
+        duration: duration,
+        mode: mode,
+        place: place,
+        platform: platform,
+        url: url,
+        status: "pending",
+        totalParticipants: 6,
+        confirmedParticipants: 0
+    }
+    await setDoc(meetingRef, newMeeting).then(() => {
+        window.location = "index.html#meetinglist"
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+export async function getMeetingDetails(id) {
+    const meetingRef = doc(firestore, "meetings", id)
+    const docSnap = await getDoc(meetingRef)
+    if (docSnap.exists()) {
+        const meeting = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return meeting
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+      }
+}
+
+export async function getMeetings() {
+    const q = query(collection(firestore, "meetings"))
+    const querySnapshot = await getDocs(q);
+    let meetingList = []
+    querySnapshot.forEach((doc) => {
+        const meeting = doc.data()
+        meeting.id = doc.id
+        meetingList.push(meeting)
+    })
+    return meetingList
+}
+
+
+// User functions
+export const createUser = async function (uid, name, lastname, email, role) {
+    const userRef = doc(firestore, 'users', uid);
+    const newUser = {
+        id: uid,
+        name: name,
+        lastname: lastname,
+        email: email,
+        role: role
+    }
+    await setDoc(userRef, newUser).then(() => {
+        localStorage.setItem('currentuser', JSON.stringify(newUser))
+        window.location = 'index.html'
+    }).catch((error) => {
+        console.log(error)
+    });
 }
 
 export const getUserFromDb = async function (uid) {
@@ -51,53 +133,3 @@ export const getUserFromDb = async function (uid) {
         console.log("No existe este usuario");
     }
 }
-
-export const submitNote = async function (uid, name, week, category, subject, file) {
-    try {
-        const usernoteRef = doc(collection(firestore, "notes"))
-        const newNote = {
-            id: usernoteRef.id,
-            name: name,
-            week: week,
-            subject: subject,
-            category: category,
-            fileReference: "",
-            userId: uid,
-            date: Date.now()
-        }
-        await setDoc(usernoteRef, newNote).then(() => {
-            submitFile(file, usernoteRef.id)
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-export const updateFileReference = async function (id, fileUrl) {
-    try {
-        const usernoteRef = doc(firestore, "notes", id)
-        await updateDoc(usernoteRef, {
-            fileReference: fileUrl
-        }).then(() => {
-            window.location = "noteboard.html"
-        })
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-export const createMeeting = async function(newMeeting) {
-    try {
-        const meetingRef = doc(collection(firestore, "meetings"))
-        await setDoc(meetingRef, newMeeting).then(() => {
-            window.location = "meetings.html"
-        }).catch((error) => {
-            console.log(error)
-        });
-    } catch(e) {
-
-    }
-}
- 

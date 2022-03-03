@@ -1,0 +1,41 @@
+.title {
+    &--light {
+        @include title($title-color, $light)
+    }
+
+    &--regular {
+        @include title($title-color, $regular)
+    }
+}
+
+.section-title {
+    @include section-title($title-color, $semibold)
+}
+
+.subtitle {
+    &--light {
+        @include subtitle($subtitle-color, $light)
+    }
+
+    &--regular {
+        @include subtitle($subtitle-color, $regular)
+    }
+
+    &--semibold {
+        @include subtitle($subtitle-color, $semibold)
+    }
+
+    &--dark {
+        color: $mineshaft;
+    }
+}
+
+.thirdtitle {
+    &--light {
+        @include thirdtitle($thirdtitle-color, $light)
+    }
+
+    &--regular {
+        @include thirdtitle($thirdtitle-color, $regular)
+    }
+}

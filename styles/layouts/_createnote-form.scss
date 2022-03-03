@@ -1,0 +1,94 @@
+.createnote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+
+    &__section {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 3rem;
+    }
+
+    &__nameInput {
+        width: 100%;
+        min-width: 35rem;
+        max-width: 35rem;
+    }
+
+    &__weekInput {
+        width: 100%;
+        max-width: 15rem;
+    }
+
+    &__radioList {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        min-width: 35rem;
+        max-width: 35rem;
+    }
+
+    &__label {
+        font-family: $poppins;
+        font-size: $categorie-label;
+        font-weight: $semibold;
+        color: $malibu;
+
+        &--regular {
+            font-weight: $regular;
+            color: $silver;
+        }
+    }
+
+    &__select {
+        max-width: 35rem;
+    }
+
+    &__filetype {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-width: 35rem;
+        max-width: 35rem;
+
+        .createnote-form__label--regular {
+            white-space: nowrap;
+        }
+    }
+    
+    &__fileList {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__loadFile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__addFile {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__audioNote {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    &__submitBtn {
+        margin-top: 2rem;
+        padding: 0.8rem 1rem;
+        max-width: 23rem;
+        align-self: flex-end;
+    }
+}

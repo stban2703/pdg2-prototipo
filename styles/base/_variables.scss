@@ -1,0 +1,100 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+$poppins:'Poppins', sans-serif;
+
+// FONT SIZES
+$title: 3rem;
+$section-title: 2.5rem;
+$subtitle: 2rem;
+$thirdtitle: 1.8rem;
+$input-label: 1.8rem;
+$input-text: 1.8rem;
+$categorie-label: 1.5rem;
+$main-button-text: 2rem;
+$small-button-text: 1.5rem;
+$board-edit-text-btn: 1.2rem;
+$link: 1.5rem;
+$navigation-tag: 2rem;
+
+// FONT WEIGHT
+$regular: 400;
+$light: 300;
+$medium: 500;
+$semibold: 600;
+
+// COLORS
+// // Base colors
+$geraldine: #FD797A;
+$malibu: #72B8FF;
+$malibu-alt: #5BAAFB;
+$melrose: #979DFF;
+$cheese: #FDB572;
+$white: #FFFFFF;
+$silver: #A0A0A0;
+$boulder: #757575;
+$mineshaft: #363636;
+$zircon: #FAFCFF;
+$invalid-color: #FE6163;
+
+// Note categories
+$keep: #9BDE90;
+$improve: #FDB572;
+$remove: #FD797A;
+$keep-light: #CCF3C6;
+$improve-light: #FFEAD6;
+$remove-light: #FFEFEF;
+$divisor-line-color: #75ADE5;
+$dots-button-background: #FAFAFA;
+
+// // Button colors
+$button-primary: $malibu;
+$button-secondary: $geraldine;
+$button-hover: #54A1EE;
+$button-secondary-hover: #da4e4e;
+$button-text-color-primary: $white;
+$create-note-color: $geraldine;
+
+// // Title colors
+$title-color: $mineshaft;
+$subtitle-color: $boulder;
+$thirdtitle-color: $boulder;
+
+// // Input colors
+$input-border-color: $silver;
+$input-border-color-focused: $malibu;
+$input-color: $mineshaft;
+
+// // Label colors
+$input-label-color: $silver;
+$input-label-valid-color: $malibu;
+$input-label-invalid-color: $invalid-color;
+
+// // Link colors
+$link-primary: $silver;
+$link-dark: $mineshaft;
+
+// // Background colors
+$page-content-background: $zircon;
+
+// // Nav colors
+$nav-tag-noselected: $silver;
+$nav-tag-selected: $malibu-alt;
+$nav-item-selected: #E9F3FE;
+$nav-item-hover: $malibu;
+
+// RADIUS
+$radius-button: 40px;
+$radius-text-input: 10px;
+$radius-meeting-item: 15px;
+
+// PADDING
+$input-padding: 1.2rem 1.5rem;
+$button-padding: 1rem 1.3rem;
+$small-button-padding: 0.5rem 1rem;
+$navigation-padding: 6rem 4rem;
+$page-content-padding: 6rem 3rem;
+
+// DROP SHADOWS
+$memo-thumb-drop-shadow: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
+$button-primary-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+$button-secondary-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);

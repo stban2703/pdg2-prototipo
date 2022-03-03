@@ -1,0 +1,125 @@
+.main-button {
+    &--primary {
+        @include button($button-primary, $button-text-color-primary, $main-button-text, $button-primary-box-shadow);
+    }
+}
+
+.small-button {
+    &--primary {
+        @include button($button-primary, $button-text-color-primary, $small-button-text, $button-primary-box-shadow);
+    }
+    padding: $small-button-padding;
+}
+
+.board-edit-button {
+    @include button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
+    padding: $small-button-padding;
+    box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+}
+
+.audio-pre-button {
+    @include button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
+    padding: $small-button-padding;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: fit-content;
+    width: fit-content;
+    box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);;
+}
+
+.create-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+
+    &--note {
+        .create-button__icon {
+            box-shadow: 0px 4px 10px rgba(239, 81, 82, 0.4);
+            @include create-button($create-note-color);
+            img {
+                max-width: none;
+            }
+        }
+    }
+
+    &--fixed {
+        position: fixed;
+        right: 1%;
+        bottom: 1%;
+    }
+
+    &__tag {
+        margin-top: 10px;
+    }
+}
+
+.file-type-button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        background-color: $malibu;
+        padding: 1.5rem;
+        border-radius: 100%;
+        width: 6rem;
+        height: 6rem;
+        opacity: 0.5;
+
+        img {
+            max-width: none;
+        }
+    }
+
+    &__tag {
+        font-family: $poppins;
+        font-size: 1.4rem;
+        min-width: 8rem;
+        color: $boulder;
+    }
+
+    &--selected {
+        .file-type-button__icon {
+            opacity: 1;
+            box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+        }
+    }
+}
+
+.record-audio-button {
+    margin: 0.5rem 0;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &__icon {
+        padding: 1.5rem;
+        width: 6rem;
+        height: 6rem;
+        background-color: $geraldine;
+        box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+        border-radius: 100%;
+
+        img {
+            max-width: none;
+        }
+    }
+
+    &__recording {
+        position: absolute;
+        border: 2px dashed $geraldine;
+        border-radius: 100%;
+        width: 8rem;
+        height: 8rem;
+        animation: rotate 4s linear infinite
+    }
+    
+}

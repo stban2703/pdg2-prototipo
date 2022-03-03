@@ -1,0 +1,38 @@
+.memo-thumbnail {
+    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    width: fit-content;
+    padding: 2.5rem 2.5rem;
+
+    &__progress {
+        img {
+            max-width: none;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    button {
+        margin-top: 1rem;
+    }
+}
+
+.subject-thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 20rem;
+    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
+    padding: 3rem;
+
+    &__title {
+        @include subtitle($silver, $medium);
+    }
+}

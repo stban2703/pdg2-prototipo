@@ -1,0 +1,283 @@
+.text-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    &__label {
+        position: absolute;
+        transform: translate(0%, -50%);
+        top: 50%;
+        left: 1.5rem;
+        padding: 0 0.5rem;
+        transition: all 0.1s ease-in;
+        @include input-label($input-label-color);
+    }
+
+    &__field {
+        @include text-input();
+        outline-color: $malibu;
+    }
+}
+
+.select-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    &__label {
+        position: absolute;
+        transform: translate(0%, -50%);
+        top: 0;
+        left: 0.5rem;
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        @include input-label($input-label-color);
+        color: $input-label-valid-color;
+    }
+
+    &__field {
+        @include select-input();
+        padding-right: 3rem;
+        outline-color: $malibu;
+        text-overflow: ellipsis;
+    }
+}
+
+.date-time-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    
+    &__label {
+        position: absolute;
+        transform: translate(0%, -50%);
+        top: 0;
+        left: 0.5rem;
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        @include input-label($input-label-color);
+        color: $input-label-valid-color;
+    }
+
+    &__field {
+        @include date-time-input();
+        outline-color: $malibu;
+        text-overflow: ellipsis;
+    }
+}
+
+.text-area-input {
+    @include textarea-input();
+}
+
+.checkbox-input {
+    font-family: $poppins;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: $mineshaft;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+
+    input[type="checkbox"] {
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.15em;
+        height: 1.15em;
+        border: 0.15em solid $malibu;
+        border-radius: 0.15em;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+
+        &::before {
+            content: url("../images/checkwhite.svg");
+            width: 1em;
+            height: 1em;
+            background-color: $malibu;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em $malibu;
+            transform-origin: center center;
+            //clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        &:checked {
+            border-color: $malibu;
+        }
+
+        &:checked::before {
+            background-color: $malibu;
+            transform: scale(1);
+        }
+    }
+}
+
+.checkbox-input + .checkbox-input {
+    margin-top: 1em;
+}
+
+.radio-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 6rem;
+    font-size: 1.5rem;
+    font-family: $poppins;
+    color: $silver;
+
+    input[type="radio"] {
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 2.25em;
+        height: 2.25em;
+        border: 0.2em solid $silver;
+        border-radius: 100%;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::before {
+            content: "";
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 100%;
+            background-color: $malibu;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em $malibu;
+            transform-origin: center center;
+            //clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        &:checked {
+            border-color: $malibu;
+        }
+
+        &:checked::before {
+            background-color: $malibu;
+            transform: scale(1);
+        }
+    }
+
+    &--keep {
+        input[type="radio"] {
+            &::before {
+                background-color: $keep;
+                box-shadow: inset 1em 1em $keep;
+            }
+
+            &:checked {
+                border-color: $keep;
+            }
+
+            &:checked::before {
+                background-color: $keep;
+            }
+        }
+    }
+
+    &--improve {
+        input[type="radio"] {
+            &::before {
+                background-color: $improve;
+                box-shadow: inset 1em 1em $improve;
+            }
+
+            &:checked {
+                border-color: $improve;
+            }
+
+            &:checked::before {
+                background-color: $improve;
+            }
+        }
+    }
+
+    &--remove {
+        input[type="radio"] {
+            &::before {
+                background-color: $remove;
+                box-shadow: inset 1em 1em $remove;
+            }
+
+            &:checked {
+                border-color: $remove;
+            }
+
+            &:checked::before {
+                background-color: $remove;
+            }
+        }
+    }
+}
+
+.submit-file-input {
+    width: 100%;
+    border: 1px solid $silver;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+    gap: 2rem;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    &__label {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        color: $silver;
+    }
+
+    &__seudoInput {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $light;
+        color: $silver;
+        width: 100%;
+        max-width: 26ch;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,47 @@
+.signinup-screen {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    &__article {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    &__logo {
+        width: 100%;
+        max-width: 38rem;
+        align-self: center;
+    }
+
+    &__section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    &__dots {
+        width: 100%;
+        max-width: 200px;
+        position: absolute;
+        bottom: 5%;
+        left: 0;
+    }
+
+    &__wave {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        height: 100vh;
+
+        img {
+            max-width: none;
+            height: 100%;
+        }
+    }
+}

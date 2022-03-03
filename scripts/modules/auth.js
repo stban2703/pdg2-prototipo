@@ -1,11 +1,6 @@
 import { firebase } from "./firebase.js";
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 import { createUser, getUserFromDb } from "./firestore.js";
 
@@ -25,7 +20,7 @@ export const signUp = function (email, password, name, lastname) {
                 case "auth/email-already-in-use":
                     alert("Parece que el correo ya está registrado")
                     break;
-            
+
                 default:
                     alert("Ha ocurrido un error desconocido, intenta de nuevo más tarde")
                     break;
@@ -68,7 +63,7 @@ export const logOut = function () {
     });
 }
 
-export const checkAuthState = function () {
+/*export const checkAuthState = function () {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
@@ -77,8 +72,8 @@ export const checkAuthState = function () {
             console.log("Empty")
         }
     });
-}
+}*/
 
-export const currentSignedInUser = function () {
+export const getCurrentSignedInUser = function () {
     return auth.currentUser
 }

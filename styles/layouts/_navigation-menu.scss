@@ -1,0 +1,73 @@
+.navigation-menu {
+    width: 36rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    padding: $navigation-padding;
+    gap: 4rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    &__tabs {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        padding: 1em;
+        background-color: $white;
+        border-radius: 10px;
+        gap: 1.8rem;
+
+        p {
+            font-family: $poppins;
+            font-size: $navigation-tag;
+            white-space: nowrap;
+            color: $nav-tag-noselected;
+        }
+
+        .navigation-icon {
+            g path {
+                fill: $nav-tag-noselected;
+            }
+        }
+
+        &--selected {
+            background-color: $nav-item-selected;
+
+            p {
+                color: $nav-tag-selected;
+            }
+
+            .navigation-icon {
+                g path {
+                    fill: $nav-tag-selected;
+                }
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: $nav-item-hover;
+
+            p {
+                color: $white;
+            }
+    
+            .navigation-icon {
+                g path {
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+}

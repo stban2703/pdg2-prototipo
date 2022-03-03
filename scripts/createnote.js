@@ -1,89 +1,190 @@
-import { checkAuthState, logOut } from "./modules/auth.js";
-import { submitNote } from "./modules/firestore.js";
-import { submitTestFile } from "./modules/storage.js";
+import { createNote } from "./modules/firestore.js";
 
-let ls = window.localStorage;
-let localUser = JSON.parse(ls.getItem('currentuser'))
-let currentUser = localUser
-if (currentUser != null || currentSignedInUser() != null) {
+let audioNote = null
+let audioURL = null
 
-} else {
-    window.location = "login.html"
-}
+export function submitNote(currentUser) {
+    const createNoteForm = document.querySelector('.createnote-form')
+    if (createNoteForm) {
+        const selectFileTypeButtons = document.querySelectorAll('.file-type-button')
+        const addFileTypes = document.querySelectorAll(".createnote-form__addFile")
 
-const filetype = location.search.replace("?", "");
-const createNoteFiles = document.querySelector(".createNote__files")
-const textFileSection = createNoteFiles.querySelector(".textfile")
-const videoFileSection = createNoteFiles.querySelector(".videofile")
-const noteForm = document.querySelector('.noteForm')
-
-switch (filetype) {
-    case "text":
-        textFileSection.classList.remove("hidden")
-        break;
-    case "video":
-        videoFileSection.classList.remove("hidden")
-        break;
-}
-
-noteForm.addEventListener('submit', function (event) {
-    event.preventDefault()
-    const name = noteForm.name.value
-    const week = noteForm.week.value
-    const categorie = noteForm.categorie.value
-    const subject = noteForm.subject.value
-    if (videoFileSection) {
-        const file = noteForm.file.files[0]
-        submitNote(currentUser.id, name, week, categorie, subject, file)
-    }
-})
-
-
-const recordAudioButton = document.querySelector(".recordAudio")
-const stopAudioButton = document.querySelector(".stopAudio")
-
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    console.log('getUserMedia supported.');
-    navigator.mediaDevices.getUserMedia(
-        // constraints - only audio needed for this app
-        {
-            audio: true
+        let selectedFileType = 0
+        selectFileTypeButtons.forEach((e, i) => {
+            e.addEventListener('click', () => {
+                selectedFileType = i
+                selectFileTypeButtons.forEach((e, i) => {
+                    if (i == selectedFileType) {
+                        e.classList.add("file-type-button--selected")
+                        addFileTypes[i].classList.remove("hidden")
+                    } else {
+                        e.classList.remove("file-type-button--selected")
+                        addFileTypes[i].classList.add("hidden")
+                    }
+                })
+            })
         })
 
-        // Success callback
-        .then(function (stream) {
-            const mediaRecorder = new MediaRecorder(stream);
-            recordAudioButton.addEventListener("click", () => {
+        // File input change
+        const fileInput = createNoteForm.fileNote
+        const fileTitle = document.querySelector(".submit-file-input__title")
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files.length > 0) {
+                //console.log(fileInput.files[0].name)
+                fileTitle.innerText = fileInput.files[0].name
+            } else {
+                fileTitle.innerText = "No se ha subido un archivo"
+            }
+        })
+
+
+        // Recorder audio functions
+        const recordAudioButton = document.querySelector(".recordAudioBtn")
+        const stopAudioButton = document.querySelector(".stopAudioBtn")
+        const playAudioBtn = document.querySelector(".audio-pre-button")
+        const audioPlayer = document.querySelector(".audio-player");
+        playAudioBtn.addEventListener('click', () => {
+            audioPlayer.play()
+        })
+
+        let mediaRecorder = null
+
+        selectFileTypeButtons[1].addEventListener('click', () => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(
+                    // constraints - only audio needed for this app
+                    {
+                        audio: true,
+                    })
+                    //Success callback
+                    .then(function (stream) {
+                        if (!mediaRecorder) {
+                            mediaRecorder = new MediaRecorder(stream);
+                        }
+                    })
+                    // Error callback
+                    .catch(function (err) {
+                        console.log('The following getUserMedia error occurred: ' + err);
+                    }
+                    );
+            } else {
+                console.log('getUserMedia not supported on your browser!');
+            }
+        })
+
+        recordAudioButton.addEventListener("click", () => {
+            if (mediaRecorder) {
                 mediaRecorder.start()
                 console.log(mediaRecorder.state);
-                console.log("Grabando audio")
-            })
-            
-            let chunks = [];
-            mediaRecorder.ondataavailable = function (e) {
-                chunks.push(e.data);
-            }
+                recordAudioButton.classList.add("hidden")
+                stopAudioButton.classList.remove("hidden")
+                let chunks = [];
+                mediaRecorder.ondataavailable = function (e) {
+                    chunks.push(e.data);
+                }
 
-            stopAudioButton.addEventListener('click', () => {
-                mediaRecorder.stop();
-                console.log("Audio detenido")
-            })
+                mediaRecorder.onstop = function (e) {
+                    const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+                    audioNote = blob
+                    audioURL = window.URL.createObjectURL(audioNote);
+                    audioPlayer.src = audioURL
+                    playAudioBtn.classList.remove("hidden")
 
-            mediaRecorder.onstop = function (e) {
-                const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-                console.log(mediaRecorder.state);
-                console.log(blob)
-                chunks = [];
-                submitTestFile(blob, "notadeaudioprueba")
+                    console.log(mediaRecorder.state);
+                    console.log(audioNote)
+
+                    chunks = [];
+                    recordAudioButton.classList.remove("hidden")
+                    stopAudioButton.classList.add("hidden")
+                }
             }
         })
 
-        // Error callback
-        .catch(function (err) {
-            console.log('The following getUserMedia error occurred: ' + err);
-        }
-        );
-} else {
-    console.log('getUserMedia not supported on your browser!');
-}
+        stopAudioButton.addEventListener('click', () => {
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+            }
+        })
 
+        selectFileTypeButtons[0].addEventListener('click', () => {
+            stopRecorder()
+        })
+
+        selectFileTypeButtons[2].addEventListener('click', () => {
+            stopRecorder()
+        })
+
+        // Detener recorder si se cambia de pantalla
+        window.addEventListener("hashchange", function () {
+            stopRecorder()
+        }, false)
+
+        function stopRecorder() {
+            if (mediaRecorder) {
+                mediaRecorder.stream.getAudioTracks().forEach(function (track) { track.stop(); });
+            }
+            mediaRecorder = null
+        }
+
+        // Create a note
+        createNoteForm.addEventListener('submit', function (event) {
+            event.preventDefault()
+            const name = createNoteForm.name.value
+            const week = createNoteForm.week.value
+            const categorie = createNoteForm.category.value
+            const subject = createNoteForm.subject.value
+            const textNote = createNoteForm.textnote.value
+            const fileNote = createNoteForm.fileNote.files[0]
+            if (mediaRecorder) {
+                if (mediaRecorder.state == "recording") {
+                    console.log("Debes detener la grabación")
+                } else {
+                    stopRecorder()
+                    switch (selectedFileType) {
+                        case 0:
+                            if (textNote != "") {
+                                createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text")
+                            }
+                            break;
+                        case 1:
+                            if (audioNote != null) {
+                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio")
+                            }
+                            break;
+                        case 2:
+                            if (fileNote != null) {
+                                if (fileNote.type.includes("video")) {
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video")
+                                } else {
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image")
+                                }
+                            }
+                            break;
+                    }
+                }
+            } else {
+                switch (selectedFileType) {
+                    case 0:
+                        if (textNote != "") {
+                            createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text")
+                        }
+                        break;
+                    case 1:
+                        if (audioNote != null) {
+                            createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio")
+                        }
+                        break;
+                    case 2:
+                        if (fileNote != null) {
+                            if (fileNote.type.includes("video")) {
+                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video")
+                            } else {
+                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image")
+                            }
+                        }
+                        break;
+                }
+            }
+        })
+    }
+}
