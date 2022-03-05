@@ -1426,6 +1426,7 @@ input[type=button] {
   gap: 1.5rem;
   width: 100%;
   max-width: 40rem;
+  height: 100%;
 }
 
 .meeting__title {
@@ -1445,9 +1446,60 @@ input[type=button] {
   color: #72B8FF;
 }
 
+.meeting__controls {
+  margin-top: auto;
+}
+
 .meeting .downloadMeetBtn {
   width: 100%;
   max-width: 30rem;
+}
+
+.page-back {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.page-back .back-button {
+  background: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5rem;
+  gap: 0.5rem;
+}
+
+.page-back .back-button__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.1em 1em;
+  background-color: #FD797A;
+  border-radius: 40px;
+}
+
+.page-back .back-button__icon img {
+  max-width: none;
+}
+
+.page-back .back-button__tag {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  color: #A0A0A0;
 }
 
 .signinup-form {
@@ -2120,6 +2172,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin-top: 2rem;
   gap: 2rem;
   width: 100%;
 }
@@ -2132,6 +2185,9 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 2rem;
   width: 100%;
   max-width: 40rem;

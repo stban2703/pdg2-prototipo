@@ -44,6 +44,7 @@ function displayHomeUserName() {
     }
 }
 
+// Agrega las funciones de cada pantalla
 function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
@@ -52,8 +53,10 @@ function addPageFuncions() {
     renderMeetingDetails()
     onSelectMeetingMode()
     submitMeeting()
+    goBack()
 }
 
+// Verifica la pantalla actual
 function checkCurrentTab() {
     const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
@@ -65,4 +68,13 @@ function checkCurrentTab() {
         }
     })
     addPageFuncions()
+}
+
+function goBack() {
+    const backButton = document.querySelector(".back-button")
+    if(backButton) {
+        backButton.addEventListener('click', () => {
+            history.back()
+        })
+    }
 }
