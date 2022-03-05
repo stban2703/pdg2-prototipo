@@ -56,7 +56,6 @@ export function submitMeeting() {
             let standarTime = parseMilitaryTimeToStandard(time)
 
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
-            // Carolina, francisco, andres
             if(inPersonMeetingSection.classList.contains("hidden")) {
                 console.log("Es virtual")
                 createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url)

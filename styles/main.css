@@ -1334,7 +1334,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  max-width: 39rem;
+  max-width: 38rem;
   background-color: #FFFFFF;
   border-radius: 15px;
   padding: 2rem 2.5rem;
@@ -1508,6 +1508,7 @@ input[type=button] {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 10;
 }
 
 .navigation-menu__tabs {
@@ -2064,7 +2065,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 5rem;
+  gap: 6rem;
 }
 
 .meetinglist-screen__description {
@@ -2072,13 +2073,11 @@ input[type=button] {
 }
 
 .meetinglist-screen__meetings {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  -ms-grid-columns: (minmax(0, 1fr))[2];
+      grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .meetinglist-screen__column {
@@ -2090,7 +2089,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  padding: 0 4rem;
+  padding: 0 2rem;
 }
 
 .meetinglist-screen__column:nth-child(1) {
