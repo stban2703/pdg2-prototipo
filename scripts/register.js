@@ -11,7 +11,7 @@ signUpForm.addEventListener('submit', function (event) {
     const confirmpass = signUpForm.confirmpass.value
     if (name != "" && lastname != "" && email != "" && pass != "") {
         if (pass === confirmpass) {
-            if (pass.length >= 8) {
+            if (pass.length >= 6) {
                 signUp(email, pass, name, lastname)
             } else {
                 alert("La contraseña debe tener almenos 8 caracteres")

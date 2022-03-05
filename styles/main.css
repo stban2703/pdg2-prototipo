@@ -242,7 +242,7 @@ input[type=button] {
   zoom: 1;
 }
 
-.main-button--primary, .small-button--primary, .board-edit-button, .audio-pre-button {
+.main-button--primary, .small-button--primary, .board-edit-button, .confirm-reject-button, .audio-pre-button {
   width: 100%;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -861,6 +861,26 @@ input[type=button] {
   background-color: #3f9eff;
 }
 
+.confirm-reject-button {
+  background-color: #FD797A;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  padding: 0.2rem 0 0.2rem 0;
+  min-width: 8.2rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.confirm-reject-button p {
+  font-size: 2rem;
+}
+
+.confirm-reject-button:hover {
+  background-color: #fc4748;
+}
+
 .audio-pre-button {
   background-color: #FD797A;
   color: #FFFFFF;
@@ -1422,11 +1442,12 @@ input[type=button] {
           flex-direction: column;
   background-color: #FFFFFF;
   border-radius: 15px;
-  padding: 2rem 2rem;
-  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  gap: 2rem;
   width: 100%;
   max-width: 40rem;
-  height: 100%;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
 }
 
 .meeting__title {
@@ -1500,6 +1521,43 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1em;
   color: #A0A0A0;
+}
+
+.confirm-reject-meeting {
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1.5rem 2.5rem;
+  border-radius: 15px;
+  gap: 1rem;
+}
+
+.confirm-reject-meeting__options {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
 }
 
 .signinup-form {
@@ -2231,7 +2289,7 @@ input[type=button] {
           align-items: center;
   background-color: #FD797A;
   border-radius: 15px;
-  padding: 2rem;
+  padding: 1rem 2rem;
   width: 100%;
   max-width: 30rem;
 }

@@ -10,7 +10,7 @@ export const signUp = function (email, password, name, lastname) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            createUser(user.uid, name, lastname, email, "teacher")
+            createUser(user.uid, name, lastname, email, "leader")
         })
         .catch((error) => {
             const errorCode = error.code;

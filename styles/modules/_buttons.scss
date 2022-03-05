@@ -17,6 +17,13 @@
     box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
 }
 
+.confirm-reject-button {
+    @include button($button-secondary, $button-text-color-primary, $confirm-reject-text-btn, $button-secondary-box-shadow);
+    padding: 0.2rem 0 0.2rem 0;
+    min-width: 8.2rem;
+    width: fit-content;
+}
+
 .audio-pre-button {
     @include button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
     padding: $small-button-padding;
