@@ -1,5 +1,6 @@
 import { getMeetingDetails, getMeetings } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
+import { sortByDate } from "./utils/sort.js"
 
 export async function renderMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
@@ -12,7 +13,7 @@ export async function renderMeetings() {
         finishedList.innerHTML = ``
 
         const meetingList = await getMeetings()
-        const copy = [...meetingList]
+        const copy = [...meetingList].sort(sortByDate)
 
         copy.forEach(meeting => {
             const meetingItem = document.createElement("div")
@@ -57,12 +58,25 @@ export async function renderMeetingDetails() {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
         if (meeting) {
+
+            let iconSrc = ""
+
+            if(meeting.platform) {
+                if(meeting.platform.includes("Meet")) {
+                    iconSrc = "meeticonmini.svg"
+                } else if(meeting.platform.includes("Teams")) {
+                    iconSrc = "teamsiconmini.svg"
+                } else if(meeting.platform.includes("Zoom")) {
+                    iconSrc = "zoomiconmini.svg"
+                }
+            }
+
             meetingInfoSection.innerHTML = `
                 <p class="subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
                 <p class="subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
                 <p class="subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
                 <p class="subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
-                <p class="subtitle subtitle--semibold">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
+                <p class="subtitle subtitle--semibold meeting-info-section__platform">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: ${meeting.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : 'Lugar'}<span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
             `
             meetingAssistants.innerHTML = `${meeting.confirmedParticipants}/${meeting.totalParticipants}`
             if (meeting.mode == "Virtual") {
