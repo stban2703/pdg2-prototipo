@@ -12,12 +12,27 @@
 
     &__color {
         border-radius: 15px 15px 0 0;
-        background-color: #ccf3c6;
+        background-color: $malibu;
         width: 100%;
         height: 1.5rem;
         position: absolute;
         top: 0;
         left: 0;
+
+        &--keep {
+            background-color: #ccf3c6;
+            color: #6fb663;
+        }
+
+        &--improve {
+            background-color: #FFEAD6;
+            color: #FCB26E;
+        }
+
+        &--remove {
+            background-color: #FFEFEF;
+            color: #FD797A;
+        }
     }
 
     &__content {
@@ -57,11 +72,26 @@
     }
 
     &__category {
-        background-color: #CCF3C6;
+        background-color: #ccf3c6;
+        color: #6fb663;
         font-size: 1.5rem;
         padding: 0.2rem 1.5rem;
         border-radius: 20px;
-        color: #6FB663;
+
+        &--keep {
+            background-color: #ccf3c6;
+            color: #6fb663;
+        }
+
+        &--improve {
+            background-color: #FFEAD6;
+            color: #FCB26E;
+        }
+
+        &--remove {
+            background-color: #FFEFEF;
+            color: #FD797A;
+        }
     }
 
     &__attached {
@@ -98,5 +128,12 @@
     &__video {
         width: 100%;
         border-radius: 15px;
+    }
+
+    &__text {
+        font-family: $poppins;
+        font-weight: $light;
+        font-size: 1.8rem;
+        color: $boulder;
     }
 }
