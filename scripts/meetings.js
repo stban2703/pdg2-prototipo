@@ -5,6 +5,7 @@ import { sortByDate } from "./utils/sort.js"
 
 export async function renderMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
+    const createMeetingButton = document.querySelector(".addMeetingBtn")
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         const pendingList = document.querySelector(".meetinglist-screen__list--pending")
@@ -15,6 +16,10 @@ export async function renderMeetings() {
 
         const meetingList = await getMeetings()
         const copy = [...meetingList].sort(sortByDate)
+
+        if(userInfo.role == "leader") {
+            createMeetingButton.classList.remove("hidden")
+        }
 
         copy.forEach(meeting => {
             const meetingItem = document.createElement("div")
@@ -57,7 +62,7 @@ export async function renderMeetingDetails() {
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
-    if(userInfo.role.includes("leader")) {
+    if(userInfo.role.includes("leader") && confirmRejectMeetingSection) {
         console.log("Lider")
         confirmRejectMeetingSection.classList.add("hidden")
     } 
