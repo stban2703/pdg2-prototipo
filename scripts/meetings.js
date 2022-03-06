@@ -108,7 +108,7 @@ export async function renderMeetingDetails() {
     }
 }
 
-export function confirmMeetingAssistance(meeting) {
+function confirmMeetingAssistance(meeting) {
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
     if (userInfo.role.includes("teacher") && confirmRejectMeetingSection && window.location.href.includes("#meetingdetails")) {
@@ -136,11 +136,11 @@ export function confirmMeetingAssistance(meeting) {
         const rejectBtn = document.querySelector(".rejectMeetingBtn")
         rejectBtn.addEventListener('click', () => {
             const participantsCopy = [...meeting.confirmedParticipants]
-            console.log(participantsCopy)
+
             const currentParticipantIndex = participantsCopy.findIndex((m) => {
                 return m == userInfo.name + " " + userInfo.lastname
             })
-            console.log(currentParticipantIndex)
+            
             if(currentParticipantIndex < 0) {
                 alert("No has confirmado tu participación en esta reunión")
             } else if(currentParticipantIndex >= 0) {
