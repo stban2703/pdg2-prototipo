@@ -1395,13 +1395,10 @@ input[type=button] {
 
 .meeting-item__content {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70% 30%;
+      grid-template-columns: 70% 30%;
 }
 
 .meeting-item__details {
@@ -1413,19 +1410,31 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: 600;
   color: #757575;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .meeting-item__controls {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .meeting-item .seeMeetingBtn {
   padding-left: 2rem;
   padding-right: 2rem;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+  margin-top: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .meeting-item .seeMeetingBtn p {

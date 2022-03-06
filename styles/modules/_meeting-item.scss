@@ -34,8 +34,8 @@
 
     &__content {
         width: 100%;
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 70% 30%;
     }
 
     &__details {
@@ -47,16 +47,22 @@
         font-size: 1.5rem;
         font-weight: $semibold;
         color: $boulder;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__controls {
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .seeMeetingBtn {
         padding-left: 2rem;
         padding-right: 2rem;
-        align-self: flex-end;
+        margin-top: auto;
+        width: fit-content;
         p {
             white-space: nowrap;
         }
