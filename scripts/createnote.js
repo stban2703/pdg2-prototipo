@@ -23,7 +23,7 @@ export function submitNote(currentUser) {
                         addFileTypes[i].classList.add("hidden")
                     }
                 })
-                if(selectedFileType == 2) {
+                if (selectedFileType == 2) {
                     descrptionTextSection.classList.remove("hidden")
                 } else {
                     descrptionTextSection.classList.add("hidden")
