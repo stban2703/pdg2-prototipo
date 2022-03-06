@@ -1,0 +1,62 @@
+<header class="header">
+    <section class="header__info">
+        <h2 class="header__title section-title">Nueva acta</h2>
+    </section>
+    <section class="header__options">
+        <a href="" class="header__icon">
+            <img src="./images/headerglass.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headerbell.svg" alt="">
+        </a>
+        <a href="" class="header__icon">
+            <img src="./images/headeruser.svg" alt="">
+        </a>
+    </section>
+</header>
+<section class="page-back">
+    <button class="back-button">
+        <div class="back-button__icon">
+            <img src="./images/backarrow.svg" alt="">
+        </div>
+        <p class="back-button__tag">Volver</p>
+    </button>
+</section>
+<article class="createmeetingminutes-screen">
+    <form class="createmeetingminutes-form">
+        <section class="createmeetingminutes-form__section">
+            <div class="text-input createmeetingminutes-form__nameInput">
+                <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
+                    autocomplete="off">
+                <label class="text-input__label" for="name">Nombre</label>
+            </div>
+        </section>
+        <section class="createmeetingminutes-form__section">
+            <div class="date-time-input createmeetingminutes-form__dateInput">
+                <input id="date" class="date-time-input__field" type="date" name="date" placeholder=" " required
+                    autocomplete="off">
+                <label class="date-time-input__label" for="date">Fecha</label>
+            </div>
+            <div class="date-time-input createmeetingminutes-form__timeInput">
+                <input id="time" class="date-time-input__field" type="time" name="time" placeholder=" " required
+                    autocomplete="off">
+                <label class="date-time-input__label" for="time">Hora</label>
+            </div>
+        </section>
+        <section class="createmeetingminutes-form__section">
+            <section class="createmeetingminutes-form__assistants">
+                <label class="createmeetingminutes-form__label">Asistentes</label>
+                <div class="createmeetingminutes-form__assistantsList">
+                    <label class="checkbox-input">
+                        <input type="checkbox" name="assistant" value="Maria Juliana Ortiz" />
+                        Maria Juliana
+                    </label>
+                    <label class="checkbox-input">
+                        <input type="checkbox" name="assistant" value="Carlos Ramirez" />
+                        Carlos Ramirez
+                    </label>
+                </div>
+            </section>
+        </section>
+    </form>
+</article>

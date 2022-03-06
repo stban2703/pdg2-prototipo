@@ -2023,6 +2023,52 @@ input[type=button] {
   max-width: 25rem;
 }
 
+.createmeetingminutes-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5rem;
+}
+
+.createmeetingminutes-form__section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[2];
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: 75rem;
+  gap: 3rem;
+}
+
+.createmeetingminutes-form__nameInput {
+  width: 100%;
+  max-width: 35rem;
+}
+
+.createmeetingminutes-form__label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #72B8FF;
+}
+
+.createmeetingminutes-form__label--regular {
+  font-weight: 400;
+  color: #A0A0A0;
+}
+
+.createmeetingminutes-form__submitBtn {
+  margin-top: 2rem;
+  padding: 0.8rem 1rem;
+  max-width: 23rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
 .note {
   width: 100%;
   background-color: #FFFFFF;
@@ -2511,6 +2557,13 @@ input[type=button] {
 }
 
 .createmeeting-screen {
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 2rem;
+  padding: 3rem;
+}
+
+.createmeetingminutes-screen {
   background-color: white;
   border-radius: 15px;
   margin-top: 2rem;

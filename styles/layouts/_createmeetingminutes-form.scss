@@ -1,0 +1,37 @@
+.createmeetingminutes-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+
+    &__section {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        max-width: 75rem;
+        gap: 3rem;
+    }
+
+    &__nameInput {
+        width: 100%;
+        max-width: 35rem;
+    }
+
+    &__label {
+        font-family: $poppins;
+        font-size: $categorie-label;
+        font-weight: $semibold;
+        color: $malibu;
+
+        &--regular {
+            font-weight: $regular;
+            color: $silver;
+        }
+    }
+
+    &__submitBtn {
+        margin-top: 2rem;
+        padding: 0.8rem 1rem;
+        max-width: 23rem;
+        align-self: flex-end;
+    }
+}
