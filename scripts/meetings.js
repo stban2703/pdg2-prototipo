@@ -115,7 +115,7 @@ function confirmMeetingAssistance(meeting) {
         const confirmBtn = document.querySelector(".confirmMeetingBtn")
         confirmBtn.addEventListener('click', () => {
             const participantsCopy = [...meeting.confirmedParticipants]
-            console.log(participantsCopy)
+
             const currentParticipant = participantsCopy.find((m) => {
                 return m == userInfo.name + " " + userInfo.lastname
             })

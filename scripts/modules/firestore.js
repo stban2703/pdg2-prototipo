@@ -8,7 +8,7 @@ const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
 
 // Note functions
-export async function createNote(uid, name, week, category, subject, textNote, file, fileType) {
+export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))
     const newNote = {
         id: usernoteRef.id,
@@ -20,6 +20,7 @@ export async function createNote(uid, name, week, category, subject, textNote, f
         textNote: textNote,
         fileReference: "",
         fileType: fileType,
+        descriptionText: description,
         date: Date.now()
     }
 

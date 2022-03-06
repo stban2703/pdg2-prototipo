@@ -8,6 +8,7 @@ export function submitNote(currentUser) {
     if (createNoteForm) {
         const selectFileTypeButtons = document.querySelectorAll('.file-type-button')
         const addFileTypes = document.querySelectorAll(".createnote-form__addFile")
+        const descrptionTextSection = document.querySelector(".description-text")
 
         let selectedFileType = 0
         selectFileTypeButtons.forEach((e, i) => {
@@ -22,6 +23,11 @@ export function submitNote(currentUser) {
                         addFileTypes[i].classList.add("hidden")
                     }
                 })
+                if(selectedFileType == 2) {
+                    descrptionTextSection.classList.remove("hidden")
+                } else {
+                    descrptionTextSection.classList.add("hidden")
+                }
             })
         })
 
@@ -135,6 +141,8 @@ export function submitNote(currentUser) {
             const subject = createNoteForm.subject.value
             const textNote = createNoteForm.textnote.value
             const fileNote = createNoteForm.fileNote.files[0]
+            const descriptionText = createNoteForm.descriptionText.value
+
             if (mediaRecorder) {
                 if (mediaRecorder.state == "recording") {
                     console.log("Debes detener la grabación")
@@ -143,20 +151,20 @@ export function submitNote(currentUser) {
                     switch (selectedFileType) {
                         case 0:
                             if (textNote != "") {
-                                createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text")
+                                createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
                             }
                             break;
                         case 1:
                             if (audioNote != null) {
-                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio")
+                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
                             }
                             break;
                         case 2:
                             if (fileNote != null) {
                                 if (fileNote.type.includes("video")) {
-                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video")
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
                                 } else {
-                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image")
+                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
                                 }
                             }
                             break;
@@ -166,20 +174,20 @@ export function submitNote(currentUser) {
                 switch (selectedFileType) {
                     case 0:
                         if (textNote != "") {
-                            createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text")
+                            createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
                         }
                         break;
                     case 1:
                         if (audioNote != null) {
-                            createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio")
+                            createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
                         }
                         break;
                     case 2:
                         if (fileNote != null) {
                             if (fileNote.type.includes("video")) {
-                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video")
+                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
                             } else {
-                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image")
+                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
                             }
                         }
                         break;
