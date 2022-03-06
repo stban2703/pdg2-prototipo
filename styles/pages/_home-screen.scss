@@ -2,27 +2,30 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 5rem;
 
-    &__section {
-        width: 100%;
+    &__shortcuts {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         margin-top: 4rem;
         gap: 3rem;
-
-        &--row {
-            flex-direction: row;
-            align-items: center;
-        }
-
-        &--column {
-            flex-direction: column;
-        }
+        width: 100%;
+        align-items: center;
     }
 
     &__courses {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+    }
+
+    &__characters {
+        opacity: 0.5;
+    }
+
+    &__coursesList {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3rem
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem
     }
 }
