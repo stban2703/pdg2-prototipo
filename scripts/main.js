@@ -15,17 +15,22 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 } else {
     window.location = "login.html"
 }
+export const userInfo = currentUser
 
+
+// Cerrar sesion
 const logoutButton = document.querySelector('.logoutButton')
 logoutButton.addEventListener('click', function () {
     logOut()
 })
+
 
 // Verifica la ventana actual en el menu
 checkCurrentTab()
 window.addEventListener("hashchange", function () {
     checkCurrentTab()
 }, false)
+
 
 // Detectar cambios de pantalla
 const pageContent = document.querySelector(".page-content")
@@ -37,12 +42,15 @@ let observer = new MutationObserver(function(mutationsList, observer) {
 });
 observer.observe(pageContent, {characterData: false, childList: true, attributes: false});
 
+
+// Mostrar nombre del usuario en pantalla principal
 function displayHomeUserName() {
     const homeWelcome = document.querySelector(".header__userName")
     if (homeWelcome) {
         homeWelcome.innerText = localUser.name
     }
 }
+
 
 // Agrega las funciones de cada pantalla
 function addPageFuncions() {
@@ -55,6 +63,7 @@ function addPageFuncions() {
     submitMeeting()
     goBack()
 }
+
 
 // Verifica la pantalla actual
 function checkCurrentTab() {
@@ -69,6 +78,7 @@ function checkCurrentTab() {
     })
     addPageFuncions()
 }
+
 
 function goBack() {
     const backButton = document.querySelector(".back-button")

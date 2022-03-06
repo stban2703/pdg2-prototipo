@@ -53,7 +53,7 @@ export async function getNotes(uid) {
 
 
 // Meetings functions
-export async function createMeeting(name, date, time, duration, mode, place, platform, url) {
+export async function createMeeting(name, date, time, duration, mode, place, platform, url, group) {
     const meetingRef = doc(collection(firestore, "meetings"))
     const newMeeting = {
         id: meetingRef.id,
@@ -66,8 +66,9 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         platform: platform,
         url: url,
         status: "pending",
-        totalParticipants: 6,
-        confirmedParticipants: 0
+        group: group,
+        totalParticipants: ["Maria Juliana Ortiz", "Carlos Ramirez", "Wilson Lopez", "Jennifer Velez", "Roberto Martinez"],
+        confirmedParticipants: []
     }
     await setDoc(meetingRef, newMeeting).then(() => {
         window.location = "index.html#meetinglist"
