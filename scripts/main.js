@@ -3,6 +3,7 @@ import { submitNote } from "./createnote.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNotes } from "./noteboard.js";
+import { renderNoteDetails } from "./notedetails.js";
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -57,6 +58,7 @@ function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
     renderNotes(currentUser.id)
+    renderNoteDetails()
     renderMeetings()
     renderMeetingDetails()
     onSelectMeetingMode()

@@ -52,6 +52,19 @@ export async function getNotes(uid) {
     return noteList
 }
 
+export async function getNoteDetails(id) {
+    const noteRef = doc(firestore, "notes", id)
+    const docSnap = await getDoc(noteRef)
+    if (docSnap.exists()) {
+        const note = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return note
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
 
 // Meetings functions
 export async function createMeeting(name, date, time, duration, mode, place, platform, url, group) {
