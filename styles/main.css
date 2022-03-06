@@ -1445,13 +1445,19 @@ input[type=button] {
   padding: 2rem 2.5rem;
   gap: 2rem;
   width: 100%;
-  max-width: 40rem;
+  height: 100%;
   -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
           box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
 }
 
 .meeting__title {
   color: #72B8FF;
+}
+
+.meeting__info p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .meeting__link {
@@ -1469,6 +1475,16 @@ input[type=button] {
 
 .meeting__controls {
   margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .meeting .downloadMeetBtn {
@@ -1828,20 +1844,17 @@ input[type=button] {
 }
 
 .createnote-form__section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[2];
+      grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
+  max-width: 75rem;
   gap: 3rem;
 }
 
 .createnote-form__nameInput {
   width: 100%;
-  min-width: 35rem;
   max-width: 35rem;
 }
 
@@ -1860,7 +1873,6 @@ input[type=button] {
           flex-direction: row;
   gap: 1rem;
   width: 100%;
-  min-width: 35rem;
   max-width: 35rem;
 }
 
@@ -1889,12 +1901,13 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  min-width: 35rem;
   max-width: 35rem;
 }
 
 .createnote-form__filetype .createnote-form__label--regular {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .createnote-form__fileList {
@@ -2226,15 +2239,12 @@ input[type=button] {
 }
 
 .meetingdetails-screen {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[2];
+      grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 2rem;
-  gap: 2rem;
+  gap: 4rem;
   width: 100%;
 }
 
@@ -2251,6 +2261,9 @@ input[type=button] {
           align-items: center;
   gap: 2rem;
   width: 100%;
+}
+
+.meetingdetails-screen__section:nth-child(2) {
   max-width: 40rem;
 }
 

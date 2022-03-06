@@ -6,16 +6,24 @@
     padding: 2rem 2.5rem;
     gap: 2rem;
     width: 100%;
-    max-width: 40rem;
+    height: 100%;
     box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
 
     &__title {
         color: $malibu;
     }
 
+    &__info {
+        p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
     &__link {
         word-break: break-all;
-        
+
         a {
             color: $boulder;
             font-weight: $regular;
@@ -28,6 +36,9 @@
 
     &__controls {
         margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .downloadMeetBtn {
