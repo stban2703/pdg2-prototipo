@@ -41,9 +41,9 @@ export async function renderNotes(uid) {
                         <button class="board-note-item__moveBtn board-note-item__moveBtn--left">
                             <img src="./images/leftarrow.svg" alt="">
                         </button>
-                        <button class="board-note-item__editBtn board-edit-button">
-                            <p>Editar</p>
-                        </button>
+                        <a class="board-note-item__editBtn board-edit-button" href = '#notesdetails?${note.id}'>
+                            <p>Ver</p>
+                        </a>
                         <button class="board-note-item__moveBtn board-note-item__moveBtn--right">
                             <img src="./images/rightarrow.svg" alt="">
                         </button>

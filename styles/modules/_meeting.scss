@@ -19,6 +19,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        span {
+            font-weight: $light;
+        }
     }
 
     &__link {
@@ -26,7 +30,7 @@
 
         a {
             color: $boulder;
-            font-weight: $regular;
+            font-weight: $light;
 
             &:hover {
                 color: $malibu;

@@ -2,6 +2,7 @@ const router = new Router(
     {
         home: new Layout(new Page("home.html")),
         notes: new Layout(new Page("notes.html")),
+        notesdetails: new Layout(new Page("notesdetails.html")),
         createnotes: new Layout(new Page("createnotes.html")),
         memointro: new Layout(new Page("memointro.html")),
         meetinglist: new Layout(new Page("meetinglist.html")),
