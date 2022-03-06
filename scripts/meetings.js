@@ -1,5 +1,5 @@
 import { userInfo } from "./main.js"
-import { getMeetingDetails, getMeetings } from "./modules/firestore.js"
+import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
 import { sortByDate } from "./utils/sort.js"
 
@@ -17,7 +17,7 @@ export async function renderMeetings() {
         const meetingList = await getMeetings()
         const copy = [...meetingList].sort(sortByDate)
 
-        if(userInfo.role == "leader") {
+        if (userInfo.role == "leader") {
             createMeetingButton.classList.remove("hidden")
         }
 
@@ -62,18 +62,19 @@ export async function renderMeetingDetails() {
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
-    if(userInfo.role.includes("leader") && confirmRejectMeetingSection) {
+    if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
         console.log("Lider")
         confirmRejectMeetingSection.classList.add("hidden")
-    } 
+    }
 
     if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
+
+        confirmMeetingAssistance(meeting)
+
         if (meeting) {
-
             let iconSrc = ""
-
             if (meeting.platform) {
                 if (meeting.platform.includes("Meet")) {
                     iconSrc = "meeticonmini.svg"
@@ -104,5 +105,51 @@ export async function renderMeetingDetails() {
         } else {
             meetingInfoSection.innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
+    }
+}
+
+export function confirmMeetingAssistance(meeting) {
+    const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
+
+    if (userInfo.role.includes("teacher") && confirmRejectMeetingSection && window.location.href.includes("#meetingdetails")) {
+        const confirmBtn = document.querySelector(".confirmMeetingBtn")
+        confirmBtn.addEventListener('click', () => {
+            const participantsCopy = [...meeting.confirmedParticipants]
+            console.log(participantsCopy)
+            const currentParticipant = participantsCopy.find((m) => {
+                return m == userInfo.name + " " + userInfo.lastname
+            })
+            
+            if(!currentParticipant && meeting.group == userInfo.group) {
+                participantsCopy.push(userInfo.name + " " + userInfo.lastname)
+                updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
+                    alert("¡Gracias por confirmar tu asistencia!")
+                    location.reload()
+                })
+            } else if(meeting.group != userInfo.group) {
+                alert("Parece que no estás asignado a este bloque")
+            } else if(currentParticipant) {
+                alert("Ya confirmaste tu participación")
+            }
+        })
+
+        const rejectBtn = document.querySelector(".rejectMeetingBtn")
+        rejectBtn.addEventListener('click', () => {
+            const participantsCopy = [...meeting.confirmedParticipants]
+            console.log(participantsCopy)
+            const currentParticipantIndex = participantsCopy.findIndex((m) => {
+                return m == userInfo.name + " " + userInfo.lastname
+            })
+            console.log(currentParticipantIndex)
+            if(currentParticipantIndex < 0) {
+                alert("No has confirmado tu participación en esta reunión")
+            } else if(currentParticipantIndex >= 0) {
+                participantsCopy.splice(currentParticipantIndex, 1)
+                updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
+                    alert("Se ha retirado tu participación en esta reunión")
+                    location.reload()
+                })
+            }
+        })
     }
 }

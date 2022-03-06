@@ -84,11 +84,11 @@ export async function getMeetingDetails(id) {
         const meeting = docSnap.data()
         //console.log("Document data:", docSnap.data());
         return meeting
-      } else {
+    } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
         return null
-      }
+    }
 }
 
 export async function getMeetings() {
@@ -101,6 +101,18 @@ export async function getMeetings() {
         meetingList.push(meeting)
     })
     return meetingList
+}
+
+export async function updateMeetingAssistants(id, value) {
+    const meetingRef = doc(firestore, "meetings", id);
+
+    await updateDoc(meetingRef, {
+        confirmedParticipants: value
+    }).then(() => {
+        console.log("Meeting updated")
+    }).catch(e => {
+        console.log(e)
+    });
 }
 
 
