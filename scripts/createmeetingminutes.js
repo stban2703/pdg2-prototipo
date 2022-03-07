@@ -1,3 +1,4 @@
+import { createMeeingMinutes } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 
 
@@ -56,10 +57,12 @@ export function submitMeetingMinutes() {
     if (createMeetingMinutesForm && window.location.href.includes("#createmeetingminutes")) {
         createMeetingMinutesForm.addEventListener('submit', (event) => {
             event.preventDefault()
+            console.log("subir")
             const name = createMeetingMinutesForm.name.value
             const date = createMeetingMinutesForm.date.value
             const time = createMeetingMinutesForm.time.value
             const assistants = createMeetingMinutesForm.elements['assistants[]']
+            const meetingId = window.location.hash.split("?")[1]
 
             let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
             let standarTime = parseMilitaryTimeToStandard(time)
@@ -71,13 +74,15 @@ export function submitMeetingMinutes() {
                 }
             })
 
-            if(agreementsList.length > 0 && assistantsList > 0) {
-
+            if(agreementsList.length > 0 && assistantsList.length > 0) {
+                createMeeingMinutes(name, timestamp, standarTime, assistantsList, agreementsList, meetingId)
             } else if(agreementsList.length == 0) {
                 alert("Debes agregar por lo menos un acuerdo")
             } else if(assistantsList.length == 0){
                 alert("Debes agregar por lo menos un asistente")
             }
         })
+    } else {
+        //console.log("No funciona")
     }
 }

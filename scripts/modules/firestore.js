@@ -130,6 +130,33 @@ export async function updateMeetingAssistants(id, value) {
     });
 }
 
+export async function updateMeetingMinutesReference(id, meetingMinutesId) {
+    const meetingRef = doc(firestore, "meetings", id)
+    await updateDoc(meetingRef, {
+        minutesId: meetingMinutesId
+    }).then(() => {
+        console.log("Link de acta actualizado")
+        //window.location = "index.html#meetingdetails?" + id
+    })
+}
+
+export async function createMeeingMinutes(name, date, time, assistans, agreements, meetingId) {
+    const minutesRef = doc(collection(firestore, "minutes"))
+    const newMinutes = {
+        id: minutesRef.id,
+        name: name,
+        date: date,
+        time: time,
+        assistans: assistans,
+        agreements: agreements,
+        meetingId: meetingId
+    }
+    await setDoc(minutesRef, newMinutes).then(() => {
+        updateMeetingMinutesReference(meetingId, minutesRef.id)
+    }).catch((error) => {
+        console.log(error)
+    });
+}
 
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
