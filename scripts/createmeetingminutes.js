@@ -1,7 +1,7 @@
 
 
 export function onCheckbox() {
-    const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form');
+    /*const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form');
     const assistants = createMeetingMinutesForm.elements['assistants[]']
 
     createMeetingMinutesForm.addEventListener('submit', (event) => {
@@ -13,5 +13,5 @@ export function onCheckbox() {
                 console.log(e.value)
             }
         })
-    })
+    })*/
 }

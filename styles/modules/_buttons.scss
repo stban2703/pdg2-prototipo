@@ -8,6 +8,10 @@
     &--primary {
         @include button($button-primary, $button-text-color-primary, $small-button-text, $button-primary-box-shadow);
     }
+
+    &--secondary {
+        @include button($button-secondary, $button-text-color-primary, $small-button-text, $button-secondary-box-shadow);
+    }
     padding: $small-button-padding;
 }
 

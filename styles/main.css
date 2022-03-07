@@ -242,7 +242,7 @@ input[type=button] {
   zoom: 1;
 }
 
-.main-button--primary, .small-button--primary, .board-edit-button, .confirm-reject-button, .audio-pre-button {
+.main-button--primary, .small-button--primary, .small-button--secondary, .board-edit-button, .confirm-reject-button, .audio-pre-button {
   width: 100%;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -500,6 +500,11 @@ input[type=button] {
 
 .text-input__field {
   outline-color: #72B8FF;
+}
+
+.add-agreement-input {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .select-input {
@@ -842,6 +847,21 @@ input[type=button] {
 
 .small-button--primary:hover {
   background-color: #3f9eff;
+}
+
+.small-button--secondary {
+  background-color: #FD797A;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+}
+
+.small-button--secondary p {
+  font-size: 1.5rem;
+}
+
+.small-button--secondary:hover {
+  background-color: #fc4748;
 }
 
 .board-edit-button {
@@ -1594,6 +1614,60 @@ input[type=button] {
   gap: 1rem;
 }
 
+.agreement {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-size: 1.8rem;
+  font-family: "Poppins", sans-serif;
+  gap: 1rem;
+}
+
+.agreement__number {
+  background-color: #72B8FF;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  min-height: 2rem;
+}
+
+.agreement__number p {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.agreement__number--secondary {
+  margin-top: 0.5rem;
+  background-color: #FD797A;
+}
+
+.agreement__text {
+  font-weight: 300;
+  line-height: 2rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -2031,7 +2105,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
 }
 
 .createmeetingminutes-form__section {
@@ -2040,8 +2114,19 @@ input[type=button] {
   -ms-grid-columns: (minmax(0, 1fr))[2];
       grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
-  max-width: 75rem;
+  max-width: 100rem;
   gap: 3rem;
+}
+
+.createmeetingminutes-form__section--submitSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  max-width: 100rem;
 }
 
 .createmeetingminutes-form__nameInput {
@@ -2067,6 +2152,7 @@ input[type=button] {
 
 .createmeetingminutes-form .checkbox-input {
   font-size: 1.8rem;
+  font-weight: 300;
 }
 
 .createmeetingminutes-form .checkbox-input input[type="checkbox"] {
@@ -2081,12 +2167,72 @@ input[type=button] {
   place-content: center;
 }
 
-.createmeetingminutes-form__submitBtn {
+.createmeetingminutes-form__agreements {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.createmeetingminutes-form__agreementsList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 1rem;
+  gap: 1.5rem;
+}
+
+.createmeetingminutes-form__controlAgreement {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
   margin-top: 2rem;
+}
+
+.createmeetingminutes-form__addAgreement input {
+  outline: #FD797A;
+}
+
+.createmeetingminutes-form__addAgreement input:focus {
+  border-color: #FD797A;
+}
+
+.createmeetingminutes-form__addAgreement input:focus + label {
+  color: #FD797A;
+}
+
+.createmeetingminutes-form__addAgreement input:not(:placeholder-shown) {
+  border-color: #FD797A;
+}
+
+.createmeetingminutes-form__addAgreement input:not(:placeholder-shown) + label {
+  color: #FD797A;
+}
+
+.createmeetingminutes-form .addAgreementBtn {
+  margin-top: 1rem;
+  max-width: 20rem;
+  margin-left: auto;
+}
+
+.createmeetingminutes-form .submitMeetingMinutesBtn {
   padding: 0.8rem 1rem;
   max-width: 23rem;
   -ms-flex-item-align: end;
-      align-self: flex-end;
+      -ms-grid-row-align: end;
+      align-self: end;
 }
 
 .note {

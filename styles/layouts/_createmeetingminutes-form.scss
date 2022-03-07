@@ -1,14 +1,20 @@
 .createmeetingminutes-form {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 3rem;
 
     &__section {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: 100%;
-        max-width: 75rem;
+        max-width: 100rem;
         gap: 3rem;
+
+        &--submitSection {
+            display: flex;
+            flex-direction: row;
+            max-width: 100rem;
+        }
     }
 
     &__nameInput {
@@ -34,6 +40,7 @@
 
     .checkbox-input {
         font-size: 1.8rem;
+        font-weight: $light;
 
         input[type="checkbox"] {
             width: 1.18em;
@@ -47,10 +54,55 @@
         }
     }
 
-    &__submitBtn {
+    &__agreements {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__agreementsList {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        gap: 1.5rem;
+    }
+
+    &__controlAgreement {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
         margin-top: 2rem;
+    }
+
+    &__addAgreement {
+        input {
+            outline: $geraldine;
+            &:focus {
+                border-color: $geraldine;
+            }
+
+            &:focus + label {
+                color: $geraldine;
+            }
+
+            &:not(:placeholder-shown) {
+                border-color: $geraldine;
+            }
+
+            &:not(:placeholder-shown) + label {
+                color: $geraldine;
+            }
+        }
+    }
+
+    .addAgreementBtn {
+        margin-top: 1rem;
+        max-width: 20rem;
+        margin-left: auto;
+    }
+
+    .submitMeetingMinutesBtn{
         padding: 0.8rem 1rem;
         max-width: 23rem;
-        align-self: flex-end;
+        align-self: end;
     }
 }

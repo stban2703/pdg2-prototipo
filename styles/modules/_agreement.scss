@@ -1,0 +1,37 @@
+.agreement {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 1.8rem;
+    font-family: $poppins;
+    gap: 1rem;
+
+    &__number {
+        background-color: $malibu;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        min-width: 2rem;
+        height: 2rem;
+        min-height: 2rem;
+
+        p {
+            color: $white;
+            font-weight: $semibold;
+            font-size: 1.5rem;
+        }
+
+        &--secondary {
+            margin-top: 0.5rem;
+            background-color: $geraldine;
+        }
+    }
+
+    &__text {
+        font-weight: $light;
+        line-height: 2rem;
+    }
+}

@@ -69,9 +69,41 @@
                     </label>
                 </div>
             </section>
+            <section class="createmeetingminutes-form__agreements">
+                <label class="createmeetingminutes-form__label">Acuerdos</label>
+                <div class="createmeetingminutes-form__agreementsList">
+                    <div class="agreement">
+                        <div class="agreement__number">
+                            <p>1</p>
+                        </div>
+                        <p class="agreement__text">Renovar el material utilizado por uno más actual</p>
+                    </div>
+                    <div class="agreement">
+                        <div class="agreement__number">
+                            <p>2</p>
+                        </div>
+                        <p class="agreement__text">Traer invitados a las clases</p>
+                    </div>
+                </div>
+                <section class="createmeetingminutes-form__controlAgreement">
+                    <div class="agreement__number agreement__number agreement__number--secondary">
+                        <img src="./images/plusagreement.svg" alt="">
+                    </div>
+                    <div class="text-input createmeetingminutes-form__addAgreement">
+                        <input id="newagreement" class="text-input__field" type="text" name="newagreement"
+                            placeholder=" " required autocomplete="off">
+                        <label class="text-input__label" for="newagreement">Agregar acuerdo</label>
+                    </div>
+                </section>
+                <button type="button" class="small-button small-button--secondary addAgreementBtn">
+                    <p>Agregar</p>
+                </button>
+            </section>
         </section>
-        <section class="createmeetingminutes-form__section">
-            <button>Subir</button>
+        <section class="createmeetingminutes-form__section createmeetingminutes-form__section--submitSection">
+            <button class="main-button main-button--primary submitMeetingMinutesBtn">
+                <p>Subir acta</p>
+            </button>
         </section>
     </form>
 </article>
