@@ -17,6 +17,7 @@
 @import "modules/page-back";
 @import "modules/confirm-reject-meeting";
 @import "modules/agreement";
+@import "modules/assistant";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
@@ -26,6 +27,7 @@
 @import "layouts/createmeeting-form";
 @import "layouts/createmeetingminutes-form";
 @import "layouts/note";
+@import "layouts/meetingminutes";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";
@@ -36,6 +38,7 @@
 @import "pages/meetingdetails-screen";
 @import "pages/createmeeting-screen";
 @import "pages/createmeetingminutes-screen";
+@import "pages/meetingminutesdetails-screen";
 
 html {
     font-size: 62.5%;
