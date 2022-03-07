@@ -61,6 +61,7 @@ export async function renderMeetingDetails() {
     const meetingInfoSection = document.querySelector(".meeting-info-section")
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
+    const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
 
     if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
         //console.log("Lider")
@@ -71,6 +72,7 @@ export async function renderMeetingDetails() {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
 
+        addMeetingMinutesBtn.href = `#createmeetingminutes?${meetingId}`
         confirmMeetingAssistance(meeting)
 
         if (meeting) {
