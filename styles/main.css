@@ -1668,6 +1668,7 @@ input[type=button] {
   font-weight: 300;
   line-height: 2rem;
   width: 100%;
+  color: #363636;
 }
 
 .agreement__delete {
@@ -1698,8 +1699,7 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 300;
-  -webkit-column-gap: #757575;
-          column-gap: #757575;
+  color: #757575;
 }
 
 .signinup-form {
