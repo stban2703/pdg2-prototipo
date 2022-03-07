@@ -5,6 +5,7 @@
     font-size: 1.8rem;
     font-family: $poppins;
     gap: 1rem;
+    width: 100%;
 
     &__number {
         background-color: $malibu;
@@ -33,5 +34,18 @@
     &__text {
         font-weight: $light;
         line-height: 2rem;
+        width: 100%;
+    }
+
+    &__delete {
+        background: none;
+        border: none;
+        visibility: hidden;
+    }
+
+    &:hover {
+        .agreement__delete {
+            visibility: visible;
+        }
     }
 }

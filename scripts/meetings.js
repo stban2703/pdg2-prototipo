@@ -63,7 +63,7 @@ export async function renderMeetingDetails() {
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
     if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
-        console.log("Lider")
+        //console.log("Lider")
         confirmRejectMeetingSection.classList.add("hidden")
     }
 
