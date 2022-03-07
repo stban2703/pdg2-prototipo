@@ -4,7 +4,7 @@ import { parseTimestampToDate } from "./utils/date-format.js"
 export async function renderMeetingMinutesDetails() {
     const meetingMinutesSection = document.querySelector(".meetingminutes")
 
-    if(meetingMinutesSection && window.location.href.includes("#meetingminutesdetails")) {
+    if (meetingMinutesSection && window.location.href.includes("#meetingminutesdetails")) {
         const minutesId = window.location.hash.split("?")[1]
         const meetingMinutes = await getMeetingMinutes(minutesId)
         const meetingInfo = await getMeetingDetails(meetingMinutes.meetingId)
@@ -30,8 +30,31 @@ export async function renderMeetingMinutesDetails() {
         const agreementItemsSection = document.querySelector('.agreement__items')
         agreementItemsSection.innerHTML = ``
 
-        meetingMinutes.agreements.forEach(e => {
-            
+        meetingMinutes.agreements.forEach((e, i) => {
+            const agreementDiv = document.createElement('div')
+            agreementDiv.classList.add('agreement')
+            agreementDiv.innerHTML = `
+            <div class="agreement__number">
+                <p>${i + 1}</p>
+                </div>
+            <p class="agreement__text">${e}</p>
+            `
+            agreementItemsSection.appendChild(agreementDiv)
         });
+
+        const assistantItemsSection = document.querySelector('.assistants__items')
+        assistantItemsSection.innerHTML = ``
+
+        meetingMinutes.assistants.forEach((e, i) => {
+            const assistantDiv = document.createElement('div')
+            assistantDiv.classList.add('assistant')
+            assistantDiv.innerHTML = `
+                <div class="assistant__icon">
+                    <img src="./images/assistantgenericicon.svg" alt="">
+                </div>
+                <p class="assistant__name">${e}</p>
+            `
+            assistantItemsSection.appendChild(assistantDiv)
+        })
     }
 }
