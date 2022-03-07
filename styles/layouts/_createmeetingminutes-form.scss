@@ -28,6 +28,25 @@
         }
     }
 
+    &__assistantsList {
+        margin-top: 1rem;
+    }
+
+    .checkbox-input {
+        font-size: 1.8rem;
+
+        input[type="checkbox"] {
+            width: 1.18em;
+            height: 1.18em;
+            border: 0.1em solid $malibu;
+
+            &::before {
+                display: grid;
+                place-content: center;
+            }
+        }
+    }
+
     &__submitBtn {
         margin-top: 2rem;
         padding: 0.8rem 1rem;

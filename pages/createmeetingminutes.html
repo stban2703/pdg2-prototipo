@@ -23,7 +23,7 @@
     </button>
 </section>
 <article class="createmeetingminutes-screen">
-    <form class="createmeetingminutes-form">
+    <form class="createmeetingminutes-form" name="createmeetingminutes-form">
         <section class="createmeetingminutes-form__section">
             <div class="text-input createmeetingminutes-form__nameInput">
                 <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
@@ -48,15 +48,30 @@
                 <label class="createmeetingminutes-form__label">Asistentes</label>
                 <div class="createmeetingminutes-form__assistantsList">
                     <label class="checkbox-input">
-                        <input type="checkbox" name="assistant" value="Maria Juliana Ortiz" />
+                        <input type="checkbox" name="assistants[]" value="Maria Juliana Ortiz" />
                         Maria Juliana
                     </label>
                     <label class="checkbox-input">
-                        <input type="checkbox" name="assistant" value="Carlos Ramirez" />
+                        <input type="checkbox" name="assistants[]" value="Carlos Ramirez" />
                         Carlos Ramirez
+                    </label>
+                    <label class="checkbox-input">
+                        <input type="checkbox" name="assistants[]" value="Wilson Lopez" />
+                        Wilson Lopez
+                    </label>
+                    <label class="checkbox-input">
+                        <input type="checkbox" name="assistants[]" value="Jennifer Vélez" />
+                        Jennifer Vélez
+                    </label>
+                    <label class="checkbox-input">
+                        <input type="checkbox" name="assistants[]" value="Roberto Martinez" />
+                        Roberto Martinez
                     </label>
                 </div>
             </section>
+        </section>
+        <section class="createmeetingminutes-form__section">
+            <button>Subir</button>
         </section>
     </form>
 </article>

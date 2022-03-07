@@ -2061,6 +2061,26 @@ input[type=button] {
   color: #A0A0A0;
 }
 
+.createmeetingminutes-form__assistantsList {
+  margin-top: 1rem;
+}
+
+.createmeetingminutes-form .checkbox-input {
+  font-size: 1.8rem;
+}
+
+.createmeetingminutes-form .checkbox-input input[type="checkbox"] {
+  width: 1.18em;
+  height: 1.18em;
+  border: 0.1em solid #72B8FF;
+}
+
+.createmeetingminutes-form .checkbox-input input[type="checkbox"]::before {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
 .createmeetingminutes-form__submitBtn {
   margin-top: 2rem;
   padding: 0.8rem 1rem;
