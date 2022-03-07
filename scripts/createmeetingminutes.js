@@ -1,3 +1,4 @@
+import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 
 
 let agreementsList = []
@@ -50,18 +51,33 @@ function renderAgreements(list) {
     });
 }
 
-export function onCheckbox() {
-    /*const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form');
-    const assistants = createMeetingMinutesForm.elements['assistants[]']
+export function submitMeetingMinutes() {
+    const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form')
+    if (createMeetingMinutesForm && window.location.href.includes("#createmeetingminutes")) {
+        createMeetingMinutesForm.addEventListener('submit', (event) => {
+            event.preventDefault()
+            const name = createMeetingMinutesForm.name.value
+            const date = createMeetingMinutesForm.date.value
+            const time = createMeetingMinutesForm.time.value
+            const assistants = createMeetingMinutesForm.elements['assistants[]']
 
-    createMeetingMinutesForm.addEventListener('submit', (event) => {
-        event.preventDefault()
-        let assistantsList = []
+            let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
+            let standarTime = parseMilitaryTimeToStandard(time)
 
-        assistants.forEach(e => {
-            if(e.checked) {
-                console.log(e.value)
+            let assistantsList = []
+            assistants.forEach(e => {
+                if (e.checked) {
+                    assistantsList.push(e.value)
+                }
+            })
+
+            if(agreementsList.length > 0 && assistantsList > 0) {
+
+            } else if(agreementsList.length == 0) {
+                alert("Debes agregar por lo menos un acuerdo")
+            } else if(assistantsList.length == 0){
+                alert("Debes agregar por lo menos un asistente")
             }
         })
-    })*/
+    }
 }
