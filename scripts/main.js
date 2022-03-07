@@ -1,6 +1,7 @@
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
+import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNotes } from "./noteboard.js";
@@ -66,6 +67,7 @@ function addPageFuncions() {
     submitMeeting()
     createAgreement()
     submitMeetingMinutes()
+    renderMeetingMinutesDetails()
     goBack()
 }
 

@@ -158,6 +158,20 @@ export async function createMeeingMinutes(name, date, time, assistans, agreement
     });
 }
 
+export async function getMeetingMinutes(id) {
+    const minutesRef = doc(firestore, "minutes", id)
+    const docSnap = await getDoc(minutesRef)
+    if (docSnap.exists()) {
+        const meetingMinutes = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return meetingMinutes
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);
