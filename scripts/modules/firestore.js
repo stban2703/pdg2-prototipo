@@ -136,7 +136,7 @@ export async function updateMeetingMinutesReference(id, meetingMinutesId) {
         minutesId: meetingMinutesId
     }).then(() => {
         console.log("Link de acta actualizado")
-        //window.location = "index.html#meetingdetails?" + id
+        window.location = "index.html#meetingminutesdetails?" + meetingMinutesId
     })
 }
 
