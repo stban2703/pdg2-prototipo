@@ -67,13 +67,17 @@ export async function renderMeetingDetails() {
         //console.log("Lider")
         confirmRejectMeetingSection.classList.add("hidden")
     }
-
+    
     if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
 
         addMeetingMinutesBtn.href = `#createmeetingminutes?${meetingId}`
         confirmMeetingAssistance(meeting)
+
+        if(userInfo.role.includes("leader")) {
+            addMeetingMinutesBtn.classList.remove("hidden")
+        }
 
         if (meeting) {
             let iconSrc = ""
