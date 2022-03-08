@@ -1,5 +1,6 @@
 import { userInfo } from "./main.js";
 import { createNote } from "./modules/firestore.js";
+import { showLoader } from "./utils/loader.js";
 
 let audioNote = null
 let audioURL = null
@@ -162,19 +163,23 @@ export function submitNote(currentUser) {
                     switch (selectedFileType) {
                         case 0:
                             if (textNote != "") {
+                                showLoader()
                                 createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
                             }
                             break;
                         case 1:
                             if (audioNote != null) {
+                                showLoader()
                                 createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
                             }
                             break;
                         case 2:
                             if (fileNote != null) {
                                 if (fileNote.type.includes("video")) {
+                                    showLoader()
                                     createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
                                 } else {
+                                    showLoader()
                                     createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
                                 }
                             }
@@ -185,19 +190,23 @@ export function submitNote(currentUser) {
                 switch (selectedFileType) {
                     case 0:
                         if (textNote != "") {
+                            showLoader()
                             createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
                         }
                         break;
                     case 1:
                         if (audioNote != null) {
+                            showLoader()
                             createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
                         }
                         break;
                     case 2:
                         if (fileNote != null) {
                             if (fileNote.type.includes("video")) {
+                                showLoader()
                                 createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
                             } else {
+                                showLoader()
                                 createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
                             }
                         }

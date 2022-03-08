@@ -32,6 +32,7 @@ export async function createNote(uid, name, week, category, subject, textNote, f
             updateFileReference(usernoteRef.id, null)
         }
     }).catch((error) => {
+        hideLoader()
         console.log(error)
     });
 
