@@ -1,5 +1,6 @@
 import { createMeeingMinutes } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
+import { showLoader } from "./utils/loader.js"
 
 
 let agreementsList = []
@@ -75,6 +76,7 @@ export function submitMeetingMinutes() {
             })
 
             if(agreementsList.length > 0 && assistantsList.length > 0) {
+                showLoader()
                 createMeeingMinutes(name, timestamp, standarTime, assistantsList, agreementsList, meetingId)
             } else if(agreementsList.length == 0) {
                 alert("Debes agregar por lo menos un acuerdo")

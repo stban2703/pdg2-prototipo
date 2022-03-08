@@ -14,6 +14,7 @@ export const signUp = function (email, password, name, lastname) {
             createUser(user.uid, name, lastname, email, "leader")
         })
         .catch((error) => {
+            hideLoader()
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode + ": " + errorMessage)

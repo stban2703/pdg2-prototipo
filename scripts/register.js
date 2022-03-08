@@ -1,4 +1,5 @@
 import { signUp } from "./modules/auth.js"
+import { showLoader } from "./utils/loader.js"
 
 const signUpForm = document.querySelector('.signUpForm')
 
@@ -11,7 +12,8 @@ signUpForm.addEventListener('submit', function (event) {
     const confirmpass = signUpForm.confirmpass.value
     if (name != "" && lastname != "" && email != "" && pass != "") {
         if (pass === confirmpass) {
-            if (pass.length >= 6) {
+            if (pass.length >= 8) {
+                showLoader()
                 signUp(email, pass, name, lastname)
             } else {
                 alert("La contraseña debe tener almenos 8 caracteres")
