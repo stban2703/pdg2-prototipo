@@ -41,12 +41,17 @@
     &__controls {
         margin-top: auto;
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: row;
+        //align-items: flex-end;
     }
 
     .downloadMeetBtn {
         width: 100%;
+        max-width: 30rem;
+    }
+
+    .seeMinutesBtn {
+        text-align: center;
         max-width: 30rem;
     }
 }

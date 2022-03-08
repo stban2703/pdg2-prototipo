@@ -104,6 +104,12 @@ export async function renderMeetingDetails() {
                 linkElement.innerHTML = `Link de la reunión: <a href=${meeting.url} target='_blank'>${meeting.url}</a>`
                 meetingInfoSection.appendChild(linkElement)
             }
+
+            const seeMinutesBtn = document.querySelector('.seeMinutesBtn')
+            if(meeting.minutesId) {
+                seeMinutesBtn.classList.remove('hidden')
+                seeMinutesBtn.href = `#meetingminutesdetails?${meeting.minutesId}`
+            }
         } else {
             meetingInfoSection.innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
