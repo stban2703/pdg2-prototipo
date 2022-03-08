@@ -69,6 +69,7 @@ export async function getNoteDetails(id) {
 // Meetings functions
 export async function createMeeting(name, date, time, duration, mode, place, platform, url, group) {
     const meetingRef = doc(collection(firestore, "meetings"))
+
     const newMeeting = {
         id: meetingRef.id,
         name: name,
@@ -79,7 +80,7 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         place: place,
         platform: platform,
         url: url,
-        status: "pending",
+        status: date < Date.now() ? "finished" : "pending",
         group: group,
         totalParticipants: ["Maria Juliana Ortiz", "Carlos Ramirez", "Wilson Lopez", "Jennifer Velez", "Roberto Martinez"],
         confirmedParticipants: [],
