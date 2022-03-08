@@ -93,12 +93,12 @@ export async function renderMeetingDetails() {
             }
 
             meetingInfoSection.innerHTML = `
-                <p class="subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
-                <p class="subtitle subtitle--semibold">Bloque: <span>${meeting.group}</span></p>
-                <p class="subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
-                <p class="subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
-                <p class="subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
-                <p class="subtitle subtitle--semibold meeting-info-section__platform">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: ${meeting.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold">Bloque: <span>${meeting.group}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold meeting-info-section__platform">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: ${meeting.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
             `
             meetingAssistants.innerHTML = `${meeting.confirmedParticipants.length}/${meeting.totalParticipants.length}`
             if (meeting.mode == "Virtual") {

@@ -1488,14 +1488,14 @@ input[type=button] {
   color: #72B8FF;
 }
 
-.meeting__info p {
+.meeting__info span {
+  font-weight: 300;
+}
+
+.meeting__subtitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.meeting__info span {
-  font-weight: 300;
 }
 
 .meeting__link {

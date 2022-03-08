@@ -11,6 +11,17 @@ export async function renderMeetingMinutesDetails() {
         console.log(meetingMinutes)
         console.log(meetingInfo)
 
+        let iconSrc = ""
+        if (meetingInfo.platform) {
+            if (meetingInfo.platform.includes("Meet")) {
+                iconSrc = "meeticonmini.svg"
+            } else if (meetingInfo.platform.includes("Teams")) {
+                iconSrc = "teamsiconmini.svg"
+            } else if (meetingInfo.platform.includes("Zoom")) {
+                iconSrc = "zoomiconmini.svg"
+            }
+        }
+
         const meetingMinutesHeader = document.querySelector('.meetingminutes__header')
         meetingMinutesHeader.innerHTML = `
             <h4 class="meetingminutes__title subtitle subtitle--semibold">Detalle del acta</h4>
@@ -23,7 +34,7 @@ export async function renderMeetingMinutesDetails() {
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Hora: <span>${meetingMinutes.time}</span></p>
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Bloque: <span>${meetingInfo.group}</span></p>
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Modalidad: <span>${meetingInfo.mode}</span></p>
-        <p class="meetingminutes__subtitle meetingminutes__mode subtitle subtitle--semibold">${meetingInfo.mode == "Virtual" ? 'Medio' : 'Lugar'}: <img src="./images/teamsiconmini.svg" alt=""><span>${meetingInfo.mode == "Virtual" ? meetingInfo.platform : meetingInfo.place}</span></p>
+        <p class="meetingminutes__subtitle meetingminutes__mode subtitle subtitle--semibold">${meetingInfo.mode == "Virtual" ? 'Medio' : 'Lugar'}: ${meetingInfo.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meetingInfo.mode == "Virtual" ? meetingInfo.platform : meetingInfo.place}</span></p>
         ${meetingInfo.mode == "Virtual" ? `<p class="meetingminutes__link subtitle subtitle--semibold">Link: <a href="${meetingInfo.url}" target="_blank">${meetingInfo.url}</a></p>` : ''}
         `
 
