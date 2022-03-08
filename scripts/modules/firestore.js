@@ -201,6 +201,7 @@ export const getUserFromDb = async function (uid) {
     if (docSnap.exists()) {
         const user = docSnap.data()
         localStorage.setItem('currentuser', JSON.stringify(user))
+        hideLoader()
         window.location = 'index.html'
         console.log("Document data: " + user.name + ", " + user.role);
     } else {

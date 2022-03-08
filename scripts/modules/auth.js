@@ -3,6 +3,7 @@ import {
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 import { createUser, getUserFromDb } from "./firestore.js";
+import { hideLoader } from "../utils/loader.js";
 
 const auth = getAuth()
 
@@ -35,6 +36,7 @@ export const signIn = function (email, password) {
         getUserFromDb(user.uid)
         console.log(user.uid + " ha iniciado sesion")
     }).catch((error) => {
+        hideLoader()
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage)
