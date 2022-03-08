@@ -160,6 +160,7 @@ export async function createMeeingMinutes(name, date, time, assistants, agreemen
     await setDoc(minutesRef, newMinutes).then(() => {
         updateMeetingMinutesReference(meetingId, minutesRef.id)
     }).catch((error) => {
+        hideLoader()
         console.log(error)
     });
 }
