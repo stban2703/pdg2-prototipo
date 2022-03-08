@@ -3,6 +3,7 @@ import {
     getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { submitFile } from "./storage.js";
+import { hideLoader } from "../utils/loader.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
@@ -41,6 +42,7 @@ export async function updateFileReference(id, fileUrl) {
     await updateDoc(usernoteRef, {
         fileReference: fileUrl
     }).then(() => {
+        hideLoader()
         window.location = "index.html#notes"
     })
 }
@@ -87,6 +89,7 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         minutesId: ""
     }
     await setDoc(meetingRef, newMeeting).then(() => {
+        hideLoader()
         window.location = "index.html#meetinglist"
     }).catch((error) => {
         console.log(error)
@@ -137,6 +140,7 @@ export async function updateMeetingMinutesReference(id, meetingMinutesId) {
         minutesId: meetingMinutesId
     }).then(() => {
         console.log("Link de acta actualizado")
+        hideLoader()
         window.location = "index.html#meetingminutesdetails?" + meetingMinutesId
     })
 }

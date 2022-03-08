@@ -60,7 +60,6 @@ export async function renderMeetings() {
 export async function renderMeetingDetails() {
     const meetingInfoSection = document.querySelector(".meeting-info-section")
     const meetingAssistants = document.querySelector(".meeting__assistants")
-    const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
     const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
 
     /*if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
@@ -79,6 +78,11 @@ export async function renderMeetingDetails() {
 
             if(userInfo.role.includes("leader") && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
+            }
+
+            const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
+            if (confirmRejectMeetingSection && meeting.status.includes("finished")) {
+                confirmRejectMeetingSection.classList.add("hidden")
             }
 
             let iconSrc = ""

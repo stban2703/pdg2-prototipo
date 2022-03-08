@@ -71,3 +71,23 @@ body {
 .hidden {
     display: none !important;
 }
+
+.loader {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba($color: #FFFFFF, $alpha: 0.7);
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-family: $poppins;
+        color: $boulder;
+        font-size: 2rem;
+    }
+}

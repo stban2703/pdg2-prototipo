@@ -1,6 +1,7 @@
 import { userInfo } from "./main.js"
 import { createMeeting } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
+import { showLoader } from "./utils/loader.js"
 
 export function onSelectMeetingMode() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
@@ -59,9 +60,11 @@ export function submitMeeting() {
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
             if(inPersonMeetingSection.classList.contains("hidden") && userInfo.leaderGroup) {
                 console.log("Es virtual")
+                showLoader()
                 createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup)
             } else if(virtualMeetingSection.classList.contains("hidden")) {
                 console.log("Es presencial")
+                showLoader()
                 createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup)
             }
         })
