@@ -57,12 +57,12 @@ export function submitMeeting() {
             let standarTime = parseMilitaryTimeToStandard(time)
 
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
-            if(inPersonMeetingSection.classList.contains("hidden")) {
+            if(inPersonMeetingSection.classList.contains("hidden") && userInfo.leaderGroup) {
                 console.log("Es virtual")
-                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.group)
+                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup)
             } else if(virtualMeetingSection.classList.contains("hidden")) {
                 console.log("Es presencial")
-                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.group)
+                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup)
             }
         })
     }

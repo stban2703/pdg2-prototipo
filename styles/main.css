@@ -2804,6 +2804,7 @@ input[type=button] {
   margin-top: 2rem;
   gap: 4rem;
   width: 100%;
+  padding-bottom: 15rem;
 }
 
 .meetingdetails-screen__section {

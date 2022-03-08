@@ -63,10 +63,10 @@ export async function renderMeetingDetails() {
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
     const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
 
-    if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
+    /*if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
         //console.log("Lider")
         confirmRejectMeetingSection.classList.add("hidden")
-    }
+    }*/
     
     if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
@@ -75,11 +75,12 @@ export async function renderMeetingDetails() {
         addMeetingMinutesBtn.href = `#createmeetingminutes?${meetingId}`
         confirmMeetingAssistance(meeting)
 
-        if(userInfo.role.includes("leader")) {
-            addMeetingMinutesBtn.classList.remove("hidden")
-        }
-
         if (meeting) {
+
+            if(userInfo.role.includes("leader") && userInfo.leaderGroup == meeting.group) {
+                addMeetingMinutesBtn.classList.remove("hidden")
+            }
+
             let iconSrc = ""
             if (meeting.platform) {
                 if (meeting.platform.includes("Meet")) {
@@ -123,7 +124,7 @@ export async function renderMeetingDetails() {
 function confirmMeetingAssistance(meeting) {
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
-    if (userInfo.role.includes("teacher") && confirmRejectMeetingSection && window.location.href.includes("#meetingdetails")) {
+    if (confirmRejectMeetingSection && window.location.href.includes("#meetingdetails")) {
         const confirmBtn = document.querySelector(".confirmMeetingBtn")
         confirmBtn.addEventListener('click', () => {
             const participantsCopy = [...meeting.confirmedParticipants]
@@ -132,13 +133,17 @@ function confirmMeetingAssistance(meeting) {
                 return m == userInfo.name + " " + userInfo.lastname
             })
             
-            if(!currentParticipant && meeting.group == userInfo.group) {
+            const userGroup = userInfo.groups.find((e) => {
+                return e == meeting.group
+            })
+
+            if(!currentParticipant && userGroup) {
                 participantsCopy.push(userInfo.name + " " + userInfo.lastname)
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
                     alert("¡Gracias por confirmar tu asistencia!")
                     location.reload()
                 })
-            } else if(meeting.group != userInfo.group) {
+            } else if(!userGroup) {
                 alert("Parece que no estás asignado a este bloque")
             } else if(currentParticipant) {
                 alert("Ya confirmaste tu participación")
