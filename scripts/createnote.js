@@ -1,3 +1,4 @@
+import { userInfo } from "./main.js";
 import { createNote } from "./modules/firestore.js";
 
 let audioNote = null
@@ -6,6 +7,16 @@ let audioURL = null
 export function submitNote(currentUser) {
     const createNoteForm = document.querySelector('.createnote-form')
     if (createNoteForm) {
+
+        const subjectSelect = createNoteForm.subject
+
+        userInfo.subjects.forEach(e => {
+            const subjectOption = document.createElement('option')
+            subjectOption.value = e
+            subjectOption.innerHTML = e
+            subjectSelect.appendChild(subjectOption)
+        })
+
         const selectFileTypeButtons = document.querySelectorAll('.file-type-button')
         const addFileTypes = document.querySelectorAll(".createnote-form__addFile")
         const descrptionTextSection = document.querySelector(".description-text")
