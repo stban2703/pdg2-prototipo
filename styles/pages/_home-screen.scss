@@ -4,6 +4,14 @@
     flex-direction: column;
     gap: 5rem;
 
+    &__patterns {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        transform: translate(10%, 25%);
+    }
+
     &__shortcuts {
         display: flex;
         flex-direction: row;

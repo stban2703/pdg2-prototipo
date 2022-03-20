@@ -2622,6 +2622,15 @@ input[type=button] {
   gap: 5rem;
 }
 
+.home-screen__patterns {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translate(10%, 25%);
+          transform: translate(10%, 25%);
+}
+
 .home-screen__shortcuts {
   display: -webkit-box;
   display: -ms-flexbox;
