@@ -315,7 +315,7 @@ input[type=button] {
 }
 
 .text-input__field:focus {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .text-input__field:focus + label {
@@ -325,11 +325,11 @@ input[type=button] {
   transition: all 0.1s ease-out;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .text-input__field:not(:placeholder-shown) {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .text-input__field:not(:placeholder-shown) + label {
@@ -339,7 +339,7 @@ input[type=button] {
   left: 0.5rem;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .select-input__field {
@@ -362,15 +362,15 @@ input[type=button] {
 }
 
 .select-input__field:focus {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .select-input__field:valid {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .select-input__field[required] option:first-child {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .date-time-input__field {
@@ -385,11 +385,11 @@ input[type=button] {
 }
 
 .date-time-input__field:focus {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .date-time-input__field:valid {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .link {
@@ -413,7 +413,7 @@ input[type=button] {
   width: 100%;
   resize: none;
   padding: 1.2rem 1.5rem;
-  outline-color: #72B8FF;
+  outline-color: #979DFF;
 }
 
 .text-area-input::-webkit-input-placeholder {
@@ -437,11 +437,11 @@ input[type=button] {
 }
 
 .text-area-input:focus {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .text-area-input:not(:placeholder-shown) {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 @-webkit-keyframes rotate {
@@ -499,7 +499,7 @@ input[type=button] {
 }
 
 .text-input__field {
-  outline-color: #72B8FF;
+  outline-color: #979DFF;
 }
 
 .add-agreement-input {
@@ -529,12 +529,12 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: bold;
   color: #A0A0A0;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .select-input__field {
   padding-right: 3rem;
-  outline-color: #72B8FF;
+  outline-color: #979DFF;
   text-overflow: ellipsis;
 }
 
@@ -560,11 +560,11 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: bold;
   color: #A0A0A0;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .date-time-input__field {
-  outline-color: #72B8FF;
+  outline-color: #979DFF;
   text-overflow: ellipsis;
 }
 
@@ -590,7 +590,7 @@ input[type=button] {
   color: currentColor;
   width: 1.15em;
   height: 1.15em;
-  border: 0.15em solid #72B8FF;
+  border: 0.15em solid #979DFF;
   border-radius: 0.15em;
   -webkit-transform: translateY(-0.075em);
           transform: translateY(-0.075em);
@@ -603,25 +603,25 @@ input[type=button] {
   content: url("../images/checkwhite.svg");
   width: 1em;
   height: 1em;
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-transform: scale(0);
           transform: scale(0);
   -webkit-transition: 120ms -webkit-transform ease-in-out;
   transition: 120ms -webkit-transform ease-in-out;
   transition: 120ms transform ease-in-out;
   transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
-  -webkit-box-shadow: inset 1em 1em #72B8FF;
-          box-shadow: inset 1em 1em #72B8FF;
+  -webkit-box-shadow: inset 1em 1em #979DFF;
+          box-shadow: inset 1em 1em #979DFF;
   -webkit-transform-origin: center center;
           transform-origin: center center;
 }
 
 .checkbox-input input[type="checkbox"]:checked {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .checkbox-input input[type="checkbox"]:checked::before {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
@@ -675,25 +675,25 @@ input[type=button] {
   width: 1.5em;
   height: 1.5em;
   border-radius: 100%;
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-transform: scale(0);
           transform: scale(0);
   -webkit-transition: 120ms -webkit-transform ease-in-out;
   transition: 120ms -webkit-transform ease-in-out;
   transition: 120ms transform ease-in-out;
   transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
-  -webkit-box-shadow: inset 1em 1em #72B8FF;
-          box-shadow: inset 1em 1em #72B8FF;
+  -webkit-box-shadow: inset 1em 1em #979DFF;
+          box-shadow: inset 1em 1em #979DFF;
   -webkit-transform-origin: center center;
           transform-origin: center center;
 }
 
 .radio-input input[type="radio"]:checked {
-  border-color: #72B8FF;
+  border-color: #979DFF;
 }
 
 .radio-input input[type="radio"]:checked::before {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
@@ -816,7 +816,7 @@ input[type=button] {
 }
 
 .main-button--primary {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
   font-size: 2rem;
@@ -824,11 +824,11 @@ input[type=button] {
 }
 
 .main-button--primary:hover {
-  background-color: #3f9eff;
+  background-color: #646dff;
 }
 
 .small-button--primary {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
   font-size: 1.5rem;
@@ -836,7 +836,7 @@ input[type=button] {
 }
 
 .small-button--primary:hover {
-  background-color: #3f9eff;
+  background-color: #646dff;
 }
 
 .small-button--secondary {
@@ -852,7 +852,7 @@ input[type=button] {
 }
 
 .board-edit-button {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
   font-size: 1.2rem;
@@ -861,7 +861,7 @@ input[type=button] {
 }
 
 .board-edit-button:hover {
-  background-color: #3f9eff;
+  background-color: #646dff;
 }
 
 .confirm-reject-button {
@@ -957,7 +957,7 @@ input[type=button] {
 }
 
 .file-type-button__icon {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   padding: 1.5rem;
   border-radius: 100%;
   width: 6rem;
@@ -1390,7 +1390,7 @@ input[type=button] {
 .meeting-item__date {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
-  color: #72B8FF;
+  color: #979DFF;
   white-space: nowrap;
 }
 
@@ -1461,7 +1461,7 @@ input[type=button] {
 }
 
 .meeting__title {
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .meeting__info span {
@@ -1484,7 +1484,7 @@ input[type=button] {
 }
 
 .meeting__link a:hover {
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .meeting__controls {
@@ -1610,7 +1610,7 @@ input[type=button] {
 }
 
 .agreement__number {
-  background-color: #72B8FF;
+  background-color: #979DFF;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1765,15 +1765,15 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding: 1em;
+  padding: 0.5em;
   background-color: #FFFFFF;
   border-radius: 10px;
-  gap: 1.8rem;
+  gap: 0.5em;
+  font-size: 2rem;
 }
 
 .navigation-menu__item p {
   font-family: "Poppins", sans-serif;
-  font-size: 2rem;
   white-space: nowrap;
   color: #A0A0A0;
 }
@@ -1783,20 +1783,20 @@ input[type=button] {
 }
 
 .navigation-menu__item--selected {
-  background-color: #E9F3FE;
+  background-color: #EFF0FF;
 }
 
 .navigation-menu__item--selected p {
-  color: #5BAAFB;
+  color: #858BF1;
 }
 
 .navigation-menu__item--selected .navigation-icon g path {
-  fill: #5BAAFB;
+  fill: #858BF1;
 }
 
 .navigation-menu__item:hover {
   cursor: pointer;
-  background-color: #72B8FF;
+  background-color: #979DFF;
 }
 
 .navigation-menu__item:hover p {
@@ -1984,7 +1984,7 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .createnote-form__label--regular {
@@ -2150,7 +2150,7 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .createmeetingminutes-form__label--regular {
@@ -2170,7 +2170,7 @@ input[type=button] {
 .createmeetingminutes-form .checkbox-input input[type="checkbox"] {
   width: 1.18em;
   height: 1.18em;
-  border: 0.1em solid #72B8FF;
+  border: 0.1em solid #979DFF;
 }
 
 .createmeetingminutes-form .checkbox-input input[type="checkbox"]::before {
@@ -2257,7 +2257,7 @@ input[type=button] {
 }
 
 .note__title {
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .note__color {
@@ -2444,7 +2444,7 @@ input[type=button] {
 }
 
 .meetingminutes__title {
-  color: #72B8FF;
+  color: #979DFF;
 }
 
 .meetingminutes__date span {

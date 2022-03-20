@@ -16,7 +16,7 @@
 
     &__field {
         @include text-input();
-        outline-color: $malibu;
+        outline-color: $main-color;
     }
 }
 
@@ -46,7 +46,7 @@
     &__field {
         @include select-input();
         padding-right: 3rem;
-        outline-color: $malibu;
+        outline-color: $main-color;
         text-overflow: ellipsis;
     }
 }
@@ -71,7 +71,7 @@
 
     &__field {
         @include date-time-input();
-        outline-color: $malibu;
+        outline-color: $main-color;
         text-overflow: ellipsis;
     }
 }
@@ -97,7 +97,7 @@
         color: currentColor;
         width: 1.15em;
         height: 1.15em;
-        border: 0.15em solid $malibu;
+        border: 0.15em solid $main-color;
         border-radius: 0.15em;
         transform: translateY(-0.075em);
         display: grid;
@@ -107,20 +107,20 @@
             content: url("../images/checkwhite.svg");
             width: 1em;
             height: 1em;
-            background-color: $malibu;
+            background-color: $main-color;
             transform: scale(0);
             transition: 120ms transform ease-in-out;
-            box-shadow: inset 1em 1em $malibu;
+            box-shadow: inset 1em 1em $main-color;
             transform-origin: center center;
             //clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
         }
 
         &:checked {
-            border-color: $malibu;
+            border-color: $main-color;
         }
 
         &:checked::before {
-            background-color: $malibu;
+            background-color: $main-color;
             transform: scale(1);
         }
     }
@@ -162,20 +162,20 @@
             width: 1.5em;
             height: 1.5em;
             border-radius: 100%;
-            background-color: $malibu;
+            background-color: $main-color;
             transform: scale(0);
             transition: 120ms transform ease-in-out;
-            box-shadow: inset 1em 1em $malibu;
+            box-shadow: inset 1em 1em $main-color;
             transform-origin: center center;
             //clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
         }
 
         &:checked {
-            border-color: $malibu;
+            border-color: $main-color;
         }
 
         &:checked::before {
-            background-color: $malibu;
+            background-color: $main-color;
             transform: scale(1);
         }
     }

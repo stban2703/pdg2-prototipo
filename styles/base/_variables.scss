@@ -26,8 +26,6 @@ $semibold: 600;
 // COLORS
 // // Base colors
 $geraldine: #FD797A;
-$malibu: #72B8FF;
-$malibu-alt: #5BAAFB;
 $melrose: #979DFF;
 $cheese: #FDB572;
 $white: #FFFFFF;
@@ -36,6 +34,11 @@ $boulder: #757575;
 $mineshaft: #363636;
 $zircon: #FAFCFF;
 $invalid-color: #FE6163;
+
+// // New colors
+$main-color: #979DFF;
+$main-color-light: #EFF0FF;
+$main-color-nav-text: #858BF1; 
 
 // Note categories
 $keep: #9BDE90;
@@ -48,7 +51,7 @@ $divisor-line-color: #75ADE5;
 $dots-button-background: #FAFAFA;
 
 // // Button colors
-$button-primary: $malibu;
+$button-primary: $main-color;
 $button-secondary: $geraldine;
 $button-hover: #54A1EE;
 $button-secondary-hover: #da4e4e;
@@ -62,12 +65,12 @@ $thirdtitle-color: $boulder;
 
 // // Input colors
 $input-border-color: $silver;
-$input-border-color-focused: $malibu;
+$input-border-color-focused: $main-color;
 $input-color: $mineshaft;
 
 // // Label colors
 $input-label-color: $silver;
-$input-label-valid-color: $malibu;
+$input-label-valid-color: $main-color;
 $input-label-invalid-color: $invalid-color;
 
 // // Link colors
@@ -79,9 +82,9 @@ $page-content-background: $zircon;
 
 // // Nav colors
 $nav-tag-noselected: $silver;
-$nav-tag-selected: $malibu-alt;
-$nav-item-selected: #E9F3FE;
-$nav-item-hover: $malibu;
+$nav-tag-selected: $main-color-nav-text;
+$nav-item-selected: $main-color-light;
+$nav-item-hover: $main-color;
 
 // RADIUS
 $radius-button: 40px;
