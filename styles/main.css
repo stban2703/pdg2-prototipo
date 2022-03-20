@@ -2563,13 +2563,10 @@ input[type=button] {
 }
 
 .signinup-screen {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
   position: relative;
 }
 
@@ -2614,7 +2611,7 @@ input[type=button] {
 
 .signinup-screen__dots {
   width: 100%;
-  max-width: 200px;
+  max-width: 150px;
   position: absolute;
   bottom: 5%;
   left: 0;

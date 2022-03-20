@@ -1,6 +1,6 @@
 .signinup-screen {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     position: relative;
 
     &__article {
@@ -27,7 +27,7 @@
 
     &__dots {
         width: 100%;
-        max-width: 200px;
+        max-width: 150px;
         position: absolute;
         bottom: 5%;
         left: 0;
