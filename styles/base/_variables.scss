@@ -26,6 +26,7 @@ $semibold: 600;
 // COLORS
 // // Base colors
 $geraldine: #FD797A;
+$malibu: #72B8FF;
 $melrose: #979DFF;
 $cheese: #FDB572;
 $white: #FFFFFF;
@@ -36,9 +37,10 @@ $zircon: #FAFCFF;
 $invalid-color: #FE6163;
 
 // // New colors
-$main-color: #979DFF;
+$main-color: $melrose;
 $main-color-light: #EFF0FF;
 $main-color-nav-text: #858BF1; 
+$secondary-color: $cheese;
 
 // Note categories
 $keep: #9BDE90;
@@ -52,11 +54,10 @@ $dots-button-background: #FAFAFA;
 
 // // Button colors
 $button-primary: $main-color;
-$button-secondary: $geraldine;
-$button-hover: #54A1EE;
-$button-secondary-hover: #da4e4e;
+$button-secondary: $secondary-color;
+$button-hover: #4e57ff;
+$button-secondary-hover: #ff9838;
 $button-text-color-primary: $white;
-$create-note-color: $geraldine;
 
 // // Title colors
 $title-color: $mineshaft;
@@ -78,7 +79,7 @@ $link-primary: $silver;
 $link-dark: $mineshaft;
 
 // // Background colors
-$page-content-background: $zircon;
+$page-content-background: #F8F8FF;
 
 // // Nav colors
 $nav-tag-noselected: $silver;
@@ -99,6 +100,6 @@ $navigation-padding: 6rem 4rem;
 $page-content-padding: 6rem 3rem;
 
 // DROP SHADOWS
-$memo-thumb-drop-shadow: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
-$button-primary-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-$button-secondary-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+$memo-thumb-drop-shadow: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
+$button-primary-box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
+$button-secondary-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);

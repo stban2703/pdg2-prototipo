@@ -817,8 +817,8 @@ input[type=button] {
 
 .main-button--primary {
   background-color: #979DFF;
-  -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-          box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+  -webkit-box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
+          box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
   font-size: 2rem;
   color: #FFFFFF;
 }
@@ -829,8 +829,8 @@ input[type=button] {
 
 .small-button--primary {
   background-color: #979DFF;
-  -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-          box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+  -webkit-box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
+          box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
   font-size: 1.5rem;
   color: #FFFFFF;
 }
@@ -840,21 +840,21 @@ input[type=button] {
 }
 
 .small-button--secondary {
-  background-color: #FD797A;
-  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  background-color: #FDB572;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
   font-size: 1.5rem;
   color: #FFFFFF;
 }
 
 .small-button--secondary:hover {
-  background-color: #fc4748;
+  background-color: #fc9b40;
 }
 
 .board-edit-button {
   background-color: #979DFF;
-  -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-          box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+  -webkit-box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
+          box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
   font-size: 1.2rem;
   color: #FFFFFF;
   text-align: center;
@@ -865,9 +865,9 @@ input[type=button] {
 }
 
 .confirm-reject-button {
-  background-color: #FD797A;
-  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  background-color: #FDB572;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
   font-size: 2rem;
   color: #FFFFFF;
   padding: 0.2em 1em;
@@ -878,13 +878,13 @@ input[type=button] {
 }
 
 .confirm-reject-button:hover {
-  background-color: #fc4748;
+  background-color: #fc9b40;
 }
 
 .audio-pre-button {
-  background-color: #FD797A;
-  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  background-color: #FDB572;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
   font-size: 1.2rem;
   color: #FFFFFF;
   padding: 0.5rem 1rem;
@@ -896,11 +896,12 @@ input[type=button] {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
 }
 
 .audio-pre-button:hover {
-  background-color: #fc4748;
+  background-color: #fc9b40;
 }
 
 .create-button {
@@ -919,9 +920,9 @@ input[type=button] {
 }
 
 .create-button--note .create-button__icon {
-  -webkit-box-shadow: 0px 4px 10px rgba(239, 81, 82, 0.4);
-          box-shadow: 0px 4px 10px rgba(239, 81, 82, 0.4);
-  background-color: #FD797A;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+  background-color: #FDB572;
 }
 
 .create-button--note .create-button__icon img {
@@ -1075,8 +1076,8 @@ input[type=button] {
 }
 
 .memo-thumbnail {
-  -webkit-filter: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
-          filter: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
+  -webkit-filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
+          filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1127,8 +1128,8 @@ input[type=button] {
       -ms-flex-pack: center;
           justify-content: center;
   min-height: 20rem;
-  -webkit-filter: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
-          filter: drop-shadow(0px 4px 10px rgba(164, 164, 164, 0.1));
+  -webkit-filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
+          filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
   padding: 3rem;
 }
 
@@ -1541,7 +1542,7 @@ input[type=button] {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 0.1em 1em;
-  background-color: #FD797A;
+  background-color: #FDB572;
   border-radius: 40px;
 }
 
@@ -2891,12 +2892,12 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #FAFCFF;
+  background-color: #F8F8FF;
 }
 
 .page-content {
   width: 100%;
-  background-color: #FAFCFF;
+  background-color: #F8F8FF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
