@@ -1,12 +1,9 @@
-@mixin button($background-color, $font-color, $font-size, $button-box-shadow) {
-    @extend %button;
+@mixin main-button($background-color, $font-color, $font-size, $button-box-shadow) {
+    @extend %main-button;
     background-color: $background-color;
-    color: $font-color;
     box-shadow: $button-box-shadow;
-
-    p {
-        font-size: $font-size;
-    }
+    font-size: $font-size;
+    color: $font-color;
 
     &:hover {
         background-color: darken($background-color, 10%);

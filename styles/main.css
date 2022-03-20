@@ -247,7 +247,7 @@ input[type=button] {
   border: none;
   font-family: "Poppins", sans-serif;
   border-radius: 40px;
-  padding: 1rem 1.3rem;
+  padding: 0.5em 1.5em;
 }
 
 .create-button--note .create-button__icon {
@@ -817,32 +817,22 @@ input[type=button] {
 
 .main-button--primary {
   background-color: #72B8FF;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-}
-
-.main-button--primary p {
   font-size: 2rem;
+  color: #FFFFFF;
 }
 
 .main-button--primary:hover {
   background-color: #3f9eff;
 }
 
-.small-button {
-  padding: 0.5rem 1rem;
-}
-
 .small-button--primary {
   background-color: #72B8FF;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-}
-
-.small-button--primary p {
   font-size: 1.5rem;
+  color: #FFFFFF;
 }
 
 .small-button--primary:hover {
@@ -851,13 +841,10 @@ input[type=button] {
 
 .small-button--secondary {
   background-color: #FD797A;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
           box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-}
-
-.small-button--secondary p {
   font-size: 1.5rem;
+  color: #FFFFFF;
 }
 
 .small-button--secondary:hover {
@@ -866,16 +853,11 @@ input[type=button] {
 
 .board-edit-button {
   background-color: #72B8FF;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
           box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-  padding: 0.5rem 1rem;
-  box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
-  text-align: center;
-}
-
-.board-edit-button p {
   font-size: 1.2rem;
+  color: #FFFFFF;
+  text-align: center;
 }
 
 .board-edit-button:hover {
@@ -884,18 +866,15 @@ input[type=button] {
 
 .confirm-reject-button {
   background-color: #FD797A;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
           box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-  padding: 0.2rem 0 0.2rem 0;
+  font-size: 2rem;
+  color: #FFFFFF;
+  padding: 0.2em 1em;
   min-width: 8.2rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-}
-
-.confirm-reject-button p {
-  font-size: 2rem;
 }
 
 .confirm-reject-button:hover {
@@ -904,9 +883,10 @@ input[type=button] {
 
 .audio-pre-button {
   background-color: #FD797A;
-  color: #FFFFFF;
   -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
           box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+  font-size: 1.2rem;
+  color: #FFFFFF;
   padding: 0.5rem 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -917,10 +897,6 @@ input[type=button] {
   width: -moz-fit-content;
   width: fit-content;
   box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
-}
-
-.audio-pre-button p {
-  font-size: 1.2rem;
 }
 
 .audio-pre-button:hover {

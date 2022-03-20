@@ -1,36 +1,33 @@
 .main-button {
     &--primary {
-        @include button($button-primary, $button-text-color-primary, $main-button-text, $button-primary-box-shadow);
+        @include main-button($button-primary, $button-text-color-primary, $main-button-text, $button-primary-box-shadow);
     }
 }
 
 .small-button {
     &--primary {
-        @include button($button-primary, $button-text-color-primary, $small-button-text, $button-primary-box-shadow);
+        @include main-button($button-primary, $button-text-color-primary, $small-button-text, $button-primary-box-shadow);
     }
 
     &--secondary {
-        @include button($button-secondary, $button-text-color-primary, $small-button-text, $button-secondary-box-shadow);
+        @include main-button($button-secondary, $button-text-color-primary, $small-button-text, $button-secondary-box-shadow);
     }
-    padding: $small-button-padding;
 }
 
 .board-edit-button {
-    @include button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
-    padding: $small-button-padding;
-    box-shadow: 0px 5px 6px rgba(69, 158, 248, 0.2);
+    @include main-button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
     text-align: center
 }
 
 .confirm-reject-button {
-    @include button($button-secondary, $button-text-color-primary, $confirm-reject-text-btn, $button-secondary-box-shadow);
-    padding: 0.2rem 0 0.2rem 0;
+    @include main-button($button-secondary, $button-text-color-primary, $confirm-reject-text-btn, $button-secondary-box-shadow);
+    padding: 0.2em 1em;
     min-width: 8.2rem;
     width: fit-content;
 }
 
 .audio-pre-button {
-    @include button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
+    @include main-button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
     padding: $small-button-padding;
     padding-left: 2rem;
     padding-right: 2rem;
