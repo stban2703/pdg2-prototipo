@@ -1207,6 +1207,71 @@ input[type=button] {
   width: 100%;
   padding: 1.5rem 2rem;
   gap: 1.5rem;
+  position: relative;
+}
+
+.board-note-item__settings {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1.5rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  -webkit-box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+  border-radius: 5px;
+  padding: 0.6rem;
+}
+
+.board-note-item__settings .delete-board-note-item img {
+  content: url("./../../images/deletenoteicon.svg");
+}
+
+.board-note-item__settings .delete-board-note-item:hover img {
+  content: url("./../../images/deletenoteiconwhite.svg");
+}
+
+.board-note-item__settings-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 0.4em;
+  color: #757575;
+  padding: 0.4em 0.8em;
+  border-radius: 3px;
+}
+
+.board-note-item__settings-item:hover {
+  background-color: #979DFF;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.board-note-item__settings--hidden {
+  -webkit-transform: scale(0, 0);
+          transform: scale(0, 0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 .board-note-item__header {
@@ -1257,14 +1322,14 @@ input[type=button] {
           align-items: center;
   background-color: #FAFAFA;
   border: none;
-  width: 3rem;
+  min-width: 3rem;
   height: 3rem;
   border-radius: 0.5rem;
-}
-
-.board-note-item__dotsBtn img {
-  height: 2rem;
-  max-width: none;
+  padding: 0;
+  background-image: url("./../../images/3dots.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
 }
 
 .board-note-item__details {

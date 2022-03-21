@@ -12,7 +12,7 @@ export async function renderNotesBoard(list) {
         noteBoardListKeep.innerHTML = ""
         noteBoardListImprove.innerHTML = ""
         noteBoardListRemove.innerHTML = ""
-    
+
         list.forEach(note => {
             const noteItem = document.createElement("div")
             noteItem.classList.add("board-note-item")
@@ -20,11 +20,15 @@ export async function renderNotesBoard(list) {
                 <div class="board-note-item__color">
                 </div>
                 <section class="board-note-item__info">
+                    <ul class="board-note-item__settings board-note-item__settings--hidden">
+                        <li class="board-note-item__settings-item delete-board-note-item"><img src=""><span>Eliminar</span></li>
+                        <li class="board-note-item__settings-item"><span>Editar</span></li>
+                    </ul>
                     <section class="board-note-item__header">
                         <img class="board-note-item__type" src="./images/board${note.fileType}type-${note.category}.svg" alt="">
                         <h4 class="board-note-item__title">${note.name}</h4>
                         <button class="board-note-item__dotsBtn">
-                            <img src="./images/3dots.svg" alt="">
+                            
                         </button>
                     </section>
                     <section class="board-note-item__details">
@@ -60,6 +64,17 @@ export async function renderNotesBoard(list) {
                     noteBoardListRemove.appendChild(noteItem)
                     break;
             }
+
+            const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
+            const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
+
+            document.addEventListener('click', (event) => {
+                if (event.target == boardNoteItemDotsBtn) {
+                    boardNoteItemSettings.classList.remove("board-note-item__settings--hidden")
+                } else {
+                    boardNoteItemSettings.classList.add("board-note-item__settings--hidden")
+                }
+            })
         });
     }
 }
