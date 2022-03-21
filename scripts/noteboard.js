@@ -1,6 +1,4 @@
-import { getNotes } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
-import { sortByWeek } from "./utils/sort.js";
 
 export async function renderNotesBoard(list) {
     const noteBoard = document.querySelector('.note-board')
