@@ -1907,15 +1907,15 @@ input[type=button] {
 }
 
 .note-board__column:nth-child(1) {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='100%' x2='100%' y1='0' y2='100%' fill='none' stroke='%2375ADE5' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='100%' x2='100%' y1='0' y2='100%' fill='none' stroke='%23858BF1' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
 }
 
 .note-board__column:nth-child(2) {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%2375ADE5' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3cline x1='100%' x2='100%' y1='0' y2='100%' fill='none' stroke='%2346A1FD' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%23858BF1' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3cline x1='100%' x2='100%' y1='0' y2='100%' fill='none' stroke='%2346A1FD' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
 }
 
 .note-board__column:nth-child(3) {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%2346A1FD' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%23858BF1' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
 }
 
 .note-board__categorie {
