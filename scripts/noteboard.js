@@ -1,5 +1,6 @@
 import { deleteNote } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
+import { showLoader } from "./utils/loader.js";
 
 export async function renderNotesBoard(list) {
     const noteBoard = document.querySelector('.note-board')
@@ -79,7 +80,8 @@ export async function renderNotesBoard(list) {
 
             const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
             deleteBoardNoteItemBtn.addEventListener('click', (e) => {
-                deleteNote(note.id)
+                showLoader()
+                deleteNote(note.id, note.fileType)
             })
         });
     }

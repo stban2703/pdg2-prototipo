@@ -4,6 +4,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader } from "../utils/loader.js";
+import { getInitialNoteList } from "../notes.js";
+import { userInfo } from "../main.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
@@ -73,9 +75,14 @@ export async function getNoteDetails(id) {
     }
 }
 
-export async function deleteNote(id) {
+export async function deleteNote(id, type) {
     await deleteDoc(doc(firestore, "notes", id)).then(() => {
-        deleteFile(id)
+        if (type != "text") {
+            deleteFile(id)
+        } else {
+            hideLoader()
+            getInitialNoteList(userInfo.id)
+        }
     }).catch(error => {
         console.log(error)
     });

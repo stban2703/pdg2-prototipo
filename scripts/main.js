@@ -5,7 +5,7 @@ import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
-import { getInitialNoteList } from "./notes.js";
+import { getInitialNoteList, onFilterListener } from "./notes.js";
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -60,6 +60,7 @@ function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
     getInitialNoteList(currentUser.id)
+    onFilterListener()
     renderNoteDetails()
     renderMeetings()
     renderMeetingDetails()

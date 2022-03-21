@@ -3,40 +3,25 @@ import { renderNotesBoard } from "./noteboard.js"
 import { sortByWeek } from "./utils/sort.js"
 
 let currentNoteView = "tablero"
+let noteList = []
 
 export async function getInitialNoteList(uid) {
-    const noteList = await getNotes(uid)
-    const copy = [...noteList].sort(sortByWeek)
-    renderNotesList(copy)
-    filterNoteList(copy)
+    noteList = await getNotes(uid)
+    noteList.sort(sortByWeek)
+    //const noteSettingsForm = document.querySelector(".note-settings-form")
+    renderNotesList(noteList)
+    //onFilterListener(noteList)
 }
 
-function filterNoteList(list) {
+export function onFilterListener() {
+    //const copy = [...noteList]
     const noteSettingsForm = document.querySelector(".note-settings-form")
 
     if (window.location.href.includes("#notes") && noteSettingsForm) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
-
         noteSettingsForm.addEventListener('input', () => {
-            let filterCopy = [...list]
-
-            if (noteSubjectFilterSelect.value.length > 0) {
-                filterCopy = [...filterCopy].filter(e => {
-                    if(e.subject == noteSubjectFilterSelect.value) {
-                        return true
-                    }
-                })
-            }
-
-            if (notePeriodFilterSelect.value.length > 0) {
-                filterCopy = [...filterCopy].filter(e => {
-                    if(e.period == notePeriodFilterSelect.value) {
-                        return true
-                    }
-                })
-            }
-
+            let filterCopy = getFilteredNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
             renderNotesList(filterCopy)
         })
     }
@@ -48,4 +33,24 @@ function renderNotesList(list) {
             renderNotesBoard(list)
             break;
     }
+}
+
+function getFilteredNoteList(subjectFilter, periodFilter) {
+    let filterCopy = [...noteList]
+    if (subjectFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.subject == subjectFilter.value) {
+                return true
+            }
+        })
+    }
+
+    if (periodFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.period == periodFilter.value) {
+                return true
+            }
+        })
+    }
+    return filterCopy
 }
