@@ -8,21 +8,24 @@ let noteList = []
 export async function getInitialNoteList(uid) {
     noteList = await getNotes(uid)
     noteList.sort(sortByWeek)
-    //const noteSettingsForm = document.querySelector(".note-settings-form")
     renderNotesList(noteList)
-    //onFilterListener(noteList)
+
+    const noteSettingsForm = document.querySelector(".note-settings-form")
+    if (window.location.href.includes("#notes") && noteSettingsForm) {
+        const noteSubjectFilterSelect = noteSettingsForm.subject
+        const notePeriodFilterSelect = noteSettingsForm.period
+        filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
+    }
 }
 
 export function onFilterListener() {
-    //const copy = [...noteList]
     const noteSettingsForm = document.querySelector(".note-settings-form")
 
     if (window.location.href.includes("#notes") && noteSettingsForm) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
         noteSettingsForm.addEventListener('input', () => {
-            let filterCopy = getFilteredNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
-            renderNotesList(filterCopy)
+            filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
         })
     }
 }
@@ -35,7 +38,7 @@ function renderNotesList(list) {
     }
 }
 
-function getFilteredNoteList(subjectFilter, periodFilter) {
+function filterNoteList(subjectFilter, periodFilter) {
     let filterCopy = [...noteList]
     if (subjectFilter.value.length > 0) {
         filterCopy = [...filterCopy].filter(e => {
@@ -52,5 +55,5 @@ function getFilteredNoteList(subjectFilter, periodFilter) {
             }
         })
     }
-    return filterCopy
+    renderNotesList(filterCopy)
 }
