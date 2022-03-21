@@ -18,30 +18,26 @@ function filterNoteList(list) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
 
-        noteSubjectFilterSelect.addEventListener('input', () => {
+        noteSettingsForm.addEventListener('input', () => {
+            let filterCopy = [...list]
+
             if (noteSubjectFilterSelect.value.length > 0) {
-                const newNoteList = [...list].filter(e => {
+                filterCopy = [...filterCopy].filter(e => {
                     if(e.subject == noteSubjectFilterSelect.value) {
                         return true
                     }
                 })
-                renderNotesList(newNoteList)
-            } else {
-                renderNotesList(list)
             }
-        })
 
-        notePeriodFilterSelect.addEventListener('input', () => {
             if (notePeriodFilterSelect.value.length > 0) {
-                const newNoteList = [...list].filter(e => {
+                filterCopy = [...filterCopy].filter(e => {
                     if(e.period == notePeriodFilterSelect.value) {
                         return true
                     }
                 })
-                renderNotesList(newNoteList)
-            } else {
-                renderNotesList(list)
             }
+
+            renderNotesList(filterCopy)
         })
     }
 }

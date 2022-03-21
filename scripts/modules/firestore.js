@@ -1,8 +1,8 @@
 import { firebase } from "./firebase.js";
 import {
-    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where
+    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
-import { submitFile } from "./storage.js";
+import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader } from "../utils/loader.js";
 
 const firestore = getFirestore(firebase)
@@ -71,6 +71,14 @@ export async function getNoteDetails(id) {
         console.log("No such document!");
         return null
     }
+}
+
+export async function deleteNote(id) {
+    await deleteDoc(doc(firestore, "notes", id)).then(() => {
+        deleteFile(id)
+    }).catch(error => {
+        console.log(error)
+    });
 }
 
 // Meetings functions

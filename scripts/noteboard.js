@@ -1,3 +1,4 @@
+import { deleteNote } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 
 export async function renderNotesBoard(list) {
@@ -74,6 +75,11 @@ export async function renderNotesBoard(list) {
                 } else {
                     boardNoteItemSettings.classList.add("board-note-item__settings--hidden")
                 }
+            })
+
+            const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
+            deleteBoardNoteItemBtn.addEventListener('click', (e) => {
+                deleteNote(note.id)
             })
         });
     }

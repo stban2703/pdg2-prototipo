@@ -1,5 +1,5 @@
 import { firebase } from "./firebase.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js";
 import { updateFileReference } from "./firestore.js";
 import { hideLoader } from "../utils/loader.js";
 
@@ -14,6 +14,16 @@ export function submitFile(file, id) {
         })
     }).catch(error => {
         hideLoader()
+        console.log(error)
+    });
+}
+
+export function deleteFile(id) {
+    const fileRef = ref(storage, id);
+    deleteObject(fileRef).then(() => {
+        // File deleted successfully
+        alert("Nota eliminada")
+    }).catch(error => {
         console.log(error)
     });
 }
