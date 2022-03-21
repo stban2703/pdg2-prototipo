@@ -41,6 +41,7 @@ $main-color: $melrose;
 $main-color-light: #EFF0FF;
 $main-color-nav-text: #858BF1; 
 $secondary-color: $cheese;
+$alt-color: $malibu;
 
 // Note categories
 $keep: #9BDE90;
@@ -55,8 +56,7 @@ $dots-button-background: #FAFAFA;
 // // Button colors
 $button-primary: $main-color;
 $button-secondary: $secondary-color;
-$button-hover: #4e57ff;
-$button-secondary-hover: #ff9838;
+$button-alt: $alt-color;
 $button-text-color-primary: $white;
 
 // // Title colors

@@ -26,6 +26,11 @@
     width: fit-content;
 }
 
+.notes-view-button {
+    @include main-button($button-alt, $button-text-color-primary, $small-button-text, none);
+    padding: 0.2em 1em;
+}
+
 .audio-pre-button {
     @include main-button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
     padding: $small-button-padding;
