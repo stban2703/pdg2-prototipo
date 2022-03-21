@@ -49,10 +49,13 @@ export async function updateFileReference(id, fileUrl) {
 }
 
 export async function getNotes(uid) {
-    const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
-    const querySnapshot = await getDocs(q);
-    const noteList = querySnapshot.docs.map(doc => doc.data());
-    return noteList
+    if (window.location.href.includes("#notes")) {
+        const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
+        const querySnapshot = await getDocs(q);
+        const noteList = querySnapshot.docs.map(doc => doc.data());
+        return noteList
+    }
+    return []
 }
 
 export async function getNoteDetails(id) {

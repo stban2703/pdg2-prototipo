@@ -2,10 +2,10 @@ import { getNotes } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { sortByWeek } from "./utils/sort.js";
 
-export async function renderNotesBoard(uid) {
+export async function renderNotesBoard(list) {
     const noteBoard = document.querySelector('.note-board')
 
-    if (noteBoard && window.location.href.includes("#notes")) {
+    if (noteBoard) {
 
         const noteBoardListKeep = noteBoard.querySelector(".note-board__list--keep")
         const noteBoardListImprove = noteBoard.querySelector(".note-board__list--improve")
@@ -14,11 +14,8 @@ export async function renderNotesBoard(uid) {
         noteBoardListKeep.innerHTML = ""
         noteBoardListImprove.innerHTML = ""
         noteBoardListRemove.innerHTML = ""
-
-        const noteList = await getNotes(uid)
-        const copy = [...noteList].sort(sortByWeek)
     
-        copy.forEach(note => {
+        list.forEach(note => {
             const noteItem = document.createElement("div")
             noteItem.classList.add("board-note-item")
             noteItem.innerHTML = `
