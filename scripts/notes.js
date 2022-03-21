@@ -14,7 +14,7 @@ export async function getInitialNoteList(uid) {
 function filterNoteList(list) {
     const noteSettingsForm = document.querySelector(".note-settings-form")
 
-    if (window.location.href.includes("#notes")) {
+    if (window.location.href.includes("#notes") && noteSettingsForm) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
 
@@ -32,7 +32,6 @@ function filterNoteList(list) {
         })
 
         notePeriodFilterSelect.addEventListener('input', () => {
-            console.log("ok")
             if (notePeriodFilterSelect.value.length > 0) {
                 const newNoteList = [...list].filter(e => {
                     if(e.period == notePeriodFilterSelect.value) {
