@@ -1,6 +1,5 @@
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
-import { filterBySubject } from "./utils/filter.js"
 import { sortByWeek } from "./utils/sort.js"
 
 let currentNoteView = "tablero"
@@ -17,11 +16,26 @@ function filterNoteList(list) {
 
     if (window.location.href.includes("#notes")) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
+        const notePeriodFilterSelect = noteSettingsForm.period
+
         noteSubjectFilterSelect.addEventListener('input', () => {
-            console.log(noteSubjectFilterSelect.value)
             if (noteSubjectFilterSelect.value.length > 0) {
                 const newNoteList = [...list].filter(e => {
                     if(e.subject == noteSubjectFilterSelect.value) {
+                        return true
+                    }
+                })
+                renderNotesList(newNoteList)
+            } else {
+                renderNotesList(list)
+            }
+        })
+
+        notePeriodFilterSelect.addEventListener('input', () => {
+            console.log("ok")
+            if (notePeriodFilterSelect.value.length > 0) {
+                const newNoteList = [...list].filter(e => {
+                    if(e.period == notePeriodFilterSelect.value) {
                         return true
                     }
                 })

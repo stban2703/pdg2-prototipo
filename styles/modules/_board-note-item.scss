@@ -95,12 +95,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: $geraldine;
+        background-color: $button-secondary;
         border-radius: 40px;
         border: none;
         height: 100%;
         padding: 0.5rem 2rem;
-        filter: drop-shadow(0px 5px 6px rgba(239, 81, 82, 0.2));
+        box-shadow: $button-secondary-box-shadow;
 
         img {
             max-width: none;

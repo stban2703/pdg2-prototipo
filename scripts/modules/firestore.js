@@ -22,6 +22,7 @@ export async function createNote(uid, name, week, category, subject, textNote, f
         fileReference: "",
         fileType: fileType,
         descriptionText: description,
+        period: "2022-1",
         date: Date.now()
     }
 
