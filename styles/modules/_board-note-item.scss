@@ -5,7 +5,7 @@
     border-radius: 15px;
     overflow: hidden;
     background-color: $white;
-    max-width: 30rem;
+    //max-width: 30rem;
     filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
 
     &__color {
@@ -69,7 +69,6 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 22ch;
         }
 
         span {

@@ -354,7 +354,7 @@ input[type=button] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background: url("./../images/selectarrow.svg");
+  background-image: url("./../images/selectarrow.svg");
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-position-x: calc(100% - 1em);
@@ -535,6 +535,29 @@ input[type=button] {
 .select-input__field {
   padding-right: 3rem;
   outline-color: #979DFF;
+  text-overflow: ellipsis;
+}
+
+.select-notes-filter {
+  background-color: #FFFFFF;
+  border: 1px solid #A0A0A0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding: 0.5rem 4rem 0.5rem 1rem;
+  color: #A0A0A0;
+  outline: #A0A0A0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("./../images/selectarrowmini.svg");
+  background-repeat: no-repeat;
+  background-position-x: 90%;
+  background-position-x: calc(100% - 1em);
+  background-position-y: 50%;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 15rem;
   text-overflow: ellipsis;
 }
 
@@ -931,8 +954,8 @@ input[type=button] {
 
 .create-button--fixed {
   position: fixed;
-  right: 1%;
-  bottom: 1%;
+  right: 2%;
+  bottom: 2%;
 }
 
 .create-button__tag {
@@ -1150,7 +1173,6 @@ input[type=button] {
   border-radius: 15px;
   overflow: hidden;
   background-color: #FFFFFF;
-  max-width: 30rem;
   -webkit-filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
           filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
 }
@@ -1246,7 +1268,6 @@ input[type=button] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 22ch;
 }
 
 .board-note-item__details span {
@@ -1869,7 +1890,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 0.5rem;
+  padding: 0 5%;
 }
 
 .note-board__column:nth-child(1) {
@@ -2679,6 +2700,73 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   padding-bottom: 12rem;
+  padding: 2rem 0;
+}
+
+.note-screen__settings {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.note-screen__filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+
+.note-screen__filters-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.note-screen__filters-title span {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #A0A0A0;
+  white-space: nowrap;
+}
+
+.note-screen__views {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .createnote-screen {

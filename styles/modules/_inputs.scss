@@ -51,6 +51,27 @@
     }
 }
 
+.select-notes-filter {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    font-family: $poppins;
+    font-size: 1.5rem;
+    font-weight: $light;
+    padding: 0.5rem 4rem 0.5rem 1rem;
+    color: $silver;
+    outline: $input-border-color;
+    appearance: none;
+    background-image: url("./../images/selectarrowmini.svg");
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-x: calc(100% - 1em);
+    background-position-y: 50%;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 15rem;
+    text-overflow: ellipsis;
+}
+
 .date-time-input {
     display: flex;
     flex-direction: column;
