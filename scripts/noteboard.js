@@ -2,7 +2,7 @@ import { getNotes } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { sortByWeek } from "./utils/sort.js";
 
-export async function renderNotes(uid) {
+export async function renderNotesBoard(uid) {
     const noteBoard = document.querySelector('.note-board')
 
     if (noteBoard && window.location.href.includes("#notes")) {

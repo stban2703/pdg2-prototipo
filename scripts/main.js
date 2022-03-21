@@ -4,7 +4,7 @@ import { submitNote } from "./createnote.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
-import { renderNotes } from "./noteboard.js";
+import { renderNotesBoard } from "./noteboard.js";
 import { renderNoteDetails } from "./notedetails.js";
 
 // Verifica si el usuario ha  iniciado sesion
@@ -59,7 +59,7 @@ function displayHomeUserName() {
 function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
-    renderNotes(currentUser.id)
+    renderNotesBoard(currentUser.id)
     renderNoteDetails()
     renderMeetings()
     renderMeetingDetails()
