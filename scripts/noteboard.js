@@ -24,19 +24,31 @@ export async function renderNotesBoard(list) {
                 if (mouseX > keepRect.x && mouseX < keepRect.x + keepRect.width &&
                     mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
                     //console.log("Keep")
-                    updateNoteCategory(selectedNote.id, selectedNote.category, "keep")
+                    try {
+                        updateNoteCategory(selectedNote.id, selectedNote.category, "keep")
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }
 
                 if (mouseX > improveRect.x && mouseX < improveRect.x + improveRect.width &&
                     mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
                     //console.log("Improve")
-                    updateNoteCategory(selectedNote.id, selectedNote.category, "improve")
+                    try {
+                        updateNoteCategory(selectedNote.id, selectedNote.category, "improve")
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }
 
                 if (mouseX > removeRect.x && mouseX < removeRect.x + removeRect.width &&
                     mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
                     //console.log("Remove")
-                    updateNoteCategory(selectedNote.id, selectedNote.category, "remove")
+                    try {
+                        updateNoteCategory(selectedNote.id, selectedNote.category, "remove")
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }
                 selectedNote = null
                 return false;
@@ -116,26 +128,26 @@ export async function renderNotesBoard(list) {
             const boardNoteItemRightBtn = noteItem.querySelector(".board-note-item__moveBtn--right")
 
             boardNoteItemLeftBtn.addEventListener('click', () => {
-                if(note.category == "improve") {
+                if (note.category == "improve") {
                     updateNoteCategory(note.id, note.category, "keep")
                 }
 
-                if(note.category == "remove") {
+                if (note.category == "remove") {
                     updateNoteCategory(note.id, note.category, "improve")
                 }
             })
 
             boardNoteItemRightBtn.addEventListener('click', () => {
-                if(note.category == "keep") {
+                if (note.category == "keep") {
                     updateNoteCategory(note.id, note.category, "improve")
                 }
 
-                if(note.category == "improve") {
+                if (note.category == "improve") {
                     updateNoteCategory(note.id, note.category, "remove")
                 }
             })
 
-            
+
             // Item settings menu
             const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
             const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
