@@ -3,7 +3,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "http
 import { updateFileReference } from "./firestore.js";
 import { hideLoader } from "../utils/loader.js";
 import { getInitialNoteList } from "../notes.js";
-import { userInfo } from "../main.js";
 
 const storage = getStorage()
 
@@ -20,11 +19,11 @@ export function submitFile(file, id) {
     });
 }
 
-export function deleteFile(id) {
-    const fileRef = ref(storage, id);
+export function deleteFile(userId, fileId) {
+    const fileRef = ref(storage, fileId);
     deleteObject(fileRef).then(() => {
         hideLoader()
-        getInitialNoteList(userInfo.id)
+        getInitialNoteList(userId)
     }).catch(error => {
         hideLoader()
         console.log(error)

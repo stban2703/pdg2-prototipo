@@ -5,7 +5,7 @@ import { showLoader } from "./utils/loader.js";
 
 let selectedNote = null
 
-export async function renderNotesBoard(list) {
+export async function renderNotesBoard(userId, list) {
     const noteBoard = document.querySelector('.note-board')
 
     if (noteBoard) {
@@ -25,7 +25,7 @@ export async function renderNotesBoard(list) {
                     mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
                     //console.log("Keep")
                     try {
-                        updateNoteCategory(selectedNote.id, selectedNote.category, "keep")
+                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "keep")
                     } catch (error) {
                         console.log(error)
                     }
@@ -35,7 +35,7 @@ export async function renderNotesBoard(list) {
                     mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
                     //console.log("Improve")
                     try {
-                        updateNoteCategory(selectedNote.id, selectedNote.category, "improve")
+                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "improve")
                     } catch (error) {
                         console.log(error)
                     }
@@ -45,7 +45,7 @@ export async function renderNotesBoard(list) {
                     mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
                     //console.log("Remove")
                     try {
-                        updateNoteCategory(selectedNote.id, selectedNote.category, "remove")
+                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "remove")
                     } catch (error) {
                         console.log(error)
                     }
@@ -129,21 +129,21 @@ export async function renderNotesBoard(list) {
 
             boardNoteItemLeftBtn.addEventListener('click', () => {
                 if (note.category == "improve") {
-                    updateNoteCategory(note.id, note.category, "keep")
+                    updateNoteCategory(userId, note.id, note.category, "keep")
                 }
 
                 if (note.category == "remove") {
-                    updateNoteCategory(note.id, note.category, "improve")
+                    updateNoteCategory(userId, note.id, note.category, "improve")
                 }
             })
 
             boardNoteItemRightBtn.addEventListener('click', () => {
                 if (note.category == "keep") {
-                    updateNoteCategory(note.id, note.category, "improve")
+                    updateNoteCategory(userId, note.id, note.category, "improve")
                 }
 
                 if (note.category == "improve") {
-                    updateNoteCategory(note.id, note.category, "remove")
+                    updateNoteCategory(userId, note.id, note.category, "remove")
                 }
             })
 
@@ -163,7 +163,7 @@ export async function renderNotesBoard(list) {
             const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
             deleteBoardNoteItemBtn.addEventListener('click', (e) => {
                 showLoader()
-                deleteNote(note.id, note.fileType)
+                deleteNote(userId, note.id, note.fileType)
             })
         });
     }

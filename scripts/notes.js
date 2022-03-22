@@ -17,33 +17,33 @@ export async function getInitialNoteList(uid) {
         if (window.location.href.includes("#notes") && noteSettingsForm) {
             const noteSubjectFilterSelect = noteSettingsForm.subject
             const notePeriodFilterSelect = noteSettingsForm.period
-            filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
+            filterNoteList(uid, noteSubjectFilterSelect, notePeriodFilterSelect)
         }
     }
 }
 
-export function onFilterListener() {
+export function onFilterListener(uid) {
     const noteSettingsForm = document.querySelector(".note-settings-form")
 
     if (window.location.href.includes("#notes") && noteSettingsForm) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
         noteSettingsForm.addEventListener('input', () => {
-            filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
+            filterNoteList(uid, noteSubjectFilterSelect, notePeriodFilterSelect)
         })
     }
 }
 
-function renderNotesList(list) {
+function renderNotesList(userId, list) {
     hideLoader()
     switch (currentNoteView) {
         case "tablero":
-            renderNotesBoard(list)
+            renderNotesBoard(userId, list)
             break;
     }
 }
 
-function filterNoteList(subjectFilter, periodFilter) {
+function filterNoteList(userId, subjectFilter, periodFilter) {
     let filterCopy = [...noteList]
     if (subjectFilter.value.length > 0) {
         filterCopy = [...filterCopy].filter(e => {
@@ -60,5 +60,5 @@ function filterNoteList(subjectFilter, periodFilter) {
             }
         })
     }
-    renderNotesList(filterCopy)
+    renderNotesList(userId, filterCopy)
 }

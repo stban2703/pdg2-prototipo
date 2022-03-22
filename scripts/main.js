@@ -23,11 +23,9 @@ export const userInfo = currentUser
 
 // Cerrar sesion
 const logoutButton = document.querySelector('.logoutButton')
-if (logoutButton) {
-    logoutButton.addEventListener('click', function () {
-        logOut()
-    })
-}
+logoutButton.addEventListener('click', function () {
+    logOut()
+})
 
 
 // Verifica la ventana actual en el menu
@@ -39,15 +37,13 @@ window.addEventListener("hashchange", function () {
 
 // Detectar cambios de pantalla
 const pageContent = document.querySelector(".page-content")
-if (pageContent) {
-    let observer = new MutationObserver(function (mutationsList, observer) {
-        mutationsList.forEach(e => {
-            //console.log(e);
-        })
-        addPageFuncions()
-    });
-    observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
-}
+let observer = new MutationObserver(function (mutationsList, observer) {
+    mutationsList.forEach(e => {
+        //console.log(e);
+    })
+    addPageFuncions()
+});
+observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
 
 
 // Mostrar nombre del usuario en pantalla principal
@@ -64,7 +60,7 @@ function addPageFuncions() {
     displayHomeUserName()
     submitNote(currentUser)
     getInitialNoteList(currentUser.id)
-    onFilterListener()
+    onFilterListener(currentUser.id)
     renderNoteDetails()
     renderMeetings()
     renderMeetingDetails()

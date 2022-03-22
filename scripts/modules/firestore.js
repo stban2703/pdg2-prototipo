@@ -5,7 +5,6 @@ import {
 import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader, showLoader } from "../utils/loader.js";
 import { getInitialNoteList } from "../notes.js";
-import { userInfo } from "../main.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
@@ -41,8 +40,8 @@ export async function createNote(uid, name, week, category, subject, textNote, f
 
 }
 
-export async function updateFileReference(id, fileUrl) {
-    const usernoteRef = doc(firestore, "notes", id)
+export async function updateFileReference(noteId, fileUrl) {
+    const usernoteRef = doc(firestore, "notes", noteId)
     await updateDoc(usernoteRef, {
         fileReference: fileUrl
     }).then(() => {
@@ -51,15 +50,15 @@ export async function updateFileReference(id, fileUrl) {
     })
 }
 
-export async function updateNoteCategory(id, currentValue, newValue) {
+export async function updateNoteCategory(userId, noteId, currentValue, newValue) {
     if (currentValue != newValue) {
         showLoader()
-        const usernoteRef = doc(firestore, "notes", id)
+        const usernoteRef = doc(firestore, "notes", noteId)
         await updateDoc(usernoteRef, {
             category: newValue
         }).then(() => {
             //hideLoader()
-            getInitialNoteList(userInfo.id)
+            getInitialNoteList(userId)
         })
     }
 }
@@ -86,13 +85,13 @@ export async function getNoteDetails(id) {
     }
 }
 
-export async function deleteNote(id, type) {
-    await deleteDoc(doc(firestore, "notes", id)).then(() => {
+export async function deleteNote(userId, noteId, type) {
+    await deleteDoc(doc(firestore, "notes", noteId)).then(() => {
         if (type != "text") {
-            deleteFile(id)
+            deleteFile(noteId)
         } else {
             hideLoader()
-            getInitialNoteList(userInfo.id)
+            getInitialNoteList(userId)
         }
     }).catch(error => {
         console.log(error)
