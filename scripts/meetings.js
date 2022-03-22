@@ -38,9 +38,15 @@ export async function renderMeetings() {
                         <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
                     </section>
                     <section class="meeting-item__controls">
-                        <a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                        ${meeting.minutesId.length > 0 ? 
+                        `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                            <p>Ver acta</p>
+                        </a>`:
+                        `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                             <p>Ver detalle</p>
-                        </a>
+                        </a>`
+                        }
+                        
                     </section>
                 </section>
             `

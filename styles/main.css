@@ -2373,7 +2373,7 @@ input[type=button] {
 }
 
 .note__title {
-  color: #979DFF;
+  color: #72B8FF;
 }
 
 .note__color {
@@ -2932,6 +2932,10 @@ input[type=button] {
   width: 100%;
   -ms-grid-columns: (minmax(0, 1fr))[2];
       grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.meetinglist-screen__subtitle {
+  font-weight: 600;
 }
 
 .meetinglist-screen__column {
