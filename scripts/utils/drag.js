@@ -15,17 +15,6 @@ export function getCategoryColumnsRect() {
     removeRect = noteBoardListRemove.getBoundingClientRect()
 }
 
-// Item
-/*export function handleDragStart(e) {
-    //e.dataTransfer.setData('text/plain', e.target.id);
-    //this.style.opacity = '0';
-}*/
-
-export function handleDragEnd(e) {
-    this.style.opacity = '1';
-}
-
-
 // Boxes
 export function handleDragEnter(e) {
     e.preventDefault();
@@ -40,26 +29,3 @@ export function handleDragOver(e) {
 
 export function handleDragLeave(e) {
 }
-
-/*export function handleDrop(e) {
-    e.stopPropagation(); // stops the browser from redirecting.
-
-    if (mouseX > keepRect.x && mouseX < keepRect.x + keepRect.width &&
-        mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
-        //const id = e.dataTransfer.getData('text/plain');
-        console.log("Keep")
-    }
-
-    if (mouseX > improveRect.x && mouseX < improveRect.x + improveRect.width &&
-        mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
-        //const id = e.dataTransfer.getData('text/plain');
-        console.log("Improve")
-    }
-
-    if (mouseX > removeRect.x && mouseX < removeRect.x + removeRect.width &&
-        mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
-        //const id = e.dataTransfer.getData('text/plain');
-        console.log("Remove")
-    }
-    return false;
-}*/
