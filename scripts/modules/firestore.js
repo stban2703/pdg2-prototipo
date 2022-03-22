@@ -67,13 +67,11 @@ export async function updateNoteCategory(id, currentValue, newValue) {
 }
 
 export async function getNotes(uid) {
-    if (window.location.href.includes("#notes")) {
-        const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
-        const querySnapshot = await getDocs(q);
-        const noteList = querySnapshot.docs.map(doc => doc.data());
-        return noteList
-    }
-    return []
+    const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))
+    const querySnapshot = await getDocs(q);
+    const noteList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return noteList
 }
 
 export async function getNoteDetails(id) {

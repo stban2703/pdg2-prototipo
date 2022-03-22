@@ -7,16 +7,18 @@ let currentNoteView = "tablero"
 let noteList = []
 
 export async function getInitialNoteList(uid) {
-    showLoader()
-    noteList = await getNotes(uid)
-    noteList.sort(sortByWeek)
-    //renderNotesList(noteList)
+    if (window.location.href.includes("#notes") && !window.location.href.includes("details")) {
+        showLoader()
+        noteList = await getNotes(uid)
+        noteList.sort(sortByWeek)
+        //renderNotesList(noteList)
 
-    const noteSettingsForm = document.querySelector(".note-settings-form")
-    if (window.location.href.includes("#notes") && noteSettingsForm) {
-        const noteSubjectFilterSelect = noteSettingsForm.subject
-        const notePeriodFilterSelect = noteSettingsForm.period
-        filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
+        const noteSettingsForm = document.querySelector(".note-settings-form")
+        if (window.location.href.includes("#notes") && noteSettingsForm) {
+            const noteSubjectFilterSelect = noteSettingsForm.subject
+            const notePeriodFilterSelect = noteSettingsForm.period
+            filterNoteList(noteSubjectFilterSelect, notePeriodFilterSelect)
+        }
     }
 }
 
