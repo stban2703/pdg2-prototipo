@@ -54,8 +54,8 @@ export async function updateFileReference(id, fileUrl) {
 export async function updateNoteCategory(id, currentValue, newValue) {
     console.log(currentValue)
     console.log(newValue)
-    showLoader()
     if (currentValue != newValue) {
+        showLoader()
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {
             category: newValue
