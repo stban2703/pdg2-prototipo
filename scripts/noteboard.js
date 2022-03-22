@@ -14,7 +14,7 @@ export async function renderNotesBoard(list) {
         const noteBoardListImprove = noteBoard.querySelector(".note-board__list--improve")
         const noteBoardListRemove = noteBoard.querySelector(".note-board__list--remove")
 
-
+        // Drop items on columns functions
         allNoteList.forEach(e => {
             e.addEventListener('dragenter', handleDragEnter);
             e.addEventListener('dragover', handleDragOver);
@@ -101,6 +101,7 @@ export async function renderNotesBoard(list) {
                     break;
             }
 
+            // Drag item functions
             noteItem.addEventListener('dragstart', e => {
                 noteItem.style.opacity = '0.3';
                 e.dataTransfer.setData('text/plain', e.target.id);
@@ -109,7 +110,34 @@ export async function renderNotesBoard(list) {
             noteItem.addEventListener('dragend', e => {
                 noteItem.style.opacity = '1';
             });
+
+
+            // Arrows functions
+            const boardNoteItemLeftBtn = noteItem.querySelector(".board-note-item__moveBtn--left")
+            const boardNoteItemRightBtn = noteItem.querySelector(".board-note-item__moveBtn--right")
+
+            boardNoteItemLeftBtn.addEventListener('click', () => {
+                if(note.category == "improve") {
+                    updateNoteCategory(note.id, note.category, "keep")
+                }
+
+                if(note.category == "remove") {
+                    updateNoteCategory(note.id, note.category, "improve")
+                }
+            })
+
+            boardNoteItemRightBtn.addEventListener('click', () => {
+                if(note.category == "keep") {
+                    updateNoteCategory(note.id, note.category, "improve")
+                }
+
+                if(note.category == "improve") {
+                    updateNoteCategory(note.id, note.category, "remove")
+                }
+            })
+
             
+            // Item settings menu
             const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
             const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
 
