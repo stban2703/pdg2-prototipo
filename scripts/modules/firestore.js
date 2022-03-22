@@ -51,6 +51,20 @@ export async function updateFileReference(id, fileUrl) {
     })
 }
 
+export async function updateNoteCategory(id, currentValue, newValue) {
+    console.log(currentValue)
+    console.log(newValue)
+    if (currentValue != newValue) {
+        const usernoteRef = doc(firestore, "notes", id)
+        await updateDoc(usernoteRef, {
+            category: newValue
+        }).then(() => {
+            //hideLoader()
+            getInitialNoteList(userInfo.id)
+        })
+    }
+}
+
 export async function getNotes(uid) {
     if (window.location.href.includes("#notes")) {
         const q = query(collection(firestore, "notes"), where("userId", "==", "" + uid))

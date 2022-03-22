@@ -1420,6 +1420,16 @@ input[type=button] {
   visibility: hidden;
 }
 
+.board-note-item:hover {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.board-note-item:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
 .memo-reminder {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1973,6 +1983,7 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   padding: 0 5%;
+  min-height: 100%;
 }
 
 .note-board__column:nth-child(1) {
@@ -2025,6 +2036,7 @@ input[type=button] {
 }
 
 .note-board__list {
+  background-color: gray;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2038,6 +2050,7 @@ input[type=button] {
   width: 100%;
   margin-top: 3rem;
   gap: 2rem;
+  min-height: 500px;
 }
 
 .createnote-form {

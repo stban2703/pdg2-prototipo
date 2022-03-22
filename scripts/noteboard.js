@@ -1,23 +1,57 @@
-import { deleteNote } from "./modules/firestore.js";
+import { deleteNote, updateNoteCategory } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
+import { getCategoryColumnsRect, handleDragEnd, handleDragEnter, handleDragLeave, handleDragOver, improveRect, keepRect, mouseX, mouseY, removeRect } from "./utils/drag.js";
 import { showLoader } from "./utils/loader.js";
+
+let selectedNote = null
 
 export async function renderNotesBoard(list) {
     const noteBoard = document.querySelector('.note-board')
 
     if (noteBoard) {
-
+        const allNoteList = noteBoard.querySelectorAll(".note-board__list")
         const noteBoardListKeep = noteBoard.querySelector(".note-board__list--keep")
         const noteBoardListImprove = noteBoard.querySelector(".note-board__list--improve")
         const noteBoardListRemove = noteBoard.querySelector(".note-board__list--remove")
+
+
+        allNoteList.forEach(e => {
+            e.addEventListener('dragenter', handleDragEnter);
+            e.addEventListener('dragover', handleDragOver);
+            e.addEventListener('dragleave', handleDragLeave);
+            e.addEventListener('drop', event => {
+                event.stopPropagation(); // stops the browser from redirecting.
+                if (mouseX > keepRect.x && mouseX < keepRect.x + keepRect.width &&
+                    mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
+                    //console.log("Keep")
+                    updateNoteCategory(selectedNote.id, selectedNote.category, "keep")
+                }
+
+                if (mouseX > improveRect.x && mouseX < improveRect.x + improveRect.width &&
+                    mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
+                    //console.log("Improve")
+                    updateNoteCategory(selectedNote.id, selectedNote.category, "improve")
+                }
+
+                if (mouseX > removeRect.x && mouseX < removeRect.x + removeRect.width &&
+                    mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
+                    //console.log("Remove")
+                    updateNoteCategory(selectedNote.id, selectedNote.category, "remove")
+                }
+                selectedNote = null
+                return false;
+            });
+        })
 
         noteBoardListKeep.innerHTML = ""
         noteBoardListImprove.innerHTML = ""
         noteBoardListRemove.innerHTML = ""
 
-        list.forEach(note => {
+        list.forEach((note, index) => {
             const noteItem = document.createElement("div")
+            noteItem.id = index + ""
             noteItem.classList.add("board-note-item")
+            noteItem.setAttribute('draggable', 'true')
             noteItem.innerHTML = `
                 <div class="board-note-item__color">
                 </div>
@@ -67,6 +101,15 @@ export async function renderNotesBoard(list) {
                     break;
             }
 
+            noteItem.addEventListener('dragstart', e => {
+                noteItem.style.opacity = '0.3';
+                e.dataTransfer.setData('text/plain', e.target.id);
+                selectedNote = note
+            });
+            noteItem.addEventListener('dragend', e => {
+                noteItem.style.opacity = '1';
+            });
+            
             const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
             const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
 
@@ -85,4 +128,5 @@ export async function renderNotesBoard(list) {
             })
         });
     }
+    getCategoryColumnsRect()
 }

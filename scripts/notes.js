@@ -8,7 +8,7 @@ let noteList = []
 export async function getInitialNoteList(uid) {
     noteList = await getNotes(uid)
     noteList.sort(sortByWeek)
-    renderNotesList(noteList)
+    //renderNotesList(noteList)
 
     const noteSettingsForm = document.querySelector(".note-settings-form")
     if (window.location.href.includes("#notes") && noteSettingsForm) {

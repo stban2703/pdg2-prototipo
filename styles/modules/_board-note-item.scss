@@ -182,4 +182,12 @@
             visibility: hidden;
         }
     }
+
+    &:hover {
+        cursor: grab;
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
 }
