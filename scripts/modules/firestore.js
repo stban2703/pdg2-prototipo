@@ -3,7 +3,7 @@ import {
     getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { deleteFile, submitFile } from "./storage.js";
-import { hideLoader } from "../utils/loader.js";
+import { hideLoader, showLoader } from "../utils/loader.js";
 import { getInitialNoteList } from "../notes.js";
 import { userInfo } from "../main.js";
 
@@ -54,6 +54,7 @@ export async function updateFileReference(id, fileUrl) {
 export async function updateNoteCategory(id, currentValue, newValue) {
     console.log(currentValue)
     console.log(newValue)
+    showLoader()
     if (currentValue != newValue) {
         const usernoteRef = doc(firestore, "notes", id)
         await updateDoc(usernoteRef, {

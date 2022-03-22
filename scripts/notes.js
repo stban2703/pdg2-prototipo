@@ -1,11 +1,13 @@
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
+import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
 
 let currentNoteView = "tablero"
 let noteList = []
 
 export async function getInitialNoteList(uid) {
+    showLoader()
     noteList = await getNotes(uid)
     noteList.sort(sortByWeek)
     //renderNotesList(noteList)
@@ -31,6 +33,7 @@ export function onFilterListener() {
 }
 
 function renderNotesList(list) {
+    hideLoader()
     switch (currentNoteView) {
         case "tablero":
             renderNotesBoard(list)

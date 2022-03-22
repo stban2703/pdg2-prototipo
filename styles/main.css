@@ -2036,7 +2036,6 @@ input[type=button] {
 }
 
 .note-board__list {
-  background-color: gray;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
