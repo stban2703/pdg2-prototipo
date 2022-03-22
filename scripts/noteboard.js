@@ -1,6 +1,6 @@
 import { deleteNote, updateNoteCategory } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
-import { getCategoryColumnsRect, handleDragEnd, handleDragEnter, handleDragLeave, handleDragOver, improveRect, keepRect, mouseX, mouseY, removeRect } from "./utils/drag.js";
+import { getCategoryColumnsRect, handleDragEnter, handleDragLeave, handleDragOver, improveRect, keepRect, mouseX, mouseY, removeRect } from "./utils/drag.js";
 import { showLoader } from "./utils/loader.js";
 
 let selectedNote = null
@@ -104,7 +104,6 @@ export async function renderNotesBoard(list) {
             // Drag item functions
             noteItem.addEventListener('dragstart', e => {
                 noteItem.style.opacity = '0.3';
-                e.dataTransfer.setData('text/plain', e.target.id);
                 selectedNote = note
             });
             noteItem.addEventListener('dragend', e => {
