@@ -40,18 +40,6 @@
         border-radius: 5px;
         padding: 0.6rem;
 
-        .delete-board-note-item {
-            img {
-                content: url("./../../images/deletenoteicon.svg");
-            }
-
-            &:hover {
-                img {
-                    content: url("./../../images/deletenoteiconwhite.svg");
-                }
-            }
-        }
-
         &-item {
             display: flex;
             flex-direction: row;
@@ -60,10 +48,26 @@
             padding: 0.4em 0.8em;
             border-radius: 3px;
 
+            &__normal-icon {
+                display: block;
+            }
+
+            &__hover-icon {
+                display: none;
+            }
+
             &:hover {
                 background-color: $main-color;
                 color: $white;
                 cursor: pointer;
+
+                .board-note-item__settings-item__normal-icon {
+                    display: none;
+                }
+
+                .board-note-item__settings-item__hover-icon {
+                    display: block;
+                }
             }
         }
 
@@ -107,7 +111,6 @@
         height: 3rem;
         border-radius: 0.5rem;
         padding: 0;
-        background-image: url('./../../images/3dots.svg');
         background-repeat: no-repeat;
         background-size: auto;
         background-position: center;

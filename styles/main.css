@@ -1237,14 +1237,6 @@ input[type=button] {
   padding: 0.6rem;
 }
 
-.board-note-item__settings .delete-board-note-item img {
-  content: url("./../../images/deletenoteicon.svg");
-}
-
-.board-note-item__settings .delete-board-note-item:hover img {
-  content: url("./../../images/deletenoteiconwhite.svg");
-}
-
 .board-note-item__settings-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1259,10 +1251,26 @@ input[type=button] {
   border-radius: 3px;
 }
 
+.board-note-item__settings-item__normal-icon {
+  display: block;
+}
+
+.board-note-item__settings-item__hover-icon {
+  display: none;
+}
+
 .board-note-item__settings-item:hover {
   background-color: #979DFF;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.board-note-item__settings-item:hover .board-note-item__settings-item__normal-icon {
+  display: none;
+}
+
+.board-note-item__settings-item:hover .board-note-item__settings-item__hover-icon {
+  display: block;
 }
 
 .board-note-item__settings--hidden {
@@ -1326,7 +1334,6 @@ input[type=button] {
   height: 3rem;
   border-radius: 0.5rem;
   padding: 0;
-  background-image: url("./../../images/3dots.svg");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;

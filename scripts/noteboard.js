@@ -69,13 +69,16 @@ export async function renderNotesBoard(userId, list) {
                 </div>
                 <section class="board-note-item__info">
                     <ul class="board-note-item__settings board-note-item__settings--hidden">
-                        <li class="board-note-item__settings-item delete-board-note-item"><img src=""><span>Eliminar</span></li>
+                        <li class="board-note-item__settings-item delete-board-note-item">
+                        <img class="board-note-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                        <img class="board-note-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                        <span>Eliminar</span></li>
                         <li class="board-note-item__settings-item"><span>Editar</span></li>
                     </ul>
                     <section class="board-note-item__header">
                         <img class="board-note-item__type" src="./images/board${note.fileType}type-${note.category}.svg" alt="">
                         <h4 class="board-note-item__title">${note.name}</h4>
-                        <button class="board-note-item__dotsBtn">
+                        <button class="board-note-item__dotsBtn" style="background-image: url('./images/3dots.svg');">
                             
                         </button>
                     </section>
