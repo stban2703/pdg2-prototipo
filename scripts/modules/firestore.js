@@ -88,7 +88,8 @@ export async function getNoteDetails(id) {
 export async function deleteNote(userId, noteId, type) {
     await deleteDoc(doc(firestore, "notes", noteId)).then(() => {
         if (type != "text") {
-            deleteFile(noteId)
+            console.log(noteId)
+            deleteFile(userId, noteId)
         } else {
             hideLoader()
             getInitialNoteList(userId)

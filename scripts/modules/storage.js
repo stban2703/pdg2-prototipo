@@ -7,7 +7,7 @@ import { getInitialNoteList } from "../notes.js";
 const storage = getStorage()
 
 export function submitFile(file, id) {
-    const noteRef = ref(storage, id);
+    const noteRef = ref(storage, "notes/" + id);
     uploadBytes(noteRef, file).then((snapshot) => {
         console.log('Nota creada');
         getDownloadURL(noteRef).then((url) => {
@@ -20,7 +20,8 @@ export function submitFile(file, id) {
 }
 
 export function deleteFile(userId, fileId) {
-    const fileRef = ref(storage, fileId);
+    console.log(fileId)
+    const fileRef = ref(storage, "notes/" + fileId);
     deleteObject(fileRef).then(() => {
         hideLoader()
         getInitialNoteList(userId)

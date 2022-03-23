@@ -166,6 +166,7 @@ export async function renderNotesBoard(userId, list) {
             const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
             deleteBoardNoteItemBtn.addEventListener('click', (e) => {
                 showLoader()
+                console.log(note.id)
                 deleteNote(userId, note.id, note.fileType)
             })
         });
