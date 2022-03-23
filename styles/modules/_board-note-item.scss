@@ -42,12 +42,12 @@
 
         .delete-board-note-item {
             img {
-                content: url("../../images/deletenoteicon.svg");
+                content: url("/images/deletenoteicon.svg");
             }
 
             &:hover {
                 img {
-                    content: url("../../images/deletenoteiconwhite.svg");
+                    content: url("/images/deletenoteiconwhite.svg");
                 }
             }
         }
@@ -107,7 +107,7 @@
         height: 3rem;
         border-radius: 0.5rem;
         padding: 0;
-        background-image: url('../../images/3dots.svg');
+        background-image: url('/images/3dots.svg');
         background-repeat: no-repeat;
         background-size: auto;
         background-position: center;
