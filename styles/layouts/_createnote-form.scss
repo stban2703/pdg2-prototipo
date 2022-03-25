@@ -72,6 +72,12 @@
         max-width: 50rem;
     }
 
+    &__addFile--audio {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
     .description-text {
         margin-top: 2rem;
         display: flex;
