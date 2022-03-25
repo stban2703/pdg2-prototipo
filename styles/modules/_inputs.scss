@@ -262,28 +262,47 @@
     align-items: center;
     position: relative;
     padding: 2rem;
-    gap: 2rem;
+    gap: 1rem;
+
+    &__icon {
+        min-width: 80px;
+
+        img {
+            width: 100%;
+        }
+    }
 
     &__info {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
         width: 100%;
+        overflow: hidden;
     }
 
     &__label {
         font-family: $poppins;
         font-size: 1.5rem;
         color: $silver;
+        font-weight: $light;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &--loaded {
+            color: $main-color
+        }
     }
 
     &__seudoInput {
-        width: 100%;
+        width: fit-content;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
         gap: 1rem;
+        z-index: 1;
+        margin-bottom: 10px;
     }
 
     input {

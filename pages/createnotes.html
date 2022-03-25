@@ -118,16 +118,19 @@
                 <div class="createnote-form__addFile createnote-form__addFile--file hidden">
                     <label for="" class="createnote-form__label">Foto o video</label>
                     <div class="submit-file-input createnote-form__submitFile">
-                        <section class="submit-file-input__icon">
+                        <section class="submit-file-input__icon submit-file-input__icon--empty">
                             <img src="./images/submitfileicon.svg" alt="">
+                        </section>
+                        <section class="submit-file-input__icon submit-file-input__icon--loaded hidden">
+                            <img src="./images/loadedfileinput.svg" alt="">
                         </section>
                         <section class="submit-file-input__info">
                             <p class="submit-file-input__label">Arrastra y suelta el archivo</p>
                             <section class="submit-file-input__seudoInput">
-                                <button type="button" class="audio-pre-button">
+                                <button type="button" class="audio-pre-button seudoInputButton">
                                     <p>Seleccionar archivo</p>
                                 </button>
-                                <p class="submit-file-input__title">No se ha subido un archivo</p>
+                                <!--<p class="submit-file-input__title">No se ha subido un archivo</p>-->
                             </section>
                         </section>
                         <input type="file" name="fileNote"

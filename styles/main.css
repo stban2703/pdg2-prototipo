@@ -779,7 +779,15 @@ input[type=button] {
           align-items: center;
   position: relative;
   padding: 2rem;
-  gap: 2rem;
+  gap: 1rem;
+}
+
+.submit-file-input__icon {
+  min-width: 80px;
+}
+
+.submit-file-input__icon img {
+  width: 100%;
 }
 
 .submit-file-input__info {
@@ -792,16 +800,27 @@ input[type=button] {
           flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+  overflow: hidden;
 }
 
 .submit-file-input__label {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   color: #A0A0A0;
+  font-weight: 300;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.submit-file-input__label--loaded {
+  color: #979DFF;
 }
 
 .submit-file-input__seudoInput {
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -815,6 +834,8 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  z-index: 1;
+  margin-bottom: 10px;
 }
 
 .submit-file-input input {

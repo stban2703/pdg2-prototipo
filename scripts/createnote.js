@@ -45,13 +45,27 @@ export function submitNote(currentUser) {
 
         // File input change
         const fileInput = createNoteForm.fileNote
-        const fileTitle = document.querySelector(".submit-file-input__title")
+        const fileLabel = document.querySelector(".submit-file-input__label")
+        const seudoInputBtn = document.querySelector(".seudoInputButton")
+        const fileInputEmptyIcon = document.querySelector(".submit-file-input__icon--empty")
+        const fileInputLoadedIcon = document.querySelector(".submit-file-input__icon--loaded")
+
+        seudoInputBtn.addEventListener('click', () => {
+            fileInput.click()
+        })
+
         fileInput.addEventListener('change', function () {
             if (fileInput.files.length > 0) {
                 //console.log(fileInput.files[0].name)
-                fileTitle.innerText = fileInput.files[0].name
+                fileLabel.innerText = fileInput.files[0].name
+                fileLabel.classList.add("submit-file-input__label--loaded")
+                fileInputEmptyIcon.classList.add("hidden")
+                fileInputLoadedIcon.classList.remove("hidden")
             } else {
-                fileTitle.innerText = "No se ha subido un archivo"
+                fileLabel.innerText = "Arrastra y suelta el archivo"
+                fileLabel.classList.remove("submit-file-input__label--loaded")
+                fileInputEmptyIcon.classList.remove("hidden")
+                fileInputLoadedIcon.classList.add("hidden")
             }
         })
 
