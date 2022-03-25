@@ -121,10 +121,21 @@
         background-color: $button-secondary;
         box-shadow: $button-secondary-box-shadow;
         border-radius: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
         img {
             max-width: none;
         }
+    }
+
+    &__number {
+        font-family: $poppins;
+        font-weight: $semibold;
+        font-size: 3.5rem;
+        color: $white;
     }
 
     &__recording {

@@ -1064,10 +1064,30 @@ input[type=button] {
   -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
           box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
   border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .record-audio-button__icon img {
   max-width: none;
+}
+
+.record-audio-button__number {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 3.5rem;
+  color: #FFFFFF;
 }
 
 .record-audio-button__recording {

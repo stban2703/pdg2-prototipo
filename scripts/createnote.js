@@ -75,6 +75,9 @@ export function submitNote(currentUser) {
         const stopAudioButton = document.querySelector(".stopAudioBtn")
         const playAudioBtn = document.querySelector(".audio-pre-button")
         const audioPlayer = document.querySelector(".audio-player");
+        const loadingRecordAudioBtn = document.querySelector(".loadingRecordAudioBtn")
+        const recordAudioLoadingNumber = document.querySelector(".record-audio-button__number")
+
         playAudioBtn.addEventListener('click', () => {
             audioPlayer.play()
         })
@@ -106,14 +109,31 @@ export function submitNote(currentUser) {
 
         recordAudioButton.addEventListener("click", () => {
             if (mediaRecorder) {
-                mediaRecorder.start()
-                console.log(mediaRecorder.state);
+                let counter = 3
                 recordAudioButton.classList.add("hidden")
-                stopAudioButton.classList.remove("hidden")
+                loadingRecordAudioBtn.classList.remove("hidden")
                 let chunks = [];
-                mediaRecorder.ondataavailable = function (e) {
-                    chunks.push(e.data);
-                }
+
+                let newInterval = setInterval(() => {
+                    counter--
+                    recordAudioLoadingNumber.innerText = counter
+                    if (counter < 1) {
+                        console.log(counter)
+                        clearInterval(newInterval)
+                    }
+                }, 1000)
+
+                let newTimeOut = setTimeout(() => {
+                    console.log("ok")
+                    mediaRecorder.start()
+                    console.log(mediaRecorder.state);
+                    recordAudioButton.classList.add("hidden")
+                    loadingRecordAudioBtn.classList.add("hidden")
+                    stopAudioButton.classList.remove("hidden")
+                    mediaRecorder.ondataavailable = function (e) {
+                        chunks.push(e.data);
+                    }
+                }, 3000)
 
                 mediaRecorder.onstop = function (e) {
                     const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
@@ -124,7 +144,8 @@ export function submitNote(currentUser) {
 
                     console.log(mediaRecorder.state);
                     console.log(audioNote)
-
+                    counter = 3
+                    recordAudioLoadingNumber.innerText = counter
                     chunks = [];
                     recordAudioButton.classList.remove("hidden")
                     stopAudioButton.classList.add("hidden")
