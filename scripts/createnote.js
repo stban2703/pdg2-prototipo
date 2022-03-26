@@ -112,6 +112,8 @@ export function submitNote(currentUser) {
                 let counter = 3
                 recordAudioButton.classList.add("hidden")
                 loadingRecordAudioBtn.classList.remove("hidden")
+                playAudioBtn.classList.add("hidden")
+
                 let chunks = [];
 
                 let newInterval = setInterval(() => {
@@ -140,15 +142,15 @@ export function submitNote(currentUser) {
                     audioNote = blob
                     audioURL = window.URL.createObjectURL(audioNote);
                     audioPlayer.src = audioURL
-                    playAudioBtn.classList.remove("hidden")
-
                     console.log(mediaRecorder.state);
                     console.log(audioNote)
                     counter = 3
                     recordAudioLoadingNumber.innerText = counter
                     chunks = [];
+                    recordAudioButton.querySelector(".record-icon-img").src = "./images/repeataudioicon.svg"
                     recordAudioButton.classList.remove("hidden")
                     stopAudioButton.classList.add("hidden")
+                    playAudioBtn.classList.remove("hidden")
                 }
             }
         })
@@ -195,59 +197,39 @@ export function submitNote(currentUser) {
                     console.log("Debes detener la grabación")
                 } else {
                     stopRecorder()
-                    switch (selectedFileType) {
-                        case 0:
-                            if (textNote != "") {
-                                showLoader()
-                                createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
-                            }
-                            break;
-                        case 1:
-                            if (audioNote != null) {
-                                showLoader()
-                                createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
-                            }
-                            break;
-                        case 2:
-                            if (fileNote != null) {
-                                if (fileNote.type.includes("video")) {
-                                    showLoader()
-                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
-                                } else {
-                                    showLoader()
-                                    createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
-                                }
-                            }
-                            break;
-                    }
+                    setNoteAndCreate(selectedFileType, currentUser.id, name, week, categorie, subject, textNote, fileNote, audioNote, descriptionText)
                 }
             } else {
-                switch (selectedFileType) {
-                    case 0:
-                        if (textNote != "") {
-                            showLoader()
-                            createNote(currentUser.id, name, week, categorie, subject, textNote, null, "text", "")
-                        }
-                        break;
-                    case 1:
-                        if (audioNote != null) {
-                            showLoader()
-                            createNote(currentUser.id, name, week, categorie, subject, null, audioNote, "audio", "")
-                        }
-                        break;
-                    case 2:
-                        if (fileNote != null) {
-                            if (fileNote.type.includes("video")) {
-                                showLoader()
-                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "video", descriptionText)
-                            } else {
-                                showLoader()
-                                createNote(currentUser.id, name, week, categorie, subject, null, fileNote, "image", descriptionText)
-                            }
-                        }
-                        break;
-                }
+                setNoteAndCreate(selectedFileType, currentUser.id, name, week, categorie, subject, textNote, fileNote, audioNote, descriptionText)
             }
         })
+    }
+}
+
+function setNoteAndCreate(selectedFileType, userId, name, week, categorie, subject, textNote, fileNote, audioNote, description) {
+    switch (selectedFileType) {
+        case 0:
+            if (textNote != "") {
+                showLoader()
+                createNote(userId, name, week, categorie, subject, textNote, null, "text", "")
+            }
+            break;
+        case 1:
+            if (audioNote != null) {
+                showLoader()
+                createNote(userId, name, week, categorie, subject, null, audioNote, "audio", "")
+            }
+            break;
+        case 2:
+            if (fileNote != null) {
+                if (fileNote.type.includes("video")) {
+                    showLoader()
+                    createNote(userId, name, week, categorie, subject, null, fileNote, "video", description)
+                } else {
+                    showLoader()
+                    createNote(userId, name, week, categorie, subject, null, fileNote, "image", description)
+                }
+            }
+            break;
     }
 }
