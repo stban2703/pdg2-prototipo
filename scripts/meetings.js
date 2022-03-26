@@ -51,20 +51,17 @@ export async function renderMeetings() {
                 </section>
             `
 
-            switch (meeting.status) {
-                case "pending":
-                    pendingList.appendChild(meetingItem)
-                    break;
-                case "finished":
-                    finishedList.appendChild(meetingItem)
-                    break;
+            if(meeting.minutesId.length > 0) {
+                finishedList.appendChild(meetingItem)
+            } else {
+                pendingList.appendChild(meetingItem)
             }
         })
     }
 }
 
 export async function renderMeetingDetails() {
-    const meetingInfoSection = document.querySelector(".meeting-info-section")
+    const meetingInfoColumns = document.querySelectorAll(".meeting__info-column")
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
 
@@ -73,7 +70,7 @@ export async function renderMeetingDetails() {
         confirmRejectMeetingSection.classList.add("hidden")
     }*/
     
-    if (meetingInfoSection && window.location.href.includes("#meetingdetails")) {
+    if (meetingInfoColumns.length > 0 && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
 
@@ -102,13 +99,11 @@ export async function renderMeetingDetails() {
                 }
             }
 
-            meetingInfoSection.innerHTML = `
+            meetingInfoColumns[0].innerHTML = `
                 <p class="meeting__subtitle subtitle subtitle--semibold">Nombre: <span>${meeting.name}</span></p>
                 <p class="meeting__subtitle subtitle subtitle--semibold">Bloque: <span>${meeting.group}</span></p>
-                <p class="meeting__subtitle subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
-                <p class="meeting__subtitle subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
                 <p class="meeting__subtitle subtitle subtitle--semibold">Modalidad: <span>${meeting.mode}</span></p>
-                <p class="meeting__subtitle subtitle subtitle--semibold meeting-info-section__platform">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: ${meeting.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
+                <p class="meeting__subtitle subtitle subtitle--semibold meeting__platform">${meeting.mode == "Virtual" ? "Medio" : "Lugar"}: ${meeting.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meeting.mode == "Virtual" ? meeting.platform : meeting.place}</span></p>
             `
             meetingAssistants.innerHTML = `${meeting.confirmedParticipants.length}/${meeting.totalParticipants.length}`
             if (meeting.mode == "Virtual") {
@@ -117,8 +112,14 @@ export async function renderMeetingDetails() {
                 linkElement.classList.add("subtitle--semibold")
                 linkElement.classList.add("meeting__link")
                 linkElement.innerHTML = `Link de la reunión: <a href=${meeting.url} target='_blank'>${meeting.url}</a>`
-                meetingInfoSection.appendChild(linkElement)
+                meetingInfoColumns[0].appendChild(linkElement)
             }
+
+            meetingInfoColumns[1].innerHTML = `
+            <p class="meeting__subtitle subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meeting.date)}</span></p>
+            <p class="meeting__subtitle subtitle subtitle--semibold">Hora: <span>${meeting.time}</span></p>
+            <p class="meeting__subtitle subtitle subtitle--semibold">Duración: <span>${meeting.duration}</span></p>
+            `
 
             const seeMinutesBtn = document.querySelector('.seeMinutesBtn')
             if(meeting.minutesId) {
@@ -126,7 +127,7 @@ export async function renderMeetingDetails() {
                 seeMinutesBtn.href = `#meetingminutesdetails?${meeting.minutesId}`
             }
         } else {
-            meetingInfoSection.innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
+            meetingInfoColumns[0].innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
     }
 }

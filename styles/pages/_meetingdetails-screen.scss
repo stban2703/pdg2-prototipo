@@ -1,8 +1,10 @@
 .meetingdetails-screen {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /*display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));*/
+    display: flex;
+    flex-direction: row;
     margin-top: 2rem;
-    gap: 4rem;
+    gap: 2rem;
     width: 100%;
     padding-bottom: 15rem;
 
@@ -19,28 +21,15 @@
         }
     }
 
-    .meeting-info-section {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-
-        &__platform {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 0.5rem;
-        }
-    }
-
     &__confirmed {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: $geraldine;
+        background-color: $secondary-color;
         border-radius: 15px;
-        padding: 1rem 2rem;
+        padding: 2rem 1rem;
         width: 100%;
-        max-width: 30rem;
+        box-shadow: $button-secondary-box-shadow;
 
         h4 {
             color: $white;
