@@ -93,6 +93,19 @@
         gap: 2rem;
     }
 
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__timer {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
     &__submitBtn {
         margin-top: 2rem;
         padding: 0.8rem 1rem;

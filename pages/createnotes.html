@@ -94,27 +94,31 @@
                 </div>
                 <div class="createnote-form__addFile createnote-form__addFile--audio hidden">
                     <label for="" class="createnote-form__label">Nota de audio</label>
-                    <p class="createnote-form__label createnote-form__label--regular audio-note-instruction">Presiona el botón para
+                    <p class="createnote-form__label createnote-form__label--regular audio-note-instruction">Presiona el
+                        botón para
                         grabar el audio</p>
                     <div class="createnote-form__audioNote">
-                        <button type="button" class="record-audio-button recordAudioBtn">
-                            <div class="record-audio-button__icon">
-                                <img class="record-icon-img" src="./images/createnoteaudio.svg" alt="">
-                            </div>
-                        </button>
-                        <button type="button" class="record-audio-button loadingRecordAudioBtn hidden">
-                            <div class="record-audio-button__icon">
-                                <p class="record-audio-button__number">3</p>
-                            </div>
-                            <div class="record-audio-button__recording"></div>
-                        </button>
-                        <button type="button" class="record-audio-button stopAudioBtn hidden">
-                            <div class="record-audio-button__icon">
-                                <img src="./images/stopaudio.svg" alt="">
-                            </div>
-                        </button>
-                        <audio class="audio-player">
-                        </audio>
+                        <section class="createnote-form__buttons">
+                            <button type="button" class="record-audio-button recordAudioBtn">
+                                <div class="record-audio-button__icon">
+                                    <img class="record-icon-img" src="./images/createnoteaudio.svg" alt="">
+                                </div>
+                            </button>
+                            <button type="button" class="record-audio-button loadingRecordAudioBtn hidden">
+                                <div class="record-audio-button__icon">
+                                    <p class="record-audio-button__number">3</p>
+                                </div>
+                                <div class="record-audio-button__recording"></div>
+                            </button>
+                            <button type="button" class="record-audio-button stopAudioBtn hidden">
+                                <div class="record-audio-button__icon">
+                                    <img src="./images/stopaudio.svg" alt="">
+                                </div>
+                            </button>
+                            <p class="createnote-form__timer hidden">00:00</p>
+                            <audio class="audio-player">
+                            </audio>
+                        </section>
                         <button type="button" class="audio-pre-button hidden">
                             <p>Escuchar audio</p>
                         </button>
@@ -144,8 +148,8 @@
                 </div>
                 <div class="description-text hidden">
                     <label for="descriptionText" class="createnote-form__label">Texto descriptivo</label>
-                    <textarea class="text-area-input createnote-form__file" name="descriptionText" id="descriptionText" rows="3"
-                        placeholder="Escribe el texto para describir la imagen o video que subiste"></textarea>
+                    <textarea class="text-area-input createnote-form__file" name="descriptionText" id="descriptionText"
+                        rows="3" placeholder="Escribe el texto para describir la imagen o video que subiste"></textarea>
                 </div>
                 <button class="main-button main-button--primary createnote-form__submitBtn">
                     <p>Guardar</p>

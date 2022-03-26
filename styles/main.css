@@ -1041,7 +1041,7 @@ input[type=button] {
 }
 
 .record-audio-button {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   background: none;
   border: none;
   display: -webkit-box;
@@ -1369,7 +1369,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #FAFAFA;
+  background-color: #FFFFFF;
   border: none;
   min-width: 3rem;
   height: 3rem;
@@ -2242,6 +2242,26 @@ input[type=button] {
       -ms-flex-pack: center;
           justify-content: center;
   gap: 2rem;
+}
+
+.createnote-form__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.createnote-form__timer {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #757575;
 }
 
 .createnote-form__submitBtn {

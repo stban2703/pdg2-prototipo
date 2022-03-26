@@ -77,6 +77,7 @@ export function submitNote(currentUser) {
         const audioPlayer = document.querySelector(".audio-player");
         const loadingRecordAudioBtn = document.querySelector(".loadingRecordAudioBtn")
         const recordAudioLoadingNumber = document.querySelector(".record-audio-button__number")
+        const audioTimer = document.querySelector(".createnote-form__timer")
 
         playAudioBtn.addEventListener('click', () => {
             audioPlayer.play()
@@ -108,30 +109,51 @@ export function submitNote(currentUser) {
         })
 
         recordAudioButton.addEventListener("click", () => {
+            let timeInterval
+
             if (mediaRecorder) {
                 let counter = 3
                 recordAudioButton.classList.add("hidden")
                 loadingRecordAudioBtn.classList.remove("hidden")
                 playAudioBtn.classList.add("hidden")
+                audioTimer.innerHTML = '00:00'
+                audioTimer.classList.add("hidden")
 
                 let chunks = [];
 
-                let newInterval = setInterval(() => {
+                let countdownInterval = setInterval(() => {
                     counter--
                     recordAudioLoadingNumber.innerText = counter
                     if (counter < 1) {
                         console.log(counter)
-                        clearInterval(newInterval)
+                        clearInterval(countdownInterval)
                     }
                 }, 1000)
 
                 let newTimeOut = setTimeout(() => {
-                    console.log("ok")
                     mediaRecorder.start()
                     console.log(mediaRecorder.state);
                     recordAudioButton.classList.add("hidden")
                     loadingRecordAudioBtn.classList.add("hidden")
                     stopAudioButton.classList.remove("hidden")
+                    audioTimer.classList.remove("hidden")
+
+                    let timerSeconds = 0
+                    let timerMinutes = 0;
+
+                    timeInterval = setInterval(() => {
+                        timerSeconds++
+                        
+                        if(timerSeconds > 59) {
+                            timerMinutes++
+                            timerSeconds = 0;
+                        }
+
+                        let timerDisplay = `${timerMinutes < 10 ? '0' + timerMinutes : timerMinutes}:${timerSeconds < 10 ? '0' + timerSeconds : timerSeconds}`
+                        audioTimer.innerHTML = timerDisplay
+
+                    }, 1000)
+
                     mediaRecorder.ondataavailable = function (e) {
                         chunks.push(e.data);
                     }
@@ -147,6 +169,7 @@ export function submitNote(currentUser) {
                     counter = 3
                     recordAudioLoadingNumber.innerText = counter
                     chunks = [];
+                    clearInterval(timeInterval)
                     recordAudioButton.querySelector(".record-icon-img").src = "./images/repeataudioicon.svg"
                     recordAudioButton.classList.remove("hidden")
                     stopAudioButton.classList.add("hidden")
