@@ -98,6 +98,22 @@
                         botón para
                         grabar el audio</p>
                     <div class="createnote-form__audioNote">
+                        <div id="audio-player-container" class="audio-player-container hidden">
+                            <!-- swaps with pause icon -->
+                            <!--<section class="audio-player-container__buttons">
+                                <button id="play-icon" type="button">
+                                    <img src="./images/playicon.svg" alt="">
+                                </button>
+                                <button id="play-icon" type="button">
+                                    <img src="./images/stopaudio.svg" alt="">
+                                </button>
+                            </section>
+                            <section class="audio-player-container__progress">
+                                <span id="current-time" class="time">0:00</span>
+                                <input type="range" id="seek-slider" max="100" value="0">
+                                <span id="duration" class="time">0:00</span>
+                            </section>-->
+                        </div>
                         <section class="createnote-form__buttons">
                             <button type="button" class="record-audio-button recordAudioBtn">
                                 <div class="record-audio-button__icon">
@@ -116,11 +132,12 @@
                                 </div>
                             </button>
                             <p class="createnote-form__timer hidden">00:00</p>
-                            <audio class="audio-player">
-                            </audio>
                         </section>
-                        <button type="button" class="audio-pre-button hidden">
-                            <p>Escuchar audio</p>
+                        <button class="record-audio-again-button hidden" type="button">
+                            <span>Volver a grabar</span>
+                        </button>
+                        <button type="button" class="listen-audio-button hidden">
+                            <span>Escuchar audio</span>
                         </button>
                     </div>
                 </div>

@@ -10,6 +10,14 @@
     }
 }
 
+@mixin alt-button($border-color, $drop-shadow) {
+    @extend %main-button;
+    background: none;
+    border: 1px solid $border-color;
+    color: $silver;
+    filter: $drop-shadow
+}
+
 @mixin create-button($background-color) {
     @extend %create-button;
     background-color: $background-color;

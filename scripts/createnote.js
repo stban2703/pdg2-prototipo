@@ -10,6 +10,7 @@ export function submitNote(currentUser) {
     if (createNoteForm) {
 
         const subjectSelect = createNoteForm.subject
+        const createNoteFormSubmitButton = createNoteForm.querySelector(".createnote-form__submitBtn")
 
         userInfo.subjects.forEach(e => {
             const subjectOption = document.createElement('option')
@@ -73,17 +74,32 @@ export function submitNote(currentUser) {
         // Recorder audio functions
         const recordAudioButton = document.querySelector(".recordAudioBtn")
         const stopAudioButton = document.querySelector(".stopAudioBtn")
-        const playAudioBtn = document.querySelector(".audio-pre-button")
-        const audioPlayer = document.querySelector(".audio-player");
+        const listenAudioButton = document.querySelector(".listen-audio-button")
         const loadingRecordAudioBtn = document.querySelector(".loadingRecordAudioBtn")
+        const recordAudioAgainButton = document.querySelector(".record-audio-again-button")
         const recordAudioLoadingNumber = document.querySelector(".record-audio-button__number")
         const audioTimer = document.querySelector(".createnote-form__timer")
+        const audioPlayerContainer = document.querySelector(".audio-player-container")
 
-        playAudioBtn.addEventListener('click', () => {
+        /*playAudio.addEventListener('click', () => {
             audioPlayer.play()
-        })
+        })*/
 
         let mediaRecorder = null
+
+        listenAudioButton.addEventListener('click', () => {
+            recordAudioButton.classList.add('hidden')                
+            audioTimer.classList.add('hidden')
+            audioPlayerContainer.classList.remove("hidden")
+            listenAudioButton.classList.add('hidden')
+            recordAudioAgainButton.classList.remove('hidden')
+        })
+
+        recordAudioAgainButton.addEventListener('click', () => {
+            recordAudioButton.classList.remove('hidden')
+            recordAudioAgainButton.classList.add('hidden')
+            recordAudioButton.click()
+        })
 
         selectFileTypeButtons[1].addEventListener('click', () => {
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -113,9 +129,12 @@ export function submitNote(currentUser) {
 
             if (mediaRecorder) {
                 let counter = 3
+                audioPlayerContainer.innerHTML = ``
+                audioPlayerContainer.classList.add("hidden")
+                createNoteFormSubmitButton.classList.add('hidden')
                 recordAudioButton.classList.add("hidden")
                 loadingRecordAudioBtn.classList.remove("hidden")
-                playAudioBtn.classList.add("hidden")
+                listenAudioButton.classList.add("hidden")
                 audioTimer.innerHTML = '00:00'
                 audioTimer.classList.add("hidden")
 
@@ -143,8 +162,8 @@ export function submitNote(currentUser) {
 
                     timeInterval = setInterval(() => {
                         timerSeconds++
-                        
-                        if(timerSeconds > 59) {
+
+                        if (timerSeconds > 59) {
                             timerMinutes++
                             timerSeconds = 0;
                         }
@@ -163,9 +182,18 @@ export function submitNote(currentUser) {
                     const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
                     audioNote = blob
                     audioURL = window.URL.createObjectURL(audioNote);
+
+                    const audioPlayer = document.createElement('audio')
+                    audioPlayer.classList.add('audio-player')
                     audioPlayer.src = audioURL
+                    audioPlayer.controls = true
+                    audioPlayer.preload = "auto"
+                    audioPlayerContainer.appendChild(audioPlayer)
+                    createNoteFormSubmitButton.classList.remove('hidden')
+    
                     console.log(mediaRecorder.state);
                     console.log(audioNote)
+
                     counter = 3
                     recordAudioLoadingNumber.innerText = counter
                     chunks = [];
@@ -173,7 +201,7 @@ export function submitNote(currentUser) {
                     recordAudioButton.querySelector(".record-icon-img").src = "./images/repeataudioicon.svg"
                     recordAudioButton.classList.remove("hidden")
                     stopAudioButton.classList.add("hidden")
-                    playAudioBtn.classList.remove("hidden")
+                    listenAudioButton.classList.remove("hidden")
                 }
             }
         })
