@@ -1807,7 +1807,6 @@ input[type=button] {
           flex-direction: row;
   font-size: 1.8rem;
   font-family: "Poppins", sans-serif;
-  gap: 1rem;
   width: 100%;
   min-height: 3.6rem;
 }
@@ -1852,10 +1851,13 @@ input[type=button] {
   width: 100%;
   color: #363636;
   height: 100%;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .agreement__text[contenteditable="true"] {
-  outline-color: #72B8FF;
+  border: 1px solid #979DFF;
+  outline-color: #979DFF;
 }
 
 .agreement__delete {

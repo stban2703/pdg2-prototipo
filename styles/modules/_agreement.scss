@@ -3,7 +3,6 @@
     flex-direction: row;
     font-size: 1.8rem;
     font-family: $poppins;
-    gap: 1rem;
     width: 100%;
     min-height: 3.6rem;
 
@@ -39,10 +38,12 @@
         width: 100%;
         color: $mineshaft;
         height: 100%;
+        padding-left: 0.5rem;
+        margin-left: 0.5rem;
 
         &[contenteditable="true"] {
-            //border: 1px solid $malibu;
-            outline-color: $malibu;
+            border: 1px solid $main-color;
+            outline-color: $main-color;
         }
     }
 
