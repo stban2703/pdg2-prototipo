@@ -38,7 +38,15 @@
         gap: 0.5rem;
     }
 
+    &__summary-text {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
     &__subtitle {
+        font-size: 1.8rem;
         span {
             font-weight: $light;
         }

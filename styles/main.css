@@ -2799,6 +2799,17 @@ input[type=button] {
   gap: 0.5rem;
 }
 
+.meetingminutes__summary-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.meetingminutes__subtitle {
+  font-size: 1.8rem;
+}
+
 .meetingminutes__subtitle span {
   font-weight: 300;
 }

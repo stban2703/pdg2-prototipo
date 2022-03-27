@@ -28,6 +28,14 @@ export async function renderMeetingMinutesDetails() {
             <p class="meetingminutes__date subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingInfo.date)}</span></p>
         `
 
+        const meetingSummarySection = document.querySelector(".meetingminutes__summary")
+        meetingSummarySection.innerHTML = `
+            <p class="meetingminutes__subtitle subtitle subtitle--semibold">Resumen:</p>
+            <p class="meetingminutes__summary-text">
+                ${meetingMinutes.summary}
+            </p>
+        `
+
         const meetingMinutesInfo = document.querySelector('.meetingminutes__info')
         meetingMinutesInfo.innerHTML = `
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Nombre: <span>${meetingInfo.name}</span></p>
