@@ -1,8 +1,21 @@
 .memointro-screen {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 2rem;
-    gap: 2%;
+
+    &__intro-title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: row;
+        gap: 2%;
+        margin-top: 2rem;
+    }
 
     &__article {
         display: flex;

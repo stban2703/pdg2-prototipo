@@ -1515,11 +1515,11 @@ input[type=button] {
 }
 
 .memo-reminder__description {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 300;
   width: 100%;
   color: #757575;
-  max-width: 60ch;
+  max-width: 45ch;
 }
 
 .memo-reminder--purple {
@@ -3153,12 +3153,30 @@ input[type=button] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2rem;
+}
+
+.memointro-screen__intro-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.memointro-screen__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-top: 2rem;
   gap: 2%;
+  margin-top: 2rem;
 }
 
 .memointro-screen__article {
