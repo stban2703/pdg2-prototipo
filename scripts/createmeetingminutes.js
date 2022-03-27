@@ -30,20 +30,48 @@ function renderAgreements(list) {
     const agreementListSection = document.querySelector('.createmeetingminutes-form__agreementsList')
     agreementListSection.innerHTML = ``
     const copy = [...list]
-    copy.forEach((e, i) => {
+    copy.forEach((elem, i) => {
         const agreementDiv = document.createElement('div')
         agreementDiv.classList.add("agreement")
         agreementDiv.innerHTML = `
             <div class="agreement__number">
                 <p>${i + 1}</p>
             </div>
-            <p class="agreement__text">${e}</p>
+            <p class="agreement__text">${elem}</p>
             <button type="button" class="agreement__delete">
                 <img src="./images/deleteagreement.svg" alt="" />
             </button>
         `
 
         agreementListSection.appendChild(agreementDiv)
+
+        const elemOriginalValue = elem.valueOf()
+
+        const editableText = agreementDiv.querySelector(".agreement__text");
+        editableText.addEventListener("dblclick", () => {
+            editableText.setAttribute("contenteditable", true);
+            editableText.focus()
+        })
+
+        function editAgreement(event) {
+            let isClickInside = editableText.contains(event.target);
+            editableText.setAttribute("contenteditable", false);
+
+            if (!isClickInside && editableText.innerText.length > 0 && editableText.innerText != elemOriginalValue) {
+                let itemIndex = agreementsList.findIndex(oldValue => {
+                    return oldValue == elem
+                })
+                agreementsList[itemIndex] = editableText.innerText;
+                renderAgreements(agreementsList)
+                document.removeEventListener("click", editAgreement)
+            } else if (!isClickInside && (editableText.innerText.length == 0 || editableText.innerText == elemOriginalValue)) {
+                editableText.innerText = elemOriginalValue
+
+            } else if (!isClickInside) {
+                console.log("Nada")
+            }
+        }
+        document.addEventListener("click", editAgreement)
 
         const deleteAgreementBtn = agreementDiv.querySelector(".agreement__delete")
         deleteAgreementBtn.addEventListener('click', () => {

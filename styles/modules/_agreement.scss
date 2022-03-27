@@ -1,11 +1,11 @@
 .agreement {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     font-size: 1.8rem;
     font-family: $poppins;
     gap: 1rem;
     width: 100%;
+    min-height: 3.6rem;
 
     &__number {
         background-color: $main-color;
@@ -18,6 +18,7 @@
         min-width: 2rem;
         height: 2rem;
         min-height: 2rem;
+        margin-top: 0.5rem;
 
         p {
             color: $white;
@@ -27,15 +28,22 @@
 
         &--secondary {
             margin-top: 0.5rem;
-            background-color: $geraldine;
+            background-color: $secondary-color;
         }
     }
 
     &__text {
+        vertical-align: middle;
         font-weight: $light;
-        line-height: 2rem;
+        //line-height: 2rem;
         width: 100%;
         color: $mineshaft;
+        height: 100%;
+
+        &[contenteditable="true"] {
+            //border: 1px solid $malibu;
+            outline-color: $malibu;
+        }
     }
 
     &__delete {

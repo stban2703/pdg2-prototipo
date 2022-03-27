@@ -122,10 +122,10 @@ export async function renderMeetingDetails() {
             `
 
             const seeMinutesBtn = document.querySelector('.seeMinutesBtn')
-            if(meeting.minutesId) {
+            /*if(meeting.minutesId.length > 0) {
                 seeMinutesBtn.classList.remove('hidden')
                 seeMinutesBtn.href = `#meetingminutesdetails?${meeting.minutesId}`
-            }
+            }*/
         } else {
             meetingInfoColumns[0].innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }

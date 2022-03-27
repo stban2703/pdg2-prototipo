@@ -1805,13 +1805,11 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   font-size: 1.8rem;
   font-family: "Poppins", sans-serif;
   gap: 1rem;
   width: 100%;
+  min-height: 3.6rem;
 }
 
 .agreement__number {
@@ -1834,6 +1832,7 @@ input[type=button] {
   min-width: 2rem;
   height: 2rem;
   min-height: 2rem;
+  margin-top: 0.5rem;
 }
 
 .agreement__number p {
@@ -1844,14 +1843,19 @@ input[type=button] {
 
 .agreement__number--secondary {
   margin-top: 0.5rem;
-  background-color: #FD797A;
+  background-color: #FDB572;
 }
 
 .agreement__text {
+  vertical-align: middle;
   font-weight: 300;
-  line-height: 2rem;
   width: 100%;
   color: #363636;
+  height: 100%;
+}
+
+.agreement__text[contenteditable="true"] {
+  outline-color: #72B8FF;
 }
 
 .agreement__delete {
