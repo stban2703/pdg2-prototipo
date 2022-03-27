@@ -176,13 +176,11 @@ export async function updateMeetingMinutesReference(id, meetingMinutesId) {
     })
 }
 
-export async function createMeeingMinutes(name, date, time, assistants, agreements, meetingId) {
+export async function createMeeingMinutes(summary, assistants, agreements, meetingId) {
     const minutesRef = doc(collection(firestore, "minutes"))
     const newMinutes = {
         id: minutesRef.id,
-        name: name,
-        date: date,
-        time: time,
+        summary: summary,
         assistants: assistants,
         agreements: agreements,
         meetingId: meetingId

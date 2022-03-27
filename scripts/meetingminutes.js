@@ -8,8 +8,8 @@ export async function renderMeetingMinutesDetails() {
         const minutesId = window.location.hash.split("?")[1]
         const meetingMinutes = await getMeetingMinutes(minutesId)
         const meetingInfo = await getMeetingDetails(meetingMinutes.meetingId)
-        console.log(meetingMinutes)
-        console.log(meetingInfo)
+        //console.log(meetingMinutes)
+        //console.log(meetingInfo)
 
         let iconSrc = ""
         if (meetingInfo.platform) {
@@ -25,13 +25,13 @@ export async function renderMeetingMinutesDetails() {
         const meetingMinutesHeader = document.querySelector('.meetingminutes__header')
         meetingMinutesHeader.innerHTML = `
             <h4 class="meetingminutes__title subtitle subtitle--semibold">Detalle del acta</h4>
-            <p class="meetingminutes__date subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingMinutes.date)}</span></p>
+            <p class="meetingminutes__date subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingInfo.date)}</span></p>
         `
 
         const meetingMinutesInfo = document.querySelector('.meetingminutes__info')
         meetingMinutesInfo.innerHTML = `
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Nombre: <span>${meetingInfo.name}</span></p>
-        <p class="meetingminutes__subtitle subtitle subtitle--semibold">Hora: <span>${meetingMinutes.time}</span></p>
+        <p class="meetingminutes__subtitle subtitle subtitle--semibold">Hora: <span>${meetingInfo.time}</span></p>
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Bloque: <span>${meetingInfo.group}</span></p>
         <p class="meetingminutes__subtitle subtitle subtitle--semibold">Modalidad: <span>${meetingInfo.mode}</span></p>
         <p class="meetingminutes__subtitle meetingminutes__mode subtitle subtitle--semibold">${meetingInfo.mode == "Virtual" ? 'Medio' : 'Lugar'}: ${meetingInfo.mode == "Virtual" ? `<img src="./images/${iconSrc}" alt="">` : ''}<span>${meetingInfo.mode == "Virtual" ? meetingInfo.platform : meetingInfo.place}</span></p>

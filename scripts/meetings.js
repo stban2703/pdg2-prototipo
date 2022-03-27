@@ -84,7 +84,7 @@ export async function renderMeetingDetails() {
             }
 
             const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
-            if (confirmRejectMeetingSection && meeting.status.includes("finished")) {
+            if (confirmRejectMeetingSection && meeting.minutesId.length > 0) {
                 confirmRejectMeetingSection.classList.add("hidden")
             }
 

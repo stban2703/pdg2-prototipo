@@ -25,23 +25,14 @@
 <article class="createmeetingminutes-screen">
     <form class="createmeetingminutes-form" name="createmeetingminutes-form">
         <section class="createmeetingminutes-form__section">
-            <div class="text-input createmeetingminutes-form__nameInput">
-                <input id="name" class="text-input__field" type="text" name="name" placeholder=" " required
-                    autocomplete="off">
-                <label class="text-input__label" for="name">Nombre</label>
-            </div>
-        </section>
-        <section class="createmeetingminutes-form__section">
-            <div class="date-time-input createmeetingminutes-form__dateInput">
-                <input id="date" class="date-time-input__field" type="date" name="date" placeholder=" " required
-                    autocomplete="off">
-                <label class="date-time-input__label" for="date">Fecha</label>
-            </div>
-            <div class="date-time-input createmeetingminutes-form__timeInput">
-                <input id="time" class="date-time-input__field" type="time" name="time" placeholder=" " required
-                    autocomplete="off">
-                <label class="date-time-input__label" for="time">Hora</label>
-            </div>
+            <section class="createmeetingminutes-form__meeting-info">
+                <p class="meeting__subtitle subtitle subtitle--semibold">Cargando...</p>
+            </section>
+            <section class="createmeetingminutes-form__summary">
+                <label for="summary" class="createnote-form__label">Resumen de la reunión</label>
+                <textarea class="text-area-input" name="summary" id="summary" rows="6"
+                    placeholder="Escribe el resumen de la reunión (Hechos, discusiones comentarios, etc)"></textarea>
+            </section>
         </section>
         <section class="createmeetingminutes-form__section">
             <section class="createmeetingminutes-form__assistants">
@@ -92,11 +83,11 @@
                     <div class="text-input createmeetingminutes-form__addAgreement">
                         <input id="newagreement" class="text-input__field newagreement" type="text" name="newagreement"
                             placeholder=" " autocomplete="off">
-                        <label class="text-input__label" for="newagreement">Agregar acuerdo</label>
+                        <label class="text-input__label" for="newagreement">Escribe tu texto aquí...</label>
                     </div>
                 </section>
                 <button type="button" class="small-button small-button--secondary addAgreementBtn">
-                    <p>Agregar</p>
+                    <p>Agregar acuerdo</p>
                 </button>
             </section>
         </section>

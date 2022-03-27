@@ -1,7 +1,6 @@
-import { createMeeingMinutes } from "./modules/firestore.js"
-import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
+import { createMeeingMinutes, getMeetingDetails } from "./modules/firestore.js"
+import { parseTimestampToDate } from "./utils/date-format.js"
 import { showLoader } from "./utils/loader.js"
-
 
 let agreementsList = []
 
@@ -53,21 +52,36 @@ function renderAgreements(list) {
     });
 }
 
+export async function getMeetingInfoForMinute() {
+    const meetingId = window.location.hash.split("?")[1]
+    const meetingInfoSection = document.querySelector(".createmeetingminutes-form__meeting-info")
+
+    if (meetingInfoSection && window.location.href.includes("#createmeetingminutes")) {
+        const meetingInfo = await getMeetingDetails(meetingId)
+        meetingInfoSection.innerHTML = `
+        <p class="meeting__subtitle subtitle subtitle--semibold">Nombre: <span>${meetingInfo.name}</span></p>
+        <p class="meeting__subtitle subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingInfo.date)}</span></p>
+        <p class="meeting__subtitle subtitle subtitle--semibold">Hora: <span>${meetingInfo.time}</span></p>
+        <p class="meeting__subtitle subtitle subtitle--semibold">Bloque: <span>${meetingInfo.group}</span></p>
+        <p class="meeting__subtitle subtitle subtitle--semibold">Modalidad: <span>${meetingInfo.mode}</span></p>
+        <p class="meeting__subtitle subtitle subtitle--semibold meeting__platform">${meetingInfo.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meetingInfo.mode == "Virtual" ? meetingInfo.platform : meetingInfo.place}</span></p>
+        `
+    }
+}
+
 export function submitMeetingMinutes() {
     const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form')
     if (createMeetingMinutesForm && window.location.href.includes("#createmeetingminutes")) {
+
+        const meetingId = window.location.hash.split("?")[1]
+
         createMeetingMinutesForm.addEventListener('submit', (event) => {
             event.preventDefault()
             console.log("subir")
-            const name = createMeetingMinutesForm.name.value
-            const date = createMeetingMinutesForm.date.value
-            const time = createMeetingMinutesForm.time.value
+
+            const summary = createMeetingMinutesForm.summary.value
+
             const assistants = createMeetingMinutesForm.elements['assistants[]']
-            const meetingId = window.location.hash.split("?")[1]
-
-            let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
-            let standarTime = parseMilitaryTimeToStandard(time)
-
             let assistantsList = []
             assistants.forEach(e => {
                 if (e.checked) {
@@ -75,12 +89,12 @@ export function submitMeetingMinutes() {
                 }
             })
 
-            if(agreementsList.length > 0 && assistantsList.length > 0) {
+            if (agreementsList.length > 0 && assistantsList.length > 0) {
                 showLoader()
-                createMeeingMinutes(name, timestamp, standarTime, assistantsList, agreementsList, meetingId)
-            } else if(agreementsList.length == 0) {
+                createMeeingMinutes(summary, assistantsList, agreementsList, meetingId)
+            } else if (agreementsList.length == 0) {
                 alert("Debes agregar por lo menos un acuerdo")
-            } else if(assistantsList.length == 0){
+            } else if (assistantsList.length == 0) {
                 alert("Debes agregar por lo menos un asistente")
             }
         })

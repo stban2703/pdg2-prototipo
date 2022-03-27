@@ -1745,6 +1745,8 @@ input[type=button] {
   padding: 0.1em 1em;
   background-color: #FDB572;
   border-radius: 40px;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
 }
 
 .page-back .back-button__icon img {
@@ -2422,10 +2424,9 @@ input[type=button] {
 .createmeetingminutes-form__section {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(0, 1fr))[2];
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
   width: 100%;
-  max-width: 100rem;
   gap: 3rem;
 }
 
@@ -2433,16 +2434,32 @@ input[type=button] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  max-width: 100rem;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
 }
 
-.createmeetingminutes-form__nameInput {
-  width: 100%;
-  max-width: 35rem;
+.createmeetingminutes-form__meeting-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.createmeetingminutes-form__meeting-info p {
+  font-size: 1.8rem !important;
+}
+
+.createmeetingminutes-form textarea {
+  margin-top: 1rem;
 }
 
 .createmeetingminutes-form__label {
@@ -2509,27 +2526,27 @@ input[type=button] {
       -ms-flex-direction: row;
           flex-direction: row;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .createmeetingminutes-form__addAgreement input {
-  outline: #FD797A;
+  outline: #FDB572;
 }
 
 .createmeetingminutes-form__addAgreement input:focus {
-  border-color: #FD797A;
+  border-color: #FDB572;
 }
 
 .createmeetingminutes-form__addAgreement input:focus + label {
-  color: #FD797A;
+  color: #FDB572;
 }
 
 .createmeetingminutes-form__addAgreement input:not(:placeholder-shown) {
-  border-color: #FD797A;
+  border-color: #FDB572;
 }
 
 .createmeetingminutes-form__addAgreement input:not(:placeholder-shown) + label {
-  color: #FD797A;
+  color: #FDB572;
 }
 
 .createmeetingminutes-form .addAgreementBtn {
@@ -2539,11 +2556,9 @@ input[type=button] {
 }
 
 .createmeetingminutes-form .submitMeetingMinutesBtn {
-  padding: 0.8rem 1rem;
   max-width: 23rem;
   -ms-flex-item-align: end;
-      -ms-grid-row-align: end;
-      align-self: end;
+      align-self: flex-end;
 }
 
 .note {
