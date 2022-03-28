@@ -2069,6 +2069,11 @@ input[type=button] {
   top: 0;
 }
 
+.memo-module__patcheditable {
+  display: inline-block;
+  z-index: 2;
+}
+
 .memo-module__name {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
@@ -3127,6 +3132,10 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   color: #757575;
+}
+
+.memoedit-form__patcheditable {
+  display: inline-block;
 }
 
 .memoedit-form__pseudo-input {

@@ -35,6 +35,11 @@
         top: 0;
     }
 
+    &__patcheditable {
+        display: inline-block;
+        z-index: 2;
+    }
+
     &__name {
         font-family: $poppins;
         font-size: 1.8rem;

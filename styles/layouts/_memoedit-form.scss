@@ -55,6 +55,10 @@
         color: $boulder;
     }
 
+    &__patcheditable {
+        display: inline-block;
+    }
+
     &__pseudo-input {
         width: 100%;
         padding: 2.5rem 3rem;
