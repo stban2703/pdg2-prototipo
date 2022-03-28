@@ -14,45 +14,54 @@ export async function renderNotesBoard(userId, list) {
         const noteBoardListImprove = noteBoard.querySelector(".note-board__list--improve")
         const noteBoardListRemove = noteBoard.querySelector(".note-board__list--remove")
 
+        function handleDrop(event) {
+            event.stopPropagation(); // stops the browser from redirecting.
+            if (mouseX > keepRect.x && mouseX < keepRect.x + keepRect.width &&
+                mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
+                //console.log("Keep")
+                try {
+                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "keep")
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+
+            if (mouseX > improveRect.x && mouseX < improveRect.x + improveRect.width &&
+                mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
+                //console.log("Improve")
+                try {
+                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "improve")
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+
+            if (mouseX > removeRect.x && mouseX < removeRect.x + removeRect.width &&
+                mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
+                //console.log("Remove")
+                try {
+                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "remove")
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            selectedNote = null
+            return false;
+        }
+
+        allNoteList.forEach(e => {
+            e.removeEventListener('dragenter', handleDragEnter);
+            e.removeEventListener('dragover', handleDragOver);
+            e.removeEventListener('dragleave', handleDragLeave);
+            e.removeEventListener('drop', handleDrop);
+        })
+
         // Drop items on columns functions
         allNoteList.forEach(e => {
             e.addEventListener('dragenter', handleDragEnter);
             e.addEventListener('dragover', handleDragOver);
             e.addEventListener('dragleave', handleDragLeave);
-            e.addEventListener('drop', event => {
-                event.stopPropagation(); // stops the browser from redirecting.
-                if (mouseX > keepRect.x && mouseX < keepRect.x + keepRect.width &&
-                    mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
-                    //console.log("Keep")
-                    try {
-                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "keep")
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
-
-                if (mouseX > improveRect.x && mouseX < improveRect.x + improveRect.width &&
-                    mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
-                    //console.log("Improve")
-                    try {
-                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "improve")
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
-
-                if (mouseX > removeRect.x && mouseX < removeRect.x + removeRect.width &&
-                    mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
-                    //console.log("Remove")
-                    try {
-                        updateNoteCategory(userId, selectedNote.id, selectedNote.category, "remove")
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
-                selectedNote = null
-                return false;
-            });
+            e.addEventListener('drop', handleDrop);
         })
 
         noteBoardListKeep.innerHTML = ""
