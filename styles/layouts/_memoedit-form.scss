@@ -1,0 +1,73 @@
+.memoedit-form {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    &__number {
+        font-family: $poppins;
+        font-size: 2.5rem;
+        font-weight: $semibold;
+        color: $main-color;
+        text-align: right;
+        min-width: 2.5rem;
+        line-height: 1.2;
+    }
+
+    &__text {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__example-text {
+        margin-left: 3.5rem;
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__description-input {
+        align-self: center;
+        width: 100%;
+        max-width: 62rem;
+        font-family: $poppins;
+        font-size: 2rem;
+        background-color: $white;
+        box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        color: $boulder;
+    }
+
+    &__pseudo-input {
+        width: 100%;
+        padding: 2.5rem 3rem;
+        outline-color: $main-color;
+
+        &--subtitle {
+            font-weight: $semibold;
+        }
+    }
+
+    &__next-button {
+        text-align: center;
+        max-width: 25rem;
+        align-self: center;
+    }
+}

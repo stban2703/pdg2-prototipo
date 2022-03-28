@@ -22,6 +22,12 @@
         width: 100%;
         color: $boulder;
         max-width: 45ch;
+        
+        br {
+            display: block; /* makes it have a width */
+            content: ""; /* clears default height */
+            margin-top: 1.5rem; /* change this to whatever height you want it */
+        }
     }
 
     &--purple {

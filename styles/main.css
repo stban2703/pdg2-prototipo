@@ -1522,6 +1522,15 @@ input[type=button] {
   max-width: 45ch;
 }
 
+.memo-reminder__description br {
+  display: block;
+  /* makes it have a width */
+  content: "";
+  /* clears default height */
+  margin-top: 1.5rem;
+  /* change this to whatever height you want it */
+}
+
 .memo-reminder--purple {
   background-color: #979DFF;
 }
@@ -1749,6 +1758,7 @@ input[type=button] {
           align-items: center;
   font-size: 1.5rem;
   gap: 0.5rem;
+  padding: 0;
 }
 
 .page-back .back-button__icon {
@@ -1996,6 +2006,10 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   color: #757575;
+}
+
+.memo-edit-info a {
+  text-align: center;
 }
 
 .signinup-form {
@@ -2927,6 +2941,104 @@ input[type=button] {
 
 .audio-player-container .audio-player {
   width: 100%;
+}
+
+.memoedit-form {
+  margin-top: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+}
+
+.memoedit-form__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.memoedit-form__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+}
+
+.memoedit-form__number {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #979DFF;
+  text-align: right;
+  min-width: 2.5rem;
+  line-height: 1.2;
+}
+
+.memoedit-form__text {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.memoedit-form__example-text {
+  margin-left: 3.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.memoedit-form__description-input {
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 100%;
+  max-width: 62rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
+          box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
+  border-radius: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #757575;
+}
+
+.memoedit-form__pseudo-input {
+  width: 100%;
+  padding: 2.5rem 3rem;
+  outline-color: #979DFF;
+}
+
+.memoedit-form__pseudo-input--subtitle {
+  font-weight: 600;
+}
+
+.memoedit-form__next-button {
+  text-align: center;
+  max-width: 25rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .signinup-screen {

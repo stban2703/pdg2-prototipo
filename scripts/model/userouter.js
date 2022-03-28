@@ -5,6 +5,7 @@ const router = new Router(
         notesdetails: new Layout(new Page("notesdetails.html")),
         createnotes: new Layout(new Page("createnotes.html")),
         memointro: new Layout(new Page("memointro.html")),
+        memoedit: new Layout(new Page("memoedit.html")),
         meetinglist: new Layout(new Page("meetinglist.html")),
         meetingdetails: new Layout(new Page("meetingdetails.html")),
         createmeeting: new Layout(new Page("createmeeting.html")),
