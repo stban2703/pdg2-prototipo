@@ -1,0 +1,26 @@
+.add-memo-module-button {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 15px;
+    padding: 2rem;
+    //border: 1px dotted $main-color;
+    border: none;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23979DFF' stroke-width='4' stroke-dasharray='11%2c 11' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+
+    &__name {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        color: $boulder;
+        text-align: center;
+        z-index: 2;
+        padding: 0.5rem;
+    }
+}

@@ -2012,6 +2012,112 @@ input[type=button] {
   text-align: center;
 }
 
+.memo-module {
+  background-color: #72B8FF;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 15px;
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.memo-module__delete-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  z-index: 2;
+}
+
+.memo-module a {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.memo-module__name {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #FFFFFF;
+  text-align: center;
+  z-index: 2;
+  padding: 0.5rem;
+}
+
+.memo-module__name:focus {
+  background-color: #FFFFFF;
+  color: #757575;
+}
+
+.add-memo-module-button {
+  background-color: #FFFFFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 15px;
+  padding: 2rem;
+  border: none;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23979DFF' stroke-width='4' stroke-dasharray='11%2c 11' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+.add-memo-module-button__name {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #757575;
+  text-align: center;
+  z-index: 2;
+  padding: 0.5rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -3039,6 +3145,19 @@ input[type=button] {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.memoedit-form__modules {
+  -ms-grid-row-align: center;
+      align-self: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 80rem;
+  gap: 5%;
+  justify-items: center;
 }
 
 .signinup-screen {

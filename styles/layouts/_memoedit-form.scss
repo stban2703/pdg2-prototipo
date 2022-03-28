@@ -70,4 +70,14 @@
         max-width: 25rem;
         align-self: center;
     }
+
+    &__modules {
+        align-self: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        max-width: 80rem;
+        gap: 5%;
+        justify-items: center;
+    }
 }
