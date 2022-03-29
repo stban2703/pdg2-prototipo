@@ -3671,11 +3671,15 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   background-color: #F8F8FF;
+  background-image: url("./../images/homepatterns.svg");
+  background-size: contain;
+  background-position-x: 16rem;
+  background-position-y: 0;
+  background-repeat: repeat-y;
 }
 
 .page-content {
   width: 100%;
-  background-color: #F8F8FF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
