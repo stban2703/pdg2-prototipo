@@ -3,6 +3,7 @@ import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "
 import { submitNote } from "./createnote.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
+import { changeMemoEditFormPage } from "./memoedit.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { getInitialNoteList, onFilterListener } from "./notes.js";
@@ -70,6 +71,7 @@ function addPageFuncions() {
     getMeetingInfoForMinute()
     submitMeetingMinutes()
     renderMeetingMinutesDetails()
+    changeMemoEditFormPage()
     goBack()
 }
 
