@@ -60,7 +60,7 @@ body {
     flex-direction: row;
     background-color: $page-content-background;
     background-image: url('./../images/homepatterns.svg');
-    background-size: contain;
+    background-size: calc(100vw);
     background-position-x: 16rem;
     background-position-y: 0;
     background-repeat: repeat-y;
