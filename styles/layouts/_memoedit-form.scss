@@ -83,5 +83,25 @@
         max-width: 80rem;
         gap: 5%;
         justify-items: center;
+        margin-bottom: 4rem;
+    }
+
+    &__cover-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+        margin-bottom: 4rem;
+    }
+
+    &__cover-title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $medium;
+        color: $main-color;
+    }
+
+    &__submit-button {
+        max-width: 25rem;
+        align-self: center;
     }
 }
