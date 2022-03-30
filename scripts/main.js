@@ -24,7 +24,27 @@ export const userInfo = currentUser
 // Memorando
 let memoProperties = {
     objective: "*Recuerda que el objetivo del memorando reflexivo es:*<br><br>La importancia de realizar un acto de reflexión es que se lleva a una constante renovación lo cual tiene un impacto en la calidad de la educación que se le brinda a los estudiantes y ayuda a satisfacer sus necesidades.",
-    importance: "*Es un momento para:*<br><br>Explorar diferentes aspectos y dificultades que se identificaron dentro del curso para luego crear un plan de acción y poder mejorar."
+    importance: "*Es un momento para:*<br><br>Explorar diferentes aspectos y dificultades que se identificaron dentro del curso para luego crear un plan de acción y poder mejorar.",
+    sections: [
+        {
+            id: "autorreflexion",
+            index: 0,
+            name: "Autorreflexión",
+            questions: []
+        },
+        {
+            id: "retroalimentacion",
+            index: 1,
+            name: "Retroalimentación obtenida sobre el curso",
+            questions: []
+        },
+        {
+            id: "plandeaccion",
+            index: 2,
+            name: "Plan de acción",
+            questions: []
+        }
+    ]
 }
 
 // Cerrar sesion
