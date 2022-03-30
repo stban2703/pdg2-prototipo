@@ -3199,6 +3199,7 @@ input[type=button] {
   width: 100%;
   padding: 2.5rem 3rem;
   outline-color: #979DFF;
+  display: inline-block;
 }
 
 .memoedit-form__pseudo-input--subtitle {

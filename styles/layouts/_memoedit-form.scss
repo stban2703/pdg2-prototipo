@@ -63,6 +63,7 @@
         width: 100%;
         padding: 2.5rem 3rem;
         outline-color: $main-color;
+        display: inline-block;
 
         &--subtitle {
             font-weight: $semibold;

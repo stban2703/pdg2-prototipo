@@ -3,7 +3,7 @@ import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "
 import { submitNote } from "./createnote.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { changeMemoEditFormPage } from "./memoedit.js";
+import { changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { getInitialNoteList, onFilterListener } from "./notes.js";
@@ -21,6 +21,11 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 }
 export const userInfo = currentUser
 
+// Memorando
+let memoProperties = {
+    objective: "*Recuerda que el objetivo del memorando reflexivo es:*<br><br>La importancia de realizar un acto de reflexión es que se lleva a una constante renovación lo cual tiene un impacto en la calidad de la educación que se le brinda a los estudiantes y ayuda a satisfacer sus necesidades.",
+    importance: "*Es un momento para:*<br><br>Explorar diferentes aspectos y dificultades que se identificaron dentro del curso para luego crear un plan de acción y poder mejorar."
+}
 
 // Cerrar sesion
 const logoutButton = document.querySelector('.logoutButton')
@@ -72,6 +77,9 @@ function addPageFuncions() {
     submitMeetingMinutes()
     renderMeetingMinutesDetails()
     changeMemoEditFormPage()
+    onContentEditableEnter()
+    updateMemoPseudoInputsValueLocally(memoProperties)
+    renderMemoEditValues(memoProperties)
     goBack()
 }
 
