@@ -1,0 +1,52 @@
+.memoform-select {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__label {
+        position: absolute;
+        background-color: $white;
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $medium;
+        color: $main-color;
+        top: 0;
+        left: 0.5rem;
+        transform: translate(0, -50%);
+        padding: 0.5rem;
+    }
+
+    &__pseudofield {
+        background-color: $white;
+        border: 1px solid $input-border-color;
+        font-family: $poppins;
+        font-size: $input-text;
+        color: $mineshaft;
+        border-radius: $radius-text-input;
+        width: 100%;
+    }
+}
+
+.memoform-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-family: $poppins;
+    font-size: $input-text;
+    color: $mineshaft;
+    padding: $input-padding;
+}
+
+.memoform-optionList {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: $white;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+
+    .memoform-option:hover {
+        background-color: rgb(203, 203, 203);
+    }
+}

@@ -2238,6 +2238,73 @@ input[type=button] {
   gap: 1rem;
 }
 
+.memoform-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+.memoform-select__label {
+  position: absolute;
+  background-color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #979DFF;
+  top: 0;
+  left: 0.5rem;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  padding: 0.5rem;
+}
+
+.memoform-select__pseudofield {
+  background-color: #FFFFFF;
+  border: 1px solid #A0A0A0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #363636;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.memoform-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #363636;
+  padding: 1.2rem 1.5rem;
+}
+
+.memoform-optionList {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+}
+
+.memoform-optionList .memoform-option:hover {
+  background-color: #cbcbcb;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
