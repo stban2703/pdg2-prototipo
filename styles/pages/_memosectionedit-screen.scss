@@ -1,0 +1,30 @@
+.memosectionedit-screen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1rem;
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2.2rem;
+        font-weight: $semibold;
+        color: $main-color;
+
+        span {
+            font-weight: $light;
+            color: $boulder;
+        }
+    }
+
+    &__note {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $semibold;
+        color: $main-color;
+
+        span {
+            font-weight: $light;
+            color: $boulder;
+        }
+    }
+}
