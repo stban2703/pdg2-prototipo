@@ -3,7 +3,7 @@ import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "
 import { submitNote } from "./createnote.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
+import { changeMemoEditFormPage, changeSelectValue, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { getInitialNoteList, onFilterListener } from "./notes.js";
@@ -100,6 +100,7 @@ function addPageFuncions() {
     onContentEditableEnter()
     updateMemoPseudoInputsValueLocally(memoProperties)
     renderMemoEditValues(memoProperties)
+    changeSelectValue()
     goBack()
 }
 

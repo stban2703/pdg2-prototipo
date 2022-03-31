@@ -2215,6 +2215,29 @@ input[type=button] {
   max-width: 50rem;
 }
 
+.memo-question-edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 2.5rem 2.5rem;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+}
+
+.memo-question-edit__section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -3295,6 +3318,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 2rem;
+  gap: 4rem;
 }
 
 .memosectionedit-form__section {
@@ -3305,6 +3329,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  gap: 2rem;
 }
 
 .signinup-screen {

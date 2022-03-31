@@ -24,7 +24,8 @@
 </section>
 <article class="memosectionedit-screen">
     <h3 class="memosectionedit-screen__title">Sección: <span>Autorreflexión</span></h3>
-    <p class="memosectionedit-screen__note">Nota: <span>En caso de querer colocar una palabra en <strong>negrita</strong> debes poner un asterisco (*) antes y después de ella.</span></p>
+    <p class="memosectionedit-screen__note">Nota: <span>En caso de querer colocar una palabra en
+            <strong>negrita</strong> debes poner un asterisco (*) antes y después de ella.</span></p>
     <form class="memosectionedit-form">
         <fieldset class="memosectionedit-form__section" title="noname0">
             <div class="memo-subsection-edit">
@@ -42,10 +43,33 @@
             <div class="memo-question-edit">
                 <section class="memo-question-edit__section">
                     <div class="text-input">
-                        <input id="question" class="text-input__field" type="text" name="question" placeholder=" " required
-                            autocomplete="off">
+                        <input id="question" class="text-input__field question" type="text" name="question"
+                            placeholder=" " required autocomplete="off">
                         <label class="text-input__label" for="question">Pregunta</label>
                     </div>
+                    <div class="memoform-select">
+                        <span class="memoform-select__label">Tipo de respuesta</span>
+                        <div class="memoform-select__pseudofield">
+                            <div class="memoform-option">
+                                <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
+                                <span class="memoform-option__label">checkbox</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="select-input">
+                        <label class="select-input__label" for="answertype">Tipo de respuesta</label>
+                        <select class="select-input__field testselect" name="answertype" id="answertype" required
+                            disabled>
+                            <option value="checkbox">Casillas</option>
+                            <option value="radius">Selección multiple</option>
+                            <option value="scale">Escala</option>
+                            <option value="parragraph">Párrafo</option>
+                            <option value="matrix">Matriz</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="memo-question-edit__section memo-question-edit__section">
+
                 </section>
             </div>
         </fieldset>

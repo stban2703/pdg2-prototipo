@@ -78,4 +78,14 @@ export function submitMemoEditForm() {
     }
 }
 
+
+export function changeSelectValue() {
+    const testSelect = document.querySelector(".testselect")
+
+    if(testSelect) {
+        testSelect.addEventListener('click', () => {
+            testSelect.value = "checkbox"
+        })
+    }
+}
 //export function renderSectionInfo(id)
