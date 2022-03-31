@@ -2180,6 +2180,41 @@ input[type=button] {
   opacity: 0;
 }
 
+.memo-subsection-edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+}
+
+.memo-subsection-edit__header {
+  background-color: #979DFF;
+  padding: 1.5rem 2.5rem;
+  border-radius: 15px 15px 0 0;
+}
+
+.memo-subsection-edit__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.memo-subsection-edit__body {
+  background-color: #FFFFFF;
+  border-radius: 0 0 15px 15px;
+  padding: 2.5rem 2.5rem;
+}
+
+.memo-subsection-edit__body div {
+  max-width: 50rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -3249,6 +3284,27 @@ input[type=button] {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.memosectionedit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2rem;
+}
+
+.memosectionedit-form__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .signinup-screen {

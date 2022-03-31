@@ -1,0 +1,10 @@
+.memosectionedit-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+    }
+}

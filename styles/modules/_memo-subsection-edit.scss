@@ -1,0 +1,28 @@
+.memo-subsection-edit {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+
+    &__header {
+        background-color: $main-color;
+        padding: 1.5rem 2.5rem;
+        border-radius: 15px 15px 0 0;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2.3rem;
+        font-weight: $semibold;
+        color: $white;
+    }
+
+    &__body {
+        background-color: $white;
+        border-radius: 0 0 15px 15px;
+        padding: 2.5rem 2.5rem;
+
+        div {
+            max-width: 50rem;
+        }
+    }
+}
