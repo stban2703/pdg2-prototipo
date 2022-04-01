@@ -21,7 +21,7 @@
         border: 1px solid $input-border-color;
         font-family: $poppins;
         font-size: $input-text;
-        color: $mineshaft;
+        color: $silver;
         border-radius: $radius-text-input;
         width: 100%;
     }
@@ -33,7 +33,7 @@
         gap: 1rem;
         font-family: $poppins;
         font-size: $input-text;
-        color: $mineshaft;
+        color: $silver;
         padding: $input-padding;
     }
 
@@ -69,7 +69,7 @@
     gap: 1rem;
     font-family: $poppins;
     font-size: $input-text;
-    color: $mineshaft;
+    color: $silver;
     padding: $input-padding;
 
     &:hover {
