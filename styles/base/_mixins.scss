@@ -32,6 +32,10 @@
     @extend %text-input;
 }
 
+@mixin expandable-text-area() {
+    @extend %expandable-text-area;
+}
+
 @mixin select-input() {
     @extend %select-input;
 }

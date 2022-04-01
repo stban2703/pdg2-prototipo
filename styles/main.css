@@ -290,7 +290,7 @@ input[type=button] {
   font-size: 1.8rem;
 }
 
-.text-input__label, .select-input__label, .date-time-input__label {
+.text-input__label, .select-input__label, .date-time-input__label, .expandable-text-area__label {
   background-color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
@@ -339,6 +339,32 @@ input[type=button] {
   left: 0.5rem;
   font-size: 1.5rem;
   font-weight: bold;
+  color: #979DFF;
+}
+
+.expandable-text-area__field {
+  background-color: #FFFFFF;
+  border: 1px solid #A0A0A0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem !important;
+  color: #363636;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  width: 100%;
+  resize: none;
+}
+
+.expandable-text-area__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.expandable-text-area__field:focus {
+  border-color: #979DFF;
+}
+
+.expandable-text-area__field:focus + label {
   color: #979DFF;
 }
 
@@ -589,6 +615,37 @@ input[type=button] {
 .date-time-input__field {
   outline-color: #979DFF;
   text-overflow: ellipsis;
+}
+
+.expandable-text-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.expandable-text-area__label {
+  position: absolute;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  padding: 0 0.5rem;
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #979DFF;
+  color: #A0A0A0;
+}
+
+.expandable-text-area__field {
+  outline-color: #979DFF;
 }
 
 .checkbox-input {
@@ -2255,12 +2312,12 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
-  color: #979DFF;
-  top: 0;
-  left: 0.5rem;
+  color: #A0A0A0;
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
-  padding: 0.2rem 0.5rem;
+  top: 0%;
+  left: 0.5rem;
+  padding: 0 0.5rem;
   z-index: 1;
 }
 
@@ -2305,6 +2362,10 @@ input[type=button] {
 
 .memoform-select:hover {
   cursor: pointer;
+}
+
+.memoform-select--focus .memoform-select__label {
+  color: #979DFF;
 }
 
 .memoform-select--focus .memoform-select__pseudofield {

@@ -9,11 +9,11 @@
         font-family: $poppins;
         font-size: 1.5rem;
         font-weight: $medium;
-        color: $main-color;
-        top: 0;
-        left: 0.5rem;
+        color: $input-label-color;
         transform: translate(0, -50%);
-        padding: 0.2rem 0.5rem;
+        top: 0%;
+        left: 0.5rem;
+        padding: 0 0.5rem;
         z-index: 1;
     }
 
@@ -52,6 +52,10 @@
     }
 
     &--focus {
+        .memoform-select__label {
+            color: $main-color;
+        }
+
         .memoform-select__pseudofield {
             border-color: $main-color;
             border-width: 2px;

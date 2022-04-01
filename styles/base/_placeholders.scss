@@ -86,6 +86,31 @@
     }
 }
 
+%expandable-text-area {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    font-family: $poppins;
+    font-size: $input-text !important;
+    color: $mineshaft;
+    border-radius: $radius-text-input;
+    padding: $input-padding;
+    width: 100%;
+    resize: none;
+
+    &:-webkit-autofill {
+        -webkit-text-fill-color: $input-color;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:focus {
+        border-color: $input-border-color-focused;
+    }
+
+    &:focus + label {
+        color: $input-label-valid-color;
+    }
+}
+
 %select-input {
     background-color: $white;
     border: 1px solid $input-border-color;
