@@ -2260,7 +2260,7 @@ input[type=button] {
   left: 0.5rem;
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
-  padding: 0.5rem;
+  padding: 0.2rem 0.5rem;
 }
 
 .memoform-select__pseudofield {
@@ -2299,10 +2299,25 @@ input[type=button] {
   border-radius: 5px;
   -webkit-box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
           box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-transform-origin: top;
+          transform-origin: top;
 }
 
 .memoform-optionList .memoform-option:hover {
   background-color: #cbcbcb;
+}
+
+.memoform-optionList--focus {
+  -webkit-transform: scaleY(100%);
+          transform: scaleY(100%);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .signinup-form {

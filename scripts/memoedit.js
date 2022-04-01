@@ -80,12 +80,26 @@ export function submitMemoEditForm() {
 
 
 export function changeSelectValue() {
-    const testSelect = document.querySelector(".testselect")
+    const memoformSelects = document.querySelectorAll(".memoform-select")
+    memoformSelects.forEach((select, i) => {
+        const optionList = select.querySelector(".memoform-optionList")
+        const pseudoField = select.querySelector(".memoform-select__pseudofield")
+        const realInput = select.querySelector(".memoform-select__realfield")
+        const options = select.querySelectorAll(".memoform-option")
 
-    if(testSelect) {
-        testSelect.addEventListener('click', () => {
-            testSelect.value = "checkbox"
+        select.addEventListener('click', () => {
+            optionList.classList.toggle('memoform-optionList--focus')
+            //console.log(realInput.value)
         })
-    }
+
+        options.forEach((option, i) => {
+            option.addEventListener('click', () => {
+                realInput.value = option.id
+                pseudoField.innerHTML = ``
+                const optionClone = option.cloneNode(true);
+                pseudoField.appendChild(optionClone)
+                console.log(realInput.value)
+            })
+        })
+    })
 }
-//export function renderSectionInfo(id)

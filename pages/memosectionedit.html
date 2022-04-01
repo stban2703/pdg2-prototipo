@@ -50,30 +50,34 @@
                     <div class="memoform-select">
                         <span class="memoform-select__label">Tipo de respuesta</span>
                         <div class="memoform-select__pseudofield">
-                            <div class="memoform-option">
+                            <div class="memoform-option" id="checkbox">
                                 <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
-                                <span class="memoform-option__label">checkbox</span>
+                                <span class="memoform-option__label">Casillas</span>
                             </div>
                         </div>
                         <div class="memoform-optionList">
-                            <div class="memoform-option">
+                            <div class="memoform-option" id="checkbox">
                                 <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
                                 <span class="memoform-option__label">Casillas</span>
                             </div>
-                            <div class="memoform-option">
-                                <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
-                                <span class="memoform-option__label">Casillas</span>
+                            <div class="memoform-option" id="radius">
+                                <img class="memoform-option__icon" src="./images/memoradiusicon.svg" alt="">
+                                <span class="memoform-option__label">Varias opciones</span>
                             </div>
-                            <div class="memoform-option">
-                                <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
-                                <span class="memoform-option__label">Casillas</span>
+                            <div class="memoform-option" id="scale">
+                                <img class="memoform-option__icon" src="./images/memoscaleicon.svg" alt="">
+                                <span class="memoform-option__label">Escala</span>
+                            </div>
+                            <div class="memoform-option" id="parragraph">
+                                <img class="memoform-option__icon" src="./images/memoparragraphicon.svg" alt="">
+                                <span class="memoform-option__label">Párrafo</span>
+                            </div>
+                            <div class="memoform-option" id="matrix">
+                                <img class="memoform-option__icon" src="./images/memomatrixicon.svg" alt="">
+                                <span class="memoform-option__label">Matriz</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="select-input hidden">
-                        <label class="select-input__label" for="answertype">Tipo de respuesta</label>
-                        <select class="select-input__field testselect" name="answertype" id="answertype" required
-                            disabled>
+                        <select class="memoform-select__realfield hidden" name="answertype" id="answertype" required disabled>
                             <option value="checkbox">Casillas</option>
                             <option value="radius">Selección multiple</option>
                             <option value="scale">Escala</option>
