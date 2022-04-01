@@ -103,3 +103,7 @@ export function changeSelectValue() {
         })
     })
 }
+
+export function changeMemoEditInputsTextSize() {
+    const memoEditTextInputs = document.querySelectorAll(".")
+}

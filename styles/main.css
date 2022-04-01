@@ -2261,6 +2261,7 @@ input[type=button] {
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
   padding: 0.2rem 0.5rem;
+  z-index: 1;
 }
 
 .memoform-select__pseudofield {
@@ -2271,6 +2272,7 @@ input[type=button] {
   color: #A0A0A0;
   border-radius: 10px;
   width: 100%;
+  position: relative;
 }
 
 .memoform-select__selectedOption {

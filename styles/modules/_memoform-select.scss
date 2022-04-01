@@ -14,6 +14,7 @@
         left: 0.5rem;
         transform: translate(0, -50%);
         padding: 0.2rem 0.5rem;
+        z-index: 1;
     }
 
     &__pseudofield {
@@ -24,6 +25,7 @@
         color: $silver;
         border-radius: $radius-text-input;
         width: 100%;
+        position: relative;
     }
 
     &__selectedOption {
