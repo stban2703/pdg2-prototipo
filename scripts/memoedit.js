@@ -83,21 +83,21 @@ export function changeSelectValue() {
     const memoformSelects = document.querySelectorAll(".memoform-select")
     memoformSelects.forEach((select, i) => {
         const optionList = select.querySelector(".memoform-optionList")
-        const pseudoField = select.querySelector(".memoform-select__pseudofield")
+        const selectedOptionField = select.querySelector(".memoform-select__selectedOption")
         const realInput = select.querySelector(".memoform-select__realfield")
         const options = select.querySelectorAll(".memoform-option")
 
         select.addEventListener('click', () => {
+            select.classList.toggle('memoform-select--focus')
             optionList.classList.toggle('memoform-optionList--focus')
-            //console.log(realInput.value)
         })
 
         options.forEach((option, i) => {
             option.addEventListener('click', () => {
                 realInput.value = option.id
-                pseudoField.innerHTML = ``
+                selectedOptionField.innerHTML = ``
                 const optionClone = option.cloneNode(true);
-                pseudoField.appendChild(optionClone)
+                selectedOptionField.innerHTML = optionClone.innerHTML
                 console.log(realInput.value)
             })
         })

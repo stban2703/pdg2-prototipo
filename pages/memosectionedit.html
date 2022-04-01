@@ -50,10 +50,11 @@
                     <div class="memoform-select">
                         <span class="memoform-select__label">Tipo de respuesta</span>
                         <div class="memoform-select__pseudofield">
-                            <div class="memoform-option" id="checkbox">
+                            <div class="memoform-select__selectedOption">
                                 <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
                                 <span class="memoform-option__label">Casillas</span>
                             </div>
+                            <img class="memoform-select__arrow" src="./images/memocustomselectarrow.svg" alt="">
                         </div>
                         <div class="memoform-optionList">
                             <div class="memoform-option" id="checkbox">
@@ -77,7 +78,8 @@
                                 <span class="memoform-option__label">Matriz</span>
                             </div>
                         </div>
-                        <select class="memoform-select__realfield hidden" name="answertype" id="answertype" required disabled>
+                        <select class="memoform-select__realfield hidden" name="answertype" id="answertype" required
+                            disabled>
                             <option value="checkbox">Casillas</option>
                             <option value="radius">Selección multiple</option>
                             <option value="scale">Escala</option>

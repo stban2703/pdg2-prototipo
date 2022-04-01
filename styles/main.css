@@ -2273,6 +2273,50 @@ input[type=button] {
   width: 100%;
 }
 
+.memoform-select__selectedOption {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #363636;
+  padding: 1.2rem 1.5rem;
+}
+
+.memoform-select__arrow {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.memoform-select:hover {
+  cursor: pointer;
+}
+
+.memoform-select--focus .memoform-select__pseudofield {
+  border-color: #979DFF;
+  border-width: 2px;
+}
+
+.memoform-select--focus .memoform-select__arrow {
+  -webkit-transform: rotateZ(-180deg) translateY(50%);
+          transform: rotateZ(-180deg) translateY(50%);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
 .memoform-option {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2289,6 +2333,14 @@ input[type=button] {
   font-size: 1.8rem;
   color: #363636;
   padding: 1.2rem 1.5rem;
+}
+
+.memoform-option:hover {
+  cursor: pointer;
+}
+
+.memoform-option:focus {
+  border-color: #979DFF;
 }
 
 .memoform-optionList {

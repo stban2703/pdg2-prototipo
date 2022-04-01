@@ -25,6 +25,41 @@
         border-radius: $radius-text-input;
         width: 100%;
     }
+
+    &__selectedOption {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        font-family: $poppins;
+        font-size: $input-text;
+        color: $mineshaft;
+        padding: $input-padding;
+    }
+
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        transition: all 0.2s ease;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &--focus {
+        .memoform-select__pseudofield {
+            border-color: $main-color;
+            border-width: 2px;
+        }
+
+        .memoform-select__arrow {
+            transform: rotateZ(-180deg) translateY(50%);
+            transition: all 0.2s ease;
+        }
+    }
 }
 
 .memoform-option {
@@ -36,6 +71,14 @@
     font-size: $input-text;
     color: $mineshaft;
     padding: $input-padding;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        border-color: $main-color;
+    }
 }
 
 .memoform-optionList {
@@ -52,7 +95,7 @@
     .memoform-option:hover {
         background-color: rgb(203, 203, 203);
     }
-    
+
     &--focus {
         transform: scaleY(100%);
         transform-origin: top;
