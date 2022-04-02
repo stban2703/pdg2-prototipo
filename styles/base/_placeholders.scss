@@ -96,6 +96,11 @@
     padding: $input-padding;
     width: 100%;
     resize: none;
+    overflow: hidden;
+
+    &::placeholder {
+        color: $boulder;
+    }
 
     &:-webkit-autofill {
         -webkit-text-fill-color: $input-color;

@@ -3,7 +3,7 @@ export function onContentEditableEnter() {
     if (window.location.href.includes("#memoedit") && pseudoInputs.length > 0) {
         pseudoInputs.forEach(elem => {
             elem.addEventListener('keydown', (e) => {
-                if(e.keyCode === 13) {
+                if (e.keyCode === 13) {
                     return false;
                 }
             })
@@ -16,7 +16,7 @@ export function updateMemoPseudoInputsValueLocally(memo) {
     if (window.location.href.includes("#memoedit") && pseudoInputs.length > 0) {
         pseudoInputs.forEach((e, i) => {
             e.addEventListener('input', () => {
-                if(i == 0) {
+                if (i == 0) {
                     memo.objective = e.innerHTML.toString()
                 } else {
                     memo.importance = e.innerHTML.toString()
@@ -64,7 +64,7 @@ export function renderMemoEditValues(memo) {
         objetiveInput.innerHTML = ``
         importanceInput.innerHTML = ``
 
-        const copy = {...memo}
+        const copy = { ...memo }
 
         objetiveInput.innerHTML = copy.objective
         importanceInput.innerHTML = copy.importance
@@ -105,5 +105,16 @@ export function changeSelectValue() {
 }
 
 export function changeMemoEditInputsTextSize() {
-    const memoEditTextInputs = document.querySelectorAll(".")
+    const memoEditTextInputs = document.querySelectorAll(".expandable-text-area__field")
+    if (memoEditTextInputs.length > 0) {
+        memoEditTextInputs.forEach(input => {
+            input.addEventListener('keydown', (e) => {
+                if (e.which == 13) { e.preventDefault(); }
+            })
+            input.addEventListener('input', () => {
+                input.style.removeProperty('height');
+                input.style.height = (input.scrollHeight) + 'px';
+            })
+        })
+    }
 }

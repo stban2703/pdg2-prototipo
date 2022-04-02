@@ -352,6 +352,23 @@ input[type=button] {
   padding: 1.2rem 1.5rem;
   width: 100%;
   resize: none;
+  overflow: hidden;
+}
+
+.expandable-text-area__field::-webkit-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field:-ms-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field::-ms-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field::placeholder {
+  color: #757575;
 }
 
 .expandable-text-area__field:-webkit-autofill {
