@@ -2542,7 +2542,7 @@ input[type=button] {
   background-color: #FFFFFF;
   -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
           box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
-  gap: 4rem;
+  gap: 5rem;
 }
 
 .memo-question-edit__section {
@@ -2550,7 +2550,7 @@ input[type=button] {
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .memo-question-edit__answertype {
@@ -2561,7 +2561,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 3rem;
+  gap: 4rem;
 }
 
 .memo-question-edit__answerList {
@@ -2646,7 +2646,6 @@ input[type=button] {
 
 .memoform-select--focus .memoform-select__pseudofield {
   border-color: #979DFF;
-  border-width: 2px;
 }
 
 .memoform-select--focus .memoform-select__arrow {
@@ -2721,7 +2720,7 @@ input[type=button] {
       -ms-flex-direction: row;
           flex-direction: row;
   width: 100%;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .memo-answer-option-edit__input {
