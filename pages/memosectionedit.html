@@ -91,23 +91,35 @@
                 <section class="memo-question-edit__section">
                     <div class="memo-question-edit__answertype memo-question-edit__answertype--checkbox">
                         <div class="memo-question-edit__answersList">
-
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input">
+                                    <img class="memo-answer-option-edit__icon" src="./images/memocheckboxicon.svg"
+                                        alt="">
+                                    <input class="memo-answer-option-edit__field" id="answeroption1"
+                                        name="answeroption1" type="text" placeholder="Escriba la opción de respuesta">
+                                    <label class="memo-answer-option-edit__label" for="answeroption1">Opción 1</label>
+                                </div>
+                                <button class="memo-answer-option-edit__deleteButton" type="button">
+                                    <img src="./images/deleteagreement.svg" alt="">
+                                </button>
+                            </div>
                         </div>
                         <div class="memo-question-edit__answersControl">
-                            <section class="add-item-input">
+                            <div class="add-item-input">
                                 <div class="add-item-input__icon">
                                     <img src="./images/plusagreement.svg" alt="">
                                 </div>
-                                <div class="text-input add-item-input__input">
-                                    <input id="newItem" class="text-input__field xadd-item-input" type="text"
-                                        name="newItem" placeholder=" " autocomplete="off">
-                                    <label class="text-input__label" for="newItem">Escribe tu texto aquí...</label>
+                                <div class="fix-label-text-input fix-label-text-input--secondary add-item-input__input">
+                                    <input id="newItem" class="fix-label-text-input__field add-item-input__field"
+                                        type="text" name="newItem" placeholder="Escribe tu texto aquí..."
+                                        autocomplete="off">
+                                    <label class="fix-label-text-input__label" for="newItem">Agregar opción</label>
                                 </div>
-                            </section>
+                            </div>
                         </div>
                     </div>
                     <div class="memo-question-edit__justification">
-                        
+
                     </div>
                 </section>
             </div>

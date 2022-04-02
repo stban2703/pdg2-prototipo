@@ -28,8 +28,68 @@
     color: $font-color;
 }
 
-@mixin text-input() {
+@mixin text-input($focus-color) {
     @extend %text-input;
+
+    &:-webkit-autofill {
+        -webkit-text-fill-color: $mineshaft;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:focus {
+        border-color: $focus-color;
+    }
+
+    &:focus + label {
+        top: 0%;
+        left: 0.5rem;
+        transition: all 0.1s ease-out;
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        color: $focus-color;
+    }
+
+    &:not(:placeholder-shown) {
+        border-color: $focus-color;
+    }
+
+    &:not(:placeholder-shown) + label {
+        top: 0%;
+        transition: all 0.1s ease-out;
+        left: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $focus-color;
+        //$input-border-color-focused
+        //$input-label-valid-color
+    }
+}
+
+@mixin fix-label-text-input($focus-color) {
+    @extend %text-input;
+
+    &:-webkit-autofill {
+        -webkit-text-fill-color: $mineshaft;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:focus {
+        border-color: $focus-color;
+    }
+
+    &:focus + label {
+        top: 0%;
+        left: 0.5rem;
+        transition: all 0.1s ease-out;
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        color: $focus-color;
+    }
+
+    &::placeholder {
+        color: $boulder;
+        font-weight: $light;
+    }
 }
 
 @mixin expandable-text-area() {

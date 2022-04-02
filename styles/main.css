@@ -290,14 +290,14 @@ input[type=button] {
   font-size: 1.8rem;
 }
 
-.text-input__label, .select-input__label, .date-time-input__label, .expandable-text-area__label {
+.text-input__label, .fix-label-text-input__label, .select-input__label, .date-time-input__label, .expandable-text-area__label {
   background-color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   font-weight: lighter;
 }
 
-.text-input__field {
+.text-input__field, .text-input--secondary .text-input__field, .fix-label-text-input__field, .fix-label-text-input--secondary .fix-label-text-input__field {
   background-color: #FFFFFF;
   border: 1px solid #A0A0A0;
   font-family: "Poppins", sans-serif;
@@ -308,38 +308,20 @@ input[type=button] {
   width: 100%;
 }
 
-.text-input__field:-webkit-autofill {
-  -webkit-text-fill-color: #363636;
-  -webkit-transition: background-color 5000s ease-in-out 0s;
-  transition: background-color 5000s ease-in-out 0s;
+.text-input__field::-webkit-input-placeholder, .text-input--secondary .text-input__field::-webkit-input-placeholder, .fix-label-text-input__field::-webkit-input-placeholder, .fix-label-text-input--secondary .fix-label-text-input__field::-webkit-input-placeholder {
+  color: #757575;
 }
 
-.text-input__field:focus {
-  border-color: #979DFF;
+.text-input__field:-ms-input-placeholder, .text-input--secondary .text-input__field:-ms-input-placeholder, .fix-label-text-input__field:-ms-input-placeholder, .fix-label-text-input--secondary .fix-label-text-input__field:-ms-input-placeholder {
+  color: #757575;
 }
 
-.text-input__field:focus + label {
-  top: 0%;
-  left: 0.5rem;
-  -webkit-transition: all 0.1s ease-out;
-  transition: all 0.1s ease-out;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #979DFF;
+.text-input__field::-ms-input-placeholder, .text-input--secondary .text-input__field::-ms-input-placeholder, .fix-label-text-input__field::-ms-input-placeholder, .fix-label-text-input--secondary .fix-label-text-input__field::-ms-input-placeholder {
+  color: #757575;
 }
 
-.text-input__field:not(:placeholder-shown) {
-  border-color: #979DFF;
-}
-
-.text-input__field:not(:placeholder-shown) + label {
-  top: 0%;
-  -webkit-transition: all 0.1s ease-out;
-  transition: all 0.1s ease-out;
-  left: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #979DFF;
+.text-input__field::placeholder, .text-input--secondary .text-input__field::placeholder, .fix-label-text-input__field::placeholder, .fix-label-text-input--secondary .fix-label-text-input__field::placeholder {
+  color: #757575;
 }
 
 .expandable-text-area__field {
@@ -383,6 +365,22 @@ input[type=button] {
 
 .expandable-text-area__field:focus + label {
   color: #979DFF;
+}
+
+.expandable-text-area__field::-webkit-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field:-ms-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field::-ms-input-placeholder {
+  color: #757575;
+}
+
+.expandable-text-area__field::placeholder {
+  color: #757575;
 }
 
 .select-input__field {
@@ -487,6 +485,26 @@ input[type=button] {
   border-color: #979DFF;
 }
 
+.text-area-input::-webkit-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.text-area-input:-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.text-area-input::-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.text-area-input::placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
 @-webkit-keyframes rotate {
   0% {
     -webkit-transform: rotate(0);
@@ -545,9 +563,211 @@ input[type=button] {
   outline-color: #979DFF;
 }
 
+.text-input__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.text-input__field:focus {
+  border-color: #979DFF;
+}
+
+.text-input__field:focus + label {
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.text-input__field:not(:placeholder-shown) {
+  border-color: #979DFF;
+}
+
+.text-input__field:not(:placeholder-shown) + label {
+  top: 0%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #979DFF;
+}
+
+.text-input--secondary .text-input__field {
+  outline-color: #FDB572;
+}
+
+.text-input--secondary .text-input__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.text-input--secondary .text-input__field:focus {
+  border-color: #FDB572;
+}
+
+.text-input--secondary .text-input__field:focus + label {
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FDB572;
+}
+
+.text-input--secondary .text-input__field:not(:placeholder-shown) {
+  border-color: #FDB572;
+}
+
+.text-input--secondary .text-input__field:not(:placeholder-shown) + label {
+  top: 0%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FDB572;
+}
+
+.fix-label-text-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.fix-label-text-input__label {
+  position: absolute;
+  padding: 0 0.5rem;
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  font-size: 1.5rem;
+  font-weight: 600;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  color: #A0A0A0;
+}
+
+.fix-label-text-input__field {
+  outline-color: #979DFF;
+}
+
+.fix-label-text-input__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.fix-label-text-input__field:focus {
+  border-color: #979DFF;
+}
+
+.fix-label-text-input__field:focus + label {
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.fix-label-text-input__field::-webkit-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input__field:-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input__field::-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input__field::placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field {
+  outline-color: #FDB572;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field:-webkit-autofill {
+  -webkit-text-fill-color: #363636;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field:focus {
+  border-color: #FDB572;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field:focus + label {
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FDB572;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field::-webkit-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field:-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field::-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.fix-label-text-input--secondary .fix-label-text-input__field::placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
 .add-agreement-input {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.add-item-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-left: 2rem;
+  gap: 1rem;
+}
+
+.add-item-input__icon {
+  margin-top: 0.5rem;
 }
 
 .select-input {
@@ -663,6 +883,26 @@ input[type=button] {
 
 .expandable-text-area__field {
   outline-color: #979DFF;
+}
+
+.expandable-text-area__field::-webkit-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.expandable-text-area__field:-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.expandable-text-area__field::-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.expandable-text-area__field::placeholder {
+  color: #757575;
+  font-weight: 300;
 }
 
 .checkbox-input {
@@ -2302,6 +2542,7 @@ input[type=button] {
   background-color: #FFFFFF;
   -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
           box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+  gap: 4rem;
 }
 
 .memo-question-edit__section {
@@ -2310,6 +2551,23 @@ input[type=button] {
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+}
+
+.memo-question-edit__answertype {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+}
+
+.memo-question-edit__answerList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .memoform-select {
@@ -2452,6 +2710,115 @@ input[type=button] {
           transform-origin: top;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+}
+
+.memo-answer-option-edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.memo-answer-option-edit__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.memo-answer-option-edit__icon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  padding-left: 1.5rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.memo-answer-option-edit__field {
+  background-color: #FFFFFF;
+  border: 1px solid #A0A0A0;
+  color: #363636;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  padding-left: 5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  width: 100%;
+  outline-color: #979DFF;
+}
+
+.memo-answer-option-edit__field:focus {
+  border-color: #979DFF;
+}
+
+.memo-answer-option-edit__field:focus + label {
+  color: #979DFF;
+}
+
+.memo-answer-option-edit__field::-webkit-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.memo-answer-option-edit__field:-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.memo-answer-option-edit__field::-ms-input-placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.memo-answer-option-edit__field::placeholder {
+  color: #757575;
+  font-weight: 300;
+}
+
+.memo-answer-option-edit__label {
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 0%;
+  left: 0.5rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  z-index: 1;
+  color: #A0A0A0;
+  padding: 0 0.5rem;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+
+.memo-answer-option-edit__deleteButton {
+  background: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .signinup-form {

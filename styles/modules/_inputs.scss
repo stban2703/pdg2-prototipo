@@ -15,14 +15,64 @@
     }
 
     &__field {
-        @include text-input();
+        @include text-input($main-color);
         outline-color: $main-color;
     }
+
+    &--secondary {
+        .text-input__field {
+            @include text-input($secondary-color);
+            outline-color: $secondary-color;
+        }
+    }
+}
+
+.fix-label-text-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    &__label {
+        position: absolute;
+        padding: 0 0.5rem;
+        top: 0%;
+        left: 0.5rem;
+        transform: translate(0%, -50%);
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        transition: all 0.1s ease-in;
+        @include input-label($input-label-color);
+    }
+
+    &__field {
+        @include fix-label-text-input($main-color);
+        outline-color: $main-color;
+    }
+
+    &--secondary {
+        .fix-label-text-input__field {
+            @include fix-label-text-input($secondary-color);
+            outline-color: $secondary-color;
+        }
+    }
+    
 }
 
 .add-agreement-input {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.add-item-input {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    gap: 1rem;
+
+    &__icon {
+        margin-top: 0.5rem;
+    }
 }
 
 .select-input {
@@ -123,6 +173,11 @@
     &__field {
         @include expandable-text-area();
         outline-color: $main-color;
+
+        &::placeholder {
+            color: $boulder;
+            font-weight: $light;
+        }
     }
 }
 
