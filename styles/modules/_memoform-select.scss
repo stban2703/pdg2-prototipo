@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    max-width: 28rem;
 
     &__label {
         position: absolute;
@@ -25,7 +26,7 @@
         color: $silver;
         border-radius: $radius-text-input;
         width: 100%;
-        position: relative;
+        position: relative;        
     }
 
     &__selectedOption {
@@ -89,6 +90,7 @@
 
 .memoform-optionList {
     position: absolute;
+    margin-top: 0.5rem;
     top: 100%;
     width: 100%;
     background-color: $white;

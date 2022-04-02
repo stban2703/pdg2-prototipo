@@ -55,27 +55,27 @@
                                 <span class="memoform-option__label">Casillas</span>
                             </div>
                             <img class="memoform-select__arrow" src="./images/memocustomselectarrow.svg" alt="">
-                        </div>
-                        <div class="memoform-optionList">
-                            <div class="memoform-option" id="checkbox">
-                                <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
-                                <span class="memoform-option__label">Casillas</span>
-                            </div>
-                            <div class="memoform-option" id="radius">
-                                <img class="memoform-option__icon" src="./images/memoradiusicon.svg" alt="">
-                                <span class="memoform-option__label">Varias opciones</span>
-                            </div>
-                            <div class="memoform-option" id="scale">
-                                <img class="memoform-option__icon" src="./images/memoscaleicon.svg" alt="">
-                                <span class="memoform-option__label">Escala</span>
-                            </div>
-                            <div class="memoform-option" id="parragraph">
-                                <img class="memoform-option__icon" src="./images/memoparragraphicon.svg" alt="">
-                                <span class="memoform-option__label">Párrafo</span>
-                            </div>
-                            <div class="memoform-option" id="matrix">
-                                <img class="memoform-option__icon" src="./images/memomatrixicon.svg" alt="">
-                                <span class="memoform-option__label">Matriz</span>
+                            <div class="memoform-optionList">
+                                <div class="memoform-option" id="checkbox">
+                                    <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
+                                    <span class="memoform-option__label">Casillas</span>
+                                </div>
+                                <div class="memoform-option" id="radius">
+                                    <img class="memoform-option__icon" src="./images/memoradiusicon.svg" alt="">
+                                    <span class="memoform-option__label">Varias opciones</span>
+                                </div>
+                                <div class="memoform-option" id="scale">
+                                    <img class="memoform-option__icon" src="./images/memoscaleicon.svg" alt="">
+                                    <span class="memoform-option__label">Escala</span>
+                                </div>
+                                <div class="memoform-option" id="parragraph">
+                                    <img class="memoform-option__icon" src="./images/memoparragraphicon.svg" alt="">
+                                    <span class="memoform-option__label">Párrafo</span>
+                                </div>
+                                <div class="memoform-option" id="matrix">
+                                    <img class="memoform-option__icon" src="./images/memomatrixicon.svg" alt="">
+                                    <span class="memoform-option__label">Matriz</span>
+                                </div>
                             </div>
                         </div>
                         <select class="memoform-select__realfield hidden" name="answertype" id="answertype" required
@@ -89,11 +89,25 @@
                     </div>
                 </section>
                 <section class="memo-question-edit__section">
-                    <div class="memo-question-edit__answertype">
+                    <div class="memo-question-edit__answertype memo-question-edit__answertype--checkbox">
+                        <div class="memo-question-edit__answersList">
 
+                        </div>
+                        <div class="memo-question-edit__answersControl">
+                            <section class="add-item-input">
+                                <div class="add-item-input__icon">
+                                    <img src="./images/plusagreement.svg" alt="">
+                                </div>
+                                <div class="text-input add-item-input__input">
+                                    <input id="newItem" class="text-input__field xadd-item-input" type="text"
+                                        name="newItem" placeholder=" " autocomplete="off">
+                                    <label class="text-input__label" for="newItem">Escribe tu texto aquí...</label>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                     <div class="memo-question-edit__justification">
-
+                        
                     </div>
                 </section>
             </div>

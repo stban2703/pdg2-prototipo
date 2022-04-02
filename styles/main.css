@@ -2309,7 +2309,7 @@ input[type=button] {
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .memoform-select {
@@ -2321,6 +2321,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   position: relative;
+  max-width: 28rem;
 }
 
 .memoform-select__label {
@@ -2425,6 +2426,7 @@ input[type=button] {
 
 .memoform-optionList {
   position: absolute;
+  margin-top: 0.5rem;
   top: 100%;
   width: 100%;
   background-color: #FFFFFF;
