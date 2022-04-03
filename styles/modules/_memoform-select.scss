@@ -99,6 +99,7 @@
     transform: scaleY(0);
     transition: all 0.2s ease;
     transform-origin: top;
+    z-index: 10;
 
     .memoform-option:hover {
         background-color: rgb(203, 203, 203);

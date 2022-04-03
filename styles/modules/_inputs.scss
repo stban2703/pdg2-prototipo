@@ -56,7 +56,6 @@
             outline-color: $secondary-color;
         }
     }
-    
 }
 
 .add-agreement-input {
@@ -329,6 +328,55 @@
             &:checked::before {
                 background-color: $remove;
             }
+        }
+    }
+}
+
+.memo-radio-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.8rem;
+    font-family: $poppins;
+    color: $silver;
+
+    input[type="radio"] {
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.3em;
+        height: 1.3em;
+        border: 0.15em solid $silver;
+        border-radius: 100%;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::before {
+            content: "";
+            width: 0.8em;
+            height: 0.8em;
+            border-radius: 100%;
+            background-color: $main-color;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em $main-color;
+            transform-origin: center center;
+        }
+
+        &:checked {
+            border-color: $main-color;
+        }
+
+        &:checked::before {
+            background-color: $main-color;
+            transform: scale(1);
         }
     }
 }
