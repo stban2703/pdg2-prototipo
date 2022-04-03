@@ -159,13 +159,12 @@
     padding: $input-padding;
     outline-color: $input-border-color-focused;
 
-    &::placeholder {
-        color: $silver;
-        font-weight: $light;
-    }
-
     &:focus {
         border-color: $input-border-color-focused;
+    }
+
+    &:focus + label {
+        color: $input-label-valid-color;
     }
 
     &:not(:placeholder-shown) {

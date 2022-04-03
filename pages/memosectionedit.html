@@ -118,7 +118,7 @@
                             </div>
                         </section>
                     </section>
-                    <section class="memo-question-edit__answertype memo-question-edit__answertype--scale">
+                    <section class="memo-question-edit__answertype memo-question-edit__answertype--scale hidden">
                         <section class="memo-question-edit__scaleRanges">
                             <p class="memo-question-edit__subtitle">De</p>
                             <select class="scale-select-input" name="minscale" id="minscale">
@@ -142,19 +142,24 @@
                         <section class="memo-question-edit__scaleTags">
                             <div class="fix-label-text-input fix-label-text-input--number">
                                 <span class="fix-label-text-input__number">1.</span>
-                                <input id="minscaletag" class="fix-label-text-input__field"
-                                    type="text" name="minscaletag" placeholder="Escribe la etiqueta aquí"
-                                    autocomplete="off">
+                                <input id="minscaletag" class="fix-label-text-input__field" type="text"
+                                    name="minscaletag" placeholder="Escribe la etiqueta aquí" autocomplete="off">
                                 <label class="fix-label-text-input__label" for="newItem">Nombre de etiqueta</label>
                             </div>
                             <div class="fix-label-text-input fix-label-text-input--number">
                                 <span class="fix-label-text-input__number">6.</span>
-                                <input id="maxscaletag" class="fix-label-text-input__field"
-                                    type="text" name="maxscaletag" placeholder="Escribe la etiqueta aquí"
-                                    autocomplete="off">
+                                <input id="maxscaletag" class="fix-label-text-input__field" type="text"
+                                    name="maxscaletag" placeholder="Escribe la etiqueta aquí" autocomplete="off">
                                 <label class="fix-label-text-input__label" for="newItem">Nombre de etiqueta</label>
                             </div>
                         </section>
+                    </section>
+                    <section class="memo-question-edit__answertype memo-question-edit__answertype--parragraph">
+                        <div class="text-area-input text-area-input--disabled">
+                            <label for="parragraph" class="text-area-input__label">Campo de texto</label>
+                            <textarea class="text-area-input__field" name="parragraph" id="parragraph" rows="5"
+                                placeholder="Texto de respuesta larga" disabled></textarea>
+                        </div>
                     </section>
                     <section class="memo-question-edit__justification">
                         <section class="memo-question-edit__addJustification">

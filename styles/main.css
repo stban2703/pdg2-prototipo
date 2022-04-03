@@ -439,7 +439,7 @@ input[type=button] {
   background-color: #FFFFFF;
 }
 
-.text-area-input {
+.text-area-input__field {
   background-color: #FFFFFF;
   border: 1px solid #A0A0A0;
   border-radius: 10px;
@@ -452,50 +452,34 @@ input[type=button] {
   outline-color: #979DFF;
 }
 
-.text-area-input::-webkit-input-placeholder {
-  color: #A0A0A0;
-  font-weight: 300;
-}
-
-.text-area-input:-ms-input-placeholder {
-  color: #A0A0A0;
-  font-weight: 300;
-}
-
-.text-area-input::-ms-input-placeholder {
-  color: #A0A0A0;
-  font-weight: 300;
-}
-
-.text-area-input::placeholder {
-  color: #A0A0A0;
-  font-weight: 300;
-}
-
-.text-area-input:focus {
+.text-area-input__field:focus {
   border-color: #979DFF;
 }
 
-.text-area-input:not(:placeholder-shown) {
+.text-area-input__field:focus + label {
+  color: #979DFF;
+}
+
+.text-area-input__field:not(:placeholder-shown) {
   border-color: #979DFF;
 }
 
-.text-area-input::-webkit-input-placeholder {
+.text-area-input__field::-webkit-input-placeholder {
   color: #757575;
   font-weight: 300;
 }
 
-.text-area-input:-ms-input-placeholder {
+.text-area-input__field:-ms-input-placeholder {
   color: #757575;
   font-weight: 300;
 }
 
-.text-area-input::-ms-input-placeholder {
+.text-area-input__field::-ms-input-placeholder {
   color: #757575;
   font-weight: 300;
 }
 
-.text-area-input::placeholder {
+.text-area-input__field::placeholder {
   color: #757575;
   font-weight: 300;
 }
@@ -870,6 +854,28 @@ input[type=button] {
 .date-time-input__field {
   outline-color: #979DFF;
   text-overflow: ellipsis;
+}
+
+.text-area-input {
+  position: relative;
+}
+
+.text-area-input__label {
+  position: absolute;
+  top: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #979DFF;
+  background-color: #FFFFFF;
+  padding: 0 0.5rem;
+  left: 0.5rem;
+}
+
+.text-area-input--disabled .text-area-input__label {
+  color: #A0A0A0;
 }
 
 .expandable-text-area {
