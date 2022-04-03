@@ -1,26 +1,46 @@
 .main-button {
     &--primary {
-        @include main-button($button-primary, $button-text-color-primary, $main-button-text, $button-primary-box-shadow);
+        @include main-button(
+            $button-primary,
+            $button-text-color-primary,
+            $main-button-text,
+            $button-primary-box-shadow
+        );
     }
 }
 
 .small-button {
     &--primary {
-        @include main-button($button-primary, $button-text-color-primary, $small-button-text, $button-primary-box-shadow);
+        @include main-button(
+            $button-primary,
+            $button-text-color-primary,
+            $small-button-text,
+            $button-primary-box-shadow
+        );
     }
 
     &--secondary {
-        @include main-button($button-secondary, $button-text-color-primary, $small-button-text, $button-secondary-box-shadow);
+        @include main-button(
+            $button-secondary,
+            $button-text-color-primary,
+            $small-button-text,
+            $button-secondary-box-shadow
+        );
     }
 }
 
 .board-edit-button {
     @include main-button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
-    text-align: center
+    text-align: center;
 }
 
 .confirm-reject-button {
-    @include main-button($button-secondary, $button-text-color-primary, $confirm-reject-text-btn, $button-secondary-box-shadow);
+    @include main-button(
+        $button-secondary,
+        $button-text-color-primary,
+        $confirm-reject-text-btn,
+        $button-secondary-box-shadow
+    );
     padding: 0.2em 1em;
     min-width: 8.2rem;
     width: fit-content;
@@ -32,13 +52,56 @@
 }
 
 .listen-audio-button {
-    @include main-button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
+    @include main-button(
+        $button-secondary,
+        $button-text-color-primary,
+        $board-edit-text-btn,
+        $button-secondary-box-shadow
+    );
     padding: $small-button-padding;
     padding-left: 2rem;
     padding-right: 2rem;
     height: fit-content;
     width: fit-content;
-    box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);;
+    box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+}
+
+.add-subsection-question-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    border: 1px solid $main-color;
+    border-radius: 40px;
+    gap: 1rem;
+    padding: 0.5rem 2rem;
+
+    span {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $regular;
+        width: 17ch;
+        text-align: left;
+    }
+
+    &--main {
+        border-color: $main-color;
+        box-shadow: 0px 5px 6px rgba(112, 120, 253, 0.2);
+
+        span {
+            color: $main-color;
+        }
+    }
+
+    &--secondary {
+        border-color: $secondary-color;
+        box-shadow: 0px 5px 6px rgba(244, 156, 73, 0.2);
+
+        span {
+            color: $secondary-color;
+        }
+    }
 }
 
 .record-audio-again-button {
@@ -149,7 +212,6 @@
         border-radius: 100%;
         width: 8rem;
         height: 8rem;
-        animation: rotate 4s linear infinite
+        animation: rotate 4s linear infinite;
     }
-    
 }

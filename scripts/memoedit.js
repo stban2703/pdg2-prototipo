@@ -98,11 +98,11 @@ export function changeSelectValue() {
 
             options.forEach((option, i) => {
                 option.addEventListener('click', () => {
-                    realInput.value = option.id
+                    realInput.selectedIndex = i
                     selectedOptionField.innerHTML = ``
                     const optionClone = option.cloneNode(true);
                     selectedOptionField.innerHTML = optionClone.innerHTML
-                    console.log(realInput.value)
+                    //console.log(realInput.value)
                 })
             })
         })
@@ -130,7 +130,49 @@ export function getMemoSectionEditFormInfo() {
         const memoEditSections = memoEditForm.querySelectorAll(".memo-subsection-edit")
         memoEditSections.forEach((section, i) => {
             let questions = nextUntil(section, '.memo-subsection-edit')
-            console.log(questions)
+            //console.log(questions)
+        })
+    }
+}
+
+export function onAnswerTypeChange() {
+
+}
+
+export function changeQuestionAnswerType() {
+    const memoEditForm = document.querySelector(".memosectionedit-form")
+
+    if (memoEditForm && window.location.href.includes("#memosectionedit")) {
+        const memoEditQuestions = memoEditForm.querySelectorAll('.memo-question-edit')
+
+        memoEditQuestions.forEach((question, i) => {
+            const questionAnswerTypeSelect = question.querySelector(".memo-question-edit-answertype")
+            console.log(questionAnswerTypeSelect)
+            questionAnswerTypeSelect.addEventListener('input', function(event) {
+                const value = event.target.value
+                //console.log(value)
+                // console.log(event.target.value === 'checkbox')
+                if(value.includes("checkbox")) {
+                    console.log('ok')
+                }
+
+                /*switch (event.target.value) {
+                    case 'checkbox':
+                        console.log("casillas")
+                        break;
+                    case 'radius':
+                        break;
+                    case 'scale':
+                        break;
+                    case 'parragraph':
+                        break;
+                    case 'matrix':
+                        break;
+                    default:
+                        console.log('default')
+                        break;
+                }*/
+            })
         })
     }
 }

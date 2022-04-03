@@ -1367,6 +1367,55 @@ input[type=button] {
   background-color: #fc9b40;
 }
 
+.add-subsection-question-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #FFFFFF;
+  border: 1px solid #979DFF;
+  border-radius: 40px;
+  gap: 1rem;
+  padding: 0.5rem 2rem;
+}
+
+.add-subsection-question-button span {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  width: 17ch;
+  text-align: left;
+}
+
+.add-subsection-question-button--main {
+  border-color: #979DFF;
+  -webkit-box-shadow: 0px 5px 6px rgba(112, 120, 253, 0.2);
+          box-shadow: 0px 5px 6px rgba(112, 120, 253, 0.2);
+}
+
+.add-subsection-question-button--main span {
+  color: #979DFF;
+}
+
+.add-subsection-question-button--secondary {
+  border-color: #FDB572;
+  -webkit-box-shadow: 0px 5px 6px rgba(244, 156, 73, 0.2);
+          box-shadow: 0px 5px 6px rgba(244, 156, 73, 0.2);
+}
+
+.add-subsection-question-button--secondary span {
+  color: #FDB572;
+}
+
 .record-audio-again-button {
   background: none;
   border: 1px solid #FDB572;
@@ -4120,10 +4169,10 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 2rem;
-  gap: 4rem;
+  gap: 3rem;
 }
 
-.memosectionedit-form__section {
+.memosectionedit-form__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4132,6 +4181,39 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
+}
+
+.memosectionedit-form__addSubsectionQuestion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 1rem;
+}
+
+.memosectionedit-form__control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.memosectionedit-form__submitButton {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .signinup-screen {
