@@ -6,7 +6,7 @@
  * @param  {String} filter   The selector to match siblings against [optional]
  * @return {Array}           The siblings
  */
-export const nextUntil = function (elem, selector, filter) {
+export let nextUntil = function (elem, selector, filter) {
 
 	// Setup siblings array
 	var siblings = [];

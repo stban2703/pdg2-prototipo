@@ -1,3 +1,5 @@
+import { nextUntil } from "./utils/nextUntil.js";
+
 export function onContentEditableEnter() {
     const pseudoInputs = document.querySelectorAll(".memoedit-form__pseudo-input--text")
     if (window.location.href.includes("#memoedit") && pseudoInputs.length > 0) {
@@ -125,6 +127,10 @@ export function changeMemoEditInputsTextSize() {
 export function getMemoSectionEditFormInfo() {
     const memoEditForm = document.querySelector(".memosectionedit-form")
     if (memoEditForm && window.location.href.includes("#memosectionedit")) {
-        
+        const memoEditSections = memoEditForm.querySelectorAll(".memo-subsection-edit")
+        memoEditSections.forEach((section, i) => {
+            let questions = nextUntil(section, '.memo-subsection-edit')
+            console.log(questions)
+        })
     }
 }
