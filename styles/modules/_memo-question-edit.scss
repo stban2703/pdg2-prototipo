@@ -72,4 +72,20 @@
         justify-content: center;
         gap: 4rem;
     }
+
+    &__rowSection {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__columnSection {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        
+        select {
+            max-width: 8rem;
+        }
+    }
 }

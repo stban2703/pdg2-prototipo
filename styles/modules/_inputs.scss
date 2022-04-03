@@ -382,11 +382,12 @@
 
 .memo-radio-input {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     font-size: 1.8rem;
     font-family: $poppins;
     color: $silver;
+    gap: 0.5rem;
 
     input[type="radio"] {
         appearance: none;
