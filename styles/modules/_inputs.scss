@@ -33,6 +33,18 @@
     width: 100%;
     position: relative;
 
+    &__number {
+        position: absolute;
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+        text-align: right;
+        margin-left: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
     &__label {
         position: absolute;
         padding: 0 0.5rem;
@@ -48,6 +60,13 @@
     &__field {
         @include fix-label-text-input($main-color);
         outline-color: $main-color;
+    }
+
+    &--number {
+        .fix-label-text-input__field {
+            padding-left: 4rem;
+        }
+
     }
 
     &--secondary {
@@ -98,6 +117,13 @@
         outline-color: $main-color;
         text-overflow: ellipsis;
     }
+}
+
+.scale-select-input {
+    @include select-input();
+    padding-right: 3rem;
+    outline-color: $main-color;
+    text-overflow: ellipsis;
 }
 
 .select-notes-filter {

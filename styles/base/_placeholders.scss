@@ -105,15 +105,10 @@
     appearance: none;
     background-image: url("./../images/selectarrow.svg");
     background-repeat: no-repeat;
-    background-position-x: 90%;
-    background-position-x: calc(100% - 1em);
+    background-position-x: calc(100% - 0.8em);
     background-position-y: 50%;
 
     &:focus {
-        border-color: $input-border-color-focused;
-    }
-
-    &:valid {
         border-color: $input-border-color-focused;
     }
 

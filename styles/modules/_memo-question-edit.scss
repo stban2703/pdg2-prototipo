@@ -19,6 +19,23 @@
         gap: 2rem;
     }
 
+    &__scaleRanges {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+
+        select {
+            max-width: 8rem;
+        }
+    }
+
+    &__scaleTags {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
     &__answerList {
         display: flex;
     }
