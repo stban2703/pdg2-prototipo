@@ -81,7 +81,8 @@ export function submitMemoEditForm() {
 }
 
 
-export function changeSelectValue() {
+
+function changeSelectValue() {
     const memoformSelects = document.querySelectorAll(".memoform-select")
 
     if (memoformSelects.length > 0) {
@@ -96,9 +97,11 @@ export function changeSelectValue() {
                 optionList.classList.toggle('memoform-optionList--focus')
             })
 
+            const realOptions = realInput.querySelectorAll('option')
             options.forEach((option, i) => {
                 option.addEventListener('click', () => {
-                    realInput.selectedIndex = i
+                    realInput.value = option.id
+                    realInput.setAttribute('value', option.id)
                     selectedOptionField.innerHTML = ``
                     const optionClone = option.cloneNode(true);
                     selectedOptionField.innerHTML = optionClone.innerHTML
@@ -109,7 +112,7 @@ export function changeSelectValue() {
     }
 }
 
-export function changeMemoEditInputsTextSize() {
+function changeMemoEditInputsTextSize() {
     const memoEditTextInputs = document.querySelectorAll(".expandable-text-area__field")
     if (memoEditTextInputs.length > 0) {
         memoEditTextInputs.forEach(input => {
@@ -124,7 +127,7 @@ export function changeMemoEditInputsTextSize() {
     }
 }
 
-export function getMemoSectionEditFormInfo() {
+function getMemoSectionEditFormSubsectionsAndQuestions() {
     const memoEditForm = document.querySelector(".memosectionedit-form")
     if (memoEditForm && window.location.href.includes("#memosectionedit")) {
         const memoEditSections = memoEditForm.querySelectorAll(".memo-subsection-edit")
@@ -135,44 +138,40 @@ export function getMemoSectionEditFormInfo() {
     }
 }
 
-export function onAnswerTypeChange() {
-
-}
-
-export function changeQuestionAnswerType() {
+function changeQuestionAnswerType() {
     const memoEditForm = document.querySelector(".memosectionedit-form")
 
     if (memoEditForm && window.location.href.includes("#memosectionedit")) {
         const memoEditQuestions = memoEditForm.querySelectorAll('.memo-question-edit')
 
         memoEditQuestions.forEach((question, i) => {
-            const questionAnswerTypeSelect = question.querySelector(".memo-question-edit-answertype")
-            console.log(questionAnswerTypeSelect)
-            questionAnswerTypeSelect.addEventListener('input', function(event) {
-                const value = event.target.value
-                //console.log(value)
-                // console.log(event.target.value === 'checkbox')
-                if(value.includes("checkbox")) {
-                    console.log('ok')
-                }
+            const questionAnswerTypeSelect = question.querySelector(".memo-question-edit-answertype-select")
+            const answerTypesElements = question.querySelectorAll(".memo-question-edit__answertype")
 
-                /*switch (event.target.value) {
-                    case 'checkbox':
-                        console.log("casillas")
-                        break;
-                    case 'radius':
-                        break;
-                    case 'scale':
-                        break;
-                    case 'parragraph':
-                        break;
-                    case 'matrix':
-                        break;
-                    default:
-                        console.log('default')
-                        break;
-                }*/
-            })
+            let selectObserver = new MutationObserver(function (mutationsList, observer) {
+                //mutationsList.forEach(e => {/*console.log(e);*/})
+                const value = questionAnswerTypeSelect.value
+
+                answerTypesElements.forEach((answerType, j) => {
+                    if(answerType.id.includes(value)) {
+                        answerType.classList.remove('hidden')
+                    } else {
+                        answerType.classList.add('hidden')
+                    }
+                })
+            });
+            selectObserver.observe(questionAnswerTypeSelect, { subtree: true, attributes: true });
         })
     }
+}
+
+function addJustificationQuestion() {
+    
+}
+
+export function addMemoSectionFormFunctions() {
+    changeSelectValue()
+    changeMemoEditInputsTextSize()
+    getMemoSectionEditFormSubsectionsAndQuestions()
+    changeQuestionAnswerType()
 }

@@ -3,7 +3,7 @@ import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "
 import { submitNote } from "./createnote.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { changeMemoEditFormPage, changeMemoEditInputsTextSize, changeQuestionAnswerType, changeSelectValue, getMemoSectionEditFormInfo, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
+import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { getInitialNoteList, onFilterListener } from "./notes.js";
@@ -64,9 +64,7 @@ window.addEventListener("hashchange", function () {
 // Detectar cambios de pantalla
 const pageContent = document.querySelector(".page-content")
 let observer = new MutationObserver(function (mutationsList, observer) {
-    mutationsList.forEach(e => {
-        //console.log(e);
-    })
+    //mutationsList.forEach(e => {/*console.log(e);*/})
     addPageFuncions()
 });
 observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
@@ -100,10 +98,7 @@ function addPageFuncions() {
     onContentEditableEnter()
     updateMemoPseudoInputsValueLocally(memoProperties)
     renderMemoEditValues(memoProperties)
-    changeSelectValue()
-    changeMemoEditInputsTextSize()
-    getMemoSectionEditFormInfo()
-    changeQuestionAnswerType()
+    addMemoSectionFormFunctions()
     goBack()
 }
 

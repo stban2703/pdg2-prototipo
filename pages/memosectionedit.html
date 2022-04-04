@@ -60,7 +60,7 @@
                                     <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
                                     <span class="memoform-option__label">Casillas</span>
                                 </div>
-                                <div class="memoform-option" id="radius">
+                                <div class="memoform-option" id="radio">
                                     <img class="memoform-option__icon" src="./images/memoradiusicon.svg" alt="">
                                     <span class="memoform-option__label">Varias opciones</span>
                                 </div>
@@ -78,10 +78,10 @@
                                 </div>
                             </div>
                         </div>
-                        <select class="memoform-select__realfield memo-question-edit-answertype" name="answertype"
-                            id="answertype" required>
+                        <select class="memoform-select__realfield memo-question-edit-answertype-select" name="answertype"
+                            id="answertype" required hidden>
                             <option value="checkbox">Casillas</option>
-                            <option value="radius">Selección multiple</option>
+                            <option value="radio">Selección multiple</option>
                             <option value="scale">Escala</option>
                             <option value="parragraph">Párrafo</option>
                             <option value="matrix">Matriz</option>
@@ -89,7 +89,7 @@
                     </div>
                 </section>
                 <section class="memo-question-edit__section memo-question-edit__section--checkbox">
-                    <fieldset class="memo-question-edit__answertype" title="questioncheckbox">
+                    <fieldset class="memo-question-edit__answertype" id="questioncheckbox">
                         <section class="memo-question-edit__answersList">
                             <div class="memo-answer-option-edit">
                                 <div class="memo-answer-option-edit__input">
@@ -118,7 +118,7 @@
                             </div>
                         </section>
                     </fieldset>
-                    <fieldset class="memo-question-edit__answertype hidden" title="questionradio">
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionradio">
                         <section class="memo-question-edit__answersList">
                             <div class="memo-answer-option-edit">
                                 <div class="memo-answer-option-edit__input">
@@ -146,7 +146,7 @@
                             </div>
                         </section>
                     </fieldset>
-                    <fieldset class="memo-question-edit__answertype hidden" title="questionscale">
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionscale">
                         <section class="memo-question-edit__scaleRanges">
                             <p class="memo-question-edit__subtitle">De</p>
                             <select class="scale-select-input" name="minscale" id="minscale">
@@ -188,14 +188,14 @@
                             </div>
                         </section>
                     </fieldset>
-                    <fieldset class="memo-question-edit__answertype hidden" title="questionparragraph">
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionparragraph">
                         <div class="text-area-input text-area-input--disabled">
                             <label for="parragraph" class="text-area-input__label">Campo de texto</label>
                             <textarea class="text-area-input__field" name="parragraph" id="parragraph" rows="5"
                                 placeholder="Texto de respuesta larga" disabled></textarea>
                         </div>
                     </fieldset>
-                    <fieldset class="memo-question-edit__answertype hidden" title="questionmatrixrow">
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionmatrixrow">
                         <section class="memo-question-edit__rowSection">
                             <h5 class="memo-question-edit__subtitle">Filas</h5>
                             <section class="memo-question-edit__rowList">
@@ -228,7 +228,7 @@
                             </section>
                         </section>
                     </fieldset>
-                    <fieldset class="memo-question-edit__answertype hidden" title="questionmatrixcolumn">
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionmatrixcolumn">
                         <section class="memo-question-edit__columnSection">
                             <h5 class="memo-question-edit__subtitle">Columnas</h5>
                             <select class="scale-select-input" name="maxscale" id="maxscale">
@@ -259,7 +259,7 @@
                             </div>
                         </section>
                     </fieldset>
-                    <fieldset class="memo-question-edit__justification" title="questionjustification">
+                    <fieldset class="memo-question-edit__justification" id="questionjustification">
                         <section class="memo-question-edit__addJustification">
                             <section>
                                 <h5 class="memo-question-edit__subtitle">Justificación</h5>
