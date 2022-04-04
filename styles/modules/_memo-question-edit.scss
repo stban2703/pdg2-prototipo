@@ -81,6 +81,12 @@
         gap: 2rem;
     }
 
+    &__rowList {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
     &__columnSection {
         display: flex;
         flex-direction: column;

@@ -191,6 +191,15 @@ function changeQuestionProperties() {
             const minScaleTag = scaleAnswerSection.querySelector(".min-scale-tag-input")
             const maxScaleTag = scaleAnswerSection.querySelector(".max-scale-tag-input")
 
+            // Elementos de matriz
+            const matrixRowAnswerSection = question.querySelector("#questionmatrixrow")
+            const matrixRowOptionList = matrixRowAnswerSection.querySelector(".memo-question-edit__rowList")
+            const addRowOptionInput = matrixRowAnswerSection.querySelector("#addnewitem")
+
+            const matrixColumnAnswerSection = question.querySelector("#questionmatrixcolumn")
+            const matrixColumnInput = matrixColumnAnswerSection.querySelector("#maxscale")
+            const matrixColumnMaxTag = matrixColumnAnswerSection.querySelector(".matrix-row-max-tag")
+
             // Cambiar tipo de respuesta
             let selectObserver = new MutationObserver(function (mutationsList, observer) {
                 //mutationsList.forEach(e => {/*console.log(e);*/})
@@ -290,6 +299,36 @@ function changeQuestionProperties() {
                 } else {
                     maxScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${maxvalue}.`
                 }
+            })
+
+            // Agregar fila de matriz
+            addRowOptionInput.addEventListener('click', () => {
+                const newMatrixRowOption = document.createElement('div')
+                newMatrixRowOption.className = "memo-answer-option-edit"
+                newMatrixRowOption.innerHTML = `
+                <div class="memo-answer-option-edit__input">
+                <span class="memo-answer-option-edit__number">${matrixRowOptionList.children.length + 1}.</span>
+                <input class="memo-answer-option-edit__field" id="row" name="row" type="text" placeholder="Escribe el nombre aquí">
+                <label class="memo-answer-option-edit__label" for="row">Nombre de la fila</label>
+                </div>
+                <button class="memo-answer-option-edit__deleteButton" type="button">
+                <img src="./images/deleteagreement.svg" alt="">
+                </button>
+                `
+                matrixRowOptionList.appendChild(newMatrixRowOption)
+
+                const matrixOptionInput = newMatrixRowOption.querySelector("#row")
+                matrixOptionInput.focus()
+
+                const deleteRowOptionButton = newMatrixRowOption.querySelector(".memo-answer-option-edit__deleteButton")
+                deleteRowOptionButton.addEventListener("click", (event) => {
+                    newMatrixRowOption.remove()
+                })
+            })
+
+            matrixColumnInput.addEventListener('input', (event) => {
+                const value = event.target.value
+                matrixColumnMaxTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${value}.`
             })
         })
     }
