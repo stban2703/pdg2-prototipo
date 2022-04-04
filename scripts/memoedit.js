@@ -81,6 +81,28 @@ export function submitMemoEditForm() {
 }
 
 
+let sections = [
+    {
+        name: "",
+        index: 0,
+        questions: [
+            {
+                name: "",
+                index: 0,
+                type: "checkbox",
+                justificationQuestion: "",
+                itemList: [
+                    ""
+                ],
+                matrix: [
+
+                ]
+            }
+        ]
+    }
+
+]
+
 
 function changeSelectValue() {
     const memoformSelects = document.querySelectorAll(".memoform-select")
@@ -137,25 +159,38 @@ function getMemoSectionEditFormSubsectionsAndQuestions() {
     }
 }
 
-function changeQuestionAnswerType() {
+function changeQuestionProperties() {
     const memoEditForm = document.querySelector(".memosectionedit-form")
 
     if (memoEditForm && window.location.href.includes("#memosectionedit")) {
         const memoEditQuestions = memoEditForm.querySelectorAll('.memo-question-edit')
 
         memoEditQuestions.forEach((question, i) => {
+            // Elementos de tipo de respuesta
             const questionAnswerTypeSelect = question.querySelector(".memo-question-edit-answertype-select")
             const answerTypesElements = question.querySelectorAll(".memo-question-edit__answertype")
+
+            // Elementos de justificzcion
             const addJustificationQuestionInput = question.querySelectorAll("input[name='addjustication']")
             const questionJusticationQuestionInput = question.querySelector(".justificationquestion-input-container")
 
-            // Tipo de respuesta
+            // Elementos de checkbox
+            const checkboxAnswerSection = question.querySelector("#questioncheckbox")
+            const checkboxOptionList = checkboxAnswerSection.querySelector(".memo-question-edit__answersList")
+            const addCheckboxOptionInput = checkboxAnswerSection.querySelector("#addnewitem")
+
+            // Elementos de radio
+            const radioAnswerSection = question.querySelector("#questionradio")
+            const radioOptionList = radioAnswerSection.querySelector(".memo-question-edit__answersList")
+            const addRadioOptionInput = radioAnswerSection.querySelector("#addnewitem")
+
+            // Cambiar tipo de respuesta
             let selectObserver = new MutationObserver(function (mutationsList, observer) {
                 //mutationsList.forEach(e => {/*console.log(e);*/})
                 const value = questionAnswerTypeSelect.value
 
                 answerTypesElements.forEach((answerType, j) => {
-                    if(answerType.id.includes(value)) {
+                    if (answerType.id.includes(value)) {
                         answerType.classList.remove('hidden')
                     } else {
                         answerType.classList.add('hidden')
@@ -167,11 +202,63 @@ function changeQuestionAnswerType() {
             // Pregunta de justificacion
             addJustificationQuestionInput.forEach((elem, j) => {
                 elem.addEventListener('input', () => {
-                    if(elem.value == "yes") {
+                    if (elem.value == "yes") {
                         questionJusticationQuestionInput.classList.remove('hidden')
                     } else {
                         questionJusticationQuestionInput.classList.add('hidden')
                     }
+                })
+            })
+
+
+            // Agregar opcion para checkbox
+            addCheckboxOptionInput.addEventListener('click', () => {
+                const newCheckBoxOption = document.createElement('div')
+                newCheckBoxOption.className = "memo-answer-option-edit"
+                newCheckBoxOption.innerHTML = `
+                <div class="memo-answer-option-edit__input">
+                <img class="memo-answer-option-edit__icon" src="./images/memocheckboxicon.svg" alt="">
+                <input class="memo-answer-option-edit__field" id="answeroption" name="answeroption" type="text" placeholder="Escriba la opción de respuesta">
+                <label class="memo-answer-option-edit__label" for="answeroption">Opción ${checkboxOptionList.children.length + 1}</label>
+                </div>
+                <button class="memo-answer-option-edit__deleteButton" type="button">
+                    <img src="./images/deleteagreement.svg" alt="">
+                </button>
+                `
+                checkboxOptionList.appendChild(newCheckBoxOption)
+
+                const checkboxOptionInput = newCheckBoxOption.querySelector("#answeroption")
+                checkboxOptionInput.focus()
+
+                const deleteCheckboxoptionButton = newCheckBoxOption.querySelector(".memo-answer-option-edit__deleteButton")
+                deleteCheckboxoptionButton.addEventListener("click", (event) => {
+                    newCheckBoxOption.remove()
+                })
+            })
+
+
+            // Agregar opcion para radio
+            addRadioOptionInput.addEventListener('click', () => {
+                const newRadioOption = document.createElement('div')
+                newRadioOption.className = "memo-answer-option-edit"
+                newRadioOption.innerHTML = `
+                <div class="memo-answer-option-edit__input">
+                <img class="memo-answer-option-edit__icon" src="./images/memoradiusicon.svg" alt="">
+                <input class="memo-answer-option-edit__field" id="answeroption" name="answeroption" type="text" placeholder="Escriba la opción de respuesta">
+                <label class="memo-answer-option-edit__label" for="answeroption">Opción ${radioOptionList.children.length + 1}</label>
+                </div>
+                <button class="memo-answer-option-edit__deleteButton" type="button">
+                    <img src="./images/deleteagreement.svg" alt="">
+                </button>
+                `
+                radioOptionList.appendChild(newRadioOption)
+
+                const radioOptionInput = newRadioOption.querySelector("#answeroption")
+                radioOptionInput.focus()
+
+                const deleteRadioptionButton = newRadioOption.querySelector(".memo-answer-option-edit__deleteButton")
+                deleteRadioptionButton.addEventListener("click", (event) => {
+                    newRadioOption.remove()
                 })
             })
         })
@@ -182,5 +269,5 @@ export function addMemoSectionFormFunctions() {
     changeSelectValue()
     changeMemoEditInputsTextSize()
     getMemoSectionEditFormSubsectionsAndQuestions()
-    changeQuestionAnswerType()
+    changeQuestionProperties()
 }

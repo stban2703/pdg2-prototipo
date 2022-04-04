@@ -2734,10 +2734,15 @@ input[type=button] {
   gap: 2rem;
 }
 
-.memo-question-edit__answerList {
+.memo-question-edit__answersList {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
 }
 
 .memo-question-edit__addJustification {

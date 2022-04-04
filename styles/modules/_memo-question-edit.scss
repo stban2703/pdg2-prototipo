@@ -36,8 +36,10 @@
         gap: 2rem;
     }
 
-    &__answerList {
+    &__answersList {
         display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     &__addJustification {
