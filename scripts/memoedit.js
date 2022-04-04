@@ -184,6 +184,13 @@ function changeQuestionProperties() {
             const radioOptionList = radioAnswerSection.querySelector(".memo-question-edit__answersList")
             const addRadioOptionInput = radioAnswerSection.querySelector("#addnewitem")
 
+            // Elementos de escala
+            const scaleAnswerSection = question.querySelector("#questionscale")
+            const minScaleInput = scaleAnswerSection.querySelector("#minscale")
+            const maxScaleInput = scaleAnswerSection.querySelector("#maxscale")
+            const minScaleTag = scaleAnswerSection.querySelector(".min-scale-tag-input")
+            const maxScaleTag = scaleAnswerSection.querySelector(".max-scale-tag-input")
+
             // Cambiar tipo de respuesta
             let selectObserver = new MutationObserver(function (mutationsList, observer) {
                 //mutationsList.forEach(e => {/*console.log(e);*/})
@@ -210,7 +217,6 @@ function changeQuestionProperties() {
                 })
             })
 
-
             // Agregar opcion para checkbox
             addCheckboxOptionInput.addEventListener('click', () => {
                 const newCheckBoxOption = document.createElement('div')
@@ -236,7 +242,6 @@ function changeQuestionProperties() {
                 })
             })
 
-
             // Agregar opcion para radio
             addRadioOptionInput.addEventListener('click', () => {
                 const newRadioOption = document.createElement('div')
@@ -260,6 +265,31 @@ function changeQuestionProperties() {
                 deleteRadioptionButton.addEventListener("click", (event) => {
                     newRadioOption.remove()
                 })
+            })
+
+            // Cambiar valores de la escala
+            minScaleInput.addEventListener('input', (event) => {
+                const minvalue = event.target.value
+                const maxvalue = maxScaleInput.value
+
+                if(parseInt(minvalue) >= parseInt(maxvalue)) {
+                    minScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${parseInt(maxvalue) - 1}.`
+                    minScaleInput.value = parseInt(maxvalue) - 1
+                } else {
+                    minScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${minvalue}.`
+                }
+            })
+
+            maxScaleInput.addEventListener('input', (event) => {
+                const maxvalue = event.target.value
+                const minvalue = minScaleInput.value
+
+                if(parseInt(maxvalue) <= parseInt(minvalue)) {
+                    maxScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${parseInt(minvalue) + 1}.`
+                    maxScaleInput.value = parseInt(minvalue) + 1
+                } else {
+                    maxScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${maxvalue}.`
+                }
             })
         })
     }

@@ -123,6 +123,10 @@
     padding-right: 3rem;
     outline-color: $main-color;
     text-overflow: ellipsis;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .select-notes-filter {

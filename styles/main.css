@@ -803,6 +803,10 @@ input[type=button] {
   text-overflow: ellipsis;
 }
 
+.scale-select-input:hover {
+  cursor: pointer;
+}
+
 .select-notes-filter {
   background-color: #FFFFFF;
   border: 1px solid #A0A0A0;
