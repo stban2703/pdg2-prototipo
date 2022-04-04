@@ -97,7 +97,6 @@ function changeSelectValue() {
                 optionList.classList.toggle('memoform-optionList--focus')
             })
 
-            const realOptions = realInput.querySelectorAll('option')
             options.forEach((option, i) => {
                 option.addEventListener('click', () => {
                     realInput.value = option.id
@@ -147,7 +146,10 @@ function changeQuestionAnswerType() {
         memoEditQuestions.forEach((question, i) => {
             const questionAnswerTypeSelect = question.querySelector(".memo-question-edit-answertype-select")
             const answerTypesElements = question.querySelectorAll(".memo-question-edit__answertype")
+            const addJustificationQuestionInput = question.querySelectorAll("input[name='addjustication']")
+            const questionJusticationQuestionInput = question.querySelector(".justificationquestion-input-container")
 
+            // Tipo de respuesta
             let selectObserver = new MutationObserver(function (mutationsList, observer) {
                 //mutationsList.forEach(e => {/*console.log(e);*/})
                 const value = questionAnswerTypeSelect.value
@@ -161,12 +163,19 @@ function changeQuestionAnswerType() {
                 })
             });
             selectObserver.observe(questionAnswerTypeSelect, { subtree: true, attributes: true });
+
+            // Pregunta de justificacion
+            addJustificationQuestionInput.forEach((elem, j) => {
+                elem.addEventListener('input', () => {
+                    if(elem.value == "yes") {
+                        questionJusticationQuestionInput.classList.remove('hidden')
+                    } else {
+                        questionJusticationQuestionInput.classList.add('hidden')
+                    }
+                })
+            })
         })
     }
-}
-
-function addJustificationQuestion() {
-    
 }
 
 export function addMemoSectionFormFunctions() {
