@@ -281,7 +281,7 @@ function changeQuestionProperties() {
                 const minvalue = event.target.value
                 const maxvalue = maxScaleInput.value
 
-                if(parseInt(minvalue) >= parseInt(maxvalue)) {
+                if (parseInt(minvalue) >= parseInt(maxvalue)) {
                     minScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${parseInt(maxvalue) - 1}.`
                     minScaleInput.value = parseInt(maxvalue) - 1
                 } else {
@@ -293,7 +293,7 @@ function changeQuestionProperties() {
                 const maxvalue = event.target.value
                 const minvalue = minScaleInput.value
 
-                if(parseInt(maxvalue) <= parseInt(minvalue)) {
+                if (parseInt(maxvalue) <= parseInt(minvalue)) {
                     maxScaleTag.querySelector(".memo-answer-option-edit__number").innerHTML = `${parseInt(minvalue) + 1}.`
                     maxScaleInput.value = parseInt(minvalue) + 1
                 } else {
@@ -334,9 +334,298 @@ function changeQuestionProperties() {
     }
 }
 
+function addNewQuestion() {
+    const memoEditForm = document.querySelector(".memosectionedit-form")
+
+    if (memoEditForm && window.location.href.includes("#memosectionedit")) {
+
+        const addQuestionBtn = document.querySelector('.addQuestionBtn')
+        const memosectioneditFormContent = memoEditForm.querySelector('.memosectionedit-form__content')
+
+        addQuestionBtn.addEventListener('click', () => {
+            const newQuestion = document.createElement('fieldset')
+            newQuestion.className = `memo-question-edit memo-edit-form-item`
+            newQuestion.innerHTML = `
+                <section class="memo-question-edit__section">
+                    <div class="expandable-text-area">
+                        <textarea id="question" class="expandable-text-area__field question" name="question1"
+                            placeholder="Escribe aquí la pregunta" required rows="1"></textarea>
+                        <label class="expandable-text-area__label" for="question">Pregunta</label>
+                    </div>
+                    <div class="memoform-select">
+                        <span class="memoform-select__label">Tipo de respuesta</span>
+                        <div class="memoform-select__pseudofield">
+                            <div class="memoform-select__selectedOption">
+                                <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
+                                <span class="memoform-option__label">Casillas</span>
+                            </div>
+                            <img class="memoform-select__arrow" src="./images/memocustomselectarrow.svg" alt="">
+                            <div class="memoform-optionList">
+                                <div class="memoform-option" id="checkbox">
+                                    <img class="memoform-option__icon" src="./images/memocheckboxicon.svg" alt="">
+                                    <span class="memoform-option__label">Casillas</span>
+                                </div>
+                                <div class="memoform-option" id="radio">
+                                    <img class="memoform-option__icon" src="./images/memoradiusicon.svg" alt="">
+                                    <span class="memoform-option__label">Varias opciones</span>
+                                </div>
+                                <div class="memoform-option" id="scale">
+                                    <img class="memoform-option__icon" src="./images/memoscaleicon.svg" alt="">
+                                    <span class="memoform-option__label">Escala</span>
+                                </div>
+                                <div class="memoform-option" id="parragraph">
+                                    <img class="memoform-option__icon" src="./images/memoparragraphicon.svg" alt="">
+                                    <span class="memoform-option__label">Párrafo</span>
+                                </div>
+                                <div class="memoform-option" id="matrix">
+                                    <img class="memoform-option__icon" src="./images/memomatrixicon.svg" alt="">
+                                    <span class="memoform-option__label">Matriz</span>
+                                </div>
+                            </div>
+                        </div>
+                        <select class="memoform-select__realfield memo-question-edit-answertype-select" name="answertype"
+                            id="answertype" required hidden>
+                            <option value="checkbox">Casillas</option>
+                            <option value="radio">Selección multiple</option>
+                            <option value="scale">Escala</option>
+                            <option value="parragraph">Párrafo</option>
+                            <option value="matrix">Matriz</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="memo-question-edit__section">
+                    <fieldset class="memo-question-edit__answertype" id="questioncheckbox">
+                        <section class="memo-question-edit__answersList">
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input">
+                                    <img class="memo-answer-option-edit__icon" src="./images/memocheckboxicon.svg"
+                                        alt="">
+                                    <input class="memo-answer-option-edit__field" id="answeroption" name="answeroption"
+                                        type="text" placeholder="Escriba la opción de respuesta">
+                                    <label class="memo-answer-option-edit__label" for="answeroption">Opción 1</label>
+                                </div>
+                                <!--<button class="memo-answer-option-edit__deleteButton" type="button">
+                                    <img src="./images/deleteagreement.svg" alt="">
+                                </button>-->
+                            </div>
+                        </section>
+                        <section class="memo-question-edit__answersControl">
+                            <div class="add-item-input">
+                                <div class="add-item-input__icon">
+                                    <img src="./images/plusagreement.svg" alt="">
+                                </div>
+                                <div class="fix-label-text-input fix-label-text-input--secondary add-item-input__input">
+                                    <input id="addnewitem" class="fix-label-text-input__field add-item-input__field"
+                                        type="text" name="addnewitem" placeholder="Haz click para agregar una opción"
+                                        autocomplete="off">
+                                    <label class="fix-label-text-input__label" for="addnewitem">Agregar opción</label>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionradio">
+                        <section class="memo-question-edit__answersList">
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input">
+                                    <img class="memo-answer-option-edit__icon" src="./images/memoradiusicon.svg" alt="">
+                                    <input class="memo-answer-option-edit__field" id="answeroption" name="answeroption"
+                                        type="text" placeholder="Escriba la opción de respuesta">
+                                    <label class="memo-answer-option-edit__label" for="answeroption">Opción 1</label>
+                                </div>
+                                <!--<button class="memo-answer-option-edit__deleteButton" type="button">
+                                    <img src="./images/deleteagreement.svg" alt="">
+                                </button>-->
+                            </div>
+                        </section>
+                        <section class="memo-question-edit__answersControl">
+                            <div class="add-item-input">
+                                <div class="add-item-input__icon">
+                                    <img src="./images/plusagreement.svg" alt="">
+                                </div>
+                                <div class="fix-label-text-input fix-label-text-input--secondary add-item-input__input">
+                                    <input id="addnewitem" class="fix-label-text-input__field add-item-input__field"
+                                        type="text" name="addnewitem" placeholder="Haz click para agregar una opción"
+                                        autocomplete="off">
+                                    <label class="fix-label-text-input__label" for="addnewitem">Agregar opción</label>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionscale">
+                        <section class="memo-question-edit__scaleRanges">
+                            <p class="memo-question-edit__subtitle">De</p>
+                            <select class="scale-select-input" name="minscale" id="minscale">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <p class="memo-question-edit__subtitle">a</p>
+                            <select class="scale-select-input" name="maxscale" id="maxscale">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6" selected="selected">6</option>
+                            </select>
+                        </section>
+                        <section class="memo-question-edit__scaleTags">
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input min-scale-tag-input">
+                                    <span class="memo-answer-option-edit__number">1.</span>
+                                    <input class="memo-answer-option-edit__field" id="minscaletag" name="minscaletag"
+                                        type="text" placeholder="Escribe la etiqueta aquí">
+                                    <label class="memo-answer-option-edit__label" for="minscaletag">Nombre de
+                                        etiqueta</label>
+                                </div>
+                            </div>
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input max-scale-tag-input">
+                                    <span class="memo-answer-option-edit__number">6.</span>
+                                    <input class="memo-answer-option-edit__field" id="maxscaletag" name="maxscaletag"
+                                        type="text" placeholder="Escribe la etiqueta aquí">
+                                    <label class="memo-answer-option-edit__label" for="maxscaletag">Nombre de
+                                        etiqueta</label>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionparragraph">
+                        <div class="text-area-input text-area-input--disabled">
+                            <label for="parragraph" class="text-area-input__label">Campo de texto</label>
+                            <textarea class="text-area-input__field" name="parragraph" id="parragraph" rows="5"
+                                placeholder="Texto de respuesta larga (Ejemplo)" disabled></textarea>
+                        </div>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionmatrixrow">
+                        <section class="memo-question-edit__rowSection">
+                            <h5 class="memo-question-edit__subtitle">Filas</h5>
+                            <section class="memo-question-edit__rowList">
+                                <div class="memo-answer-option-edit">
+                                    <div class="memo-answer-option-edit__input">
+                                        <span class="memo-answer-option-edit__number">1.</span>
+                                        <input class="memo-answer-option-edit__field" id="row" name="row" type="text"
+                                            placeholder="Escribe el nombre aquí">
+                                        <label class="memo-answer-option-edit__label" for="row">Nombre de la
+                                            fila</label>
+                                    </div>
+                                    <!--<button class="memo-answer-option-edit__deleteButton" type="button">
+                                        <img src="./images/deleteagreement.svg" alt="">
+                                    </button>-->
+                                </div>
+                            </section>
+                            <section class="memo-question-edit__rowControl">
+                                <div class="add-item-input">
+                                    <div class="add-item-input__icon">
+                                        <img src="./images/plusagreement.svg" alt="">
+                                    </div>
+                                    <div
+                                        class="fix-label-text-input fix-label-text-input--secondary add-item-input__input">
+                                        <input id="addnewitem" class="fix-label-text-input__field add-item-input__field"
+                                            type="text" name="addnewitem" placeholder="Haz click aquí para agregar una fila"
+                                            autocomplete="off">
+                                        <label class="fix-label-text-input__label" for="addnewitem">Agregar opción</label>
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__answertype hidden" id="questionmatrixcolumn">
+                        <section class="memo-question-edit__columnSection">
+                            <h5 class="memo-question-edit__subtitle">Columnas</h5>
+                            <select class="scale-select-input" name="maxscale" id="maxscale">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6" selected="selected">6</option>
+                            </select>
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input">
+                                    <span class="memo-answer-option-edit__number">1.</span>
+                                    <input class="memo-answer-option-edit__field" id="mincolumntag" name="mincolumntag"
+                                        type="text" placeholder="Escribe la etiqueta aquí">
+                                    <label class="memo-answer-option-edit__label" for="mincolumntag">Nombre de
+                                        etiqueta</label>
+                                </div>
+                            </div>
+                            <div class="memo-answer-option-edit">
+                                <div class="memo-answer-option-edit__input matrix-row-max-tag">
+                                    <span class="memo-answer-option-edit__number">6.</span>
+                                    <input class="memo-answer-option-edit__field" id="maxcolumntag" name="maxcolumntag"
+                                        type="text" placeholder="Escribe la etiqueta aquí">
+                                    <label class="memo-answer-option-edit__label" for="maxcolumntag">Nombre de
+                                        etiqueta</label>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                    <fieldset class="memo-question-edit__justification" id="questionjustification">
+                        <section class="memo-question-edit__addJustification">
+                            <section>
+                                <h5 class="memo-question-edit__subtitle">Justificación</h5>
+                                <p class="memo-question-edit__text">¿Desea agregar un campo para la justificación?</p>
+                            </section>
+                            <section class="memo-question-edit__yes-no">
+                                <label class="memo-radio-input">
+                                    <input type="radio" name="addjustication" value="yes" />
+                                    Sí
+                                </label>
+                                <label class="memo-radio-input">
+                                    <input type="radio" name="addjustication" value="no" checked />
+                                    No
+                                </label>
+                            </section>
+                            <div class="expandable-text-area justificationquestion-input-container hidden">
+                                <textarea id="justificationquestion" class="expandable-text-area__field question"
+                                    name="justificationquestion" placeholder="Escribe aquí la pregunta" required
+                                    rows="1"></textarea>
+                                <label class="expandable-text-area__label" for="justificationquestion">Pregunta para
+                                    justificación</label>
+                            </div>
+                        </section>
+                    </fieldset>
+                </section>
+            `
+            memosectioneditFormContent.appendChild(newQuestion)
+        })
+    }
+}
+
+function addNewSubsection() {
+    const memoEditForm = document.querySelector(".memosectionedit-form")
+
+    if (memoEditForm && window.location.href.includes("#memosectionedit")) {
+
+        const addSubsectionBtn = document.querySelector('.addSubsectionBtn')
+        const memosectioneditFormContent = memoEditForm.querySelector('.memosectionedit-form__content')
+
+        addSubsectionBtn.addEventListener('click', () => {
+            const newSubsection = document.createElement('fieldset')
+            newSubsection.className = `memo-subsection-edit memo-edit-form-item`
+            newSubsection.innerHTML = `
+            <section class="memo-subsection-edit__header">
+                    <legend class="memo-subsection-edit__title">Subsección</legend>
+                </section>
+                <section class="memo-subsection-edit__body">
+                    <div class="text-input">
+                        <input id="subsectiontitle" class="text-input__field" type="text" name="subsectiontitle"
+                            placeholder=" " required autocomplete="off">
+                        <label class="text-input__label" for="subsectiontitle">Título de la subsección</label>
+                    </div>
+                </section>
+            `
+            memosectioneditFormContent.appendChild(newSubsection)
+        })
+    }
+}
+
 export function addMemoSectionFormFunctions() {
     changeSelectValue()
     changeMemoEditInputsTextSize()
     getMemoSectionEditFormSubsectionsAndQuestions()
     changeQuestionProperties()
+    addNewQuestion()
+    addNewSubsection()
 }
