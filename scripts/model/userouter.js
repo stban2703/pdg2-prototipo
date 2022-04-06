@@ -12,6 +12,7 @@ const router = new Router(
         createmeetingminutes: new Layout(new Page("createmeetingminutes.html")),
         meetingminutesdetails: new Layout(new Page("meetingminutesdetails.html")),
         memosectionedit: new Layout(new Page("memosectionedit.html")),
+        memoselectsubject: new Layout(new Page("memoselectsubject.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

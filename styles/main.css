@@ -3100,6 +3100,35 @@ input[type=button] {
           justify-content: center;
 }
 
+.memo-subject {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
+          box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
+  border-radius: 15px;
+  padding: 4rem;
+  min-height: 19rem;
+}
+
+.memo-subject__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.memo-subject__button {
+  margin-top: auto;
+  text-align: center;
+  max-width: 16rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -4674,6 +4703,56 @@ input[type=button] {
 .memosectionedit-screen__note span {
   font-weight: 300;
   color: #757575;
+}
+
+.memoselectsubject-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.memoselectsubject-screen__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 1.5rem 0;
+}
+
+.memoselectsubject-screen__description {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.memoselectsubject-screen__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+}
+
+.memoselectsubject-screen__subjectList {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
 }
 
 html {
