@@ -1,0 +1,20 @@
+.memoprogress-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+    padding: 2rem 4rem;
+    gap: 2rem;
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        color: $boulder;
+    }
+
+    &__percent {
+        width: 7rem;
+    }
+}

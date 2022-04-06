@@ -28,6 +28,8 @@
 @import "modules/memoform-select";
 @import "modules/memo-answer-option-edit";
 @import "modules/memo-subject";
+@import "modules/memoprogress-item";
+@import "modules/memo-improve-actions";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
@@ -54,6 +56,7 @@
 @import "pages/meetingminutesdetails-screen";
 @import "pages/memosectionedit-screen";
 @import "pages/memoselectsubject-screen";
+@import "pages/memosections-screen";
 
 html {
     font-size: 62.5%;

@@ -1,0 +1,28 @@
+.memo-improve-actions {
+    display: flex;
+    flex-direction: column;
+    background-color: $main-color;
+    padding: 2rem 2rem;
+    border-radius: 15px;
+    align-items: center;
+    gap: 2rem;
+    
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        color: $white;
+        width: 12ch;
+    }
+
+    a {
+        text-align: center;
+        max-width: 12rem;
+    }
+}
