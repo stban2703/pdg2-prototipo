@@ -94,15 +94,36 @@ let sections = [
                 itemList: [
                     ""
                 ],
-                matrix: [
-
-                ]
+                scalemin: "1",
+                scalemax: "6",
+                scalemintag: "",
+                scalemaxtag: "",
+                parragraph: "",
+                matrixrow: [
+                    ""
+                ],
+                matrixcolumnmin: "1",
+                matrixcolumnmax: "6",
+                matrixcolumnmintag: "",
+                matrixcolumnmaxtag: ""
             }
         ]
     }
-
 ]
 
+function renderMemoEditForm(list) {
+    const memoEditForm = document.querySelector(".memosectionedit-form")
+
+    if (memoEditForm && window.location.href.includes("#memosectionedit")) {
+        let copy = JSON.parse(JSON.stringify(list));
+        const memoEditFormContent = memoEditForm.querySelector(".memosectionedit-form__content")
+
+        copy.forEach((memoEditFormItem, index) => {
+            const newItem = document.createElement("fieldset")
+            
+        })
+    }
+}
 
 function changeSelectValue() {
     const memoformSelects = document.querySelectorAll(".memoform-select")
