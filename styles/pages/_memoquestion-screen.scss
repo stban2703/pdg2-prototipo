@@ -1,0 +1,54 @@
+.memoquestion-screen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 2rem;
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    &__number {
+        min-width: 4.8rem;
+        min-height: 4.8rem;
+        background-color: $secondary-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+
+        span {
+            font-family: $poppins;
+            font-size: 2.5rem;
+            font-weight: $semibold;
+            color: $white;
+        }
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2.3rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__progress {
+        width: 100%;
+        background-color: #FFF2E5;
+        height: 1rem;
+        border-radius: 20px;
+        position: relative;
+    }
+
+    &__currentProgress {
+        position: absolute;
+        background-color: $secondary-color;
+        width: 50%;
+        height: 100%;
+        border-radius: 20px;
+    }
+}
