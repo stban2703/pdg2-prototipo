@@ -4487,7 +4487,8 @@ input[type=button] {
   border-radius: 15px;
   padding: 4rem;
   gap: 2rem;
-  max-width: 80rem;
+  width: 100%;
+  max-width: 82rem;
 }
 
 .memoquestion-form__subtitle {
@@ -4558,6 +4559,135 @@ input[type=button] {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   color: #A0A0A0;
+}
+
+.memoquestion-form__scale {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1.8rem;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.memoquestion-form__scaleTag {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #A0A0A0;
+  width: 100%;
+  max-width: 14ch;
+}
+
+.memoquestion-form__scaleList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 4rem;
+}
+
+.memoquestion-form__scaleOption {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+
+.memoquestion-form__scaleOption span {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #A0A0A0;
+}
+
+.memoquestion-form__information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.memoquestion-form__informationList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+
+.memoquestion-form__informationItem {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #757575;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.memoquestion-form__informationItem::marker {
+  color: #979DFF;
+}
+
+.memo-matrix-table__header {
+  font-family: "Poppins", sans-serif;
+  color: #A0A0A0;
+}
+
+.memo-matrix-table__tag {
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+  max-width: 14ch;
+  vertical-align: middle;
+}
+
+.memo-matrix-table__tag--right {
+  text-align: right;
+}
+
+.memo-matrix-table__tag--left {
+  text-align: left;
+}
+
+.memo-matrix-table__number {
+  font-size: 1.8rem;
+  font-weight: 600;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 2rem;
+  padding-bottom: 3rem;
+}
+
+.memo-matrix-table__label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #757575;
+  padding-right: 1.5rem;
+}
+
+.memo-matrix-table__radio {
+  padding: 0 1rem;
+  padding-bottom: 2rem;
 }
 
 .signinup-screen {

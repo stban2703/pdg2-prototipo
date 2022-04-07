@@ -1,0 +1,42 @@
+.memo-matrix-table {
+    &__header {
+        font-family: $poppins;
+        color: $silver;
+    }
+
+    &__tag {
+        font-size: 1.5rem;
+        padding-bottom: 2rem;
+        max-width: 14ch;
+        vertical-align: middle;
+
+        &--right {
+            text-align: right;
+        }
+
+        &--left {
+            text-align: left;
+        }
+    }
+
+    &__number {
+        font-size: 1.8rem;
+        font-weight: $semibold;
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 2rem;
+        padding-bottom: 3rem;
+    }
+
+    &__label {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        color: $boulder;
+        padding-right: 1.5rem;
+    }
+
+    &__radio {
+        padding: 0 1rem;
+        padding-bottom: 2rem;
+    }
+}

@@ -31,8 +31,9 @@
     <form class="memoquestion-form">
         <h4 class="memoquestion-form__title">Objetivos de aprendizaje</h4>
         <div class="memoquestion-form__container">
-            <h5 class="memoquestion-form__subtitle">Pregunta 1</h5>
-            <p class="memoquestion-form__question">¿Con qué <span style="font-weight: 600;">frecuencia</span> utilizas estrategias para reforzar los objetivos de aprendizaje a los estudiantes durante el semestre?</p>
+            <h5 class="memoquestion-form__subtitle">Pregunta 5</h5>
+            <p class="memoquestion-form__question">¿En qué nivel consideras que las estrategias de E-A
+                (Enseñanza-Aprendizaje) son adecuadas a los objetivos de la clase?</p>
             <div class="memoquestion-form__answer">
                 <div class="memoquestion-form__radio-checkbox hidden">
                     <label class="memo-radio-input">
@@ -60,7 +61,7 @@
                         Cada clase
                     </label>
                 </div>
-                <div class="memoquestion-form__radio-checkbox">
+                <div class="memoquestion-form__radio-checkbox hidden">
                     <label class="checkbox-input checkbox-input--memo">
                         <input type="checkbox" name="strategies[]" value="Videos" checked />
                         Videos
@@ -92,6 +93,162 @@
                         <p class="memoquestion-form__addOptionTag">Agregar otra</p>
                     </button>
                 </div>
+                <div class="memoquestion-form__scale hidden">
+                    <section class="memoquestion-form__scaleTag">
+                        <p>Insatisfecho</p>
+                    </section>
+                    <section class="memoquestion-form__scaleList">
+                        <div class="memoquestion-form__scaleOption">
+                            <span>1</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="1" />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>2</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="2" />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>3</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="3" />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>4</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="4" />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>5</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="5" />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>6</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="satisfaction" value="6" />
+                            </label>
+                        </div>
+                    </section>
+                    <section class="memoquestion-form__scaleTag">
+                        <p>Completamente satisfecho</p>
+                    </section>
+                </div>
+                <div class="memoquestion-form__matrix">
+                    <table class="memo-matrix-table">
+                        <thead class="memo-matrix-table__header">
+                            <tr class="memo-matrix-table__headerRow">
+                                <td class="memo-matrix-table__tag memo-matrix-table__tag--right">No son adecuadas</td>
+                                <td class="memo-matrix-table__number">1</td>
+                                <td class="memo-matrix-table__number">2</td>
+                                <td class="memo-matrix-table__number">3</td>
+                                <td class="memo-matrix-table__number">4</td>
+                                <td class="memo-matrix-table__number">5</td>
+                                <td class="memo-matrix-table__number">6</td>
+                                <td class="memo-matrix-table__tag memo-matrix-table__tag--left">Completamente adecuadas</td>
+                            </tr>
+                        </thead>
+                        <tbody class="memo-matrix-table__body">
+                            <tr class="memo-matrix-table__bodyRow">
+                                <td class="memo-matrix-table__label">Control de lectura</td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="1" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="2" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="3" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="4" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="5" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row1" value="6" />
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="memo-matrix-table__bodyRow">
+                                <td class="memo-matrix-table__label">Exposiciones</td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="1" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="2" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="3" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="4" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="5" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row2" value="6" />
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--<div class="memoquestion-form__matrixrows">
+                        <section class="memoquestion-form__matrixtag memoquestion-form__matrixtag--right">
+                            <p>No son adecuadas</p>
+                        </section>
+                        <section class="memoquestion-form__matrixcolumnList">
+                            <div class="memoquestion-form__matrixcolumn">
+
+                            </div>
+                        </section>
+                        <section class="memoquestion-form__matrixtag">
+                            <p>Completamente adecuadas</p>
+                        </section>
+                    </div>-->
+                </div>
+            </div>
+            <div class="memoquestion-form__information hidden">
+                <ul class="memoquestion-form__informationList">
+                    <li class="memoquestion-form__informationItem">Favorecer la interrelación entre profesores y
+                        alumnos.</li>
+                    <li class="memoquestion-form__informationItem">Desarrollar reciprocidad y cooperación entre sus
+                        estudiantes.</li>
+                    <li class="memoquestion-form__informationItem">Promover un aprendizaje activo.</li>
+                    <li class="memoquestion-form__informationItem">Retroalimentar rápidamente.</li>
+                    <li class="memoquestion-form__informationItem">Enfatizar los tiempos en las tareas.</li>
+                    <li class="memoquestion-form__informationItem">Respetar las diferentes habilidades y aprendizaje.
+                    </li>
+                </ul>
             </div>
         </div>
         <button class="main-button main-button--primary memoquestion-form__nextButton">
