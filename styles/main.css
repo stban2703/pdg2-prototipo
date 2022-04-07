@@ -4649,6 +4649,10 @@ input[type=button] {
   color: #979DFF;
 }
 
+.memoquestion-form__parragraph {
+  width: 100%;
+}
+
 .memo-matrix-table__header {
   font-family: "Poppins", sans-serif;
   color: #A0A0A0;
