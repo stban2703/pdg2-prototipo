@@ -1,0 +1,87 @@
+.memo-question-modal {
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        background-color: $white;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem;
+        gap: 3rem;
+        position: relative;
+        max-width: 60rem;
+    }
+
+    &__title {
+        margin-top: 4rem;
+        font-family: $poppins;
+        font-weight: $semibold;
+        font-size: 2rem;
+        color: $main-color;
+    }
+
+    &__description {
+        font-family: $poppins;
+        font-weight: $light;
+        font-size: 1.8rem;
+        color: $boulder;
+        text-align: center;
+    }
+
+    &__box {
+        display: flex;
+        flex-direction: row;
+        background-color: $main-color;
+        border-radius: 15px;
+        padding: 3rem;
+        gap: 2rem;
+
+        &--vertical {
+            flex-direction: column;
+        }
+    }
+
+    &__boxIcon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+
+        span {
+            font-family: $poppins;
+            font-weight: $semibold;
+            font-size: 1.8rem;
+            color: $white;
+        }
+    }
+
+    &__boxDescription {
+        p {
+            font-family: $poppins;
+            font-weight: $light;
+            font-size: 1.8rem;
+            color: $white;
+        }
+    }
+
+    &__closeButton {
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 2rem;
+    }
+}
