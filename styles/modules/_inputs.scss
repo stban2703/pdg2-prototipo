@@ -249,11 +249,12 @@
         color: currentColor;
         width: 1.15em;
         height: 1.15em;
-        border: 0.15em solid $main-color;
+        border: 0.15em solid $silver;
         border-radius: 0.15em;
         transform: translateY(-0.075em);
         display: grid;
         place-content: center;
+        vertical-align: middle;
 
         &::before {
             content: url("../images/checkwhite.svg");
@@ -274,6 +275,25 @@
         &:checked::before {
             background-color: $main-color;
             transform: scale(1);
+        }
+    }
+
+    &--memo {
+        font-size: 1.8rem;
+        color: $silver;
+        margin-top: 0 !important;
+
+        input[type="checkbox"] {
+            width: 1.2em;
+            height: 1.2em;
+            transform: translateY(-0.075em);
+
+            &::before {
+                align-content: center;
+                width: 1.1em;
+                height: 1.1em;
+                padding-left: 0.1em;
+            }
         }
     }
 }

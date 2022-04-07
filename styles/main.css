@@ -955,13 +955,14 @@ input[type=button] {
   color: currentColor;
   width: 1.15em;
   height: 1.15em;
-  border: 0.15em solid #979DFF;
+  border: 0.15em solid #A0A0A0;
   border-radius: 0.15em;
   -webkit-transform: translateY(-0.075em);
           transform: translateY(-0.075em);
   display: -ms-grid;
   display: grid;
   place-content: center;
+  vertical-align: middle;
 }
 
 .checkbox-input input[type="checkbox"]::before {
@@ -989,6 +990,27 @@ input[type=button] {
   background-color: #979DFF;
   -webkit-transform: scale(1);
           transform: scale(1);
+}
+
+.checkbox-input--memo {
+  font-size: 1.8rem;
+  color: #A0A0A0;
+  margin-top: 0 !important;
+}
+
+.checkbox-input--memo input[type="checkbox"] {
+  width: 1.2em;
+  height: 1.2em;
+  -webkit-transform: translateY(-0.075em);
+          transform: translateY(-0.075em);
+}
+
+.checkbox-input--memo input[type="checkbox"]::before {
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 1.1em;
+  height: 1.1em;
+  padding-left: 0.1em;
 }
 
 .checkbox-input + .checkbox-input {
@@ -4495,7 +4517,7 @@ input[type=button] {
           align-items: center;
 }
 
-.memoquestion-form__checkbox {
+.memoquestion-form__radio-checkbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
