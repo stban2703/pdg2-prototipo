@@ -58,4 +58,20 @@
         margin-top: 0;
         width: auto;
     }
+
+    &__addOptionButton {
+        display: flex;
+        flex-direction: row;
+        gap: 0.7rem;
+        align-items: center;
+        background: none;
+        padding: 0;
+        border: none;
+    }
+
+    &__addOptionTag {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        color: $silver;
+    }
 }

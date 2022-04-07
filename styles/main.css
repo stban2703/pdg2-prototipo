@@ -4537,6 +4537,29 @@ input[type=button] {
   width: auto;
 }
 
+.memoquestion-form__addOptionButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 0.7rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+.memoquestion-form__addOptionTag {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  color: #A0A0A0;
+}
+
 .signinup-screen {
   display: -ms-grid;
   display: grid;
