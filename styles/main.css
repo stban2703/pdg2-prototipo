@@ -1370,16 +1370,26 @@ input[type=button] {
 }
 
 .notes-view-button {
-  background-color: #72B8FF;
+  background-color: rgba(0, 0, 0, 0);
   -webkit-box-shadow: none;
           box-shadow: none;
   font-size: 1.5rem;
-  color: #FFFFFF;
+  color: #363636;
   padding: 0.2em 1em;
 }
 
 .notes-view-button:hover {
-  background-color: #3f9eff;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.notes-view-button:hover {
+  background-color: #72B8FF;
+  color: #FFFFFF;
+}
+
+.notes-view-button--selected {
+  background-color: #72B8FF;
+  color: #FFFFFF;
 }
 
 .listen-audio-button {
@@ -5096,6 +5106,92 @@ input[type=button] {
 
 .improve-actions__emptyText--purple {
   color: #979DFF;
+}
+
+.note-list {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 4rem;
+  margin-top: 2rem;
+}
+
+.note-list__number {
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #eff0ff;
+  border-radius: 6px;
+}
+
+.note-list__number span {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.note-list__tag {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #A0A0A0;
+  padding: 1.5rem 2rem;
+}
+
+.note-list__column {
+  padding: 1.5rem 2rem;
+}
+
+.note-list__title {
+  padding: 1.5rem 2rem;
+}
+
+.note-list__title span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: #363636;
+}
+
+.note-list__category {
+  background-color: #ccf3c6;
+  color: #6fb663;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0.2rem 1.5rem;
+  border-radius: 20px;
+}
+
+.note-list__category--keep {
+  background-color: #ccf3c6;
+  color: #6fb663;
+}
+
+.note-list__category--improve {
+  background-color: #FFEAD6;
+  color: #FCB26E;
+}
+
+.note-list__category--remove {
+  background-color: #FFEFEF;
+  color: #FD797A;
+}
+
+.note-list a span {
+  white-space: nowrap;
 }
 
 .signinup-screen {

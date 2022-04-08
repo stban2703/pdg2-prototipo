@@ -1,0 +1,78 @@
+.note-list {
+    background-color: $white;
+    border-radius: 15px;
+    padding: 4rem;
+    margin-top: 2rem;
+
+    &__number {
+        min-width: 3.5rem;
+        min-height: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #eff0ff;
+        border-radius: 6px;
+
+        span {
+            font-family: $poppins;
+            font-size: 1.8rem;
+            font-weight: $semibold;
+            color: $main-color;
+        }
+    }
+
+    &__tag {
+        font-family: $poppins;
+        font-weight: $semibold;
+        font-size: 2rem;
+        color: $silver;
+        padding: 1.5rem 2rem;
+
+    }
+
+    &__column {
+        padding: 1.5rem 2rem;
+    }
+
+    &__title {
+        padding: 1.5rem 2rem;
+        span {
+            font-family: $poppins;
+            font-weight: $light;
+            font-size: 1.8rem;
+            color: $mineshaft;
+        }
+    }
+
+    &__category {
+        background-color: #ccf3c6;
+        color: #6fb663;
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $regular;
+        padding: 0.2rem 1.5rem;
+        border-radius: 20px;
+
+        &--keep {
+            background-color: #ccf3c6;
+            color: #6fb663;
+        }
+
+        &--improve {
+            background-color: #FFEAD6;
+            color: #FCB26E;
+        }
+
+        &--remove {
+            background-color: #FFEFEF;
+            color: #FD797A;
+        }
+    }
+
+    a {
+        span {
+            white-space:nowrap;
+        }
+    }
+}

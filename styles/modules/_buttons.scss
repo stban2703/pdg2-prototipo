@@ -56,8 +56,18 @@
 }
 
 .notes-view-button {
-    @include main-button($button-alt, $button-text-color-primary, $small-button-text, none);
+    @include main-button(rgba($color: #000000, $alpha: 0), $mineshaft, $small-button-text, none);
     padding: 0.2em 1em;
+
+    &:hover {
+        background-color: $button-alt;
+        color: $button-text-color-primary;
+    }
+
+    &--selected {
+        background-color: $button-alt;
+        color: $button-text-color-primary;
+    }
 }
 
 .listen-audio-button {
