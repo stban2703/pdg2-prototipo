@@ -5113,6 +5113,11 @@ input[type=button] {
   border-radius: 15px;
   padding: 4rem;
   margin-top: 2rem;
+  position: relative;
+}
+
+.note-list__sectionTitle {
+  margin-bottom: 3rem;
 }
 
 .note-list__number {

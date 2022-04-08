@@ -3,6 +3,11 @@
     border-radius: 15px;
     padding: 4rem;
     margin-top: 2rem;
+    position: relative;
+
+    &__sectionTitle {
+        margin-bottom: 3rem;
+    }
 
     &__number {
         min-width: 3.5rem;
