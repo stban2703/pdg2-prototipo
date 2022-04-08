@@ -245,7 +245,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
     const memoquestionRef = doc(collection(firestore, "memos/template/questions"))
     //index, section, sectionIndex, subsection, subsectionIndex, type, justification, options
     let newQuestion
-    switch (type) {
+    switch (questionObject.type) {
         case "scale":
             newQuestion = {
                 index: questionObject.index,
@@ -253,6 +253,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
                 sectionIndex: questionObject.sectionIndex,
                 subsection: questionObject.subsection,
                 subsectionIndex: questionObject.subsectionIndex,
+                question: questionObject.question,
                 type: questionObject.type,
                 scalemin: questionObject.scalemin,
                 scalemax: questionObject.scalemax,
@@ -268,6 +269,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
                 sectionIndex: questionObject.sectionIndex,
                 subsection: questionObject.subsection,
                 subsectionIndex: questionObject.subsectionIndex,
+                question: questionObject.question,
                 type: questionObject.type,
                 matrixrows: questionObject.matrixrows,
                 matrixcolumnmin: questionObject.matrixcolumnmin,
@@ -284,6 +286,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
                 sectionIndex: questionObject.sectionIndex,
                 subsection: questionObject.subsection,
                 subsectionIndex: questionObject.subsectionIndex,
+                question: questionObject.question,
                 type: questionObject.type,
                 justification: questionObject.justification.length > 0 ? questionObject.justification : null
             }
@@ -295,6 +298,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
                 sectionIndex: questionObject.sectionIndex,
                 subsection: questionObject.subsection,
                 subsectionIndex: questionObject.subsectionIndex,
+                question: questionObject.question,
                 type: questionObject.type,
                 options: questionObject.options,
                 justification: questionObject.justification.length > 0 ? questionObject.justification : null
@@ -304,6 +308,7 @@ export const submitTestMemoQuestion = async function (questionObject) {
 
     await setDoc(memoquestionRef, newQuestion).then(() => {
         hideLoader()
+        console.log("Exito")
     }).catch((error) => {
         hideLoader()
         console.log(error)

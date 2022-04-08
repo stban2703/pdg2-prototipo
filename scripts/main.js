@@ -7,6 +7,7 @@ import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableE
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { getInitialNoteList, onFilterListener } from "./notes.js";
+import { submitQuestions } from "./testmemoform.js";
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -99,6 +100,7 @@ function addPageFuncions() {
     updateMemoPseudoInputsValueLocally(memoProperties)
     renderMemoEditValues(memoProperties)
     addMemoSectionFormFunctions()
+    submitQuestions()
     goBack()
 }
 
