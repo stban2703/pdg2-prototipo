@@ -5075,6 +5075,29 @@ input[type=button] {
   gap: 5rem;
 }
 
+.improve-actions__empty {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 2.8rem;
+}
+
+.improve-actions__emptyText {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.improve-actions__emptyText--purple {
+  color: #979DFF;
+}
+
 .signinup-screen {
   display: -ms-grid;
   display: grid;

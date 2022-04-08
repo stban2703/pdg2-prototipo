@@ -47,4 +47,22 @@
         flex-direction: column;
         gap: 5rem;
     }
+
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+        margin-top: 2.8rem;
+    }
+
+    &__emptyText {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+
+        &--purple {
+            color: $main-color;
+        }
+    }
 }
