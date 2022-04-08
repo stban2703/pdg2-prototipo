@@ -1,0 +1,59 @@
+.improve-action-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2.5rem;
+
+    &__number {
+        min-width: 3.5rem;
+        min-height: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #eff0ff;
+        border-radius: 6px;
+
+        span {
+            font-family: $poppins;
+            font-size: 1.8rem;
+            font-weight: $semibold;
+            color: $main-color;
+        }
+    }
+
+    &__title {
+        min-width: 23.5rem;
+        h5 {
+            font-family: $poppins;
+            font-size: 1.8rem;
+            font-weight: $light;
+            color: $mineshaft;
+        }
+    }
+
+    &__description {
+        p {
+            font-family: $poppins;
+            font-size: 1.5rem;
+            font-weight: $light;
+            color: $mineshaft;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $white;
+        border: none;
+        min-width: 3rem;
+        height: 3rem;
+        border-radius: 0.5rem;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-position: center;
+    }
+}
