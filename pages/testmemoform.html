@@ -1,0 +1,41 @@
+<form class="testmemoform">
+    <div>
+        <label for="index">Index</label>
+        <input type="number" id="index" name="index" required>
+    </div>
+
+    <div>
+        <label for="section">Sección</label>
+        <input type="text" id="section" name="section" required>
+    </div>
+
+    <div>
+        <label for="subsection">Subsección</label>
+        <input type="text" id="subsection" name="subsection" required>
+    </div>
+
+    <div>
+        <label for="type">Tipo de respuesta</label>
+        <select name="type" id="type" required>
+            <option value="checkbox">Casillas</option>
+            <option value="radio">Selección multiple</option>
+            <option value="scale">Escala</option>
+            <option value="parragraph">Párrafo</option>
+            <option value="matrix">Matriz</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="justification">Tipo de respuesta</label>
+        <input type="text" id="justification" name="justification">
+    </div>
+
+    <div>
+        <label for="options">Tipo de respuesta</label>
+        <textarea type="text" id="options" name="options" rows="10"></textarea>
+    </div>
+
+    <button style="height: 4rem;">
+        Subir
+    </button>
+</form>

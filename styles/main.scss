@@ -122,3 +122,17 @@ body {
         font-size: 2rem;
     }
 }
+
+.testmemoform {
+    display: flex;
+    flex-direction: column;
+    max-width: 50rem;
+    font-size: 1.8rem;
+    font-family: $poppins;
+    gap: 3rem;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
