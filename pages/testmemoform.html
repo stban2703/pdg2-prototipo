@@ -10,8 +10,18 @@
     </div>
 
     <div>
+        <label for="sectionIndex">Index de sección</label>
+        <input type="number" id="sectionIndex" name="sectionIndex" required>
+    </div>
+
+    <div>
         <label for="subsection">Subsección</label>
         <input type="text" id="subsection" name="subsection" required>
+    </div>
+
+    <div>
+        <label for="subsectionIndex">Index de subsección</label>
+        <input type="number" id="subsectionIndex" name="subsectionIndex" required>
     </div>
 
     <div>
@@ -26,13 +36,88 @@
     </div>
 
     <div>
-        <label for="justification">Tipo de respuesta</label>
+        <label for="justification">Pregunta de justificación</label>
         <input type="text" id="justification" name="justification">
     </div>
 
+    <!--Radio y checkbox-->
     <div>
-        <label for="options">Tipo de respuesta</label>
+        <label for="options">Opciones</label>
         <textarea type="text" id="options" name="options" rows="10"></textarea>
+    </div>
+
+    <!--Escala-->
+    <div>
+        <label for="scalemin">Escala mínimo</label>
+        <select name="scalemin" id="scalemin" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="scalemax">Escala máximo</label>
+        <select name="scalemax" id="scalemax" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6" selected>6</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="scalemintag">Etiqueta escala mínima</label>
+        <input type="text" id="scalemintag" name="scalemintag" required>
+    </div>
+
+    <div>
+        <label for="scalemaxtag">Etiqueta escala máxima</label>
+        <input type="text" id="scalemaxtag" name="scalemaxtag" required>
+    </div>
+
+    <!--Matriz-->
+    <div>
+        <label for="matrixrows">Filas de matriz</label>
+        <textarea type="text" id="matrixrows" name="matrixrows" rows="10"></textarea>
+    </div>
+    <div>
+        <label for="matrixcolumnmin">Columna mínimo</label>
+        <select name="matrixcolumnmin" id="matrixcolumnmin" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="matrixcolumnmax">Columna máximo</label>
+        <select name="matrixcolumnmax" id="matrixcolumnmax" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6" selected>6</option >
+        </select>
+    </div>
+
+    <div>
+        <label for="matrixcolumnmintag">Etiqueta columna mínima</label>
+        <input type="text" id="matrixcolumnmintag" name="matrixcolumnmintag" required>
+    </div>
+
+    <div>
+        <label for="matrixcolumnmaxtag">Etiqueta columna máxima</label>
+        <input type="text" id="matrixcolumnmaxtag" name="matrixcolumnmaxtag" required>
     </div>
 
     <button style="height: 4rem;">

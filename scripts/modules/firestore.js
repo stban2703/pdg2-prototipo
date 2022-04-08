@@ -240,3 +240,72 @@ export const getUserFromDb = async function (uid) {
         console.log("No existe este usuario");
     }
 }
+
+export const submitTestMemoQuestion = async function (questionObject) {
+    const memoquestionRef = doc(collection(firestore, "memos/template/questions"))
+    //index, section, sectionIndex, subsection, subsectionIndex, type, justification, options
+    let newQuestion
+    switch (type) {
+        case "scale":
+            newQuestion = {
+                index: questionObject.index,
+                section: questionObject.section,
+                sectionIndex: questionObject.sectionIndex,
+                subsection: questionObject.subsection,
+                subsectionIndex: questionObject.subsectionIndex,
+                type: questionObject.type,
+                scalemin: questionObject.scalemin,
+                scalemax: questionObject.scalemax,
+                scalemintag: questionObject.scalemintag,
+                scalemaxtag: questionObject.scalemaxtag,
+                justification: questionObject.justification.length > 0 ? questionObject.justification : null
+            }
+            break;
+        case "matrix":
+            newQuestion = {
+                index: questionObject.index,
+                section: questionObject.section,
+                sectionIndex: questionObject.sectionIndex,
+                subsection: questionObject.subsection,
+                subsectionIndex: questionObject.subsectionIndex,
+                type: questionObject.type,
+                matrixrows: questionObject.matrixrows,
+                matrixcolumnmin: questionObject.matrixcolumnmin,
+                matrixcolumnmax: questionObject.matrixcolumnmax,
+                matrixcolumnmintag: questionObject.matrixcolumnmintag,
+                matrixcolumnmaxtag: questionObject.matrixcolumnmaxtag,
+                justification: questionObject.justification.length > 0 ? questionObject.justification : null
+            }
+            break;
+        case "parragraph":
+            newQuestion = {
+                index: questionObject.index,
+                section: questionObject.section,
+                sectionIndex: questionObject.sectionIndex,
+                subsection: questionObject.subsection,
+                subsectionIndex: questionObject.subsectionIndex,
+                type: questionObject.type,
+                justification: questionObject.justification.length > 0 ? questionObject.justification : null
+            }
+            break;
+        default:
+            newQuestion = {
+                index: questionObject.index,
+                section: questionObject.section,
+                sectionIndex: questionObject.sectionIndex,
+                subsection: questionObject.subsection,
+                subsectionIndex: questionObject.subsectionIndex,
+                type: questionObject.type,
+                options: questionObject.options,
+                justification: questionObject.justification.length > 0 ? questionObject.justification : null
+            }
+            break
+    }
+
+    await setDoc(memoquestionRef, newQuestion).then(() => {
+        hideLoader()
+    }).catch((error) => {
+        hideLoader()
+        console.log(error)
+    });
+}
