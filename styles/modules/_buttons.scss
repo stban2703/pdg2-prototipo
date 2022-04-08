@@ -7,6 +7,15 @@
             $button-primary-box-shadow
         );
     }
+
+    &--secondary {
+        @include main-button(
+            $button-secondary,
+            $button-text-color-primary,
+            $main-button-text,
+            $button-secondary-box-shadow
+        );
+    }
 }
 
 .small-button {
