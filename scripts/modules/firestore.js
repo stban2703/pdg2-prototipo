@@ -291,6 +291,20 @@ export const submitTestMemoQuestion = async function (questionObject) {
                 justification: questionObject.justification.length > 0 ? questionObject.justification : null
             }
             break;
+
+        case "improveactions":
+            newQuestion = {
+                index: questionObject.index,
+                section: questionObject.section,
+                sectionIndex: questionObject.sectionIndex,
+                subsection: questionObject.subsection,
+                subsectionIndex: questionObject.subsectionIndex,
+                question: questionObject.question,
+                type: questionObject.type,
+                justification: questionObject.justification.length > 0 ? questionObject.justification : null
+            }
+            break
+
         default:
             newQuestion = {
                 index: questionObject.index,
