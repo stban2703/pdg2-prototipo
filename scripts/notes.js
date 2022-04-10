@@ -1,3 +1,4 @@
+import { userSubjects } from "./main.js"
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
@@ -28,6 +29,14 @@ export function onFilterListener(uid) {
     if (window.location.href.includes("#notes") && noteSettingsForm) {
         const noteSubjectFilterSelect = noteSettingsForm.subject
         const notePeriodFilterSelect = noteSettingsForm.period
+
+        userSubjects.forEach(e => {
+            const subjectOption = document.createElement('option')
+            subjectOption.value = e.name
+            subjectOption.innerHTML = e.name
+            noteSubjectFilterSelect.appendChild(subjectOption)
+        })
+
         noteSettingsForm.addEventListener('input', () => {
             filterNoteList(uid, noteSubjectFilterSelect, notePeriodFilterSelect)
         })

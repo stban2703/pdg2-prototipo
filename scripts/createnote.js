@@ -1,4 +1,4 @@
-import { userInfo } from "./main.js";
+import { userInfo, userSubjects } from "./main.js";
 import { createNote } from "./modules/firestore.js";
 import { showLoader } from "./utils/loader.js";
 
@@ -12,10 +12,10 @@ export function submitNote(currentUser) {
         const subjectSelect = createNoteForm.subject
         const createNoteFormSubmitButton = createNoteForm.querySelector(".createnote-form__submitBtn")
 
-        userInfo.subjects.forEach(e => {
+        userSubjects.forEach(e => {
             const subjectOption = document.createElement('option')
-            subjectOption.value = e
-            subjectOption.innerHTML = e
+            subjectOption.value = e.name
+            subjectOption.innerHTML = e.name
             subjectSelect.appendChild(subjectOption)
         })
 

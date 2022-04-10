@@ -12,6 +12,7 @@ import { submitQuestions } from "./testmemoform.js";
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
 let localUser = JSON.parse(ls.getItem('currentuser'))
+let localSubjects = JSON.parse(ls.getItem('subjectList'))
 let currentUser = localUser
 
 if (currentUser != null || getCurrentSignedInUser() != null) {
@@ -20,7 +21,9 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 } else {
     window.location = "login.html"
 }
+
 export const userInfo = currentUser
+export const userSubjects = localSubjects
 
 // Memorando
 let memoProperties = {

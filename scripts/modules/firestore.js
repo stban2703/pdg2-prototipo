@@ -233,12 +233,26 @@ export const getUserFromDb = async function (uid) {
     if (docSnap.exists()) {
         const user = docSnap.data()
         localStorage.setItem('currentuser', JSON.stringify(user))
-        hideLoader()
-        window.location = 'index.html'
+        //hideLoader()
+        //window.location = 'index.html'
         console.log("Document data: " + user.name + ", " + user.role);
     } else {
         console.log("No existe este usuario");
     }
+}
+
+export async function getUserSubjects(teacherId) {
+    const q = query(collection(firestore, "subjects"), where("teacherId", "==", "" + teacherId))
+    const querySnapshot = await getDocs(q);
+    let subjectList = []
+    querySnapshot.forEach((doc) => {
+        const subject = doc.data()
+        subjectList.push(subject)
+    })
+    localStorage.setItem('subjectList', JSON.stringify(subjectList))
+    hideLoader()
+    window.location = 'index.html'
+    //return subjectList
 }
 
 export const submitTestMemoQuestion = async function (questionObject) {
