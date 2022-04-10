@@ -5,7 +5,7 @@
     align-items: center;
     gap: 2rem;
     width: fit-content;
-    padding: 2.5rem 2.5rem;
+    padding: 4rem 2.5rem;
 
     &__progress {
         img {
@@ -20,6 +20,27 @@
     
     button {
         margin-top: 1rem;
+    }
+}
+
+.last-subject-thumbnail {
+    display: flex;
+    flex-direction: row;
+    padding: 5rem 3rem;
+    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
+    gap: 1rem;
+    max-width: 23rem;
+
+    &__icon {
+        min-width: 3.3rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 1.4rem;
+        font-weight: $bold;
+        color: $main-color;
+        max-width: 14ch;
     }
 }
 
@@ -40,6 +61,10 @@
         display: flex;
         flex-direction: row;
         gap: 1rem;
+    }
+
+    &__icon {
+        min-width: 4rem;
     }
 
     &__title {
