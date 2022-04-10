@@ -1,4 +1,3 @@
-import { userSubjects } from "./main.js"
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
@@ -23,7 +22,7 @@ export async function getInitialNoteList(uid) {
     }
 }
 
-export function onFilterListener(uid) {
+export function onFilterListener(uid, userSubjects) {
     const noteSettingsForm = document.querySelector(".note-settings-form")
 
     if (window.location.href.includes("#notes") && noteSettingsForm) {

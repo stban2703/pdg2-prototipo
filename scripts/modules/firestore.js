@@ -244,11 +244,7 @@ export const getUserFromDb = async function (uid) {
 export async function getUserSubjects(teacherId) {
     const q = query(collection(firestore, "subjects"), where("teacherId", "==", "" + teacherId))
     const querySnapshot = await getDocs(q);
-    let subjectList = []
-    querySnapshot.forEach((doc) => {
-        const subject = doc.data()
-        subjectList.push(subject)
-    })
+    const subjectList = querySnapshot.docs.map(doc => doc.data());
     localStorage.setItem('subjectList', JSON.stringify(subjectList))
     hideLoader()
     window.location = 'index.html'

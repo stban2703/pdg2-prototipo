@@ -5389,11 +5389,15 @@ input[type=button] {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-top: 4rem;
-  gap: 3rem;
+  gap: 7%;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.home-screen__shortcuts .home-screen__notes {
+  margin-top: 4rem;
 }
 
 .home-screen__content {

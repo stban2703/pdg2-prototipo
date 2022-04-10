@@ -63,7 +63,7 @@ export const logOut = function () {
         window.location = 'login.html'
     }).catch((error) => {
         // An error happened.
-        console.log("No salio")
+        console.log(error)
     });
 }
 

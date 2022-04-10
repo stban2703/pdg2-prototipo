@@ -1,11 +1,11 @@
-import { userInfo, userSubjects } from "./main.js";
+//import { userInfo, userSubjects } from "./main.js";
 import { createNote } from "./modules/firestore.js";
 import { showLoader } from "./utils/loader.js";
 
 let audioNote = null
 let audioURL = null
 
-export function submitNote(currentUser) {
+export function submitNote(currentUser, userSubjects) {
     const createNoteForm = document.querySelector('.createnote-form')
     if (createNoteForm) {
 

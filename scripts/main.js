@@ -1,6 +1,7 @@
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
+import { renderSubjectListHome } from "./home.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
@@ -85,25 +86,37 @@ function displayHomeUserName() {
 
 // Agrega las funciones de cada pantalla
 function addPageFuncions() {
+    // Home functions
     displayHomeUserName()
-    submitNote(currentUser)
+    renderSubjectListHome(userSubjects)
+
+    //Note functions
+    submitNote(currentUser, userSubjects)
     getInitialNoteList(currentUser.id)
-    onFilterListener(currentUser.id)
+    onFilterListener(currentUser.id, userSubjects)
     renderNoteDetails()
+
+    // Meeting functions
     renderMeetings()
     renderMeetingDetails()
     onSelectMeetingMode()
     submitMeeting()
+
+    // Minutes functions
     createAgreement()
     getMeetingInfoForMinute()
     submitMeetingMinutes()
     renderMeetingMinutesDetails()
+
+    // Memo form edit functions
     changeMemoEditFormPage()
     onContentEditableEnter()
     updateMemoPseudoInputsValueLocally(memoProperties)
     renderMemoEditValues(memoProperties)
     addMemoSectionFormFunctions()
     submitQuestions()
+
+    // Back-return
     goBack()
 }
 
