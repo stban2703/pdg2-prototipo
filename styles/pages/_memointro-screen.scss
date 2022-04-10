@@ -12,14 +12,14 @@
 
     &__content {
         display: flex;
-        flex-direction: row;
-        gap: 2%;
+        flex-direction: column;
         margin-top: 2rem;
+        gap: 2.6rem;
     }
 
     &__article {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 2rem;
     }
 }

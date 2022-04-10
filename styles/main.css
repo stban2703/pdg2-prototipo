@@ -2090,7 +2090,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: "Poppins", sans-serif;
-  padding: 3rem 2rem;
+  padding: 4rem;
   background-color: white;
   border-radius: 10px;
   -webkit-box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
@@ -5560,22 +5560,22 @@ input[type=button] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  gap: 2%;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-top: 2rem;
+  gap: 2.6rem;
 }
 
 .memointro-screen__article {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 2rem;
 }
 
