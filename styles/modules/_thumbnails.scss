@@ -26,13 +26,61 @@
 .subject-thumbnail {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 20rem;
-    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
     padding: 3rem;
+    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
+    gap: 1.5rem;
+
+    &__info {
+        display: flex;
+        flex-direction: row;
+        gap: 1.7rem;
+    }
+
+    &__icon-title {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
 
     &__title {
-        @include subtitle($silver, $medium);
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $bold;
+        color: $pink;
+        max-width: 14ch;
+    }
+
+    &__percent {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__progress {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__subtitle {
+        font-family: $poppins;
+        font-size: 1.4rem;
+        font-weight: $light;
+        color: $silver;
+    }
+
+    &__progressBar {
+        position: relative;
+        background-color: #E8E9FF;
+        height: 6px;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    &__currentBar {
+        position: absolute;
+        background-color: rgba($color: #A6ABF4, $alpha: 0.74);
+        width: 60%;
+        height: 100%;
     }
 }

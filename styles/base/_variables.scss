@@ -1,5 +1,5 @@
 // FONTS
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 $poppins:'Poppins', sans-serif;
 
 // FONT SIZES
@@ -22,6 +22,7 @@ $regular: 400;
 $light: 300;
 $medium: 500;
 $semibold: 600;
+$bold: 700;
 
 // COLORS
 // // Base colors
@@ -35,6 +36,7 @@ $boulder: #757575;
 $mineshaft: #363636;
 $zircon: #FAFCFF;
 $invalid-color: #FE6163;
+$pink: #FF89D0;
 
 // // New colors
 $main-color: $melrose;

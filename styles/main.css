@@ -10,7 +10,7 @@
 -------------------------------------------------------------------------------*/
 /* Let's default this puppy out
 -------------------------------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
   margin: 0;
   padding: 0;
@@ -280,7 +280,7 @@ input[type=button] {
   font-size: 2.5rem;
 }
 
-.subtitle--light, .subtitle--regular, .subtitle--semibold, .subject-thumbnail__title, .note-board__subtitle {
+.subtitle--light, .subtitle--regular, .subtitle--semibold, .note-board__subtitle {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
 }
@@ -1712,21 +1712,79 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  min-height: 20rem;
+  padding: 3rem;
   -webkit-filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
           filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
-  padding: 3rem;
+  gap: 1.5rem;
+}
+
+.subject-thumbnail__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1.7rem;
+}
+
+.subject-thumbnail__icon-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
 }
 
 .subject-thumbnail__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF89D0;
+  max-width: 14ch;
+}
+
+.subject-thumbnail__percent {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #757575;
+}
+
+.subject-thumbnail__progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.subject-thumbnail__subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 300;
   color: #A0A0A0;
-  font-weight: 500;
+}
+
+.subject-thumbnail__progressBar {
+  position: relative;
+  background-color: #E8E9FF;
+  height: 6px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.subject-thumbnail__currentBar {
+  position: absolute;
+  background-color: rgba(166, 171, 244, 0.74);
+  width: 60%;
+  height: 100%;
 }
 
 .board-note-item {
@@ -5307,7 +5365,7 @@ input[type=button] {
           align-items: center;
 }
 
-.home-screen__courses {
+.home-screen__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5318,16 +5376,23 @@ input[type=button] {
   gap: 4rem;
 }
 
-.home-screen__characters {
-  opacity: 0.5;
+.home-screen__subjects {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
 }
 
-.home-screen__coursesList {
+.home-screen__subjectList {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 3rem;
 }
 
 .note-screen {
