@@ -828,6 +828,9 @@ input[type=button] {
   width: 100%;
   max-width: 15rem;
   text-overflow: ellipsis;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .date-time-input {
@@ -3253,6 +3256,7 @@ input[type=button] {
   border-radius: 15px;
   padding: 4rem;
   min-height: 19rem;
+  gap: 1rem;
 }
 
 .memo-subject__title {
@@ -5505,6 +5509,9 @@ input[type=button] {
           align-items: center;
   gap: 1rem;
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .note-screen__filters-title span {
