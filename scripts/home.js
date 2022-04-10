@@ -1,7 +1,7 @@
 export function renderSubjectListHome(subjectList) {
     const homescreenSubjectList = document.querySelector(".home-screen__subjectList")
 
-    if(homescreenSubjectList && window.location.href.includes("#home")) {
+    if(homescreenSubjectList) {
         homescreenSubjectList.innerHTML = ``
         subjectList.forEach(subject => {
             const subjectThumbnail = document.createElement('div')
@@ -24,6 +24,7 @@ export function renderSubjectListHome(subjectList) {
                 </div>
             </section>
             `
+            homescreenSubjectList.appendChild(subjectThumbnail)
         });
     }
 }
