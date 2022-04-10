@@ -207,6 +207,40 @@ export async function getMeetingMinutes(id) {
     }
 }
 
+//Memo functions
+export async function getSubjectMemo(subjectId, currentPeriod) {
+    const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`))
+    const querySnapshot = await getDocs(q);
+    const memoQuestions = querySnapshot.docs.map(doc => doc.data());
+    return memoQuestions
+}
+
+export async function getMemoTemplate(targetPath) {
+    const q = query(collection(firestore, `memos/template/questions`))
+    const querySnapshot = await getDocs(q);
+    let templateQuestions = []
+
+    querySnapshot.docs.forEach((doc) => {
+        let newQuestion = doc.data()
+        newQuestion.id = doc.id
+        templateQuestions.push(newQuestion)
+    })
+
+    await createNewMemoQuestions(templateQuestions, targetPath).then(() => {
+        console.log("Subido")
+    }).catch((error) => {
+        console.log(error)
+    });
+
+}
+
+async function createNewMemoQuestions(templateQuestions, path) {
+    await templateQuestions.forEach(async q => {
+        await setDoc(doc(firestore, path, "" + q.id), q);
+    })
+}
+
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);

@@ -4,7 +4,7 @@ import { submitNote } from "./createnote.js";
 import { renderSubjectListHome } from "./home.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener } from "./memo.js";
+import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
@@ -113,6 +113,7 @@ function addPageFuncions() {
     renderMemoIntro(currentUser)
     getInitialMemoSubjects(userSubjects)
     onSortFilterMemoSubjectListener(userSubjects, userInfo.groups)
+    getMemoSectionInfo(userSubjects)
 
     // Memo form edit functions
     changeMemoEditFormPage()

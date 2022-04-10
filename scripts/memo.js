@@ -1,3 +1,4 @@
+import { getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js"
 
 export function renderMemoIntro(user) {
@@ -84,4 +85,24 @@ function sortFilterMemoSubjects(userSubjects, subjectSort, groupFilter) {
         })
     }
     renderMemoSubject(filterCopy)
+}
+
+export async function getMemoSectionInfo(userSubjects) {
+    const memosectionScreen = document.querySelector(".memosections-screen")
+
+    if (memosectionScreen && window.location.href.includes("#memosections")) {
+
+        const subjectId = window.location.hash.split("?")[1]
+
+        const selectedSubject = userSubjects.find((s) => {
+            return s.id = subjectId
+        })
+
+        console.log(subjectId, selectedSubject.memoPeriod)
+        let memoQuestions = await getSubjectMemo(subjectId, selectedSubject.memoPeriod)
+        
+        if(memoQuestions.length === 0) {
+            getMemoTemplate(`memos/periods/${selectedSubject.memoPeriod}/${subjectId}/questions`)
+        }
+    }
 }
