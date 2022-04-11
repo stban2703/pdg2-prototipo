@@ -131,7 +131,7 @@ function renderMemoSections(groupList, memoPeriod, subjectId) {
         // Revisar cada pregunta:
         for (let i = 0; i < groupList[group].length; i++) {
             const question = groupList[group][i];
-            if (!question.answer) {
+            if (!question.answerId) {
                 currentQuestionId = question.id
                 break
             }
