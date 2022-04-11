@@ -148,11 +148,13 @@ export async function renderMemoQuestion() {
                     `
                     memoAnswerContainer.appendChild(matrixAnswerQuestion)
 
-                    if(!currentQuestion.matrixrows[0]) {
-                        console.log("No tiene valor")
+                    if (!currentQuestion.matrixrows[0]) {
                         let options = []
-                        switch(parseInt(currentQuestion.index)) {
+                        switch (parseInt(currentQuestion.index)) {
                             case 5:
+                                options = await getOptionsFromAnswers("UdZPykHVoTAftyvkLxdE", subjectId, period)
+                                break;
+                            case 6:
                                 options = await getOptionsFromAnswers("UdZPykHVoTAftyvkLxdE", subjectId, period)
                                 break;
                         }
@@ -165,32 +167,32 @@ export async function renderMemoQuestion() {
                                 <td class="memo-matrix-table__label">${elem}</td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="1" />
+                                        <input type="radio" name="row${index}" value="1" required />
                                     </label>
                                 </td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="2" />
+                                        <input type="radio" name="row${index}" value="2" required />
                                     </label>
                                 </td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="3" />
+                                        <input type="radio" name="row${index}" value="3" required />
                                     </label>
                                 </td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="4" />
+                                        <input type="radio" name="row${index}" value="4" required />
                                     </label>
                                 </td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="5" />
+                                        <input type="radio" name="row${index}" value="5" required />
                                     </label>
                                 </td>
                                 <td class="memo-matrix-table__radio">
                                     <label class="memo-radio-input">
-                                        <input type="radio" name="row${index}" value="6" />
+                                        <input type="radio" name="row${index}" value="6" required />
                                     </label>
                                 </td>
                             `
@@ -338,6 +340,19 @@ export async function submitMemoQuestionForm() {
                     case "scale":
                         const scaleAnswerValue = [memoQuestionForm.scale.value];
                         onSubmitAnswer(questionId, currentQuestion.answerId, scaleAnswerValue, period, subjectId, currentQuestion.index)
+                        break;
+                    case "matrix":
+                        const rows= document.querySelectorAll(".memo-matrix-table__bodyRow")
+                        const matrixAnswerValues = []
+                        
+                        for (let i = 0; i < rows.length; i++) {
+                            const rowInputValue = document.querySelector(".memoquestion-form").elements[`row${i}`].value
+                            const answerTag = rows[i].querySelector(".memo-matrix-table__label").innerHTML
+                            const answerValue = answerTag + "|" + rowInputValue
+                            matrixAnswerValues.push(answerValue)
+                        }
+
+                        onSubmitAnswer(questionId, currentQuestion.answerId, matrixAnswerValues, period, subjectId, currentQuestion.index)
                         break;
                 }
             }
