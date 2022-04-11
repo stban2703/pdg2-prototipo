@@ -179,6 +179,44 @@
         }
     }
 
+    &__scaleValues {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            font-family: $poppins;
+            font-weight: $semibold;
+            font-size: 1.5rem;
+            color: $boulder;
+        }
+    }
+
+    &__scaleValuesList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        list-style-position: inside;
+        counter-reset: item;
+
+        li {
+            font-family: $poppins;
+            font-weight: $light;
+            font-size: 1.5rem;
+            color: $boulder;
+            list-style-type: none;
+            counter-increment: item;
+
+            &:before {
+                display: inline-block;
+                width: 1em;
+                padding-right: 0.5em;
+                font-weight: bold;
+                text-align: right;
+                content: counter(item) ".";
+            }
+        }
+    }
+
     &__information {
         display: flex;
         flex-direction: column;

@@ -66,6 +66,15 @@ export async function renderMemoQuestion() {
                     renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
                     break;
+
+                case "scale":
+                    const scaleAnswerQuestion = document.createElement('div')
+                    scaleAnswerQuestion.className = "memoquestion-form__scale"
+
+                    if(parseInt(currentQuestion.index) === 3) {
+                        document.querySelector(".memoquestion-form__scaleValues").classList.remove("hidden")
+                    }
+                    break;
             }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
         }
@@ -195,6 +204,10 @@ export async function submitMemoQuestionForm() {
                     } else {
                         window.alert("Debes responder a la pregunta")
                     }
+                    break;
+                case "scale":
+
+                    break;
             }
         })
     }

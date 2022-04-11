@@ -5048,6 +5048,54 @@ input[type=button] {
   color: #A0A0A0;
 }
 
+.memoquestion-form__scaleValues {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.memoquestion-form__scaleValues p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #757575;
+}
+
+.memoquestion-form__scaleValuesList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+  list-style-position: inside;
+  counter-reset: item;
+}
+
+.memoquestion-form__scaleValuesList li {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #757575;
+  list-style-type: none;
+  counter-increment: item;
+}
+
+.memoquestion-form__scaleValuesList li:before {
+  display: inline-block;
+  width: 1em;
+  padding-right: 0.5em;
+  font-weight: bold;
+  text-align: right;
+  content: counter(item) ".";
+}
+
 .memoquestion-form__information {
   display: -webkit-box;
   display: -ms-flexbox;
