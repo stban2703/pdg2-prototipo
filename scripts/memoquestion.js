@@ -17,6 +17,9 @@ export async function renderMemoQuestion() {
 
         currentQuestion = await getMemoQuestion(period, subjectId, questionId)
 
+        const memoSectionNumber = memoQuestionScreen.querySelector(".memoquestion-screen__numberSpan")
+        memoSectionNumber.innerHTML = currentQuestion.sectionIndex
+
         // Titulo de seccion
         const memoQuestionSectionTitle = memoQuestionScreen.querySelector(".memoquestion-screen__title")
         memoQuestionSectionTitle.innerHTML = currentQuestion.section
@@ -47,6 +50,10 @@ export async function renderMemoQuestion() {
                 case "radio":
                     const radioAnswerQuestion = document.createElement('div')
                     radioAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--radio"
+
+                    if (parseInt(currentQuestion.index) === 8) {
+                        radioAnswerQuestion.style.width = 'fit-content'
+                    }
 
                     currentQuestion.options.forEach(option => {
                         const answerOption = document.createElement('label')
@@ -79,11 +86,11 @@ export async function renderMemoQuestion() {
                                 value: parseInt(parts[parts.length - 1])
                             }
                             positiveOptions.push(object.tag)
-                            if(object.value < 4) {
+                            if (object.value < 4) {
                                 let temp = negativeOptions.find(elem => {
                                     return elem === object.value
                                 })
-                                if(!temp) {
+                                if (!temp) {
                                     negativeOptions.push(object.tag)
                                 }
                             }
@@ -95,11 +102,11 @@ export async function renderMemoQuestion() {
                                 tag: parts[0],
                                 value: parseInt(parts[parts.length - 1])
                             }
-                            if(object.value < 4) {
+                            if (object.value < 4) {
                                 let temp = negativeOptions.find(elem => {
                                     return elem === object.value
                                 })
-                                if(!temp) {
+                                if (!temp) {
                                     negativeOptions.push(object.tag)
                                 }
                             }
@@ -358,7 +365,6 @@ export async function submitMemoQuestionForm() {
             const period = urlQueryParts[0]
             const subjectId = urlQueryParts[1]
             const questionId = urlQueryParts[2]
-            showLoader()
 
             if (parseInt(currentQuestion.index) == 4 && window.location.href.includes("_info")) {
                 hideLoader()
@@ -368,7 +374,12 @@ export async function submitMemoQuestionForm() {
                     case "radio":
                         if (memoQuestionForm.radioanswer) {
                             const answerValue = [memoQuestionForm.radioanswer.value]
-                            onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
+                            if (parseInt(currentQuestion.index) === 8 && answerValue[0] === "No") {
+                                const rememberModal = document.querySelector(".memo-question-modal--remember")
+                                rememberModal.classList.remove("hidden")
+                            } else {
+                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
+                            }
                         }
                         break;
                     case "checkbox":
@@ -411,6 +422,7 @@ export async function submitMemoQuestionForm() {
 }
 
 function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subjectId, questionIndex) {
+    showLoader()
     if (questionAnswerdId) {
         updateAnswerValue(questionAnswerdId, answerValue, period, subjectId, parseInt(questionIndex))
     } else {

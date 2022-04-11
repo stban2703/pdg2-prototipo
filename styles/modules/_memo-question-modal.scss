@@ -45,7 +45,7 @@
         background-color: $main-color;
         border-radius: 15px;
         padding: 3rem;
-        gap: 2rem;
+        gap: 1rem;
 
         &--vertical {
             flex-direction: column;
@@ -57,21 +57,31 @@
         flex-direction: row;
         align-items: center;
         gap: 1rem;
+        width: 100%;
+        width: fit-content;
 
-        span {
+        img {
+            width: 5.3rem;
+            max-width: none;
+        }
+
+        p {
             font-family: $poppins;
             font-weight: $semibold;
             font-size: 1.8rem;
             color: $white;
+            display: inline-block;
         }
     }
 
     &__boxDescription {
+        width: 100%;
         p {
             font-family: $poppins;
             font-weight: $light;
             font-size: 1.8rem;
             color: $white;
+         
         }
     }
 

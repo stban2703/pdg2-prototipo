@@ -3514,7 +3514,7 @@ input[type=button] {
   background-color: #979DFF;
   border-radius: 15px;
   padding: 3rem;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .memo-question-modal__box--vertical {
@@ -3536,13 +3536,27 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
-.memo-question-modal__boxIcon span {
+.memo-question-modal__boxIcon img {
+  width: 5.3rem;
+  max-width: none;
+}
+
+.memo-question-modal__boxIcon p {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 1.8rem;
   color: #FFFFFF;
+  display: inline-block;
+}
+
+.memo-question-modal__boxDescription {
+  width: 100%;
 }
 
 .memo-question-modal__boxDescription p {
