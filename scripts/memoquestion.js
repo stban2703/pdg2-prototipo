@@ -76,9 +76,6 @@ export async function renderMemoQuestion() {
                         const question5Answers = await getOptionsFromAnswers("YsVpQwlC6PXwgAS2IW7r", subjectId, period)
                         const question6Answers = await getOptionsFromAnswers("jOz7X758oimxAJZ4V9BU", subjectId, period)
 
-                        console.log(question5Answers)
-                        console.log(question6Answers)
-
                         question5Answers.forEach((elem) => {
                             const parts = elem.split("|")
                             const object = {
@@ -88,7 +85,7 @@ export async function renderMemoQuestion() {
                             positiveOptions.push(object.tag)
                             if (object.value < 4) {
                                 let temp = negativeOptions.find(elem => {
-                                    return elem === object.value
+                                    return elem === object.tag
                                 })
                                 if (!temp) {
                                     negativeOptions.push(object.tag)
@@ -104,7 +101,7 @@ export async function renderMemoQuestion() {
                             }
                             if (object.value < 4) {
                                 let temp = negativeOptions.find(elem => {
-                                    return elem === object.value
+                                    return elem === object.tag
                                 })
                                 if (!temp) {
                                     negativeOptions.push(object.tag)

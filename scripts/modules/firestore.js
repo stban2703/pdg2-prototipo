@@ -307,11 +307,35 @@ export async function getNextMemmoQuestion(currentPeriod, subjectId, currentInde
 
 export async function getPreviousMemoQuestion(currentPeriod, subjectId, currentIndex) {
     if (currentIndex > 1) {
-        const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex - 1)))
-        const querySnapshot = await getDocs(q);
-        const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
-        hideLoader()
-        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
+        if (currentIndex === 10) {
+            const q8 = query(collection(firestore, `memos/answers/answers`), where("questionId", "==", `jvLjdfeVkm6JnQMgrO6C`), where("subjectId", "==", subjectId))
+            const querySnapshot = await getDocs(q8);
+            const q8Answer = querySnapshot.docs.map(doc => doc.data())[0];
+            const q8AnswerValue = q8Answer.answerValue[0]
+
+            if (q8AnswerValue === "No") {
+                const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex - 2)))
+                const querySnapshot = await getDocs(q);
+                const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+                hideLoader()
+                window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
+
+            } else {
+                const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex - 1)))
+                const querySnapshot = await getDocs(q);
+                const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+                hideLoader()
+                window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
+            }
+            
+        } else {
+            const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex - 1)))
+            const querySnapshot = await getDocs(q);
+            const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+            hideLoader()
+            window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
+        }
+
     } else if (currentIndex === 1) {
         hideLoader()
         window.location = `index.html#memosections?${subjectId}`
