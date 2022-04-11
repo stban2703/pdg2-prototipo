@@ -5,7 +5,7 @@ export function renderSubjectListHome(subjectList) {
         homescreenSubjectList.innerHTML = ``
         subjectList.forEach(subject => {
             const subjectThumbnail = document.createElement('div')
-            subjectThumbnail.className = "subject-thumbnail"
+            subjectThumbnail.className = "subject-thumbnail " + subject.id
             subjectThumbnail.innerHTML = `
             <section class="subject-thumbnail__info">
                 <section class="subject-thumbnail__icon-title">

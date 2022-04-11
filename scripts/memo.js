@@ -21,7 +21,6 @@ export function renderMemoIntro(user) {
 
 export function getInitialMemoSubjects(subjectList) {
     const memoSubjectList = document.querySelector(".memoselectsubject-screen__subjectList")
-
     if (memoSubjectList && window.location.href.includes("#memoselectsubject")) {
         const copy = [...subjectList].sort(sortByAlphabeticAscending)
         renderMemoSubject(copy)
@@ -30,9 +29,10 @@ export function getInitialMemoSubjects(subjectList) {
 
 function renderMemoSubject(subjectList) {
     const memoSubjectList = document.querySelector(".memoselectsubject-screen__subjectList")
-    memoSubjectList.innerHTML = ``
 
+    memoSubjectList.innerHTML = ``
     subjectList.forEach(subject => {
+        //console.log(subject.id)
         const memoSubject = document.createElement("div")
         memoSubject.className = "memo-subject"
         memoSubject.innerHTML = `
@@ -92,6 +92,7 @@ export async function getMemoSectionInfo(userSubjects) {
 
     if (memosectionScreen && window.location.href.includes("#memosections")) {
         const subjectId = window.location.hash.split("?")[1]
+        //console.log(subjectId)
         const selectedSubject = getSubjectFromId(subjectId, userSubjects)
 
         const memosectionsSubjectName = memosectionScreen.querySelector(".memosections-screen__info--subjectName")
@@ -106,7 +107,7 @@ export async function getMemoSectionInfo(userSubjects) {
         } else {
             // Obtener grupos
             memoQuestions.sort(sortByIndex)
-    
+
             const groups = memoQuestions.reduce((groups, item) => ({
                 ...groups,
                 [item.section]: [...(groups[item.section] || []), item]
@@ -152,7 +153,7 @@ function renderMemoSections(groupList) {
 
 function getSubjectFromId(id, userSubjects) {
     const subject = userSubjects.find((s) => {
-        return s.id = id
+        return s.id === id
     })
     return subject
 }

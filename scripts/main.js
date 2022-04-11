@@ -16,6 +16,7 @@ let ls = window.localStorage;
 let localUser = JSON.parse(ls.getItem('currentuser'))
 let localSubjects = JSON.parse(ls.getItem('subjectList'))
 let currentUser = localUser
+let currentSubjects = localSubjects
 
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
@@ -25,7 +26,7 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 }
 
 export const userInfo = currentUser
-export const userSubjects = localSubjects
+export const userSubjects = currentSubjects
 
 // Memorando
 let memoProperties = {
@@ -89,12 +90,12 @@ function displayHomeUserName() {
 function addPageFuncions() {
     // Home functions
     displayHomeUserName()
-    renderSubjectListHome(userSubjects)
+    renderSubjectListHome(currentSubjects)
 
     //Note functions
-    submitNote(currentUser, userSubjects)
+    submitNote(currentUser, currentSubjects)
     getInitialNoteList(currentUser.id)
-    onFilterListener(currentUser.id, userSubjects)
+    onFilterListener(currentUser.id, currentSubjects)
     renderNoteDetails()
 
     // Meeting functions
@@ -111,9 +112,9 @@ function addPageFuncions() {
 
     // Memo functions
     renderMemoIntro(currentUser)
-    getInitialMemoSubjects(userSubjects)
-    onSortFilterMemoSubjectListener(userSubjects, userInfo.groups)
-    getMemoSectionInfo(userSubjects)
+    getInitialMemoSubjects(currentSubjects)
+    onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups)
+    getMemoSectionInfo(currentSubjects)
 
     // Memo form edit functions
     changeMemoEditFormPage()
