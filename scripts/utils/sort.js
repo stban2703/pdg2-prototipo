@@ -25,3 +25,7 @@ export function sortByAlphabeticDescending(a, b) {
     }
     return 0;
 }
+
+export function sortByIndex(a, b) {
+    return a.index - b.index;
+}

@@ -2682,6 +2682,7 @@ input[type=button] {
   text-align: center;
   z-index: 2;
   padding: 0.5rem;
+  min-width: 17ch;
 }
 
 .memo-module__name:focus {
