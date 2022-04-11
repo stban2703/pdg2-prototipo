@@ -108,6 +108,36 @@
         align-self: flex-end;
     }
 
+    .question-back-button {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1.5rem;
+        gap: 0.5rem;
+        padding: 0;
+
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.1em 1em;
+            background-color: $button-secondary;
+            border-radius: 40px;
+            box-shadow: $button-secondary-box-shadow;
+            img {
+                max-width: none;
+            }
+        }
+
+        &__tag {
+            font-family: $poppins;
+            font-size: 1em;
+            color: $silver;
+        }
+    }
+
     &__addOptionTag {
         font-family: $poppins;
         font-size: 1.8rem;

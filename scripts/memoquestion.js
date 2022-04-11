@@ -1,4 +1,4 @@
-import { createMemoAnswer, getMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { createMemoAnswer, getMemoQuestion, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
 import { showLoader } from "./utils/loader.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
@@ -163,7 +163,7 @@ export async function submitMemoQuestionForm() {
             const period = urlQueryParts[0]
             const subjectId = urlQueryParts[1]
             const questionId = urlQueryParts[2]
-            //showLoader()
+            showLoader()
 
             switch (currentQuestion.type) {
                 case "radio":
@@ -200,6 +200,17 @@ export async function submitMemoQuestionForm() {
     }
 }
 
-export async function nextMemoQuestion() {
+export function memoQuestionGoBack() {
+    const questionBackButton = document.querySelector(".question-back-button")
 
+    if (questionBackButton && window.location.href.includes("#memoquestion")) {
+        questionBackButton.addEventListener('click', () => {
+            showLoader()
+            const urlQuery = window.location.hash.split("?")[1]
+            const urlQueryParts = urlQuery.split("_")
+            const period = urlQueryParts[0]
+            const subjectId = urlQueryParts[1]
+            getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
+        })
+    }
 }

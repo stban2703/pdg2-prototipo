@@ -273,7 +273,7 @@ export async function createMemoAnswer(currentPeriod, questionId, subjectId, ans
     });
 }
 
-async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId , answerId, currentIndex) {
+async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerId, currentIndex) {
     const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, questionId)
     await updateDoc(questionRef, {
         answerId: answerId
@@ -301,6 +301,19 @@ export async function getNextMemmoQuestion(currentPeriod, subjectId, currentInde
     const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
     hideLoader()
     window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
+}
+
+export async function getPreviousMemoQuestion(currentPeriod, subjectId, currentIndex) {
+    if (currentIndex > 1) {
+        const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex - 1)))
+        const querySnapshot = await getDocs(q);
+        const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+        hideLoader()
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
+    } else if(currentIndex === 1) {
+        hideLoader()
+        window.location = `index.html#memosections?${subjectId}`
+    }
 }
 
 // User functions
