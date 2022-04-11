@@ -23,24 +23,21 @@ export async function renderMemoQuestion() {
 
         if (questionInfo.type !== "improveactions") {
             // Titulo de subseccion
-            const memoQuestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
-            memoQuestionSubsectionTitle.innerHTML = questionInfo.subsection
-            memoQuestionSubsectionTitle.classList.remove("hidden")
+            const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
+            memoquestionSubsectionTitle.innerHTML = questionInfo.subsection
 
-            // Contenedor de pregunta normal
+            // Mostrar contenedor de pregunta normal
             const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")
             memoquestionContainerNormal.classList.remove("hidden")
 
-            // Renderizar pregunta
-            memoquestionContainerNormal.innerHTML = `
-                    <h5 class="memoquestion-form__subtitle">Pregunta ${questionInfo.index}</h5>
-                    <p class="memoquestion-form__question">${asteriskToBold(questionInfo.question)}
-                    </p>
-                `
-            
+            // Número de pregunta
+            memoquestionContainerNormal.querySelector(".memoquestion-form__subtitle").innerHTML = `Pregunta ${questionInfo.index}`
+
+            // Descripcion de pregunta
+            memoquestionContainerNormal.querySelector(".memoquestion-form__question").innerHTML = asteriskToBold(questionInfo.question)
+
             // Contenedor de respuesta
-            const answerContainer = document.createElement('div')
-            answerContainer.className = "memoquestion-form__answer"
+            const memoAnswerContainer = memoquestionContainerNormal.querySelector(".memoquestion-form__answer")
 
             // Agregar tipo de respuesta
             switch (questionInfo.type) {
@@ -52,17 +49,30 @@ export async function renderMemoQuestion() {
                         const answerOption = document.createElement('label')
                         answerOption.className = "memo-radio-input"
                         answerOption.innerHTML = `
-                        <input type="radio" name="${questionId}" value="${option}" required />
+                        <input type="radio" name="radioanswer" value="${option}" required />
                         ${option}
                         `
                         radioAnswerQuestion.appendChild(answerOption)
                     });
-                    answerContainer.appendChild(radioAnswerQuestion)
+                    memoAnswerContainer.appendChild(radioAnswerQuestion)
                     break;
             }
 
-            memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(answerContainer)
+            memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
         }
 
+    }
+}
+
+export async function submitMemoQuestionAnswer() {
+    const memoQuestionForm = document.querySelector(".memoquestion-form")
+
+    if (memoQuestionForm && window.location.href.includes("#memoquestion")) {
+        memoQuestionForm.addEventListener('submit', (event) => {
+            event.preventDefault()
+            if(memoQuestionForm.radioanswer.value) {
+                
+            }
+        })
     }
 }
