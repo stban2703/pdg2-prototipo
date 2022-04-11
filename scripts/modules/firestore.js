@@ -300,7 +300,9 @@ export async function getNextMemmoQuestion(currentPeriod, subjectId, currentInde
     const querySnapshot = await getDocs(q);
     const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
     hideLoader()
-    window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
+    if (currentIndex == 3) {
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}_info`
+    } else window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
 }
 
 export async function getPreviousMemoQuestion(currentPeriod, subjectId, currentIndex) {
@@ -310,7 +312,7 @@ export async function getPreviousMemoQuestion(currentPeriod, subjectId, currentI
         const previosQuestion = querySnapshot.docs.map(doc => doc.data())[0];
         hideLoader()
         window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${previosQuestion.id}`
-    } else if(currentIndex === 1) {
+    } else if (currentIndex === 1) {
         hideLoader()
         window.location = `index.html#memosections?${subjectId}`
     }

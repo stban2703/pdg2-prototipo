@@ -1,5 +1,5 @@
 import { createMemoAnswer, getMemoQuestion, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
-import { showLoader } from "./utils/loader.js"
+import { hideLoader, showLoader } from "./utils/loader.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
@@ -24,7 +24,7 @@ export async function renderMemoQuestion() {
         // Formulario general
         const memoQuestionForm = memoQuestionScreen.querySelector(".memoquestion-form")
 
-        if (currentQuestion.type !== "improveactions") {
+        if (currentQuestion.type !== "improveactions" && !urlQueryParts[3]) {
             // Titulo de subseccion
             const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
             memoquestionSubsectionTitle.innerHTML = currentQuestion.subsection
@@ -70,13 +70,72 @@ export async function renderMemoQuestion() {
                 case "scale":
                     const scaleAnswerQuestion = document.createElement('div')
                     scaleAnswerQuestion.className = "memoquestion-form__scale"
+                    scaleAnswerQuestion.innerHTML = `
+                    <section class="memoquestion-form__scaleTag">
+                        <p>${currentQuestion.scalemintag}</p>
+                    </section>
+                    <section class="memoquestion-form__scaleList">
+                        <div class="memoquestion-form__scaleOption">
+                            <span>1</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="1" required/>
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>2</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="2" required />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>3</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="3" required />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>4</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="4" required />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>5</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="5" required />
+                            </label>
+                        </div>
+                        <div class="memoquestion-form__scaleOption">
+                            <span>6</span>
+                            <label class="memo-radio-input">
+                                <input type="radio" name="scale" value="6" required />
+                            </label>
+                        </div>
+                    </section>
+                    <section class="memoquestion-form__scaleTag">
+                        <p>${currentQuestion.scalemaxtag}</p>
+                    </section>
+                    `
 
-                    if(parseInt(currentQuestion.index) === 3) {
+                    memoAnswerContainer.appendChild(scaleAnswerQuestion)
+                    if (parseInt(currentQuestion.index) === 3) {
                         document.querySelector(".memoquestion-form__scaleValues").classList.remove("hidden")
-                    }
+                    } else document.querySelector(".memoquestion-form__scaleValues").classList.add("hidden")
+
                     break;
             }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
+        } else if (parseInt(currentQuestion.index) === 4) {
+            const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
+            memoquestionSubsectionTitle.innerHTML = currentQuestion.subsection
+
+            const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")
+            memoquestionContainerNormal.classList.remove("hidden")
+
+            memoquestionContainerNormal.querySelector(".memoquestion-form__answer").classList.add("hidden")
+            document.querySelectorAll(".memoquestion-form__subtitle")[0].classList.add("hidden")
+            document.querySelector(".memoquestion-form__question").classList.add("hidden")
+            document.querySelector(".memoquestion-form__information").classList.remove("hidden")
         }
 
     }
@@ -174,42 +233,48 @@ export async function submitMemoQuestionForm() {
             const questionId = urlQueryParts[2]
             showLoader()
 
-            switch (currentQuestion.type) {
-                case "radio":
-                    if (memoQuestionForm.radioanswer) {
-                        const answerValue = [memoQuestionForm.radioanswer.value]
-                        if (currentQuestion.answerId) {
-                            updateAnswerValue(currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
+            if (parseInt(currentQuestion.index) == 4) {
+                hideLoader()
+                window.location = `index.html#memoquestion?${period}_${subjectId}_${questionId}`
+            } else {
+                switch (currentQuestion.type) {
+                    case "radio":
+                        if (memoQuestionForm.radioanswer) {
+                            const answerValue = [memoQuestionForm.radioanswer.value]
+                            onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
+                        }
+                        break;
+                    case "checkbox":
+                        const checkboxOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
+                        let selectedChecboxOptions = []
+
+                        checkboxOptions.forEach(e => {
+                            if (e.checked) {
+                                selectedChecboxOptions.push(e.value)
+                            }
+                        })
+
+                        if (selectedChecboxOptions.length > 0) {
+                            onSubmitAnswer(questionId, currentQuestion.answerId, selectedChecboxOptions, period, subjectId, currentQuestion.index)
                         } else {
-                            createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(currentQuestion.index))
+                            window.alert("Debes responder a la pregunta")
                         }
-                    }
-                    break;
-                case "checkbox":
-                    const checkboxOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
-                    let selectedChecboxOptions = []
-
-                    checkboxOptions.forEach(e => {
-                        if (e.checked) {
-                            selectedChecboxOptions.push(e.value)
-                        }
-                    })
-
-                    if (selectedChecboxOptions.length > 0) {
-                        if (currentQuestion.answerId) {
-                            updateAnswerValue(currentQuestion.answerId, selectedChecboxOptions, period, subjectId, parseInt(currentQuestion.index))
-                        } else {
-                            createMemoAnswer(period, questionId, subjectId, selectedChecboxOptions, parseInt(currentQuestion.index))
-                        }
-                    } else {
-                        window.alert("Debes responder a la pregunta")
-                    }
-                    break;
-                case "scale":
-
-                    break;
+                        break;
+                    case "scale":
+                        const scaleAnswerValue = [memoQuestionForm.scale.value];
+                        onSubmitAnswer(questionId, currentQuestion.answerId, scaleAnswerValue, period, subjectId, currentQuestion.index)
+                        break;
+                }
             }
         })
+    }
+}
+
+function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subjectId, questionIndex) {
+    if (questionAnswerdId) {
+        updateAnswerValue(questionAnswerdId, answerValue, period, subjectId, parseInt(questionIndex))
+    } else {
+        createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(questionIndex))
     }
 }
 
