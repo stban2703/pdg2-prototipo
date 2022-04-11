@@ -66,6 +66,8 @@
     &__radio-checkbox {
         display: flex;
         flex-direction: column;
+        width: 100%;
+        max-width: 29rem;
         gap: 1rem;
     }
 
@@ -78,7 +80,7 @@
         width: auto;
     }
 
-    &__addOptionButton {
+    &__openAddOptionButton {
         display: flex;
         flex-direction: row;
         gap: 0.7rem;
@@ -86,6 +88,24 @@
         background: none;
         padding: 0;
         border: none;
+    }
+
+    &__addOptionControls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__inputControls {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .addOptionBtn {
+        max-width: 26rem;
+        align-self: flex-end;
     }
 
     &__addOptionTag {
@@ -193,7 +213,7 @@
         font-size: 1.8rem;
         font-weight: $semibold;
         color: $boulder;
-        
+
         span {
             font-weight: $light;
             margin-left: 0.3rem;

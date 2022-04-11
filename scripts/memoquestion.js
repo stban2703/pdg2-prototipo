@@ -3,6 +3,7 @@ import { showLoader } from "./utils/loader.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
+let selectedOptions = []
 
 export async function renderMemoQuestion() {
     const memoQuestionScreen = document.querySelector(".memoquestion-screen")
@@ -59,12 +60,118 @@ export async function renderMemoQuestion() {
                     });
                     memoAnswerContainer.appendChild(radioAnswerQuestion)
                     break;
-            }
 
+                case "checkbox":
+                    const checkboxAnswerQuestion = document.createElement('div')
+                    checkboxAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--checkbox"
+
+                    /*currentQuestion.options.forEach(option => {
+                        const answerOption = document.createElement('label')
+                        answerOption.className = "checkbox-input checkbox-input--memo"
+                        answerOption.innerHTML = `
+                        <input type="checkbox" name="${"checkbox"}[]" value="${option}" />
+                        ${option}
+                        `
+                        checkboxAnswerQuestion.appendChild(answerOption)
+                    })
+                    
+                    const addOptionButton = document.createElement('button')
+                    addOptionButton.type = "button"
+                    addOptionButton.className = "memoquestion-form__addOptionButton"
+                    addOptionButton.innerHTML = `
+                        <div class="add-item-input__icon">
+                            <img src="./images/plusagreement.svg" alt="">
+                        </div>
+                        <p class="memoquestion-form__addOptionTag">Agregar otra</p>
+                    `
+                    checkboxAnswerQuestion.appendChild(addOptionButton)*/
+                    renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
+                    memoAnswerContainer.appendChild(checkboxAnswerQuestion)
+                    break;
+            }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
         }
 
     }
+}
+
+
+function addMemoOption(list, checkboxAnswerQuestion, value) {
+    const newOption = value
+    list.push(newOption)
+    const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
+    
+    allOptions.forEach((elem, index) => {
+        if(elem.checked) {
+            selectedOptions.push(index)
+        }
+    })
+    renderMemoOption(list, checkboxAnswerQuestion)
+}
+
+function renderMemoOption(list, checkboxAnswerQuestion) {
+    checkboxAnswerQuestion.innerHTML = ``
+    list.forEach((option, index) => {
+        const answerOption = document.createElement('label')
+        answerOption.className = "checkbox-input checkbox-input--memo"
+        answerOption.innerHTML = `
+        <input type="checkbox" name="${"checkbox"}[]" value="${option}" required />
+        ${option}
+        `
+
+        // Recuperar opciones marcadas
+        for (let j = 0; j < selectedOptions.length; j++) {
+            const selectedIndex = selectedOptions[j];
+            if(index === selectedIndex) {
+                answerOption.querySelector("input").checked = true
+                break;
+            }
+        }
+        checkboxAnswerQuestion.appendChild(answerOption)
+    })
+    selectedOptions = []
+
+    const openAddOptionButton = document.createElement('button')
+    openAddOptionButton.type = "button"
+    openAddOptionButton.className = "memoquestion-form__openAddOptionButton"
+    openAddOptionButton.innerHTML = `
+        <div class="add-item-input__icon">
+            <img src="./images/plusagreement.svg" alt="">
+        </div>
+        <p class="memoquestion-form__addOptionTag">Agregar otra</p>
+    `
+
+    const addOptionControls = document.createElement('div')
+    addOptionControls.className = "memoquestion-form__addOptionControls hidden"
+    addOptionControls.innerHTML = `
+    <section class="memoquestion-form__inputControls">
+        <div class="agreement__number agreement__number agreement__number--secondary">
+            <img src="./images/plusagreement.svg" alt="">
+        </div>
+        <div class="fix-label-text-input fix-label-text-input--secondary memoquestion-form__addOptionInput">
+            <input id="newoption" class="fix-label-text-input__field newoption" type="text" name="newoption" placeholder="Escribe aquí tu texto" autocomplete="off">
+            <label class="fix-label-text-input__label" for="newoption">Agregar otra</label>
+        </div>
+    </section>
+    <button type="button" class="small-button small-button--secondary addOptionBtn">
+        <span>Agregar acuerdo</span>
+    </button>
+    `
+
+    checkboxAnswerQuestion.appendChild(openAddOptionButton)
+    checkboxAnswerQuestion.appendChild(addOptionControls)
+    openAddOptionButton.addEventListener('click', () => {
+        addOptionControls.classList.remove("hidden")
+        openAddOptionButton.classList.add("hidden")
+    })
+
+    const addOptionBtn = addOptionControls.querySelector(".addOptionBtn")
+    addOptionBtn.addEventListener('click', () => {
+        const optionValue = addOptionControls.querySelector("#newoption").value
+        if (optionValue.length > 0) {
+            addMemoOption(list, checkboxAnswerQuestion, optionValue)
+        } else console.log("Rellena el campo")
+    })
 }
 
 export async function submitMemoQuestionForm() {

@@ -643,7 +643,7 @@ input[type=button] {
   position: absolute;
   padding: 0 0.5rem;
   top: 0%;
-  left: 0.5rem;
+  left: 1rem;
   -webkit-transform: translate(0%, -50%);
           transform: translate(0%, -50%);
   font-size: 1.5rem;
@@ -669,7 +669,7 @@ input[type=button] {
 
 .fix-label-text-input__field:focus + label {
   top: 0%;
-  left: 0.5rem;
+  left: 1rem;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
   font-size: 1.5rem;
@@ -717,7 +717,7 @@ input[type=button] {
 
 .fix-label-text-input--secondary .fix-label-text-input__field:focus + label {
   top: 0%;
-  left: 0.5rem;
+  left: 1rem;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
   font-size: 1.5rem;
@@ -764,6 +764,12 @@ input[type=button] {
 
 .add-item-input__icon {
   margin-top: 0.5rem;
+  min-width: 2rem;
+  max-width: 2rem;
+}
+
+.add-item-input__icon img {
+  width: 100%;
 }
 
 .select-input {
@@ -2456,6 +2462,10 @@ input[type=button] {
   height: 2rem;
   min-height: 2rem;
   margin-top: 0.5rem;
+}
+
+.agreement__number img {
+  width: 100%;
 }
 
 .agreement__number p {
@@ -4873,6 +4883,8 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+  max-width: 29rem;
   gap: 1rem;
 }
 
@@ -4885,7 +4897,7 @@ input[type=button] {
   width: auto;
 }
 
-.memoquestion-form__addOptionButton {
+.memoquestion-form__openAddOptionButton {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4900,6 +4912,35 @@ input[type=button] {
   background: none;
   padding: 0;
   border: none;
+}
+
+.memoquestion-form__addOptionControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+
+.memoquestion-form__inputControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.memoquestion-form .addOptionBtn {
+  max-width: 26rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .memoquestion-form__addOptionTag {
