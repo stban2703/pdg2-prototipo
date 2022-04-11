@@ -256,6 +256,19 @@ export async function renderMemoQuestion() {
                         })
                     }
                     break;
+
+                case "parragraph":
+                    const parragraphAnswerQuestion = document.createElement('div')
+                    parragraphAnswerQuestion.className = "memoquestion-form__parragraph"
+
+                    parragraphAnswerQuestion.innerHTML = `
+                    <div class="text-area-input">
+                        <textarea class="text-area-input__field" name="parragraph" id="" rows="5"
+                        placeholder="Escribe aquí tu texto..."></textarea>
+                    </div>
+                    `
+                    memoAnswerContainer.appendChild(parragraphAnswerQuestion)
+                    break;
             }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
         } else if (parseInt(currentQuestion.index) === 4) {
@@ -420,6 +433,10 @@ export async function submitMemoQuestionForm() {
                         }
 
                         onSubmitAnswer(questionId, currentQuestion.answerId, matrixAnswerValues, period, subjectId, currentQuestion.index)
+                        break;
+                    case "parragraph":
+                        const parragraphAnswerValue = [memoQuestionForm.parragraph.value]
+                        onSubmitAnswer(questionId, currentQuestion.answerId, parragraphAnswerValue, period, subjectId, currentQuestion.index)
                         break;
                 }
             }
