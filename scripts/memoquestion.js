@@ -63,7 +63,56 @@ export async function renderMemoQuestion() {
                 case "checkbox":
                     const checkboxAnswerQuestion = document.createElement('div')
                     checkboxAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--checkbox"
-                    renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
+                    if (!currentQuestion.options[0]) {
+                        let negativeOptions = []
+                        let positiveOptions = []
+                        const question5Answers = await getOptionsFromAnswers("YsVpQwlC6PXwgAS2IW7r", subjectId, period)
+                        const question6Answers = await getOptionsFromAnswers("jOz7X758oimxAJZ4V9BU", subjectId, period)
+
+                        console.log(question5Answers)
+                        console.log(question6Answers)
+
+                        question5Answers.forEach((elem) => {
+                            const parts = elem.split("|")
+                            const object = {
+                                tag: parts[0],
+                                value: parseInt(parts[parts.length - 1])
+                            }
+                            positiveOptions.push(object.tag)
+                            if(object.value < 4) {
+                                let temp = negativeOptions.find(elem => {
+                                    return elem === object.value
+                                })
+                                if(!temp) {
+                                    negativeOptions.push(object.tag)
+                                }
+                            }
+                        })
+
+                        question6Answers.forEach((elem) => {
+                            const parts = elem.split("|")
+                            const object = {
+                                tag: parts[0],
+                                value: parseInt(parts[parts.length - 1])
+                            }
+                            if(object.value < 4) {
+                                let temp = negativeOptions.find(elem => {
+                                    return elem === object.value
+                                })
+                                if(!temp) {
+                                    negativeOptions.push(object.tag)
+                                }
+                            }
+                        })
+
+                        negativeOptions.forEach((elem) => {
+                            const negativeIndex = positiveOptions.indexOf(elem)
+                            positiveOptions.splice(negativeIndex, 1)
+                        })
+                        renderMemoOption(positiveOptions, checkboxAnswerQuestion)
+                    } else {
+                        renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
+                    }
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
                     break;
 
@@ -234,6 +283,7 @@ function addMemoOption(list, checkboxAnswerQuestion, value) {
 
 function renderMemoOption(list, checkboxAnswerQuestion) {
     checkboxAnswerQuestion.innerHTML = ``
+
     list.forEach((option, index) => {
         const answerOption = document.createElement('label')
         answerOption.className = "checkbox-input checkbox-input--memo"
@@ -342,9 +392,9 @@ export async function submitMemoQuestionForm() {
                         onSubmitAnswer(questionId, currentQuestion.answerId, scaleAnswerValue, period, subjectId, currentQuestion.index)
                         break;
                     case "matrix":
-                        const rows= document.querySelectorAll(".memo-matrix-table__bodyRow")
+                        const rows = document.querySelectorAll(".memo-matrix-table__bodyRow")
                         const matrixAnswerValues = []
-                        
+
                         for (let i = 0; i < rows.length; i++) {
                             const rowInputValue = document.querySelector(".memoquestion-form").elements[`row${i}`].value
                             const answerTag = rows[i].querySelector(".memo-matrix-table__label").innerHTML
