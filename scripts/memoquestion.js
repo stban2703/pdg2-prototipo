@@ -1,4 +1,5 @@
 import { createMemoAnswer, getMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { showLoader } from "./utils/loader.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
@@ -72,19 +73,25 @@ export async function submitMemoQuestionForm() {
     if (memoQuestionForm && window.location.href.includes("#memoquestion")) {
         memoQuestionForm.addEventListener('submit', (event) => {
             event.preventDefault()
+            const urlQuery = window.location.hash.split("?")[1]
+            const urlQueryParts = urlQuery.split("_")
+            const period = urlQueryParts[0]
+            const subjectId = urlQueryParts[1]
+            const questionId = urlQueryParts[2]
+            showLoader()
+
             if (memoQuestionForm.radioanswer) {
                 const answerValue = [memoQuestionForm.radioanswer.value]
                 if (currentQuestion.answerId) {
-                    updateAnswerValue(currentQuestion.answerId, answerValue)
+                    updateAnswerValue(currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
                 } else {
-                    const urlQuery = window.location.hash.split("?")[1]
-                    const urlQueryParts = urlQuery.split("_")
-                    const period = urlQueryParts[0]
-                    const subjectId = urlQueryParts[1]
-                    const questionId = urlQueryParts[2]
-                    createMemoAnswer(period, questionId, subjectId, answerValue)
+                    createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(currentQuestion.index))
                 }
             }
         })
     }
+}
+
+export async function nextMemoQuestion() {
+
 }

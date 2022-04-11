@@ -254,7 +254,7 @@ export async function getMemoQuestion(currentPeriod, subjectId, id) {
     }
 }
 
-export async function createMemoAnswer(currentPeriod, questionId, subjectId, answerValue) {
+export async function createMemoAnswer(currentPeriod, questionId, subjectId, answerValue, currentIndex) {
     const answerRef = doc(collection(firestore, `memos/answers/answers`));
     console.log(answerRef.id)
     const newAnswer = {
@@ -266,31 +266,41 @@ export async function createMemoAnswer(currentPeriod, questionId, subjectId, ans
     }
 
     await setDoc(answerRef, newAnswer).then(() => {
-        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id)
+        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id, currentIndex)
     }).catch((error) => {
         hideLoader()
         console.log(error)
     });
 }
 
-async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId , answerId) {
+async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId , answerId, currentIndex) {
     const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, questionId)
     await updateDoc(questionRef, {
         answerId: answerId
     }).then(() => {
         //hideLoader()
         console.log("Referencia actualizada")
+        getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
     })
 }
 
-export async function updateAnswerValue(answerId, answerValue) {
+export async function updateAnswerValue(answerId, answerValue, currentPeriod, subjectId, currentIndex) {
     const answerRef = doc(firestore, "memos/answers/answers", answerId)
     await updateDoc(answerRef, {
         answerValue: answerValue
     }).then(() => {
         //hideLoader()
         console.log("Respuesta actualizada")
+        getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
     })
+}
+
+export async function getNextMemmoQuestion(currentPeriod, subjectId, currentIndex) {
+    const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex + 1)))
+    const querySnapshot = await getDocs(q);
+    const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+    hideLoader()
+    window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
 }
 
 // User functions

@@ -27,5 +27,5 @@ export function sortByAlphabeticDescending(a, b) {
 }
 
 export function sortByIndex(a, b) {
-    return a.index - b.index;
+    return parseInt(a.index) - parseInt(b.index);
 }
