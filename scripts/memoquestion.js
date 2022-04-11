@@ -16,7 +16,6 @@ export async function renderMemoQuestion() {
         const questionId = urlQueryParts[2]
 
         currentQuestion = await getMemoQuestion(period, subjectId, questionId)
-        console.log(currentQuestion)
 
         // Titulo de seccion
         const memoQuestionSectionTitle = memoQuestionScreen.querySelector(".memoquestion-screen__title")
@@ -64,27 +63,6 @@ export async function renderMemoQuestion() {
                 case "checkbox":
                     const checkboxAnswerQuestion = document.createElement('div')
                     checkboxAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--checkbox"
-
-                    /*currentQuestion.options.forEach(option => {
-                        const answerOption = document.createElement('label')
-                        answerOption.className = "checkbox-input checkbox-input--memo"
-                        answerOption.innerHTML = `
-                        <input type="checkbox" name="${"checkbox"}[]" value="${option}" />
-                        ${option}
-                        `
-                        checkboxAnswerQuestion.appendChild(answerOption)
-                    })
-                    
-                    const addOptionButton = document.createElement('button')
-                    addOptionButton.type = "button"
-                    addOptionButton.className = "memoquestion-form__addOptionButton"
-                    addOptionButton.innerHTML = `
-                        <div class="add-item-input__icon">
-                            <img src="./images/plusagreement.svg" alt="">
-                        </div>
-                        <p class="memoquestion-form__addOptionTag">Agregar otra</p>
-                    `
-                    checkboxAnswerQuestion.appendChild(addOptionButton)*/
                     renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
                     break;
@@ -100,9 +78,9 @@ function addMemoOption(list, checkboxAnswerQuestion, value) {
     const newOption = value
     list.push(newOption)
     const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
-    
+
     allOptions.forEach((elem, index) => {
-        if(elem.checked) {
+        if (elem.checked) {
             selectedOptions.push(index)
         }
     })
@@ -115,14 +93,14 @@ function renderMemoOption(list, checkboxAnswerQuestion) {
         const answerOption = document.createElement('label')
         answerOption.className = "checkbox-input checkbox-input--memo"
         answerOption.innerHTML = `
-        <input type="checkbox" name="${"checkbox"}[]" value="${option}" required />
+        <input type="checkbox" name="${"checkbox"}[]" value="${option}" />
         ${option}
         `
 
         // Recuperar opciones marcadas
         for (let j = 0; j < selectedOptions.length; j++) {
             const selectedIndex = selectedOptions[j];
-            if(index === selectedIndex) {
+            if (index === selectedIndex) {
                 answerOption.querySelector("input").checked = true
                 break;
             }
@@ -185,15 +163,38 @@ export async function submitMemoQuestionForm() {
             const period = urlQueryParts[0]
             const subjectId = urlQueryParts[1]
             const questionId = urlQueryParts[2]
-            showLoader()
+            //showLoader()
 
-            if (memoQuestionForm.radioanswer) {
-                const answerValue = [memoQuestionForm.radioanswer.value]
-                if (currentQuestion.answerId) {
-                    updateAnswerValue(currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
-                } else {
-                    createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(currentQuestion.index))
-                }
+            switch (currentQuestion.type) {
+                case "radio":
+                    if (memoQuestionForm.radioanswer) {
+                        const answerValue = [memoQuestionForm.radioanswer.value]
+                        if (currentQuestion.answerId) {
+                            updateAnswerValue(currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
+                        } else {
+                            createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(currentQuestion.index))
+                        }
+                    }
+                    break;
+                case "checkbox":
+                    const checkboxOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
+                    let selectedChecboxOptions = []
+
+                    checkboxOptions.forEach(e => {
+                        if (e.checked) {
+                            selectedChecboxOptions.push(e.value)
+                        }
+                    })
+
+                    if (selectedChecboxOptions.length > 0) {
+                        if (currentQuestion.answerId) {
+                            updateAnswerValue(currentQuestion.answerId, selectedChecboxOptions, period, subjectId, parseInt(currentQuestion.index))
+                        } else {
+                            createMemoAnswer(period, questionId, subjectId, selectedChecboxOptions, parseInt(currentQuestion.index))
+                        }
+                    } else {
+                        window.alert("Debes responder a la pregunta")
+                    }
             }
         })
     }
