@@ -254,6 +254,45 @@ export async function getMemoQuestion(currentPeriod, subjectId, id) {
     }
 }
 
+export async function createMemoAnswer(currentPeriod, questionId, subjectId, answerValue) {
+    const answerRef = doc(collection(firestore, `memos/answers/answers`));
+    console.log(answerRef.id)
+    const newAnswer = {
+        id: answerRef.id,
+        answerValue: answerValue,
+        period: currentPeriod,
+        questionId: questionId,
+        subjectId: subjectId
+    }
+
+    await setDoc(answerRef, newAnswer).then(() => {
+        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id)
+    }).catch((error) => {
+        hideLoader()
+        console.log(error)
+    });
+}
+
+async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId , answerId) {
+    const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, questionId)
+    await updateDoc(questionRef, {
+        answerId: answerId
+    }).then(() => {
+        //hideLoader()
+        console.log("Referencia actualizada")
+    })
+}
+
+export async function updateAnswerValue(answerId, answerValue) {
+    const answerRef = doc(firestore, "memos/answers/answers", answerId)
+    await updateDoc(answerRef, {
+        answerValue: answerValue
+    }).then(() => {
+        //hideLoader()
+        console.log("Respuesta actualizada")
+    })
+}
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);
