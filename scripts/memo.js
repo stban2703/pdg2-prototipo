@@ -1,4 +1,4 @@
-import { getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
+import { getMemoQuestion, getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
 export function renderMemoIntro(user) {
@@ -65,7 +65,6 @@ export function onSortFilterMemoSubjectListener(userSubjects, userGroups) {
     }
 }
 
-
 function sortFilterMemoSubjects(userSubjects, subjectSort, groupFilter) {
     let filterCopy = [...userSubjects]
 
@@ -113,18 +112,31 @@ export async function getMemoSectionInfo(userSubjects) {
                 [item.section]: [...(groups[item.section] || []), item]
             }), {});
 
-            const groupNames = Object.keys(groups);
-            renderMemoSections(groupNames)
+            renderMemoSections(groups, selectedSubject.memoPeriod, subjectId)
         }
     }
 }
 
-function renderMemoSections(groupList) {
+function renderMemoSections(groupList, memoPeriod, subjectId) {
     const memoSectionList = document.querySelector(".memosections-screen__sectionList")
     memoSectionList.innerHTML = ``
-    groupList.forEach((group, index) => {
+
+    //const groupNames = Object.keys(groups);
+    Object.keys(groupList).forEach((group, index) => {
         const memoSectionProgressItem = document.createElement("div")
         memoSectionProgressItem.className = `memo-section-progress-item`
+
+        let currentQuestionId = ""
+
+        // Revisar cada pregunta:
+        for (let i = 0; i < groupList[group].length; i++) {
+            const question = groupList[group][i];
+            if (!question.answer) {
+                currentQuestionId = question.id
+                break
+            }
+        }
+
         memoSectionProgressItem.innerHTML = `
         <section class="memo-section-progress-item__progress">
             <div class="memo-section-progress-item__number">
@@ -139,7 +151,7 @@ function renderMemoSections(groupList) {
             </div>
         </section>
         <div class="memo-module" style="background-image: url('./images/circlepatternmemomodules.svg');">
-            <a href="#memoquestion">
+            <a href="#memoquestion?${memoPeriod}_${subjectId}_${currentQuestionId}">
             </a>
             <div class="memo-module__patcheditable">
                 <h4 class="memo-module__name">${group}
@@ -149,6 +161,21 @@ function renderMemoSections(groupList) {
         `
         memoSectionList.appendChild(memoSectionProgressItem)
     })
+}
+
+export async function renderMemoQuestion() {
+    const memoQuestionScreen = document.querySelector(".memoquestion-screen")
+
+    if (memoQuestionScreen && window.location.href.includes("#memoquestion")) {
+        const urlQuery = window.location.hash.split("?")[1]
+        const urlQueryParts = urlQuery.split("_")
+        const period = urlQueryParts[0]
+        const subjectId = urlQueryParts[1]
+        const questionId = urlQueryParts[2]
+
+        const questionInfo = await getMemoQuestion(period, subjectId, questionId)
+        console.log(questionInfo)
+    }
 }
 
 function getSubjectFromId(id, userSubjects) {

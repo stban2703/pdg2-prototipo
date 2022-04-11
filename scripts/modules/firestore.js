@@ -240,6 +240,19 @@ async function createNewMemoQuestions(templateQuestions, path) {
     })
 }
 
+export async function getMemoQuestion(currentPeriod, subjectId, id) {
+    const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, id)
+    const docSnap = await getDoc(questionRef)
+    if (docSnap.exists()) {
+        const question = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return question
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
 
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
