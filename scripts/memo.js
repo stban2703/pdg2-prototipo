@@ -1,4 +1,4 @@
-import { getMemoQuestion, getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
+import { getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
 export function renderMemoIntro(user) {
@@ -161,21 +161,6 @@ function renderMemoSections(groupList, memoPeriod, subjectId) {
         `
         memoSectionList.appendChild(memoSectionProgressItem)
     })
-}
-
-export async function renderMemoQuestion() {
-    const memoQuestionScreen = document.querySelector(".memoquestion-screen")
-
-    if (memoQuestionScreen && window.location.href.includes("#memoquestion")) {
-        const urlQuery = window.location.hash.split("?")[1]
-        const urlQueryParts = urlQuery.split("_")
-        const period = urlQueryParts[0]
-        const subjectId = urlQueryParts[1]
-        const questionId = urlQueryParts[2]
-
-        const questionInfo = await getMemoQuestion(period, subjectId, questionId)
-        console.log(questionInfo)
-    }
 }
 
 function getSubjectFromId(id, userSubjects) {
