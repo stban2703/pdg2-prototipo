@@ -377,6 +377,12 @@ export async function submitMemoQuestionForm() {
                             if (parseInt(currentQuestion.index) === 8 && answerValue[0] === "No") {
                                 const rememberModal = document.querySelector(".memo-question-modal--remember")
                                 rememberModal.classList.remove("hidden")
+
+                                const closeMemoRememberModalButton = document.querySelector(".closeMemoRememberModalButton")
+                                closeMemoRememberModalButton.addEventListener('click', () => {
+                                    rememberModal.classList.add("hidden")
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                })
                             } else {
                                 onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
                             }
