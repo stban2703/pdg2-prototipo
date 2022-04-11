@@ -233,7 +233,7 @@ export async function submitMemoQuestionForm() {
             const questionId = urlQueryParts[2]
             showLoader()
 
-            if (parseInt(currentQuestion.index) == 4) {
+            if (parseInt(currentQuestion.index) == 4 && window.location.href.includes("_info")) {
                 hideLoader()
                 window.location = `index.html#memoquestion?${period}_${subjectId}_${questionId}`
             } else {
@@ -288,7 +288,14 @@ export function memoQuestionGoBack() {
             const urlQueryParts = urlQuery.split("_")
             const period = urlQueryParts[0]
             const subjectId = urlQueryParts[1]
-            getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
+            const questionId = urlQueryParts[2]
+
+            if (parseInt(currentQuestion.index) == 4 && window.location.href.includes("_info")) {
+                getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
+            } else if (parseInt(currentQuestion.index) == 4 && !window.location.href.includes("_info")) {
+                hideLoader()
+                window.location = `index.html#memoquestion?${period}_${subjectId}_${questionId}_info`
+            }
         })
     }
 }
