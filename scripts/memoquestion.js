@@ -1,4 +1,4 @@
-import { createMemoAnswer, getMemoQuestion, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { createMemoAnswer, getMemoQuestion, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
@@ -122,6 +122,81 @@ export async function renderMemoQuestion() {
                         document.querySelector(".memoquestion-form__scaleValues").classList.remove("hidden")
                     } else document.querySelector(".memoquestion-form__scaleValues").classList.add("hidden")
 
+                    break;
+
+                case "matrix":
+                    const matrixAnswerQuestion = document.createElement('div')
+                    matrixAnswerQuestion.className = "memoquestion-form__matrix"
+                    matrixAnswerQuestion.innerHTML = `
+                    <table class="memo-matrix-table">
+                        <thead class="memo-matrix-table__header">
+                            <tr class="memo-matrix-table__headerRow">
+                                <td class="memo-matrix-table__tag memo-matrix-table__tag--right">${currentQuestion.matrixcolumnmintag}</td>
+                                <td class="memo-matrix-table__number">1</td>
+                                <td class="memo-matrix-table__number">2</td>
+                                <td class="memo-matrix-table__number">3</td>
+                                <td class="memo-matrix-table__number">4</td>
+                                <td class="memo-matrix-table__number">5</td>
+                                <td class="memo-matrix-table__number">6</td>
+                                <td class="memo-matrix-table__tag memo-matrix-table__tag--left">${currentQuestion.matrixcolumnmaxtag}
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="memo-matrix-table__body">
+                        </tbody>
+                    </table>
+                    `
+                    memoAnswerContainer.appendChild(matrixAnswerQuestion)
+
+                    if(!currentQuestion.matrixrows[0]) {
+                        console.log("No tiene valor")
+                        let options = []
+                        switch(parseInt(currentQuestion.index)) {
+                            case 5:
+                                options = await getOptionsFromAnswers("UdZPykHVoTAftyvkLxdE", subjectId, period)
+                                break;
+                        }
+                        const matrixTableBody = document.querySelector(".memo-matrix-table__body")
+                        matrixTableBody.innerHTML = ""
+                        options.forEach((elem, index) => {
+                            const matrixRow = document.createElement("tr")
+                            matrixRow.className = "memo-matrix-table__bodyRow"
+                            matrixRow.innerHTML = `
+                                <td class="memo-matrix-table__label">${elem}</td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="1" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="2" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="3" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="4" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="5" />
+                                    </label>
+                                </td>
+                                <td class="memo-matrix-table__radio">
+                                    <label class="memo-radio-input">
+                                        <input type="radio" name="row${index}" value="6" />
+                                    </label>
+                                </td>
+                            `
+                            matrixTableBody.appendChild(matrixRow)
+                        })
+                    }
                     break;
             }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
@@ -290,11 +365,11 @@ export function memoQuestionGoBack() {
             const subjectId = urlQueryParts[1]
             const questionId = urlQueryParts[2]
 
-            if (parseInt(currentQuestion.index) == 4 && window.location.href.includes("_info")) {
-                getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
-            } else if (parseInt(currentQuestion.index) == 4 && !window.location.href.includes("_info")) {
+            if (parseInt(currentQuestion.index) == 4 && !window.location.href.includes("_info")) {
                 hideLoader()
                 window.location = `index.html#memoquestion?${period}_${subjectId}_${questionId}_info`
+            } else {
+                getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
             }
         })
     }

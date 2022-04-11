@@ -318,6 +318,17 @@ export async function getPreviousMemoQuestion(currentPeriod, subjectId, currentI
     }
 }
 
+export async function getOptionsFromAnswers(targetQuestionId, subjectId, period) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("questionId", "==", `${targetQuestionId}`), where("subjectId", "==", subjectId))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    const currentPeriodAnswer = answerList.filter((e) => {
+        return e.period === period
+    })
+    const options = currentPeriodAnswer[0].answerValue
+    return options
+}
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);
@@ -362,6 +373,7 @@ export async function getUserSubjects(teacherId) {
     //return subjectList
 }
 
+// Test functions
 export const submitTestMemoQuestion = async function (questionObject) {
     const memoquestionRef = doc(collection(firestore, "memos/template/questions"))
     //index, section, sectionIndex, subsection, subsectionIndex, type, justification, options
