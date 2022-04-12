@@ -6,6 +6,7 @@ import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
 let selectedOptions = []
+let improveActionsList = []
 
 export async function renderMemoQuestion() {
     const memoQuestionScreen = document.querySelector(".memoquestion-screen")
@@ -406,7 +407,64 @@ export async function renderMemoQuestion() {
                 memoquestionFormBack.classList.remove("hidden")
                 newImproveActionForm.classList.add("hidden")
             })
+
+            renderImproveActions(improveActionsList)
+
+            const addImproveActionButton = document.querySelector(".addImproveActionButton")
+            addImproveActionButton.addEventListener("click", () => {
+                //console.log(memoQuestionForm.improveactionname)
+                const improveActionName = memoQuestionForm.improveactionname.value
+                const improveActionDescription = memoQuestionForm.improveactiondescription.value
+
+                if (improveActionName.length > 0 && improveActionDescription.length > 0) {
+                    addImproveAction(improveActionName, improveActionDescription)
+                } else {
+                    alert("Debes rellenar los campos")
+                }
+            })
         }
+    }
+}
+
+function addImproveAction(improveactionname, improveactiondescription) {
+    improveActionsList.push({
+        name: improveactionname,
+        description: improveactiondescription
+    })
+    renderImproveActions(improveActionsList)
+    document.querySelector(".returnToImproveActionButton").click()
+}
+
+function renderImproveActions(list) {
+    const emptyMessage = document.querySelector(".improve-actions__empty")
+    const improveActionList = document.querySelector(".improve-actions__list")
+
+    improveActionList.innerHTML = ``
+    if (list.length == 0) {
+        emptyMessage.classList.remove("hidden")
+        improveActionList.classList.add("hidden")
+    } else {
+        emptyMessage.classList.add("hidden")
+        improveActionList.classList.remove("hidden")
+        list.forEach((elem, index) => {
+            const actionItem = document.createElement("div")
+            actionItem.className = "improve-action-item"
+            actionItem.innerHTML = `
+            <section class="improve-action-item__number">
+                <span>${index + 1}</span>
+            </section>
+            <section class="improve-action-item__title">
+                <h5>${elem.name}</h5>
+            </section>
+            <section class="improve-action-item__description">
+                <p>${elem.description}</p>
+            </section>
+            <button type="button" class="improve-action-item__controls"
+                style="background-image: url('./images/3dots.svg');">
+            </button>
+            `
+            improveActionList.appendChild(actionItem)
+        })
     }
 }
 

@@ -3689,6 +3689,7 @@ input[type=button] {
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
+  margin-left: auto;
 }
 
 .signinup-form {
