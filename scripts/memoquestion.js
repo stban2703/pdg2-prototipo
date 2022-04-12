@@ -56,7 +56,7 @@ export async function renderMemoQuestion() {
                     const radioAnswerQuestion = document.createElement('div')
                     radioAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--radio"
 
-                    if (parseInt(currentQuestion.index) === 8) {
+                    if (parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11) {
                         radioAnswerQuestion.style.width = 'fit-content'
                     }
 
@@ -682,6 +682,14 @@ export async function submitMemoQuestionForm() {
                     case "parragraph":
                         const parragraphAnswerValue = [memoQuestionForm.parragraph.value]
                         onSubmitAnswer(questionId, currentQuestion.answerId, parragraphAnswerValue, period, subjectId, currentQuestion.index)
+                        break;
+                    case "improveactions":
+                        if(improveActionsList.length > 0) {
+                            const improveactionsValue = improveActionsList
+                            onSubmitAnswer(questionId, currentQuestion.answerId, improveactionsValue, period, subjectId, currentQuestion.index)
+                        } else {
+                            window.alert("Debes agregar acciones de mejora")
+                        }
                         break;
                 }
             }
