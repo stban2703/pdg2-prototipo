@@ -5246,7 +5246,7 @@ input[type=button] {
   margin-left: 0.3rem;
 }
 
-.memoquestion-form .addImproveActionButton {
+.memoquestion-form .openAddImproveActionButton {
   max-width: 25rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5263,8 +5263,18 @@ input[type=button] {
       align-self: center;
 }
 
-.memoquestion-form .addImproveActionButton img {
+.memoquestion-form .openAddImproveActionButton img {
   height: 2rem;
+}
+
+.memoquestion-form .addImproveActionButton {
+  max-width: 24rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.memoquestion-form .returnToImproveActionButton {
+  width: auto;
 }
 
 .memo-matrix-table__header {

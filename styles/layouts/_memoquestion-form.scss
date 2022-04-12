@@ -295,7 +295,7 @@
         }
     }
 
-    .addImproveActionButton {
+    .openAddImproveActionButton {
         max-width: 25rem;
         display: flex;
         flex-direction: row;
@@ -306,5 +306,14 @@
         img {
             height: 2rem;
         }
+    }
+
+    .addImproveActionButton {
+        max-width: 24rem;
+        align-self: flex-end;
+    }
+
+    .returnToImproveActionButton {
+        width: auto;
     }
 }

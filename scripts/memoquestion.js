@@ -38,7 +38,7 @@ export async function renderMemoQuestion() {
             memoquestionContainerNormal.classList.remove("hidden")
 
             // Número de pregunta
-            memoquestionContainerNormal.querySelector(".memoquestion-form__subtitle").innerHTML = `Pregunta ${currentQuestion.index}`
+            memoquestionContainerNormal.querySelector(".memoquestion-form__subtitle--questionNumber").innerHTML = `Pregunta ${currentQuestion.index}`
 
             // Descripcion de pregunta
             memoquestionContainerNormal.querySelector(".memoquestion-form__question").innerHTML = asteriskToBold(currentQuestion.question)
@@ -278,6 +278,7 @@ export async function renderMemoQuestion() {
             document.querySelector(".memoquestion-form__question").classList.add("hidden")
             document.querySelector(".memoquestion-form__information").classList.remove("hidden")
         } else if (currentQuestion.type === "improveactions") {
+            // Recover previous answers
             const question5Answers = await getOptionsFromAnswers("YsVpQwlC6PXwgAS2IW7r", subjectId, period)
             const question6Answers = await getOptionsFromAnswers("jOz7X758oimxAJZ4V9BU", subjectId, period)
 
@@ -323,10 +324,10 @@ export async function renderMemoQuestion() {
                 document.querySelector(".improve-action-question6").appendChild(newItem)
             })
 
-
             const question3Answer = await getOptionsFromAnswers("RRNqsml3iXEoAqQyQd9k", subjectId, period)
             const question3Container = document.querySelector(".improve-action-question3")
 
+            // Niveles de logro
             switch (parseInt(question3Answer[0])) {
                 case 1:
                     question3Container.innerText = "Bajo"
@@ -348,17 +349,10 @@ export async function renderMemoQuestion() {
                     break;
             }
 
-
+            // Recover previous answers
             const question8Answer = await getOptionsFromAnswers("jvLjdfeVkm6JnQMgrO6C", subjectId, period)
             const question8Container = document.querySelector(".improve-action-question8")
             question8Container.innerHTML = question8Answer[0]
-
-            // Display improve actions containers
-            const improveActionContainers = document.querySelectorAll(".improve-actions-content")
-            improveActionContainers.forEach((e) => {
-                e.classList.remove("hidden")
-            })
-
 
             const memoModalNotes = document.querySelector(".memo-question-modal--notes")
             const closeMemoNotesModalButton = memoModalNotes.querySelector(".closeMemoNotesModalButton")
@@ -377,6 +371,40 @@ export async function renderMemoQuestion() {
                 elem.addEventListener('click', () => {
                     memoModalNotes.classList.add("hidden")
                 })
+            })
+
+            // Display improve actions containers
+            const improveActionContainers = document.querySelectorAll(".improve-actions-content")
+            improveActionContainers.forEach((e) => {
+                e.classList.remove("hidden")
+            })
+
+            // Open add improve action
+            const openAddImproveActionButton = document.querySelector(".openAddImproveActionButton")
+            const memoNextQuestionButton = document.querySelector(".memoquestion-form__nextButton")
+            const memoquestionFormBack = document.querySelector(".memoquestion-form__back")
+            const newImproveActionForm = document.querySelector(".memoquestion-form__container--newimproveaction")
+
+            openAddImproveActionButton.addEventListener('click', () => {
+                improveActionContainers.forEach((e) => {
+                    e.classList.add("hidden")
+                })
+                memoNextQuestionButton.classList.add("hidden")
+                returnToImproveActionButton.classList.remove("hidden")
+                memoquestionFormBack.classList.add("hidden")
+                newImproveActionForm.classList.remove("hidden")
+            })
+
+            // Close add improve action
+            const returnToImproveActionButton = document.querySelector(".returnToImproveActionButton")
+            returnToImproveActionButton.addEventListener("click", () => {
+                improveActionContainers.forEach((e) => {
+                    e.classList.remove("hidden")
+                })
+                memoNextQuestionButton.classList.remove("hidden")
+                returnToImproveActionButton.classList.add("hidden")
+                memoquestionFormBack.classList.remove("hidden")
+                newImproveActionForm.classList.add("hidden")
             })
         }
     }
