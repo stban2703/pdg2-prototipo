@@ -19,7 +19,7 @@
         background-color: $white;
         box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
         border-radius: 15px;
-        padding: 4rem;
+        padding: 4rem 3rem;
         gap: 2.5rem;
         width: 100%;
         max-width: 82rem;
@@ -63,11 +63,18 @@
         align-items: center;
     }
 
+    &__justification {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     &__radio-checkbox {
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 29rem;
+        max-width: 40rem;
         gap: 1rem;
     }
 

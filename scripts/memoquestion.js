@@ -56,7 +56,7 @@ export async function renderMemoQuestion() {
                     const radioAnswerQuestion = document.createElement('div')
                     radioAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--radio"
 
-                    if (parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11) {
+                    if (parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11 || parseInt(currentQuestion.index) === 12) {
                         radioAnswerQuestion.style.width = 'fit-content'
                     }
 
@@ -69,7 +69,22 @@ export async function renderMemoQuestion() {
                         `
                         radioAnswerQuestion.appendChild(answerOption)
                     });
+
                     memoAnswerContainer.appendChild(radioAnswerQuestion)
+
+                    if (currentQuestion.justification) {
+                        const justificationSection = document.createElement('div')
+                        justificationSection.className = `memoquestion-form__justification hidden`
+                        justificationSection.innerHTML = `
+                        <p class="memoquestion-form__question">${asteriskToBold(currentQuestion.justification)}</p>
+                        <div class="text-area-input">
+                            <textarea class="text-area-input__field" name="justification" id="" rows="5"
+                            placeholder="Escribe aquí tu texto..." required></textarea>
+                        </div>
+                        `
+                        memoAnswerContainer.parentNode.insertBefore(justificationSection, memoAnswerContainer.nextSibling)
+                        addJustificationQuestion(memoQuestionForm.radioanswer, justificationSection)
+                    }
                     break;
 
                 case "checkbox":
@@ -272,7 +287,7 @@ export async function renderMemoQuestion() {
                     memoAnswerContainer.appendChild(parragraphAnswerQuestion)
                     break;
             }
-            memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
+
         } else if (parseInt(currentQuestion.index) === 4) {
             const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")
             memoquestionContainerNormal.classList.remove("hidden")
@@ -430,6 +445,16 @@ export async function renderMemoQuestion() {
             })
         }
     }
+}
+
+function addJustificationQuestion(input, justificationSection) {
+    input.forEach(elem => {
+        elem.addEventListener("input", () => {
+            if (input.value.length > 0) {
+                justificationSection.classList.remove("hidden")
+            }
+        })
+    })
 }
 
 function addImproveAction(improveactionname, improveactiondescription) {
@@ -641,6 +666,16 @@ export async function submitMemoQuestionForm() {
                                     rememberModal.classList.add("hidden")
                                     onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
                                 })
+                            } else if (parseInt(currentQuestion.index) === 11 && answerValue[0] === "No") {
+                                //memo-question-modal--doyouknow
+                                const doyouknowModal = document.querySelector(".memo-question-modal--doyouknow")
+                                doyouknowModal.classList.remove("hidden")
+
+                                const closeMemodoyouknowModalButton = document.querySelector(".closeMemodoyouknowModalButton")
+                                closeMemodoyouknowModalButton.addEventListener('click', () => {
+                                    doyouknowModal.classList.add("hidden")
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                })
                             } else {
                                 onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
                             }
@@ -684,7 +719,7 @@ export async function submitMemoQuestionForm() {
                         onSubmitAnswer(questionId, currentQuestion.answerId, parragraphAnswerValue, period, subjectId, currentQuestion.index)
                         break;
                     case "improveactions":
-                        if(improveActionsList.length > 0) {
+                        if (improveActionsList.length > 0) {
                             const improveactionsValue = improveActionsList
                             onSubmitAnswer(questionId, currentQuestion.answerId, improveactionsValue, period, subjectId, currentQuestion.index)
                         } else {
@@ -699,10 +734,19 @@ export async function submitMemoQuestionForm() {
 
 function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subjectId, questionIndex) {
     showLoader()
+
+    let questionJustification = null
+
+    const justificationInput = document.querySelector(".memoquestion-form").justification
+
+    if(justificationInput) {
+        questionJustification = justificationInput.value
+    }
+
     if (questionAnswerdId) {
-        updateAnswerValue(questionAnswerdId, answerValue, period, subjectId, parseInt(questionIndex))
+        updateAnswerValue(questionAnswerdId, answerValue, period, subjectId, parseInt(questionIndex), questionJustification)
     } else {
-        createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(questionIndex))
+        createMemoAnswer(period, questionId, subjectId, answerValue, parseInt(questionIndex), questionJustification)
     }
 }
 

@@ -419,6 +419,7 @@
     font-family: $poppins;
     color: $silver;
     gap: 0.5rem;
+    white-space: nowrap;
 
     input[type="radio"] {
         appearance: none;
@@ -426,8 +427,8 @@
         margin: 0;
         font: inherit;
         color: currentColor;
-        width: 1.3em;
-        height: 1.3em;
+        min-width: 1.3em;
+        min-height: 1.3em;
         border: 0.15em solid $silver;
         border-radius: 100%;
         transform: translateY(-0.075em);
@@ -440,8 +441,8 @@
 
         &::before {
             content: "";
-            width: 0.8em;
-            height: 0.8em;
+            min-width: 0.8em;
+            min-height: 0.8em;
             border-radius: 100%;
             background-color: $main-color;
             transform: scale(0);
