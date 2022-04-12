@@ -3529,6 +3529,7 @@ input[type=button] {
   font-weight: 600;
   font-size: 2rem;
   color: #979DFF;
+  text-align: center;
 }
 
 .memo-question-modal__description {
@@ -3537,6 +3538,11 @@ input[type=button] {
   font-size: 1.8rem;
   color: #757575;
   text-align: center;
+}
+
+.memo-question-modal__description--purple {
+  color: #979DFF;
+  margin-bottom: 2rem;
 }
 
 .memo-question-modal__box {

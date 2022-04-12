@@ -33,6 +33,7 @@
         font-weight: $semibold;
         font-size: 2rem;
         color: $main-color;
+        text-align: center;
     }
 
     &__description {
@@ -41,6 +42,11 @@
         font-size: 1.8rem;
         color: $boulder;
         text-align: center;
+
+        &--purple {
+            color: $main-color;
+            margin-bottom: 2rem;
+        }
     }
 
     &__box {
