@@ -6,7 +6,14 @@ import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
 let selectedOptions = []
-let improveActionsList = []
+let improveActionsList = [{
+    name: "Mejorar la exposición final",
+    description: "Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre."
+},
+{
+    name: "Mejorar la exposición final",
+    description: "Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre."
+}]
 
 export async function renderMemoQuestion() {
     const memoQuestionScreen = document.querySelector(".memoquestion-screen")
@@ -462,8 +469,34 @@ function renderImproveActions(list) {
             <button type="button" class="improve-action-item__controls"
                 style="background-image: url('./images/3dots.svg');">
             </button>
+            <ul class="improve-action-item__settings improve-action-item__settings--hidden">
+                <li class="improve-action-item__settings-item delete-improve-action-item">
+                    <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                    <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                    <span>Eliminar</span></li>
+                <li class="improve-action-item__settings-item">
+                    <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
+                    <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
+                    <span>Editar</span>
+                </li>
+            </ul>
             `
             improveActionList.appendChild(actionItem)
+            // Item settings menu
+            const improveActionsDotsBtn = actionItem.querySelector(".improve-action-item__controls")
+            const improveActionItemSettings = actionItem.querySelector(".improve-action-item__settings")
+
+            improveActionsDotsBtn.addEventListener('click', () => {
+                improveActionItemSettings.classList.toggle("improve-action-item__settings--hidden")
+                improveActionsDotsBtn.classList.toggle("improve-action-item__controls--activated")
+            })
+            /*document.addEventListener('click', (event) => {
+                if (event.target == improveActionsDotsBtn) {
+                    improveActionItemSettings.classList.remove("improve-action-item__settings--hidden")
+                } else {
+                    improveActionItemSettings.classList.add("improve-action-item__settings--hidden")
+                }
+            })*/
         })
     }
 }

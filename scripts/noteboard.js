@@ -79,10 +79,14 @@ export async function renderNotesBoard(userId, list) {
                 <section class="board-note-item__info">
                     <ul class="board-note-item__settings board-note-item__settings--hidden">
                         <li class="board-note-item__settings-item delete-board-note-item">
-                        <img class="board-note-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
-                        <img class="board-note-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
-                        <span>Eliminar</span></li>
-                        <li class="board-note-item__settings-item"><span>Editar</span></li>
+                            <img class="board-note-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                            <img class="board-note-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                            <span>Eliminar</span></li>
+                        <li class="board-note-item__settings-item">
+                            <img class="board-note-item__settings-item__normal-icon" src="./images/editicon.svg">
+                            <img class="board-note-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
+                            <span>Editar</span>
+                        </li>
                     </ul>
                     <section class="board-note-item__header">
                         <img class="board-note-item__type" src="./images/board${note.fileType}type-${note.category}.svg" alt="">
@@ -164,13 +168,18 @@ export async function renderNotesBoard(userId, list) {
             const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
             const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
 
-            document.addEventListener('click', (event) => {
+            boardNoteItemDotsBtn.addEventListener('click', () => {
+                boardNoteItemSettings.classList.toggle("board-note-item__settings--hidden")
+                boardNoteItemDotsBtn.classList.toggle("board-note-item__dotsBtn--activated")
+            })
+
+            /*document.addEventListener('click', (event) => {
                 if (event.target == boardNoteItemDotsBtn) {
                     boardNoteItemSettings.classList.remove("board-note-item__settings--hidden")
                 } else {
                     boardNoteItemSettings.classList.add("board-note-item__settings--hidden")
                 }
-            })
+            })*/
 
             const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
             deleteBoardNoteItemBtn.addEventListener('click', (e) => {
