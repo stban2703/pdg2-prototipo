@@ -24,14 +24,13 @@ export async function renderMemoQuestion() {
         const memoQuestionSectionTitle = memoQuestionScreen.querySelector(".memoquestion-screen__title")
         memoQuestionSectionTitle.innerHTML = currentQuestion.section
 
+        const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
+        memoquestionSubsectionTitle.innerHTML = currentQuestion.subsection
+
         // Formulario general
         const memoQuestionForm = memoQuestionScreen.querySelector(".memoquestion-form")
 
         if (currentQuestion.type !== "improveactions" && !urlQueryParts[3]) {
-            // Titulo de subseccion
-            const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
-            memoquestionSubsectionTitle.innerHTML = currentQuestion.subsection
-
             // Mostrar contenedor de pregunta normal
             const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")
             memoquestionContainerNormal.classList.remove("hidden")
@@ -269,9 +268,6 @@ export async function renderMemoQuestion() {
             }
             memoQuestionForm.querySelector(".memoquestion-form__container").appendChild(memoAnswerContainer)
         } else if (parseInt(currentQuestion.index) === 4) {
-            const memoquestionSubsectionTitle = memoQuestionScreen.querySelector(".memoquestion-form__title")
-            memoquestionSubsectionTitle.innerHTML = currentQuestion.subsection
-
             const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")
             memoquestionContainerNormal.classList.remove("hidden")
 
@@ -279,8 +275,88 @@ export async function renderMemoQuestion() {
             document.querySelectorAll(".memoquestion-form__subtitle")[0].classList.add("hidden")
             document.querySelector(".memoquestion-form__question").classList.add("hidden")
             document.querySelector(".memoquestion-form__information").classList.remove("hidden")
-        }
+        } else if (currentQuestion.type === "improveactions") {
+            const question5Answers = await getOptionsFromAnswers("YsVpQwlC6PXwgAS2IW7r", subjectId, period)
+            const question6Answers = await getOptionsFromAnswers("jOz7X758oimxAJZ4V9BU", subjectId, period)
 
+            let optionsQ5 = []
+            let optionsQ6 = []
+
+            question5Answers.forEach((elem) => {
+                const parts = elem.split("|")
+                const object = {
+                    tag: parts[0],
+                    value: parseInt(parts[parts.length - 1])
+                }
+                if (object.value < 4) {
+                    optionsQ5.push(object.tag)
+                }
+            })
+
+            question6Answers.forEach((elem) => {
+                const parts = elem.split("|")
+                const object = {
+                    tag: parts[0],
+                    value: parseInt(parts[parts.length - 1])
+                }
+                if (object.value < 4) {
+                    optionsQ6.push(object.tag)
+                }
+            })
+
+            // Render columns
+            document.querySelector(".improve-action-question5").innerHTML = ``
+            optionsQ5.forEach(tag => {
+                const newItem = document.createElement("p")
+                newItem.className = "memoquestion-form__strategyItem"
+                newItem.innerHTML = tag
+                document.querySelector(".improve-action-question5").appendChild(newItem)
+            })
+
+            document.querySelector(".improve-action-question6").innerHTML = ``
+            optionsQ6.forEach(tag => {
+                const newItem = document.createElement("p")
+                newItem.className = "memoquestion-form__strategyItem"
+                newItem.innerHTML = tag
+                document.querySelector(".improve-action-question6").appendChild(newItem)
+            })
+
+
+            const question3Answer = await getOptionsFromAnswers("RRNqsml3iXEoAqQyQd9k", subjectId, period)
+            const question3Container = document.querySelector(".improve-action-question3")
+
+            switch (parseInt(question3Answer[0])) {
+                case 1:
+                    question3Container.innerText = "Bajo"
+                    break;
+                case 2:
+                    question3Container.innerText = "Deficiente"
+                    break;
+                case 3:
+                    question3Container.innerText = "Medio-bajo"
+                    break;
+                case 4:
+                    question3Container.innerText = "Medio"
+                    break;
+                case 5:
+                    question3Container.innerText = "Medio-alto"
+                    break;
+                case 6:
+                    question3Container.innerText = "Alto"
+                    break;
+            }
+
+
+            const question8Answer = await getOptionsFromAnswers("jvLjdfeVkm6JnQMgrO6C", subjectId, period)
+            const question8Container = document.querySelector(".improve-action-question8")
+            question8Container.innerHTML = question8Answer[0]
+
+            // Display improve actions containers
+            const improveActionContainers = document.querySelectorAll(".improve-actions-content")
+            improveActionContainers.forEach((e) => {
+                e.classList.remove("hidden")
+            })
+        }
     }
 }
 
