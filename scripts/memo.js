@@ -1,4 +1,4 @@
-import { getMemoTemplate, getSubjectMemo } from "./modules/firestore.js"
+import { getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
 export function renderMemoIntro(user) {
@@ -112,16 +112,29 @@ export async function getMemoSectionInfo(userSubjects) {
                 [item.section]: [...(groups[item.section] || []), item]
             }), {});
 
-            renderMemoSections(groups, selectedSubject.memoPeriod, subjectId)
+            renderMemoSections(memoQuestions, groups, selectedSubject.memoPeriod, subjectId)
         }
     }
 }
 
-function renderMemoSections(groupList, memoPeriod, subjectId) {
+async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectId) {
     const memoSectionList = document.querySelector(".memosections-screen__sectionList")
     memoSectionList.innerHTML = ``
 
+    //let lastOpenedQuestionId = ""
+
+    /*for (let index = 0; index < memoQuestions.length; index++) {
+        const question = memoQuestions[index];
+        if(!question.answerId) {
+            lastOpenedQuestionId = question.id
+            break;
+        }
+    }*/
+
     //const groupNames = Object.keys(groups);
+    const question8Answer = await getOptionsFromAnswers(memoQuestions[7].id, subjectId, memoPeriod)
+    const question11Answer = await getOptionsFromAnswers(memoQuestions[10].id, subjectId, memoPeriod)
+
     Object.keys(groupList).forEach((group, index) => {
         const memoSectionProgressItem = document.createElement("div")
         memoSectionProgressItem.className = `memo-section-progress-item`
@@ -134,6 +147,24 @@ function renderMemoSections(groupList, memoPeriod, subjectId) {
             if (!question.answerId) {
                 currentQuestionId = question.id
                 break
+                /*} else if(i == groupList[group].length - 1 && question.answerId) {
+                    currentQuestionId = lastOpenedQuestionId*/
+            } else if (i === groupList[group].length - 1 && question.answerId) {
+                if (index === 1) {
+                    if (question8Answer[0] === "Sí") {
+                        currentQuestionId = memoQuestions[8].id
+                    } else {
+                        currentQuestionId = memoQuestions[7].id
+                    }
+                } else if(index === 2) {
+                    if(question11Answer[0] === "Sí") {
+                        currentQuestionId = memoQuestions[11].id
+                    } else {
+                        currentQuestionId = memoQuestions[10].id
+                    }
+                }else {
+                    currentQuestionId = question.id
+                }
             }
         }
 
