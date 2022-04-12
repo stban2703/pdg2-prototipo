@@ -669,12 +669,28 @@ export async function submitMemoQuestionForm() {
                             } else if (parseInt(currentQuestion.index) === 11 && answerValue[0] === "No") {
                                 //memo-question-modal--doyouknow
                                 const doyouknowModal = document.querySelector(".memo-question-modal--doyouknow")
+                                const finalModal = document.querySelector(".memo-question-modal--final")
                                 doyouknowModal.classList.remove("hidden")
 
                                 const closeMemodoyouknowModalButton = document.querySelector(".closeMemodoyouknowModalButton")
                                 closeMemodoyouknowModalButton.addEventListener('click', () => {
                                     doyouknowModal.classList.add("hidden")
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                    finalModal.classList.remove("hidden")
+                                    /*onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)*/
+                                })
+
+                                const closeFinalMemoModal = document.querySelector(".closeMemofinalModalButton")
+                                closeFinalMemoModal.addEventListener('click', () => {
+                                    finalModal.classList.add("hidden")
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, 12)
+                                })
+                            } else if(parseInt(currentQuestion.index) === 12) {
+                                const finalModal = document.querySelector(".memo-question-modal--final")
+                                finalModal.classList.remove("hidden")
+                                const closeFinalMemoModal = document.querySelector(".closeMemofinalModalButton")
+                                closeFinalMemoModal.addEventListener('click', () => {
+                                    finalModal.classList.add("hidden")
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
                                 })
                             } else {
                                 onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)
