@@ -9,7 +9,7 @@ import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableE
 import { memoQuestionGoBack, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
-import { getInitialNoteList, onFilterListener } from "./notes.js";
+import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
 
 // Verifica si el usuario ha  iniciado sesion
@@ -98,6 +98,7 @@ function addPageFuncions() {
     getInitialNoteList(currentUser.id)
     onFilterListener(currentUser.id, currentSubjects)
     renderNoteDetails()
+    changeNotesView()
 
     // Meeting functions
     renderMeetings()

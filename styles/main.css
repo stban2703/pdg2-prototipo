@@ -5373,6 +5373,12 @@ input[type=button] {
   padding: 4rem 0;
   margin-top: 2rem;
   position: relative;
+  width: 100%;
+  position: relative;
+  min-height: 60rem;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: nowrap;
   /*&__column {
         //padding: 1.5rem 2rem;
     }*/
@@ -5383,6 +5389,7 @@ input[type=button] {
 }
 
 .note-list__table {
+  position: absolute;
   border-collapse: separate;
   border-spacing: 4rem 0;
   width: 100%;

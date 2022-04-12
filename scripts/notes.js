@@ -14,6 +14,9 @@ export async function getInitialNoteList(uid) {
         noteList.sort(sortByWeek)
         //renderNotesList(noteList)
 
+        const viewsButtons = document.querySelectorAll(".notes-view-button")
+        onChangeView(viewsButtons)
+
         const noteSettingsForm = document.querySelector(".note-settings-form")
         if (window.location.href.includes("#notes") && noteSettingsForm) {
             const noteSubjectFilterSelect = noteSettingsForm.subject
@@ -21,6 +24,52 @@ export async function getInitialNoteList(uid) {
             filterNoteList(uid, noteSubjectFilterSelect, notePeriodFilterSelect)
         }
     }
+}
+
+
+export function changeNotesView() {
+    const noteViewsControl = document.querySelector(".note-screen__views")
+    if (window.location.href.includes("#notes") && !window.location.href.includes("details") && noteViewsControl) {
+        const viewsButtons = noteViewsControl.querySelectorAll(".notes-view-button")
+        viewsButtons.forEach((e, i) => {
+            e.addEventListener('click', () => {
+                switch(i) {
+                    case 0:
+                        currentNoteView = "tablero"
+                        onChangeView(viewsButtons)
+                        break;
+
+                    case 1:
+                        currentNoteView = "lista"
+                        onChangeView(viewsButtons)
+                        break;
+
+                    case 2:
+                        currentNoteView = "semana"
+                        break;
+                }
+            })
+        })
+    }
+}
+
+function onChangeView(buttonList) {
+    buttonList.forEach(elem => {
+        if(elem.id == currentNoteView) {
+            elem.classList.add("notes-view-button--selected")
+        } else {
+            elem.classList.remove("notes-view-button--selected")
+        }
+    })
+
+    const noteviews = document.querySelectorAll(".noteview")
+    noteviews.forEach(elem => {
+        if(elem.id.includes(currentNoteView)) {
+            elem.classList.remove("hidden")
+        } else {
+            elem.classList.add("hidden")
+        }
+    })
 }
 
 export function onFilterListener(uid, userSubjects) {

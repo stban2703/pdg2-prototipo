@@ -34,18 +34,18 @@
             </select>
         </section>
         <section class="note-screen__views">
-            <button class="notes-view-button notes-view-button--selected" type="button">
+            <button id="tablero" class="notes-view-button notes-view-button--selected" type="button">
                 <span>Tablero</span>
             </button>
-            <button class="notes-view-button" type="button">
+            <button id="lista" class="notes-view-button" type="button">
                 <span>Lista</span>
             </button>
-            <button class="notes-view-button" type="button">
+            <button id="semana" class="notes-view-button" type="button">
                 <span>Semana</span>
             </button>
         </section>
     </form>
-    <section class="note-board hidden">
+    <section id="vistatablero" class="note-board noteview">
         <div class="note-board__column">
             <section class="note-board__categorie">
                 <div class="note-board__color note-board__color--keep"></div>
@@ -74,7 +74,7 @@
             </section>
         </div>
     </section>
-    <section class="note-list">
+    <section id="vistalista" class="note-list noteview hidden">
         <table class="note-list__table">
             <thead class="note-list__header">
                 <tr class="note-list__headerRow note-list__row">
