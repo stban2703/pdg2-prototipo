@@ -1,5 +1,6 @@
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
+import { renderNotesListView } from "./notelist.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
 
@@ -44,11 +45,16 @@ export function onFilterListener(uid, userSubjects) {
 
 function renderNotesList(userId, list) {
     hideLoader()
-    switch (currentNoteView) {
+    renderNotesBoard(userId, list)
+    renderNotesListView(list)
+    /*switch (currentNoteView) {
         case "tablero":
             renderNotesBoard(userId, list)
             break;
-    }
+        case "lista":
+            renderNotesListView(list)
+            break;
+    }*/
 }
 
 function filterNoteList(userId, subjectFilter, periodFilter) {

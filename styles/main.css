@@ -5370,18 +5370,31 @@ input[type=button] {
 .note-list {
   background-color: #FFFFFF;
   border-radius: 15px;
-  padding: 4rem;
+  padding: 4rem 0;
   margin-top: 2rem;
   position: relative;
+  /*&__column {
+        //padding: 1.5rem 2rem;
+    }*/
 }
 
 .note-list__sectionTitle {
   margin-bottom: 3rem;
 }
 
+.note-list__table {
+  border-collapse: separate;
+  border-spacing: 4rem 0;
+  width: 100%;
+}
+
+.note-list__row td {
+  padding-bottom: 4rem;
+}
+
 .note-list__number {
-  min-width: 3.5rem;
-  min-height: 3.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5411,15 +5424,6 @@ input[type=button] {
   font-weight: 600;
   font-size: 2rem;
   color: #A0A0A0;
-  padding: 1.5rem 2rem;
-}
-
-.note-list__column {
-  padding: 1.5rem 2rem;
-}
-
-.note-list__title {
-  padding: 1.5rem 2rem;
 }
 
 .note-list__title span {
@@ -5427,6 +5431,18 @@ input[type=button] {
   font-weight: 300;
   font-size: 1.8rem;
   color: #363636;
+}
+
+.note-list__title--long {
+  max-width: 40ch;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.note-list__title--nowrap {
+  white-space: nowrap;
 }
 
 .note-list__category {
@@ -5437,6 +5453,7 @@ input[type=button] {
   font-weight: 400;
   padding: 0.2rem 1.5rem;
   border-radius: 20px;
+  text-align: center;
 }
 
 .note-list__category--keep {
@@ -5445,13 +5462,13 @@ input[type=button] {
 }
 
 .note-list__category--improve {
-  background-color: #FFEAD6;
-  color: #FCB26E;
+  background-color: #ffead6;
+  color: #fcb26e;
 }
 
 .note-list__category--remove {
-  background-color: #FFEFEF;
-  color: #FD797A;
+  background-color: #ffefef;
+  color: #fd797a;
 }
 
 .note-list a span {

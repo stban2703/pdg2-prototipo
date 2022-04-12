@@ -3,7 +3,7 @@ import { parseTimestampToDate } from "./utils/date-format.js";
 import { getCategoryColumnsRect, handleDragEnter, handleDragLeave, handleDragOver, improveRect, keepRect, mouseX, mouseY, removeRect } from "./utils/drag.js";
 import { showLoader } from "./utils/loader.js";
 
-let selectedNote = null
+let selectedBoardNote = null
 
 export async function renderNotesBoard(userId, list) {
     const noteBoard = document.querySelector('.note-board')
@@ -20,7 +20,7 @@ export async function renderNotesBoard(userId, list) {
                 mouseY > keepRect.y && mouseY < keepRect.y + keepRect.height) {
                 //console.log("Keep")
                 try {
-                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "keep")
+                    updateNoteCategory(userId, selectedBoardNote.id, selectedBoardNote.category, "keep")
                 } catch (error) {
                     console.log(error)
                 }
@@ -30,7 +30,7 @@ export async function renderNotesBoard(userId, list) {
                 mouseY > improveRect.y && mouseY < improveRect.y + improveRect.height) {
                 //console.log("Improve")
                 try {
-                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "improve")
+                    updateNoteCategory(userId, selectedBoardNote.id, selectedBoardNote.category, "improve")
                 } catch (error) {
                     console.log(error)
                 }
@@ -40,12 +40,12 @@ export async function renderNotesBoard(userId, list) {
                 mouseY > removeRect.y && mouseY < removeRect.y + removeRect.height) {
                 //console.log("Remove")
                 try {
-                    updateNoteCategory(userId, selectedNote.id, selectedNote.category, "remove")
+                    updateNoteCategory(userId, selectedBoardNote.id, selectedBoardNote.category, "remove")
                 } catch (error) {
                     console.log(error)
                 }
             }
-            selectedNote = null
+            selectedBoardNote = null
             return false;
         }
 
@@ -128,7 +128,7 @@ export async function renderNotesBoard(userId, list) {
             // Drag item functions
             noteItem.addEventListener('dragstart', e => {
                 noteItem.style.opacity = '0.3';
-                selectedNote = note
+                selectedBoardNote = note
             });
             noteItem.addEventListener('dragend', e => {
                 noteItem.style.opacity = '1';
