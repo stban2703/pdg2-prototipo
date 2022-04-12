@@ -6,7 +6,7 @@ import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
-import { memoQuestionGoBack, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
+import { memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
@@ -119,6 +119,7 @@ function addPageFuncions() {
     getMemoSectionInfo(currentSubjects)
     renderMemoQuestion()
     submitMemoQuestionForm()
+    renderMemoNotes(currentUser.id)
 
     // Memo form edit functions
     changeMemoEditFormPage()

@@ -26,7 +26,6 @@ export async function getInitialNoteList(uid) {
     }
 }
 
-
 export function changeNotesView() {
     const noteViewsControl = document.querySelector(".note-screen__views")
     if (window.location.href.includes("#notes") && !window.location.href.includes("details") && noteViewsControl) {

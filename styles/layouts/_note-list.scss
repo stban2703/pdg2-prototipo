@@ -4,19 +4,14 @@
     padding: 4rem 0;
     margin-top: 2rem;
     position: relative;
-    width: 100%;
-    position: relative;
-    min-height: 60rem;
-    overflow-y: auto;
-    overflow-x: auto;
-    white-space: nowrap;
 
     &__sectionTitle {
         margin-bottom: 3rem;
+        margin-left: 4rem;
     }
 
     &__table {
-        position: absolute;
+        //position: absolute;
         border-collapse: separate;
         border-spacing: 4rem 0;
         width: 100%;

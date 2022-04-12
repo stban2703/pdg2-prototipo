@@ -1,7 +1,5 @@
 import { parseTimestampToDate } from "./utils/date-format.js";
 
-let selectedListNote = null
-
 export async function renderNotesListView(list) {
     const noteList = document.querySelector(".note-list")
 

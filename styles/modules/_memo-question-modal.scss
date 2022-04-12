@@ -10,6 +10,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+    &--notes {
+        overflow-x: auto;
+    }
 
     &__container {
         background-color: $white;

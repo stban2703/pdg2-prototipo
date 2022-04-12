@@ -1,5 +1,7 @@
-import { createMemoAnswer, getMemoQuestion, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { createMemoAnswer, getMemoQuestion, getNotes, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { renderNotesListView } from "./notelist.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
+import { sortByWeek } from "./utils/sort.js"
 import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
@@ -369,10 +371,16 @@ export async function renderMemoQuestion() {
             closeMemoNotesModalButton.addEventListener("click", () => {
                 memoModalNotes.classList.add("hidden")
             })
+
+            const viewNoteDetailsButtons = document.querySelectorAll(".board-note-item__editBtn")
+            viewNoteDetailsButtons.forEach((elem) => {
+                elem.addEventListener('click', () => {
+                    memoModalNotes.classList.add("hidden")
+                })
+            })
         }
     }
 }
-
 
 function addMemoOption(list, checkboxAnswerQuestion, value) {
     const newOption = value
@@ -558,5 +566,24 @@ export function memoQuestionGoBack() {
                 getPreviousMemoQuestion(period, subjectId, parseInt(currentQuestion.index))
             }
         })
+    }
+}
+
+export async function renderMemoNotes(uid) {
+    if (window.location.href.includes("#memoquestion") && window.location.href.includes("a0tOgnI8yoiCW0BvJK2k")) {
+        const noteList = await getNotes(uid)
+        noteList.sort(sortByWeek)
+
+        const urlQuery = window.location.hash.split("?")[1]
+        const urlQueryParts = urlQuery.split("_")
+        const period = urlQueryParts[0]
+        const subjectId = urlQueryParts[1]
+        const questionId = urlQueryParts[2]
+
+        noteList.filter((elem) => {
+            return elem.period === period
+        })
+
+        renderNotesListView(noteList)
     }
 }

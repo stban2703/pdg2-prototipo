@@ -3495,6 +3495,10 @@ input[type=button] {
           justify-content: center;
 }
 
+.memo-question-modal--notes {
+  overflow-x: auto;
+}
+
 .memo-question-modal__container {
   background-color: #FFFFFF;
   border-radius: 15px;
@@ -5400,12 +5404,6 @@ input[type=button] {
   padding: 4rem 0;
   margin-top: 2rem;
   position: relative;
-  width: 100%;
-  position: relative;
-  min-height: 60rem;
-  overflow-y: auto;
-  overflow-x: auto;
-  white-space: nowrap;
   /*&__column {
         //padding: 1.5rem 2rem;
     }*/
@@ -5413,10 +5411,10 @@ input[type=button] {
 
 .note-list__sectionTitle {
   margin-bottom: 3rem;
+  margin-left: 4rem;
 }
 
 .note-list__table {
-  position: absolute;
   border-collapse: separate;
   border-spacing: 4rem 0;
   width: 100%;
