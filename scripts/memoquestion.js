@@ -356,6 +356,19 @@ export async function renderMemoQuestion() {
             improveActionContainers.forEach((e) => {
                 e.classList.remove("hidden")
             })
+
+
+            const memoModalNotes = document.querySelector(".memo-question-modal--notes")
+            const closeMemoNotesModalButton = memoModalNotes.querySelector(".closeMemoNotesModalButton")
+            const seeNotesButton = document.querySelector(".seeNotesButton")
+
+            seeNotesButton.addEventListener("click", () => {
+                memoModalNotes.classList.remove("hidden")
+            })
+
+            closeMemoNotesModalButton.addEventListener("click", () => {
+                memoModalNotes.classList.add("hidden")
+            })
         }
     }
 }
