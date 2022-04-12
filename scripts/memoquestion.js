@@ -7,22 +7,7 @@ import { asteriskToBold } from "./utils/text-format.js"
 let currentQuestion = {}
 let selectedOptions = []
 
-let improveActionsList = [{
-    name: "Mejorar la exposición final",
-    description: "Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre."
-},
-{
-    name: "Traer ejemplos actuales",
-    description: "Los ejemplos del curso no tienen relación con el presente."
-},
-{
-    name: "Tener recursos dinámicos",
-    description: "Para que los estudiantes se sientan motivados en las clases y presten más atención."
-},
-{
-    name: "Incentivar la participación",
-    description: "Dar más bonificaciones a los estudiantes que participen con base a las lecturas."
-}]
+let improveActionsList = []
 
 let improveActionEditIndex = null
 
