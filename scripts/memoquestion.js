@@ -6,14 +6,25 @@ import { asteriskToBold } from "./utils/text-format.js"
 
 let currentQuestion = {}
 let selectedOptions = []
+
 let improveActionsList = [{
     name: "Mejorar la exposición final",
     description: "Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre."
 },
 {
-    name: "Mejorar la exposición final",
-    description: "Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre."
+    name: "Traer ejemplos actuales",
+    description: "Los ejemplos del curso no tienen relación con el presente."
+},
+{
+    name: "Tener recursos dinámicos",
+    description: "Para que los estudiantes se sientan motivados en las clases y presten más atención."
+},
+{
+    name: "Incentivar la participación",
+    description: "Dar más bonificaciones a los estudiantes que participen con base a las lecturas."
 }]
+
+let improveActionEditIndex = null
 
 export async function renderMemoQuestion() {
     const memoQuestionScreen = document.querySelector(".memoquestion-screen")
@@ -394,6 +405,7 @@ export async function renderMemoQuestion() {
             const newImproveActionForm = document.querySelector(".memoquestion-form__container--newimproveaction")
 
             openAddImproveActionButton.addEventListener('click', () => {
+                improveActionEditIndex = null
                 improveActionContainers.forEach((e) => {
                     e.classList.add("hidden")
                 })
@@ -401,6 +413,8 @@ export async function renderMemoQuestion() {
                 returnToImproveActionButton.classList.remove("hidden")
                 memoquestionFormBack.classList.add("hidden")
                 newImproveActionForm.classList.remove("hidden")
+                memoQuestionForm.improveactionname.value = ""
+                memoQuestionForm.improveactiondescription.value = ""
             })
 
             // Close add improve action
@@ -434,12 +448,24 @@ export async function renderMemoQuestion() {
 }
 
 function addImproveAction(improveactionname, improveactiondescription) {
-    improveActionsList.push({
-        name: improveactionname,
-        description: improveactiondescription
-    })
+    if (improveActionEditIndex) {
+        improveActionsList[improveActionEditIndex] = {
+            name: improveactionname,
+            description: improveactiondescription
+        }
+    } else {
+        improveActionsList.push({
+            name: improveactionname,
+            description: improveactiondescription
+        })
+    }
     renderImproveActions(improveActionsList)
     document.querySelector(".returnToImproveActionButton").click()
+}
+
+function removeImproveAction(index) {
+    improveActionsList.splice(index, 1)
+    renderImproveActions(improveActionsList)
 }
 
 function renderImproveActions(list) {
@@ -474,7 +500,7 @@ function renderImproveActions(list) {
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
                     <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
                     <span>Eliminar</span></li>
-                <li class="improve-action-item__settings-item">
+                <li class="improve-action-item__settings-item edit-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
                     <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
                     <span>Editar</span>
@@ -482,6 +508,7 @@ function renderImproveActions(list) {
             </ul>
             `
             improveActionList.appendChild(actionItem)
+
             // Item settings menu
             const improveActionsDotsBtn = actionItem.querySelector(".improve-action-item__controls")
             const improveActionItemSettings = actionItem.querySelector(".improve-action-item__settings")
@@ -490,13 +517,33 @@ function renderImproveActions(list) {
                 improveActionItemSettings.classList.toggle("improve-action-item__settings--hidden")
                 improveActionsDotsBtn.classList.toggle("improve-action-item__controls--activated")
             })
-            /*document.addEventListener('click', (event) => {
-                if (event.target == improveActionsDotsBtn) {
-                    improveActionItemSettings.classList.remove("improve-action-item__settings--hidden")
-                } else {
-                    improveActionItemSettings.classList.add("improve-action-item__settings--hidden")
-                }
-            })*/
+
+            const deleteImproveActionButton = actionItem.querySelector(".delete-improve-action-item")
+            deleteImproveActionButton.addEventListener("click", () => {
+                removeImproveAction(index)
+            })
+
+            const editImproveActionButton = actionItem.querySelector(".edit-improve-action-item")
+            editImproveActionButton.addEventListener("click", () => {
+                const improveActionContainers = document.querySelectorAll(".improve-actions-content")
+                const memoNextQuestionButton = document.querySelector(".memoquestion-form__nextButton")
+                const memoquestionFormBack = document.querySelector(".memoquestion-form__back")
+                const newImproveActionForm = document.querySelector(".memoquestion-form__container--newimproveaction")
+                const returnToImproveActionButton = document.querySelector(".returnToImproveActionButton")
+
+                improveActionContainers.forEach((e) => {
+                    e.classList.add("hidden")
+                })
+                memoNextQuestionButton.classList.add("hidden")
+                returnToImproveActionButton.classList.remove("hidden")
+                memoquestionFormBack.classList.add("hidden")
+                newImproveActionForm.classList.remove("hidden")
+
+                improveActionEditIndex = index
+                const memoQuestionForm = document.querySelector(".memoquestion-form")
+                memoQuestionForm.improveactionname.value = elem.name
+                memoQuestionForm.improveactiondescription.value = elem.description
+            })
         })
     }
 }
