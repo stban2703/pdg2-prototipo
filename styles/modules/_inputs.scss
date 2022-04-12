@@ -513,6 +513,25 @@
         margin-bottom: 10px;
     }
 
+    .seudoInputButton {
+        @include main-button(
+            $button-secondary,
+            $button-text-color-primary,
+            $board-edit-text-btn,
+            $button-secondary-box-shadow
+        );
+        padding: $small-button-padding;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        height: fit-content;
+        width: fit-content;
+        box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+
+        span {
+            white-space: nowrap;
+        }
+    }
+
     input {
         position: absolute;
         left: 0;

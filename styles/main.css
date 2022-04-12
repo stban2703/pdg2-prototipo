@@ -242,7 +242,7 @@ input[type=button] {
   zoom: 1;
 }
 
-.main-button--primary, .main-button--secondary, .small-button--primary, .small-button--secondary, .board-edit-button, .confirm-reject-button, .notes-view-button, .listen-audio-button, .record-audio-again-button {
+.submit-file-input .seudoInputButton, .main-button--primary, .main-button--secondary, .small-button--primary, .small-button--secondary, .board-edit-button, .confirm-reject-button, .notes-view-button, .listen-audio-button, .record-audio-again-button {
   width: 100%;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -1277,6 +1277,33 @@ input[type=button] {
   gap: 1rem;
   z-index: 1;
   margin-bottom: 10px;
+}
+
+.submit-file-input .seudoInputButton {
+  background-color: #FDB572;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+          box-shadow: 0px 5px 6px rgba(239, 81, 82, 0.2);
+}
+
+.submit-file-input .seudoInputButton:hover {
+  background-color: #fc9b40;
+}
+
+.submit-file-input .seudoInputButton span {
+  white-space: nowrap;
 }
 
 .submit-file-input input {
