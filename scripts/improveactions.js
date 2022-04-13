@@ -13,10 +13,34 @@ export async function getInitialImproveActions() {
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
         editImproveAction(improveActionsAnswers)
-
-        const circle = new CircularProgressBar("pie");
-        circle.initial();
+        setPieGraphicForImproveActions(improveActionsAnswers, subjectId)
     }
+}
+
+async function setPieGraphicForImproveActions(answersList, subjectId) {
+    const generalList = []
+
+    answersList.forEach(answer => {
+        answer.answerValue.forEach(elem => {
+            generalList.push(elem)
+        })
+    })
+
+    const checkedActionsList = await getHistoryImproveActions(subjectId)
+
+    checkedActionsList.forEach(elem => {
+        generalList.push(elem)
+    })
+
+    const percent = (checkedActionsList.length / generalList.length) * 100
+
+    const progressContainer = document.querySelector(".memoprogress-item--improveactions")
+    progressContainer.innerHTML = `
+    <p class="memoprogress-item__title">Tu progreso de mejoras</p>
+    <div class="pie custom-pie" data-pie='{ "colorSlice": "#979DFF", "percent": ${percent}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10}'></div>
+    `
+    const circle = new CircularProgressBar("pie");
+    circle.initial();
 }
 
 function editImproveAction(list) {
