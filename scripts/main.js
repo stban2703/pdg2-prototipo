@@ -2,7 +2,7 @@ import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
 import { renderSubjectListHome } from "./home.js";
-import { getInitialImproveActions } from "./improveactions.js";
+import { getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton } from "./memo.js";
@@ -126,6 +126,7 @@ function addPageFuncions() {
     // Improve actions functions
     renderGoToImproveActionsButton()
     getInitialImproveActions(currentSubjects)
+    renderGoToImproveActionHistoryButton()
 
     // Memo form edit functions
     changeMemoEditFormPage()

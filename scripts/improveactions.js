@@ -139,3 +139,11 @@ function renderImproveActions(list) {
         })
     }
 }
+
+export function renderGoToImproveActionHistoryButton() {
+    const goToImproveActionsHistoryButton = document.querySelector('.goToImproveActionsHistoryButton')
+    if(goToImproveActionsHistoryButton && window.location.href.includes("#memoimproveactions")) {
+        const subjectId = window.location.hash.split("?")[1]
+        goToImproveActionsHistoryButton.href = `#memohistoryimproveactions?${subjectId}`
+    }
+}

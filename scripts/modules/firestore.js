@@ -402,7 +402,8 @@ export async function submitCheckedImproveAction(questionId, answerId, subjectId
         subjectId: subjectId,
         period: period,
         name: name,
-        description: description
+        description: description,
+        date: Date.now()
     }
 
     await setDoc(checkImproveActionRef, newCheckedAction).then(() => {
