@@ -121,20 +121,60 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
     const memoSectionList = document.querySelector(".memosections-screen__sectionList")
     memoSectionList.innerHTML = ``
 
-    //let lastOpenedQuestionId = ""
-
-    /*for (let index = 0; index < memoQuestions.length; index++) {
-        const question = memoQuestions[index];
-        if(!question.answerId) {
-            lastOpenedQuestionId = question.id
-            break;
-        }
-    }*/
-
     //const groupNames = Object.keys(groups);
     const question8Answer = await getOptionsFromAnswers(memoQuestions[7].id, subjectId, memoPeriod)
     const question11Answer = await getOptionsFromAnswers(memoQuestions[10].id, subjectId, memoPeriod)
 
+    // Section counter and progress
+    let firstSectionLength = 7
+    let secondSectionLength = 2
+    let thirdSectionLength = 3
+
+    const firstSectionQuestions = groupList['Autorreflexión']
+    const secondSectionQuestions = groupList['Retroalimentación obtenida sobre el curso']
+    const thirdSectionQuestions = groupList['Plan de acción']
+
+    // First section
+    let firstSectionCounter = 0
+    firstSectionQuestions.forEach(q => {
+        if (q.answerId) {
+            firstSectionCounter++
+        }
+    })
+    const firstSectionPercent = Math.round((firstSectionCounter / firstSectionLength) * 100)
+
+
+    // Second section
+    let secondSectionCounter = 0
+    secondSectionQuestions.forEach(q => {
+        if (q.answerId) {
+            secondSectionCounter++
+        }
+    })
+
+    if (question8Answer[0] === "No") {
+        secondSectionCounter--
+        secondSectionLength--
+    }
+    const secondSectionPercent = Math.round((secondSectionCounter / secondSectionLength) * 100)
+
+    // Third section
+    let thirdSectionCounter = 0
+    thirdSectionQuestions.forEach(q => {
+        if (q.answerId) {
+            thirdSectionCounter++
+        }
+    })
+
+    if (question11Answer[0] === "No") {
+        thirdSectionCounter--
+        thirdSectionLength--
+    }
+    const thirdSectionPercent = Math.round((thirdSectionCounter / thirdSectionLength) * 100)
+    console.log(thirdSectionCounter + " " + thirdSectionLength)
+    console.log(thirdSectionPercent)
+
+    /// Render
     Object.keys(groupList).forEach((group, index) => {
         const memoSectionProgressItem = document.createElement("div")
         memoSectionProgressItem.className = `memo-section-progress-item`
@@ -156,16 +196,29 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
                     } else {
                         currentQuestionId = memoQuestions[7].id
                     }
-                } else if(index === 2) {
-                    if(question11Answer[0] === "Sí") {
+                } else if (index === 2) {
+                    if (question11Answer[0] === "Sí") {
                         currentQuestionId = memoQuestions[11].id
                     } else {
                         currentQuestionId = memoQuestions[10].id
                     }
-                }else {
+                } else {
                     currentQuestionId = question.id
                 }
             }
+        }
+
+        let sectionProgress = 0
+        switch (index) {
+            case 0:
+                sectionProgress = firstSectionPercent
+                break;
+            case 1:
+                sectionProgress = secondSectionPercent
+                break;
+            case 2:
+                sectionProgress = thirdSectionPercent
+                break;
         }
 
         memoSectionProgressItem.innerHTML = `
@@ -174,9 +227,9 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
                 <span>${index + 1}</span>
             </div>
             <div class="memo-section-progress-item__percent">
-                <span class="memo-section-progress-item__percentNumber">100%</span>
+                <span class="memo-section-progress-item__percentNumber">${sectionProgress}%</span>
                 <div class="memo-section-progress-item__progressBar">
-                    <div class="memo-section-progress-item__currentBar">
+                    <div class="memo-section-progress-item__currentBar" style="width:${sectionProgress}%">
                     </div>
                 </div>
             </div>
