@@ -1,0 +1,25 @@
+.memoimproveactions-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__actionsContainer {
+        max-width: none;
+    }
+
+    .small-button {
+        max-width: 15rem;
+    }
+}

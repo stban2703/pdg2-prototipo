@@ -16,6 +16,7 @@ const router = new Router(
         memosections: new Layout(new Page("memosections.html")),
         memoquestion: new Layout(new Page("memoquestion.html")),
         testmemoform: new Layout(new Page("testmemoform.html")),
+        memoimproveactions: new Layout(new Page("memoimproveactions.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

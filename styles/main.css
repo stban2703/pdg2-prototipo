@@ -3359,6 +3359,8 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   gap: 2rem;
+  -webkit-box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
+          box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
 }
 
 .memo-improve-actions__header {
@@ -3375,6 +3377,11 @@ input[type=button] {
   gap: 2rem;
 }
 
+.memo-improve-actions__header img {
+  width: 3.4rem;
+  max-width: none;
+}
+
 .memo-improve-actions__title {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -3384,7 +3391,15 @@ input[type=button] {
 
 .memo-improve-actions a {
   text-align: center;
-  max-width: 12rem;
+  max-width: 12.1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+.memo-improve-actions--history {
+  background-color: #72B8FF;
+  -webkit-box-shadow: 0px 4px 10px rgba(69, 158, 248, 0.2);
+          box-shadow: 0px 4px 10px rgba(69, 158, 248, 0.2);
 }
 
 .memo-section-progress-item {
@@ -6279,6 +6294,42 @@ input[type=button] {
   background-color: #FDB572;
   height: 100%;
   border-radius: 20px;
+}
+
+.memoimproveactions-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4rem;
+}
+
+.memoimproveactions-screen__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.memoimproveactions-screen__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.memoimproveactions-screen__actionsContainer {
+  max-width: none;
+}
+
+.memoimproveactions-screen .small-button {
+  max-width: 15rem;
 }
 
 html {

@@ -171,8 +171,6 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
         thirdSectionLength--
     }
     const thirdSectionPercent = Math.round((thirdSectionCounter / thirdSectionLength) * 100)
-    console.log(thirdSectionCounter + " " + thirdSectionLength)
-    console.log(thirdSectionPercent)
 
     /// Render
     Object.keys(groupList).forEach((group, index) => {
