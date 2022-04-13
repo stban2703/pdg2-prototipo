@@ -343,7 +343,7 @@ export async function renderMemoQuestion() {
                                 const tag = parts[0]
                                 const value = parts[parts.length - 1]
 
-                                if(rowTag == tag) {
+                                if (rowTag == tag) {
                                     rowInput.value = value
                                     break;
                                 }
@@ -372,6 +372,12 @@ export async function renderMemoQuestion() {
                     </div>
                     `
                     memoAnswerContainer.appendChild(parragraphAnswerQuestion)
+
+                    if (currentQuestion.answerId) {
+                        const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                        //console.log(answers)
+                        memoQuestionForm.parragraph.value = answers[0]
+                    }
                     break;
             }
 
@@ -414,21 +420,25 @@ export async function renderMemoQuestion() {
             })
 
             // Render columns
-            document.querySelector(".improve-action-question5").innerHTML = ``
-            optionsQ5.forEach(tag => {
-                const newItem = document.createElement("p")
-                newItem.className = "memoquestion-form__strategyItem"
-                newItem.innerHTML = tag
-                document.querySelector(".improve-action-question5").appendChild(newItem)
-            })
+            if (optionsQ5.length > 0) {
+                document.querySelector(".improve-action-question5").innerHTML = ``
+                optionsQ5.forEach(tag => {
+                    const newItem = document.createElement("p")
+                    newItem.className = "memoquestion-form__strategyItem"
+                    newItem.innerHTML = tag
+                    document.querySelector(".improve-action-question5").appendChild(newItem)
+                })
+            }
 
-            document.querySelector(".improve-action-question6").innerHTML = ``
-            optionsQ6.forEach(tag => {
-                const newItem = document.createElement("p")
-                newItem.className = "memoquestion-form__strategyItem"
-                newItem.innerHTML = tag
-                document.querySelector(".improve-action-question6").appendChild(newItem)
-            })
+            if (optionsQ6.length > 0) {
+                document.querySelector(".improve-action-question6").innerHTML = ``
+                optionsQ6.forEach(tag => {
+                    const newItem = document.createElement("p")
+                    newItem.className = "memoquestion-form__strategyItem"
+                    newItem.innerHTML = tag
+                    document.querySelector(".improve-action-question6").appendChild(newItem)
+                })
+            }
 
             const question3Answer = await getOptionsFromAnswers("RRNqsml3iXEoAqQyQd9k", subjectId, period)
             const question3Container = document.querySelector(".improve-action-question3")
