@@ -5045,7 +5045,7 @@ input[type=button] {
 
 .memoquestion-form__back {
   margin-top: 0;
-  width: auto;
+  max-width: 80rem;
 }
 
 .memoquestion-form__openAddOptionButton {
@@ -5380,7 +5380,7 @@ input[type=button] {
 }
 
 .memoquestion-form .returnToImproveActionButton {
-  width: auto;
+  max-width: 80rem;
 }
 
 .memo-matrix-table__header {
