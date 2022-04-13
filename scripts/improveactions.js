@@ -1,4 +1,4 @@
-import { getImproveActions, updateImproveActions } from "./modules/firestore.js";
+import { getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
 import { showLoader } from "./utils/loader.js";
 
 let editAnswerTarget = ""
@@ -116,6 +116,24 @@ function renderImproveActions(list) {
                     editImproveActionForm.classList.remove("hidden")
                     editImproveActionForm.improveactionname.value = elem.name
                     editImproveActionForm.improveactiondescription.value = elem.description
+                })
+
+                // Check improve action
+                const checkImproveActionButton = actionItem.querySelector(".checkImproveActionButton")
+                checkImproveActionButton.addEventListener("click", () => {
+                    editAnswerTarget = answer.id
+                    improveActionIndex = index
+
+                    const periodListIndex = list.findIndex((elem) => {
+                        return elem.id === editAnswerTarget
+                    })
+
+                    const copy = [...list[periodListIndex].answerValue]
+                    copy.splice(improveActionIndex, 1)
+                    console.log(answer)
+                    showLoader()
+                    submitCheckedImproveAction(answer.questionId, answer.id, answer.subjectId, answer.period, 
+                        list[periodListIndex].answerValue[improveActionIndex].name, list[periodListIndex].answerValue[improveActionIndex].description, copy)
                 })
             })
         })

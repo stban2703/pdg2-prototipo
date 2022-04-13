@@ -394,12 +394,23 @@ export async function updateImproveActions(answerId, newValue) {
     })
 }
 
-export async function deleteImproveAction(answerId, newValue) {
+export async function submitCheckedImproveAction(questionId, answerId, subjectId, period, name, description, updateList) {
+    const checkImproveActionRef = doc(collection(firestore, "memos/checkedimproveactions/checkedimproveactions"))
+    const newCheckedAction = {
+        id: checkImproveActionRef.id,
+        questionId: questionId,
+        subjectId: subjectId,
+        period: period,
+        name: name,
+        description: description
+    }
 
-}
-
-export async function submitCheckedImproveAction() {
-
+    await setDoc(checkImproveActionRef, newCheckedAction).then(() => {
+        updateImproveActions(answerId, updateList)
+    }).catch((error) => {
+        hideLoader()
+        console.log(error)
+    });
 }
 
 // User functions
