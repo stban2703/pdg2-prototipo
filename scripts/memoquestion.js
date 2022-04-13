@@ -159,12 +159,6 @@ export async function renderMemoQuestion() {
                             })
                         }
                         renderMemoOption(currentQuestion.options, checkboxAnswerQuestion, answers)
-
-                        /*answers.forEach((elem, i) => {
-                            if(option === elem) {
-                                answerOption.querySelector("input").checked = true
-                            }
-                        })*/
                     }
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
                     const checkboxList = document.querySelectorAll("input[type=checkbox]")
@@ -269,6 +263,12 @@ export async function renderMemoQuestion() {
 
                     if (!currentQuestion.matrixrows[0]) {
                         let options = []
+                        let previousAnswers = []
+
+                        if (currentQuestion.answerId) {
+                            previousAnswers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                        }
+
                         switch (parseInt(currentQuestion.index)) {
                             case 5:
                                 options = await getOptionsFromAnswers("UdZPykHVoTAftyvkLxdE", subjectId, period)
@@ -316,7 +316,48 @@ export async function renderMemoQuestion() {
                                 </td>
                             `
                             matrixTableBody.appendChild(matrixRow)
+                            /*if (previousAnswers.length > 0) {
+                                previousAnswers.forEach(elem => {
+                                    
+                                    const parts = elem.split("|")
+                                    const value = parts[1]
+                                    
+                                    //console.log(memoQuestionForm.elements[`row${index}`][0])
+
+                                    if(value === memoQuestionForm.elements[`row${index}`].value) {
+                                        memoQuestionForm.elements[`row${index}`].checked = true
+                                    }
+                                })
+                            }*/
                         })
+
+                        const rows = document.querySelectorAll(".memo-matrix-table__bodyRow")
+
+                        for (let i = 0; i < rows.length; i++) {
+                            const rowInput = document.querySelector(".memoquestion-form").elements[`row${i}`]
+                            const rowTag = rows[i].querySelector(".memo-matrix-table__label").innerHTML
+
+                            for (let j = 0; j < previousAnswers.length; j++) {
+                                const elem = previousAnswers[j];
+                                const parts = elem.split("|")
+                                const tag = parts[0]
+                                const value = parts[parts.length - 1]
+
+                                if(rowTag == tag) {
+                                    rowInput.value = value
+                                    break;
+                                }
+                            }
+                            /*previousAnswers.forEach(elem => {
+                                const parts = elem.split("|")
+                                const tag = parts[0]
+                                const value = parts[parts.length - 1]
+
+                                if(rowTag == tag) {
+                                    rowInput.value = value
+                                }
+                            })*/
+                        }
                     }
                     break;
 
