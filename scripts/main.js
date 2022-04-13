@@ -2,9 +2,10 @@ import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
 import { renderSubjectListHome } from "./home.js";
+import { getInitialImproveActions } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo } from "./memo.js";
+import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
@@ -120,6 +121,10 @@ function addPageFuncions() {
     renderMemoQuestion()
     submitMemoQuestionForm()
     renderMemoNotes(currentUser.id)
+
+    // Improve actions functions
+    renderGoToImproveActionsButton()
+    getInitialImproveActions(currentSubjects)
 
     // Memo form edit functions
     changeMemoEditFormPage()

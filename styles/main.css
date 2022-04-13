@@ -3686,11 +3686,19 @@ input[type=button] {
   color: #363636;
 }
 
+.improve-action-item__description {
+  width: 100%;
+}
+
 .improve-action-item__description p {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 300;
   color: #363636;
+}
+
+.improve-action-item__description--bigger {
+  font-size: 1.5rem;
 }
 
 .improve-action-item__controls {
@@ -3748,6 +3756,7 @@ input[type=button] {
           box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
   border-radius: 5px;
   padding: 0.6rem;
+  z-index: 5;
 }
 
 .improve-action-item__settings-item {

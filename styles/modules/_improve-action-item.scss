@@ -34,11 +34,16 @@
     }
 
     &__description {
+        width: 100%;
         p {
             font-family: $poppins;
             font-size: 1.5rem;
             font-weight: $light;
             color: $mineshaft;
+        }
+
+        &--bigger {
+            font-size: 1.5rem;
         }
     }
 
@@ -79,6 +84,7 @@
         box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
         border-radius: 5px;
         padding: 0.6rem;
+        z-index: 5;
 
         &-item {
             display: flex;

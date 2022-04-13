@@ -27,6 +27,14 @@ export function getInitialMemoSubjects(subjectList) {
     }
 }
 
+export function renderGoToImproveActionsButton() {
+    const goToImproveActionsButton = document.querySelector('.goToImproveActionsButton')
+    if(goToImproveActionsButton && window.location.href.includes("#memosections")) {
+        const subjectId = window.location.hash.split("?")[1]
+        goToImproveActionsButton.href = `#memoimproveactions?${subjectId}`
+    }
+}
+
 function renderMemoSubject(subjectList) {
     const memoSubjectList = document.querySelector(".memoselectsubject-screen__subjectList")
 
