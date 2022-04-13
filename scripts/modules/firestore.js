@@ -281,7 +281,9 @@ async function updateQuestionAnswerReference(currentPeriod, questionId, subjectI
     }).then(() => {
         //hideLoader()
         console.log("Referencia actualizada")
-        getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+        if (currentIndex !== 12) {
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+        }
     })
 }
 
@@ -293,7 +295,9 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
     }).then(() => {
         //hideLoader()
         console.log("Respuesta actualizada")
-        getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+        if (currentIndex !== 12) {
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+        }
     })
 }
 

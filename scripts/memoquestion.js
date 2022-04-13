@@ -50,6 +50,16 @@ export async function renderMemoQuestion() {
             // Contenedor de respuesta
             const memoAnswerContainer = memoquestionContainerNormal.querySelector(".memoquestion-form__answer")
 
+            if(parseInt(currentQuestion.index) === 12) {
+                const nextButton = memoQuestionForm.querySelector(".memoquestion-form__nextButton")
+                const finishButton = memoQuestionForm.querySelector(".memoquestion-form__finishButton")
+
+                nextButton.classList.add("hidden")
+                nextButton.disabled = true
+                finishButton.classList.remove("hidden")
+                finishButton.disabled = false
+            }
+
             // Agregar tipo de respuesta
             switch (currentQuestion.type) {
                 case "radio":
@@ -792,21 +802,25 @@ export async function submitMemoQuestionForm() {
                                 closeMemodoyouknowModalButton.addEventListener('click', () => {
                                     doyouknowModal.classList.add("hidden")
                                     finalModal.classList.remove("hidden")
-                                    /*onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)*/
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                    hideLoader()
                                 })
 
                                 const closeFinalMemoModal = document.querySelector(".closeMemofinalModalButton")
                                 closeFinalMemoModal.addEventListener('click', () => {
                                     finalModal.classList.add("hidden")
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, 12)
+                                    window.location = `index.html#memosections?${subjectId}`
+                                    //onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, 12)
                                 })
                             } else if (parseInt(currentQuestion.index) === 12) {
+                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
+                                hideLoader()
                                 const finalModal = document.querySelector(".memo-question-modal--final")
                                 finalModal.classList.remove("hidden")
                                 const closeFinalMemoModal = document.querySelector(".closeMemofinalModalButton")
                                 closeFinalMemoModal.addEventListener('click', () => {
                                     finalModal.classList.add("hidden")
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
+                                    window.location = `index.html#memosections?${subjectId}`
                                 })
                             } else {
                                 onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, currentQuestion.index)

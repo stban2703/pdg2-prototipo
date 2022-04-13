@@ -5039,6 +5039,10 @@ input[type=button] {
   max-width: 24rem;
 }
 
+.memoquestion-form__finishButton {
+  max-width: 24rem;
+}
+
 .memoquestion-form__back {
   margin-top: 0;
   width: auto;
