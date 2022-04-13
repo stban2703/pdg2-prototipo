@@ -85,11 +85,24 @@ export async function renderMemoQuestion() {
                         memoAnswerContainer.parentNode.insertBefore(justificationSection, memoAnswerContainer.nextSibling)
                         addJustificationQuestion(memoQuestionForm.radioanswer, justificationSection)
                     }
+
+                    // Render answers
+                    if (currentQuestion.answerId) {
+                        const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                        console.log(answers)
+                        memoQuestionForm.radioanswer.value = answers[0]
+                    }
                     break;
 
                 case "checkbox":
                     const checkboxAnswerQuestion = document.createElement('div')
                     checkboxAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--checkbox"
+
+                    let answers = []
+                    if (currentQuestion.answerId) {
+                        answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                    }
+
                     if (!currentQuestion.options[0]) {
                         let negativeOptions = []
                         let positiveOptions = []
@@ -133,9 +146,19 @@ export async function renderMemoQuestion() {
                             const negativeIndex = positiveOptions.indexOf(elem)
                             positiveOptions.splice(negativeIndex, 1)
                         })
-                        renderMemoOption(positiveOptions, checkboxAnswerQuestion)
+                        renderMemoOption(positiveOptions, checkboxAnswerQuestion, answers)
                     } else {
-                        renderMemoOption(currentQuestion.options, checkboxAnswerQuestion)
+                        if(answers.length > 0) {
+                            answers.forEach(answer => {
+                                const q = currentQuestion.options.find(elem => {
+                                    return elem === answer
+                                })
+                                if(!q) {
+                                    currentQuestion.options.push(answer)
+                                }
+                            })
+                        }
+                        renderMemoOption(currentQuestion.options, checkboxAnswerQuestion, answers)
                     }
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
                     break;
@@ -558,7 +581,7 @@ function renderImproveActions(list) {
     }
 }
 
-function addMemoOption(list, checkboxAnswerQuestion, value) {
+function addMemoOption(list, checkboxAnswerQuestion, value, answers) {
     const newOption = value
     list.push(newOption)
     const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
@@ -568,13 +591,15 @@ function addMemoOption(list, checkboxAnswerQuestion, value) {
             selectedOptions.push(index)
         }
     })
-    renderMemoOption(list, checkboxAnswerQuestion)
+    renderMemoOption(list, checkboxAnswerQuestion, answers)
 }
 
-function renderMemoOption(list, checkboxAnswerQuestion) {
+function renderMemoOption(list, checkboxAnswerQuestion, answers) {
     checkboxAnswerQuestion.innerHTML = ``
 
-    list.forEach((option, index) => {
+    let copy = [...list]
+    
+    copy.forEach((option, index) => {
         const answerOption = document.createElement('label')
         answerOption.className = "checkbox-input checkbox-input--memo"
         answerOption.innerHTML = `
@@ -591,7 +616,16 @@ function renderMemoOption(list, checkboxAnswerQuestion) {
             }
         }
         checkboxAnswerQuestion.appendChild(answerOption)
+
+        if (answers.length > 0) {
+            answers.forEach((elem, i) => {
+                if(option === elem) {
+                    answerOption.querySelector("input").checked = true
+                }
+            })
+        }
     })
+
     selectedOptions = []
 
     const openAddOptionButton = document.createElement('button')
@@ -632,7 +666,10 @@ function renderMemoOption(list, checkboxAnswerQuestion) {
     addOptionBtn.addEventListener('click', () => {
         const optionValue = addOptionControls.querySelector("#newoption").value
         if (optionValue.length > 0) {
-            addMemoOption(list, checkboxAnswerQuestion, optionValue)
+            addMemoOption(list, checkboxAnswerQuestion, optionValue, answers)
+            const inputs = checkboxAnswerQuestion.querySelectorAll('input[type=checkbox]')
+            console.log(inputs[inputs.length - 1])
+            inputs[inputs.length - 1].checked = true
         } else console.log("Rellena el campo")
     })
 }
@@ -684,7 +721,7 @@ export async function submitMemoQuestionForm() {
                                     finalModal.classList.add("hidden")
                                     onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, 12)
                                 })
-                            } else if(parseInt(currentQuestion.index) === 12) {
+                            } else if (parseInt(currentQuestion.index) === 12) {
                                 const finalModal = document.querySelector(".memo-question-modal--final")
                                 finalModal.classList.remove("hidden")
                                 const closeFinalMemoModal = document.querySelector(".closeMemofinalModalButton")
@@ -755,7 +792,7 @@ function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subj
 
     const justificationInput = document.querySelector(".memoquestion-form").justification
 
-    if(justificationInput) {
+    if (justificationInput) {
         questionJustification = justificationInput.value
     }
 
