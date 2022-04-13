@@ -29,7 +29,7 @@ export function getInitialMemoSubjects(subjectList) {
 
 export function renderGoToImproveActionsButton() {
     const goToImproveActionsButton = document.querySelector('.goToImproveActionsButton')
-    if(goToImproveActionsButton && window.location.href.includes("#memosections")) {
+    if (goToImproveActionsButton && window.location.href.includes("#memosections")) {
         const subjectId = window.location.hash.split("?")[1]
         goToImproveActionsButton.href = `#memoimproveactions?${subjectId}`
     }
@@ -161,10 +161,13 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
     })
 
     if (question8Answer[0] === "No") {
-        secondSectionCounter--
+        if (secondSectionCounter > 1) {
+            secondSectionCounter--
+        }
         secondSectionLength--
     }
     const secondSectionPercent = Math.round((secondSectionCounter / secondSectionLength) * 100)
+
 
     // Third section
     let thirdSectionCounter = 0
@@ -175,7 +178,9 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
     })
 
     if (question11Answer[0] === "No") {
-        thirdSectionCounter--
+        if (thirdSectionCounter > 2) {
+            thirdSectionCounter--
+        }
         thirdSectionLength--
     }
     const thirdSectionPercent = Math.round((thirdSectionCounter / thirdSectionLength) * 100)
@@ -251,7 +256,7 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
             </div>
         </section>
         <div class="memo-module" style="background-image: url('./images/circlepatternmemomodules.svg');">
-            <a href="#memoquestion?${memoPeriod}_${subjectId}_${currentQuestionId}">
+            <a class="memo-module__anchor">
             </a>
             <div class="memo-module__patcheditable">
                 <h4 class="memo-module__name">${group}
@@ -260,6 +265,27 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
         </div>
         `
         memoSectionList.appendChild(memoSectionProgressItem)
+
+        const anchor = memoSectionProgressItem.querySelector(".memo-module__anchor")
+        switch (index) {
+            case 0:
+                anchor.setAttribute('href', `#memoquestion?${memoPeriod}_${subjectId}_${currentQuestionId}`)
+                break;
+            case 1:
+                if (firstSectionPercent >= 100) {
+                    anchor.setAttribute('href', `#memoquestion?${memoPeriod}_${subjectId}_${currentQuestionId}`)
+                } else {
+                    memoSectionProgressItem.querySelector(".memo-module").classList.add("memo-module--locked")
+                }
+                break;
+            case 2:
+                if (firstSectionPercent >= 100 && secondSectionPercent >= 100) {
+                    anchor.setAttribute('href', `#memoquestion?${memoPeriod}_${subjectId}_${currentQuestionId}`)
+                } else {
+                    memoSectionProgressItem.querySelector(".memo-module").classList.add("memo-module--locked")
+                }
+                break;
+        }
     })
 }
 

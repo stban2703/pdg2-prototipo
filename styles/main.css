@@ -2732,6 +2732,10 @@ input[type=button] {
   color: #757575;
 }
 
+.memo-module--locked {
+  background-color: #ADD5FD;
+}
+
 .add-memo-module-button {
   background-color: #FFFFFF;
   display: -webkit-box;
@@ -5506,7 +5510,6 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1.4rem;
-  margin-top: 2.8rem;
 }
 
 .improve-actions__emptyText {
@@ -6239,7 +6242,23 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.memoquestion-screen__header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 3rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .memoquestion-screen__number {
@@ -6289,6 +6308,11 @@ input[type=button] {
   background-color: #FDB572;
   height: 100%;
   border-radius: 20px;
+}
+
+.memoquestion-screen .exitMemoQuestionButton {
+  max-width: 22rem;
+  text-align: center;
 }
 
 .memoimproveactions-screen {

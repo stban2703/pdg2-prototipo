@@ -16,10 +16,15 @@
 </header>
 <article class="memoquestion-screen">
     <section class="memoquestion-screen__header">
-        <div class="memoquestion-screen__number">
-            <span class="memoquestion-screen__numberSpan"></span>
+        <div>
+            <div class="memoquestion-screen__number">
+                <span class="memoquestion-screen__numberSpan"></span>
+            </div>
+            <h3 class="memoquestion-screen__title">Cargando...</h3>
         </div>
-        <h3 class="memoquestion-screen__title">Cargando...</h3>
+        <a href="" class="small-button small-button--primary exitMemoQuestionButton">
+            <span>Volver a las secciones</span>
+        </a>
     </section>
     <section class="memoquestion-screen__progress">
         <div class="memoquestion-screen__progressBar">
@@ -139,13 +144,6 @@
                         <td class="improve-actions__headerTag">Descripción breve</td>
                     </tr>
                 </thead>
-                <div class="improve-actions__empty">
-                    <p class="improve-actions__emptyText">Aún no tienes acciones de mejora agregadas</p>
-                    <p class="improve-actions__emptyText improve-actions__emptyText--purple">Si deseas <span
-                            style="font-weight: 600;">agregar una acción</span> da click en el botón de “Agregar
-                        acción”, <span style="font-weight: 600;">completa</span> los campos y <span
-                            style="font-weight: 600;">guarda</span> los cambios.</p>
-                </div>
                 <tbody class="improve-actions__list hidden">
                     <tr class="improve-action-item">
                         <td>
@@ -167,6 +165,13 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="improve-actions__empty">
+                <p class="improve-actions__emptyText">Aún no tienes acciones de mejora agregadas</p>
+                <p class="improve-actions__emptyText improve-actions__emptyText--purple">Si deseas <span
+                        style="font-weight: 600;">agregar una acción</span> da click en el botón de “Agregar
+                    acción”, <span style="font-weight: 600;">completa</span> los campos y <span
+                        style="font-weight: 600;">guarda</span> los cambios.</p>
+            </div>
         </div>
 
         <div class="memoquestion-form__container memoquestion-form__container--newimproveaction hidden">

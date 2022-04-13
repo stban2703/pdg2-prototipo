@@ -21,6 +21,9 @@ export async function renderMemoQuestion() {
         const subjectId = urlQueryParts[1]
         const questionId = urlQueryParts[2]
 
+        const exitMemoQuestionButton = document.querySelector(".exitMemoQuestionButton")
+        exitMemoQuestionButton.setAttribute('href', `index.html#memosections?${subjectId}`)
+
         currentQuestion = await getMemoQuestion(period, subjectId, questionId)
 
         const memoSectionNumber = memoQuestionScreen.querySelector(".memoquestion-screen__numberSpan")
