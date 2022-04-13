@@ -89,7 +89,7 @@ export async function renderMemoQuestion() {
                     // Render answers
                     if (currentQuestion.answerId) {
                         const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
-                        console.log(answers)
+                        //console.log(answers)
                         memoQuestionForm.radioanswer.value = answers[0]
                     }
                     break;
@@ -148,19 +148,35 @@ export async function renderMemoQuestion() {
                         })
                         renderMemoOption(positiveOptions, checkboxAnswerQuestion, answers)
                     } else {
-                        if(answers.length > 0) {
+                        if (answers.length > 0) {
                             answers.forEach(answer => {
                                 const q = currentQuestion.options.find(elem => {
                                     return elem === answer
                                 })
-                                if(!q) {
+                                if (!q) {
                                     currentQuestion.options.push(answer)
                                 }
                             })
                         }
                         renderMemoOption(currentQuestion.options, checkboxAnswerQuestion, answers)
+
+                        /*answers.forEach((elem, i) => {
+                            if(option === elem) {
+                                answerOption.querySelector("input").checked = true
+                            }
+                        })*/
                     }
                     memoAnswerContainer.appendChild(checkboxAnswerQuestion)
+                    const checkboxList = document.querySelectorAll("input[type=checkbox]")
+
+                    answers.forEach((answer) => {
+                        const targetIndex = Array.prototype.slice.call(checkboxList).findIndex(elem => {
+                            return elem.value === answer
+                        })
+                        if (targetIndex >= 0) {
+                            checkboxList[targetIndex].checked = true
+                        }
+                    })
                     break;
 
                 case "scale":
@@ -216,8 +232,15 @@ export async function renderMemoQuestion() {
                     memoAnswerContainer.appendChild(scaleAnswerQuestion)
                     if (parseInt(currentQuestion.index) === 3) {
                         document.querySelector(".memoquestion-form__scaleValues").classList.remove("hidden")
-                    } else document.querySelector(".memoquestion-form__scaleValues").classList.add("hidden")
+                    } else {
+                        document.querySelector(".memoquestion-form__scaleValues").classList.add("hidden")
+                    }
 
+                    if (currentQuestion.answerId) {
+                        const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                        //console.log(answers)
+                        memoQuestionForm.scale.value = answers[0]
+                    }
                     break;
 
                 case "matrix":
@@ -598,7 +621,7 @@ function renderMemoOption(list, checkboxAnswerQuestion, answers) {
     checkboxAnswerQuestion.innerHTML = ``
 
     let copy = [...list]
-    
+
     copy.forEach((option, index) => {
         const answerOption = document.createElement('label')
         answerOption.className = "checkbox-input checkbox-input--memo"
@@ -616,14 +639,6 @@ function renderMemoOption(list, checkboxAnswerQuestion, answers) {
             }
         }
         checkboxAnswerQuestion.appendChild(answerOption)
-
-        if (answers.length > 0) {
-            answers.forEach((elem, i) => {
-                if(option === elem) {
-                    answerOption.querySelector("input").checked = true
-                }
-            })
-        }
     })
 
     selectedOptions = []
@@ -668,7 +683,6 @@ function renderMemoOption(list, checkboxAnswerQuestion, answers) {
         if (optionValue.length > 0) {
             addMemoOption(list, checkboxAnswerQuestion, optionValue, answers)
             const inputs = checkboxAnswerQuestion.querySelectorAll('input[type=checkbox]')
-            console.log(inputs[inputs.length - 1])
             inputs[inputs.length - 1].checked = true
         } else console.log("Rellena el campo")
     })
