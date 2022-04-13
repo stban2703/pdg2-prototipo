@@ -360,8 +360,12 @@ export async function getOptionsFromAnswers(targetQuestionId, subjectId, period)
     const currentPeriodAnswer = answerList.filter((e) => {
         return e.period === period
     })
-    const options = currentPeriodAnswer[0].answerValue
-    return options
+    if (answerList.length > 0) {
+        const options = currentPeriodAnswer[0].answerValue
+        return options
+    } else {
+        return []
+    }
 }
 
 export async function getJustificationAnswers(targetQuestionId, subjectId, period) {
