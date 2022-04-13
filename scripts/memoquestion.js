@@ -592,12 +592,12 @@ function addJustificationQuestion(input, justificationSection) {
 }
 
 function addImproveAction(improveactionname, improveactiondescription) {
-    if (improveActionEditIndex) {
+    if (improveActionEditIndex >= 0 && improveActionEditIndex !== null) {
         improveActionsList[improveActionEditIndex] = {
             name: improveactionname,
             description: improveactiondescription
         }
-    } else {
+    } else if(improveActionEditIndex === null) {
         improveActionsList.push({
             name: improveactionname,
             description: improveactiondescription
@@ -624,21 +624,25 @@ function renderImproveActions(list) {
         emptyMessage.classList.add("hidden")
         improveActionList.classList.remove("hidden")
         list.forEach((elem, index) => {
-            const actionItem = document.createElement("div")
+            const actionItem = document.createElement("tr")
             actionItem.className = "improve-action-item"
             actionItem.innerHTML = `
-            <section class="improve-action-item__number">
-                <span>${index + 1}</span>
-            </section>
-            <section class="improve-action-item__title">
+            <td>
+                <div class="improve-action-item__number">
+                    <span>${index + 1}</span>
+                </div>
+            </td>
+            <td class="improve-action-item__title">
                 <h5>${elem.name}</h5>
-            </section>
-            <section class="improve-action-item__description">
+            </td>
+            <td class="improve-action-item__description">
                 <p>${elem.description}</p>
-            </section>
-            <button type="button" class="improve-action-item__controls"
-                style="background-image: url('./images/3dots.svg');">
-            </button>
+            </td>
+            <td>
+                <button type="button" class="improve-action-item__controls"
+                    style="background-image: url('./images/3dots.svg');">
+                </button>
+            </td>
             <ul class="improve-action-item__settings improve-action-item__settings--hidden">
                 <li class="improve-action-item__settings-item delete-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">

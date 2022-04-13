@@ -158,7 +158,6 @@ export function renderGoToImproveActionHistoryButton() {
 
 export async function getInitialHistoryImproveActions() {
     const memohistoryImproveActionsScreen = document.querySelector(".memohistoryimproveactions-screen")
-    console.log(memohistoryImproveActionsScreen)
     if (memohistoryImproveActionsScreen && window.location.href.includes("#memohistoryimproveactions")) {
         const subjectId = window.location.hash.split("?")[1]
         historyImproveActions = await getHistoryImproveActions(subjectId)
