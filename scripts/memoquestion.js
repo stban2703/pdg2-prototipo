@@ -470,6 +470,7 @@ export async function renderMemoQuestion() {
             const question8Container = document.querySelector(".improve-action-question8")
             question8Container.innerHTML = question8Answer[0]
 
+            // Notes from user
             const memoModalNotes = document.querySelector(".memo-question-modal--notes")
             const closeMemoNotesModalButton = memoModalNotes.querySelector(".closeMemoNotesModalButton")
             const seeNotesButton = document.querySelector(".seeNotesButton")
@@ -526,6 +527,12 @@ export async function renderMemoQuestion() {
                 newImproveActionForm.classList.add("hidden")
             })
 
+            if (currentQuestion.answerId) {
+                const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
+                //console.log(answers)
+                improveActionsList = answers
+            }
+            console.log(improveActionsList)
             renderImproveActions(improveActionsList)
 
             const addImproveActionButton = document.querySelector(".addImproveActionButton")
@@ -898,8 +905,6 @@ export async function renderMemoNotes(uid) {
         const urlQuery = window.location.hash.split("?")[1]
         const urlQueryParts = urlQuery.split("_")
         const period = urlQueryParts[0]
-        const subjectId = urlQueryParts[1]
-        const questionId = urlQueryParts[2]
 
         noteList.filter((elem) => {
             return elem.period === period
