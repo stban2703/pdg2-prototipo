@@ -1,8 +1,10 @@
-import { getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
+import { getHistoryImproveActions, getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
+import { parseTimestampToDate } from "./utils/date-format.js";
 import { showLoader } from "./utils/loader.js";
 
 let editAnswerTarget = ""
 let improveActionIndex = 0
+let historyImproveActions = []
 
 export async function getInitialImproveActions() {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
@@ -47,24 +49,30 @@ function renderImproveActions(list) {
         improveActionList.classList.remove("hidden")
         list.forEach((answer) => {
             answer.answerValue.forEach((elem, index) => {
-                const actionItem = document.createElement("div")
+                const actionItem = document.createElement("tr")
                 actionItem.className = "improve-action-item"
                 actionItem.innerHTML = `
-                <section class="improve-action-item__number">
-                <span>${index + 1}</span>
-                </section>
-                <section class="improve-action-item__title">
-                <h5>${elem.name}</h5>
-                </section>
-                <section class="improve-action-item__description improve-action-item__description--bigger">
-                <p>${elem.description}</p>
-                </section>
-                <button type="button" class="small-button small-button--secondary checkImproveActionButton">
-                <span>Realizado</span>
-                </button>
-                <button type="button" class="improve-action-item__controls"
-                style="background-image: url('./images/3dots.svg');">
-                </button>
+                <td>
+                    <div class="improve-action-item__number">
+                        <span>${index + 1}</span>
+                    </div>
+                </td>
+                <td class="improve-action-item__title">
+                    <h5>${elem.name}</h5>
+                </td>
+                <td class="improve-action-item__description">
+                    <p>${elem.description}</p>
+                </td>
+                <td style="width: fit-content;">
+                    <button type="button" class="small-button small-button--secondary checkImproveActionButton">
+                        <span>Realizado</span>
+                    </button>
+                </td>
+                <td style="width: fit-content;">
+                    <button type="button" class="improve-action-item__controls"
+                        style="background-image: url('./images/3dots.svg');">
+                    </button>
+                </td>
                 <ul class="improve-action-item__settings improve-action-item__settings--hidden">
                 <li class="improve-action-item__settings-item delete-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
@@ -132,7 +140,7 @@ function renderImproveActions(list) {
                     copy.splice(improveActionIndex, 1)
                     console.log(answer)
                     showLoader()
-                    submitCheckedImproveAction(answer.questionId, answer.id, answer.subjectId, answer.period, 
+                    submitCheckedImproveAction(answer.questionId, answer.id, answer.subjectId, answer.period,
                         list[periodListIndex].answerValue[improveActionIndex].name, list[periodListIndex].answerValue[improveActionIndex].description, copy)
                 })
             })
@@ -142,8 +150,53 @@ function renderImproveActions(list) {
 
 export function renderGoToImproveActionHistoryButton() {
     const goToImproveActionsHistoryButton = document.querySelector('.goToImproveActionsHistoryButton')
-    if(goToImproveActionsHistoryButton && window.location.href.includes("#memoimproveactions")) {
+    if (goToImproveActionsHistoryButton && window.location.href.includes("#memoimproveactions")) {
         const subjectId = window.location.hash.split("?")[1]
         goToImproveActionsHistoryButton.href = `#memohistoryimproveactions?${subjectId}`
+    }
+}
+
+export async function getInitialHistoryImproveActions() {
+    const memohistoryImproveActionsScreen = document.querySelector(".memohistoryimproveactions-screen")
+    console.log(memohistoryImproveActionsScreen)
+    if (memohistoryImproveActionsScreen && window.location.href.includes("#memohistoryimproveactions")) {
+        const subjectId = window.location.hash.split("?")[1]
+        historyImproveActions = await getHistoryImproveActions(subjectId)
+        renderHistoryImproveActions(historyImproveActions)
+    }
+}
+
+function renderHistoryImproveActions(list) {
+    const improveActionsLisHistory = document.querySelector(".improve-actions__list--history")
+    const emptyMessage = document.querySelector(".improve-actions__empty")
+
+    improveActionsLisHistory.innerHTML = ``
+    if (list.length == 0) {
+        emptyMessage.classList.remove("hidden")
+        improveActionsLisHistory.classList.add("hidden")
+    } else {
+        emptyMessage.classList.add("hidden")
+        improveActionsLisHistory.classList.remove("hidden")
+        list.forEach((elem, index) => {
+            const historyItem = document.createElement('tr')
+            historyItem.className = "improve-action-item"
+            historyItem.innerHTML = `
+            <td>
+            <div class="improve-action-item__number">
+            <span>${index + 1}</span>
+            </div>
+            <td>
+            <section class="improve-action-item__title">
+            <h5>${elem.name}</h5>
+            </td>
+            <td class="improve-action-item__description improve-action-item__description--bigger">
+            <p>${elem.description}</p>
+            </td>
+            <td class="improve-action-item__date">
+            <p>${parseTimestampToDate(elem.date)}</p>
+            </td>
+            `
+            improveActionsLisHistory.appendChild(historyItem)
+        })
     }
 }

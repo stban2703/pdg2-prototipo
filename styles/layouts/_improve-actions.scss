@@ -1,13 +1,31 @@
 .improve-actions {
-    display: flex;
-    flex-direction: column;
     background-color: $white;
     box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
     border-radius: 15px;
     padding: 4rem;
-    gap: 2rem;
     width: 100%;
     max-width: 82rem;
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    td {
+        padding-right: 3rem;
+        padding-bottom: 2rem;
+    }
+
+    &__table {
+        border-collapse: separate;
+        //border-spacing: 4rem 0;
+        width: 100%;
+    }
+
+    &__header {
+        width: 100%;
+    }
 
     &__subtitle {
         font-family: $poppins;
@@ -16,41 +34,19 @@
         color: $main-color;
     }
 
-    &__header {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-    }
-
     &__headerTag {
         font-family: $poppins;
         font-size: 2rem;
         font-weight: $semibold;
         color: $silver;
 
-        &:nth-child(1) {
-            min-width: 3.5rem;
-        }
-
-        &:nth-child(2) {
-            min-width: 23.5rem;
-        }
-
-        &:nth-child(3) {
-            width: 100%;
-        }
-
         &--daterow {
-            width: fit-content;
             white-space: nowrap;
         }
     }
 
     &__list {
         margin-top: 3.3rem;
-        display: flex;
-        flex-direction: column;
-        gap: 5rem;
     }
 
     &__empty {

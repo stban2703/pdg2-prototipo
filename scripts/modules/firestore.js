@@ -384,6 +384,13 @@ export async function getImproveActions(questionId, subjectId) {
     return answer
 }
 
+export async function getHistoryImproveActions(subjectId) {
+    const q = query(collection(firestore, `memos/checkedimproveactions/checkedimproveactions`), where("subjectId", "==", subjectId))
+    const querySnapshot = await getDocs(q);
+    const history = querySnapshot.docs.map(doc => doc.data());
+    return history
+}
+
 export async function updateImproveActions(answerId, newValue) {
     const answerRef = doc(firestore, "memos/answers/answers", answerId)
     await updateDoc(answerRef, {

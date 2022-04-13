@@ -1,13 +1,10 @@
 .improve-action-item {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
     gap: 2.5rem;
     position: relative;
 
     &__number {
-        min-width: 3.5rem;
-        min-height: 3.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -24,7 +21,6 @@
     }
 
     &__title {
-        min-width: 23.5rem;
         h5 {
             font-family: $poppins;
             font-size: 1.8rem;
@@ -34,7 +30,6 @@
     }
 
     &__description {
-        width: 100%;
         p {
             font-family: $poppins;
             font-size: 1.5rem;
@@ -43,7 +38,18 @@
         }
 
         &--bigger {
-            font-size: 1.5rem;
+            p {
+                font-size: 1.8rem;
+            }
+        }
+    }
+
+    &__date {
+        p {
+            font-family: $poppins;
+            font-size: 1.8rem;
+            font-weight: $light;
+            color: $mineshaft;
         }
     }
 
@@ -64,7 +70,7 @@
         margin-left: auto;
 
         &--activated {
-            background-color: #FAFAFA;
+            background-color: #fafafa;
         }
     }
 
@@ -75,7 +81,7 @@
         background-color: $white;
         position: absolute;
         top: 0;
-        right: 0;
+        right: 3rem;
         margin: 3rem 0;
         display: flex;
         flex-direction: column;

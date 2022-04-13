@@ -44,57 +44,43 @@
         </form>
     </section>
     <section class="memohistoryimproveactions-screen__actions">
-        <div class="improve-actions improve-actions-content memoimproveactions-screen__actionsContainer" style="margin-top: 2rem;">
+        <div class="improve-actions improve-actions-content memoimproveactions-screen__actionsContainer">
             <h5 class="improve-actions__subtitle">Tu historial de mejoras</h5>
-            <div class="improve-actions__container">
-                <section class="improve-actions__header">
-                    <h5 class="improve-actions__headerTag">No.</h5>
-                    <h5 class="improve-actions__headerTag">Acción</h5>
-                    <h5 class="improve-actions__headerTag">Descripción breve</h5>
-                    <h5 class="improve-actions__headerTag improve-actions__headerTag--daterow">Fecha de mejora</h5>
-                </section>
-                <section class="improve-actions__empty">
+            <table class="improve-actions__table">
+                <thead class="improve-actions__header">
+                    <tr>
+                        <td class="improve-actions__headerTag">No.</td>
+                        <td class="improve-actions__headerTag">Acción</td>
+                        <td class="improve-actions__headerTag">Descripción breve</td>
+                        <td class="improve-actions__headerTag improve-actions__headerTag--daterow">Fecha de mejora</td>
+                    </tr>
+                </thead>
+                <div class="improve-actions__empty">
                     <p class="improve-actions__emptyText">Aún no tienes acciones de mejora realizadas</p>
                     <p class="improve-actions__emptyText improve-actions__emptyText--purple">Si deseas <span
-                            style="font-weight: 600;">agregar una acción a este historial</span>, debes dar click en el botón de “Realizado” en tu <span style="font-weight: 600;">lista de acciones de mejora</span>.</p>
-                </section>
-                <section class="improve-actions__list hidden">
-                    <div class="improve-action-item">
-                        <section class="improve-action-item__number">
-                            <span>1</span>
-                        </section>
-                        <section class="improve-action-item__title">
+                            style="font-weight: 600;">agregar una acción a este historial</span>, debes dar click en el
+                        botón de “Realizado” en tu <span style="font-weight: 600;">lista de acciones de mejora</span>.
+                    </p>
+                </div>
+                <tbody class="improve-actions__list improve-actions__list--history hidden">
+                    <tr class="improve-action-item">
+                        <td>
+                            <div class="improve-action-item__number">
+                                <span>1</span>
+                            </div>
+                        </td>
+                        <td class="improve-action-item__title">
                             <h5>Mejorar la exposición final</h5>
-                        </section>
-                        <section class="improve-action-item__description">
-                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre </p>
-                        </section>
-                        <button type="button" class="small-button small-button--secondary checkImproveActionButton">
-                            <span>Realizado</span>
-                        </button>
-                        <button type="button" class="improve-action-item__controls"
-                            style="background-image: url('./images/3dots.svg');">
-                        </button>
-                    </div>
-                    <div class="improve-action-item">
-                        <section class="improve-action-item__number">
-                            <span>2</span>
-                        </section>
-                        <section class="improve-action-item__title">
-                            <h5>Mejorar la exposición final</h5>
-                        </section>
-                        <section class="improve-action-item__description">
-                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre </p>
-                        </section>
-                        <button type="button" class="small-button small-button--secondary checkImproveActionButton">
-                            <span>Realizado</span>
-                        </button>
-                        <button type="button" class="improve-action-item__controls"
-                            style="background-image: url('./images/3dots.svg');">
-                        </button>
-                    </div>
-                </section>
-            </div>
+                        </td>
+                        <td class="improve-action-item__description improve-action-item__description--bigger">
+                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre</p>
+                        </td>
+                        <td class="improve-action-item__date">
+                            <p>12/12/2000</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 </article>

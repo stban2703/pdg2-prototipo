@@ -3634,23 +3634,13 @@ input[type=button] {
 }
 
 .improve-action-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   gap: 2.5rem;
   position: relative;
 }
 
 .improve-action-item__number {
-  min-width: 3.5rem;
-  min-height: 3.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3675,19 +3665,11 @@ input[type=button] {
   color: #979DFF;
 }
 
-.improve-action-item__title {
-  min-width: 23.5rem;
-}
-
 .improve-action-item__title h5 {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   font-weight: 300;
   color: #363636;
-}
-
-.improve-action-item__description {
-  width: 100%;
 }
 
 .improve-action-item__description p {
@@ -3697,8 +3679,15 @@ input[type=button] {
   color: #363636;
 }
 
-.improve-action-item__description--bigger {
-  font-size: 1.5rem;
+.improve-action-item__description--bigger p {
+  font-size: 1.8rem;
+}
+
+.improve-action-item__date p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #363636;
 }
 
 .improve-action-item__controls {
@@ -3728,7 +3717,7 @@ input[type=button] {
 }
 
 .improve-action-item__controls--activated {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .improve-action-item__settings {
@@ -3741,7 +3730,7 @@ input[type=button] {
   background-color: #FFFFFF;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 3rem;
   margin: 3rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5448,6 +5437,16 @@ input[type=button] {
 }
 
 .improve-actions {
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+  border-radius: 15px;
+  padding: 4rem;
+  width: 100%;
+  max-width: 82rem;
+}
+
+.improve-actions-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5455,14 +5454,21 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #FFFFFF;
-  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
-          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
-  border-radius: 15px;
-  padding: 4rem;
   gap: 2rem;
+}
+
+.improve-actions td {
+  padding-right: 3rem;
+  padding-bottom: 2rem;
+}
+
+.improve-actions__table {
+  border-collapse: separate;
   width: 100%;
-  max-width: 82rem;
+}
+
+.improve-actions__header {
+  width: 100%;
 }
 
 .improve-actions__subtitle {
@@ -5472,17 +5478,6 @@ input[type=button] {
   color: #979DFF;
 }
 
-.improve-actions__header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  gap: 2rem;
-}
-
 .improve-actions__headerTag {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -5490,35 +5485,12 @@ input[type=button] {
   color: #A0A0A0;
 }
 
-.improve-actions__headerTag:nth-child(1) {
-  min-width: 3.5rem;
-}
-
-.improve-actions__headerTag:nth-child(2) {
-  min-width: 23.5rem;
-}
-
-.improve-actions__headerTag:nth-child(3) {
-  width: 100%;
-}
-
 .improve-actions__headerTag--daterow {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   white-space: nowrap;
 }
 
 .improve-actions__list {
   margin-top: 3.3rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 5rem;
 }
 
 .improve-actions__empty {
