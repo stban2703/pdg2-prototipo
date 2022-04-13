@@ -27,3 +27,74 @@
     </div>
     <h2 class="section-banner__title">Memorando reflexivo</h2>
 </section>
+<article class="memohistoryimproveactions-screen">
+    <section class="memohistoryimproveactions-screen__header">
+        <p class="memoimproveactions-screen__title">Historial de mejoras implementadas</p>
+        <form class="memohistoryimproveactions-screen__controls">
+            <div class="note-screen__filters-title">
+                <img src="./images/filtericon.svg" alt="">
+                <span>Filtrar por:</span>
+            </div>
+            <select class="select-notes-filter" name="period" id="">
+                <option value="">Semestre</option>
+                <option value="2022-1">2022-1</option>
+                <option value="2021-2">2021-2</option>
+                <option value="2021-1">2021-1</option>
+            </select>
+        </form>
+    </section>
+    <section class="memohistoryimproveactions-screen__actions">
+        <div class="improve-actions improve-actions-content memoimproveactions-screen__actionsContainer" style="margin-top: 2rem;">
+            <h5 class="improve-actions__subtitle">Tu historial de mejoras</h5>
+            <div class="improve-actions__container">
+                <section class="improve-actions__header">
+                    <h5 class="improve-actions__headerTag">No.</h5>
+                    <h5 class="improve-actions__headerTag">Acción</h5>
+                    <h5 class="improve-actions__headerTag">Descripción breve</h5>
+                    <h5 class="improve-actions__headerTag improve-actions__headerTag--daterow">Fecha de mejora</h5>
+                </section>
+                <section class="improve-actions__empty">
+                    <p class="improve-actions__emptyText">Aún no tienes acciones de mejora realizadas</p>
+                    <p class="improve-actions__emptyText improve-actions__emptyText--purple">Si deseas <span
+                            style="font-weight: 600;">agregar una acción a este historial</span>, debes dar click en el botón de “Realizado” en tu <span style="font-weight: 600;">lista de acciones de mejora</span>.</p>
+                </section>
+                <section class="improve-actions__list hidden">
+                    <div class="improve-action-item">
+                        <section class="improve-action-item__number">
+                            <span>1</span>
+                        </section>
+                        <section class="improve-action-item__title">
+                            <h5>Mejorar la exposición final</h5>
+                        </section>
+                        <section class="improve-action-item__description">
+                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre </p>
+                        </section>
+                        <button type="button" class="small-button small-button--secondary checkImproveActionButton">
+                            <span>Realizado</span>
+                        </button>
+                        <button type="button" class="improve-action-item__controls"
+                            style="background-image: url('./images/3dots.svg');">
+                        </button>
+                    </div>
+                    <div class="improve-action-item">
+                        <section class="improve-action-item__number">
+                            <span>2</span>
+                        </section>
+                        <section class="improve-action-item__title">
+                            <h5>Mejorar la exposición final</h5>
+                        </section>
+                        <section class="improve-action-item__description">
+                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre </p>
+                        </section>
+                        <button type="button" class="small-button small-button--secondary checkImproveActionButton">
+                            <span>Realizado</span>
+                        </button>
+                        <button type="button" class="improve-action-item__controls"
+                            style="background-image: url('./images/3dots.svg');">
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</article>

@@ -5502,6 +5502,13 @@ input[type=button] {
   width: 100%;
 }
 
+.improve-actions__headerTag--daterow {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  white-space: nowrap;
+}
+
 .improve-actions__list {
   margin-top: 3.3rem;
   display: -webkit-box;
@@ -6153,6 +6160,9 @@ input[type=button] {
       -ms-flex-direction: row;
           flex-direction: row;
   gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .memoselectsubject-screen__subjectList {
@@ -6339,6 +6349,32 @@ input[type=button] {
 
 .memoimproveactions-screen .small-button {
   max-width: 15rem;
+}
+
+.memohistoryimproveactions-screen__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 2rem;
+}
+
+.memohistoryimproveactions-screen__controls {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1.5rem;
 }
 
 html {

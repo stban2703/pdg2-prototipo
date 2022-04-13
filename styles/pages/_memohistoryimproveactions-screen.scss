@@ -1,0 +1,15 @@
+.memohistoryimproveactions-screen {
+    &__header {
+        display: flex;
+        flex-direction: row;
+        margin-top: 2rem;
+    }
+
+    &__controls {
+        margin-left: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}

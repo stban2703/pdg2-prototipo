@@ -39,6 +39,11 @@
         &:nth-child(3) {
             width: 100%;
         }
+
+        &--daterow {
+            width: fit-content;
+            white-space: nowrap;
+        }
     }
 
     &__list {
