@@ -162,6 +162,13 @@ export async function getInitialHistoryImproveActions() {
         const subjectId = window.location.hash.split("?")[1]
         historyImproveActions = await getHistoryImproveActions(subjectId)
         renderHistoryImproveActions(historyImproveActions)
+
+        // Filter
+        const historyFilterControls = memohistoryImproveActionsScreen.querySelector(".memohistoryimproveactions-screen__controls")
+        const periodFilter = historyFilterControls.period
+        periodFilter.addEventListener('input', () => {
+            filterImproveActionsHistory(periodFilter)
+        })
     }
 }
 
@@ -198,4 +205,17 @@ function renderHistoryImproveActions(list) {
             improveActionsLisHistory.appendChild(historyItem)
         })
     }
+}
+
+function filterImproveActionsHistory(periodFilter) {
+    let filterCopy = [...historyImproveActions]
+    
+    if (periodFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.period == periodFilter.value) {
+                return true
+            }
+        })
+    }
+    renderHistoryImproveActions(filterCopy)
 }
