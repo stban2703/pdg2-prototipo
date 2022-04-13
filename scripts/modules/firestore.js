@@ -377,14 +377,21 @@ export async function getJustificationAnswers(targetQuestionId, subjectId, perio
 
 
 // Improve actions functions
-export async function getImproveActions(questionId, subjectId, period) {
+export async function getImproveActions(questionId, subjectId) {
     const q = query(collection(firestore, `memos/answers/answers`), where("questionId", "==", `${questionId}`), where("subjectId", "==", subjectId))
     const querySnapshot = await getDocs(q);
     const answer = querySnapshot.docs.map(doc => doc.data());
-    const filteredActionList = answer.filter((e) => {
-        return e.period === period
+    return answer
+}
+
+export async function updateImproveActions(answerId, newValue) {
+    const answerRef = doc(firestore, "memos/answers/answers", answerId)
+    await updateDoc(answerRef, {
+        answerValue: newValue,
+    }).then(() => {
+        hideLoader()
+        window.location.reload()
     })
-    return filteredActionList[0].answerValue
 }
 
 // User functions

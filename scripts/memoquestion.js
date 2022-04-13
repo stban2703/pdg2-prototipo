@@ -38,7 +38,7 @@ export async function renderMemoQuestion() {
 
         // Mostrar barra de progreso
         const totalQuestion = 12
-        
+
         const currentProgress = Math.round((parseInt(currentQuestion.index) / totalQuestion) * 100)
         const currentProgressBar = document.querySelector(".memoquestion-screen__currentProgress")
         currentProgressBar.style.width = `${currentProgress}%`
@@ -57,7 +57,7 @@ export async function renderMemoQuestion() {
             // Contenedor de respuesta
             const memoAnswerContainer = memoquestionContainerNormal.querySelector(".memoquestion-form__answer")
 
-            if(parseInt(currentQuestion.index) === 12) {
+            if (parseInt(currentQuestion.index) === 12) {
                 const nextButton = memoQuestionForm.querySelector(".memoquestion-form__nextButton")
                 const finishButton = memoQuestionForm.querySelector(".memoquestion-form__finishButton")
 
@@ -108,9 +108,9 @@ export async function renderMemoQuestion() {
                         const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
                         //console.log(answers)
                         memoQuestionForm.radioanswer.value = answers[0]
-                        
+
                         const justificationSection = document.querySelector(".memoquestion-form__justification")
-                        if(justificationSection) {
+                        if (justificationSection) {
                             justificationSection.classList.remove("hidden")
                             const justificationAnswer = await getJustificationAnswers(currentQuestion.id, subjectId, period)
                             justificationSection.querySelector('textarea').value = justificationAnswer
@@ -558,20 +558,26 @@ export async function renderMemoQuestion() {
             }
 
             renderImproveActions(improveActionsList)
-
-            const addImproveActionButton = document.querySelector(".addImproveActionButton")
-            addImproveActionButton.addEventListener("click", () => {
-                //console.log(memoQuestionForm.improveactionname)
-                const improveActionName = memoQuestionForm.improveactionname.value
-                const improveActionDescription = memoQuestionForm.improveactiondescription.value
-
-                if (improveActionName.length > 0 && improveActionDescription.length > 0) {
-                    addImproveAction(improveActionName, improveActionDescription)
-                } else {
-                    alert("Debes rellenar los campos")
-                }
-            })
         }
+    }
+}
+
+export function handleMemoAddActionForm() {
+    const memoQuestionForm = document.querySelector(".memoquestion-form")
+
+    if (memoQuestionForm && window.location.href.includes("#memoquestion") && window.location.href.includes("a0tOgnI8yoiCW0BvJK2k")) {
+        const addImproveActionButton = document.querySelector(".addImproveActionButton")
+        
+        addImproveActionButton.addEventListener("click", () => {
+            const improveActionName = memoQuestionForm.improveactionname.value
+            const improveActionDescription = memoQuestionForm.improveactiondescription.value
+
+            if (improveActionName.length > 0 && improveActionDescription.length > 0) {
+                addImproveAction(improveActionName, improveActionDescription)
+            } else {
+                alert("Debes rellenar los campos")
+            }
+        })
     }
 }
 

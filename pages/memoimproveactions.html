@@ -28,10 +28,10 @@
     <h2 class="section-banner__title">Memorando reflexivo</h2>
 </section>
 <article class="memoimproveactions-screen">
-    <section class="memosections-screen__header">
+    <section class="memosections-screen__header improveactionview">
         <p class="memoimproveactions-screen__title">Proceso de tus acciones de mejora</p>
     </section>
-    <section class="memosections-screen__progress">
+    <section class="memosections-screen__progress improveactionview">
         <div class="memoprogress-item">
             <p class="memoprogress-item__title">Tu progreso de mejoras</p>
             <img class="memoprogress-item__percent" src="./images/memotenpercent.svg" alt="">
@@ -46,13 +46,14 @@
             </a>
         </div>
     </section>
-    <section class="memoimproveactions-screen__section">
+    <section class="memoimproveactions-screen__section improveactionview">
         <div class="memoedit-form__item">
             <p class="memoedit-form__number">1.</p>
-            <p class="memoedit-form__text">Una vez hayas <span style="font-weight: 600;">hecho</span> alguna acción de mejora da click en el botón “Realizado”</p>
+            <p class="memoedit-form__text">Una vez hayas <span style="font-weight: 600;">hecho</span> alguna acción de
+                mejora da click en el botón “Realizado”</p>
         </div>
     </section>
-    <section class="memoimproveactions-screen__actions">
+    <section class="memoimproveactions-screen__actions improveactionview">
         <div class="improve-actions improve-actions-content memoimproveactions-screen__actionsContainer">
             <h5 class="improve-actions__subtitle">Acciones de mejora</h5>
             <div class="improve-actions__container">
@@ -107,4 +108,23 @@
             </div>
         </div>
     </section>
+    <form class="memoquestion-form__container editImproveActionForm hidden"
+        style="align-self: center; margin-top: 4rem;">
+        <h5 class="memoquestion-form__subtitle">Editar acción de mejora</h5>
+        <div class="expandable-text-area">
+            <textarea id="improveactionname" class="expandable-text-area__field question" name="improveactionname"
+                placeholder="Nombre de la acción de mejora" rows="1" required></textarea>
+            <label class="expandable-text-area__label" for="improveactionname">Nombre</label>
+        </div>
+        <div class="expandable-text-area">
+            <textarea id="improveactiondescription" class="expandable-text-area__field question"
+                name="improveactiondescription" placeholder="Escribe aquí tu texto..." rows="5" required></textarea>
+            <label class="expandable-text-area__label" for="improveactiondescription">Descripción breve de la
+                acción</label>
+        </div>
+        <button class="main-button main-button--primary editImproveActionButton"
+            style="max-width: 24rem; align-self: flex-end;">
+            <span>Guardar</span>
+        </button>
+    </form>
 </article>

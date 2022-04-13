@@ -7,7 +7,7 @@ import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
-import { memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
+import { handleMemoAddActionForm, memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
@@ -121,6 +121,7 @@ function addPageFuncions() {
     renderMemoQuestion()
     submitMemoQuestionForm()
     renderMemoNotes(currentUser.id)
+    handleMemoAddActionForm()
 
     // Improve actions functions
     renderGoToImproveActionsButton()
@@ -159,7 +160,20 @@ function goBack() {
     const backButton = document.querySelector(".back-button")
     if (backButton) {
         backButton.addEventListener('click', () => {
-            history.back()
+            const editImproveActionForm = document.querySelector(".editImproveActionForm")
+            if (window.location.href.includes("#memoimproveactions?") && editImproveActionForm) {
+                if (!editImproveActionForm.classList.contains("hidden")) {
+                    const improveActionViews = document.querySelectorAll(".improveactionview")
+                    improveActionViews.forEach(elem => {
+                        elem.classList.remove("hidden")
+                    })
+                    editImproveActionForm.classList.add("hidden")
+                } else {
+                    history.back()
+                }
+            } else {
+                history.back()
+            }
         })
     }
 }
