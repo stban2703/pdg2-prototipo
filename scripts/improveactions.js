@@ -13,6 +13,9 @@ export async function getInitialImproveActions() {
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
         editImproveAction(improveActionsAnswers)
+
+        const circle = new CircularProgressBar("pie");
+        circle.initial();
     }
 }
 
@@ -209,7 +212,7 @@ function renderHistoryImproveActions(list) {
 
 function filterImproveActionsHistory(periodFilter) {
     let filterCopy = [...historyImproveActions]
-    
+
     if (periodFilter.value.length > 0) {
         filterCopy = [...filterCopy].filter(e => {
             if (e.period == periodFilter.value) {

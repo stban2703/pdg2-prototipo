@@ -3793,6 +3793,10 @@ input[type=button] {
   transition: all 0.1s ease-out;
 }
 
+.custom-pie {
+  font-family: "Poppins", sans-serif;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -6295,7 +6299,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .memoimproveactions-screen__title {
