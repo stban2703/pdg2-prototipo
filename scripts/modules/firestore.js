@@ -360,6 +360,17 @@ export async function getOptionsFromAnswers(targetQuestionId, subjectId, period)
     return options
 }
 
+export async function getJustificationAnswers(targetQuestionId, subjectId, period) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("questionId", "==", `${targetQuestionId}`), where("subjectId", "==", subjectId))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    const currentPeriodAnswer = answerList.filter((e) => {
+        return e.period === period
+    })
+    const justification = currentPeriodAnswer[0].justification
+    return justification
+}
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);

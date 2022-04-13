@@ -1,4 +1,4 @@
-import { createMemoAnswer, getMemoQuestion, getNotes, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
+import { createMemoAnswer, getJustificationAnswers, getMemoQuestion, getNotes, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
 import { renderNotesListView } from "./notelist.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
@@ -91,6 +91,13 @@ export async function renderMemoQuestion() {
                         const answers = await getOptionsFromAnswers(currentQuestion.id, subjectId, period)
                         //console.log(answers)
                         memoQuestionForm.radioanswer.value = answers[0]
+                        
+                        const justificationSection = document.querySelector(".memoquestion-form__justification")
+                        if(justificationSection) {
+                            justificationSection.classList.remove("hidden")
+                            const justificationAnswer = await getJustificationAnswers(currentQuestion.id, subjectId, period)
+                            justificationSection.querySelector('textarea').value = justificationAnswer
+                        }
                     }
                     break;
 
@@ -532,7 +539,7 @@ export async function renderMemoQuestion() {
                 //console.log(answers)
                 improveActionsList = answers
             }
-            console.log(improveActionsList)
+
             renderImproveActions(improveActionsList)
 
             const addImproveActionButton = document.querySelector(".addImproveActionButton")

@@ -3530,6 +3530,7 @@ input[type=button] {
   font-size: 2rem;
   color: #979DFF;
   text-align: center;
+  max-width: 33ch;
 }
 
 .memo-question-modal__description {
