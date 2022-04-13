@@ -567,7 +567,7 @@ export function handleMemoAddActionForm() {
 
     if (memoQuestionForm && window.location.href.includes("#memoquestion") && window.location.href.includes("a0tOgnI8yoiCW0BvJK2k")) {
         const addImproveActionButton = document.querySelector(".addImproveActionButton")
-        
+
         addImproveActionButton.addEventListener("click", () => {
             const improveActionName = memoQuestionForm.improveactionname.value
             const improveActionDescription = memoQuestionForm.improveactiondescription.value
@@ -643,7 +643,8 @@ function renderImproveActions(list) {
                 <li class="improve-action-item__settings-item delete-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
                     <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
-                    <span>Eliminar</span></li>
+                    <span>Eliminar</span>
+                </li>
                 <li class="improve-action-item__settings-item edit-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
                     <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">

@@ -4,11 +4,10 @@ import { showLoader } from "./utils/loader.js";
 let editAnswerTarget = ""
 let improveActionIndex = 0
 
-export async function getInitialImproveActions(userSubjects) {
+export async function getInitialImproveActions() {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
     if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
         const subjectId = window.location.hash.split("?")[1]
-        //const selectedSubject = getSubjectFromId(subjectId, userSubjects)
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
         editImproveAction(improveActionsAnswers)
@@ -67,6 +66,11 @@ function renderImproveActions(list) {
                 style="background-image: url('./images/3dots.svg');">
                 </button>
                 <ul class="improve-action-item__settings improve-action-item__settings--hidden">
+                <li class="improve-action-item__settings-item delete-improve-action-item">
+                    <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                    <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                    <span>Eliminar</span>
+                </li>
                 <li class="improve-action-item__settings-item edit-improve-action-item">
                     <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
                     <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
@@ -85,6 +89,23 @@ function renderImproveActions(list) {
                     improveActionsDotsBtn.classList.toggle("improve-action-item__controls--activated")
                 })
 
+                // Delete from firestore
+                const deleteImproveActionButton = actionItem.querySelector(".delete-improve-action-item")
+                deleteImproveActionButton.addEventListener("click", () => {
+                    editAnswerTarget = answer.id
+                    improveActionIndex = index
+
+                    const periodListIndex = list.findIndex((elem) => {
+                        return elem.id === editAnswerTarget
+                    })
+
+                    const copy = [...list[periodListIndex].answerValue]
+                    copy.splice(improveActionIndex, 1)
+                    showLoader()
+                    updateImproveActions(editAnswerTarget, copy)
+                })
+
+                // Edit on firestore
                 const editImproveActionButton = actionItem.querySelector(".edit-improve-action-item")
                 editImproveActionButton.addEventListener("click", () => {
                     editAnswerTarget = answer.id

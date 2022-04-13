@@ -394,6 +394,14 @@ export async function updateImproveActions(answerId, newValue) {
     })
 }
 
+export async function deleteImproveAction(answerId, newValue) {
+
+}
+
+export async function submitCheckedImproveAction() {
+
+}
+
 // User functions
 export const createUser = async function (uid, name, lastname, email, role) {
     const userRef = doc(firestore, 'users', uid);
