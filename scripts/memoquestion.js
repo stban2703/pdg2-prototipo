@@ -36,6 +36,13 @@ export async function renderMemoQuestion() {
         // Formulario general
         const memoQuestionForm = memoQuestionScreen.querySelector(".memoquestion-form")
 
+        // Mostrar barra de progreso
+        const totalQuestion = 12
+        
+        const currentProgress = Math.round((parseInt(currentQuestion.index) / totalQuestion) * 100)
+        const currentProgressBar = document.querySelector(".memoquestion-screen__currentProgress")
+        currentProgressBar.style.width = `${currentProgress}%`
+
         if (currentQuestion.type !== "improveactions" && !urlQueryParts[3]) {
             // Mostrar contenedor de pregunta normal
             const memoquestionContainerNormal = memoQuestionForm.querySelector(".memoquestion-form__container--normal")

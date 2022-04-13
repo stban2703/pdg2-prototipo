@@ -6278,7 +6278,6 @@ input[type=button] {
 .memoquestion-screen__currentProgress {
   position: absolute;
   background-color: #FDB572;
-  width: 50%;
   height: 100%;
   border-radius: 20px;
 }
