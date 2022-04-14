@@ -132,7 +132,7 @@ function addPageFuncions() {
     getInitialHistoryImproveActions()
 
     // Progress funtions
-    getInitialProgressInfo(currentSubjects)
+    getInitialProgressInfo(currentUser.id, currentSubjects)
 
     // Memo form edit functions
     changeMemoEditFormPage()

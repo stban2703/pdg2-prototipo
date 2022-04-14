@@ -1,7 +1,7 @@
 import { getAllAnswersByQuestionAndPeriod } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
 
-export async function getInitialProgressInfo(userSubjects) {
+export async function getInitialProgressInfo(userId, userSubjects) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
     if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
         const subjectId = window.location.hash.split("?")[1]
@@ -12,44 +12,68 @@ export async function getInitialProgressInfo(userSubjects) {
 
         const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, subject.memoPeriod)
 
-        const labels = []
-        firstQuestionAnswers.forEach(q => {
+        const labels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
+
+        const allDataSet = []
+        const userDataSet = []
+
+        labels.forEach((label, index) => {
+            const answerList = [...firstQuestionAnswers].filter((answer) => {
+                return answer.answerValue[0] === label
+            })
+            const userAnswer = answerList.find(elem => {
+                return elem.subjectId === subjectId
+            })
+            if (!userAnswer) {
+                allDataSet[index] = answerList.length
+                userDataSet[index] = 0
+            } else {
+                allDataSet[index] = answerList.length - 1
+                userDataSet[index] = 1
+            }
+        });
+
+        /*firstQuestionAnswers.forEach(q => {
             const value = q.answerValue[0]
             const query = labels.find(elem => {
                 return elem === value
             })
-            if(!query) {
+            if (!query) {
                 labels.push(value)
             }
-        });
+        });*/
 
-        renderBarChart(labels)
+        /*const groups = firstQuestionAnswers.reduce((groups, item) => ({
+            ...groups,
+            [item.answerValue[0]]: [...(groups[item.answerValue[0]] || []), item]
+        }), {});
+
+        const keys = Object.keys(groups);
+
+        keys.forEach((key, index) => {
+            console.log(groups[key].length)
+        })
+        /*groups.forEach(elem => {
+            console.log(elem.length)
+        })*/
+        renderBarChart(labels, allDataSet, userDataSet, firstQuestionAnswers.length)
     }
 }
 
-function renderBarChart(labels) {
-    /*const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-    ];*/
-
+function renderBarChart(labels, allDataSet, userDataSet, yMax) {
     const data = {
         labels: labels,
         datasets: [{
             label: 'Tu respuesta',
             backgroundColor: 'rgb(253, 181, 114)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 0, 0, 0, 1, 0],
+            data: userDataSet,
         },
         {
             label: 'Otros profesores',
             backgroundColor: 'rgb(114, 184, 255)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30],
+            data: allDataSet,
         }]
     };
 
@@ -103,7 +127,7 @@ function renderBarChart(labels) {
                     ticks: {
                         font: {
                             family: 'Poppins', // Your font family
-                            size: 14,
+                            size: 11,
                         },
                     },
                     title: {
@@ -115,8 +139,9 @@ function renderBarChart(labels) {
                     }
                 },
                 y: {
-
                     stacked: true,
+                    min: 0,
+                    max: yMax < 6 ? 6: yMax,
                     ticks: {
                         font: {
                             family: 'Poppins', // Your font family
