@@ -1,9 +1,11 @@
 import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
+import { hideLoader, showLoader } from "./utils/loader.js";
 
 export async function getInitialProgressInfo(userSubjects, currentPeriod) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
     if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
+        showLoader()
         const subjectId = window.location.hash.split("?")[1]
         const subject = getSubjectFromId(subjectId, userSubjects)
 
@@ -149,6 +151,22 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         });
 
         renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel')
+
+        // Eigth question
+        const eigthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(8, currentPeriod)
+        const eigthQuestionLabels = ['Sí', 'No']
+        const eigthQuestionDataSet = [0, 0]
+
+        eigthQuestionAnswers.forEach(answer => {
+            const answerValue = answer.answerValue[0]
+            const labelIndex = eigthQuestionLabels.findIndex(label => {
+                return label === answerValue
+            })
+            eigthQuestionDataSet[labelIndex]++
+        })
+        console.log(eigthQuestionDataSet)
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, "No", 'eightQuestionChart')
+        hideLoader()
     }
 }
 
@@ -259,7 +277,6 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, c
     renderChart(config, chartId)
 }
 
-
 function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId, legend) {
     const data = {
         labels: labels,
@@ -354,6 +371,72 @@ function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId,
                     }
                 }
             },
+        }
+    };
+
+    renderChart(config, chartId)
+}
+
+function renderPieChart(labels, allDataSet, userAnswer, chartId) {
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'No se',
+            backgroundColor: ['rgb(114, 184, 255)', 'rgb(253, 181, 114)'],
+            data: allDataSet,
+        }]
+    };
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            tension: 0.6,
+            pointBackgroundColor: 'rgb(14, 99, 186)',
+            pointBorderColor: 'rgb(14, 99, 186)',
+            plugins: {
+                title: {
+                    display: true,
+                    text: '¿Brindas espacios de retroalimentación?',
+                    font: {
+                        size: 14,
+                        family: 'Poppins'
+                    }
+                },
+                subtitle: {
+                    display: true,
+                    text: 'Respuestas en general de los docentes',
+                    font: {
+                        size: 12,
+                        family: 'Poppins',
+                        //weight: 'light'
+                    }
+                },
+                legend: {
+                    align: 'end',
+                    labels: {
+                        boxWidth: 15,
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 15,
+                            family: 'Poppins',
+                            weight: 'Regular'
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: {
+                        family: 'Poppins'
+                    },
+                    bodyFont: {
+                        family: 'Poppins'
+                    },
+                    footerFont: {
+                        family: 'Poppins'
+                    }
+                }
+            },
+            responsive: true,
         }
     };
 
