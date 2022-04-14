@@ -1,7 +1,7 @@
 import { getAllAnswersByQuestionAndPeriod } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
 
-export async function getInitialProgressInfo(userId, userSubjects) {
+export async function getInitialProgressInfo(userSubjects) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
     if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
         const subjectId = window.location.hash.split("?")[1]
@@ -32,31 +32,9 @@ export async function getInitialProgressInfo(userId, userSubjects) {
                 userDataSet[index] = 1
             }
         });
-
-        /*firstQuestionAnswers.forEach(q => {
-            const value = q.answerValue[0]
-            const query = labels.find(elem => {
-                return elem === value
-            })
-            if (!query) {
-                labels.push(value)
-            }
-        });*/
-
-        /*const groups = firstQuestionAnswers.reduce((groups, item) => ({
-            ...groups,
-            [item.answerValue[0]]: [...(groups[item.answerValue[0]] || []), item]
-        }), {});
-
-        const keys = Object.keys(groups);
-
-        keys.forEach((key, index) => {
-            console.log(groups[key].length)
-        })
-        /*groups.forEach(elem => {
-            console.log(elem.length)
-        })*/
         renderBarChart(labels, allDataSet, userDataSet, firstQuestionAnswers.length)
+
+        renderUserLineChart([], [], 7)
     }
 }
 
@@ -141,7 +119,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
                 y: {
                     stacked: true,
                     min: 0,
-                    max: yMax < 6 ? 6: yMax,
+                    max: yMax < 6 ? 6 : yMax,
                     ticks: {
                         font: {
                             family: 'Poppins', // Your font family
@@ -163,6 +141,130 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
     };
 
     renderChart(config, "firstQuestionChart")
+}
+
+
+function renderUserLineChart(labels, userDataSet, yMax) {
+    const data = {
+        labels: ['2020-1','2020-2', '2021-1', '2021-2', '2022-1'],
+        datasets: [{
+            label: 'Nivel alcanzado',
+            backgroundColor: 'rgb(114, 184, 255)',
+            borderColor: 'rgb(114, 184, 255)',
+            data: [1, 2, 5, 6, 2],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            tension: 0.6,
+            pointBackgroundColor: 'rgb(14, 99, 186)',
+            pointBorderColor: 'rgb(14, 99, 186)',
+            plugins: {
+                title: {
+                    display: false,
+                    text: 'Chart.js Bar Chart - Stacked',
+                    font: {
+                        size: 20,
+                        family: 'Poppins'
+                    }
+                },
+                subtitle: {
+                    display: false,
+                    text: 'Custom Chart Subtitle',
+                    font: {
+                        size: 15,
+                        family: 'Poppins'
+                    }
+                },
+                legend: {
+                    align: 'end',
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 15,
+                            family: 'Poppins',
+                            weight: 'Regular'
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: {
+                        family: 'Poppins'
+                    },
+                    bodyFont: {
+                        family: 'Poppins'
+                    },
+                    footerFont: {
+                        family: 'Poppins'
+                    }
+                }
+            },
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: 'Poppins', // Your font family
+                            size: 11,
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: 'Semestres',
+                        font: {
+                            family: 'Poppins'
+                        }
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: yMax,
+                    ticks: {
+                        font: {
+                            family: 'Poppins', // Your font family
+                            size: 14,
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: 'Nivel de logro',
+                        font: {
+                            family: 'Poppins'
+                        }
+                    }
+                }
+            },
+        }
+    };
+
+    renderChart(config, "thirdQuestionChart")
+
+    /*firstQuestionAnswers.forEach(q => {
+            const value = q.answerValue[0]
+            const query = labels.find(elem => {
+                return elem === value
+            })
+            if (!query) {
+                labels.push(value)
+            }
+        });*/
+
+    /*const groups = firstQuestionAnswers.reduce((groups, item) => ({
+        ...groups,
+        [item.answerValue[0]]: [...(groups[item.answerValue[0]] || []), item]
+    }), {});
+
+    const keys = Object.keys(groups);
+
+    keys.forEach((key, index) => {
+        console.log(groups[key].length)
+    })
+    /*groups.forEach(elem => {
+        console.log(elem.length)
+    })*/
 }
 
 function renderChart(config, id) {
