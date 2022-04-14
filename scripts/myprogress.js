@@ -31,7 +31,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 firstQuestionUserDataSet[index] = 1
             }
         });
-        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas')
+        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart')
 
 
         // Third question
@@ -53,11 +53,54 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
 
         // Fourth question
         const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
-        //console.log(fourthQuestionAnswers)
+        const fourtQuestionLabels = []
+
+        fourthQuestionAnswers.forEach(q => {
+            const valueList = q.answerValue
+            valueList.forEach(value => {
+                const query = fourtQuestionLabels.find(elem => {
+                    return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
+                })
+                if (!query) {
+                    fourtQuestionLabels.push(value)
+                }
+            })
+        });
+        console.log(fourtQuestionLabels)
+
+
+        const fourthQuestionUserDataSet = []
+        const fourthQuestionAllDataSet = []
+        fourtQuestionLabels.forEach((elem, index) => {
+            fourthQuestionUserDataSet[index] = 0
+            fourthQuestionAllDataSet[index] = 0
+        })
+
+        fourthQuestionAnswers.forEach(answer => {
+            answer.answerValue.forEach(value => {
+                let labelIndex = fourtQuestionLabels.findIndex(label => {
+                    return label === value
+                })
+                fourthQuestionAllDataSet[labelIndex]++
+            })
+        })
+
+        const subjectAnswers = [...fourthQuestionAnswers].filter((answer) => {
+            return answer.subjectId === subjectId
+        })[0].answerValue
+
+        subjectAnswers.forEach(value => {
+            const labelIndex = fourtQuestionLabels.indexOf(value)
+            fourthQuestionUserDataSet[labelIndex]++
+            fourthQuestionAllDataSet[labelIndex]--
+        })
+        console.log(fourthQuestionUserDataSet)
+        console.log(fourthQuestionAllDataSet)
+        renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
     }
 }
 
-function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel) {
+function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId) {
     const data = {
         labels: labels,
         datasets: [{
@@ -96,6 +139,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel) {
                     }
                 },
                 legend: {
+                    align: 'end',
                     labels: {
                         boxWidth: 15,
                         // This more specific font property overrides the global property
@@ -139,7 +183,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel) {
                 y: {
                     stacked: true,
                     min: 0,
-                    max: yMax < 6 ? 6 : yMax,
+                    suggestedMax: yMax < 6 ? 6 : yMax,
                     ticks: {
                         font: {
                             family: 'Poppins', // Your font family
@@ -160,7 +204,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel) {
         }
     };
 
-    renderChart(config, "firstQuestionChart")
+    renderChart(config, chartId)
 }
 
 
@@ -262,30 +306,6 @@ function renderUserLineChart(labels, userDataSet, yMax) {
     };
 
     renderChart(config, "thirdQuestionChart")
-
-    /*firstQuestionAnswers.forEach(q => {
-            const value = q.answerValue[0]
-            const query = labels.find(elem => {
-                return elem === value
-            })
-            if (!query) {
-                labels.push(value)
-            }
-        });*/
-
-    /*const groups = firstQuestionAnswers.reduce((groups, item) => ({
-        ...groups,
-        [item.answerValue[0]]: [...(groups[item.answerValue[0]] || []), item]
-    }), {});
-
-    const keys = Object.keys(groups);
-
-    keys.forEach((key, index) => {
-        console.log(groups[key].length)
-    })
-    /*groups.forEach(elem => {
-        console.log(elem.length)
-    })*/
 }
 
 function renderChart(config, id) {
