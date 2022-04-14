@@ -1,0 +1,61 @@
+.progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__titleItem {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__number {
+        width: 3.1rem;
+        height: 3.1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $pink;
+        border-radius: 100%;
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $white;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__questionContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__question {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+        margin-left: 3.1rem;
+    }
+
+    &__graphicContainer {
+        background-color: $white;
+        box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
+        border-radius: 15px;
+        padding: 4rem;
+    }
+
+    &__doubleQuestion {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4.1rem;
+    }
+}

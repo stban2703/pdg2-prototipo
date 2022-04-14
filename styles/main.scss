@@ -51,6 +51,7 @@
 @import "layouts/memo-matrix-table";
 @import "layouts/improve-actions";
 @import "layouts/note-list";
+@import "layouts/progress-section";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";
@@ -68,7 +69,8 @@
 @import "pages/memoquestion-screen";
 @import "pages/memoimproveactions-screen";
 @import "pages/memohistoryimproveactions-screen";
-@import "pages/progressselectsubject";
+@import "pages/progressselectsubject-screen";
+@import "pages/progresssubject-screen";
 
 html {
     font-size: 62.5%;

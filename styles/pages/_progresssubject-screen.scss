@@ -1,0 +1,25 @@
+.progresssubject-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    &__info {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
