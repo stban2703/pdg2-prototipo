@@ -256,32 +256,34 @@ export async function getMemoQuestion(currentPeriod, subjectId, id) {
 
 export async function createMemoAnswer(currentPeriod, questionId, subjectId, answerValue, currentIndex, justification) {
     const answerRef = doc(collection(firestore, `memos/answers/answers`));
-    console.log(answerRef.id)
     const newAnswer = {
         id: answerRef.id,
         answerValue: answerValue,
         period: currentPeriod,
         questionId: questionId,
         subjectId: subjectId,
-        justification: justification
+        justification: justification,
+        questionIndex: currentIndex
     }
 
     await setDoc(answerRef, newAnswer).then(() => {
-        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id, currentIndex)
+        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id, currentIndex, answerValue)
     }).catch((error) => {
         hideLoader()
         console.log(error)
     });
 }
 
-async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerId, currentIndex) {
+async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerId, currentIndex, answerValue) {
     const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, questionId)
     await updateDoc(questionRef, {
         answerId: answerId
     }).then(() => {
         //hideLoader()
         console.log("Referencia actualizada")
-        if (currentIndex !== 12) {
+        if (currentIndex === 8 && answerValue[0] === "No") {
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex + 1)
+        } else if (currentIndex !== 12) {
             getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
         }
     })
@@ -295,24 +297,25 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
     }).then(() => {
         //hideLoader()
         console.log("Respuesta actualizada")
-        if (currentIndex !== 12) {
-            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+        if (currentIndex === 8 && answerValue[0] === "No") {
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex + 1)
+        } else if (currentIndex !== 12) {
+            if (currentIndex === 11 && answerValue[0] != "No") {
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+            }
         }
     })
 }
 
 export async function getNextMemmoQuestion(currentPeriod, subjectId, currentIndex) {
-    if (currentIndex + 1 == 13 || currentIndex == 12) {
-        hideLoader()
-        window.location = `index.html#memosections?${subjectId}`
+    const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex + 1)))
+    const querySnapshot = await getDocs(q);
+    const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+    hideLoader()
+    if (currentIndex == 3) {
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}_info`
     } else {
-        const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex + 1)))
-        const querySnapshot = await getDocs(q);
-        const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
-        hideLoader()
-        if (currentIndex == 3) {
-            window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}_info`
-        } else window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
     }
 }
 

@@ -811,7 +811,8 @@ export async function submitMemoQuestionForm() {
                                 const closeMemoRememberModalButton = document.querySelector(".closeMemoRememberModalButton")
                                 closeMemoRememberModalButton.addEventListener('click', () => {
                                     rememberModal.classList.add("hidden")
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                    // Pregunta 8
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
                                 })
                             } else if (parseInt(currentQuestion.index) === 11 && answerValue[0] === "No") {
                                 //memo-question-modal--doyouknow
@@ -823,7 +824,8 @@ export async function submitMemoQuestionForm() {
                                 closeMemodoyouknowModalButton.addEventListener('click', () => {
                                     doyouknowModal.classList.add("hidden")
                                     finalModal.classList.remove("hidden")
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index) + 1)
+                                    // Pregunta 11
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectId, parseInt(currentQuestion.index))
                                     hideLoader()
                                 })
 
