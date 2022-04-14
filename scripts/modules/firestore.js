@@ -300,8 +300,13 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
         if (currentIndex === 8 && answerValue[0] === "No") {
             getNextMemmoQuestion(currentPeriod, subjectId, currentIndex + 1)
         } else if (currentIndex !== 12) {
-            if (currentIndex === 11 && answerValue[0] != "No") {
+            if (currentIndex === 11 && answerValue[0] === "Sí") {
                 getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+            } else if (currentIndex === 11 && answerValue[0] === "No"){
+                //getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+            } else {
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+
             }
         }
     })

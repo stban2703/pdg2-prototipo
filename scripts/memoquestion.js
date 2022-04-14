@@ -762,7 +762,7 @@ function renderMemoOption(list, checkboxAnswerQuestion, answers) {
         </div>
     </section>
     <button type="button" class="small-button small-button--secondary addOptionBtn">
-        <span>Agregar acuerdo</span>
+        <span>Agregar estrategia</span>
     </button>
     `
 
