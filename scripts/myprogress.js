@@ -1,3 +1,24 @@
+
+export async function getInitialProgressInfo() {
+    const progressSubjectScreen = document.querySelector(".progresssubject-screen")
+    if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
+        const subjectId = window.location.hash.split("?")[1]
+
+    }
+}
+
+export async function getAnswersByQuestion(index, period) {
+
+}
+
+
+export function renderQuestionChart(config, id) {
+    const myChart = new Chart(
+        document.getElementById(id),
+        config
+    );
+}
+
 export function testChart() {
     const labels = [
         'January',
@@ -108,8 +129,8 @@ export function testChart() {
         }
     };
 
-    const myChart = new Chart(
+    /*const myChart = new Chart(
         document.getElementById('myChart'),
         config
-    );
+    );*/
 }

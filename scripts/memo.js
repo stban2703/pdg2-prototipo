@@ -1,4 +1,4 @@
-import { getAllAnswersByPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
 export async function getAllSubjectsProgress(userSubjects) {
@@ -8,7 +8,7 @@ export async function getAllSubjectsProgress(userSubjects) {
         let allQuestionsAnswers = []
         for (let index = 0; index < userSubjects.length; index++) {
             const subject = userSubjects[index];
-            const subjectAnswers = await getAllAnswersByPeriod(subject.id, userSubjects[0].memoPeriod)
+            const subjectAnswers = await getAllAnswersBySubjectsAndPeriod(subject.id, userSubjects[0].memoPeriod)
             allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
         }
 

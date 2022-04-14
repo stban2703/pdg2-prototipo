@@ -132,7 +132,7 @@ function addPageFuncions() {
     getInitialHistoryImproveActions()
 
     // Progress funtions
-    testChart()
+    //testChart()
 
     // Memo form edit functions
     changeMemoEditFormPage()

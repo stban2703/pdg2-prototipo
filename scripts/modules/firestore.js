@@ -407,13 +407,26 @@ export async function getJustificationAnswers(targetQuestionId, subjectId, perio
     return justification
 }
 
-export async function getAllAnswersByPeriod(subjectId, period) {
+export async function getAllAnswersBySubjectsAndPeriod(subjectId, period) {
     const q = query(collection(firestore, `memos/answers/answers`), where("subjectId", "==", subjectId), where("period", "==", period))
     const querySnapshot = await getDocs(q);
     const answerList = querySnapshot.docs.map(doc => doc.data());
     return answerList
 }
 
+export async function getAllAnswersByQuestionAndPeriod(questionIndex, period) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("questionIndex", "==", questionIndex), where("period", "==", period))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    return answerList
+}
+
+export async function getAllAnswersByPeriod(period) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("period", "==", period))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    return answerList
+}
 
 // Improve actions functions
 export async function getImproveActions(questionId, subjectId) {
