@@ -20,6 +20,8 @@ export async function getAllSubjectsProgress(userSubjects) {
             if (elem.questionId === "jvLjdfeVkm6JnQMgrO6C") {
                 if (elem.answerValue[0] === "No") {
                     q8NegativeAnswersCounter++
+
+                    //allQuestionsAnswers
                 }
             } else if (elem.questionId === "w26gqYPhjPygD8vDcKOR") {
                 if (elem.answerValue[0] === "No") {
@@ -29,6 +31,7 @@ export async function getAllSubjectsProgress(userSubjects) {
         })
 
         let totalQuestions = (userSubjects.length * 12) - q8NegativeAnswersCounter - q11NegativeAnswersCounter
+
         let totalPercent = Math.round((allQuestionsAnswers.length / totalQuestions) * 100)
 
         allSubjectsProgress.innerHTML = `
@@ -251,8 +254,16 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
         for (let i = 0; i < groupList[group].length; i++) {
             const question = groupList[group][i];
             if (!question.answerId) {
-                currentQuestionId = question.id
-                break
+                if(index === 1 && question8Answer[0] === "No") {
+                    currentQuestionId = groupList[group][i - 1].id
+                    break
+                } else if(index === 2 && question11Answer[0] === "No") {
+                    currentQuestionId = groupList[group][i - 1].id
+                    break
+                } else  {
+                    currentQuestionId = question.id
+                    break
+                }
                 /*} else if(i == groupList[group].length - 1 && question.answerId) {
                     currentQuestionId = lastOpenedQuestionId*/
             } else if (i === groupList[group].length - 1 && question.answerId) {
