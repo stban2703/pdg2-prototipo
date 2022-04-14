@@ -1,4 +1,5 @@
 import { getAllAnswersBySubjectsAndPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
+import { getSubjectFromId } from "./utils/getters.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
 export async function getAllSubjectsProgress(userSubjects) {
@@ -359,9 +360,9 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
     })
 }
 
-function getSubjectFromId(id, userSubjects) {
+/*function getSubjectFromId(id, userSubjects) {
     const subject = userSubjects.find((s) => {
         return s.id === id
     })
     return subject
-}
+}*/
