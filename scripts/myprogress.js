@@ -31,7 +31,7 @@ export async function getInitialProgressInfo(userSubjects) {
                 firstQuestionUserDataSet[index] = 1
             }
         });
-        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length)
+        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas')
 
 
         // Third question
@@ -49,12 +49,15 @@ export async function getInitialProgressInfo(userSubjects) {
             }
 
         });
-        console.log(thirdQuestionDataSet)
         renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7)
+
+        // Fourth question
+        const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, subject.memoPeriod)
+        //console.log(fourthQuestionAnswers)
     }
 }
 
-function renderBarChart(labels, allDataSet, userDataSet, yMax) {
+function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel) {
     const data = {
         labels: labels,
         datasets: [{
@@ -127,7 +130,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
                     },
                     title: {
                         display: true,
-                        text: 'Frecuencia',
+                        text: xLabel,
                         font: {
                             family: 'Poppins'
                         }
@@ -145,7 +148,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
                     },
                     title: {
                         display: true,
-                        text: 'Cantidad de respuestas',
+                        text: yLabel,
                         font: {
                             family: 'Poppins'
                         }

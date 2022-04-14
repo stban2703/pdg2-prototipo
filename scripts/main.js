@@ -93,7 +93,7 @@ function displayHomeUserName() {
 function addPageFuncions() {
     // Home functions
     displayHomeUserName()
-    renderSubjectListHome(currentSubjects)
+    renderSubjectListHome(currentSubjects)///Sin actualizar
 
     //Note functions
     submitNote(currentUser, currentSubjects)
