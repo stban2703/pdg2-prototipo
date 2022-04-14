@@ -49,7 +49,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             }
 
         });
-        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7)
+        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro')
 
         // Fourth question
         const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
@@ -66,8 +66,6 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 }
             })
         });
-        console.log(fourtQuestionLabels)
-
 
         const fourthQuestionUserDataSet = []
         const fourthQuestionAllDataSet = []
@@ -94,9 +92,37 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             fourthQuestionUserDataSet[labelIndex]++
             fourthQuestionAllDataSet[labelIndex]--
         })
-        console.log(fourthQuestionUserDataSet)
-        console.log(fourthQuestionAllDataSet)
         renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
+
+
+        // Fifth answers
+        const fifthQuestions = await getAllAnswersByQuestionAndSubject(5, subjectId)
+        const fifthQuestionAnswers = fifthQuestions.filter(answer => {
+            return answer.period == currentPeriod
+        })[0].answerValue
+
+        console.log(fifthQuestionAnswers)
+
+        const fifthQuestionLabels = []
+        fifthQuestionAnswers.forEach(value => {
+            const q = fifthQuestionLabels.find(label => {
+                return label === value.split('|')[0]
+            })
+            if (!q) {
+                fifthQuestionLabels.push(value.split('|')[0])
+            }
+        })
+
+        const fifthQuestionUserDataSet = []
+        fifthQuestionLabels.forEach((label, index) => {
+            const answer = [...fifthQuestionAnswers].filter((answer) => {
+                return answer.split('|')[0] === label
+            })[0]
+            
+            fifthQuestionUserDataSet[index] = answer.split('|')[answer.split('|').length - 1]
+        });
+
+        renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel')
     }
 }
 
@@ -208,11 +234,11 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, c
 }
 
 
-function renderUserLineChart(labels, userDataSet, yMax) {
+function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId, legend) {
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Nivel alcanzado',
+            label: legend,
             backgroundColor: 'rgb(114, 184, 255)',
             borderColor: 'rgb(114, 184, 255)',
             data: userDataSet,
@@ -278,7 +304,7 @@ function renderUserLineChart(labels, userDataSet, yMax) {
                     },
                     title: {
                         display: true,
-                        text: 'Semestres',
+                        text: xLabel,
                         font: {
                             family: 'Poppins'
                         }
@@ -295,7 +321,7 @@ function renderUserLineChart(labels, userDataSet, yMax) {
                     },
                     title: {
                         display: true,
-                        text: 'Nivel de logro',
+                        text: yLabel,
                         font: {
                             family: 'Poppins'
                         }
@@ -305,7 +331,7 @@ function renderUserLineChart(labels, userDataSet, yMax) {
         }
     };
 
-    renderChart(config, "thirdQuestionChart")
+    renderChart(config, chartId)
 }
 
 function renderChart(config, id) {
