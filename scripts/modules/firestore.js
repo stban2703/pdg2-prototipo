@@ -407,6 +407,13 @@ export async function getJustificationAnswers(targetQuestionId, subjectId, perio
     return justification
 }
 
+export async function getAllAnswersByQuestionAndSubject(questionIndex, subjectId) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("questionIndex", "==", questionIndex), where("subjectId", "==", subjectId))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    return answerList
+}
+
 export async function getAllAnswersBySubjectsAndPeriod(subjectId, period) {
     const q = query(collection(firestore, `memos/answers/answers`), where("subjectId", "==", subjectId), where("period", "==", period))
     const querySnapshot = await getDocs(q);

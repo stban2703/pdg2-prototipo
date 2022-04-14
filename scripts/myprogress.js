@@ -1,4 +1,4 @@
-import { getAllAnswersByQuestionAndPeriod } from "./modules/firestore.js";
+import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
 
 export async function getInitialProgressInfo(userSubjects) {
@@ -10,14 +10,13 @@ export async function getInitialProgressInfo(userSubjects) {
         document.querySelector(".progresssubject-screen__info--subjectName").innerHTML = subject.name
         document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = subject.memoPeriod
 
+
+        // First questions
         const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, subject.memoPeriod)
-
-        const labels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
-
-        const allDataSet = []
-        const userDataSet = []
-
-        labels.forEach((label, index) => {
+        const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
+        const firtQuestionAllDataSet = []
+        const firstQuestionUserDataSet = []
+        firstQuestionLabels.forEach((label, index) => {
             const answerList = [...firstQuestionAnswers].filter((answer) => {
                 return answer.answerValue[0] === label
             })
@@ -25,16 +24,33 @@ export async function getInitialProgressInfo(userSubjects) {
                 return elem.subjectId === subjectId
             })
             if (!userAnswer) {
-                allDataSet[index] = answerList.length
-                userDataSet[index] = 0
+                firtQuestionAllDataSet[index] = answerList.length
+                firstQuestionUserDataSet[index] = 0
             } else {
-                allDataSet[index] = answerList.length - 1
-                userDataSet[index] = 1
+                firtQuestionAllDataSet[index] = answerList.length - 1
+                firstQuestionUserDataSet[index] = 1
             }
         });
-        renderBarChart(labels, allDataSet, userDataSet, firstQuestionAnswers.length)
+        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length)
 
-        renderUserLineChart([], [], 7)
+
+        // Third question
+        const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+        const thirdQuestionDataSet = []
+        const thirdQuestionAnswers = await getAllAnswersByQuestionAndSubject(3, subjectId)
+        thirdQuestionLabels.forEach((label, index) => {
+            const answerList = [...thirdQuestionAnswers].filter((answer) => {
+                return answer.period === label
+            })
+            if (answerList.length > 0) {
+                thirdQuestionDataSet[index] = parseInt(answerList[0].answerValue[0])
+            } else {
+                thirdQuestionDataSet[index] = 0
+            }
+
+        });
+        console.log(thirdQuestionDataSet)
+        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7)
     }
 }
 
@@ -78,6 +94,7 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
                 },
                 legend: {
                     labels: {
+                        boxWidth: 15,
                         // This more specific font property overrides the global property
                         font: {
                             size: 15,
@@ -146,12 +163,12 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax) {
 
 function renderUserLineChart(labels, userDataSet, yMax) {
     const data = {
-        labels: ['2020-1','2020-2', '2021-1', '2021-2', '2022-1'],
+        labels: labels,
         datasets: [{
             label: 'Nivel alcanzado',
             backgroundColor: 'rgb(114, 184, 255)',
             borderColor: 'rgb(114, 184, 255)',
-            data: [1, 2, 5, 6, 2],
+            data: userDataSet,
         }]
     };
 
@@ -182,6 +199,7 @@ function renderUserLineChart(labels, userDataSet, yMax) {
                 legend: {
                     align: 'end',
                     labels: {
+                        boxWidth: 15,
                         // This more specific font property overrides the global property
                         font: {
                             size: 15,
