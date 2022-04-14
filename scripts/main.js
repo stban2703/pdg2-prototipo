@@ -5,7 +5,7 @@ import { renderSubjectListHome } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
-import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton } from "./memo.js";
+import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton, getAllSubjectsProgress } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { handleMemoAddActionForm, memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
@@ -114,6 +114,7 @@ function addPageFuncions() {
     renderMeetingMinutesDetails()
 
     // Memo functions
+    getAllSubjectsProgress(currentSubjects)
     renderMemoIntro(currentUser)
     getInitialMemoSubjects(currentSubjects)
     onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups)

@@ -1,5 +1,50 @@
-import { getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
+import { getAllAnswersByPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
+
+export async function getAllSubjectsProgress(userSubjects) {
+    const allSubjectsProgress = document.querySelector(".allSubjectsProgress")
+
+    if (allSubjectsProgress && window.location.href.includes("#memointro")) {
+        let allQuestionsAnswers = []
+        for (let index = 0; index < userSubjects.length; index++) {
+            const subject = userSubjects[index];
+            const subjectAnswers = await getAllAnswersByPeriod(subject.id, userSubjects[0].memoPeriod)
+            allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
+        }
+        console.log(allQuestionsAnswers)
+
+        let q8NegativeAnswersCounter = 0
+        let q11NegativeAnswersCounter = 0
+
+        allQuestionsAnswers.forEach((elem, index) => {
+            if (elem.questionId === "jvLjdfeVkm6JnQMgrO6C") {
+                if (elem.answerValue[0] === "No") {
+                    q8NegativeAnswersCounter++
+                }
+            } else if (elem.questionId === "w26gqYPhjPygD8vDcKOR") {
+                if (elem.answerValue[0] === "No") {
+                    q11NegativeAnswersCounter++
+                }
+            }
+        })
+
+        let totalQuestions = (userSubjects.length * 12) - q8NegativeAnswersCounter - q11NegativeAnswersCounter
+        let totalPercent = Math.round((allQuestionsAnswers.length / totalQuestions) * 100)
+
+        allSubjectsProgress.innerHTML = `
+        <h4 class="memo-edit-info__title">Tu progeso:</h4>
+        <div class="pie custom-pie" data-pie='{ "colorSlice": "#979DFF", "percent": ${totalPercent}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'></div>
+        <p class="memo-edit-info__date">Completado</p>
+        <a href="#memoselectsubject" class="small-button small-button--primary">
+            <span>Continuar</span>
+        </a>
+        `
+
+        const circle = new CircularProgressBar("pie");
+        circle.initial();
+
+    }
+}
 
 export function renderMemoIntro(user) {
     const memoIntroTitle = document.querySelector(".memointro-screen__intro-title")
