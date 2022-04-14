@@ -118,7 +118,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             const answer = [...fifthQuestionAnswers].filter((answer) => {
                 return answer.split('|')[0] === label
             })[0]
-            
+
             fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
         });
 
@@ -146,7 +146,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             const answer = [...sixthQuestionAnswers].filter((answer) => {
                 return answer.split('|')[0] === label
             })[0]
-            
+
             sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
         });
 
@@ -391,10 +391,17 @@ function renderPieChart(labels, allDataSet, userAnswer, chartId) {
         type: 'pie',
         data: data,
         options: {
-            tension: 0.6,
-            pointBackgroundColor: 'rgb(14, 99, 186)',
-            pointBorderColor: 'rgb(14, 99, 186)',
+            tooltips: {
+                enabled: false
+            },
             plugins: {
+                labels: {
+                    render: 'percentage',
+                    precision: 2,
+                    fontColor: '#fff',
+                    fontFamily: 'Poppins',
+                    fontSize: 20
+                },
                 title: {
                     display: true,
                     text: '¿Brindas espacios de retroalimentación?',
@@ -414,13 +421,12 @@ function renderPieChart(labels, allDataSet, userAnswer, chartId) {
                 },
                 legend: {
                     align: 'end',
+                    fontSize: 20,
                     labels: {
                         boxWidth: 15,
                         // This more specific font property overrides the global property
                         font: {
                             size: 15,
-                            family: 'Poppins',
-                            weight: 'Regular'
                         }
                     }
                 },
