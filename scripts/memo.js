@@ -11,56 +11,34 @@ export async function getAllSubjectsProgress(userSubjects) {
             const subjectAnswers = await getAllAnswersByPeriod(subject.id, userSubjects[0].memoPeriod)
             allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
         }
-        console.log(allQuestionsAnswers)
 
-        let q8NegativeAnswersCounter = 0
-        let q11NegativeAnswersCounter = 0
+        let totalQuestions = 12 * userSubjects.length
 
-        let q9Answers = []
+        let answeredQuestions = allQuestionsAnswers.length
+
+        // Optional answer
+        let totalOptionals = 2 * userSubjects.length
+        let actualOptionals = 0
+
+
+        let recoveredOptional = 0
+
         allQuestionsAnswers.forEach(elem => {
-            if (elem.questionIndex === 9) {
-                q9Answers.push(elem)
-            }
-        })
-
-        let q12Answers = []
-        allQuestionsAnswers.forEach(elem => {
-            if (elem.questionIndex === 12) {
-                q12Answers.push(elem)
-            }
-        })
-
-        allQuestionsAnswers.forEach((elem, index) => {
-            if (elem.questionId === "jvLjdfeVkm6JnQMgrO6C") {
-                if (elem.answerValue[0] === "No") {
-                    q8NegativeAnswersCounter++
-                    //q8NegativeAnswersCounter -= notAnsweredOptional
-                }
-            } else if (elem.questionId === "w26gqYPhjPygD8vDcKOR") {
-                if (elem.answerValue[0] === "No") {
-                    q11NegativeAnswersCounter++
+            if(elem.questionIndex === 8 || elem.questionIndex === 11) {
+                recoveredOptional++
+                if(elem.answerValue[0] === "No") {
+                    answeredQuestions--
+                    actualOptionals++
                 }
             }
         })
 
-
-        let q9Andq12Answers = q9Answers.concat(q12Answers)
-        if(q9Andq12Answers.length === 0) {
-
+        let totalPercent = 0
+        if(recoveredOptional !== totalOptionals) {
+            totalPercent = (answeredQuestions / (totalQuestions - actualOptionals - (totalOptionals - recoveredOptional)) * 100)
+        } else {
+            totalPercent = (answeredQuestions / (totalQuestions - actualOptionals) * 100)
         }
-
-        console.log(q9Andq12Answers.length)
-        let notAnsweredOptional = 0
-
-        q9Andq12Answers.forEach(elem => {
-            if(elem.answerValue[0].length > 0) {
-                notAnsweredOptional++
-            }
-        })
-
-        let totalQuestions = (userSubjects.length * 12) - q8NegativeAnswersCounter - q11NegativeAnswersCounter
-
-        let totalPercent = Math.round(((allQuestionsAnswers.length - (userSubjects.length - notAnsweredOptional))/ totalQuestions) * 100)
         console.log(totalPercent)
 
         allSubjectsProgress.innerHTML = `
