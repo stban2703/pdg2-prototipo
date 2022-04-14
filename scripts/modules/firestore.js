@@ -282,14 +282,14 @@ async function updateQuestionAnswerReference(currentPeriod, questionId, subjectI
         //hideLoader()
         console.log("Referencia actualizada")
         if (currentIndex === 8 && answerValue[0] === "No") {
-            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex + 1)
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
             } else if (currentIndex === 11 && answerValue[0] === "No"){
-                //getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
             } else {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
 
             }
         }
@@ -305,27 +305,40 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
         //hideLoader()
         console.log("Respuesta actualizada")
         if (currentIndex === 8 && answerValue[0] === "No") {
-            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex + 1)
+            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
             } else if (currentIndex === 11 && answerValue[0] === "No"){
-                //getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
             } else {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex)
+                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
 
             }
         }
     })
 }
 
-export async function getNextMemmoQuestion(currentPeriod, subjectId, currentIndex) {
+export async function getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue) {
     const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex + 1)))
     const querySnapshot = await getDocs(q);
     const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
+    //console.log(nextQuestion)
     hideLoader()
     if (currentIndex == 3) {
         window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}_info`
+    } else if (currentIndex === 8 && answerValue[0] === "No") {
+        if (nextQuestion.answerId && nextQuestion.answerId.length > 0) {
+            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectId, currentIndex + 1, null)
+        } else {
+            createMemoAnswer(currentPeriod, "WEI1TIuPkuZH8mRdzq9Y", subjectId, [""], currentIndex + 1, null)
+        }
+    } else if (currentIndex === 11 && answerValue[0] === "No") {
+        if (nextQuestion.answerId && nextQuestion.answerId.length > 0) {
+            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectId, currentIndex + 1, null)
+        } else {
+            createMemoAnswer(currentPeriod, "fBxBrSNyWs9xKqG3B6kQ", subjectId, [""], currentIndex + 1, null)
+        }
     } else {
         window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
     }

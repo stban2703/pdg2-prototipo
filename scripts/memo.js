@@ -45,8 +45,13 @@ export async function getAllSubjectsProgress(userSubjects) {
 
 
         let q9Andq12Answers = q9Answers.concat(q12Answers)
-        console.log(q9Andq12Answers)
+        if(q9Andq12Answers.length === 0) {
+
+        }
+
+        console.log(q9Andq12Answers.length)
         let notAnsweredOptional = 0
+
         q9Andq12Answers.forEach(elem => {
             if(elem.answerValue[0].length > 0) {
                 notAnsweredOptional++
