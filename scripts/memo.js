@@ -2,14 +2,14 @@ import { getAllAnswersBySubjectsAndPeriod, getCurrentPeriod, getMemoTemplate, ge
 import { getSubjectFromId } from "./utils/getters.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 
-export async function getAllSubjectsProgress(userSubjects) {
+export async function getAllSubjectsProgress(userSubjects, currentPeriod) {
     const allSubjectsProgress = document.querySelector(".allSubjectsProgress")
 
     if (allSubjectsProgress && window.location.href.includes("#memointro")) {
         let allQuestionsAnswers = []
         for (let index = 0; index < userSubjects.length; index++) {
             const subject = userSubjects[index];
-            const subjectAnswers = await getAllAnswersBySubjectsAndPeriod(subject.id, userSubjects[0].memoPeriod)
+            const subjectAnswers = await getAllAnswersBySubjectsAndPeriod(subject.id, currentPeriod)
             allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
         }
 
@@ -157,7 +157,7 @@ function sortFilterMemoSubjects(userSubjects, subjectSort, groupFilter) {
     renderMemoSubject(filterCopy)
 }
 
-export async function getMemoSectionInfo(userSubjects) {
+export async function getMemoSectionInfo(userSubjects, currentPeriod) {
     const memosectionScreen = document.querySelector(".memosections-screen")
 
     if (memosectionScreen && window.location.href.includes("#memosections")) {
@@ -168,12 +168,12 @@ export async function getMemoSectionInfo(userSubjects) {
         const memosectionsSubjectName = memosectionScreen.querySelector(".memosections-screen__info--subjectName")
         const memosectionsSubjectPeriod = memosectionScreen.querySelector(".memosections-screen__info--subjectPeriod")
         memosectionsSubjectName.innerHTML = selectedSubject.name
-        memosectionsSubjectPeriod.innerHTML = selectedSubject.memoPeriod
+        memosectionsSubjectPeriod.innerHTML = currentPeriod
 
-        let memoQuestions = await getSubjectMemo(subjectId, selectedSubject.memoPeriod)
+        let memoQuestions = await getSubjectMemo(subjectId, currentPeriod)
 
         if (memoQuestions.length === 0) {
-            getMemoTemplate(`memos/periods/${selectedSubject.memoPeriod}/${subjectId}/questions`)
+            getMemoTemplate(`memos/periods/${currentPeriod}/${subjectId}/questions`)
         } else {
             // Obtener grupos
             memoQuestions.sort(sortByIndex)
@@ -183,7 +183,7 @@ export async function getMemoSectionInfo(userSubjects) {
                 [item.section]: [...(groups[item.section] || []), item]
             }), {});
 
-            renderMemoSections(memoQuestions, groups, selectedSubject.memoPeriod, subjectId)
+            renderMemoSections(memoQuestions, groups, currentPeriod, subjectId)
         }
     }
 }

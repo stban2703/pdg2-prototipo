@@ -23,8 +23,6 @@ let currentUser = localUser
 let currentSubjects = localSubjects
 let currentPeriod = localPeriod
 
-console.log(currentPeriod)
-
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
     displayHomeUserName()
@@ -119,11 +117,11 @@ function addPageFuncions() {
     renderMeetingMinutesDetails()
 
     // Memo functions
-    getAllSubjectsProgress(currentSubjects) // ACTUALIZANDO
+    getAllSubjectsProgress(currentSubjects, currentPeriod) // LISTO
     renderMemoIntro(currentUser)
-    getInitialMemoSubjects(currentSubjects)
-    onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups)
-    getMemoSectionInfo(currentSubjects)
+    getInitialMemoSubjects(currentSubjects) // SIN PROBLEMAS
+    onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups) // LISTO
+    getMemoSectionInfo(currentSubjects, currentPeriod) // LISTO
     renderMemoQuestion()
     submitMemoQuestionForm()
     renderMemoNotes(currentUser.id)
@@ -131,12 +129,12 @@ function addPageFuncions() {
 
     // Improve actions functions
     renderGoToImproveActionsButton()
-    getInitialImproveActions(currentSubjects)
+    getInitialImproveActions() // LISTO
     renderGoToImproveActionHistoryButton()
     getInitialHistoryImproveActions()
 
     // Progress funtions
-    getInitialProgressInfo(currentSubjects)
+    getInitialProgressInfo(currentSubjects, currentPeriod) // LISTO
 
     // Memo form edit functions
     changeMemoEditFormPage()

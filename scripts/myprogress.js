@@ -1,18 +1,18 @@
 import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
 
-export async function getInitialProgressInfo(userSubjects) {
+export async function getInitialProgressInfo(userSubjects, currentPeriod) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
     if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
         const subjectId = window.location.hash.split("?")[1]
         const subject = getSubjectFromId(subjectId, userSubjects)
 
         document.querySelector(".progresssubject-screen__info--subjectName").innerHTML = subject.name
-        document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = subject.memoPeriod
+        document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
 
         // First questions
-        const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, subject.memoPeriod)
+        const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, currentPeriod)
         const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
         const firtQuestionAllDataSet = []
         const firstQuestionUserDataSet = []
@@ -52,7 +52,7 @@ export async function getInitialProgressInfo(userSubjects) {
         renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7)
 
         // Fourth question
-        const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, subject.memoPeriod)
+        const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
         //console.log(fourthQuestionAnswers)
     }
 }
