@@ -18,8 +18,12 @@ import { submitQuestions } from "./testmemoform.js";
 let ls = window.localStorage;
 let localUser = JSON.parse(ls.getItem('currentuser'))
 let localSubjects = JSON.parse(ls.getItem('subjectList'))
+let localPeriod = JSON.parse(ls.getItem('currentPeriod'))
 let currentUser = localUser
 let currentSubjects = localSubjects
+let currentPeriod = localPeriod
+
+console.log(currentPeriod)
 
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
@@ -96,9 +100,9 @@ function addPageFuncions() {
     renderSubjectListHome(currentSubjects)///Sin actualizar
 
     //Note functions
-    submitNote(currentUser, currentSubjects)
+    submitNote(currentUser, currentSubjects)// Sin problemas
     getInitialNoteList(currentUser.id)
-    onFilterListener(currentUser.id, currentSubjects)
+    onFilterListener(currentUser.id, currentSubjects) // Sin problemas
     renderNoteDetails()
     changeNotesView()
 
@@ -115,7 +119,7 @@ function addPageFuncions() {
     renderMeetingMinutesDetails()
 
     // Memo functions
-    getAllSubjectsProgress(currentSubjects)
+    getAllSubjectsProgress(currentSubjects) // ACTUALIZANDO
     renderMemoIntro(currentUser)
     getInitialMemoSubjects(currentSubjects)
     onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups)

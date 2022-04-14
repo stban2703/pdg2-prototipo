@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectsAndPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getCurrentPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
 import { getSubjectFromId } from "./utils/getters.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
 

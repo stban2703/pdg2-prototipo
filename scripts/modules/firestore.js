@@ -9,6 +9,21 @@ import { getInitialNoteList } from "../notes.js";
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
 
+// Get current period
+export async function getCurrentPeriod() {
+    const periodRef = doc(firestore, "memos", "template")
+    const docSnap = await getDoc(periodRef)
+    console.log(docSnap)
+    if (docSnap.exists()) {
+        const period = docSnap.data()
+        localStorage.setItem('currentPeriod', JSON.stringify(period.period))
+        console.log(period)
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))
@@ -492,8 +507,8 @@ export const createUser = async function (uid, name, lastname, email, role) {
     }
     await setDoc(userRef, newUser).then(() => {
         localStorage.setItem('currentuser', JSON.stringify(newUser))
-        hideLoader()
-        window.location = 'index.html'
+        getCurrentPeriod()
+        getUserSubjects(uid)
     }).catch((error) => {
         hideLoader()
         console.log(error)

@@ -2,7 +2,7 @@ import { firebase } from "./firebase.js";
 import {
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { createUser, getUserFromDb, getUserSubjects } from "./firestore.js";
+import { createUser, getCurrentPeriod, getUserFromDb, getUserSubjects } from "./firestore.js";
 import { hideLoader } from "../utils/loader.js";
 
 const auth = getAuth()
@@ -35,6 +35,7 @@ export const signIn = function (email, password) {
         // Signed in
         const user = userCredential.user;
         getUserFromDb(user.uid)
+        getCurrentPeriod()
         getUserSubjects(user.uid)
         console.log(user.uid + " ha iniciado sesion")
     }).catch((error) => {
