@@ -24,9 +24,9 @@ export async function getAllSubjectsProgress(userSubjects) {
         let recoveredOptional = 0
 
         allQuestionsAnswers.forEach(elem => {
-            if(elem.questionIndex === 8 || elem.questionIndex === 11) {
+            if (elem.questionIndex === 8 || elem.questionIndex === 11) {
                 recoveredOptional++
-                if(elem.answerValue[0] === "No") {
+                if (elem.answerValue[0] === "No") {
                     answeredQuestions--
                     actualOptionals++
                 }
@@ -34,7 +34,7 @@ export async function getAllSubjectsProgress(userSubjects) {
         })
 
         let totalPercent = 0
-        if(recoveredOptional !== totalOptionals) {
+        if (recoveredOptional !== totalOptionals) {
             totalPercent = (answeredQuestions / (totalQuestions - actualOptionals - (totalOptionals - recoveredOptional)) * 100)
         } else {
             totalPercent = (answeredQuestions / (totalQuestions - actualOptionals) * 100)
@@ -76,7 +76,7 @@ export function renderMemoIntro(user) {
 
 export function getInitialMemoSubjects(subjectList) {
     const memoSubjectList = document.querySelector(".memoselectsubject-screen__subjectList")
-    if (memoSubjectList && window.location.href.includes("#memoselectsubject")) {
+    if (memoSubjectList && (window.location.href.includes("#memoselectsubject") || window.location.href.includes("#progressselectsubject"))) {
         const copy = [...subjectList].sort(sortByAlphabeticAscending)
         renderMemoSubject(copy)
     }
@@ -92,15 +92,22 @@ export function renderGoToImproveActionsButton() {
 
 function renderMemoSubject(subjectList) {
     const memoSubjectList = document.querySelector(".memoselectsubject-screen__subjectList")
-
     memoSubjectList.innerHTML = ``
+
+    let anchor = ""
+    if(window.location.href.includes("#memoselectsubject")) {
+        anchor = "memosections"
+    } else {
+        anchor = "progresssubject"
+    }
+
     subjectList.forEach(subject => {
         //console.log(subject.id)
         const memoSubject = document.createElement("div")
         memoSubject.className = "memo-subject"
         memoSubject.innerHTML = `
             <h5 class="memo-subject__title">${subject.name}</h5>
-            <a class="memo-subject__button small-button small-button--secondary" href="#memosections?${subject.id}">
+            <a class="memo-subject__button small-button small-button--secondary" href="#${anchor}?${subject.id}">
                 <span>Seleccionar</span>
             </a>
             `
@@ -111,7 +118,7 @@ function renderMemoSubject(subjectList) {
 export function onSortFilterMemoSubjectListener(userSubjects, userGroups) {
     const memoSubjectsSettingsForm = document.querySelector(".memoselectsubject-screen__controls")
 
-    if (window.location.href.includes("#memoselectsubject") && memoSubjectsSettingsForm) {
+    if ((window.location.href.includes("#memoselectsubject") || window.location.href.includes("#progressselectsubject")) && memoSubjectsSettingsForm) {
         const memoSubjectsSortSelect = memoSubjectsSettingsForm.alphabetic
         const memoSubjectsFilterSelect = memoSubjectsSettingsForm.group
 

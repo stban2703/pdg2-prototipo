@@ -18,6 +18,7 @@ const router = new Router(
         testmemoform: new Layout(new Page("testmemoform.html")),
         memoimproveactions: new Layout(new Page("memoimproveactions.html")),
         memohistoryimproveactions: new Layout(new Page("memohistoryimproveactions.html")),
+        progressselectsubject: new Layout(new Page("progressselectsubject.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

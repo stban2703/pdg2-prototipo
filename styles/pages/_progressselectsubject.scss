@@ -1,0 +1,17 @@
+.progressselectsubject-screen {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 1.5rem 0;
+    }
+
+    &__subjectList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem;
+    }
+}
