@@ -101,8 +101,6 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             return answer.period == currentPeriod
         })[0].answerValue
 
-        console.log(fifthQuestionAnswers)
-
         const fifthQuestionLabels = []
         fifthQuestionAnswers.forEach(value => {
             const q = fifthQuestionLabels.find(label => {
@@ -119,10 +117,38 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 return answer.split('|')[0] === label
             })[0]
             
-            fifthQuestionUserDataSet[index] = answer.split('|')[answer.split('|').length - 1]
+            fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
         });
 
         renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel')
+
+
+        // Sixth question
+        const sixthQuestions = await getAllAnswersByQuestionAndSubject(6, subjectId)
+        const sixthQuestionAnswers = sixthQuestions.filter(answer => {
+            return answer.period == currentPeriod
+        })[0].answerValue
+
+        const sixthQuestionsLabels = []
+        sixthQuestionAnswers.forEach(value => {
+            const q = sixthQuestionsLabels.find(label => {
+                return label === value.split('|')[0]
+            })
+            if (!q) {
+                sixthQuestionsLabels.push(value.split('|')[0])
+            }
+        })
+
+        const sixthQuestionUserDataSet = []
+        sixthQuestionsLabels.forEach((label, index) => {
+            const answer = [...sixthQuestionAnswers].filter((answer) => {
+                return answer.split('|')[0] === label
+            })[0]
+            
+            sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
+        });
+
+        renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel')
     }
 }
 
