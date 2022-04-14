@@ -16,12 +16,25 @@ export async function getAllSubjectsProgress(userSubjects) {
         let q8NegativeAnswersCounter = 0
         let q11NegativeAnswersCounter = 0
 
+        let q9Answers = []
+        allQuestionsAnswers.forEach(elem => {
+            if (elem.questionIndex === 9) {
+                q9Answers.push(elem)
+            }
+        })
+
+        let q12Answers = []
+        allQuestionsAnswers.forEach(elem => {
+            if (elem.questionIndex === 12) {
+                q12Answers.push(elem)
+            }
+        })
+
         allQuestionsAnswers.forEach((elem, index) => {
             if (elem.questionId === "jvLjdfeVkm6JnQMgrO6C") {
                 if (elem.answerValue[0] === "No") {
                     q8NegativeAnswersCounter++
-
-                    //allQuestionsAnswers
+                    //q8NegativeAnswersCounter -= notAnsweredOptional
                 }
             } else if (elem.questionId === "w26gqYPhjPygD8vDcKOR") {
                 if (elem.answerValue[0] === "No") {
@@ -30,9 +43,20 @@ export async function getAllSubjectsProgress(userSubjects) {
             }
         })
 
+
+        let q9Andq12Answers = q9Answers.concat(q12Answers)
+        console.log(q9Andq12Answers)
+        let notAnsweredOptional = 0
+        q9Andq12Answers.forEach(elem => {
+            if(elem.answerValue[0].length > 0) {
+                notAnsweredOptional++
+            }
+        })
+
         let totalQuestions = (userSubjects.length * 12) - q8NegativeAnswersCounter - q11NegativeAnswersCounter
 
-        let totalPercent = Math.round((allQuestionsAnswers.length / totalQuestions) * 100)
+        let totalPercent = Math.round(((allQuestionsAnswers.length - (userSubjects.length - notAnsweredOptional))/ totalQuestions) * 100)
+        console.log(totalPercent)
 
         allSubjectsProgress.innerHTML = `
         <h4 class="memo-edit-info__title">Tu progeso:</h4>
@@ -254,13 +278,13 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
         for (let i = 0; i < groupList[group].length; i++) {
             const question = groupList[group][i];
             if (!question.answerId) {
-                if(index === 1 && question8Answer[0] === "No") {
+                if (index === 1 && question8Answer[0] === "No") {
                     currentQuestionId = groupList[group][i - 1].id
                     break
-                } else if(index === 2 && question11Answer[0] === "No") {
+                } else if (index === 2 && question11Answer[0] === "No") {
                     currentQuestionId = groupList[group][i - 1].id
                     break
-                } else  {
+                } else {
                     currentQuestionId = question.id
                     break
                 }
