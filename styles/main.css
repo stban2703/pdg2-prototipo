@@ -5714,7 +5714,23 @@ input[type=button] {
   -webkit-box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
           box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
   border-radius: 15px;
-  padding: 4rem;
+  padding: 4rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.progress-section__chartcontainer {
+  position: relative;
+  width: 100%;
+  max-width: 76rem;
 }
 
 .progress-section__doubleQuestion {
