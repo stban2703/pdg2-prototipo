@@ -244,19 +244,13 @@ export async function getInitialGeneralAll(currentPeriod) {
 
         const allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
         const allHistoryImproveActionAnswers = []
-        //const totalImproveActionsByAnswers = []
 
+        // Improve actions chart
         for (let index = 0; index < allImproveActionsAnswers.length; index++) {
-            //totalImproveActionsByAnswers[index] = allImproveActionsAnswers[index].answerValue.length
             const improveActionAnswer = allImproveActionsAnswers[index];
-
             const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
             allHistoryImproveActionAnswers.push(history)
-        }
-        /*allHistoryImproveActionAnswers.forEach((history, index) => {
-            totalImproveActionsByAnswers[index] += history.length
-        })*/
-        
+        }     
 
         const improveActionQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
         const improveActionsDataSet = []
@@ -314,14 +308,15 @@ export async function getInitialGeneralAll(currentPeriod) {
 
 
 
-        // Thhird question
+        // Third question
         const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
         const thirdQuestionDataSet = []
 
         thirdQuestionLabels.forEach((label, index) => {
-            const answerList = [...answersArray[2]].filter((answer) => {
+            const answerList = allThirdQuestionAnswers.filter((answer) => {
                 return answer.period === label
             })
+                        
             if (answerList.length > 0) {
                 let sum = 0
                 let dataSetValue = 0
@@ -486,10 +481,6 @@ export async function getInitialGeneralAll(currentPeriod) {
         })
 
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
-
-
-
-        // Improve Action Answers
 
 
         // Eleven question
