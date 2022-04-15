@@ -355,10 +355,11 @@ export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, l
 }
 
 export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId, parentNodeClass) {
+    const location = window.location.hash.split("?")[0]
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Tu respuesta',
+            label: location.includes("generalspecific") ? 'Docente de la materia' : 'Tu respuesta',
             backgroundColor: 'rgb(253, 181, 114)',
             borderColor: 'rgb(255, 255, 255)',
             data: userDataSet,
