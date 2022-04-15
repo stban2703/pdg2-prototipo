@@ -152,6 +152,39 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
 
         renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel')
 
+
+        // Seventh question
+        const seventhQuestionAnwers = await getAllAnswersByQuestionAndPeriod(7, currentPeriod)
+        const seventhQuestionLabels = []
+
+        seventhQuestionAnwers.forEach(answer => {
+            answer.answerValue.forEach(value => {
+                console.log(value)
+                const query = seventhQuestionLabels.find(label => {
+                    return label === value
+                })
+                if(!query) {
+                    seventhQuestionLabels.push(value)
+                }
+            })
+        })
+
+        const seventhQuestionDataSet = []
+        seventhQuestionLabels.forEach((label, index) => {
+            seventhQuestionDataSet[index] = 0
+        })
+
+        seventhQuestionAnwers.forEach((answer, index) => {
+            answer.answerValue.forEach(value => {
+                let labelIndex = seventhQuestionLabels.findIndex(label => {
+                    return label === value
+                })
+                seventhQuestionDataSet[labelIndex]++
+            })  
+        })
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos')
+        
+
         // Eigth question
         const eigthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(8, currentPeriod)
         const eigthQuestionLabels = ['Sí', 'No']
@@ -178,7 +211,6 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         const checkedActionsList = await getHistoryImproveActions(subjectId)
 
-        const generalList = []
         const improveActionsLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
 
         const improveActionsDataSet = []
