@@ -340,7 +340,7 @@ export async function getInitialGeneralAll(currentPeriod) {
                     const labelAnswer = answer.answerValue.filter(value => {
                         return value.split('|')[0] === label
                     })
-                    if(labelAnswer.length > 0) {
+                    if (labelAnswer.length > 0) {
                         const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
                         sum += value
                     }
@@ -349,7 +349,7 @@ export async function getInitialGeneralAll(currentPeriod) {
                 fifthQuestionDataSet[index] = dataSetValue
             })
 
-            renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')  
+            renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
         }
 
 
@@ -377,7 +377,7 @@ export async function getInitialGeneralAll(currentPeriod) {
                     const labelAnswer = answer.answerValue.filter(value => {
                         return value.split('|')[0] === label
                     })
-                    if(labelAnswer.length > 0) {
+                    if (labelAnswer.length > 0) {
                         const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
                         sum += value
                     }
@@ -386,7 +386,39 @@ export async function getInitialGeneralAll(currentPeriod) {
                 sixthQuestionDataSet[index] = dataSetValue
             })
 
-            renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')  
+            renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
+        }
+
+
+        // Seventh question
+        const seventhQuestionLabels = []
+        if (answersArray[6]) {
+            answersArray[6].forEach(answer => {
+                answer.answerValue.forEach(value => {
+                    const query = seventhQuestionLabels.find(label => {
+                        return label === value
+                    })
+                    if (!query) {
+                        seventhQuestionLabels.push(value)
+                    }
+                })
+            })
+
+            const seventhQuestionDataSet = []
+            seventhQuestionLabels.forEach((label, index) => {
+                seventhQuestionDataSet[index] = 0
+            })
+
+            answersArray[6].forEach((answer, index) => {
+                answer.answerValue.forEach(value => {
+                    let labelIndex = seventhQuestionLabels.findIndex(label => {
+                        return label === value
+                    })
+                    seventhQuestionDataSet[labelIndex]++
+                })
+            })
+
+            renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
         }
 
         hideLoader()
