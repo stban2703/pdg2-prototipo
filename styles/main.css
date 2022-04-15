@@ -5657,6 +5657,13 @@ input[type=button] {
       align-self: flex-end;
 }
 
+.improve-actions__commentContainer p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #363636;
+}
+
 .note-list {
   background-color: #FFFFFF;
   border-radius: 15px;

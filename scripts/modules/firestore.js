@@ -82,6 +82,14 @@ export async function createImproveActionComment(subjectId, period, userInfo, co
     });
 }
 
+export async function getImproveActionComment(subjectId, currentPeriod) {
+    const q = query(collection(firestore, "improveactionscomments"), where("subjectId", "==", "" + subjectId), where("period", "==", currentPeriod))
+    const querySnapshot = await getDocs(q);
+    const commentsLiST = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return commentsLiST
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

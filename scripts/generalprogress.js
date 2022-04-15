@@ -1,4 +1,4 @@
-import { createImproveActionComment, getCareerInfo, getCareerSubjects, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -192,6 +192,18 @@ export async function renderImproveActionsForSpecificGeneral(period) {
             addCommentForm.classList.remove("hidden")
             openAddCommentButton.classList.add("hidden")
         })
+
+
+        const comment = await getImproveActionComment(subjectId, period)
+        if(comment.length > 0) {
+            openAddCommentButton.classList.add("hidden")
+            const commentContainer = document.querySelector(".improve-actions__commentContainer")
+            commentContainer.classList.remove("hidden")
+            commentContainer.innerHTML = `
+            <p>${comment[0].comment}</p>
+            `
+        }
+        console.log(comment)
     }
 }
 

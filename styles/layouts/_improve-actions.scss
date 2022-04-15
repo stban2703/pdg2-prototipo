@@ -82,4 +82,13 @@
         max-width: 18.6rem;
         align-self: flex-end;
     }
+
+    &__commentContainer {
+        p {
+            font-family: $poppins;
+            font-size: 1.8rem;
+            font-weight: $light;
+            color: $mineshaft;
+        }
+    }
 }
