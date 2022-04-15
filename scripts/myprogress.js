@@ -1,4 +1,4 @@
-import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject } from "./modules/firestore.js";
+import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getHistoryImproveActions, getImproveActions } from "./modules/firestore.js";
 import { getSubjectFromId } from "./utils/getters.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 
@@ -172,6 +172,59 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, "No", 'eightQuestionChart')
         document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer.answerValue[0]}”`
         hideLoader()
+
+
+        // Improve actions answers 10
+        const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
+        const checkedActionsList = await getHistoryImproveActions(subjectId)
+
+        const generalList = []
+        const improveActionsLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+
+        const improveActionsDataSet = []
+        improveActionsLabels.forEach((label, index) => {
+            const answerList = improveActionsAnswers.filter(answer => {
+                return answer.period === label
+            })
+            const checkedList = improveActionsAnswers.filter(action => {
+                return action.period === label
+            })
+
+            let improveActionsPercent = 0
+            let totalActionsBySemester = 0
+
+            if (answerList[0]) {
+                totalActionsBySemester = answerList[0].answerValue.length + checkedList.length
+            } else if(!answerList[0] && checkedActionsList.length > 0) {
+                totalActionsBySemester += checkedList.length
+            } else if(!answerList[0] && checkedList.length === 0){
+                totalActionsBySemester = 0
+            }
+
+            if(totalActionsBySemester !== 0) {
+                improveActionsPercent = Math.round((checkedList.length / totalActionsBySemester) * 100)
+            }
+            improveActionsDataSet[index] = improveActionsPercent
+        });
+       
+
+        /*if (improveActionsAnswers.length > 0) {
+            improveActionsAnswers.forEach(answer => {
+                answer.answerValue.forEach(elem => {
+                    generalList.push(elem)
+                })
+            })
+        }
+
+        if (checkedActionsList.length > 0) {
+            checkedActionsList.forEach(elem => {
+                generalList.push(elem)
+            })
+        }*/
+
+        //console.log(improveActionsAnswers)
+        //console.log(checkedActionsList)
+
     }
 }
 
@@ -197,6 +250,9 @@ function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, c
         data: data,
         options: {
             plugins: {
+                labels: {
+                    fontSize: 0
+                },
                 title: {
                     display: false,
                     text: 'Chart.js Bar Chart - Stacked',
