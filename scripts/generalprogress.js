@@ -1,4 +1,5 @@
 import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { renderBarChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -223,30 +224,45 @@ export async function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
 
     if (generalAllScreen && window.location.href.includes("generalall")) {
+
         const view = window.location.hash.split('?')[1].split('_')[0]
         const viewId = window.location.hash.split('?')[1].split('_')[1]
 
         showLoader()
+        let viewInfo = {}
+        if (view === 'career') {
+            viewInfo = await getCareerInfo(viewId)
+        }
+        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
+        document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
+
         const allAnswers = await getAllAnswersByViewType(view, viewId, currentPeriod)
-        hideLoader()
 
         const totalsQuestions = 12
         const answersArray = []
 
-        /*for (let index = 0; index < 12; index++) {
-            const element = array[index];
-            
-        }
-            answersArray[value] = allAnswers.filter(answer => {
-                return answer.questionIndex === value
+        for (let index = 0; index < totalsQuestions; index++) {
+            //const element = array[index];
+            answersArray[index] = allAnswers.filter(answer => {
+                return answer.questionIndex === index + 1
             })
-        })
 
-        console.log(answersArray)*/
+        }
+
+        // First question
+        const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
+        const firtQuestionAllDataSet = []
+
+        firstQuestionLabels.forEach((label, index) => {
+            const answerList = [...answersArray[0]].filter((answer) => {
+                return answer.answerValue[0] === label
+            })
+            firtQuestionAllDataSet[index] = answerList.length
+        });
+        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent')
+        hideLoader()
+
+
     }
-}
-
-async function getAllAnswers(subjects) {
-    car
 }
 
