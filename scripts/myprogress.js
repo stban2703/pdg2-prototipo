@@ -164,8 +164,13 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             })
             eigthQuestionDataSet[labelIndex]++
         })
-        console.log(eigthQuestionDataSet)
+
+        const userAnswer = eigthQuestionAnswers.find(answer => {
+            return answer.subjectId === subjectId
+        })
+
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, "No", 'eightQuestionChart')
+        document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer.answerValue[0]}”`
         hideLoader()
     }
 }
@@ -414,7 +419,7 @@ function renderPieChart(labels, allDataSet, userAnswer, chartId) {
                     display: true,
                     text: 'Respuestas en general de los docentes',
                     font: {
-                        size: 12,
+                        size: 14,
                         family: 'Poppins',
                         //weight: 'light'
                     }

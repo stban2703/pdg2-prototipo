@@ -5733,6 +5733,14 @@ input[type=button] {
   max-width: 76rem;
 }
 
+.progress-section__userAnswer {
+  margin-top: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
 .progress-section__doubleQuestion {
   display: -ms-grid;
   display: grid;
