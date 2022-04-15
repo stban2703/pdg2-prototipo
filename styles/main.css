@@ -5619,6 +5619,20 @@ input[type=button] {
   color: #979DFF;
 }
 
+.improve-actions__comments {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 2rem;
+}
+
 .note-list {
   background-color: #FFFFFF;
   border-radius: 15px;
