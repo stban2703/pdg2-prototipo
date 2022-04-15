@@ -17,7 +17,11 @@ export async function renderMeetings() {
         const meetingList = await getMeetings()
         const copy = [...meetingList].sort(sortByDate)
 
-        if (userInfo.role == "leader") {
+        const leaderRole = userInfo.role.find(role => {
+            return role === 'leader'
+        })
+        console.log(leaderRole)
+        if (leaderRole) {
             createMeetingButton.classList.remove("hidden")
         }
 
@@ -65,11 +69,6 @@ export async function renderMeetingDetails() {
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
 
-    /*if (userInfo.role.includes("leader") && confirmRejectMeetingSection) {
-        //console.log("Lider")
-        confirmRejectMeetingSection.classList.add("hidden")
-    }*/
-    
     if (meetingInfoColumns.length > 0 && window.location.href.includes("#meetingdetails")) {
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
@@ -78,8 +77,11 @@ export async function renderMeetingDetails() {
         confirmMeetingAssistance(meeting)
 
         if (meeting) {
-
-            if(userInfo.role.includes("leader") && userInfo.leaderGroup == meeting.group) {
+            const leaderRole = userInfo.role.find(role => {
+                return role === 'leader'
+            })
+            console.log(leaderRole)
+            if(leaderRole && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
             }
 
