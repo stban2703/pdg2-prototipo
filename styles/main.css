@@ -6887,11 +6887,11 @@ body {
   display: none !important;
 }
 
-.loader {
+.custom-loader {
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.4);
   left: 0;
   top: 0;
   z-index: 100;
@@ -6910,12 +6910,104 @@ body {
           justify-content: center;
 }
 
-.loader p {
+.custom-loader p {
   font-family: "Poppins", sans-serif;
   color: #757575;
-  font-size: 2rem;
+  font-size: 3rem;
+  margin-top: 2rem;
 }
 
+.custom-loader .loader {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  position: relative;
+  -webkit-animation: rotate 1s linear infinite;
+          animation: rotate 1s linear infinite;
+}
+
+.custom-loader .loader::before,
+.custom-loader .loader::after {
+  content: "";
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #979DFF;
+  -webkit-animation: prixClipFix 2s linear infinite;
+          animation: prixClipFix 2s linear infinite;
+}
+
+.custom-loader .loader::after {
+  inset: 8px;
+  -webkit-transform: rotate3d(90, 90, 0, 180deg);
+          transform: rotate3d(90, 90, 0, 180deg);
+  border-color: #FDB572;
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes prixClipFix {
+  0% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+            clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  50% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  75%,
+  100% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+            clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  50% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  75%,
+  100% {
+    -webkit-clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+}
+
+/*.loader {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba($color: #FFFFFF, $alpha: 0.7);
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-family: $poppins;
+        color: $boulder;
+        font-size: 2rem;
+    }
+}*/
 .testmemoform {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -229,8 +229,20 @@ export async function getInitialGeneralAll(currentPeriod) {
         showLoader()
         const allAnswers = await getAllAnswersByViewType(view, viewId, currentPeriod)
         hideLoader()
-        console.log(allAnswers)
 
+        const totalsQuestions = 12
+        const answersArray = []
+
+        /*for (let index = 0; index < 12; index++) {
+            const element = array[index];
+            
+        }
+            answersArray[value] = allAnswers.filter(answer => {
+                return answer.questionIndex === value
+            })
+        })
+
+        console.log(answersArray)*/
     }
 }
 
