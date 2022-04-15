@@ -33,6 +33,18 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 export const userInfo = currentUser
 export const userSubjects = currentSubjects
 
+// Check user roles
+currentUser.role.forEach(role => {
+    if(role === 'principal') {
+        document.querySelector('#navgeneralprogress').classList.remove('hidden')
+    }
+
+    if(role === 'boss') {
+        document.querySelector('#navaccomplishment').classList.remove('hidden')
+
+    }
+})
+
 // Memorando
 let memoProperties = {
     objective: "*Recuerda que el objetivo del memorando reflexivo es:*<br><br>La importancia de realizar un acto de reflexión es que se lleva a una constante renovación lo cual tiene un impacto en la calidad de la educación que se le brinda a los estudiantes y ayuda a satisfacer sus necesidades.",
