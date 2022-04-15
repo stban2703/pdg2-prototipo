@@ -14,6 +14,12 @@ export async function getInitialProgressInfo(currentPeriod) {
         document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
 
+        const goToImproveActionsButton = progressSubjectScreen.querySelector(".goToImproveActionsButton")
+        if(goToImproveActionsButton && window.location.href.includes("#generalspecific")) {
+            goToImproveActionsButton.setAttribute('href', `#generalimproveactions?${subjectId}`)
+        }
+
+
         // First questions
         const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, currentPeriod)
         const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']

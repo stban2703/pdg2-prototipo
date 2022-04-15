@@ -25,6 +25,7 @@ const router = new Router(
         generalcareer: new Layout(new Page("generalcareer.html")),
         generalsubjects: new Layout(new Page("generalsubjects.html")),
         generalspecific: new Layout(new Page("generalspecific.html")),
+        generalimproveactions: new Layout(new Page("generalimproveactions.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")
