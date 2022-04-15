@@ -12,12 +12,12 @@ export async function getInitialGeneralSelect(userInfo) {
 
         let currentRole = ""
         userInfo.role.forEach(role => {
-            if(role === "principal" || role === "boss" || role === "admin") {
+            if (role === "principal" || role === "boss" || role === "admin") {
                 currentRole = role
-            } 
+            }
         });
 
-        switch(currentRole) {
+        switch (currentRole) {
             case "principal":
                 const careerInfo = await getCareerInfo(userInfo.principalCareer)
                 generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
@@ -27,7 +27,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización general</h5>
-                    <a class="small-button small-button--secondary" href="#generalall?careers_${careerInfo.id}">
+                    <a class="small-button small-button--secondary" href="#generalall?career_${careerInfo.id}">
                         <span>Ver</span>
                     </a>
                     </section>
@@ -143,10 +143,10 @@ export async function renderImproveActionsForSpecificGeneral(period) {
 
     const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
 
-    if(generalImproveActionsContainer && window.location.href.includes("#generalimproveactions")) {
+    if (generalImproveActionsContainer && window.location.href.includes("#generalimproveactions")) {
         const subjectTitle = document.querySelector('.progresssubject-screen__info--subjectName')
         const periodTitle = document.querySelector('.progresssubject-screen__info--subjectPeriod')
-        
+
         const subjectId = window.location.hash.split("?")[1]
         const subjectInfo = await getSubcjectInfo(subjectId)
 
@@ -154,8 +154,8 @@ export async function renderImproveActionsForSpecificGeneral(period) {
         periodTitle.innerHTML = period
 
         const improveActions = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
-        if(improveActions.length > 0) {
-            if(improveActions[0].answerValue.length > 0) {
+        if (improveActions.length > 0) {
+            if (improveActions[0].answerValue.length > 0) {
                 const improveActionsContainer = document.querySelector(".improve-actions__list")
                 const emptyContainer = document.querySelector(".improve-actions__empty")
 
@@ -194,7 +194,7 @@ export async function renderImproveActionsForSpecificGeneral(period) {
 
 
         const comment = await getImproveActionComment(subjectId, period)
-        if(comment.length > 0) {
+        if (comment.length > 0) {
             openAddCommentButton.classList.add("hidden")
             const commentContainer = document.querySelector(".improve-actions__commentContainer")
             commentContainer.classList.remove("hidden")
@@ -208,7 +208,7 @@ export async function renderImproveActionsForSpecificGeneral(period) {
 export async function onSubmitImproveActionComment(userInfo, period) {
     const addCommentForm = document.querySelector(".addCommentForm")
 
-    if(addCommentForm && window.location.href.includes("#generalimproveactions")) {
+    if (addCommentForm && window.location.href.includes("#generalimproveactions")) {
         addCommentForm.addEventListener("submit", (event) => {
             event.preventDefault()
             const subjectId = window.location.hash.split("?")[1]
@@ -219,27 +219,18 @@ export async function onSubmitImproveActionComment(userInfo, period) {
 }
 
 // All general
-export async function getInitialGeneralAll() {
+export async function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
 
-    if(generalAllScreen && window.location.href.includes("generalall")) {
+    if (generalAllScreen && window.location.href.includes("generalall")) {
         const view = window.location.hash.split('?')[1].split('_')[0]
         const viewId = window.location.hash.split('?')[1].split('_')[1]
 
-        let allAnsers = []
+        showLoader()
+        const allAnswers = await getAllAnswersByViewType(view, viewId, currentPeriod)
+        hideLoader()
+        console.log(allAnswers)
 
-        switch(view) {
-            case "careers":
-                //const careerSubjects = await getCareerSubjects(viewId)
-
-                
-
-                break;
-        }
-        //const allAnswers = getAllAnswersByViewType(view, )
-        //const allAnswer = 
-        console.log(view)
-        console.log(viewId)
     }
 }
 

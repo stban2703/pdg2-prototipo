@@ -158,7 +158,7 @@ function addPageFuncions() {
     getInitialGeneralSubjets()
     renderImproveActionsForSpecificGeneral(currentPeriod)
     onSubmitImproveActionComment(currentUser, currentPeriod)
-    getInitialGeneralAll()
+    getInitialGeneralAll(currentPeriod)
 
     // Memo form edit functions
     changeMemoEditFormPage()
