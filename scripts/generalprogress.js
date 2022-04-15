@@ -63,6 +63,13 @@ export async function getInitialGeneralSubjets() {
         const careerInfo = await getCareerInfo(careerId)
         const subjects = await getCareerSubjects(careerId)
         hideLoader()
+
+        const generalSelectSectionTitle = document.querySelector(".section-banner__title")
+        generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
+
+        const generalSelectSectionDescription = document.querySelector(".generalselect-screen__description")
+        generalSelectSectionDescription.innerHTML = `Selecciona el <span style="font-weight: 600;">curso de ${careerInfo.name}</span> que deseas observar el progreso`
+
         const subjectsForm = generalselectScreenSubjects.querySelector(".memoselectsubject-screen__controls")
         careerInfo.groups.forEach(group => {
             const option = document.createElement('option')
