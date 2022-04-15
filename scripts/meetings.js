@@ -20,7 +20,6 @@ export async function renderMeetings() {
         const leaderRole = userInfo.role.find(role => {
             return role === 'leader'
         })
-        console.log(leaderRole)
         if (leaderRole) {
             createMeetingButton.classList.remove("hidden")
         }
@@ -80,7 +79,6 @@ export async function renderMeetingDetails() {
             const leaderRole = userInfo.role.find(role => {
                 return role === 'leader'
             })
-            console.log(leaderRole)
             if(leaderRole && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
             }
