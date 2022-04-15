@@ -2,6 +2,7 @@ import { createImproveActionComment, getCareerInfo, getCareerSubjects, getImprov
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
+// Select view general
 export async function getInitialGeneralSelect(userInfo) {
     const generalselectScreen = document.querySelector(".generalselect-screen--select")
 
@@ -26,7 +27,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización general</h5>
-                    <a class="small-button small-button--secondary" href="#generalchart?career_${careerInfo.id}">
+                    <a class="small-button small-button--secondary" href="#generalall?career_${careerInfo.id}">
                         <span>Ver</span>
                     </a>
                     </section>
@@ -55,7 +56,6 @@ export async function getInitialGeneralSelect(userInfo) {
         }
     }
 }
-
 
 // Subject general
 export async function getInitialGeneralSubjets() {
@@ -138,8 +138,7 @@ function renderGeneralSubjects(list) {
     })
 }
 
-
-// Specifi general
+// Specific general
 export async function renderImproveActionsForSpecificGeneral(period) {
 
     const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
@@ -216,6 +215,21 @@ export async function onSubmitImproveActionComment(userInfo, period) {
             showLoader()
             createImproveActionComment(subjectId, period, userInfo, addCommentForm.comment.value)
         })
+    }
+}
+
+// All general
+export async function getInitialGeneralAll() {
+    const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
+
+    if(generalAllScreen && window.location.href.includes("generalall")) {
+        const view = window.location.hash.split('?')[1].split('_')[0]
+        const viewId = window.location.hash.split('?')[1].split('_')[1]
+
+
+        
+        console.log(view)
+        console.log(viewId)
     }
 }
 

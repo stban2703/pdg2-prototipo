@@ -1,8 +1,6 @@
 import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getHistoryImproveActions, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 
-let charts = []
-
 export async function getInitialProgressInfo(currentPeriod) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
     if (progressSubjectScreen && (window.location.href.includes("#progresssubject")) || window.location.href.includes("#generalspecific")) {
