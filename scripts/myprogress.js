@@ -56,7 +56,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             }
 
         });
-        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent')
+        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent')
 
         // Fourth question
         const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
@@ -131,7 +131,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                 fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
             });
         }
-        renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
+        renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
 
 
         // Sixth question
@@ -162,7 +162,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             });
         }
 
-        renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
+        renderLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
 
 
         // Seventh question
@@ -514,14 +514,14 @@ export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLab
     renderChart(config, chartId, parentNodeClass)
 }
 
-export function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
+export function renderLineChart(labels, dataSet, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
             label: legend,
             backgroundColor: 'rgb(114, 184, 255)',
             borderColor: 'rgb(114, 184, 255)',
-            data: userDataSet,
+            data: dataSet,
         }]
     };
 

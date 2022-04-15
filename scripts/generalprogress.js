@@ -1,5 +1,5 @@
 import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
-import { renderBarChart } from "./myprogress.js";
+import { renderBarChart, renderLineChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -242,7 +242,6 @@ export async function getInitialGeneralAll(currentPeriod) {
         const answersArray = []
 
         for (let index = 0; index < totalsQuestions; index++) {
-            //const element = array[index];
             answersArray[index] = allAnswers.filter(answer => {
                 return answer.questionIndex === index + 1
             })
@@ -260,6 +259,33 @@ export async function getInitialGeneralAll(currentPeriod) {
             firtQuestionAllDataSet[index] = answerList.length
         });
         renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent')
+
+
+
+        // Thhird question
+        const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+        const thirdQuestionDataSet = []
+
+        thirdQuestionLabels.forEach((label, index) => {
+            const answerList = [...answersArray[2]].filter((answer) => {
+                return answer.period === label
+            })
+            if (answerList.length > 0) {
+                let sum = 0
+                let dataSetValue = 0
+                console.log(answerList)
+                answerList.forEach(answer => {
+                    sum += parseInt(answer.answerValue[0])
+                })
+                dataSetValue = (sum / answerList.length).toFixed(1);
+                thirdQuestionDataSet[index] = dataSetValue
+            } else {
+                thirdQuestionDataSet[index] = 0
+            }
+        });
+        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent')
+
+
         hideLoader()
 
 
