@@ -33,6 +33,7 @@
 @import "modules/memo-section-progress-item";
 @import "modules/memo-question-modal";
 @import "modules/improve-action-item";
+@import "modules/visualization-item";
 @import "modules/custom-pie";
 
 @import "layouts/signinup-form";
@@ -71,6 +72,7 @@
 @import "pages/memohistoryimproveactions-screen";
 @import "pages/progressselectsubject-screen";
 @import "pages/progresssubject-screen";
+@import "pages/generalselect-screen";
 
 html {
     font-size: 62.5%;

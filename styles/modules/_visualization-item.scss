@@ -1,0 +1,46 @@
+.visualization-item {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.2);
+    border-radius: 15px;
+    padding: 3rem 3rem;
+    gap: 1rem;
+    max-width: 35rem;
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__description {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    a {
+        height: fit-content;
+        text-align: center;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+        min-width: 12rem;
+        max-width: 12rem;
+    }
+
+    &--pink {
+        box-shadow: 0px 4px 10px rgba(236, 119, 189, 0.2);
+        .visualization-item__title {
+            color: $pink;
+        }
+    }
+}

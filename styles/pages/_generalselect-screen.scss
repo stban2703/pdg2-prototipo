@@ -1,0 +1,29 @@
+.generalselect-screen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__description {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__content {
+        padding: 2rem 0;
+    }
+
+    &__list {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 3rem;
+    }
+}
