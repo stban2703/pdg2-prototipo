@@ -33,7 +33,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 firstQuestionUserDataSet[index] = 1
             }
         });
-        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart')
+        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart')
 
 
         // Third question
@@ -94,7 +94,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             fourthQuestionUserDataSet[labelIndex]++
             fourthQuestionAllDataSet[labelIndex]--
         })
-        renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
+        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
 
 
         // Fifth answers
@@ -207,40 +207,127 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
        
-
-        /*if (improveActionsAnswers.length > 0) {
-            improveActionsAnswers.forEach(answer => {
-                answer.answerValue.forEach(elem => {
-                    generalList.push(elem)
-                })
-            })
-        }
-
-        if (checkedActionsList.length > 0) {
-            checkedActionsList.forEach(elem => {
-                generalList.push(elem)
-            })
-        }*/
-
-        //console.log(improveActionsAnswers)
-        //console.log(checkedActionsList)
-
+        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas')
     }
 }
 
-function renderBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId) {
+function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend) {
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: legend,
+            backgroundColor: 'rgb(114, 184, 255)',
+            borderColor: 'rgb(255, 255, 255)',
+            data: dataset,
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            plugins: {
+                labels: {
+                    fontSize: 0
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Bar Chart - Stacked',
+                    font: {
+                        size: 20,
+                        family: 'Poppins'
+                    }
+                },
+                subtitle: {
+                    display: false,
+                    text: 'Custom Chart Subtitle',
+                    font: {
+                        size: 15,
+                        family: 'Poppins'
+                    }
+                },
+                legend: {
+                    align: 'end',
+                    labels: {
+                        boxWidth: 15,
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 15,
+                            family: 'Poppins',
+                            weight: 'Regular'
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: {
+                        family: 'Poppins'
+                    },
+                    bodyFont: {
+                        family: 'Poppins'
+                    },
+                    footerFont: {
+                        family: 'Poppins'
+                    }
+                }
+            },
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        font: {
+                            family: 'Poppins', // Your font family
+                            size: 11,
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: xLabel,
+                        font: {
+                            family: 'Poppins'
+                        }
+                    }
+                },
+                y: {
+                    stacked: true,
+                    min: 0,
+                    suggestedMax: yMax < 6 ? 6 : yMax,
+                    ticks: {
+                        font: {
+                            family: 'Poppins', // Your font family
+                            size: 14,
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: yLabel,
+                        font: {
+                            family: 'Poppins'
+                        }
+                    }
+                }
+            },
+            borderRadius: 10,
+            barThickness: 40
+        }
+    };
+
+    renderChart(config, chartId)
+}
+
+function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId) {
     const data = {
         labels: labels,
         datasets: [{
             label: 'Tu respuesta',
             backgroundColor: 'rgb(253, 181, 114)',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 255, 255)',
             data: userDataSet,
         },
         {
             label: 'Otros profesores',
             backgroundColor: 'rgb(114, 184, 255)',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 255, 255)',
             data: allDataSet,
         }]
     };
