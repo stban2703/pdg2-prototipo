@@ -57,8 +57,8 @@ export async function getInitialGeneralSelect(userInfo) {
 
 export async function getInitialGeneralSubjets() {
     const generalselectScreenSubjects = document.querySelector(".generalselect-screen--subjects")
-    showLoader()
     if (generalselectScreenSubjects && window.location.href.includes("#generalsubjects")) {
+        showLoader()
         const careerId = window.location.href.split("?")[1]
         const careerInfo = await getCareerInfo(careerId)
         const subjects = await getCareerSubjects(careerId)
