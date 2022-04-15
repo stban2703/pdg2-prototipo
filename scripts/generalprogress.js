@@ -219,6 +219,18 @@ export async function onSubmitImproveActionComment(userInfo, period) {
     }
 }
 
+
+export function onFilterGeneralAllByPeriod() {
+    const generalAllFilterForm = document.querySelector(".memoselectsubject-screen__controls--generalAll")
+    if(generalAllFilterForm && window.location.href.includes("#generalall")) {
+        const generalAllPeriodFilter = generalAllFilterForm.period
+        generalAllFilterForm.period.addEventListener('input', (event) => {
+            event.preventDefault()
+            renderGeneralAllChart(event.target.value)
+        })
+    }
+}
+
 // All general
 export async function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
@@ -522,5 +534,9 @@ export async function getInitialGeneralAll(currentPeriod) {
 
         hideLoader()
     }
+}
+
+export function renderGeneralAllChart(period) {
+
 }
 
