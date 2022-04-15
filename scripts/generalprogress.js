@@ -273,7 +273,6 @@ export async function getInitialGeneralAll(currentPeriod) {
             if (answerList.length > 0) {
                 let sum = 0
                 let dataSetValue = 0
-                console.log(answerList)
                 answerList.forEach(answer => {
                     sum += parseInt(answer.answerValue[0])
                 })
@@ -286,9 +285,111 @@ export async function getInitialGeneralAll(currentPeriod) {
         renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent')
 
 
+        // Fourth question
+        const fourtQuestionLabels = []
+        answersArray[3].forEach(q => {
+            const valueList = q.answerValue
+            valueList.forEach(value => {
+                const query = fourtQuestionLabels.find(elem => {
+                    return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
+                })
+                if (!query) {
+                    fourtQuestionLabels.push(value)
+                }
+            })
+        });
+
+        const fourthQuestionAllDataSet = []
+        fourtQuestionLabels.forEach((elem, index) => {
+            fourthQuestionAllDataSet[index] = 0
+        })
+
+        answersArray[3].forEach(answer => {
+            answer.answerValue.forEach(value => {
+                let labelIndex = fourtQuestionLabels.findIndex(label => {
+                    return label === value
+                })
+                fourthQuestionAllDataSet[labelIndex]++
+            })
+        })
+
+        renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'Docentes', 'chartFourthQuestionParent')
+
+
+        // Fifth question
+        const fifthQuestionLabels = []
+        const fifthQuestionDataSet = []
+
+        if (answersArray[4].length > 0) {
+            answersArray[4].forEach(answer => {
+                answer.answerValue.forEach(value => {
+                    const q = fifthQuestionLabels.find(label => {
+                        return label === value.split('|')[0]
+                    })
+                    if (!q) {
+                        fifthQuestionLabels.push(value.split('|')[0])
+                    }
+                })
+            })
+
+            fifthQuestionLabels.forEach((label, index) => {
+                let sum = 0
+                let dataSetValue = 0
+
+                answersArray[4].forEach(answer => {
+                    const labelAnswer = answer.answerValue.filter(value => {
+                        return value.split('|')[0] === label
+                    })
+                    if(labelAnswer.length > 0) {
+                        const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
+                        sum += value
+                    }
+                })
+                dataSetValue = (sum / answersArray[4].length).toFixed(1)
+                fifthQuestionDataSet[index] = dataSetValue
+            })
+
+            renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')  
+        }
+
+
+        // Sixth question
+        const sixthQuestionLabels = []
+        const sixthQuestionDataSet = []
+
+        if (answersArray[4].length > 0) {
+            answersArray[4].forEach(answer => {
+                answer.answerValue.forEach(value => {
+                    const q = sixthQuestionLabels.find(label => {
+                        return label === value.split('|')[0]
+                    })
+                    if (!q) {
+                        sixthQuestionLabels.push(value.split('|')[0])
+                    }
+                })
+            })
+
+            sixthQuestionLabels.forEach((label, index) => {
+                let sum = 0
+                let dataSetValue = 0
+
+                answersArray[5].forEach(answer => {
+                    const labelAnswer = answer.answerValue.filter(value => {
+                        return value.split('|')[0] === label
+                    })
+                    if(labelAnswer.length > 0) {
+                        const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
+                        sum += value
+                    }
+                })
+                dataSetValue = (sum / answersArray[5].length).toFixed(1)
+                sixthQuestionDataSet[index] = dataSetValue
+            })
+
+            renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')  
+        }
+
         hideLoader()
-
-
     }
 }
 
