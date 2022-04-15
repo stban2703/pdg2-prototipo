@@ -252,7 +252,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
 
-        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
+        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
 
         // Question 11
         if (document.querySelector(".chartElevenQuestionParent")) {

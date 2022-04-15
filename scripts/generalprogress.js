@@ -203,7 +203,6 @@ export async function renderImproveActionsForSpecificGeneral(period) {
             <p>${comment[0].comment}</p>
             `
         }
-        console.log(comment)
     }
 }
 
