@@ -79,7 +79,7 @@ logoutButton.addEventListener('click', function () {
     logOut()
 })
 
-
+addPageFuncions()
 // Verifica la ventana actual en el menu
 checkCurrentTab()
 window.addEventListener("hashchange", function () {
@@ -90,8 +90,11 @@ window.addEventListener("hashchange", function () {
 // Detectar cambios de pantalla
 const pageContent = document.querySelector(".page-content")
 let observer = new MutationObserver(function (mutationsList, observer) {
-    //mutationsList.forEach(e => {/*console.log(e);*/})
-    addPageFuncions()
+    mutationsList.forEach(e => {
+        if(e.addedNodes.length > 0) {
+            addPageFuncions()
+        }
+    })
 });
 observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
 
@@ -107,6 +110,7 @@ function displayHomeUserName() {
 
 // Agrega las funciones de cada pantalla
 function addPageFuncions() {
+    console.log('ejecuta')
     // Home functions
     displayHomeUserName()
     renderSubjectListHome(currentSubjects)///Sin actualizar
@@ -179,7 +183,7 @@ function checkCurrentTab() {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
-    addPageFuncions()
+    //addPageFuncions()
 }
 
 
