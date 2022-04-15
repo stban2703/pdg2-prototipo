@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -436,10 +436,17 @@ export async function getInitialGeneralAll(currentPeriod) {
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
 
 
+        const improveActionsHistory = []
 
         // Improve actions question
+        for (let index = 0; index < answersArray[9].length; index++) {
+            const improveActionAnswer = answersArray[9][index];
+            const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
+            improveActionsHistory.push(history)
+        }
 
-
+        //console.log()
+        console.log(improveActionsHistory)
 
         // Eleven question
         const elevenQuestionLabels = ['Sí', 'No']
@@ -470,7 +477,6 @@ export async function getInitialGeneralAll(currentPeriod) {
                         twelveQuestionDataSet[labelIndex]++
                     }
                 })
-                console.log(twelveQuestionDataSet)
                 renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent')
             }
 
