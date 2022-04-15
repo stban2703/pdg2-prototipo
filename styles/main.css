@@ -5714,7 +5714,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .progress-section__titleItem {
@@ -6655,7 +6655,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .generalselect-screen {
