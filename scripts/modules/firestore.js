@@ -24,6 +24,21 @@ export async function getCurrentPeriod() {
     }
 }
 
+// General function
+export async function getCareerInfo(careerId) {
+    const careerRef = doc(firestore, "careers", careerId)
+    const docSnap = await getDoc(careerRef)
+    if (docSnap.exists()) {
+        const career = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return career
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

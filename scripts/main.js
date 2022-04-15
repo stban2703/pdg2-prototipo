@@ -1,6 +1,7 @@
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
+import { getInitialGeneralSelect } from "./generalprogress.js";
 import { renderSubjectListHome } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
@@ -133,7 +134,7 @@ function addPageFuncions() {
     getAllSubjectsProgress(currentSubjects, currentPeriod) // LISTO
     renderMemoIntro(currentUser)
     getInitialMemoSubjects(currentSubjects) // SIN PROBLEMAS
-    onSortFilterMemoSubjectListener(currentSubjects, userInfo.groups) // LISTO
+    onSortFilterMemoSubjectListener(currentSubjects, currentUser.groups) // LISTO
     getMemoSectionInfo(currentSubjects, currentPeriod) // LISTO
     renderMemoQuestion()
     submitMemoQuestionForm()
@@ -148,6 +149,9 @@ function addPageFuncions() {
 
     // Progress funtions
     getInitialProgressInfo(currentSubjects, currentPeriod) // LISTO
+
+    // General progress functions
+    getInitialGeneralSelect(currentUser)
 
     // Memo form edit functions
     changeMemoEditFormPage()
