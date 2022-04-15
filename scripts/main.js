@@ -1,7 +1,7 @@
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
-import { getInitialGeneralSelect, getInitialGeneralSubjets } from "./generalprogress.js";
+import { getInitialGeneralSelect, getInitialGeneralSubjets, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderSubjectListHome } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
@@ -110,7 +110,6 @@ function displayHomeUserName() {
 
 // Agrega las funciones de cada pantalla
 function addPageFuncions() {
-    console.log('ejecuta')
     // Home functions
     displayHomeUserName()
     renderSubjectListHome(currentSubjects)///Sin actualizar
@@ -157,6 +156,7 @@ function addPageFuncions() {
     // General progress functions
     getInitialGeneralSelect(currentUser)
     getInitialGeneralSubjets()
+    renderImproveActionsForSpecificGeneral(currentPeriod)
 
     // Memo form edit functions
     changeMemoEditFormPage()

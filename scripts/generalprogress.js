@@ -1,4 +1,4 @@
-import { getCareerInfo, getCareerSubjects } from "./modules/firestore.js";
+import { getCareerInfo, getCareerSubjects, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -139,4 +139,52 @@ function renderGeneralSubjects(list) {
 }
 
 
-// Render specific general
+// Specifi general
+export async function renderImproveActionsForSpecificGeneral(period) {
+
+    const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
+
+    if(generalImproveActionsContainer && window.location.href.includes("#generalimproveactions")) {
+        const subjectTitle = document.querySelector('.progresssubject-screen__info--subjectName')
+        const periodTitle = document.querySelector('.progresssubject-screen__info--subjectPeriod')
+        
+        const subjectId = window.location.hash.split("?")[1]
+        const subjectInfo = await getSubcjectInfo(subjectId)
+
+        subjectTitle.innerHTML = subjectInfo.name
+        periodTitle.innerHTML = period
+
+        const improveActions = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
+        if(improveActions.length > 0) {
+            if(improveActions[0].answerValue.length > 0) {
+                console.log(improveActions[0])
+                const improveActionsContainer = document.querySelector(".improve-actions__list")
+                const emptyContainer = document.querySelector(".improve-actions__empty")
+
+                improveActionsContainer.innerHTML = ``
+                improveActionsContainer.classList.remove("hidden")
+                emptyContainer.classList.add("hidden")
+
+                const improveActionsList = improveActions[0].answerValue
+                improveActionsList.forEach((action, index) => {
+                    const actionItem = document.createElement('tr')
+                    actionItem.className = "improve-action-item"
+                    actionItem.innerHTML = `
+                        <td>
+                            <div class="improve-action-item__number">
+                                <span>${index + 1}</span>
+                            </div>
+                        </td>
+                        <td class="improve-action-item__title">
+                            <h5>${action.name}</h5>
+                        </td>
+                        <td class="improve-action-item__description">
+                            <p>${action.description}</p>
+                        </td>
+                    `
+                    improveActionsContainer.appendChild(actionItem)
+                })
+            }
+        }
+    }
+}
