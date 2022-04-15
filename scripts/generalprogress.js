@@ -124,14 +124,14 @@ function sortFilterGeneralSubjects(subjects, subjectSort, groupFilter) {
 function renderGeneralSubjects(list) {
     const generalSubjectListContainer = document.querySelector(".generalselect-screen__list--subjects")
     generalSubjectListContainer.innerHTML = ``
-    
+
     list.forEach(subject => {
         const subjectItem = document.createElement("div")
         subjectItem.className = "memo-subject"
         subjectItem.innerHTML = `
             <h5 class="memo-subject__title">${subject.name}</h5>
-            <a class="memo-subject__button small-button small-button--secondary" href="generalspecific?${subject.id}">
-                <span>Seleccionar</span>
+            <a class="memo-subject__button small-button small-button--secondary" href="#generalspecific?${subject.id}">
+                <span>Ver</span>
             </a>
             `
         generalSubjectListContainer.appendChild(subjectItem)
