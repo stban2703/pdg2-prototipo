@@ -1,5 +1,6 @@
 import { getCareerInfo, getCareerSubjects } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
+import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
 export async function getInitialGeneralSelect(userInfo) {
     const generalselectScreen = document.querySelector(".generalselect-screen--select")
@@ -55,6 +56,8 @@ export async function getInitialGeneralSelect(userInfo) {
     }
 }
 
+
+// Subject general
 export async function getInitialGeneralSubjets() {
     const generalselectScreenSubjects = document.querySelector(".generalselect-screen--subjects")
     if (generalselectScreenSubjects && window.location.href.includes("#generalsubjects")) {
@@ -78,13 +81,50 @@ export async function getInitialGeneralSubjets() {
             subjectsForm.group.appendChild(option)
         })
 
-        renderGeneralSubjects(subjects)
+        const copy = [...subjects].sort(sortByAlphabeticAscending)
+        renderGeneralSubjects(copy)
+        onSortFilterGeneralSubjectListener(subjects)
     }
+}
+
+function onSortFilterGeneralSubjectListener(subjects) {
+    const generalSubjectsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--general")
+
+    if (window.location.href.includes("#generalsubjects") && generalSubjectsSettingsForm) {
+        const subjectsSortSelect = generalSubjectsSettingsForm.alphabetic
+        const subjectsFilterSelect = generalSubjectsSettingsForm.group
+
+        generalSubjectsSettingsForm.addEventListener('input', () => {
+            sortFilterGeneralSubjects(subjects, subjectsSortSelect, subjectsFilterSelect)
+        })
+    }
+}
+
+function sortFilterGeneralSubjects(subjects, subjectSort, groupFilter) {
+    let filterCopy = [...subjects]
+
+    if (subjectSort.value.length > 0) {
+        if (subjectSort.value == "ascending") {
+            filterCopy = [...filterCopy].sort(sortByAlphabeticAscending)
+        } else if (subjectSort.value = "descending") {
+            filterCopy = [...filterCopy].sort(sortByAlphabeticDescending)
+        }
+    }
+
+    if (groupFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.group == groupFilter.value) {
+                return true
+            }
+        })
+    }
+    renderGeneralSubjects(filterCopy)
 }
 
 function renderGeneralSubjects(list) {
     const generalSubjectListContainer = document.querySelector(".generalselect-screen__list--subjects")
-
+    generalSubjectListContainer.innerHTML = ``
+    
     list.forEach(subject => {
         const subjectItem = document.createElement("div")
         subjectItem.className = "memo-subject"
