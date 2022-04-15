@@ -61,6 +61,27 @@ export async function getSubcjectInfo(subjectId) {
     }
 }
 
+export async function createImproveActionComment(subjectId, period, userInfo, comment) {
+    const commentRef = doc(collection(firestore, "improveactionscomments"))
+    const newComment = {
+        id: commentRef.id,
+        principalId: userInfo.id,
+        principaName: userInfo.name + " " + userInfo.lastname,
+        subjectId: subjectId,
+        period: period,
+        comment: comment,
+        date: Date.now()
+    }
+
+    await setDoc(commentRef, newComment).then(() => {
+        hideLoader()
+        window.location.reload()
+    }).catch((error) => {
+        hideLoader()
+        console.log(error)
+    });
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

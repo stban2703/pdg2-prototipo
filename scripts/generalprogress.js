@@ -1,4 +1,4 @@
-import { getCareerInfo, getCareerSubjects, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getCareerInfo, getCareerSubjects, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -185,5 +185,26 @@ export async function renderImproveActionsForSpecificGeneral(period) {
                 })
             }
         }
+
+        const openAddCommentButton = document.querySelector(".openAddCommentButton")
+        const addCommentForm = document.querySelector(".addCommentForm")
+        openAddCommentButton.addEventListener('click', () => {
+            addCommentForm.classList.remove("hidden")
+            openAddCommentButton.classList.add("hidden")
+        })
     }
 }
+
+export async function onSubmitImproveActionComment(userInfo, period) {
+    const addCommentForm = document.querySelector(".addCommentForm")
+
+    if(addCommentForm && window.location.href.includes("#generalimproveactions")) {
+        addCommentForm.addEventListener("submit", (event) => {
+            event.preventDefault()
+            const subjectId = window.location.hash.split("?")[1]
+            showLoader()
+            createImproveActionComment(subjectId, period, userInfo, addCommentForm.comment.value)
+        })
+    }
+}
+
