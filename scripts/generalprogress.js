@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -236,10 +236,62 @@ export async function getInitialGeneralAll(currentPeriod) {
         document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
         document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
-        const allAnswers = await getAllAnswersByViewType(view, viewId, currentPeriod)
+        const allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
+        const answersArray = []
+
+        // All periods question
+        const allThirdQuestionAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 3)
+
+        const allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
+        const allHistoryImproveActionAnswers = []
+        //const totalImproveActionsByAnswers = []
+
+        for (let index = 0; index < allImproveActionsAnswers.length; index++) {
+            //totalImproveActionsByAnswers[index] = allImproveActionsAnswers[index].answerValue.length
+            const improveActionAnswer = allImproveActionsAnswers[index];
+
+            const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
+            allHistoryImproveActionAnswers.push(history)
+        }
+        /*allHistoryImproveActionAnswers.forEach((history, index) => {
+            totalImproveActionsByAnswers[index] += history.length
+        })*/
+        
+
+        const improveActionQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+        const improveActionsDataSet = []
+
+        improveActionQuestionLabels.forEach((label, index) => {
+            const answerList = allImproveActionsAnswers.filter(answer => {
+                return answer.period === label
+            })
+
+            let checkedByPeriod = 0
+            let totalByPeriod = answerList.length
+
+            allHistoryImproveActionAnswers.forEach(h => {
+                const checkedList = h.filter(action => {
+                    return action.period === label
+                })
+
+                if(checkedList.length > 0) {
+                    checkedByPeriod += checkedList.length
+                    totalByPeriod += checkedList.length
+                }
+            })
+
+            let percent = 0
+            if(totalByPeriod > 0) {
+                percent = Math.round((checkedByPeriod / totalByPeriod) * 100)
+            }
+
+            improveActionsDataSet[index] = percent
+        })
+
+        renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
+
 
         const totalsQuestions = 12
-        const answersArray = []
 
         for (let index = 0; index < totalsQuestions; index++) {
             answersArray[index] = allAnswers.filter(answer => {
@@ -436,17 +488,9 @@ export async function getInitialGeneralAll(currentPeriod) {
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
 
 
-        const improveActionsHistory = []
 
-        // Improve actions question
-        for (let index = 0; index < answersArray[9].length; index++) {
-            const improveActionAnswer = answersArray[9][index];
-            const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
-            improveActionsHistory.push(history)
-        }
+        // Improve Action Answers
 
-        //console.log()
-        console.log(improveActionsHistory)
 
         // Eleven question
         const elevenQuestionLabels = ['Sí', 'No']

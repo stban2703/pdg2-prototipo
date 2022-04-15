@@ -229,7 +229,8 @@ export async function getInitialProgressInfo(currentPeriod) {
             const answerList = improveActionsAnswers.filter(answer => {
                 return answer.period === label
             })
-            const checkedList = improveActionsAnswers.filter(action => {
+            // Cambio raro
+            const checkedList = checkedActionsList.filter(action => {
                 return action.period === label
             })
 
