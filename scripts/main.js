@@ -36,7 +36,8 @@ export const userSubjects = currentSubjects
 // Check user roles
 currentUser.role.forEach(role => {
     if(role === 'principal') {
-        document.querySelector('#navgeneralprogress').classList.remove('hidden')
+        document.querySelector('#navgeneral').classList.remove('hidden')
+        document.querySelector('#navgeneral').setAttribute('href', `#generalcareer?${userInfo.principalCareer}`)
     }
 
     if(role === 'boss') {
