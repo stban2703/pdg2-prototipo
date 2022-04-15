@@ -157,7 +157,6 @@ export async function renderImproveActionsForSpecificGeneral(period) {
         const improveActions = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         if(improveActions.length > 0) {
             if(improveActions[0].answerValue.length > 0) {
-                console.log(improveActions[0])
                 const improveActionsContainer = document.querySelector(".improve-actions__list")
                 const emptyContainer = document.querySelector(".improve-actions__empty")
 

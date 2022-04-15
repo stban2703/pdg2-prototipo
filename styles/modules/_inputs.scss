@@ -202,6 +202,20 @@
         @include textarea-input();
     }
 
+    &--secondary {
+        .text-area-input__label {
+            color: $secondary-color;
+        }
+
+        .text-area-input__field {
+            padding: 2rem;
+            &:focus {
+                border-color: $secondary-color;
+                outline-color: $secondary-color;
+            }
+        }
+    }
+
     &--disabled {
         .text-area-input__label {
             color: $silver;

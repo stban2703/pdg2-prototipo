@@ -887,6 +887,19 @@ input[type=button] {
   left: 0.5rem;
 }
 
+.text-area-input--secondary .text-area-input__label {
+  color: #FDB572;
+}
+
+.text-area-input--secondary .text-area-input__field {
+  padding: 2rem;
+}
+
+.text-area-input--secondary .text-area-input__field:focus {
+  border-color: #FDB572;
+  outline-color: #FDB572;
+}
+
 .text-area-input--disabled .text-area-input__label {
   color: #A0A0A0;
 }
@@ -5631,6 +5644,17 @@ input[type=button] {
       -ms-flex-align: start;
           align-items: flex-start;
   gap: 2rem;
+  width: 100%;
+}
+
+.improve-actions__addCommentSection {
+  width: 100%;
+}
+
+.improve-actions .addCommentButton {
+  max-width: 18.6rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .note-list {
@@ -6718,10 +6742,6 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.progresssubject-screen__improveActions div {
-  max-width: 80rem;
 }
 
 .progresssubject-screen__improveActionsContainer {

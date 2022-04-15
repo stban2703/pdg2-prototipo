@@ -38,7 +38,8 @@
         </div>
     </section>
     <section class="progresssubject-screen__improveActions">
-        <div class="improve-actions improve-actions-content progresssubject-screen__improveActionsContainer generalImproveActionsContainer">
+        <div
+            class="improve-actions improve-actions-content progresssubject-screen__improveActionsContainer generalImproveActionsContainer">
             <h5 class="improve-actions__subtitle">Acciones de mejora</h5>
             <table class="improve-actions__container">
                 <thead class="improve-actions__header">
@@ -64,17 +65,30 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="improve-actions__empty">
+                <p class="improve-actions__emptyText">El docente de la materia aún no ha planteado acciones de mejora.
+                </p>
+            </div>
             <div class="improve-actions__comments">
                 <p class="improve-actions__subtitle">Comentario</p>
-                <button class="memoquestion-form__openAddOptionButton" type="button">
-                    <div class="add-item-input__icon">
-                        <img src="./images/plusagreement.svg" alt="">
-                    </div>
-                    <p class="memoquestion-form__addOptionTag">Agregar comentario</p>
-                </button>
-            </div>
-            <div class="improve-actions__empty">
-                <p class="improve-actions__emptyText">El docente de la materia aún no ha planteado acciones de mejora.</p>
+                <div class="improve-actions__addCommentSection">
+                    <button class="memoquestion-form__openAddOptionButton" type="button">
+                        <div class="add-item-input__icon">
+                            <img src="./images/plusagreement.svg" alt="">
+                        </div>
+                        <p class="memoquestion-form__addOptionTag">Agregar comentario</p>
+                    </button>
+                    <form class="memoquestion-form__justification addCommentForm hidden">
+                        <div class="text-area-input text-area-input--secondary">
+                            <label class="text-area-input__label" for="comment">Agregar comentario</label>
+                            <textarea class="text-area-input__field" name="comment" id="comment" rows="5"
+                            placeholder="Escribe aquí tu texto..." required></textarea>
+                        </div>
+                        <button class="main-button main-button--primary addCommentButton">
+                            <span>Guardar</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
