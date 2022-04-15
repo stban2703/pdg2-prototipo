@@ -209,8 +209,10 @@ export async function getInitialProgressInfo(currentPeriod) {
             return answer.subjectId === subjectId
         })
 
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', 'chartEigthQuestionParent')
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes','chartEigthQuestionParent')
+
         document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
+
 
         // Improve actions answers 10
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
@@ -246,6 +248,27 @@ export async function getInitialProgressInfo(currentPeriod) {
 
         renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
 
+        // Question 11
+        if (document.querySelector(".chartElevenQuestionParent")) {
+            const elevenQuestionAnswers = await getAllAnswersByQuestionAndSubject(11, subjectId)
+            const elevenQuestionLabels = ['Sí', 'No']
+            const elevenQuestionDataSet = [0, 0]
+
+            const currentPeriodAnswer11 = elevenQuestionAnswers.filter(answer => {
+                return answer.period === currentPeriod
+            })
+
+            if(currentPeriodAnswer11.length > 0) {
+                const answerValue = currentPeriodAnswer11[0].answerValue[0]
+                elevenQuestionLabels.forEach((label, index) => {
+                    if(label === answerValue) {
+                        elevenQuestionDataSet[index]++
+                    }
+                })
+            }
+
+            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', '¿El docente necesita apoyo por parte de la universidad para el desarrollo de las acciones de mejora?', 'Respuesta del docente de la materia', 'chartElevenQuestionParent')
+        }
         hideLoader()
     }
 }
@@ -565,7 +588,7 @@ export function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, c
     renderChart(config, chartId, parentNodeClass)
 }
 
-export function renderPieChart(labels, allDataSet, chartId, parentNodeClass) {
+export function renderPieChart(labels, allDataSet, chartId, title, subtitle, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
@@ -592,17 +615,17 @@ export function renderPieChart(labels, allDataSet, chartId, parentNodeClass) {
                 },
                 title: {
                     display: true,
-                    text: '¿Brindas espacios de retroalimentación?',
+                    text: title,
                     font: {
-                        size: 14,
+                        size: 13,
                         family: 'Poppins'
                     }
                 },
                 subtitle: {
                     display: true,
-                    text: 'Respuestas en general de los docentes',
+                    text: subtitle,
                     font: {
-                        size: 14,
+                        size: 12,
                         family: 'Poppins',
                         //weight: 'light'
                     }
@@ -634,7 +657,7 @@ export function renderPieChart(labels, allDataSet, chartId, parentNodeClass) {
         }
     };
 
-    renderChart(config, chartId , parentNodeClass)
+    renderChart(config, chartId, parentNodeClass)
 }
 
 export function renderChart(config, id, parentNodeClass) {

@@ -40,7 +40,6 @@ export async function getAllSubjectsProgress(userSubjects, currentPeriod) {
         } else {
             totalPercent = (answeredQuestions / (totalQuestions - actualOptionals) * 100)
         }
-        console.log(totalPercent)
 
         allSubjectsProgress.innerHTML = `
         <h4 class="memo-edit-info__title">Tu progeso:</h4>
