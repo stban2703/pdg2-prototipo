@@ -39,6 +39,14 @@ export async function getCareerInfo(careerId) {
     }
 }
 
+export async function getCareerSubjects(careerId) {
+    const q = query(collection(firestore, "subjects"), where("careerId", "==", "" + careerId))
+    const querySnapshot = await getDocs(q);
+    const careerList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return careerList
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

@@ -1,7 +1,8 @@
-import { getCareerInfo } from "./modules/firestore.js";
+import { getCareerInfo, getCareerSubjects } from "./modules/firestore.js";
+import { hideLoader, showLoader } from "./utils/loader.js";
 
 export async function getInitialGeneralSelect(userInfo) {
-    const generalselectScreen = document.querySelector(".generalselect-screen")
+    const generalselectScreen = document.querySelector(".generalselect-screen--select")
 
     if (generalselectScreen && window.location.href.includes("#generalselect")) {
         const generalSelectSectionTitle = document.querySelector(".section-banner__title")
@@ -54,6 +55,38 @@ export async function getInitialGeneralSelect(userInfo) {
     }
 }
 
-export async function getInitialGeneralCareer() {
+export async function getInitialGeneralSubjets() {
+    const generalselectScreenSubjects = document.querySelector(".generalselect-screen--subjects")
+    showLoader()
+    if (generalselectScreenSubjects && window.location.href.includes("#generalsubjects")) {
+        const careerId = window.location.href.split("?")[1]
+        const careerInfo = await getCareerInfo(careerId)
+        const subjects = await getCareerSubjects(careerId)
+        hideLoader()
+        const subjectsForm = generalselectScreenSubjects.querySelector(".memoselectsubject-screen__controls")
+        careerInfo.groups.forEach(group => {
+            const option = document.createElement('option')
+            option.value = group
+            option.innerHTML = group
+            subjectsForm.group.appendChild(option)
+        })
 
+        renderGeneralSubjects(subjects)
+    }
+}
+
+function renderGeneralSubjects(list) {
+    const generalSubjectListContainer = document.querySelector(".generalselect-screen__list--subjects")
+
+    list.forEach(subject => {
+        const subjectItem = document.createElement("div")
+        subjectItem.className = "memo-subject"
+        subjectItem.innerHTML = `
+            <h5 class="memo-subject__title">${subject.name}</h5>
+            <a class="memo-subject__button small-button small-button--secondary" href="generalspecific?${subject.id}">
+                <span>Seleccionar</span>
+            </a>
+            `
+        generalSubjectListContainer.appendChild(subjectItem)
+    })
 }

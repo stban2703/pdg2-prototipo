@@ -3304,8 +3304,9 @@ input[type=button] {
   -webkit-box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
           box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
   border-radius: 15px;
-  padding: 4rem;
+  padding: 3rem;
   min-height: 19rem;
+  max-height: 30rem;
   gap: 1rem;
 }
 
@@ -6709,6 +6710,13 @@ input[type=button] {
       -ms-flex-pack: center;
           justify-content: center;
   gap: 3rem;
+}
+
+.generalselect-screen__list--subjects {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
 }
 
 html {
