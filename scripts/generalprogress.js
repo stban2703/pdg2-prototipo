@@ -37,7 +37,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item visualization-item--pink">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización específica</h5>
-                    <a class="small-button small-button--secondary" href="#generalcareer?${careerInfo.id}">
+                    <a class="small-button small-button--secondary" href="#generalsubjects?${careerInfo.id}">
                         <span>Ver</span>
                     </a>
                     </section>
@@ -52,4 +52,8 @@ export async function getInitialGeneralSelect(userInfo) {
                 break;
         }
     }
+}
+
+export async function getInitialGeneralCareer() {
+
 }

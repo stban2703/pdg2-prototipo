@@ -43,4 +43,11 @@
             color: $pink;
         }
     }
+
+    &--blue {
+        box-shadow: 0px 4px 10px rgba(87, 161, 237, 0.2);
+        .visualization-item__title {
+            color: $alt-color;
+        }
+    }
 }

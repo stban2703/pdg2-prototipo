@@ -3862,6 +3862,15 @@ input[type=button] {
   color: #FF89D0;
 }
 
+.visualization-item--blue {
+  -webkit-box-shadow: 0px 4px 10px rgba(87, 161, 237, 0.2);
+          box-shadow: 0px 4px 10px rgba(87, 161, 237, 0.2);
+}
+
+.visualization-item--blue .visualization-item__title {
+  color: #72B8FF;
+}
+
 .custom-pie {
   font-family: "Poppins", sans-serif;
 }
@@ -6033,6 +6042,10 @@ input[type=button] {
   font-size: 1.5rem;
   color: #A0A0A0;
   white-space: nowrap;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  width: 12ch;
 }
 
 .note-screen__views {
@@ -6663,6 +6676,13 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 4rem;
 }
 
 .generalselect-screen__description {
