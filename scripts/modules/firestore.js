@@ -90,6 +90,15 @@ export async function getImproveActionComment(subjectId, currentPeriod) {
     return commentsLiST
 }
 
+export async function getAllAnswersByViewType(view, viewKey, viewId, currentPeriod) {
+    
+    /*const q = query(collection(firestore, view),  where(viewKey, "==", "" + viewId), where("period", "==", "" + currentPeriod))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return answerList*/
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

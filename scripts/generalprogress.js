@@ -1,4 +1,4 @@
-import { createImproveActionComment, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -27,7 +27,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización general</h5>
-                    <a class="small-button small-button--secondary" href="#generalall?career_${careerInfo.id}">
+                    <a class="small-button small-button--secondary" href="#generalall?careers_${careerInfo.id}">
                         <span>Ver</span>
                     </a>
                     </section>
@@ -226,10 +226,24 @@ export async function getInitialGeneralAll() {
         const view = window.location.hash.split('?')[1].split('_')[0]
         const viewId = window.location.hash.split('?')[1].split('_')[1]
 
+        let allAnsers = []
 
-        
+        switch(view) {
+            case "careers":
+                //const careerSubjects = await getCareerSubjects(viewId)
+
+                
+
+                break;
+        }
+        //const allAnswers = getAllAnswersByViewType(view, )
+        //const allAnswer = 
         console.log(view)
         console.log(viewId)
     }
+}
+
+async function getAllAnswers(subjects) {
+    car
 }
 
