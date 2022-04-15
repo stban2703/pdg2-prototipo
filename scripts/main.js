@@ -37,7 +37,7 @@ export const userSubjects = currentSubjects
 currentUser.role.forEach(role => {
     if(role === 'principal') {
         document.querySelector('#navgeneral').classList.remove('hidden')
-        document.querySelector('#navgeneral').setAttribute('href', `#generalcareer?${userInfo.principalCareer}`)
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.principalCareer}`)
     }
 
     if(role === 'boss') {

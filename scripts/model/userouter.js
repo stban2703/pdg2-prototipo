@@ -20,6 +20,7 @@ const router = new Router(
         memohistoryimproveactions: new Layout(new Page("memohistoryimproveactions.html")),
         progressselectsubject: new Layout(new Page("progressselectsubject.html")),
         progresssubject: new Layout(new Page("progresssubject.html")),
+        generalselect: new Layout(new Page("generalselect.html")),
         general: new Layout(new Page("generalprogress.html")),
         generalcareer: new Layout(new Page("generalcareer.html")),
         "#default": new Page("home.html"),
