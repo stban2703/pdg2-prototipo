@@ -47,6 +47,20 @@ export async function getCareerSubjects(careerId) {
     return careerList
 }
 
+export async function getSubcjectInfo(subjectId) {
+    const subjectRef = doc(firestore, "subjects", subjectId)
+    const docSnap = await getDoc(subjectRef)
+    if (docSnap.exists()) {
+        const subject = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return subject
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))

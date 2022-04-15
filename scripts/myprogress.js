@@ -1,13 +1,14 @@
-import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getHistoryImproveActions, getImproveActions } from "./modules/firestore.js";
-import { getSubjectFromId } from "./utils/getters.js";
+import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getHistoryImproveActions, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 
-export async function getInitialProgressInfo(userSubjects, currentPeriod) {
+let charts = []
+
+export async function getInitialProgressInfo(currentPeriod) {
     const progressSubjectScreen = document.querySelector(".progresssubject-screen")
-    if (progressSubjectScreen && window.location.href.includes("#progresssubject")) {
+    if (progressSubjectScreen && (window.location.href.includes("#progresssubject")) || window.location.href.includes("#generalspecific")) {
         showLoader()
         const subjectId = window.location.hash.split("?")[1]
-        const subject = getSubjectFromId(subjectId, userSubjects)
+        const subject = await getSubcjectInfo(subjectId)
 
         document.querySelector(".progresssubject-screen__info--subjectName").innerHTML = subject.name
         document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
@@ -33,7 +34,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 firstQuestionUserDataSet[index] = 1
             }
         });
-        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart')
+        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'chartFirstQuestionParent')
 
 
         // Third question
@@ -51,7 +52,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             }
 
         });
-        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro')
+        renderUserLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent')
 
         // Fourth question
         const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
@@ -96,7 +97,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 fourthQuestionAllDataSet[labelIndex]--
             })
         }
-        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
+        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'chartFourthQuestionParent')
 
 
         // Fifth answers
@@ -126,7 +127,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
             });
         }
-        renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel')
+        renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
 
 
         // Sixth question
@@ -157,7 +158,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             });
         }
 
-        renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel')
+        renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
 
 
         // Seventh question
@@ -188,7 +189,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                 seventhQuestionDataSet[labelIndex]++
             })
         })
-        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos')
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
 
 
         // Eigth question
@@ -208,10 +209,8 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             return answer.subjectId === subjectId
         })
 
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, "No", 'eightQuestionChart')
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', 'chartEigthQuestionParent')
         document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
-        hideLoader()
-
 
         // Improve actions answers 10
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
@@ -245,11 +244,13 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
 
-        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas')
+        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
+
+        hideLoader()
     }
 }
 
-function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend) {
+export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
@@ -350,10 +351,10 @@ function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend) 
         }
     };
 
-    renderChart(config, chartId)
+    renderChart(config, chartId, parentNodeClass)
 }
 
-function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId) {
+export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
@@ -460,10 +461,10 @@ function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLa
         }
     };
 
-    renderChart(config, chartId)
+    renderChart(config, chartId, parentNodeClass)
 }
 
-function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId, legend) {
+export function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
@@ -560,10 +561,10 @@ function renderUserLineChart(labels, userDataSet, yMax, xLabel, yLabel, chartId,
         }
     };
 
-    renderChart(config, chartId)
+    renderChart(config, chartId, parentNodeClass)
 }
 
-function renderPieChart(labels, allDataSet, userAnswer, chartId) {
+export function renderPieChart(labels, allDataSet, chartId, parentNodeClass) {
     const data = {
         labels: labels,
         datasets: [{
@@ -632,11 +633,17 @@ function renderPieChart(labels, allDataSet, userAnswer, chartId) {
         }
     };
 
-    renderChart(config, chartId)
+    renderChart(config, chartId , parentNodeClass)
 }
 
-function renderChart(config, id) {
-    const myChart = new Chart(
+export function renderChart(config, id, parentNodeClass) {
+    const parentNode = document.querySelector(`.${parentNodeClass}`)
+    parentNode.innerHTML = ``
+    const chartContainer = document.createElement('canvas')
+    chartContainer.id = id
+    parentNode.appendChild(chartContainer)
+
+    var myChart = new Chart(
         document.getElementById(id),
         config
     );

@@ -148,7 +148,7 @@ function addPageFuncions() {
     getInitialHistoryImproveActions()
 
     // Progress funtions
-    getInitialProgressInfo(currentSubjects, currentPeriod) // LISTO
+    getInitialProgressInfo(currentPeriod) // LISTO
 
     // General progress functions
     getInitialGeneralSelect(currentUser)

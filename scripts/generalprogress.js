@@ -137,3 +137,6 @@ function renderGeneralSubjects(list) {
         generalSubjectListContainer.appendChild(subjectItem)
     })
 }
+
+
+// Render specific general
