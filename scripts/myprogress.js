@@ -209,7 +209,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             return answer.subjectId === subjectId
         })
 
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes','chartEigthQuestionParent')
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
 
         document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
 
@@ -258,16 +258,38 @@ export async function getInitialProgressInfo(currentPeriod) {
                 return answer.period === currentPeriod
             })
 
-            if(currentPeriodAnswer11.length > 0) {
+            if (currentPeriodAnswer11.length > 0) {
                 const answerValue = currentPeriodAnswer11[0].answerValue[0]
                 elevenQuestionLabels.forEach((label, index) => {
-                    if(label === answerValue) {
+                    if (label === answerValue) {
                         elevenQuestionDataSet[index]++
                     }
                 })
+
+                if (answerValue === 'No') {
+                    document.querySelector('.progress-section__11And12Container').classList.add('hidden')
+                } else {
+                    // Question 12
+                    const twelveQuestionAnswer = await getAllAnswersByQuestionAndSubject(12, subjectId)
+                    const twelveQuestionLabels = ['']
+                    const twelveQuestionDataSet = [0]
+
+                    const currentPeriodAnswer12 = twelveQuestionAnswer.filter(answer => {
+                        return answer.period === currentPeriod
+                    })
+
+                    if (currentPeriodAnswer12.length > 0) {
+                        const answerValue12 = currentPeriodAnswer12[0].answerValue[0]
+                        twelveQuestionLabels[0] = answerValue12
+                        twelveQuestionDataSet[0] = 1
+                        renderPieChart(twelveQuestionLabels, twelveQuestionDataSet, 'twelveQuestionChart', 'Tipo de apoyo', 'Respuestas del docente de la materia', 'chartTwelveQuestionParent')
+                    }
+                }
+            } else {
+                document.querySelector('.progress-section__11And12Container').classList.add('hidden')
             }
 
-            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', '¿El docente necesita apoyo por parte de la universidad para el desarrollo de las acciones de mejora?', 'Respuesta del docente de la materia', 'chartElevenQuestionParent')
+            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent')
         }
         hideLoader()
     }
