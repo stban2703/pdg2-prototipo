@@ -435,6 +435,50 @@ export async function getInitialGeneralAll(currentPeriod) {
 
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
 
+
+
+        // Improve actions question
+
+
+
+        // Eleven question
+        const elevenQuestionLabels = ['Sí', 'No']
+        const elevenQuestionDataSet = [0, 0]
+
+        if (answersArray[10].length > 0) {
+            answersArray[10].forEach(answer => {
+                const answerValue = answer.answerValue[0]
+                const labelIndex = elevenQuestionLabels.findIndex(label => {
+                    return label === answerValue
+                })
+                elevenQuestionDataSet[labelIndex]++
+            })
+            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿Los docentes necesitan apoyo por parte de la', 'universidad para el desarrollo de las acciones de mejora?'], 'Respuestas en general de los docentes', 'chartElevenQuestionParent')
+
+
+            // Twelve question
+            const twelveQuestionLabels = ['Formación', 'Material didáctico o pedagógico', 'Material bibliográfico', 'Apoyo de centros u otros departamentos']
+            const twelveQuestionDataSet = [0, 0, 0, 0]
+
+            if (answersArray[11].length > 0) {
+                answersArray[11].forEach(answer => {
+                    const answerValue = answer.answerValue[0]
+                    const labelIndex = twelveQuestionLabels.findIndex(label => {
+                        return label === answerValue
+                    })
+                    if (labelIndex >= 0) {
+                        twelveQuestionDataSet[labelIndex]++
+                    }
+                })
+                console.log(twelveQuestionDataSet)
+                renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent')
+            }
+
+        } else {
+            document.querySelector('.progress-section__11And12Container').classList.add('hidden')
+        }
+
+
         hideLoader()
     }
 }
