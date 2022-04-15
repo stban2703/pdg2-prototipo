@@ -140,7 +140,7 @@ function addPageFuncions() {
     onSortFilterMemoSubjectListener(currentSubjects, currentUser.groups) // LISTO
     getMemoSectionInfo(currentSubjects, currentPeriod) // LISTO
     renderMemoQuestion()
-    submitMemoQuestionForm()
+    submitMemoQuestionForm(currentSubjects)
     renderMemoNotes(currentUser.id)
     handleMemoAddActionForm()
 

@@ -174,7 +174,6 @@ function renderImproveActions(list) {
 
                     const copy = [...list[periodListIndex].answerValue]
                     copy.splice(improveActionIndex, 1)
-                    console.log(answer)
                     showLoader()
                     submitCheckedImproveAction(answer.questionId, answer.id, answer.subjectId, answer.period,
                         list[periodListIndex].answerValue[improveActionIndex].name, list[periodListIndex].answerValue[improveActionIndex].description, copy)

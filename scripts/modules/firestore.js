@@ -344,49 +344,52 @@ export async function getMemoQuestion(currentPeriod, subjectId, id) {
     }
 }
 
-export async function createMemoAnswer(currentPeriod, questionId, subjectId, answerValue, currentIndex, justification) {
+export async function createMemoAnswer(currentPeriod, questionId, subjectInfo, answerValue, currentIndex, justification) {
     const answerRef = doc(collection(firestore, `memos/answers/answers`));
     const newAnswer = {
         id: answerRef.id,
         answerValue: answerValue,
         period: currentPeriod,
         questionId: questionId,
-        subjectId: subjectId,
+        subjectId: subjectInfo.id,
         justification: justification,
-        questionIndex: currentIndex
+        questionIndex: currentIndex,
+        departmentId: subjectInfo.departamentId,
+        careerId: subjectInfo.careerId,
+        groupId: subjectInfo.groupId
     }
 
     await setDoc(answerRef, newAnswer).then(() => {
-        updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerRef.id, currentIndex, answerValue)
+        updateQuestionAnswerReference(currentPeriod, questionId, subjectInfo, answerRef.id, currentIndex, answerValue)
     }).catch((error) => {
         hideLoader()
         console.log(error)
     });
 }
 
-async function updateQuestionAnswerReference(currentPeriod, questionId, subjectId, answerId, currentIndex, answerValue) {
-    const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`, questionId)
+async function updateQuestionAnswerReference(currentPeriod, questionId, subjectInfo, answerId, currentIndex, answerValue) {
+    const questionRef = doc(firestore, `memos/periods/${currentPeriod}/${subjectInfo.id}/questions`, questionId)
     await updateDoc(questionRef, {
         answerId: answerId
     }).then(() => {
         //hideLoader()
         console.log("Referencia actualizada")
         if (currentIndex === 8 && answerValue[0] === "No") {
-            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+            getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else if (currentIndex === 11 && answerValue[0] === "No"){
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
 
             }
         }
     })
 }
 
-export async function updateAnswerValue(answerId, answerValue, currentPeriod, subjectId, currentIndex, justification) {
+export async function updateAnswerValue(answerId, answerValue, currentPeriod, subjectInfo, currentIndex, justification) {
     const answerRef = doc(firestore, "memos/answers/answers", answerId)
     await updateDoc(answerRef, {
         answerValue: answerValue,
@@ -395,42 +398,43 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
         //hideLoader()
         console.log("Respuesta actualizada")
         if (currentIndex === 8 && answerValue[0] === "No") {
-            getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+            getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else if (currentIndex === 11 && answerValue[0] === "No"){
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else {
-                getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue)
+                getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
 
             }
         }
     })
 }
 
-export async function getNextMemmoQuestion(currentPeriod, subjectId, currentIndex, answerValue) {
-    const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectId}/questions`), where("index", "==", "" + (currentIndex + 1)))
+export async function getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue) {
+    const q = query(collection(firestore, `memos/periods/${currentPeriod}/${subjectInfo.id}/questions`), where("index", "==", "" + (currentIndex + 1)))
+
     const querySnapshot = await getDocs(q);
     const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
     //console.log(nextQuestion)
     hideLoader()
     if (currentIndex == 3) {
-        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}_info`
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectInfo.id}_${nextQuestion.id}_info`
     } else if (currentIndex === 8 && answerValue[0] === "No") {
         if (nextQuestion.answerId && nextQuestion.answerId.length > 0) {
-            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectId, currentIndex + 1, null)
+            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectInfo, currentIndex + 1, null)
         } else {
-            createMemoAnswer(currentPeriod, "WEI1TIuPkuZH8mRdzq9Y", subjectId, [""], currentIndex + 1, null)
+            createMemoAnswer(currentPeriod, "WEI1TIuPkuZH8mRdzq9Y", subjectInfo, [""], currentIndex + 1, null)
         }
     } else if (currentIndex === 11 && answerValue[0] === "No") {
         if (nextQuestion.answerId && nextQuestion.answerId.length > 0) {
-            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectId, currentIndex + 1, null)
+            updateAnswerValue(nextQuestion.answerId, [""], currentPeriod, subjectInfo, currentIndex + 1, null)
         } else {
-            createMemoAnswer(currentPeriod, "fBxBrSNyWs9xKqG3B6kQ", subjectId, [""], currentIndex + 1, null)
+            createMemoAnswer(currentPeriod, "fBxBrSNyWs9xKqG3B6kQ", subjectInfo, [""], currentIndex + 1, null)
         }
     } else {
-        window.location = `index.html#memoquestion?${currentPeriod}_${subjectId}_${nextQuestion.id}`
+        window.location = `index.html#memoquestion?${currentPeriod}_${subjectInfo.id}_${nextQuestion.id}`
     }
 }
 
