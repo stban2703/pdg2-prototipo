@@ -3410,6 +3410,27 @@ input[type=button] {
           box-shadow: 0px 4px 10px rgba(69, 158, 248, 0.2);
 }
 
+.memo-improve-actions--bigger {
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.memo-improve-actions--bigger__image {
+  width: 2.6rem;
+}
+
+.memo-improve-actions--bigger .memo-improve-actions__title {
+  width: 100%;
+  font-size: 1.8rem;
+}
+
+.memo-improve-actions--bigger a {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
 .memo-section-progress-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6632,12 +6653,26 @@ input[type=button] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.progresssubject-screen__headerDescription {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
 .progresssubject-screen__info {
