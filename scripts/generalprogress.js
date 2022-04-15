@@ -1,5 +1,5 @@
 import { createImproveActionComment, getAllAnswersByViewType, getCareerInfo, getCareerSubjects, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
-import { renderBarChart, renderLineChart } from "./myprogress.js";
+import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -420,6 +420,20 @@ export async function getInitialGeneralAll(currentPeriod) {
 
             renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
         }
+
+
+        // Eigth question
+        const eigthQuestionLabels = ['Sí', 'No']
+        const eigthQuestionDataSet = [0, 0]
+        answersArray[7].forEach(answer => {
+            const answerValue = answer.answerValue[0]
+            const labelIndex = eigthQuestionLabels.findIndex(label => {
+                return label === answerValue
+            })
+            eigthQuestionDataSet[labelIndex]++
+        })
+
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
 
         hideLoader()
     }
