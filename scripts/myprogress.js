@@ -87,13 +87,15 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
 
         const subjectAnswers = [...fourthQuestionAnswers].filter((answer) => {
             return answer.subjectId === subjectId
-        })[0].answerValue
+        })[0]
 
-        subjectAnswers.forEach(value => {
-            const labelIndex = fourtQuestionLabels.indexOf(value)
-            fourthQuestionUserDataSet[labelIndex]++
-            fourthQuestionAllDataSet[labelIndex]--
-        })
+        if (subjectAnswers) {
+            subjectAnswers.answerValue.forEach(value => {
+                const labelIndex = fourtQuestionLabels.indexOf(value)
+                fourthQuestionUserDataSet[labelIndex]++
+                fourthQuestionAllDataSet[labelIndex]--
+            })
+        }
         renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart')
 
 
@@ -101,27 +103,29 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         const fifthQuestions = await getAllAnswersByQuestionAndSubject(5, subjectId)
         const fifthQuestionAnswers = fifthQuestions.filter(answer => {
             return answer.period == currentPeriod
-        })[0].answerValue
+        })[0]
 
         const fifthQuestionLabels = []
-        fifthQuestionAnswers.forEach(value => {
-            const q = fifthQuestionLabels.find(label => {
-                return label === value.split('|')[0]
-            })
-            if (!q) {
-                fifthQuestionLabels.push(value.split('|')[0])
-            }
-        })
-
         const fifthQuestionUserDataSet = []
-        fifthQuestionLabels.forEach((label, index) => {
-            const answer = [...fifthQuestionAnswers].filter((answer) => {
-                return answer.split('|')[0] === label
-            })[0]
+        if (fifthQuestionAnswers) {
+            fifthQuestionAnswers.answerValue.forEach(value => {
+                const q = fifthQuestionLabels.find(label => {
+                    return label === value.split('|')[0]
+                })
+                if (!q) {
+                    fifthQuestionLabels.push(value.split('|')[0])
+                }
+            })
 
-            fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
-        });
 
+            fifthQuestionLabels.forEach((label, index) => {
+                const answer = [...fifthQuestionAnswers.answerValue].filter((answer) => {
+                    return answer.split('|')[0] === label
+                })[0]
+
+                fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
+            });
+        }
         renderUserLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel')
 
 
@@ -129,26 +133,29 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         const sixthQuestions = await getAllAnswersByQuestionAndSubject(6, subjectId)
         const sixthQuestionAnswers = sixthQuestions.filter(answer => {
             return answer.period == currentPeriod
-        })[0].answerValue
+        })[0]
 
         const sixthQuestionsLabels = []
-        sixthQuestionAnswers.forEach(value => {
-            const q = sixthQuestionsLabels.find(label => {
-                return label === value.split('|')[0]
-            })
-            if (!q) {
-                sixthQuestionsLabels.push(value.split('|')[0])
-            }
-        })
-
         const sixthQuestionUserDataSet = []
-        sixthQuestionsLabels.forEach((label, index) => {
-            const answer = [...sixthQuestionAnswers].filter((answer) => {
-                return answer.split('|')[0] === label
-            })[0]
 
-            sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
-        });
+        if (sixthQuestionAnswers) {
+            sixthQuestionAnswers.answerValue.forEach(value => {
+                const q = sixthQuestionsLabels.find(label => {
+                    return label === value.split('|')[0]
+                })
+                if (!q) {
+                    sixthQuestionsLabels.push(value.split('|')[0])
+                }
+            })
+
+            sixthQuestionsLabels.forEach((label, index) => {
+                const answer = [...sixthQuestionAnswers.answerValue].filter((answer) => {
+                    return answer.split('|')[0] === label
+                })[0]
+
+                sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
+            });
+        }
 
         renderUserLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel')
 
@@ -159,11 +166,10 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
 
         seventhQuestionAnwers.forEach(answer => {
             answer.answerValue.forEach(value => {
-                console.log(value)
                 const query = seventhQuestionLabels.find(label => {
                     return label === value
                 })
-                if(!query) {
+                if (!query) {
                     seventhQuestionLabels.push(value)
                 }
             })
@@ -180,10 +186,10 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
                     return label === value
                 })
                 seventhQuestionDataSet[labelIndex]++
-            })  
+            })
         })
         renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos')
-        
+
 
         // Eigth question
         const eigthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(8, currentPeriod)
@@ -203,7 +209,7 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
         })
 
         renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, "No", 'eightQuestionChart')
-        document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer.answerValue[0]}”`
+        document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
         hideLoader()
 
 
@@ -227,18 +233,18 @@ export async function getInitialProgressInfo(userSubjects, currentPeriod) {
 
             if (answerList[0]) {
                 totalActionsBySemester = answerList[0].answerValue.length + checkedList.length
-            } else if(!answerList[0] && checkedActionsList.length > 0) {
+            } else if (!answerList[0] && checkedActionsList.length > 0) {
                 totalActionsBySemester += checkedList.length
-            } else if(!answerList[0] && checkedList.length === 0){
+            } else if (!answerList[0] && checkedList.length === 0) {
                 totalActionsBySemester = 0
             }
 
-            if(totalActionsBySemester !== 0) {
+            if (totalActionsBySemester !== 0) {
                 improveActionsPercent = Math.round((checkedList.length / totalActionsBySemester) * 100)
             }
             improveActionsDataSet[index] = improveActionsPercent
         });
-       
+
         renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Tus acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas')
     }
 }
