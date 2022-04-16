@@ -58,7 +58,7 @@ export async function getInitialGeneralSelect(userInfo) {
 
             case "boss":
                 const departmentInfo = await getDepartmentInfo(userInfo.bossDepartment)
-                generalSelectSectionTitle.innerHTML = `Progreso general<br>${departmentInfo.name}`
+                generalSelectSectionTitle.innerHTML = `Progreso general<br>Departamento de ${departmentInfo.name}`
 
                 generalselectScreenList.innerHTML = `
                 
@@ -283,10 +283,17 @@ async function renderGeneralAllCharts(currentPeriod) {
     let viewInfo = {}
     if (view === 'career') {
         viewInfo = await getCareerInfo(viewId)
-    } else if(view === 'department') {
+    } else if (view === 'department') {
         viewInfo = await getDepartmentInfo(viewId)
     }
-    document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
+
+    let initialTitle = ""
+    switch (view) {
+        case 'department':
+            initialTitle = "Departamento de "
+            break;
+    }
+    document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${initialTitle}${viewInfo.name}`
     document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
     const allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
