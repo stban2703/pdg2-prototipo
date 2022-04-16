@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -12,6 +12,7 @@ export async function getInitialGeneralSelect(userInfo) {
         const generalselectScreenList = generalselectScreen.querySelector(".generalselect-screen__list")
 
         let currentRole = ""
+
         userInfo.role.forEach(role => {
             if (role === "principal" || role === "boss" || role === "admin") {
                 currentRole = role
@@ -48,6 +49,42 @@ export async function getInitialGeneralSelect(userInfo) {
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
                         Datos de forma <span style="font-weight: 600;">detallada</span> por cada curso del programa <span style="font-weight: 600;">${careerInfo.name}</span>.
+                    </p>
+                    </section>
+                </div>
+
+                `
+                break;
+
+            case "boss":
+                const departmentInfo = await getDepartmentInfo(userInfo.bossDepartment)
+                generalSelectSectionTitle.innerHTML = `Progreso general<br>${departmentInfo.name}`
+
+                generalselectScreenList.innerHTML = `
+                
+                <div class="visualization-item">
+                    <section class="visualization-item__header">
+                    <h5 class="visualization-item__title">Visualización general</h5>
+                    <a class="small-button small-button--secondary" href="#generalall?department_${departmentInfo.id}">
+                        <span>Ver</span>
+                    </a>
+                    </section>
+                    <section class="visualization-item__content">
+                    <p class="visualization-item__description">
+                        Datos a <span style="font-weight: 600;">nivel global</span> sobre los <span style="font-weight: 600;">docentes</span> del <span style="font-weight: 600;">Departamento de ${departmentInfo.name}</span>.
+                    </p>
+                    </section>
+                </div>
+                <div class="visualization-item visualization-item--pink">
+                    <section class="visualization-item__header">
+                    <h5 class="visualization-item__title">Visualización específica</h5>
+                    <a class="small-button small-button--secondary" href="#generalcareers?${departmentInfo.id}">
+                        <span>Ver</span>
+                    </a>
+                    </section>
+                    <section class="visualization-item__content">
+                    <p class="visualization-item__description">
+                        Datos de forma <span style="font-weight: 600;">detallada</span> por cada curso del <span style="font-weight: 600;">Departamento de ${departmentInfo.name}</span>.
                     </p>
                     </section>
                 </div>
@@ -246,6 +283,8 @@ async function renderGeneralAllCharts(currentPeriod) {
     let viewInfo = {}
     if (view === 'career') {
         viewInfo = await getCareerInfo(viewId)
+    } else if(view === 'department') {
+        viewInfo = await getDepartmentInfo(viewId)
     }
     document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
     document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod

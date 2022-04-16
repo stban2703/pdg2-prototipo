@@ -25,6 +25,20 @@ export async function getCurrentPeriod() {
 }
 
 // General function
+export async function getDepartmentInfo(departamentId) {
+    const departamentRef = doc(firestore, "departments", departamentId)
+    const docSnap = await getDoc(departamentRef)
+    if (docSnap.exists()) {
+        const departament = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return departament
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
 export async function getCareerInfo(careerId) {
     const careerRef = doc(firestore, "careers", careerId)
     const docSnap = await getDoc(careerRef)

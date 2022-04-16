@@ -3964,7 +3964,7 @@ input[type=button] {
           flex-direction: column;
   background-color: #FFFFFF;
   padding: 6rem 4rem;
-  gap: 4rem;
+  gap: 2rem;
   position: fixed;
   left: 0;
   top: 0;

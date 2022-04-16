@@ -43,7 +43,8 @@ currentUser.role.forEach(role => {
 
     if(role === 'boss') {
         document.querySelector('#navaccomplishment').classList.remove('hidden')
-
+        document.querySelector('#navgeneral').classList.remove('hidden')
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.bossDepartment}`)
     }
 })
 
