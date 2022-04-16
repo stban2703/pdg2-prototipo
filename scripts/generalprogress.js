@@ -149,17 +149,19 @@ export async function getInitialGeneralDepartments() {
     if (generalselectScreenDepartments && window.location.href.includes("#generaldepartments")) {
         showLoader()
         const departments = await getDepartments()
-        console.log(departments)
+        const urlParts = window.location.hash.split("?")
 
         const generalDepartmentListContainer = document.querySelector(".generalselect-screen__list--subjects")
         generalDepartmentListContainer.innerHTML = ``
 
+
         departments.forEach(department => {
+            const href = urlParts[1] ? `#generalall?department_${department.id}`: `#generalcareer?${department.id}`
             const departmentItem = document.createElement("div")
             departmentItem.className = "memo-subject"
             departmentItem.innerHTML = `
             <h5 class="memo-subject__title">${department.name}</h5>
-            <a class="memo-subject__button small-button small-button--secondary" href="#generalcareer?${department.id}">
+            <a class="memo-subject__button small-button small-button--secondary" href="${href}">
                 <span>Ver</span>
             </a>
             `
