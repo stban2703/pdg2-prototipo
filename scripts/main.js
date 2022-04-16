@@ -46,6 +46,14 @@ currentUser.role.forEach(role => {
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.bossDepartment}`)
     }
+
+    if(role === 'admin') {
+        document.querySelector('#navnotes').classList.add("hidden")
+        document.querySelector('#navprogress').classList.add('hidden')
+        document.querySelector('#navaccomplishment').classList.remove('hidden')
+        document.querySelector('#navgeneral').classList.remove('hidden')
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_general`)
+    }
 })
 
 // Memorando

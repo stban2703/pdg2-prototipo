@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -100,41 +100,41 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización general de la facultad</h5>
-                    <a class="small-button small-button--secondary" href="#generalall?faculty_general">
-                        <span>Ver</span>
-                    </a>
                     </section>
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
                         Datos a <span style="font-weight: 600;">nivel global</span> sobre los <span style="font-weight: 600;">docentes</span> de la <span style="font-weight: 600;">Facultad de ingeniería</span>.
                     </p>
                     </section>
+                    <a class="small-button small-button--secondary" href="#generalall?faculty_general">
+                        <span>Ver</span>
+                    </a>
                 </div>
                 <div class="visualization-item visualization-item--blue">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización específica</h5>
-                    <a class="small-button small-button--secondary" href="#generaldepartments?general">
-                        <span>Ver</span>
-                    </a>
                     </section>
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
                         Datos de forma <span style="font-weight: 600;">general</span> por cada <span style="font-weight: 600;">departamento/span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
                     </p>
                     </section>
+                    <a class="small-button small-button--secondary" href="#generaldepartments?general">
+                        <span>Ver</span>
+                    </a>
                 </div>
                 <div class="visualization-item visualization-item--pink">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización específica</h5>
-                    <a class="small-button small-button--secondary" href="#generaldepartments">
-                        <span>Ver</span>
-                    </a>
                     </section>
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
                         Datos de forma <span style="font-weight: 600;">detallada</span> por cada <span style="font-weight: 600;">curso/span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
                     </p>
                     </section>
+                    <a class="small-button small-button--secondary" href="#generaldepartments">
+                        <span>Ver</span>
+                    </a>
                 </div>
 
                 `
@@ -379,13 +379,25 @@ async function renderGeneralAllCharts(currentPeriod) {
     document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${initialTitle}${viewInfo.name}`
     document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
-    const allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
+    let allAnswers = []
+    if (view === "faculty") {
+        allAnswers = await getAllAnswersByPeriod(currentPeriod)
+    } else {
+        allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
+    }
     const answersArray = []
 
     // All periods question
-    const allThirdQuestionAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 3)
-
-    const allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
+    let allThirdQuestionAnswers = []
+    let allImproveActionsAnswers = []
+    if (view === "faculty") {
+        console.log("todas")
+        allThirdQuestionAnswers = await getAllAnswersByQuestion(3)
+        allImproveActionsAnswers = await getAllAnswersByQuestion(10)
+    } else {
+        allThirdQuestionAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 3)
+        allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
+    }
     const allHistoryImproveActionAnswers = []
 
     // Improve actions chart

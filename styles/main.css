@@ -3871,6 +3871,7 @@ input[type=button] {
 }
 
 .visualization-item__description {
+  margin-top: auto;
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 300;
@@ -3878,6 +3879,7 @@ input[type=button] {
 }
 
 .visualization-item a {
+  margin-top: auto;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;

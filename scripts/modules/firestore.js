@@ -112,6 +112,13 @@ export async function getImproveActionComment(subjectId, currentPeriod) {
     return commentsLiST
 }
 
+export async function getAllAnswersByQuestion(questionIndex) {
+    const q = query(collection(firestore, "memos/answers/answers"), where("questionIndex", "==", questionIndex))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    return answerList
+}
+
 export async function getAllAnswersByViewTypeAndPeriod(viewKey, viewId, currentPeriod) {
     const q = query(collection(firestore, "memos/answers/answers"),  where(`${viewKey}Id`, "==", "" + viewId), where("period", "==", "" + currentPeriod))
     const querySnapshot = await getDocs(q);
