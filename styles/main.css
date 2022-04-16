@@ -6978,6 +6978,7 @@ input[type=button] {
   min-height: 50rem;
   width: 100%;
   gap: 4rem;
+  padding: 0 2rem;
 }
 
 .accomplishment-screen__column:nth-child(1) {

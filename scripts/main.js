@@ -1,3 +1,4 @@
+import { getInitialAccomplishmentList } from "./accomplishment.js";
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
@@ -36,6 +37,12 @@ export const userSubjects = currentSubjects
 
 // Check user roles
 currentUser.role.forEach(role => {
+
+    if(role ==='leader') {
+        document.querySelector('#navaccomplishment').classList.remove('hidden')
+        document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?${'group'}_${userInfo.leaderGroupId}`)
+    }
+
     if(role === 'principal') {
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.principalCareer}`)
@@ -171,6 +178,9 @@ function addPageFuncions() {
     getInitialGeneralAll(currentPeriod)
     onFilterGeneralAllByPeriod()
     getInitialGeneralDepartments()
+
+    // Accomplishment functions
+    getInitialAccomplishmentList(currentUser)
 
     // Memo form edit functions
     changeMemoEditFormPage()
