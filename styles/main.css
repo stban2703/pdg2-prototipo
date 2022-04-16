@@ -6838,6 +6838,71 @@ input[type=button] {
       grid-template-columns: repeat(3, 1fr);
 }
 
+.accomplishment-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.accomplishment-screen__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.accomplishment-screen .memoselectsubject-screen__controls--accomplishmentControls {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.accomplishment-screen__content {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+}
+
+.accomplishment-screen__column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 50rem;
+}
+
+.accomplishment-screen__column:nth-child(1) {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='100%' x2='100%' y1='0' y2='100%' fill='none' stroke='%23858BF1' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+}
+
+.accomplishment-screen__column:nth-child(2) {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%23858BF1' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+}
+
+.accomplishment-screen__columnHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 html {
   font-size: 62.5%;
 }
