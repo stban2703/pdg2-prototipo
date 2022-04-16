@@ -12,6 +12,8 @@
     &__info {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     &__name {
@@ -26,5 +28,7 @@
         font-size: 1.5rem;
         font-weight: $light;
         color: $boulder;
+        text-overflow: ellipsis;
+
     }
 }

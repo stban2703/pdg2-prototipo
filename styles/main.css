@@ -3989,6 +3989,8 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .accomplishment-teacher__name {
@@ -4003,6 +4005,7 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: 300;
   color: #757575;
+  text-overflow: ellipsis;
 }
 
 .signinup-form {

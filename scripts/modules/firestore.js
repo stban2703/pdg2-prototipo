@@ -78,6 +78,14 @@ export async function getCareerSubjects(careerId) {
     return careerList
 }
 
+export async function getGroupSubjects(groupId) {
+    const q = query(collection(firestore, "subjects"), where("groupId", "==", "" + groupId))
+    const querySnapshot = await getDocs(q);
+    const subjectList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return subjectList
+}
+
 export async function getSubcjectInfo(subjectId) {
     const subjectRef = doc(firestore, "subjects", subjectId)
     const docSnap = await getDoc(subjectRef)

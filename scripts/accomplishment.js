@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectsAndPeriod, getGroupInfo, getTeacherById, updateTeacherAccomplishment } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getGroupInfo, getGroupSubjects, getTeacherById, getUserSubjects, updateTeacherAccomplishment } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 
 
@@ -20,9 +20,16 @@ export async function getInitialAccomplishmentList(userInfo) {
             }
         });
 
+        const completeList = accomplishmentScreenContentList.querySelector(".accomplishment-screen__columnList--complete")
+        const incompleteList = accomplishmentScreenContentList.querySelector(".accomplishment-screen__columnList--incomplete")
+
+        completeList.innerHTML = ``
+        incompleteList.innerHTML = ``
+
         switch (currentRole) {
             case "leader":
                 const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
+                const groupSubjects = await getGroupSubjects(viewId)
 
                 const teacherList = []
                 for (let index = 0; index < groupInfo.teachers.length; index++) {
@@ -30,6 +37,31 @@ export async function getInitialAccomplishmentList(userInfo) {
                     const teacher = await getTeacherById(id)
                     teacherList.push(teacher)
                 }
+
+                teacherList.forEach(teacher => {
+                    let teacherSubjectsNames = ''
+                    teacher.subjects.forEach(id => {
+                        const q = groupSubjects.find(subject => {
+                            return subject.id === id
+                        })
+                        teacherSubjectsNames += `${q.name}<br>`
+                    })
+                    console.log(teacherSubjectsNames)
+                    const teacherItem = document.createElement('div')
+                    teacherItem.className = `accomplishment-teacher${teacher.accomplishment === 100 ? ' accomplishment-teacher--secondary' : ''}`
+                    teacherItem.innerHTML = `
+                    <img src="./images/accomplishmentteacher.svg" alt="">
+                    <section class="accomplishment-teacher__info">
+                        <h5 class="accomplishment-teacher__name">${teacher.name.split(" ")[0]} ${teacher.lastname.split(" ")[0]}</h5>
+                        <p class="accomplishment-teacher__subject">${teacherSubjectsNames}</p>
+                    </section>
+                    `
+                    if(teacher.accomplishment === 100) {
+                        completeList.appendChild(teacherItem)
+                    } else {
+                        incompleteList.appendChild(teacherItem)
+                    }
+                })
                 break;
         }
 
