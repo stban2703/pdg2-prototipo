@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -78,7 +78,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 <div class="visualization-item visualization-item--pink">
                     <section class="visualization-item__header">
                     <h5 class="visualization-item__title">Visualización específica</h5>
-                    <a class="small-button small-button--secondary" href="#generalcareers?${departmentInfo.id}">
+                    <a class="small-button small-button--secondary" href="#generalcareer?${departmentInfo.id}">
                         <span>Ver</span>
                     </a>
                     </section>
@@ -92,6 +92,36 @@ export async function getInitialGeneralSelect(userInfo) {
                 `
                 break;
         }
+    }
+}
+
+// Career general
+export async function getInitialGeneralCareer() {
+    const generalselectScreenCareer = document.querySelector(".generalselect-screen--careers")
+    if (generalselectScreenCareer && window.location.href.includes("#generalcareer")) {
+        showLoader()
+        const departmentId = window.location.href.split("?")[1]
+        const departmentInfo = await getDepartmentInfo(departmentId)
+        const careers = await getDepartmentCareers(departmentId)
+        hideLoader()
+
+        const generalSelectSectionTitle = document.querySelector(".section-banner__title")
+        generalSelectSectionTitle.innerHTML = `Progreso general<br>Departamento de ${departmentInfo.name}`
+
+        const generalCareerListContainer = document.querySelector(".generalselect-screen__list--subjects")
+        generalCareerListContainer.innerHTML = ``
+
+        careers.forEach(career => {
+            const careerItem = document.createElement("div")
+            careerItem.className = "memo-subject"
+            careerItem.innerHTML = `
+            <h5 class="memo-subject__title">${career.name}</h5>
+            <a class="memo-subject__button small-button small-button--secondary" href="#generalsubjects?${career.id}">
+                <span>Ver</span>
+            </a>
+            `
+            generalCareerListContainer.appendChild(careerItem)
+        })
     }
 }
 
@@ -255,7 +285,6 @@ export async function onSubmitImproveActionComment(userInfo, period) {
         })
     }
 }
-
 
 export function onFilterGeneralAllByPeriod() {
     const generalAllFilterForm = document.querySelector(".memoselectsubject-screen__controls--generalAll")

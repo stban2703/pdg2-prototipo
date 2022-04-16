@@ -25,18 +25,26 @@ export async function getCurrentPeriod() {
 }
 
 // General function
-export async function getDepartmentInfo(departamentId) {
-    const departamentRef = doc(firestore, "departments", departamentId)
-    const docSnap = await getDoc(departamentRef)
+export async function getDepartmentInfo(departmentId) {
+    const departmentRef = doc(firestore, "departments", departmentId)
+    const docSnap = await getDoc(departmentRef)
     if (docSnap.exists()) {
-        const departament = docSnap.data()
+        const department = docSnap.data()
         //console.log("Document data:", docSnap.data());
-        return departament
+        return department
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
         return null
     }
+}
+
+export async function getDepartmentCareers(departmentId) {
+    const q = query(collection(firestore, "careers"), where("departmentId", "==", "" + departmentId))
+    const querySnapshot = await getDocs(q);
+    const departmentList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return departmentList
 }
 
 export async function getCareerInfo(careerId) {
@@ -373,7 +381,7 @@ export async function createMemoAnswer(currentPeriod, questionId, subjectInfo, a
         subjectId: subjectInfo.id,
         justification: justification,
         questionIndex: currentIndex,
-        departmentId: subjectInfo.departamentId,
+        departmentId: subjectInfo.departmentId,
         careerId: subjectInfo.careerId,
         groupId: subjectInfo.groupId
     }
