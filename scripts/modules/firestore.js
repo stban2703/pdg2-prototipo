@@ -39,12 +39,20 @@ export async function getDepartmentInfo(departmentId) {
     }
 }
 
-export async function getDepartmentCareers(departmentId) {
-    const q = query(collection(firestore, "careers"), where("departmentId", "==", "" + departmentId))
+export async function getDepartments() {
+    const q = query(collection(firestore, "departments"))
     const querySnapshot = await getDocs(q);
     const departmentList = querySnapshot.docs.map(doc => doc.data());
     hideLoader()
     return departmentList
+}
+
+export async function getDepartmentCareers(departmentId) {
+    const q = query(collection(firestore, "careers"), where("departmentId", "==", "" + departmentId))
+    const querySnapshot = await getDocs(q);
+    const careerList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return careerList
 }
 
 export async function getCareerInfo(careerId) {

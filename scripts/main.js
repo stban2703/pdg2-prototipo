@@ -1,7 +1,7 @@
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
-import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
+import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderSubjectListHome } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
@@ -166,10 +166,11 @@ function addPageFuncions() {
     getInitialGeneralSelect(currentUser)
     getInitialGeneralCareer()
     getInitialGeneralSubjets()
-    renderImproveActionsForSpecificGeneral(currentPeriod)
+    renderImproveActionsForSpecificGeneral(currentPeriod, currentUser)
     onSubmitImproveActionComment(currentUser, currentPeriod)
     getInitialGeneralAll(currentPeriod)
     onFilterGeneralAllByPeriod()
+    getInitialGeneralDepartments()
 
     // Memo form edit functions
     changeMemoEditFormPage()

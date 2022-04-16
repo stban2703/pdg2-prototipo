@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -112,11 +112,11 @@ export async function getInitialGeneralSelect(userInfo) {
                 </div>
                 <div class="visualization-item visualization-item--blue">
                     <section class="visualization-item__header">
-                    <h5 class="visualization-item__title">Visualización específica</h5>
+                    <h5 class="visualization-item__title">Visualización general por departamentos</h5>
                     </section>
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
-                        Datos de forma <span style="font-weight: 600;">general</span> por cada <span style="font-weight: 600;">departamento/span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
+                        Datos de forma <span style="font-weight: 600;">general</span> por cada <span style="font-weight: 600;">departamento</span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
                     </p>
                     </section>
                     <a class="small-button small-button--secondary" href="#generaldepartments?general">
@@ -125,11 +125,11 @@ export async function getInitialGeneralSelect(userInfo) {
                 </div>
                 <div class="visualization-item visualization-item--pink">
                     <section class="visualization-item__header">
-                    <h5 class="visualization-item__title">Visualización específica</h5>
+                    <h5 class="visualization-item__title">Visualización específica por curso</h5>
                     </section>
                     <section class="visualization-item__content">
                     <p class="visualization-item__description">
-                        Datos de forma <span style="font-weight: 600;">detallada</span> por cada <span style="font-weight: 600;">curso/span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
+                        Datos de forma <span style="font-weight: 600;">detallada</span> por cada <span style="font-weight: 600;">curso</span> perteneciente a la <span style="font-weight: 600;">Facultad de Ingeniería</span>.
                     </p>
                     </section>
                     <a class="small-button small-button--secondary" href="#generaldepartments">
@@ -144,8 +144,28 @@ export async function getInitialGeneralSelect(userInfo) {
 }
 
 // Faculty general
-export async function getInitialDepartment() {
+export async function getInitialGeneralDepartments() {
+    const generalselectScreenDepartments = document.querySelector(".generalselect-screen--departments")
+    if (generalselectScreenDepartments && window.location.href.includes("#generaldepartments")) {
+        showLoader()
+        const departments = await getDepartments()
+        console.log(departments)
 
+        const generalDepartmentListContainer = document.querySelector(".generalselect-screen__list--subjects")
+        generalDepartmentListContainer.innerHTML = ``
+
+        departments.forEach(department => {
+            const departmentItem = document.createElement("div")
+            departmentItem.className = "memo-subject"
+            departmentItem.innerHTML = `
+            <h5 class="memo-subject__title">${department.name}</h5>
+            <a class="memo-subject__button small-button small-button--secondary" href="#generalcareer?${department.id}">
+                <span>Ver</span>
+            </a>
+            `
+            generalDepartmentListContainer.appendChild(departmentItem)
+        })
+    }
 }
 
 
@@ -261,7 +281,7 @@ function renderGeneralSubjects(list) {
 }
 
 // Specific general
-export async function renderImproveActionsForSpecificGeneral(period) {
+export async function renderImproveActionsForSpecificGeneral(period, userInfo) {
 
     const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
 
@@ -309,6 +329,14 @@ export async function renderImproveActionsForSpecificGeneral(period) {
 
         const openAddCommentButton = document.querySelector(".openAddCommentButton")
         const addCommentForm = document.querySelector(".addCommentForm")
+
+        const commentSection = document.querySelector(".improve-actions__comments")
+        userInfo.role.forEach(role => {
+            if(role === "principal") {
+                commentSection.classList.remove("hidden")
+            }
+        })
+
         openAddCommentButton.addEventListener('click', () => {
             addCommentForm.classList.remove("hidden")
             openAddCommentButton.classList.add("hidden")
@@ -391,7 +419,6 @@ async function renderGeneralAllCharts(currentPeriod) {
     let allThirdQuestionAnswers = []
     let allImproveActionsAnswers = []
     if (view === "faculty") {
-        console.log("todas")
         allThirdQuestionAnswers = await getAllAnswersByQuestion(3)
         allImproveActionsAnswers = await getAllAnswersByQuestion(10)
     } else {
