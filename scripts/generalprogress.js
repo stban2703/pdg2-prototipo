@@ -222,321 +222,314 @@ export async function onSubmitImproveActionComment(userInfo, period) {
 
 export function onFilterGeneralAllByPeriod() {
     const generalAllFilterForm = document.querySelector(".memoselectsubject-screen__controls--generalAll")
-    if(generalAllFilterForm && window.location.href.includes("#generalall")) {
-        const generalAllPeriodFilter = generalAllFilterForm.period
+    if (generalAllFilterForm && window.location.href.includes("#generalall")) {
         generalAllFilterForm.period.addEventListener('input', (event) => {
             event.preventDefault()
-            renderGeneralAllChart(event.target.value)
+            renderGeneralAllCharts(event.target.value)
         })
     }
 }
 
 // All general
-export async function getInitialGeneralAll(currentPeriod) {
+export function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
-
     if (generalAllScreen && window.location.href.includes("generalall")) {
-
-        const view = window.location.hash.split('?')[1].split('_')[0]
-        const viewId = window.location.hash.split('?')[1].split('_')[1]
-
-        showLoader()
-        let viewInfo = {}
-        if (view === 'career') {
-            viewInfo = await getCareerInfo(viewId)
-        }
-        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
-        document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
-
-        const allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
-        const answersArray = []
-
-        // All periods question
-        const allThirdQuestionAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 3)
-
-        const allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
-        const allHistoryImproveActionAnswers = []
-
-        // Improve actions chart
-        for (let index = 0; index < allImproveActionsAnswers.length; index++) {
-            const improveActionAnswer = allImproveActionsAnswers[index];
-            const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
-            allHistoryImproveActionAnswers.push(history)
-        }     
-
-        const improveActionQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
-        const improveActionsDataSet = []
-
-        improveActionQuestionLabels.forEach((label, index) => {
-            const answerList = allImproveActionsAnswers.filter(answer => {
-                return answer.period === label
-            })
-
-            let checkedByPeriod = 0
-            let totalByPeriod = answerList.length
-
-            allHistoryImproveActionAnswers.forEach(h => {
-                const checkedList = h.filter(action => {
-                    return action.period === label
-                })
-
-                if(checkedList.length > 0) {
-                    checkedByPeriod += checkedList.length
-                    totalByPeriod += checkedList.length
-                }
-            })
-
-            let percent = 0
-            if(totalByPeriod > 0) {
-                percent = Math.round((checkedByPeriod / totalByPeriod) * 100)
-            }
-
-            improveActionsDataSet[index] = percent
-        })
-
-        renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
-
-
-        const totalsQuestions = 12
-
-        for (let index = 0; index < totalsQuestions; index++) {
-            answersArray[index] = allAnswers.filter(answer => {
-                return answer.questionIndex === index + 1
-            })
-
-        }
-
-        // First question
-        const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
-        const firtQuestionAllDataSet = []
-
-        firstQuestionLabels.forEach((label, index) => {
-            const answerList = [...answersArray[0]].filter((answer) => {
-                return answer.answerValue[0] === label
-            })
-            firtQuestionAllDataSet[index] = answerList.length
-        });
-        renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent')
-
-
-
-        // Third question
-        const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
-        const thirdQuestionDataSet = []
-
-        thirdQuestionLabels.forEach((label, index) => {
-            const answerList = allThirdQuestionAnswers.filter((answer) => {
-                return answer.period === label
-            })
-                        
-            if (answerList.length > 0) {
-                let sum = 0
-                let dataSetValue = 0
-                answerList.forEach(answer => {
-                    sum += parseInt(answer.answerValue[0])
-                })
-                dataSetValue = (sum / answerList.length).toFixed(1);
-                thirdQuestionDataSet[index] = dataSetValue
-            } else {
-                thirdQuestionDataSet[index] = 0
-            }
-        });
-        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent')
-
-
-        // Fourth question
-        const fourtQuestionLabels = []
-        answersArray[3].forEach(q => {
-            const valueList = q.answerValue
-            valueList.forEach(value => {
-                const query = fourtQuestionLabels.find(elem => {
-                    return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
-                })
-                if (!query) {
-                    fourtQuestionLabels.push(value)
-                }
-            })
-        });
-
-        const fourthQuestionAllDataSet = []
-        fourtQuestionLabels.forEach((elem, index) => {
-            fourthQuestionAllDataSet[index] = 0
-        })
-
-        answersArray[3].forEach(answer => {
-            answer.answerValue.forEach(value => {
-                let labelIndex = fourtQuestionLabels.findIndex(label => {
-                    return label === value
-                })
-                fourthQuestionAllDataSet[labelIndex]++
-            })
-        })
-
-        renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'Docentes', 'chartFourthQuestionParent')
-
-
-        // Fifth question
-        const fifthQuestionLabels = []
-        const fifthQuestionDataSet = []
-
-        if (answersArray[4].length > 0) {
-            answersArray[4].forEach(answer => {
-                answer.answerValue.forEach(value => {
-                    const q = fifthQuestionLabels.find(label => {
-                        return label === value.split('|')[0]
-                    })
-                    if (!q) {
-                        fifthQuestionLabels.push(value.split('|')[0])
-                    }
-                })
-            })
-
-            fifthQuestionLabels.forEach((label, index) => {
-                let sum = 0
-                let dataSetValue = 0
-
-                answersArray[4].forEach(answer => {
-                    const labelAnswer = answer.answerValue.filter(value => {
-                        return value.split('|')[0] === label
-                    })
-                    if (labelAnswer.length > 0) {
-                        const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
-                        sum += value
-                    }
-                })
-                dataSetValue = (sum / answersArray[4].length).toFixed(1)
-                fifthQuestionDataSet[index] = dataSetValue
-            })
-
-            renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
-        }
-
-
-        // Sixth question
-        const sixthQuestionLabels = []
-        const sixthQuestionDataSet = []
-
-        if (answersArray[4].length > 0) {
-            answersArray[4].forEach(answer => {
-                answer.answerValue.forEach(value => {
-                    const q = sixthQuestionLabels.find(label => {
-                        return label === value.split('|')[0]
-                    })
-                    if (!q) {
-                        sixthQuestionLabels.push(value.split('|')[0])
-                    }
-                })
-            })
-
-            sixthQuestionLabels.forEach((label, index) => {
-                let sum = 0
-                let dataSetValue = 0
-
-                answersArray[5].forEach(answer => {
-                    const labelAnswer = answer.answerValue.filter(value => {
-                        return value.split('|')[0] === label
-                    })
-                    if (labelAnswer.length > 0) {
-                        const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
-                        sum += value
-                    }
-                })
-                dataSetValue = (sum / answersArray[5].length).toFixed(1)
-                sixthQuestionDataSet[index] = dataSetValue
-            })
-
-            renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
-        }
-
-
-        // Seventh question
-        const seventhQuestionLabels = []
-        if (answersArray[6]) {
-            answersArray[6].forEach(answer => {
-                answer.answerValue.forEach(value => {
-                    const query = seventhQuestionLabels.find(label => {
-                        return label === value
-                    })
-                    if (!query) {
-                        seventhQuestionLabels.push(value)
-                    }
-                })
-            })
-
-            const seventhQuestionDataSet = []
-            seventhQuestionLabels.forEach((label, index) => {
-                seventhQuestionDataSet[index] = 0
-            })
-
-            answersArray[6].forEach((answer, index) => {
-                answer.answerValue.forEach(value => {
-                    let labelIndex = seventhQuestionLabels.findIndex(label => {
-                        return label === value
-                    })
-                    seventhQuestionDataSet[labelIndex]++
-                })
-            })
-
-            renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
-        }
-
-
-        // Eigth question
-        const eigthQuestionLabels = ['Sí', 'No']
-        const eigthQuestionDataSet = [0, 0]
-        answersArray[7].forEach(answer => {
-            const answerValue = answer.answerValue[0]
-            const labelIndex = eigthQuestionLabels.findIndex(label => {
-                return label === answerValue
-            })
-            eigthQuestionDataSet[labelIndex]++
-        })
-
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
-
-
-        // Eleven question
-        const elevenQuestionLabels = ['Sí', 'No']
-        const elevenQuestionDataSet = [0, 0]
-
-        if (answersArray[10].length > 0) {
-            answersArray[10].forEach(answer => {
-                const answerValue = answer.answerValue[0]
-                const labelIndex = elevenQuestionLabels.findIndex(label => {
-                    return label === answerValue
-                })
-                elevenQuestionDataSet[labelIndex]++
-            })
-            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿Los docentes necesitan apoyo por parte de la', 'universidad para el desarrollo de las acciones de mejora?'], 'Respuestas en general de los docentes', 'chartElevenQuestionParent')
-
-
-            // Twelve question
-            const twelveQuestionLabels = ['Formación', 'Material didáctico o pedagógico', 'Material bibliográfico', 'Apoyo de centros u otros departamentos']
-            const twelveQuestionDataSet = [0, 0, 0, 0]
-
-            if (answersArray[11].length > 0) {
-                answersArray[11].forEach(answer => {
-                    const answerValue = answer.answerValue[0]
-                    const labelIndex = twelveQuestionLabels.findIndex(label => {
-                        return label === answerValue
-                    })
-                    if (labelIndex >= 0) {
-                        twelveQuestionDataSet[labelIndex]++
-                    }
-                })
-                renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent')
-            }
-
-        } else {
-            document.querySelector('.progress-section__11And12Container').classList.add('hidden')
-        }
-
-
-        hideLoader()
+        renderGeneralAllCharts(currentPeriod)
     }
 }
 
-export function renderGeneralAllChart(period) {
+async function renderGeneralAllCharts(currentPeriod) {
+    const view = window.location.hash.split('?')[1].split('_')[0]
+    const viewId = window.location.hash.split('?')[1].split('_')[1]
 
+    showLoader()
+    let viewInfo = {}
+    if (view === 'career') {
+        viewInfo = await getCareerInfo(viewId)
+    }
+    document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${viewInfo.name}`
+    document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
+
+    const allAnswers = await getAllAnswersByViewTypeAndPeriod(view, viewId, currentPeriod)
+    const answersArray = []
+
+    // All periods question
+    const allThirdQuestionAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 3)
+
+    const allImproveActionsAnswers = await getAllAnswersByViewTypeAndQuestion(view, viewId, 10)
+    const allHistoryImproveActionAnswers = []
+
+    // Improve actions chart
+    for (let index = 0; index < allImproveActionsAnswers.length; index++) {
+        const improveActionAnswer = allImproveActionsAnswers[index];
+        const history = await getHistoryImproveActions(improveActionAnswer.subjectId)
+        allHistoryImproveActionAnswers.push(history)
+    }
+
+    const improveActionQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+    const improveActionsDataSet = []
+
+    improveActionQuestionLabels.forEach((label, index) => {
+        const answerList = allImproveActionsAnswers.filter(answer => {
+            return answer.period === label
+        })
+
+        let checkedByPeriod = 0
+        let totalByPeriod = answerList.length
+
+        allHistoryImproveActionAnswers.forEach(h => {
+            const checkedList = h.filter(action => {
+                return action.period === label
+            })
+
+            if (checkedList.length > 0) {
+                checkedByPeriod += checkedList.length
+                totalByPeriod += checkedList.length
+            }
+        })
+
+        let percent = 0
+        if (totalByPeriod > 0) {
+            percent = Math.round((checkedByPeriod / totalByPeriod) * 100)
+        }
+
+        improveActionsDataSet[index] = percent
+    })
+
+    renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
+
+
+    const totalsQuestions = 12
+
+    for (let index = 0; index < totalsQuestions; index++) {
+        answersArray[index] = allAnswers.filter(answer => {
+            return answer.questionIndex === index + 1
+        })
+
+    }
+
+    // First question
+    const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
+    const firtQuestionAllDataSet = []
+
+    firstQuestionLabels.forEach((label, index) => {
+        const answerList = [...answersArray[0]].filter((answer) => {
+            return answer.answerValue[0] === label
+        })
+        firtQuestionAllDataSet[index] = answerList.length
+    });
+    renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent')
+
+
+
+    // Third question
+    const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+    const thirdQuestionDataSet = []
+
+    thirdQuestionLabels.forEach((label, index) => {
+        const answerList = allThirdQuestionAnswers.filter((answer) => {
+            return answer.period === label
+        })
+
+        if (answerList.length > 0) {
+            let sum = 0
+            let dataSetValue = 0
+            answerList.forEach(answer => {
+                sum += parseInt(answer.answerValue[0])
+            })
+            dataSetValue = (sum / answerList.length).toFixed(1);
+            thirdQuestionDataSet[index] = dataSetValue
+        } else {
+            thirdQuestionDataSet[index] = 0
+        }
+    });
+    renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent')
+
+
+    // Fourth question
+    const fourtQuestionLabels = []
+    answersArray[3].forEach(q => {
+        const valueList = q.answerValue
+        valueList.forEach(value => {
+            const query = fourtQuestionLabels.find(elem => {
+                return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
+            })
+            if (!query) {
+                fourtQuestionLabels.push(value)
+            }
+        })
+    });
+
+    const fourthQuestionAllDataSet = []
+    fourtQuestionLabels.forEach((elem, index) => {
+        fourthQuestionAllDataSet[index] = 0
+    })
+
+    answersArray[3].forEach(answer => {
+        answer.answerValue.forEach(value => {
+            let labelIndex = fourtQuestionLabels.findIndex(label => {
+                return label === value
+            })
+            fourthQuestionAllDataSet[labelIndex]++
+        })
+    })
+
+    renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'Docentes', 'chartFourthQuestionParent')
+
+
+    // Fifth question
+    const fifthQuestionLabels = []
+    const fifthQuestionDataSet = []
+
+    if (answersArray[4].length > 0) {
+        answersArray[4].forEach(answer => {
+            answer.answerValue.forEach(value => {
+                const q = fifthQuestionLabels.find(label => {
+                    return label === value.split('|')[0]
+                })
+                if (!q) {
+                    fifthQuestionLabels.push(value.split('|')[0])
+                }
+            })
+        })
+
+        fifthQuestionLabels.forEach((label, index) => {
+            let sum = 0
+            let dataSetValue = 0
+
+            answersArray[4].forEach(answer => {
+                const labelAnswer = answer.answerValue.filter(value => {
+                    return value.split('|')[0] === label
+                })
+                if (labelAnswer.length > 0) {
+                    const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
+                    sum += value
+                }
+            })
+            dataSetValue = (sum / answersArray[4].length).toFixed(1)
+            fifthQuestionDataSet[index] = dataSetValue
+        })
+    }
+    renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
+
+
+    // Sixth question
+    const sixthQuestionLabels = []
+    const sixthQuestionDataSet = []
+
+    if (answersArray[4].length > 0) {
+        answersArray[4].forEach(answer => {
+            answer.answerValue.forEach(value => {
+                const q = sixthQuestionLabels.find(label => {
+                    return label === value.split('|')[0]
+                })
+                if (!q) {
+                    sixthQuestionLabels.push(value.split('|')[0])
+                }
+            })
+        })
+
+        sixthQuestionLabels.forEach((label, index) => {
+            let sum = 0
+            let dataSetValue = 0
+
+            answersArray[5].forEach(answer => {
+                const labelAnswer = answer.answerValue.filter(value => {
+                    return value.split('|')[0] === label
+                })
+                if (labelAnswer.length > 0) {
+                    const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
+                    sum += value
+                }
+            })
+            dataSetValue = (sum / answersArray[5].length).toFixed(1)
+            sixthQuestionDataSet[index] = dataSetValue
+        })
+    }
+
+    renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
+
+
+    // Seventh question
+    const seventhQuestionLabels = []
+    if (answersArray[6]) {
+        answersArray[6].forEach(answer => {
+            answer.answerValue.forEach(value => {
+                const query = seventhQuestionLabels.find(label => {
+                    return label === value
+                })
+                if (!query) {
+                    seventhQuestionLabels.push(value)
+                }
+            })
+        })
+
+        const seventhQuestionDataSet = []
+        seventhQuestionLabels.forEach((label, index) => {
+            seventhQuestionDataSet[index] = 0
+        })
+
+        answersArray[6].forEach((answer, index) => {
+            answer.answerValue.forEach(value => {
+                let labelIndex = seventhQuestionLabels.findIndex(label => {
+                    return label === value
+                })
+                seventhQuestionDataSet[labelIndex]++
+            })
+        })
+
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
+    }
+
+
+    // Eigth question
+    const eigthQuestionLabels = ['Sí', 'No']
+    const eigthQuestionDataSet = [0, 0]
+    answersArray[7].forEach(answer => {
+        const answerValue = answer.answerValue[0]
+        const labelIndex = eigthQuestionLabels.findIndex(label => {
+            return label === answerValue
+        })
+        eigthQuestionDataSet[labelIndex]++
+    })
+
+    renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
+
+
+    // Eleven question
+    const elevenQuestionLabels = ['Sí', 'No']
+    const elevenQuestionDataSet = [0, 0]
+
+    if (answersArray[10].length > 0) {
+        answersArray[10].forEach(answer => {
+            const answerValue = answer.answerValue[0]
+            const labelIndex = elevenQuestionLabels.findIndex(label => {
+                return label === answerValue
+            })
+            elevenQuestionDataSet[labelIndex]++
+        })
+    }
+    renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿Los docentes necesitan apoyo por parte de la', 'universidad para el desarrollo de las acciones de mejora?'], 'Respuestas en general de los docentes', 'chartElevenQuestionParent')
+
+
+    // Twelve question
+    const twelveQuestionLabels = ['Formación', 'Material didáctico o pedagógico', 'Material bibliográfico', 'Apoyo de centros u otros departamentos']
+    const twelveQuestionDataSet = [0, 0, 0, 0]
+
+    if (answersArray[11].length > 0) {
+        answersArray[11].forEach(answer => {
+            const answerValue = answer.answerValue[0]
+            const labelIndex = twelveQuestionLabels.findIndex(label => {
+                return label === answerValue
+            })
+            if (labelIndex >= 0) {
+                twelveQuestionDataSet[labelIndex]++
+            }
+        })
+    }
+
+    renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent')
+
+    hideLoader()
 }
 
