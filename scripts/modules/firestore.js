@@ -141,6 +141,44 @@ export async function getAllAnswersByViewTypeAndQuestion(viewKey, viewId, questi
     return answerList
 }
 
+// Accomplishment functions
+export async function getGroupInfo(groupId) {
+    const groupsRef = doc(firestore, "groups", groupId)
+    const docSnap = await getDoc(groupsRef)
+    if (docSnap.exists()) {
+        const group = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return group
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
+export async function getTeacherById(id) {
+    const teacherId = doc(firestore, "users", id)
+    const docSnap = await getDoc(teacherId)
+    if (docSnap.exists()) {
+        const teacher = docSnap.data()
+        //console.log("Document data:", docSnap.data());
+        return teacher
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        return null
+    }
+}
+
+export async function updateTeacherAccomplishment(teacherId, percent) {
+    const teacherRef = doc(firestore, "users", teacherId)
+    await updateDoc(teacherRef, {
+        accomplishment: percent
+    }).then(() => {
+        hideLoader()
+    })
+}
+
 // Note functions
 export async function createNote(uid, name, week, category, subject, textNote, file, fileType, description) {
     const usernoteRef = doc(collection(firestore, "notes"))
