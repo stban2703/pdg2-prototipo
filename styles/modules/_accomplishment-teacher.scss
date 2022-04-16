@@ -8,12 +8,19 @@
     max-width: 43.3rem;
     padding: 2rem;
     gap: 1rem;
+    min-height: 13.5rem;
 
     &__info {
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        white-space: nowrap;
+
+        p {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 35ch;
+        }
     }
 
     &__name {
@@ -29,6 +36,5 @@
         font-weight: $light;
         color: $boulder;
         text-overflow: ellipsis;
-
     }
 }

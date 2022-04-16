@@ -21,7 +21,7 @@ export async function getInitialGeneralSelect(userInfo) {
 
         switch (currentRole) {
             case "principal":
-                const careerInfo = await getCareerInfo(userInfo.principalCareer)
+                const careerInfo = await getCareerInfo(userInfo.principalCareerId)
                 generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
 
                 generalselectScreenList.innerHTML = `
@@ -57,7 +57,7 @@ export async function getInitialGeneralSelect(userInfo) {
                 break;
 
             case "boss":
-                const departmentInfo = await getDepartmentInfo(userInfo.bossDepartment)
+                const departmentInfo = await getDepartmentInfo(userInfo.bossDepartmentId)
                 generalSelectSectionTitle.innerHTML = `Progreso general<br>Departamento de ${departmentInfo.name}`
 
                 generalselectScreenList.innerHTML = `

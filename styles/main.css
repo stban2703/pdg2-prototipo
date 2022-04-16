@@ -3952,7 +3952,7 @@ input[type=button] {
 
 .accomplishment-counter__title {
   font-family: "Poppins", sans-serif;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 300;
   color: #FFFFFF;
 }
@@ -3979,6 +3979,7 @@ input[type=button] {
   max-width: 43.3rem;
   padding: 2rem;
   gap: 1rem;
+  min-height: 13.5rem;
 }
 
 .accomplishment-teacher__info {
@@ -3990,7 +3991,13 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: hidden;
+}
+
+.accomplishment-teacher__info p {
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 35ch;
 }
 
 .accomplishment-teacher__name {

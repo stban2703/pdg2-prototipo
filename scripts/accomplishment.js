@@ -19,6 +19,11 @@ export async function getInitialAccomplishmentList(userInfo) {
                 sectionTitle.innerHTML = `Cumplimiento de tu bloque<br>de ${userInfo.leaderGroup}`
                 currentRole = role
             }
+
+            if(role === "boss") {
+                sectionTitle.innerHTML = `Cumplimiento del departamento<br>de ${userInfo.bossDepartment}`
+                currentRole = role
+            }
         });
 
         const accomplishmentListControls = document.querySelector(".memoselectsubject-screen__controls--accomplishmentControls")
@@ -51,6 +56,12 @@ export async function getInitialAccomplishmentList(userInfo) {
                 accomplishmentListControls.addEventListener('input', () => {
                     sortFilterAccomplishmentTeacher(teacherList, accomplishmentListControls.alphabetic, accomplishmentListControls.career, accomplishmentListControls.group, groupSubjects)
                 })
+                break;
+
+            case "boss":
+                //const departmentInfo = await getGroupInfo(userInfo.leaderGroupId)
+                //const departmentSubjects = await getGroupSubjects(viewId)
+                //const allTeachers = 
                 break;
         }
         hideLoader()

@@ -100,6 +100,15 @@ export async function getSubcjectInfo(subjectId) {
     }
 }
 
+export async function getTeachersByGroupName(groupName) {
+    const q = query(collection(firestore, "users"), where("groups", "array-contains", "" + groupName))
+    const querySnapshot = await getDocs(q);
+    const teachersList = querySnapshot.docs.map(doc => doc.data());
+    return teachersList
+}
+
+// Improve actons
+
 export async function createImproveActionComment(subjectId, period, userInfo, comment) {
     const commentRef = doc(collection(firestore, "improveactionscomments"))
     const newComment = {
