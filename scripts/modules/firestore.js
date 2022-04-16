@@ -5,6 +5,7 @@ import {
 import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader, showLoader } from "../utils/loader.js";
 import { getInitialNoteList } from "../notes.js";
+import { submitUserAccomplishment } from "../accomplishment.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
@@ -128,14 +129,14 @@ export async function getAllAnswersByQuestion(questionIndex) {
 }
 
 export async function getAllAnswersByViewTypeAndPeriod(viewKey, viewId, currentPeriod) {
-    const q = query(collection(firestore, "memos/answers/answers"),  where(`${viewKey}Id`, "==", "" + viewId), where("period", "==", "" + currentPeriod))
+    const q = query(collection(firestore, "memos/answers/answers"), where(`${viewKey}Id`, "==", "" + viewId), where("period", "==", "" + currentPeriod))
     const querySnapshot = await getDocs(q);
     const answerList = querySnapshot.docs.map(doc => doc.data());
     return answerList
 }
 
 export async function getAllAnswersByViewTypeAndQuestion(viewKey, viewId, questionIndex) {
-    const q = query(collection(firestore, "memos/answers/answers"),  where(`${viewKey}Id`, "==", "" + viewId), where("questionIndex", "==", questionIndex))
+    const q = query(collection(firestore, "memos/answers/answers"), where(`${viewKey}Id`, "==", "" + viewId), where("questionIndex", "==", questionIndex))
     const querySnapshot = await getDocs(q);
     const answerList = querySnapshot.docs.map(doc => doc.data());
     return answerList
@@ -454,12 +455,16 @@ async function updateQuestionAnswerReference(currentPeriod, questionId, subjectI
     }).then(() => {
         //hideLoader()
         console.log("Referencia actualizada")
+        let ls = window.localStorage;
+        let localSubjects = JSON.parse(ls.getItem('subjectList'))
+        submitUserAccomplishment(localSubjects, currentPeriod)
+
         if (currentIndex === 8 && answerValue[0] === "No") {
             getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
-            } else if (currentIndex === 11 && answerValue[0] === "No"){
+            } else if (currentIndex === 11 && answerValue[0] === "No") {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
@@ -476,13 +481,17 @@ export async function updateAnswerValue(answerId, answerValue, currentPeriod, su
         justification: justification
     }).then(() => {
         //hideLoader()
+        let ls = window.localStorage;
+        let localSubjects = JSON.parse(ls.getItem('subjectList'))
+        submitUserAccomplishment(localSubjects, currentPeriod)
+
         console.log("Respuesta actualizada")
         if (currentIndex === 8 && answerValue[0] === "No") {
             getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
         } else if (currentIndex !== 12) {
             if (currentIndex === 11 && answerValue[0] === "Sí") {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
-            } else if (currentIndex === 11 && answerValue[0] === "No"){
+            } else if (currentIndex === 11 && answerValue[0] === "No") {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
             } else {
                 getNextMemmoQuestion(currentPeriod, subjectInfo, currentIndex, answerValue)
@@ -498,6 +507,7 @@ export async function getNextMemmoQuestion(currentPeriod, subjectInfo, currentIn
     const querySnapshot = await getDocs(q);
     const nextQuestion = querySnapshot.docs.map(doc => doc.data())[0];
     //console.log(nextQuestion)
+
     hideLoader()
     if (currentIndex == 3) {
         window.location = `index.html#memoquestion?${currentPeriod}_${subjectInfo.id}_${nextQuestion.id}_info`

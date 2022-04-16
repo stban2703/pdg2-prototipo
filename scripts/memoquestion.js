@@ -1,3 +1,4 @@
+import { submitUserAccomplishment } from "./accomplishment.js"
 import { createMemoAnswer, getJustificationAnswers, getMemoQuestion, getNotes, getOptionsFromAnswers, getPreviousMemoQuestion, updateAnswerValue } from "./modules/firestore.js"
 import { renderNotesListView } from "./notelist.js"
 import { getSubjectFromId } from "./utils/getters.js"
@@ -815,7 +816,7 @@ export async function submitMemoQuestionForm(userSubjects) {
                                 closeMemoRememberModalButton.addEventListener('click', () => {
                                     rememberModal.classList.add("hidden")
                                     // Pregunta 8
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index))
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index), userSubjects)
                                 })
                             } else if (parseInt(currentQuestion.index) === 11 && answerValue[0] === "No") {
                                 //memo-question-modal--doyouknow
@@ -828,7 +829,7 @@ export async function submitMemoQuestionForm(userSubjects) {
                                     doyouknowModal.classList.add("hidden")
                                     finalModal.classList.remove("hidden")
                                     // Pregunta 11
-                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index))
+                                    onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index), userSubjects)
                                     hideLoader()
                                 })
 
@@ -838,7 +839,7 @@ export async function submitMemoQuestionForm(userSubjects) {
                                     window.location = `index.html#memosections?${subjectId}`
                                 })
                             } else if (parseInt(currentQuestion.index) === 12) {
-                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index))
+                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, parseInt(currentQuestion.index), userSubjects)
                                 hideLoader()
                                 const finalModal = document.querySelector(".memo-question-modal--final")
                                 finalModal.classList.remove("hidden")
@@ -848,7 +849,7 @@ export async function submitMemoQuestionForm(userSubjects) {
                                     window.location = `index.html#memosections?${subjectId}`
                                 })
                             } else {
-                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, currentQuestion.index)
+                                onSubmitAnswer(questionId, currentQuestion.answerId, answerValue, period, subjectInfo, currentQuestion.index, userSubjects)
                             }
                         }
                         break;
@@ -863,14 +864,14 @@ export async function submitMemoQuestionForm(userSubjects) {
                         })
 
                         if (selectedChecboxOptions.length > 0) {
-                            onSubmitAnswer(questionId, currentQuestion.answerId, selectedChecboxOptions, period, subjectInfo, currentQuestion.index)
+                            onSubmitAnswer(questionId, currentQuestion.answerId, selectedChecboxOptions, period, subjectInfo, currentQuestion.index, userSubjects)
                         } else {
                             window.alert("Debes responder a la pregunta")
                         }
                         break;
                     case "scale":
                         const scaleAnswerValue = [memoQuestionForm.scale.value];
-                        onSubmitAnswer(questionId, currentQuestion.answerId, scaleAnswerValue, period, subjectInfo, currentQuestion.index)
+                        onSubmitAnswer(questionId, currentQuestion.answerId, scaleAnswerValue, period, subjectInfo, currentQuestion.index, userSubjects)
                         break;
                     case "matrix":
                         const rows = document.querySelectorAll(".memo-matrix-table__bodyRow")
@@ -883,16 +884,16 @@ export async function submitMemoQuestionForm(userSubjects) {
                             matrixAnswerValues.push(answerValue)
                         }
 
-                        onSubmitAnswer(questionId, currentQuestion.answerId, matrixAnswerValues, period, subjectInfo, currentQuestion.index)
+                        onSubmitAnswer(questionId, currentQuestion.answerId, matrixAnswerValues, period, subjectInfo, currentQuestion.index, userSubjects)
                         break;
                     case "parragraph":
                         const parragraphAnswerValue = [memoQuestionForm.parragraph.value]
-                        onSubmitAnswer(questionId, currentQuestion.answerId, parragraphAnswerValue, period, subjectInfo, currentQuestion.index)
+                        onSubmitAnswer(questionId, currentQuestion.answerId, parragraphAnswerValue, period, subjectInfo, currentQuestion.index, userSubjects)
                         break;
                     case "improveactions":
                         if (improveActionsList.length > 0) {
                             const improveactionsValue = improveActionsList
-                            onSubmitAnswer(questionId, currentQuestion.answerId, improveactionsValue, period, subjectInfo, currentQuestion.index)
+                            onSubmitAnswer(questionId, currentQuestion.answerId, improveactionsValue, period, subjectInfo, currentQuestion.index, userSubjects)
                         } else {
                             window.alert("Debes agregar acciones de mejora")
                         }
@@ -903,7 +904,7 @@ export async function submitMemoQuestionForm(userSubjects) {
     }
 }
 
-function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subjectInfo, questionIndex) {
+function onSubmitAnswer(questionId, questionAnswerdId, answerValue, period, subjectInfo, questionIndex, userSubjects) {
     showLoader()
 
     let questionJustification = null

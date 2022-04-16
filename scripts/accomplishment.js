@@ -1,4 +1,4 @@
-import { getGroupInfo, getTeacherById } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getGroupInfo, getTeacherById, updateTeacherAccomplishment } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 
 
@@ -72,5 +72,9 @@ export async function submitUserAccomplishment(userSubjects, currentPeriod) {
         } else {
             totalPercent = (answeredQuestions / (totalQuestions - actualOptionals) * 100)
         }
+
+        let ls = window.localStorage;
+        let localUser = JSON.parse(ls.getItem('currentuser'))
+        await updateTeacherAccomplishment(localUser.id, totalPercent)
     }
 }
