@@ -30,12 +30,19 @@ export async function getInitialAccomplishmentList(userInfo) {
             case "leader":
                 const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
                 const groupSubjects = await getGroupSubjects(viewId)
+                let completeCounter = 0
+                let incompleteCounter = 0
 
                 const teacherList = []
                 for (let index = 0; index < groupInfo.teachers.length; index++) {
                     const id = groupInfo.teachers[index];
                     const teacher = await getTeacherById(id)
                     teacherList.push(teacher)
+                    if(teacher.accomplishment >= 100) {
+                        completeCounter++
+                    } else {
+                        incompleteCounter++
+                    }
                 }
 
                 teacherList.forEach(teacher => {
@@ -46,7 +53,6 @@ export async function getInitialAccomplishmentList(userInfo) {
                         })
                         teacherSubjectsNames += `${q.name}<br>`
                     })
-                    console.log(teacherSubjectsNames)
                     const teacherItem = document.createElement('div')
                     teacherItem.className = `accomplishment-teacher${teacher.accomplishment === 100 ? ' accomplishment-teacher--secondary' : ''}`
                     teacherItem.innerHTML = `
@@ -62,6 +68,12 @@ export async function getInitialAccomplishmentList(userInfo) {
                         incompleteList.appendChild(teacherItem)
                     }
                 })
+
+                const completeNumberContainer = document.querySelector(".accomplishment-counter__number--complete")
+                const incompleteNumberContainer = document.querySelector(".accomplishment-counter__number--incomplete")
+                completeNumberContainer.innerHTML = `${completeCounter}/${teacherList.length}`
+                incompleteNumberContainer.innerHTML = `${incompleteCounter}`
+
                 break;
         }
 
