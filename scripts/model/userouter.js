@@ -21,7 +21,7 @@ const router = new Router(
         progressselectsubject: new Layout(new Page("progressselectsubject.html")),
         progresssubject: new Layout(new Page("progresssubject.html")),
         generalselect: new Layout(new Page("generalselect.html")),
-        general: new Layout(new Page("generalprogress.html")),
+        generalfaculty: new Layout(new Page("generalfaculty.html")),
         generalall: new Layout(new Page("generalall.html")),
         generalcareer: new Layout(new Page("generalcareer.html")),
         generalsubjects: new Layout(new Page("generalsubjects.html")),
