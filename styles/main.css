@@ -3963,6 +3963,48 @@ input[type=button] {
           box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.2);
 }
 
+.accomplishment-teacher {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 4px 10px rgba(208, 208, 208, 0.2);
+  width: 100%;
+  max-width: 43.3rem;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.accomplishment-teacher__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.accomplishment-teacher__name {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
+.accomplishment-teacher__subject {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #757575;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -6935,6 +6977,7 @@ input[type=button] {
           flex-direction: column;
   min-height: 50rem;
   width: 100%;
+  gap: 4rem;
 }
 
 .accomplishment-screen__column:nth-child(1) {
@@ -6957,6 +7000,21 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+}
+
+.accomplishment-screen__columnList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  gap: 3.4rem;
 }
 
 html {
