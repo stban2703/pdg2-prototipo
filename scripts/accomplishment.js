@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectsAndPeriod, getGroupInfo, getGroupSubjects, getTeacherById, getUserSubjects, updateTeacherAccomplishment } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getDepartmentInfo, getGroupInfo, getGroupSubjects, getSubcjectInfo, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById, getUserSubjects, updateTeacherAccomplishment } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js"
 
@@ -20,7 +20,7 @@ export async function getInitialAccomplishmentList(userInfo) {
                 currentRole = role
             }
 
-            if(role === "boss") {
+            if (role === "boss") {
                 sectionTitle.innerHTML = `Cumplimiento del departamento<br>de ${userInfo.bossDepartment}`
                 currentRole = role
             }
@@ -59,9 +59,42 @@ export async function getInitialAccomplishmentList(userInfo) {
                 break;
 
             case "boss":
-                //const departmentInfo = await getGroupInfo(userInfo.leaderGroupId)
-                //const departmentSubjects = await getGroupSubjects(viewId)
-                //const allTeachers = 
+                const subjects = await getSubjectsByView("departmentId", userInfo.bossDepartmentId)
+                const teachersIds = []
+
+                subjects.forEach(subject => {
+                    const q = teachersIds.find(id => {
+                        return subject.teacherId === id
+                    })
+                    if(!q) {
+                        teachersIds.push(subject.teacherId)
+                    }
+                })
+
+                const teachers = []
+                for (let index = 0; index < teachersIds.length; index++) {
+                    const id = teachersIds[index];
+                    const q = await getTeacherById(id)
+                    teachers.push(q)
+                }
+                
+                const accomplishmentList = []
+                teachers.forEach(t => {
+                    let object = {
+                        name: `${t.name.split(" ")[0]} ${t.lastname.split(" ")[0]}`,
+                        accomplishment: t.accomplishment,
+                        subjectsNames: []
+                    }
+                    subjects.forEach(subject => {
+                        const q = t.subjects.find(ts => {
+                            return ts === subject.id
+                        })
+                        if(q) {
+                            object.subjectsNames.push(subject.name)
+                        }
+                    })
+                })
+                
                 break;
         }
         hideLoader()
@@ -102,7 +135,7 @@ function renderAccomplishmentTeachers(list, groupSubjects) {
     const incompleteList = document.querySelector(".accomplishment-screen__columnList--incomplete")
     completeList.innerHTML = ``
     incompleteList.innerHTML = ``
-    
+
     list.forEach(teacher => {
         let teacherSubjectsNames = ''
         teacher.subjects.forEach(id => {

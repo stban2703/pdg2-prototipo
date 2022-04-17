@@ -86,6 +86,22 @@ export async function getGroupSubjects(groupId) {
     return subjectList
 }
 
+export async function getSubjectsByView(viewKey, viewId) {
+    const q = query(collection(firestore, "subjects"), where(viewKey, "==", "" + viewId))
+    const querySnapshot = await getDocs(q);
+    const subjectList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return subjectList
+}
+
+export async function getSubjectsByDepartmentId(departmentId) {
+    const q = query(collection(firestore, "subjects"), where("departmentId", "==", "" + departmentId))
+    const querySnapshot = await getDocs(q);
+    const subjectList = querySnapshot.docs.map(doc => doc.data());
+    hideLoader()
+    return subjectList
+}
+
 export async function getSubcjectInfo(subjectId) {
     const subjectRef = doc(firestore, "subjects", subjectId)
     const docSnap = await getDoc(subjectRef)
@@ -100,6 +116,7 @@ export async function getSubcjectInfo(subjectId) {
     }
 }
 
+// Sin usar
 export async function getTeachersByGroupName(groupName) {
     const q = query(collection(firestore, "users"), where("groups", "array-contains", "" + groupName))
     const querySnapshot = await getDocs(q);
