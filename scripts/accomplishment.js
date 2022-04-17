@@ -56,7 +56,10 @@ export async function getInititalAccomplishmentDepartmentList() {
 function renderAccomplishmentDepartmentList(list) {
     const accomplishmentScreenDeparmenttList = document.querySelector(".accomplishment-screen__departmentList")
     accomplishmentScreenDeparmenttList.innerHTML = ``
+
+    let allDepartmentsProgress = 0
     list.forEach((department, index) => {
+        allDepartmentsProgress += department.progress
         const departmentItem = document.createElement('div')
         departmentItem.className = "accomplishment-department"
         departmentItem.innerHTML = `
@@ -78,6 +81,24 @@ function renderAccomplishmentDepartmentList(list) {
         const circle = new CircularProgressBar(`deparment-pie-${index}`)
         circle.initial()
     })
+
+    
+    allDepartmentsProgress = Math.round((allDepartmentsProgress / (list.length * 100)) * 100)
+    const generalItem = document.createElement('div')
+    generalItem.className = "accomplishment-department"
+    generalItem.innerHTML = `
+        <section class="accomplishment-department__info">
+            <h5 class="accomplishment-department__title">Cumplimiento de la <span style="font-weight: 600;">Facultad de Ingeniería</span></h5>
+            <div class="accomplishment-department__pieContainer">
+                <div class="general-pie custom-pie"
+                        data-pie='{ "colorSlice": "#FDB572", "percent": ${allDepartmentsProgress}, "colorCircle": "#FFF2E5", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#FDB572", "round": true, "stroke": 10 }'>
+                </div>
+            </div>
+        </section>
+        `
+    accomplishmentScreenDeparmenttList.prepend(generalItem)
+    const circle = new CircularProgressBar(`general-pie`)
+    circle.initial()
 }
 
 
@@ -124,7 +145,7 @@ export async function getInitialAccomplishmentList(userInfo) {
         const subjects = await getSubjectsByView(`${view}Id`, viewId)
         const teachersIds = []
 
-        if(currentRole === "admin") {
+        if (currentRole === "admin") {
             document.querySelector(".accomplishment-screen__currentDepartmentTitle").innerHTML = `Departamento: ${subjects[0].department}`
         }
 
