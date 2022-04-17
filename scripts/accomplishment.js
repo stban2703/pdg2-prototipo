@@ -79,14 +79,13 @@ export async function getInitialAccomplishmentList(userInfo) {
                     }
                 }
             })
-            console.log(object)
             accomplishmentList.push(object)
         })
 
         completeNumberContainer.innerHTML = `${completeCounter}/${teachers.length}`
         incompleteNumberContainer.innerHTML = `${incompleteCounter}`
         renderAccomplishmentTeachers(accomplishmentList)
-        const accomplishmentListControls = document.querySelector(".memoselectsubject-screen__controls--accomplishmentControls")
+        renderAccomplishmentFilters(accomplishmentList, subjects, currentRole)
 
         switch (currentRole) {
             case "leader":
@@ -126,8 +125,55 @@ export async function getInitialAccomplishmentList(userInfo) {
     }
 }
 
-function sortFilterAccomplishmentTeacher(teacherList, alphabeticSort, careerFilter, groupFilter, groupSubjects) {
-    let filterCopy = [...teacherList]
+function renderAccomplishmentFilters(accomplishmentList, subjectList, role) {
+    const accomplishmentListControls = document.querySelector(".memoselectsubject-screen__controls--accomplishmentControls")
+    const careersList = []
+    const groupsList = []
+
+    subjectList.forEach(subject => {
+        const cQ = careersList.find(career => {
+            return career === subject.career
+        })
+        if(!cQ) {
+            careersList.push(subject.career)
+        }
+        const gQ = groupsList.find(group => {
+            return group === subject.group
+        })
+        if(!gQ) {
+            groupsList.push(subject.group)
+        }
+    })
+    
+    careersList.forEach(career => {
+        const option = document.createElement('option')
+        option.value = career
+        option.innerHTML = career
+        accomplishmentListControls.career.appendChild(option)
+    })
+    
+    groupsList.forEach(group => {
+        const option = document.createElement('option')
+        option.value = group
+        option.innerHTML = group
+        accomplishmentListControls.group.appendChild(option)
+    })
+
+    accomplishmentListControls.alphabetic.classList.remove("hidden")
+    switch(role) {
+        case "boss":
+            accomplishmentListControls.career.classList.remove("hidden")
+            accomplishmentListControls.group.classList.remove("hidden")
+            break;
+    }
+
+    accomplishmentListControls.addEventListener('input', () => {
+        sortFilterAccomplishmentTeachers(accomplishmentList, accomplishmentListControls.alphabetic, accomplishmentListControls.career, accomplishmentListControls.group)
+    })
+}
+
+function sortFilterAccomplishmentTeachers(accomplishmentList, alphabeticSort, careerFilter, groupFilter) {
+    let filterCopy = [...accomplishmentList]
 
     if (alphabeticSort.value.length > 0) {
         if (alphabeticSort.value == "ascending") {
@@ -139,20 +185,19 @@ function sortFilterAccomplishmentTeacher(teacherList, alphabeticSort, careerFilt
 
     if (careerFilter.value.length > 0) {
         filterCopy = [...filterCopy].filter(e => {
-            if (e.group == careerFilter.value) {
+            if (e.career == careerFilter.value) {
                 return true
             }
         })
     }
 
     if (groupFilter.value.length > 0) {
-        filterCopy = [...filterCopy].filter(e => {
-            if (e.group == groupFilter.value) {
-                return true
-            }
+        const targetGroup = groupFilter.value
+        filterCopy = [...filterCopy].filter(elem => {
+            return elem.groups.includes(targetGroup)
         })
     }
-    renderAccomplishmentTeachers(filterCopy, groupSubjects)
+    renderAccomplishmentTeachers(filterCopy)
 }
 
 function renderAccomplishmentTeachers(list) {
