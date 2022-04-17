@@ -98,13 +98,18 @@ export async function getInitialAccomplishmentList(userInfo) {
                 currentRole = role
             }
 
+            if (role === "principal") {
+                sectionTitle.innerHTML = `Cumplimiento de<br> ${userInfo.principalCareer}`
+                currentRole = role
+            }
+
             if (role === "boss") {
                 sectionTitle.innerHTML = `Cumplimiento del departamento<br>de ${userInfo.bossDepartment}`
                 currentRole = role
             }
 
-            if (role === "principal") {
-                sectionTitle.innerHTML = `Cumplimiento de<br> ${userInfo.principalCareer}`
+            if (role === "admin") {
+                sectionTitle.innerHTML = `Cumplimiento del departamento de tu facultad`
                 currentRole = role
             }
         });
@@ -118,6 +123,10 @@ export async function getInitialAccomplishmentList(userInfo) {
         // Get list
         const subjects = await getSubjectsByView(`${view}Id`, viewId)
         const teachersIds = []
+
+        if(currentRole === "admin") {
+            document.querySelector(".accomplishment-screen__currentDepartmentTitle").innerHTML = `Departamento: ${subjects[0].department}`
+        }
 
         subjects.forEach(subject => {
             const q = teachersIds.find(id => {
@@ -211,6 +220,10 @@ function renderAccomplishmentFilters(accomplishmentList, subjectList, role) {
     console.log(role)
     switch (role) {
         case "boss":
+            accomplishmentListControls.career.classList.remove("hidden")
+            accomplishmentListControls.group.classList.remove("hidden")
+            break;
+        case "admin":
             accomplishmentListControls.career.classList.remove("hidden")
             accomplishmentListControls.group.classList.remove("hidden")
             break;
