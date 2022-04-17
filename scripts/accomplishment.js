@@ -9,8 +9,6 @@ export async function getInitialAccomplishmentList(userInfo) {
     if (accomplishmentScreenContentList && window.location.href.includes("#accomplishmentlist")) {
         const view = window.location.hash.split("?")[1].split("_")[0]
         const viewId = window.location.hash.split("?")[1].split("_")[1]
-        console.log(view)
-        console.log(viewId)
 
         showLoader()
         const sectionTitle = document.querySelector(".section-banner__title")
@@ -61,16 +59,27 @@ export async function getInitialAccomplishmentList(userInfo) {
             let object = {
                 name: `${t.name.split(" ")[0]} ${t.lastname.split(" ")[0]}`,
                 accomplishment: t.accomplishment,
-                subjectsNames: []
+                subjectsNames: [],
+                career: "",
+                groups: [],
             }
+
             subjects.forEach(subject => {
                 const q = t.subjects.find(ts => {
                     return ts === subject.id
                 })
                 if (q) {
                     object.subjectsNames.push(subject.name)
+                    object.career = subject.career
+                    const gQ = object.groups.find(g => {
+                        return g === subject.group
+                    })
+                    if (!gQ) {
+                        object.groups.push(subject.group)
+                    }
                 }
             })
+            console.log(object)
             accomplishmentList.push(object)
         })
 
