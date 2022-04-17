@@ -1,18 +1,83 @@
-import { getAllAnswersBySubjectsAndPeriod, getDepartmentInfo, getGroupInfo, getGroupSubjects, getSubcjectInfo, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById, getUserSubjects, updateTeacherAccomplishment } from "./modules/firestore.js"
+import { getAllAnswersBySubjectsAndPeriod, getDepartments, getSubjectsByView, getTeacherById, updateTeacherAccomplishment } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js"
 
 
-export function renderAccomplishmentDepartmentList() {
+export async function getInititalAccomplishmentDepartmentList() {
     const accomplishmentScreenDeparmenttList = document.querySelector(".accomplishment-screen__departmentList")
-    if(accomplishmentScreenDeparmenttList && window.location.href.includes("#accomplishmentdashboard")) {
-        const circle = new CircularProgressBar("test-pie");
-        const circle2 = new CircularProgressBar("test-pie2");
-        const circle3 = new CircularProgressBar("test-pie3");
-        circle.initial();
-        circle2.initial();
-        circle3.initial();
+    if (accomplishmentScreenDeparmenttList && window.location.href.includes("#accomplishmentdashboard")) {
+        showLoader()
+        const departments = await getDepartments()
+        const departmentAccomplishmnetList = []
+        for (let index = 0; index < departments.length; index++) {
+            const department = departments[index];
+            const subjects = await getSubjectsByView(`departmentId`, department.id)
+            const teachersIds = []
+
+            subjects.forEach(subject => {
+                const q = teachersIds.find(id => {
+                    return subject.teacherId === id
+                })
+                if (!q) {
+                    teachersIds.push(subject.teacherId)
+                }
+            })
+
+            const teachers = []
+            for (let index = 0; index < teachersIds.length; index++) {
+                const id = teachersIds[index];
+                const q = await getTeacherById(id)
+                teachers.push(q)
+            }
+
+            let departmentProgress = 0
+            let completeCounter = 0
+            let incompleteCounter = 0
+
+            teachers.forEach(t => {
+                t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
+            })
+
+            departmentProgress = Math.round((completeCounter / (completeCounter + incompleteCounter)) * 100)
+
+            const object = {
+                name: department.name,
+                id: department.id,
+                progress: departmentProgress
+            }
+            console.log(object)
+            departmentAccomplishmnetList.push(object)
+        }
+        renderAccomplishmentDepartmentList(departmentAccomplishmnetList)
+        hideLoader()
     }
+}
+
+function renderAccomplishmentDepartmentList(list) {
+    const accomplishmentScreenDeparmenttList = document.querySelector(".accomplishment-screen__departmentList")
+    accomplishmentScreenDeparmenttList.innerHTML = ``
+    list.forEach((department, index) => {
+        const departmentItem = document.createElement('div')
+        departmentItem.className = "accomplishment-department"
+        departmentItem.innerHTML = `
+        <section class="accomplishment-department__info">
+            <h5 class="accomplishment-department__title">Departamento de <span style="font-weight: 600;">${department.name}</span></h5>
+            <div class="accomplishment-department__pieContainer">
+                <div class="deparment-pie-${index} custom-pie"
+                        data-pie='{ "colorSlice": "#979DFF", "percent": ${department.progress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+                </div>
+            </div>
+        </section>
+        <a class="accomplishment-department__button small-button small-button--secondary"
+                href="#accomplishmentlist?department_${department.id}">
+                <span>Seleccionar</span>
+        </a>
+        `
+        accomplishmentScreenDeparmenttList.appendChild(departmentItem)
+
+        const circle = new CircularProgressBar(`deparment-pie-${index}`)
+        circle.initial()
+    })
 }
 
 
