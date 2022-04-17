@@ -90,7 +90,6 @@ export async function getSubjectsByView(viewKey, viewId) {
     const q = query(collection(firestore, "subjects"), where(viewKey, "==", "" + viewId))
     const querySnapshot = await getDocs(q);
     const subjectList = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
     return subjectList
 }
 
@@ -98,7 +97,6 @@ export async function getSubjectsByDepartmentId(departmentId) {
     const q = query(collection(firestore, "subjects"), where("departmentId", "==", "" + departmentId))
     const querySnapshot = await getDocs(q);
     const subjectList = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
     return subjectList
 }
 

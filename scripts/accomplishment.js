@@ -9,6 +9,8 @@ export async function getInitialAccomplishmentList(userInfo) {
     if (accomplishmentScreenContentList && window.location.href.includes("#accomplishmentlist")) {
         const view = window.location.hash.split("?")[1].split("_")[0]
         const viewId = window.location.hash.split("?")[1].split("_")[1]
+        console.log(view)
+        console.log(viewId)
 
         showLoader()
         const sectionTitle = document.querySelector(".section-banner__title")
@@ -26,6 +28,45 @@ export async function getInitialAccomplishmentList(userInfo) {
             }
         });
 
+        // Get list
+        const subjects = await getSubjectsByView(`${view}Id`, viewId)
+        const teachersIds = []
+
+        subjects.forEach(subject => {
+            const q = teachersIds.find(id => {
+                return subject.teacherId === id
+            })
+            if (!q) {
+                teachersIds.push(subject.teacherId)
+            }
+        })
+
+        const teachers = []
+        for (let index = 0; index < teachersIds.length; index++) {
+            const id = teachersIds[index];
+            const q = await getTeacherById(id)
+            teachers.push(q)
+        }
+
+        const accomplishmentList = []
+        teachers.forEach(t => {
+            let object = {
+                name: `${t.name.split(" ")[0]} ${t.lastname.split(" ")[0]}`,
+                accomplishment: t.accomplishment,
+                subjectsNames: []
+            }
+            subjects.forEach(subject => {
+                const q = t.subjects.find(ts => {
+                    return ts === subject.id
+                })
+                if (q) {
+                    object.subjectsNames.push(subject.name)
+                }
+            })
+            accomplishmentList.push(object)
+        })
+
+        renderAccomplishmentTeachers(accomplishmentList)
         const accomplishmentListControls = document.querySelector(".memoselectsubject-screen__controls--accomplishmentControls")
 
         switch (currentRole) {
@@ -59,42 +100,7 @@ export async function getInitialAccomplishmentList(userInfo) {
                 break;
 
             case "boss":
-                const subjects = await getSubjectsByView("departmentId", userInfo.bossDepartmentId)
-                const teachersIds = []
 
-                subjects.forEach(subject => {
-                    const q = teachersIds.find(id => {
-                        return subject.teacherId === id
-                    })
-                    if(!q) {
-                        teachersIds.push(subject.teacherId)
-                    }
-                })
-
-                const teachers = []
-                for (let index = 0; index < teachersIds.length; index++) {
-                    const id = teachersIds[index];
-                    const q = await getTeacherById(id)
-                    teachers.push(q)
-                }
-                
-                const accomplishmentList = []
-                teachers.forEach(t => {
-                    let object = {
-                        name: `${t.name.split(" ")[0]} ${t.lastname.split(" ")[0]}`,
-                        accomplishment: t.accomplishment,
-                        subjectsNames: []
-                    }
-                    subjects.forEach(subject => {
-                        const q = t.subjects.find(ts => {
-                            return ts === subject.id
-                        })
-                        if(q) {
-                            object.subjectsNames.push(subject.name)
-                        }
-                    })
-                })
-                
                 break;
         }
         hideLoader()
@@ -130,27 +136,20 @@ function sortFilterAccomplishmentTeacher(teacherList, alphabeticSort, careerFilt
     renderAccomplishmentTeachers(filterCopy, groupSubjects)
 }
 
-function renderAccomplishmentTeachers(list, groupSubjects) {
+function renderAccomplishmentTeachers(list) {
     const completeList = document.querySelector(".accomplishment-screen__columnList--complete")
     const incompleteList = document.querySelector(".accomplishment-screen__columnList--incomplete")
     completeList.innerHTML = ``
     incompleteList.innerHTML = ``
 
     list.forEach(teacher => {
-        let teacherSubjectsNames = ''
-        teacher.subjects.forEach(id => {
-            const q = groupSubjects.find(subject => {
-                return subject.id === id
-            })
-            teacherSubjectsNames += `${q.name}<br>`
-        })
         const teacherItem = document.createElement('div')
         teacherItem.className = `accomplishment-teacher${teacher.accomplishment === 100 ? ' accomplishment-teacher--secondary' : ''}`
         teacherItem.innerHTML = `
         <img src="./images/accomplishmentteacher.svg" alt="">
         <section class="accomplishment-teacher__info">
-            <h5 class="accomplishment-teacher__name">${teacher.name.split(" ")[0]} ${teacher.lastname.split(" ")[0]}</h5>
-            <p class="accomplishment-teacher__subject">${teacherSubjectsNames}</p>
+            <h5 class="accomplishment-teacher__name">${teacher.name}</h5>
+            <p class="accomplishment-teacher__subject">${teacher.subjectsNames.join("<br>")}</p>
         </section>
         `
         if (teacher.accomplishment === 100) {

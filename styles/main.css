@@ -3979,7 +3979,10 @@ input[type=button] {
   max-width: 43.3rem;
   padding: 2rem;
   gap: 1rem;
-  min-height: 13.5rem;
+  min-height: 12.5rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .accomplishment-teacher__info {
