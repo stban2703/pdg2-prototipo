@@ -64,4 +64,10 @@
         width: 100%;
         gap: 3.4rem;
     }
+
+    &__departmentList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
 }

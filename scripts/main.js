@@ -1,4 +1,4 @@
-import { getInitialAccomplishmentList } from "./accomplishment.js";
+import { getInitialAccomplishmentList, renderAccomplishmentDepartmentList } from "./accomplishment.js";
 import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
@@ -185,6 +185,7 @@ function addPageFuncions() {
 
     // Accomplishment functions
     getInitialAccomplishmentList(currentUser)
+    renderAccomplishmentDepartmentList()
 
     // Memo form edit functions
     changeMemoEditFormPage()

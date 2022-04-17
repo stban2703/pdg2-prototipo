@@ -3,6 +3,19 @@ import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js"
 
 
+export function renderAccomplishmentDepartmentList() {
+    const accomplishmentScreenDeparmenttList = document.querySelector(".accomplishment-screen__departmentList")
+    if(accomplishmentScreenDeparmenttList && window.location.href.includes("#accomplishmentdashboard")) {
+        const circle = new CircularProgressBar("test-pie");
+        const circle2 = new CircularProgressBar("test-pie2");
+        const circle3 = new CircularProgressBar("test-pie3");
+        circle.initial();
+        circle2.initial();
+        circle3.initial();
+    }
+}
+
+
 export async function getInitialAccomplishmentList(userInfo) {
     const accomplishmentScreenContentList = document.querySelector(".accomplishment-screen__content--list")
 
