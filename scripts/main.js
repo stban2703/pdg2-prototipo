@@ -45,7 +45,9 @@ currentUser.role.forEach(role => {
 
     if(role === 'principal') {
         document.querySelector('#navgeneral').classList.remove('hidden')
-        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.principalCareer}`)
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.principalCareerId}`)
+        document.querySelector('#navaccomplishment').classList.remove('hidden')
+        document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?career_${userInfo.principalCareerId}`)
     }
 
     if(role === 'boss') {

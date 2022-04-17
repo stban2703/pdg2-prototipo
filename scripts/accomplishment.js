@@ -24,6 +24,11 @@ export async function getInitialAccomplishmentList(userInfo) {
                 sectionTitle.innerHTML = `Cumplimiento del departamento<br>de ${userInfo.bossDepartment}`
                 currentRole = role
             }
+
+            if (role === "principal") {
+                sectionTitle.innerHTML = `Cumplimiento de<br> ${userInfo.principalCareer}`
+                currentRole = role
+            }
         });
 
         // Accomplishment counter
@@ -134,24 +139,24 @@ function renderAccomplishmentFilters(accomplishmentList, subjectList, role) {
         const cQ = careersList.find(career => {
             return career === subject.career
         })
-        if(!cQ) {
+        if (!cQ) {
             careersList.push(subject.career)
         }
         const gQ = groupsList.find(group => {
             return group === subject.group
         })
-        if(!gQ) {
+        if (!gQ) {
             groupsList.push(subject.group)
         }
     })
-    
+
     careersList.forEach(career => {
         const option = document.createElement('option')
         option.value = career
         option.innerHTML = career
         accomplishmentListControls.career.appendChild(option)
     })
-    
+
     groupsList.forEach(group => {
         const option = document.createElement('option')
         option.value = group
@@ -160,9 +165,13 @@ function renderAccomplishmentFilters(accomplishmentList, subjectList, role) {
     })
 
     accomplishmentListControls.alphabetic.classList.remove("hidden")
-    switch(role) {
+    console.log(role)
+    switch (role) {
         case "boss":
             accomplishmentListControls.career.classList.remove("hidden")
+            accomplishmentListControls.group.classList.remove("hidden")
+            break;
+        case "principal":
             accomplishmentListControls.group.classList.remove("hidden")
             break;
     }
