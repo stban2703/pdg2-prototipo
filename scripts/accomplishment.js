@@ -91,41 +91,6 @@ export async function getInitialAccomplishmentList(userInfo) {
         incompleteNumberContainer.innerHTML = `${incompleteCounter}`
         renderAccomplishmentTeachers(accomplishmentList)
         renderAccomplishmentFilters(accomplishmentList, subjects, currentRole)
-
-        switch (currentRole) {
-            case "leader":
-            /*accomplishmentListControls.alphabetic.classList.remove("hidden")
-            const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
-            const groupSubjects = await getGroupSubjects(viewId)
-            let completeCounter = 0
-            let incompleteCounter = 0
-
-            const teacherList = []
-            for (let index = 0; index < groupInfo.teachers.length; index++) {
-                const id = groupInfo.teachers[index];
-                const teacher = await getTeacherById(id)
-                teacherList.push(teacher)
-                if (teacher.accomplishment >= 100) {
-                    completeCounter++
-                } else {
-                    incompleteCounter++
-                }
-            }
-            const completeNumberContainer = document.querySelector(".accomplishment-counter__number--complete")
-            const incompleteNumberContainer = document.querySelector(".accomplishment-counter__number--incomplete")
-            completeNumberContainer.innerHTML = `${completeCounter}/${teacherList.length}`
-            incompleteNumberContainer.innerHTML = `${incompleteCounter}`
-
-            renderAccomplishmentTeachers(teacherList, groupSubjects)
-            accomplishmentListControls.addEventListener('input', () => {
-                sortFilterAccomplishmentTeacher(teacherList, accomplishmentListControls.alphabetic, accomplishmentListControls.career, accomplishmentListControls.group, groupSubjects)
-            })
-            break;*/
-
-            case "boss":
-
-                break;
-        }
         hideLoader()
     }
 }
