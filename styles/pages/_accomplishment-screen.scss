@@ -9,6 +9,20 @@
         flex-direction: row;
     }
 
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__description {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
     .memoselectsubject-screen__controls--accomplishmentControls {
         width: fit-content;
         margin-left: auto;

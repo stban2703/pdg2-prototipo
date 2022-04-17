@@ -28,6 +28,7 @@ const router = new Router(
         generalspecific: new Layout(new Page("generalspecific.html")),
         generalimproveactions: new Layout(new Page("generalimproveactions.html")),
         accomplishmentlist: new Layout(new Page("accomplishmentlist.html")),
+        accomplishmentdashboard: new Layout(new Page("accomplishmentdashboard.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")
