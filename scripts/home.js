@@ -13,6 +13,7 @@ export async function renderSubjectListHome(subjectList, currentPeriod) {
             const subject = subjectList[index];
             const answers = await getAllAnswersBySubjectAndPeriod(subject.id, currentPeriod)
             const object = {
+                id: subject.id,
                 name: subject.name,
                 progress: 0
             }
@@ -46,7 +47,8 @@ export async function renderSubjectListHome(subjectList, currentPeriod) {
 
         homescreenSubjectList.innerHTML = ``
         subjectSummary.forEach(subject => {
-            const subjectThumbnail = document.createElement('div')
+            const subjectThumbnail = document.createElement('a')
+            subjectThumbnail.setAttribute('href', `#memosections?${subject.id}`)
             subjectThumbnail.className = "subject-thumbnail " + subject.id
             subjectThumbnail.innerHTML = `
             <section class="subject-thumbnail__info">
