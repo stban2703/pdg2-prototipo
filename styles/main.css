@@ -7234,6 +7234,46 @@ input[type=button] {
   gap: 2rem;
 }
 
+.memosee-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+.memosee-screen__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.memosee-screen__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
+.memosee-screen__selectList {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
 html {
   font-size: 62.5%;
 }

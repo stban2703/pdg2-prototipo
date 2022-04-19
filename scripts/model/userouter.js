@@ -29,6 +29,9 @@ const router = new Router(
         generalimproveactions: new Layout(new Page("generalimproveactions.html")),
         accomplishmentlist: new Layout(new Page("accomplishmentlist.html")),
         accomplishmentdashboard: new Layout(new Page("accomplishmentdashboard.html")),
+        memoseedepartments: new Layout(new Page("memoseedepartments.html")),
+        memoseecareers: new Layout(new Page("memoseecareers.html")),
+        memoseesubjects: new Layout(new Page("memoseesubjects.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

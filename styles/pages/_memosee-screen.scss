@@ -1,0 +1,25 @@
+.memosee-screen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 2rem;
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__selectList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}
