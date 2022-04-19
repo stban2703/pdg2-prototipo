@@ -145,7 +145,7 @@ function addPageFuncions() {
     renderMeetings()
     renderMeetingDetails()
     onSelectMeetingMode()
-    submitMeeting()
+    submitMeeting(currentUser)
 
     // Minutes functions
     createAgreement()

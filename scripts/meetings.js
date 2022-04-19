@@ -1,6 +1,7 @@
 import { userInfo } from "./main.js"
 import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
+import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDate } from "./utils/sort.js"
 
 export async function renderMeetings() {
@@ -8,6 +9,7 @@ export async function renderMeetings() {
     const createMeetingButton = document.querySelector(".addMeetingBtn")
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
+        showLoader()
         const pendingList = document.querySelector(".meetinglist-screen__list--pending")
         const finishedList = document.querySelector(".meetinglist-screen__list--finished")
 
@@ -60,6 +62,7 @@ export async function renderMeetings() {
                 pendingList.appendChild(meetingItem)
             }
         })
+        hideLoader()
     }
 }
 
@@ -67,8 +70,10 @@ export async function renderMeetingDetails() {
     const meetingInfoColumns = document.querySelectorAll(".meeting__info-column")
     const meetingAssistants = document.querySelector(".meeting__assistants")
     const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
+    const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
     if (meetingInfoColumns.length > 0 && window.location.href.includes("#meetingdetails")) {
+        showLoader()
         const meetingId = window.location.hash.split("?")[1]
         const meeting = await getMeetingDetails(meetingId)
 
@@ -81,9 +86,9 @@ export async function renderMeetingDetails() {
             })
             if(leaderRole && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
+                confirmRejectMeetingSection.classList.add("hidden")
             }
 
-            const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
             if (confirmRejectMeetingSection && meeting.minutesId.length > 0) {
                 confirmRejectMeetingSection.classList.add("hidden")
             }
@@ -129,6 +134,7 @@ export async function renderMeetingDetails() {
         } else {
             meetingInfoColumns[0].innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
+        hideLoader()
     }
 }
 

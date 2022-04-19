@@ -1,4 +1,3 @@
-import { userInfo } from "./main.js"
 import { createMeeting } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 import { showLoader } from "./utils/loader.js"
@@ -37,7 +36,7 @@ export function onSelectMeetingMode() {
     }
 }
 
-export function submitMeeting() {
+export function submitMeeting(userInfo) {
     const createMeetingForm = document.querySelector('.createmeeting-form')
     if (createMeetingForm && window.location.href.includes("#createmeeting")) {
         const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')

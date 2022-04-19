@@ -1814,6 +1814,9 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   gap: 1rem;
 }
 
@@ -1844,6 +1847,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-top: auto;
 }
 
 .subject-thumbnail__subtitle {
@@ -6439,6 +6443,7 @@ input[type=button] {
   width: 100%;
   -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
           box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+  text-align: center;
 }
 
 .meetingdetails-screen__confirmed h4 {
