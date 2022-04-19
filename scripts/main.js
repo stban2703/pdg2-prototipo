@@ -3,7 +3,7 @@ import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
 import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
-import { renderSubjectListHome } from "./home.js";
+import { renderSubjectListHome, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
@@ -132,7 +132,8 @@ function displayHomeUserName() {
 function addPageFuncions() {
     // Home functions
     displayHomeUserName()
-    renderSubjectListHome(currentSubjects, currentPeriod)///Sin actualizar
+    showShortcuts(currentUser.role)
+    renderSubjectListHome(currentSubjects, currentPeriod, currentUser.role)///Sin actualizar
 
     //Note functions
     submitNote(currentUser, currentSubjects)// Sin problemas
