@@ -1,4 +1,5 @@
 import { getAllAnswersBySubjectAndPeriod } from "./modules/firestore.js";
+import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
 export async function renderSubjectListHome(subjectList, currentPeriod) {
@@ -7,6 +8,7 @@ export async function renderSubjectListHome(subjectList, currentPeriod) {
     if (homescreenSubjectList) {
         const subjectSummary = []
 
+        showLoader()
         for (let index = 0; index < subjectList.length; index++) {
             const subject = subjectList[index];
             const answers = await getAllAnswersBySubjectAndPeriod(subject.id, currentPeriod)
@@ -40,7 +42,6 @@ export async function renderSubjectListHome(subjectList, currentPeriod) {
             }
 
             subjectSummary.push(object)
-            console.log(subjectSummary)
         }
 
         homescreenSubjectList.innerHTML = ``
@@ -67,6 +68,25 @@ export async function renderSubjectListHome(subjectList, currentPeriod) {
             `
             homescreenSubjectList.appendChild(subjectThumbnail)
         });
+
+        let sum = 0
+        subjectSummary.forEach(s => {
+            sum += s.progress
+        })
+
+        let allSubjectsProgress = Math.round((sum / (subjectSummary.length * 100)) * 100)
+        console.log(allSubjectsProgress)
+
+        const progressContainer = document.querySelector(".memo-thumbnail__progress")
+        progressContainer.innerHTML = `
+        <div class="memo-pie custom-pie"
+            data-pie='{ "colorSlice": "#979DFF", "percent": ${allSubjectsProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+        </div>
+        `
+        const circle = new CircularProgressBar(`memo-pie`)
+        circle.initial()
+
+        hideLoader()
     }
 }
 
