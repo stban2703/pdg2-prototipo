@@ -9,13 +9,17 @@ export function showShortcuts(roles) {
         if (roles.includes("admin")) {
             const lastSubjectShortcut = homeScreenShortCuts.querySelector(".home-screen__lastSubject")
             lastSubjectShortcut.classList.add("hidden")
+
             const notesShortcut = homeScreenShortCuts.querySelector(".home-screen__notes")
             notesShortcut.classList.add("hidden")
+
+            const homeSubjects = document.querySelector(".home-screen__subjects")
+            homeSubjects.classList.add("hidden")
         }
     }
 }
 
-export async function renderSubjectListHome(subjectList, currentPeriod, roles) {
+export async function renderListHome(subjectList, currentPeriod, roles) {
     const homescreenSubjectList = document.querySelector(".home-screen__subjectList")
 
     if (homescreenSubjectList) {

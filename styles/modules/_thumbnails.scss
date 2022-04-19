@@ -115,3 +115,85 @@
         height: 100%;
     }
 }
+
+.deparment-thumbnail {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    @include memo-subject-thumbnail($memo-thumb-drop-shadow);
+    gap: 1.5rem;
+
+    &__info {
+        display: flex;
+        flex-direction: row;
+        gap: 1.7rem;
+        width: 100%;
+    }
+
+    &__icon-title {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__icon {
+        min-width: 4rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $bold;
+        color: $pink;
+        max-width: 18ch;
+    }
+
+    &__percent {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        color: $boulder;
+        margin-left: auto;
+    }
+
+    &__progress {
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+    }
+
+    &__subtitle {
+        font-family: $poppins;
+        font-size: 1.4rem;
+        font-weight: $light;
+        color: $silver;
+    }
+
+    &__progressBar {
+        position: relative;
+        background-color: #E8E9FF;
+        height: 6px;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    &__currentBar {
+        position: absolute;
+        background-color: rgba($color: #A6ABF4, $alpha: 0.74);
+        width: 60%;
+        height: 100%;
+    }
+
+    &__controls {
+        width: 100%;
+
+        a {
+            display: inline-block;
+            width: 100%;
+            max-width: 12rem;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+        }
+    }
+}

@@ -29,6 +29,7 @@
         display: flex;
         flex-direction: row;
         gap: 4rem;
+        width: 100%;
     }
 
     &__lastSubject {
@@ -47,6 +48,19 @@
     &__subjectList {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        grid-gap: 3rem
+    }
+
+    &__departments {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        width: 100%;
+    }
+
+    &__departmentList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         grid-gap: 3rem
     }
 }
