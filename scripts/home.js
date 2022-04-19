@@ -180,6 +180,23 @@ export async function renderListHome(subjectList, currentPeriod, roles) {
                 `
                 homeDepartmentList.appendChild(departmentThumbnail)
             })
+
+            
+            let sum = 0
+            departmentProgressList.forEach(d => {
+                sum += d.progress
+            })
+
+            let allDepartmentProgress = Math.round((sum / (departmentProgressList.length * 100)) * 100)
+
+            const progressContainer = document.querySelector(".memo-thumbnail__progress")
+            progressContainer.innerHTML = `
+        <div class="memo-pie custom-pie"
+            data-pie='{ "colorSlice": "#979DFF", "percent": ${allDepartmentProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+        </div>
+        `
+            const circle = new CircularProgressBar(`memo-pie`)
+            circle.initial()
         }
         hideLoader()
     }
