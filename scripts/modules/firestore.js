@@ -431,6 +431,7 @@ export async function getMemoTemplate(targetPath) {
 
     await createNewMemoQuestions(templateQuestions, targetPath).then(() => {
         console.log("Subido")
+        window.location.reload()
     }).catch((error) => {
         console.log(error)
     });
@@ -630,7 +631,7 @@ export async function getAllAnswersByQuestionAndSubject(questionIndex, subjectId
     return answerList
 }
 
-export async function getAllAnswersBySubjectsAndPeriod(subjectId, period) {
+export async function getAllAnswersBySubjectAndPeriod(subjectId, period) {
     const q = query(collection(firestore, `memos/answers/answers`), where("subjectId", "==", subjectId), where("period", "==", period))
     const querySnapshot = await getDocs(q);
     const answerList = querySnapshot.docs.map(doc => doc.data());

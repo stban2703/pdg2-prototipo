@@ -132,7 +132,7 @@ function displayHomeUserName() {
 function addPageFuncions() {
     // Home functions
     displayHomeUserName()
-    renderSubjectListHome(currentSubjects)///Sin actualizar
+    renderSubjectListHome(currentSubjects, currentPeriod)///Sin actualizar
 
     //Note functions
     submitNote(currentUser, currentSubjects)// Sin problemas
@@ -212,6 +212,9 @@ function checkCurrentTab() {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
+    if(!window.location.hash) {
+        tabs[0].classList.add("navigation-menu__item--selected")
+    }
     //addPageFuncions()
 }
 

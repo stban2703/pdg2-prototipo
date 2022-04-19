@@ -29,3 +29,7 @@ export function sortByAlphabeticDescending(a, b) {
 export function sortByIndex(a, b) {
     return parseInt(a.index) - parseInt(b.index);
 }
+
+export function sortByQuestionIndex(a, b) {
+    return a.questionIndex - b.questionIndex
+}

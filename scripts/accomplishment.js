@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectsAndPeriod, getDepartments, getSubjectsByView, getTeacherById, updateTeacherAccomplishment } from "./modules/firestore.js"
+import { getAllAnswersBySubjectAndPeriod, getDepartments, getSubjectsByView, getTeacherById, updateTeacherAccomplishment } from "./modules/firestore.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js"
 
@@ -315,7 +315,7 @@ export async function submitUserAccomplishment(userSubjects, currentPeriod) {
         let allQuestionsAnswers = []
         for (let index = 0; index < userSubjects.length; index++) {
             const subject = userSubjects[index];
-            const subjectAnswers = await getAllAnswersBySubjectsAndPeriod(subject.id, currentPeriod)
+            const subjectAnswers = await getAllAnswersBySubjectAndPeriod(subject.id, currentPeriod)
             allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
         }
 
