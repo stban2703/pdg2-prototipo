@@ -19,6 +19,7 @@
 }
 
 .small-button {
+    text-align: center;
     &--primary {
         @include main-button(
             $button-primary,
