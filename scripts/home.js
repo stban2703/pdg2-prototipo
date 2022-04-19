@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectAndPeriod, getDepartments } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getDepartments, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
@@ -21,8 +21,9 @@ export function showShortcuts(roles) {
 
 export async function renderListHome(subjectList, currentPeriod, roles) {
     const homescreenSubjectList = document.querySelector(".home-screen__subjectList")
+    const homeDepartmentList = document.querySelector(".home-screen__departmentList")
 
-    if (homescreenSubjectList) {
+    if (homescreenSubjectList && homeDepartmentList) {
         showLoader()
         if (!roles.includes("admin")) {
             const subjectSummary = []
@@ -108,7 +109,77 @@ export async function renderListHome(subjectList, currentPeriod, roles) {
         }
         else if (roles.includes("admin")) {
             const departments = await getDepartments()
-            console.log(departments)
+            const departmentProgressList = []
+
+            for (let index = 0; index < departments.length; index++) {
+                const department = departments[index];
+                const subjects = await getSubjectsByView(`departmentId`, department.id)
+                const teachersIds = []
+
+                subjects.forEach(subject => {
+                    const q = teachersIds.find(id => {
+                        return subject.teacherId === id
+                    })
+                    if (!q) {
+                        teachersIds.push(subject.teacherId)
+                    }
+                })
+
+                const teachers = []
+                for (let index = 0; index < teachersIds.length; index++) {
+                    const id = teachersIds[index];
+                    const q = await getTeacherById(id)
+                    teachers.push(q)
+                }
+
+                let departmentProgress = 0
+                let completeCounter = 0
+                let incompleteCounter = 0
+
+                teachers.forEach(t => {
+                    t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
+                })
+
+                departmentProgress = Math.round((completeCounter / (completeCounter + incompleteCounter)) * 100)
+
+                const object = {
+                    name: department.name,
+                    id: department.id,
+                    progress: departmentProgress
+                }
+                console.log(object)
+                departmentProgressList.push(object)
+            }
+
+            homeDepartmentList.innerHTML = ``
+
+            departmentProgressList.forEach(department => {
+                const departmentThumbnail = document.createElement("div")
+                departmentThumbnail.className = "deparment-thumbnail"
+                departmentThumbnail.innerHTML = `
+                    <section class="deparment-thumbnail__info">
+                        <section class="deparment-thumbnail__icon-title">
+                            <h5 class="deparment-thumbnail__title">${department.name}</h5>
+                        </section>
+                        <p class="deparment-thumbnail__percent">
+                        ${department.progress}%
+                        </p>
+                    </section>
+                    <section class="deparment-thumbnail__progress">
+                        <p class="deparment-thumbnail__subtitle">Memorando completado</p>
+                        <div class="deparment-thumbnail__progressBar">
+                            <div class="deparment-thumbnail__currentBar" style="width: ${department.progress}%">
+                            </div>
+                        </div>
+                    </section>
+                    <section class="deparment-thumbnail__controls">
+                        <a href="#accomplishmentlist?department_${department.id}" class="small-button small-button--secondary">
+                            <span>Ver</span>
+                        </a>
+                    </section>
+                `
+                homeDepartmentList.appendChild(departmentThumbnail)
+            })
         }
         hideLoader()
     }
