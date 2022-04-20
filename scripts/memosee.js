@@ -126,7 +126,7 @@ function sortFilterMemoseeSubjects(subjects, subjectSort, groupFilter) {
 export function changeMemoseeAnswerTab() {
     const memoTabButtons = document.querySelectorAll(".memo-summary__tab")
 
-    if(memoTabButtons && window.location.href.includes("#memoseeanswers")) {
+    if (memoTabButtons && window.location.href.includes("#memoseeanswers")) {
         memoTabButtons.forEach((button, index) => {
             button.addEventListener('click', () => {
                 currentMemoseeAnswerTab = index
@@ -140,17 +140,17 @@ export function renderMemoseeAnswerTab() {
     const buttons = document.querySelectorAll(".memo-summary__tab")
     const sections = document.querySelectorAll(".memo-summary__section")
 
-    if(buttons && sections && window.location.href.includes("#memoseeanswers")) {
+    if (buttons && sections && window.location.href.includes("#memoseeanswers")) {
         buttons.forEach((button, index) => {
-            if(index === currentMemoseeAnswerTab) {
+            if (index === currentMemoseeAnswerTab) {
                 button.classList.add("memo-summary__tab--selected")
             } else {
                 button.classList.remove("memo-summary__tab--selected")
             }
         })
-    
+
         sections.forEach((section, index) => {
-            if(index === currentMemoseeAnswerTab) {
+            if (index === currentMemoseeAnswerTab) {
                 section.classList.remove("hidden")
             } else {
                 section.classList.add("hidden")
@@ -161,15 +161,109 @@ export function renderMemoseeAnswerTab() {
 
 export async function renderMemoseeAnswersQuestions(currentPeriod) {
     const sections = document.querySelectorAll(".memo-summary__section")
-    if(sections && window.location.href.includes("#memoseeanswers")) {
+    if (sections && window.location.href.includes("#memoseeanswers")) {
+        showLoader()
         const subjectId = window.location.hash.split("?")[1]
         const answers = await getAllAnswersBySubjectAndPeriod(subjectId, currentPeriod)
         answers.sort(sortByQuestionIndex)
 
         const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
-        answersHolders[0].innerHTML = answers[0].answerValue[0]
-        
-        
 
+        // First
+        if (answers[0].answerValue[0]) {
+            answersHolders[0].innerHTML = answers[0].answerValue[0]
+        }
+
+        // Second
+        answersHolders[1].innerHTML = ``
+        if (answers[1].answerValue.length > 0) {
+            answers[1].answerValue.forEach(value => {
+                const optionItem = document.createElement("li")
+                optionItem.className = "memo-summary__answerItem"
+                optionItem.innerHTML = value
+                answersHolders[1].appendChild(optionItem)
+            })
+        }
+
+        // Third
+        const scaleValues = [
+            "Bajo (Aproximadamente solo un 10% evidencian en sus resultados el logro de los objetivos del curso)",
+            "Deficiente",
+            "Medio-bajo",
+            "Medio (Aproximadamente un 60% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)",
+            "Medio-alto",
+            "Alto (Aproximadamente un 90% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)"
+        ]
+        if (answers[2].answerValue[2]) {
+            answersHolders[2].innerHTML = `${answers[2].answerValue[0]}. ${scaleValues[parseInt(answers[2].answerValue[0]) - 1]}`
+        }
+
+        // Fourth
+        answersHolders[3].innerHTML = ``
+        if (answers[3].answerValue.length > 0) {
+            answers[3].answerValue.forEach(value => {
+                const optionItem = document.createElement("li")
+                optionItem.className = "memo-summary__answerItem"
+                optionItem.innerHTML = value
+                answersHolders[3].appendChild(optionItem)
+            })
+        }
+
+        // Fifth
+        if (answers[4].answerValue.length > 0) {
+            answers[4].answerValue.forEach((value) => {
+                const itemValue = parseInt(value.split("|")[1])
+
+                const optionTag = document.createElement("li")
+                optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
+                optionTag.innerHTML = value.split("|")[0]
+
+                const optionValue = document.createElement("li")
+                optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
+                optionValue.innerHTML = value.split("|")[1]
+
+                answersHolders[4].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
+                answersHolders[4].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+            })
+        }
+
+        // Sixth
+        if (answers[5].answerValue.length > 0) {
+            answers[5].answerValue.forEach((value) => {
+                const itemValue = parseInt(value.split("|")[1])
+
+                const optionTag = document.createElement("li")
+                optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
+                optionTag.innerHTML = value.split("|")[0]
+
+                const optionValue = document.createElement("li")
+                optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
+                optionValue.innerHTML = value.split("|")[1]
+
+                answersHolders[5].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
+                answersHolders[5].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+            })
+        }
+
+        // Seventh
+        answersHolders[6].innerHTML = ``
+        if (answers[6].answerValue.length > 0) {
+            answers[6].answerValue.forEach(value => {
+                const optionItem = document.createElement("li")
+                optionItem.className = "memo-summary__answerItem"
+                optionItem.innerHTML = value
+                answersHolders[6].appendChild(optionItem)
+            })
+        }
+
+        // Eigth
+        if (answers[7].answerValue) {
+            answersHolders[7].innerHTML = answers[7].answerValue[0]
+        }
+
+        if (answers[8].answerValue) {
+            answersHolders[8].innerHTML = answers[8].answerValue[0]
+        }
+        hideLoader()
     }
 }
