@@ -1,6 +1,6 @@
-import { getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartments } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartments } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
-import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
+import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByQuestionIndex } from "./utils/sort.js";
 
 let currentMemoseeAnswerTab = 0
 
@@ -156,5 +156,20 @@ export function renderMemoseeAnswerTab() {
                 section.classList.add("hidden")
             }
         })
+    }
+}
+
+export async function renderMemoseeAnswersQuestions(currentPeriod) {
+    const sections = document.querySelectorAll(".memo-summary__section")
+    if(sections && window.location.href.includes("#memoseeanswers")) {
+        const subjectId = window.location.hash.split("?")[1]
+        const answers = await getAllAnswersBySubjectAndPeriod(subjectId, currentPeriod)
+        answers.sort(sortByQuestionIndex)
+
+        const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
+        answersHolders[0].innerHTML = answers[0].answerValue[0]
+        
+        
+
     }
 }

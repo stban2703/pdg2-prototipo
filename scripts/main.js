@@ -5,7 +5,7 @@ import { submitNote } from "./createnote.js";
 import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderListHome, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
-import { changeMemoseeAnswerTab, getInitialMemoseeSubjects, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
+import { changeMemoseeAnswerTab, getInitialMemoseeSubjects, renderMemoseeAnswersQuestions, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { renderMeetingDetails, renderMeetings } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton, getAllSubjectsProgress } from "./memo.js";
@@ -172,6 +172,7 @@ function addPageFuncions() {
     getInitialMemoseeSubjects()
     changeMemoseeAnswerTab()
     renderMemoseeAnswerTab()
+    renderMemoseeAnswersQuestions(currentPeriod)
 
     // Improve actions functions
     renderGoToImproveActionsButton()
