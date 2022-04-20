@@ -194,8 +194,9 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
             "Medio-alto",
             "Alto (Aproximadamente un 90% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)"
         ]
-        if (answers[2].answerValue[2]) {
+        if (answers[2].answerValue) {
             answersHolders[2].innerHTML = `${answers[2].answerValue[0]}. ${scaleValues[parseInt(answers[2].answerValue[0]) - 1]}`
+            document.querySelector(".improve-action-question3").innerHTML = answers[2].answerValue[0]
         }
 
         // Fourth
@@ -210,6 +211,7 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         }
 
         // Fifth
+        document.querySelector(".improve-action-question5").innerHTML = ``
         if (answers[4].answerValue.length > 0) {
             answers[4].answerValue.forEach((value) => {
                 const itemValue = parseInt(value.split("|")[1])
@@ -224,10 +226,18 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
 
                 answersHolders[4].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
                 answersHolders[4].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+
+                if (itemValue <= 3) {
+                    const previousAnswerItem = document.createElement("p")
+                    previousAnswerItem.className = "memo-summary__strategyItem"
+                    previousAnswerItem.innerHTML = value.split("|")[0]
+                    document.querySelector(".improve-action-question5").appendChild(previousAnswerItem)
+                }
             })
         }
 
         // Sixth
+        document.querySelector(".improve-action-question6").innerHTML = ``
         if (answers[5].answerValue.length > 0) {
             answers[5].answerValue.forEach((value) => {
                 const itemValue = parseInt(value.split("|")[1])
@@ -242,6 +252,13 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
 
                 answersHolders[5].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
                 answersHolders[5].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+
+                if (itemValue <= 3) {
+                    const previousAnswerItem = document.createElement("p")
+                    previousAnswerItem.className = "memo-summary__strategyItem"
+                    previousAnswerItem.innerHTML = value.split("|")[0]
+                    document.querySelector(".improve-action-question6").appendChild(previousAnswerItem)
+                }
             })
         }
 
@@ -259,10 +276,54 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         // Eigth
         if (answers[7].answerValue) {
             answersHolders[7].innerHTML = answers[7].answerValue[0]
+            document.querySelector(".improve-action-question8").innerHTML = answers[7].answerValue[0]
         }
 
+
+        // Ninth
         if (answers[8].answerValue) {
             answersHolders[8].innerHTML = answers[8].answerValue[0]
+        }
+
+        // Improve actions
+        if (answers[9].answerValue.length > 0) {
+            answers[9].answerValue.forEach((elem, index) => {
+                const improveActionItem = document.createElement("tr")
+                improveActionItem.className = 'improve-action-item'
+                improveActionItem.innerHTML = `
+                <td>
+                    <div class="improve-action-item__number">
+                        <span>${index + 1}</span>
+                    </div>
+                </td>
+                <td class="improve-action-item__title">
+                    <h5>${elem.name}</h5>
+                </td>
+                <td class="improve-action-item__description">
+                    <p>${elem.description}</p>
+                </td>
+                `
+                document.querySelector(".improve-actions__list").appendChild(improveActionItem)
+            })
+            const empty = document.querySelector(".improve-actions__empty")
+            empty.classList.add("hidden")
+        }
+
+        // Eleven
+        if(answers[10].answerValue) {
+            answersHolders[10].innerHTML = answers[10].answerValue[0]
+        }
+
+        // Eleven
+        if(answers[11].answerValue) {
+            answersHolders[11].innerHTML = answers[11].answerValue[0]
+        }
+
+        // Twelve
+        if(answers[11].justification) {
+            document.querySelector(".memo-summary__answerJustification").innerHTML = `
+                <span style="font-weight: 600;">Descripción: </span>${answers[11].justification}
+            `
         }
         hideLoader()
     }
