@@ -123,7 +123,6 @@ export async function getTeachersByGroupName(groupName) {
 }
 
 // Improve actons
-
 export async function createImproveActionComment(subjectId, period, userInfo, comment) {
     const commentRef = doc(collection(firestore, "improveactionscomments"))
     const newComment = {
