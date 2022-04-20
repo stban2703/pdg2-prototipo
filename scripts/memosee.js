@@ -2,6 +2,8 @@ import { getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartments 
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
+let currentMemoseeAnswerTab = 0
+
 export async function renderMemoseeDepartments() {
     const memoseeDepartments = document.querySelector(".memosee-screen__selectList--departments")
 
@@ -119,4 +121,40 @@ function sortFilterMemoseeSubjects(subjects, subjectSort, groupFilter) {
         })
     }
     renderMemoseeSubjects(filterCopy)
+}
+
+export function changeMemoseeAnswerTab() {
+    const memoTabButtons = document.querySelectorAll(".memo-summary__tab")
+
+    if(memoTabButtons && window.location.href.includes("#memoseeanswers")) {
+        memoTabButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentMemoseeAnswerTab = index
+                renderMemoseeAnswerTab()
+            })
+        })
+    }
+}
+
+export function renderMemoseeAnswerTab() {
+    const buttons = document.querySelectorAll(".memo-summary__tab")
+    const sections = document.querySelectorAll(".memo-summary__section")
+
+    if(buttons && sections && window.location.href.includes("#memoseeanswers")) {
+        buttons.forEach((button, index) => {
+            if(index === currentMemoseeAnswerTab) {
+                button.classList.add("memo-summary__tab--selected")
+            } else {
+                button.classList.remove("memo-summary__tab--selected")
+            }
+        })
+    
+        sections.forEach((section, index) => {
+            if(index === currentMemoseeAnswerTab) {
+                section.classList.remove("hidden")
+            } else {
+                section.classList.add("hidden")
+            }
+        })
+    }
 }
