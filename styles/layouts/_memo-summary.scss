@@ -1,0 +1,169 @@
+.memo-summary {
+    display: flex;
+    flex-direction: column;
+
+    &__sectionTabs {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__tab {
+        background-color: #EFF0FF;
+        border-radius: 15px 15px 0 0;
+        color: $main-color;
+        font-family: $poppins;
+        font-size: 2rem;
+        border: none;
+        padding: 0.5rem 2rem;
+        width: 100%;
+        max-width: 35rem;
+
+        &--selected {
+            background-color: $main-color;
+            color: $white;
+        }
+    }
+
+    &__content {
+        background-color: $white;
+        padding: 4rem;
+    }
+
+    &__titleItem {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__number {
+        width: 3.1rem;
+        height: 3.1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $pink;
+        border-radius: 100%;
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $white;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__subsection {
+        margin-left: 4.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__subtitle {
+        font-family: $poppins;
+        font-size: 1.7rem;
+        font-weight: $semibold;
+        color: $pink;
+    }
+
+    &__questionAnswerSection {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__question {
+        display: flex;
+        flex-direction: row;
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__questionNumber {
+        font-family: $poppins;
+        font-size: 2rem;
+        color: $main-color;
+        min-width: 2.5rem;
+        
+        span {
+            font-weight: $semibold;
+        }
+    }
+
+    &__answer {
+        margin-left: 2.5rem;
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    &__answerTitle {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__answerText {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__answerList {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__answerItem {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+        list-style-type: disc;
+        list-style-position: inside;
+
+        &::marker {
+            color: $main-color;
+            margin-right: 0 !important;
+        }
+
+        &--negative {
+            color: $pink;
+        }
+
+        &--semibold {
+            font-weight: $semibold;
+        }
+    }
+
+    &__answerMatrix {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+    }
+
+    &__answerJustification {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;   
+    }
+}
