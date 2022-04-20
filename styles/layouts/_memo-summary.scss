@@ -105,7 +105,7 @@
         font-family: $poppins;
         font-size: 2rem;
         color: $main-color;
-        min-width: 2.5rem;
+        min-width: 3rem;
         
         span {
             font-weight: $semibold;
@@ -181,5 +181,61 @@
         font-size: 1.8rem;
         font-weight: $light;
         color: $boulder;   
+    }
+
+    &__previousAnswers {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    &__strategiesContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+    }
+
+    &__strategiesColumn {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__strategiesSubtitle {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__strategiesList {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+    }
+
+    &__strategyItem {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__feedback {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__feedbackAnswer {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $semibold;
+        color: $boulder;
+
+        span {
+            font-weight: $light;
+            margin-left: 0.3rem;
+        }
     }
 }
