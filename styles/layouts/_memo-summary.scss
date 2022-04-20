@@ -238,4 +238,10 @@
             margin-left: 0.3rem;
         }
     }
+
+    &__answerImproveActions {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
