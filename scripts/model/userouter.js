@@ -32,6 +32,7 @@ const router = new Router(
         memoseedepartments: new Layout(new Page("memoseedepartments.html")),
         memoseecareers: new Layout(new Page("memoseecareers.html")),
         memoseesubjects: new Layout(new Page("memoseesubjects.html")),
+        memoseeanswers: new Layout(new Page("memoseeanswers.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")
