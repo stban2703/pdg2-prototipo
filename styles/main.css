@@ -7635,6 +7635,10 @@ input[type=button] {
   margin-top: 2rem;
 }
 
+.memosee-screen .goToImproveActionsButton:hover {
+  cursor: pointer;
+}
+
 html {
   font-size: 62.5%;
 }

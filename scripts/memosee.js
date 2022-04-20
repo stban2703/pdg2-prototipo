@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartments } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartments, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByQuestionIndex } from "./utils/sort.js";
 
@@ -164,10 +164,25 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
     if (sections && window.location.href.includes("#memoseeanswers")) {
         showLoader()
         const subjectId = window.location.hash.split("?")[1]
+        const subectInfo = await getSubcjectInfo(subjectId)
         const answers = await getAllAnswersBySubjectAndPeriod(subjectId, currentPeriod)
         answers.sort(sortByQuestionIndex)
 
+
+        const subjectInfoTitles = document.querySelectorAll(".subjectTitle")
+        subjectInfoTitles[0].innerHTML = subectInfo.name
+        subjectInfoTitles[1].innerHTML = currentPeriod
+        subjectInfoTitles[2].innerHTML = subectInfo.teacher
+
+        
         const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
+
+        const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
+        goToImproveActionsButton.addEventListener('click', () => {
+            currentMemoseeAnswerTab = 2
+            renderMemoseeAnswerTab()
+            answersHolders[9].scrollIntoView(true)
+        })
 
         // First
         if (answers[0].answerValue[0]) {
@@ -279,7 +294,6 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
             document.querySelector(".improve-action-question8").innerHTML = answers[7].answerValue[0]
         }
 
-
         // Ninth
         if (answers[8].answerValue) {
             answersHolders[8].innerHTML = answers[8].answerValue[0]
@@ -310,17 +324,17 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         }
 
         // Eleven
-        if(answers[10].answerValue) {
+        if (answers[10].answerValue) {
             answersHolders[10].innerHTML = answers[10].answerValue[0]
         }
 
         // Eleven
-        if(answers[11].answerValue) {
+        if (answers[11].answerValue) {
             answersHolders[11].innerHTML = answers[11].answerValue[0]
         }
 
         // Twelve
-        if(answers[11].justification) {
+        if (answers[11].justification) {
             document.querySelector(".memo-summary__answerJustification").innerHTML = `
                 <span style="font-weight: 600;">Descripción: </span>${answers[11].justification}
             `

@@ -44,4 +44,10 @@
     &__summary {
         margin-top: 2rem;
     }
+
+    .goToImproveActionsButton {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
