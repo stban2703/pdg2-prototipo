@@ -6261,7 +6261,8 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1rem;
+  margin-top: 2rem;
+  gap: 2rem;
 }
 
 .memo-summary__subtitle {
@@ -6269,6 +6270,17 @@ input[type=button] {
   font-size: 1.7rem;
   font-weight: 600;
   color: #FF89D0;
+}
+
+.memo-summary__subsectionQuestions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3.5rem;
 }
 
 .memo-summary__questionAnswerSection {
@@ -6307,6 +6319,13 @@ input[type=button] {
   font-weight: 600;
 }
 
+.memo-summary__questionText {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #757575;
+}
+
 .memo-summary__answer {
   margin-left: 2.5rem;
   display: -webkit-box;
@@ -6317,6 +6336,7 @@ input[type=button] {
       -ms-flex-direction: row;
           flex-direction: row;
   gap: 2rem;
+  margin-top: 1rem;
 }
 
 .memo-summary__answerTitle {
