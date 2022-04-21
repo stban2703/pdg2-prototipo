@@ -4257,7 +4257,7 @@ input[type=button] {
 
 .roleShortcut-thumbnail a {
   padding-top: 0.2rem;
-  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
   max-width: 13rem;
 }
 
@@ -6759,6 +6759,7 @@ input[type=button] {
           flex-direction: column;
   gap: 3rem;
   width: 100%;
+  max-width: 91.5rem;
 }
 
 .home-screen__roleShortcutsList {

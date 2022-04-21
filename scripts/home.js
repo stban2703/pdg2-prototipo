@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectAndPeriod, getDepartments, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getDepartmentCareers, getDepartments, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
@@ -19,11 +19,11 @@ export function showShortcuts(roles) {
     }
 }
 
-export async function renderListHome(subjectList, currentPeriod, roles) {
+export async function renderListHome(subjectList, currentPeriod, roles, userInfo) {
     const homescreenSubjectList = document.querySelector(".home-screen__subjectList")
     const homeDepartmentList = document.querySelector(".home-screen__departmentList")
 
-    if (homescreenSubjectList && homeDepartmentList) {
+    if (homescreenSubjectList) {
         showLoader()
         if (!roles.includes("admin")) {
             const subjectSummary = []
@@ -96,18 +96,53 @@ export async function renderListHome(subjectList, currentPeriod, roles) {
             })
 
             let allSubjectsProgress = Math.round((sum / (subjectSummary.length * 100)) * 100)
-            console.log(allSubjectsProgress)
 
             const progressContainer = document.querySelector(".memo-thumbnail__progress")
             progressContainer.innerHTML = `
         <div class="memo-pie custom-pie"
             data-pie='{ "colorSlice": "#979DFF", "percent": ${allSubjectsProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
         </div>
-        `
+            `
             const circle = new CircularProgressBar(`memo-pie`)
             circle.initial()
-        }
-        else if (roles.includes("admin")) {
+
+            if (roles.includes("boss") || roles.includes("principal") || roles.includes("leader")) {
+                const roleShortcutSection = document.querySelector(".home-screen__roleShortcuts")
+                roleShortcutSection.classList.remove("hidden")
+                const roleShortCutSectionList = document.querySelector(".home-screen__roleShortcutsList")
+
+                roleShortCutSectionList.innerHTML = ``
+
+                let roleItems = []
+                let initialHref = ""
+
+                if (roles.includes("boss")) {
+                    roleItems = await getDepartmentCareers(userInfo.bossDepartmentId)
+                    initialHref = "#generalsubjects?"
+                }
+                
+                roleItems.forEach(item => {
+                    const roleElement = document.createElement("div")
+                    roleElement.className = "roleShortcut-thumbnail"
+                    roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
+                    roleElement.innerHTML = `
+                    <section class="roleShortcut-thumbnail__abbreviation">
+                        <h4 class="roleShortcut-thumbnail__title">${item.abbrevation}</h4>
+                    </section>
+                    <section class="roleShortcut-thumbnail__info">
+                        <section class="roleShortcut-thumbnail__titles">
+                            <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
+                            <p class="roleShortcut-thumbnail__name">${item.name}</p>
+                        </section>
+                        <a class="small-button small-button--secondary" href="${initialHref}${item.id}">
+                            <span>Ver</span>
+                        </a>
+                    </section>
+                    `
+                    roleShortCutSectionList.appendChild(roleElement)
+                })
+            }
+        } else if (roles.includes("admin")) {
             const departments = await getDepartments()
             const departmentProgressList = []
 
@@ -181,7 +216,7 @@ export async function renderListHome(subjectList, currentPeriod, roles) {
                 homeDepartmentList.appendChild(departmentThumbnail)
             })
 
-            
+
             let sum = 0
             departmentProgressList.forEach(d => {
                 sum += d.progress
