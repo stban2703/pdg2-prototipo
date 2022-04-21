@@ -7,6 +7,9 @@ import { sortByDate } from "./utils/sort.js"
 export async function getInitialMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
     const createMeetingButton = document.querySelector(".addMeetingBtn")
+    const meetingListSection = document.querySelector(".meetinglist-screen__meetings")
+    const meetingListSectionAdmin = document.querySelector(".meetinglist-screen__meetings--admin")
+
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
@@ -14,14 +17,22 @@ export async function getInitialMeetings() {
         const meetingList = await getMeetings()
         meetingList.sort(sortByDate)
 
-        const leaderRole = userInfo.role.find(role => {
-            return role === 'leader'
-        })
-        if (leaderRole) {
+
+        if (userInfo.role.includes("leader")) {
             createMeetingButton.classList.remove("hidden")
         }
 
-        renderMeetings(meetingList)
+        if (userInfo.role.includes("admin")) {
+            document.querySelector(".section-banner__description").classList.add("hidden")
+            meetingListSectionAdmin.classList.remove("hidden")
+            meetingListSection.classList.add("hidden")
+            renderMeetingsForAdmin(meetingList)
+        } else {
+            meetingListSectionAdmin.classList.add("hidden")
+            meetingListSection.classList.remove("hidden")
+            renderMeetings(meetingList)
+        }
+
         hideLoader()
     }
 }
@@ -67,6 +78,48 @@ function renderMeetings(list) {
         } else {
             pendingList.appendChild(meetingItem)
         }
+    })
+}
+
+function renderMeetingsForAdmin(list) {
+    const finishedListAdmin = document.querySelector(".meetinglist-screen__list--admin")
+
+    finishedListAdmin.innerHTML = ``
+
+    const copy = list.filter(elem => {
+        return elem.minutesId.length > 0
+    })
+
+    copy.forEach(meeting => {
+        const meetingItem = document.createElement("div")
+        meetingItem.classList.add("meeting-item")
+        meetingItem.innerHTML = `
+            <section class="meeting-item__header">
+                <img class="meeting-item__icon" src="./images/meetingicon.svg" alt="">
+                <h4 class="meeting-item__title subtitle subtitle--semibold">${meeting.name}</h4>
+                <p class="meeting-item__date">${parseTimestampToDate(meeting.date)}</p>
+            </section>
+            <section class="meeting-item__content">
+                <section class="meeting-item__details">
+                    <p class="meeting-item__subtitle">Bloque: <span>${meeting.group}</span></p>
+                    <p class="meeting-item__subtitle">Hora: <span>${meeting.time}</span></p>
+                    <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
+                    <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
+                </section>
+                <section class="meeting-item__controls">
+                    ${meeting.minutesId.length > 0 ?
+                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                        <p>Ver acta</p>
+                    </a>`:
+                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                        <p>Ver detalle</p>
+                    </a>`}
+                    
+                </section>
+            </section>
+        `
+
+        finishedListAdmin.appendChild(meetingItem)
     })
 }
 

@@ -6928,6 +6928,16 @@ input[type=button] {
       grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.meetinglist-screen__meetings--admin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .meetinglist-screen__subtitle {
   font-weight: 600;
 }
@@ -6952,6 +6962,10 @@ input[type=button] {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='0' x2='0' y1='0' y2='100%' fill='none' stroke='%2346A1FD' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
 }
 
+.meetinglist-screen__column--admin:nth-child(1) {
+  background-image: none;
+}
+
 .meetinglist-screen__list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6962,6 +6976,15 @@ input[type=button] {
           flex-direction: column;
   margin-top: 1.5rem;
   gap: 2rem;
+}
+
+.meetinglist-screen__list--admin {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  max-width: 80rem;
 }
 
 .meetingdetails-screen {
