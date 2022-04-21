@@ -15,6 +15,8 @@ export function showShortcuts(roles) {
 
             const homeSubjects = document.querySelector(".home-screen__subjects")
             homeSubjects.classList.add("hidden")
+
+            document.querySelector('.home-screen__departments').classList.remove("hidden")
         }
     }
 }

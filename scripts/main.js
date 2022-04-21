@@ -7,7 +7,7 @@ import { renderListHome, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
 import { changeMemoseeAnswerTab, getInitialMemoseeSubjects, renderMemoseeAnswersQuestions, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
-import { renderMeetingDetails, renderMeetings } from "./meetings.js";
+import { getInitialMeetings, renderMeetingDetails } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton, getAllSubjectsProgress } from "./memo.js";
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { handleMemoAddActionForm, memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
@@ -40,35 +40,35 @@ export const userSubjects = currentSubjects
 // Check user roles
 currentUser.role.forEach(role => {
 
-    if(role ==='leader') {
+    if (role === 'leader') {
         document.querySelector('#navaccomplishment').classList.remove('hidden')
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
         document.querySelector('#navmygroup').classList.remove('hidden')
         document.querySelector('#navmygroup').setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
     }
 
-    if(role === 'principal') {
+    if (role === 'principal') {
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.principalCareerId}`)
         document.querySelector('#navaccomplishment').classList.remove('hidden')
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?career_${userInfo.principalCareerId}`)
     }
 
-    if(role === 'boss') {
+    if (role === 'boss') {
         document.querySelector('#navaccomplishment').classList.remove('hidden')
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?department_${userInfo.bossDepartmentId}`)
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_${userInfo.bossDepartment}`)
     }
 
-    if(role === 'admin') {
+    if (role === 'admin') {
         document.querySelector('#navnotes').classList.add("hidden")
         document.querySelector('#navprogress').classList.add('hidden')
         document.querySelector('#navaccomplishment').classList.remove('hidden')
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentdashboard`)
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_general`)
-        document.querySelector('.home-screen__departments').classList.remove("hidden")
+        
     }
 })
 
@@ -116,7 +116,7 @@ window.addEventListener("hashchange", function () {
 const pageContent = document.querySelector(".page-content")
 let observer = new MutationObserver(function (mutationsList, observer) {
     mutationsList.forEach(e => {
-        if(e.addedNodes.length > 0) {
+        if (e.addedNodes.length > 0) {
             addPageFuncions()
         }
     })
@@ -148,7 +148,7 @@ function addPageFuncions() {
     changeNotesView()
 
     // Meeting functions
-    renderMeetings()
+    getInitialMeetings()
     renderMeetingDetails()
     onSelectMeetingMode()
     submitMeeting(currentUser)
@@ -229,7 +229,7 @@ function checkCurrentTab() {
             t.classList.remove("navigation-menu__item--selected")
         }
     })
-    if(!window.location.hash) {
+    if (!window.location.hash) {
         tabs[0].classList.add("navigation-menu__item--selected")
     }
     //addPageFuncions()

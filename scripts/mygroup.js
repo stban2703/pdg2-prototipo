@@ -12,8 +12,8 @@ export async function getInitialMyGroupSubjects() {
         const subjects = await getGroupSubjects(groupId)
         renderMyGroupSubjects(subjects)
         onSortMygroupSubjectListener(subjects)
+        hideLoader()
     }
-    hideLoader()
 }
 
 function renderMyGroupSubjects(list) {

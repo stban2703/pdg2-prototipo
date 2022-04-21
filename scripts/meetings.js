@@ -4,20 +4,15 @@ import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDate } from "./utils/sort.js"
 
-export async function renderMeetings() {
+export async function getInitialMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
     const createMeetingButton = document.querySelector(".addMeetingBtn")
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
-        const pendingList = document.querySelector(".meetinglist-screen__list--pending")
-        const finishedList = document.querySelector(".meetinglist-screen__list--finished")
-
-        pendingList.innerHTML = ``
-        finishedList.innerHTML = ``
 
         const meetingList = await getMeetings()
-        const copy = [...meetingList].sort(sortByDate)
+        meetingList.sort(sortByDate)
 
         const leaderRole = userInfo.role.find(role => {
             return role === 'leader'
@@ -26,44 +21,53 @@ export async function renderMeetings() {
             createMeetingButton.classList.remove("hidden")
         }
 
-        copy.forEach(meeting => {
-            const meetingItem = document.createElement("div")
-            meetingItem.classList.add("meeting-item")
-            meetingItem.innerHTML = `
-                <section class="meeting-item__header">
-                    <img class="meeting-item__icon" src="./images/meetingicon.svg" alt="">
-                    <h4 class="meeting-item__title subtitle subtitle--semibold">${meeting.name}</h4>
-                    <p class="meeting-item__date">${parseTimestampToDate(meeting.date)}</p>
-                </section>
-                <section class="meeting-item__content">
-                    <section class="meeting-item__details">
-                        <p class="meeting-item__subtitle">Bloque: <span>${meeting.group}</span></p>
-                        <p class="meeting-item__subtitle">Hora: <span>${meeting.time}</span></p>
-                        <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
-                        <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
-                    </section>
-                    <section class="meeting-item__controls">
-                        ${meeting.minutesId.length > 0 ? 
-                        `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
-                            <p>Ver acta</p>
-                        </a>`:
-                        `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
-                            <p>Ver detalle</p>
-                        </a>`
-                        }
-                        
-                    </section>
-                </section>
-            `
-
-            if(meeting.minutesId.length > 0) {
-                finishedList.appendChild(meetingItem)
-            } else {
-                pendingList.appendChild(meetingItem)
-            }
-        })
+        renderMeetings(meetingList)
         hideLoader()
     }
+}
+
+function renderMeetings(list) {
+    const pendingList = document.querySelector(".meetinglist-screen__list--pending")
+    const finishedList = document.querySelector(".meetinglist-screen__list--finished")
+
+    pendingList.innerHTML = ``
+    finishedList.innerHTML = ``
+
+    list.forEach(meeting => {
+        const meetingItem = document.createElement("div")
+        meetingItem.classList.add("meeting-item")
+        meetingItem.innerHTML = `
+            <section class="meeting-item__header">
+                <img class="meeting-item__icon" src="./images/meetingicon.svg" alt="">
+                <h4 class="meeting-item__title subtitle subtitle--semibold">${meeting.name}</h4>
+                <p class="meeting-item__date">${parseTimestampToDate(meeting.date)}</p>
+            </section>
+            <section class="meeting-item__content">
+                <section class="meeting-item__details">
+                    <p class="meeting-item__subtitle">Bloque: <span>${meeting.group}</span></p>
+                    <p class="meeting-item__subtitle">Hora: <span>${meeting.time}</span></p>
+                    <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
+                    <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
+                </section>
+                <section class="meeting-item__controls">
+                    ${meeting.minutesId.length > 0 ?
+                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                        <p>Ver acta</p>
+                    </a>`:
+                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                        <p>Ver detalle</p>
+                    </a>`}
+                    
+                </section>
+            </section>
+        `
+
+        if (meeting.minutesId.length > 0) {
+            finishedList.appendChild(meetingItem)
+        } else {
+            pendingList.appendChild(meetingItem)
+        }
+    })
 }
 
 export async function renderMeetingDetails() {
@@ -84,7 +88,7 @@ export async function renderMeetingDetails() {
             const leaderRole = userInfo.role.find(role => {
                 return role === 'leader'
             })
-            if(leaderRole && userInfo.leaderGroup == meeting.group) {
+            if (leaderRole && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
                 confirmRejectMeetingSection.classList.add("hidden")
             }
@@ -149,20 +153,20 @@ function confirmMeetingAssistance(meeting) {
             const currentParticipant = participantsCopy.find((m) => {
                 return m == userInfo.name + " " + userInfo.lastname
             })
-            
+
             const userGroup = userInfo.groups.find((e) => {
                 return e == meeting.group
             })
 
-            if(!currentParticipant && userGroup) {
+            if (!currentParticipant && userGroup) {
                 participantsCopy.push(userInfo.name + " " + userInfo.lastname)
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
                     alert("¡Gracias por confirmar tu asistencia!")
                     location.reload()
                 })
-            } else if(!userGroup) {
+            } else if (!userGroup) {
                 alert("Parece que no estás asignado a este bloque")
-            } else if(currentParticipant) {
+            } else if (currentParticipant) {
                 alert("Ya confirmaste tu participación")
             }
         })
@@ -174,10 +178,10 @@ function confirmMeetingAssistance(meeting) {
             const currentParticipantIndex = participantsCopy.findIndex((m) => {
                 return m == userInfo.name + " " + userInfo.lastname
             })
-            
-            if(currentParticipantIndex < 0) {
+
+            if (currentParticipantIndex < 0) {
                 alert("No has confirmado tu participación en esta reunión")
-            } else if(currentParticipantIndex >= 0) {
+            } else if (currentParticipantIndex >= 0) {
                 participantsCopy.splice(currentParticipantIndex, 1)
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
                     alert("Se ha retirado tu participación en esta reunión")
