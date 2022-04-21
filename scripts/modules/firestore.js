@@ -93,7 +93,7 @@ export async function getGroups() {
 }
 
 export async function getCareerByGroup(groupName) {
-    const q = query(collection(firestore, "subjects"), where("groups", "array-contains", "" + groupName))
+    const q = query(collection(firestore, "careers"), where("groups", "array-contains", groupName))
     const querySnapshot = await getDocs(q);
     const career = querySnapshot.docs.map(doc => doc.data());
     return career[0]
@@ -315,7 +315,7 @@ export async function deleteNote(userId, noteId, type) {
 }
 
 // Meetings functions
-export async function createMeeting(name, date, time, duration, mode, place, platform, url, group) {
+export async function createMeeting(name, date, time, duration, mode, place, platform, url, group, careerInfo, departmentInfo) {
     const meetingRef = doc(collection(firestore, "meetings"))
 
     const newMeeting = {
@@ -332,7 +332,9 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         group: group,
         totalParticipants: ["Maria Juliana Ortiz", "Carlos Ramirez", "Wilson Lopez", "Jennifer Velez", "Roberto Martinez"],
         confirmedParticipants: [],
-        minutesId: ""
+        minutesId: "",
+        career: careerInfo.name,
+        department: departmentInfo.name
     }
     await setDoc(meetingRef, newMeeting).then(() => {
         hideLoader()

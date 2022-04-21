@@ -1,6 +1,6 @@
-import { createMeeting } from "./modules/firestore.js"
+import { createMeeting, getCareerByGroup, getDepartmentInfo } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
-import { showLoader } from "./utils/loader.js"
+import { hideLoader, showLoader } from "./utils/loader.js"
 
 export function onSelectMeetingMode() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
@@ -19,7 +19,7 @@ export function onSelectMeetingMode() {
                 platformInput.setAttribute('required', '')
                 urlInput.setAttribute('required', '')
                 placeInput.removeAttribute('required')
-            } else if(modeInput.value == "Presencial") {
+            } else if (modeInput.value == "Presencial") {
                 virtualMeetingSection.classList.add("hidden")
                 inPersonMeetingSection.classList.remove("hidden")
                 platformInput.removeAttribute('required')
@@ -36,11 +36,15 @@ export function onSelectMeetingMode() {
     }
 }
 
-export function submitMeeting(userInfo) {
+export async function submitMeeting(userInfo) {
     const createMeetingForm = document.querySelector('.createmeeting-form')
     if (createMeetingForm && window.location.href.includes("#createmeeting")) {
+        showLoader()
         const virtualMeetingSection = document.querySelector('.createmeeting-form__section--virtual')
         const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
+        const careerInfo = await getCareerByGroup(userInfo.leaderGroup)
+        const deparmentInfo = await getDepartmentInfo(careerInfo.departmentId)
+        hideLoader()
 
         createMeetingForm.addEventListener('submit', (event) => {
             event.preventDefault()
@@ -57,14 +61,14 @@ export function submitMeeting(userInfo) {
             let standarTime = parseMilitaryTimeToStandard(time)
 
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))
-            if(inPersonMeetingSection.classList.contains("hidden") && userInfo.leaderGroup) {
+            if (inPersonMeetingSection.classList.contains("hidden") && userInfo.leaderGroup) {
                 console.log("Es virtual")
                 showLoader()
-                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup)
-            } else if(virtualMeetingSection.classList.contains("hidden")) {
+                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup, careerInfo, deparmentInfo)
+            } else if (virtualMeetingSection.classList.contains("hidden")) {
                 console.log("Es presencial")
                 showLoader()
-                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup)
+                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup, careerInfo, deparmentInfo)
             }
         })
     }

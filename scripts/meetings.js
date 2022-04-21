@@ -1,5 +1,5 @@
 import { userInfo } from "./main.js"
-import { getGroups, getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
+import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDate } from "./utils/sort.js"
@@ -15,23 +15,24 @@ export async function getInitialMeetings() {
         showLoader()
 
         const meetingList = await getMeetings()
-        const groups = await getGroups()
-
-        const meetingListItems = []
-
-        meetingList.forEach(meeting => {
-            const groupInfo = groups.find(g => {
-                return g.name === meeting.group
-            })
-            if(groupInfo) {
-                meeting.career = groupInfo.career
-                meeting.department = groupInfo.department
-
-            }
-        })
-
         meetingList.sort(sortByDate)
 
+
+        const groups = []
+        const careers = []
+        const departments = []
+
+        meetingList.forEach((meeting) => {
+            if(!groups.includes(meeting.group)) {
+                groups.push(meeting.group)
+            }
+            if(!careers.includes(meeting.career)) {
+                careers.push(meeting.career)
+            }
+            if(!departments.includes(meeting.department)) {
+                departments.push(meeting.department)
+            }
+        })
 
         if (userInfo.role.includes("leader")) {
             createMeetingButton.classList.remove("hidden")

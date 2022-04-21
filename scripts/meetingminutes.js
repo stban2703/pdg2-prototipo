@@ -8,8 +8,7 @@ export async function renderMeetingMinutesDetails() {
         const minutesId = window.location.hash.split("?")[1]
         const meetingMinutes = await getMeetingMinutes(minutesId)
         const meetingInfo = await getMeetingDetails(meetingMinutes.meetingId)
-        //console.log(meetingMinutes)
-        //console.log(meetingInfo)
+
 
         let iconSrc = ""
         if (meetingInfo.platform) {
