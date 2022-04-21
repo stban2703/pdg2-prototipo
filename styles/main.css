@@ -7619,6 +7619,10 @@ input[type=button] {
   font-weight: 300;
 }
 
+.memosee-screen form {
+  margin-left: auto;
+}
+
 .memosee-screen__selectList {
   display: -ms-grid;
   display: grid;

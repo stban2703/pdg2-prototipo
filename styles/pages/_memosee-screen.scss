@@ -31,6 +31,10 @@
         }
     }
 
+    form {
+        margin-left: auto;
+    }
+
     &__selectList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

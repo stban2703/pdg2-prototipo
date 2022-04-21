@@ -16,6 +16,7 @@ import { getInitialProgressInfo } from "./myprogress.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
+import { getInitialMyGroupSubjects } from "./mygroup.js";
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -42,6 +43,8 @@ currentUser.role.forEach(role => {
     if(role ==='leader') {
         document.querySelector('#navaccomplishment').classList.remove('hidden')
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
+        document.querySelector('#navmygroup').classList.remove('hidden')
+        document.querySelector('#navmygroup').setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
     }
 
     if(role === 'principal') {
@@ -65,6 +68,7 @@ currentUser.role.forEach(role => {
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentdashboard`)
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_general`)
+        document.querySelector('.home-screen__departments').classList.remove("hidden")
     }
 })
 
@@ -196,6 +200,9 @@ function addPageFuncions() {
     // Accomplishment functions
     getInitialAccomplishmentList(currentUser)
     getInititalAccomplishmentDepartmentList()
+
+    // My group functions
+    getInitialMyGroupSubjects()
 
     // Memo form edit functions
     changeMemoEditFormPage()
