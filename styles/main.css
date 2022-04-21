@@ -6938,6 +6938,13 @@ input[type=button] {
           flex-direction: column;
 }
 
+.meetinglist-screen__header form {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+}
+
 .meetinglist-screen__subtitle {
   font-weight: 600;
 }

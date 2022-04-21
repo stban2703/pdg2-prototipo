@@ -2,8 +2,12 @@ export function sortByWeek(a, b) {
     return a.week - b.week;
 }
 
-export function sortByDate(a, b) {
+export function sortByDateAscending(a, b) {
     return a.date - b.date;
+}
+
+export function sortByDateDescending(a, b) {
+    return b.date - a.date;
 }
 
 export function sortByAlphabeticAscending(a, b) {

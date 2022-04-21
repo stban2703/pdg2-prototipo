@@ -2,20 +2,20 @@ import { userInfo } from "./main.js"
 import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
-import { sortByDate } from "./utils/sort.js"
+import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js"
 
 export async function getInitialMeetings() {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
     const createMeetingButton = document.querySelector(".addMeetingBtn")
     const meetingListSection = document.querySelector(".meetinglist-screen__meetings")
     const meetingListSectionAdmin = document.querySelector(".meetinglist-screen__meetings--admin")
-
+    const meetingsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--meetings")
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
 
         const meetingList = await getMeetings()
-        meetingList.sort(sortByDate)
+        meetingList.sort(sortByDateDescending)
 
 
         const groups = []
@@ -34,6 +34,30 @@ export async function getInitialMeetings() {
             }
         })
 
+        const departmentFilterSelect = meetingsSettingsForm.department
+        departments.forEach(elem => {
+            const option = document.createElement("option")
+            option.value = elem
+            option.innerHTML = elem
+            departmentFilterSelect.appendChild(option)
+        })
+
+        const careerFilterSelect = meetingsSettingsForm.career
+        careers.forEach(elem => {
+            const option = document.createElement("option")
+            option.value = elem
+            option.innerHTML = elem
+            careerFilterSelect.appendChild(option)
+        })
+
+        const groupFilterSelect = meetingsSettingsForm.group
+        groups.forEach(elem => {
+            const option = document.createElement("option")
+            option.value = elem
+            option.innerHTML = elem
+            groupFilterSelect.appendChild(option)
+        })
+
         if (userInfo.role.includes("leader")) {
             createMeetingButton.classList.remove("hidden")
         }
@@ -43,6 +67,7 @@ export async function getInitialMeetings() {
             meetingListSectionAdmin.classList.remove("hidden")
             meetingListSection.classList.add("hidden")
             renderMeetingsForAdmin(meetingList)
+            onSortFilterMeetingsListener(meetingList)
         } else {
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
@@ -137,6 +162,59 @@ function renderMeetingsForAdmin(list) {
 
         finishedListAdmin.appendChild(meetingItem)
     })
+}
+
+function onSortFilterMeetingsListener(meetings) {
+    const meetingsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--meetings")
+
+    if (window.location.href.includes("#meetinglist") && meetingsSettingsForm) {
+        const meetingsSortSelect = meetingsSettingsForm.date
+        const departmentFilterSelect = meetingsSettingsForm.department
+        const careerFilterSelect = meetingsSettingsForm.career
+        const groupFilterSelect = meetingsSettingsForm.group
+
+        meetingsSettingsForm.addEventListener('input', () => {
+            sortFilterMeetings(meetings, meetingsSortSelect, departmentFilterSelect, careerFilterSelect, groupFilterSelect)
+        })
+    }
+}
+
+function sortFilterMeetings(meetings, meetingSort, departmentFilter, careerFilter, groupFilter) {
+    let filterCopy = [...meetings]
+
+    if (meetingSort.value.length > 0) {
+        if (meetingSort.value == "ascending") {
+            filterCopy = [...filterCopy].sort(sortByDateAscending)
+        } else if (meetingSort.value = "descending") {
+            filterCopy = [...filterCopy].sort(sortByDateDescending)
+        }
+    }
+
+    if (departmentFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.department == departmentFilter.value) {
+                return true
+            }
+        })
+    }
+
+    if (careerFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.career == careerFilter.value) {
+                return true
+            }
+        })
+    }
+
+    if (groupFilter.value.length > 0) {
+        filterCopy = [...filterCopy].filter(e => {
+            if (e.group == groupFilter.value) {
+                return true
+            }
+        })
+    }
+
+    renderMeetingsForAdmin(filterCopy)
 }
 
 export async function renderMeetingDetails() {

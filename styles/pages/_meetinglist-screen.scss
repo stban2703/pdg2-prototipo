@@ -16,6 +16,13 @@
         }
     }
 
+    &__header {
+        form {
+            width: fit-content;
+            margin-left: auto;
+        }
+    }
+
     &__subtitle {
         font-weight: $semibold;
     }
