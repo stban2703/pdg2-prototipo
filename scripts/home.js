@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectAndPeriod, getDepartmentCareers, getDepartments, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getDepartmentCareers, getDepartments, getGroupInfo, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
@@ -109,6 +109,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
             if (roles.includes("boss") || roles.includes("principal") || roles.includes("leader")) {
                 const roleShortcutSection = document.querySelector(".home-screen__roleShortcuts")
                 roleShortcutSection.classList.remove("hidden")
+                const roleShortcutsTitle = document.querySelector(".roleShortcutsTitle")
                 const roleShortCutSectionList = document.querySelector(".home-screen__roleShortcutsList")
 
                 roleShortCutSectionList.innerHTML = ``
@@ -117,30 +118,76 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                 let initialHref = ""
 
                 if (roles.includes("boss")) {
+                    roleShortcutsTitle.innerHTML = `Departamento de ${userInfo.bossDepartment}`
                     roleItems = await getDepartmentCareers(userInfo.bossDepartmentId)
                     initialHref = "#generalsubjects?"
-                }
-                
-                roleItems.forEach(item => {
+                    roleItems.forEach(item => {
+                        const roleElement = document.createElement("div")
+                        roleElement.className = "roleShortcut-thumbnail"
+
+                        roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
+                        roleElement.innerHTML = `
+                        <section class="roleShortcut-thumbnail__abbreviation">
+                            <h4 class="roleShortcut-thumbnail__title">${item.abbreviation}</h4>
+                        </section>
+                        <section class="roleShortcut-thumbnail__info">
+                            <section class="roleShortcut-thumbnail__titles">
+                                <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
+                                <p class="roleShortcut-thumbnail__name">${item.name}</p>
+                            </section>
+                            <a class="small-button small-button--secondary" href="${initialHref}${item.id}">
+                                <span>Ver</span>
+                            </a>
+                        </section>
+                        `
+                        roleShortCutSectionList.appendChild(roleElement)
+                    })
+
+                } else if (roles.includes("principal")) {
+                    roleItems = await getCareerInfo(userInfo.principalCareerId)
+                    roleShortcutsTitle.innerHTML = `Tu carrera`
                     const roleElement = document.createElement("div")
                     roleElement.className = "roleShortcut-thumbnail"
+                    initialHref = "#generalsubjects?"
                     roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
                     roleElement.innerHTML = `
-                    <section class="roleShortcut-thumbnail__abbreviation">
-                        <h4 class="roleShortcut-thumbnail__title">${item.abbrevation}</h4>
-                    </section>
-                    <section class="roleShortcut-thumbnail__info">
-                        <section class="roleShortcut-thumbnail__titles">
-                            <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
-                            <p class="roleShortcut-thumbnail__name">${item.name}</p>
+                        <section class="roleShortcut-thumbnail__abbreviation">
+                            <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
                         </section>
-                        <a class="small-button small-button--secondary" href="${initialHref}${item.id}">
-                            <span>Ver</span>
-                        </a>
-                    </section>
-                    `
+                        <section class="roleShortcut-thumbnail__info">
+                            <section class="roleShortcut-thumbnail__titles">
+                                <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
+                                <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
+                            </section>
+                            <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
+                                <span>Ver</span>
+                            </a>
+                        </section>`
                     roleShortCutSectionList.appendChild(roleElement)
-                })
+                } else if (roles.includes("leader")) {
+                    roleItems = await getGroupInfo(userInfo.leaderGroupId)
+                    roleShortcutsTitle.innerHTML = `Tu bloque`
+
+                    const roleElement = document.createElement("div")
+                    roleElement.className = "roleShortcut-thumbnail"
+                    initialHref = "#mygroup?"
+                    roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
+
+                    roleElement.innerHTML = `
+                        <section class="roleShortcut-thumbnail__abbreviation">
+                            <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
+                        </section>
+                        <section class="roleShortcut-thumbnail__info">
+                            <section class="roleShortcut-thumbnail__titles">
+                                <h5 class="roleShortcut-thumbnail__subtitle">Bloque</h5>
+                                <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
+                            </section>
+                            <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
+                                <span>Ver</span>
+                            </a>
+                        </section>`
+                    roleShortCutSectionList.appendChild(roleElement)
+                }
             }
         } else if (roles.includes("admin")) {
             const departments = await getDepartments()
