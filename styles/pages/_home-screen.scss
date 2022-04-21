@@ -63,4 +63,17 @@
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 3rem
     }
+
+    &__roleShortcuts {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        width: 100%;
+    }
+
+    &__roleShortcutsList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 3rem
+    }
 }

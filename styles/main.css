@@ -4177,6 +4177,90 @@ input[type=button] {
   max-width: 16rem;
 }
 
+.roleShortcut-thumbnail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #979DFF;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+  padding: 2rem 4rem;
+  gap: 4rem;
+}
+
+.roleShortcut-thumbnail__abbreviation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.roleShortcut-thumbnail__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.roleShortcut-thumbnail__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1rem;
+}
+
+.roleShortcut-thumbnail__titles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.roleShortcut-thumbnail__subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.roleShortcut-thumbnail__name {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #FFFFFF;
+}
+
+.roleShortcut-thumbnail a {
+  padding-top: 0.2rem;
+  padding-top: 0.2rem;
+  max-width: 13rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -6658,6 +6742,26 @@ input[type=button] {
 }
 
 .home-screen__departmentList {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+}
+
+.home-screen__roleShortcuts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+.home-screen__roleShortcutsList {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[3];
