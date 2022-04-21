@@ -44,7 +44,6 @@ export async function getDepartments() {
     const q = query(collection(firestore, "departments"))
     const querySnapshot = await getDocs(q);
     const departmentList = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
     return departmentList
 }
 
@@ -84,6 +83,20 @@ export async function getGroupSubjects(groupId) {
     const subjectList = querySnapshot.docs.map(doc => doc.data());
     hideLoader()
     return subjectList
+}
+
+export async function getGroups() {
+    const q = query(collection(firestore, "groups"))
+    const querySnapshot = await getDocs(q);
+    const groups = querySnapshot.docs.map(doc => doc.data());
+    return groups
+}
+
+export async function getCareerByGroup(groupName) {
+    const q = query(collection(firestore, "subjects"), where("groups", "array-contains", "" + groupName))
+    const querySnapshot = await getDocs(q);
+    const career = querySnapshot.docs.map(doc => doc.data());
+    return career[0]
 }
 
 export async function getSubjectsByView(viewKey, viewId) {

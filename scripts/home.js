@@ -231,7 +231,6 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                     id: department.id,
                     progress: departmentProgress
                 }
-                console.log(object)
                 departmentProgressList.push(object)
             }
 

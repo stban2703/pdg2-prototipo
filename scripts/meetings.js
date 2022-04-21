@@ -1,5 +1,5 @@
 import { userInfo } from "./main.js"
-import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
+import { getGroups, getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDate } from "./utils/sort.js"
@@ -15,6 +15,21 @@ export async function getInitialMeetings() {
         showLoader()
 
         const meetingList = await getMeetings()
+        const groups = await getGroups()
+
+        const meetingListItems = []
+
+        meetingList.forEach(meeting => {
+            const groupInfo = groups.find(g => {
+                return g.name === meeting.group
+            })
+            if(groupInfo) {
+                meeting.career = groupInfo.career
+                meeting.department = groupInfo.department
+
+            }
+        })
+
         meetingList.sort(sortByDate)
 
 

@@ -45,7 +45,6 @@ export async function getInititalAccomplishmentDepartmentList() {
                 id: department.id,
                 progress: departmentProgress
             }
-            console.log(object)
             departmentAccomplishmnetList.push(object)
         }
         renderAccomplishmentDepartmentList(departmentAccomplishmnetList)
