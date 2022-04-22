@@ -5515,6 +5515,14 @@ input[type=button] {
   gap: 1rem;
 }
 
+.memoquestion-form__radio-checkbox--row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 3rem;
+}
+
 .memoquestion-form__nextButton {
   max-width: 24rem;
 }

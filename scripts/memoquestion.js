@@ -78,6 +78,10 @@ export async function renderMemoQuestion() {
                     const radioAnswerQuestion = document.createElement('div')
                     radioAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--radio"
 
+                    if(parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11) {
+                        radioAnswerQuestion.classList.add("memoquestion-form__radio-checkbox--row")
+                    }
+
                     if (parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11 || parseInt(currentQuestion.index) === 12) {
                         radioAnswerQuestion.style.width = 'fit-content'
                     }

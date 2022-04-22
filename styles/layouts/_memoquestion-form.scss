@@ -76,6 +76,11 @@
         width: 100%;
         max-width: 40rem;
         gap: 1rem;
+
+        &--row {
+            flex-direction: row;
+            gap: 3rem;
+        }
     }
 
     &__nextButton {
