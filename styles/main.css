@@ -6836,10 +6836,7 @@ input[type=button] {
   font-size: 1.5rem;
   color: #A0A0A0;
   white-space: nowrap;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  width: 12ch;
+  margin-right: 1rem;
 }
 
 .note-screen__views {

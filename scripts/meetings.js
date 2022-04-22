@@ -66,11 +66,13 @@ export async function getInitialMeetings() {
             document.querySelector(".section-banner__description").classList.add("hidden")
             meetingListSectionAdmin.classList.remove("hidden")
             meetingListSection.classList.add("hidden")
+            document.querySelector(".meetinglist-screen__header").classList.remove("hidden")
             renderMeetingsForAdmin(meetingList)
             onSortFilterMeetingsListener(meetingList)
         } else {
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
+            document.querySelector(".meetinglist-screen__header").classList.add("hidden")
             renderMeetings(meetingList)
         }
 
