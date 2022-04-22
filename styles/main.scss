@@ -11,6 +11,7 @@
 @import "modules/titles";
 @import "modules/thumbnails";
 @import "modules/board-note-item";
+@import "modules/week-note-item";
 @import "modules/memo-reminder";
 @import "modules/meeting-item";
 @import "modules/meeting";
@@ -58,6 +59,7 @@
 @import "layouts/note-list";
 @import "layouts/progress-section";
 @import "layouts/memo-summary";
+@import "layouts/note-week";
 
 @import "pages/signinup-screen";
 @import "pages/home-screen";

@@ -4,7 +4,7 @@ import { renderNotesListView } from "./notelist.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
 
-let currentNoteView = "tablero"
+let currentNoteView = "semana"
 let noteList = []
 
 export async function getInitialNoteList(uid) {
@@ -35,18 +35,18 @@ export function changeNotesView() {
                 switch(i) {
                     case 0:
                         currentNoteView = "tablero"
-                        onChangeView(viewsButtons)
                         break;
 
                     case 1:
                         currentNoteView = "lista"
-                        onChangeView(viewsButtons)
                         break;
 
                     case 2:
                         currentNoteView = "semana"
                         break;
                 }
+                onChangeView(viewsButtons)
+
             })
         })
     }

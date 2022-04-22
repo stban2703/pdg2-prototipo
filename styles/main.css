@@ -285,7 +285,7 @@ input[type=button] {
   font-size: 2rem;
 }
 
-.thirdtitle--light, .thirdtitle--regular, .board-note-item__title {
+.thirdtitle--light, .thirdtitle--regular, .board-note-item__title, .week-note-item__title {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
 }
@@ -2250,6 +2250,184 @@ input[type=button] {
 .board-note-item:active {
   cursor: -webkit-grabbing;
   cursor: grabbing;
+}
+
+.week-note-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  -webkit-filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
+          filter: drop-shadow(0px 4px 10px rgba(208, 208, 208, 0.2));
+}
+
+.week-note-item__color {
+  width: 100%;
+  height: 1.3rem;
+  background-color: #CCF3C6;
+}
+
+.week-note-item__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.week-note-item__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  gap: 0.65rem;
+}
+
+.week-note-item__type {
+  width: 3rem;
+  max-width: none;
+}
+
+.week-note-item__title {
+  color: #757575;
+  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.week-note-item__details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.week-note-item__details p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.week-note-item__details span {
+  font-weight: 300;
+}
+
+.week-note-item__subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #757575;
+}
+
+.week-note-item__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+
+.week-note-item__summary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+
+.week-note-item--keep .board-note-item__color {
+  background-color: #CCF3C6;
+}
+
+.week-note-item--keep .board-note-item__moveBtn--left {
+  visibility: hidden;
+}
+
+.week-note-item--improve .board-note-item__color {
+  background-color: #FFEAD6;
+}
+
+.week-note-item--remove .board-note-item__color {
+  background-color: #FFEFEF;
+}
+
+.week-note-item--remove .board-note-item__moveBtn--right {
+  visibility: hidden;
+}
+
+.week-note-item--empty {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 18rem;
+}
+
+.week-note-item__emptyContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.week-note-item__emptyText {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #A0A0A0;
+  max-width: 19.3rem;
 }
 
 .memo-reminder {
@@ -6579,6 +6757,44 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
+}
+
+.note-week {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 4rem;
+  gap: 3rem;
+}
+
+.note-week__week {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+
+.note-week__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #A0A0A0;
+}
+
+.note-week__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
 }
 
 .signinup-screen {

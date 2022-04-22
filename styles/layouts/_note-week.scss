@@ -1,0 +1,25 @@
+.note-week {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+    gap: 3rem;
+
+    &__week {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $semibold;
+        color: $silver;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}

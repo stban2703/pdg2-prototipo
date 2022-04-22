@@ -52,7 +52,7 @@
                 <h4 class="note-board__subtitle">Mantener</h4>
             </section>
             <section class="note-board__list note-board__list--keep">
-                
+
             </section>
         </div>
         <div class="note-board__column">
@@ -61,7 +61,7 @@
                 <h4 class="note-board__subtitle">Mejorar</h4>
             </section>
             <section class="note-board__list note-board__list--improve">
-                
+
             </section>
         </div>
         <div class="note-board__column">
@@ -70,7 +70,7 @@
                 <h4 class="note-board__subtitle">Quitar</h4>
             </section>
             <section class="note-board__list note-board__list--remove">
-                
+
             </section>
         </div>
     </section>
@@ -87,9 +87,212 @@
                 </tr>
             </thead>
             <tbody class="note-list__body">
-                
+
             </tbody>
         </table>
+    </section>
+    <section id="vistasemana" class="note-week noteview hidden">
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 1</h5>
+            <section class="note-week__list" id="note-week-1">
+                <div class="week-note-item hidden">
+                    <div class="week-note-item__color">
+                    </div>
+                    <section class="week-note-item__info">
+                        <section class="week-note-item__header">
+                            <img class="week-note-item__type"
+                                src="./images/board${note.fileType}type-${note.category}.svg" alt="">
+                            <h4 class="week-note-item__title">${note.name}</h4>
+                        </section>
+                        <div class="week-note-item__summary">
+                            <section class="week-note-item__details">
+                                <p class="week-note-item__subtitle">Curso: <span>${note.subject}</span></p>
+                                <p class="week-note-item__subtitle">Fecha:
+                                    <span>${parseTimestampToDate(note.date)}</span>
+                                </p>
+                                <p class="week-note-item__subtitle">Semana: <span>${note.week}</span></p>
+                            </section>
+                            <section class="week-note-item__controls">
+                                <a class="week-note-item__editBtn board-edit-button" href='#notesdetails?${note.id}'>
+                                    <p>Ver detalle</p>
+                                </a>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 2</h5>
+            <section class="note-week__list" id="note-week-2">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 3</h5>
+            <section class="note-week__list" id="note-week-3">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 4</h5>
+            <section class="note-week__list" id="note-week-4">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 5</h5>
+            <section class="note-week__list" id="note-week-5">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 6</h5>
+            <section class="note-week__list" id="note-week-6">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 7</h5>
+            <section class="note-week__list" id="note-week-7">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 8</h5>
+            <section class="note-week__list" id="note-week-8">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 9</h5>
+            <section class="note-week__list" id="note-week-9">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 10</h5>
+            <section class="note-week__list" id="note-week-10">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 11</h5>
+            <section class="note-week__list" id="note-week-11">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 12</h5>
+            <section class="note-week__list" id="note-week-12">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 13</h5>
+            <section class="note-week__list" id="note-week-13">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 14</h5>
+            <section class="note-week__list" id="note-week-14">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 15</h5>
+            <section class="note-week__list" id="note-week-15">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+        <section class="note-week__week">
+            <h5 class="note-week__title">Semana 16</h5>
+            <section class="note-week__list" id="note-week-16">
+                <div class="week-note-item week-note-item--empty">
+                    <section class="week-note-item__emptyContent">
+                        <img src="./images/emptyweekicon.svg" alt="">
+                        <p class="week-note-item__emptyText">No hay anotaciones para esta semana</p>
+                    </section>
+                </div>
+            </section>
+        </section>
     </section>
     <a href="#createnotes" class="addNoteBtn create-button create-button--note create-button--fixed">
         <div class="create-button__icon">
