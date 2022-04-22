@@ -302,6 +302,8 @@ function confirmMeetingAssistance(meeting) {
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
     if (confirmRejectMeetingSection && window.location.href.includes("#meetingdetails")) {
+        const assistanceModal = document.querySelector(".memo-question-modal--assistance")
+
         const confirmBtn = document.querySelector(".confirmMeetingBtn")
         confirmBtn.addEventListener('click', () => {
             const participantsCopy = [...meeting.confirmedParticipants]
@@ -315,10 +317,12 @@ function confirmMeetingAssistance(meeting) {
             })
 
             if (!currentParticipant && userGroup) {
+                showLoader()
                 participantsCopy.push(userInfo.name + " " + userInfo.lastname)
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
-                    alert("¡Gracias por confirmar tu asistencia!")
-                    location.reload()
+                    hideLoader()
+                    assistanceModal.classList.remove("hidden")
+                    //location.reload()
                 })
             } else if (!userGroup) {
                 alert("Parece que no estás asignado a este bloque")
@@ -338,12 +342,20 @@ function confirmMeetingAssistance(meeting) {
             if (currentParticipantIndex < 0) {
                 alert("No has confirmado tu participación en esta reunión")
             } else if (currentParticipantIndex >= 0) {
+                showLoader()
                 participantsCopy.splice(currentParticipantIndex, 1)
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
+                    hideLoader()
                     alert("Se ha retirado tu participación en esta reunión")
                     location.reload()
                 })
             }
+        })
+
+        const closeAssistanceModalButton = document.querySelector(".closeAssistanceModalButton")
+        closeAssistanceModalButton.addEventListener('click', () => {
+            assistanceModal.classList.add("hidden")
+            window.location.reload()
         })
     }
 }

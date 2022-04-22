@@ -3977,6 +3977,14 @@ input[type=button] {
   margin: 2rem;
 }
 
+.memo-question-modal--assistance .memo-question-modal__title {
+  margin-top: 2rem;
+}
+
+.memo-question-modal--assistance .memo-question-modal__description {
+  margin-bottom: 2rem;
+}
+
 .improve-action-item {
   gap: 2.5rem;
   position: relative;

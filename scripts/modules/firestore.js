@@ -719,7 +719,7 @@ export const createUser = async function (uid, name, lastname, email, role) {
         name: name,
         lastname: lastname,
         email: email,
-        role: role
+        role: [role]
     }
     await setDoc(userRef, newUser).then(() => {
         localStorage.setItem('currentuser', JSON.stringify(newUser))

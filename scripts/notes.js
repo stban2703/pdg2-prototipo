@@ -5,7 +5,7 @@ import { renderNotesWeek } from "./noteweek.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
 
-let currentNoteView = "semana"
+let currentNoteView = "tablero"
 let noteList = []
 
 export async function getInitialNoteList(uid) {

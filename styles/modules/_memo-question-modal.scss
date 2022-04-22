@@ -105,4 +105,14 @@
         right: 0;
         margin: 2rem;
     }
+
+    &--assistance {
+        .memo-question-modal__title {
+            margin-top: 2rem;
+        }
+
+        .memo-question-modal__description {
+            margin-bottom: 2rem;
+        }
+    }
 }
