@@ -10,7 +10,6 @@ export async function getInitialImproveActions() {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
     if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
         const subjectId = window.location.hash.split("?")[1].split("_")[0]
-        console.log(subjectId)
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
         editImproveAction(improveActionsAnswers)
@@ -22,8 +21,9 @@ export async function renderImproveActionComment(currentPeriod) {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
     if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
         const subjectId = window.location.hash.split("?")[1].split("_")[0]
-        const comment = await getImproveActionComment(subjectId, currentPeriod)
+        const queryComment = window.location.hash.split("?")[1].split("_")[1]
 
+        const comment = await getImproveActionComment(subjectId, currentPeriod)
         const commentEmpty = document.querySelector(".commentEmpty")
         const commentName = document.querySelector(".commentName")
         const commentDate = document.querySelector(".commentDate")
@@ -37,6 +37,11 @@ export async function renderImproveActionComment(currentPeriod) {
             commentDate.innerHTML = parseTimestampToDate(comment[0].date)
             commentText.classList.remove("hidden")
             commentText.innerHTML = comment[0].comment
+        }
+
+        if(queryComment) {
+            const commentSection = document.querySelector(".memoimproveactions-screen__commentSection")
+            commentSection.scrollIntoView(true)
         }
     }
 }

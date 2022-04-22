@@ -89,9 +89,11 @@ export function getInitialMemoSubjects(subjectList) {
 
 export function renderGoToImproveActionsButton() {
     const goToImproveActionsButton = document.querySelector('.goToImproveActionsButton')
+    const goToImproveActionsCommentButton = document.querySelector('.goToImproveActionsCommentButton')
     if (goToImproveActionsButton && window.location.href.includes("#memosections")) {
         const subjectId = window.location.hash.split("?")[1]
         goToImproveActionsButton.href = `#memoimproveactions?${subjectId}`
+        goToImproveActionsCommentButton.href = `#memoimproveactions?${subjectId}_comment`
     }
 }
 
