@@ -4,7 +4,7 @@ import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js"
 
-export async function getInitialMeetings() {
+export async function getInitialMeetings(userInfo) {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
     const createMeetingButton = document.querySelector(".addMeetingBtn")
     const meetingListSection = document.querySelector(".meetinglist-screen__meetings")
@@ -13,10 +13,17 @@ export async function getInitialMeetings() {
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
+        
 
         const meetingList = await getMeetings()
         meetingList.sort(sortByDateDescending)
+        let listCopy = [...meetingList]
 
+        if(userInfo.groups) {
+            listCopy = meetingList.filter(meeting => {
+                return userInfo.groups.includes(meeting.group) 
+            })
+        }
 
         const groups = []
         const careers = []
@@ -67,13 +74,13 @@ export async function getInitialMeetings() {
             meetingListSectionAdmin.classList.remove("hidden")
             meetingListSection.classList.add("hidden")
             document.querySelector(".meetinglist-screen__header").classList.remove("hidden")
-            renderMeetingsForAdmin(meetingList)
+            renderMeetingsForAdmin(listCopy)
             onSortFilterMeetingsListener(meetingList)
         } else {
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
             document.querySelector(".meetinglist-screen__header").classList.add("hidden")
-            renderMeetings(meetingList)
+            renderMeetings(listCopy)
         }
 
         hideLoader()
