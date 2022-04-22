@@ -1,4 +1,4 @@
-import { getHistoryImproveActions, getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
+import { getHistoryImproveActions, getImproveActionComment, getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { showLoader } from "./utils/loader.js";
 
@@ -9,11 +9,35 @@ let historyImproveActions = []
 export async function getInitialImproveActions() {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
     if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
-        const subjectId = window.location.hash.split("?")[1]
+        const subjectId = window.location.hash.split("?")[1].split("_")[0]
+        console.log(subjectId)
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
         editImproveAction(improveActionsAnswers)
         setPieGraphicForImproveActions(improveActionsAnswers, subjectId)
+    }
+}
+
+export async function renderImproveActionComment(currentPeriod) {
+    const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
+    if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
+        const subjectId = window.location.hash.split("?")[1].split("_")[0]
+        const comment = await getImproveActionComment(subjectId, currentPeriod)
+
+        const commentEmpty = document.querySelector(".commentEmpty")
+        const commentName = document.querySelector(".commentName")
+        const commentDate = document.querySelector(".commentDate")
+        const commentText = document.querySelector(".commentText")
+
+        if(comment[0]) {
+            commentEmpty.classList.add("hidden")
+            commentName.classList.remove("hidden")
+            commentName.innerHTML = comment[0].principalName
+            commentDate.classList.remove("hidden")
+            commentDate.innerHTML = parseTimestampToDate(comment[0].date)
+            commentText.classList.remove("hidden")
+            commentText.innerHTML = comment[0].comment
+        }
     }
 }
 

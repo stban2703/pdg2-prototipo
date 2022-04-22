@@ -7386,6 +7386,13 @@ input[type=button] {
   gap: 0.5rem;
 }
 
+.memoimproveactions-screen__commentEmpty {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #979DFF;
+}
+
 .memoimproveactions-screen__title {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;

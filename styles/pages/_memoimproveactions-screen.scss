@@ -28,6 +28,13 @@
         gap: 0.5rem;
     }
 
+    &__commentEmpty {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $main-color;
+    }
+
     &__title {
         font-family: $poppins;
         font-size: 2rem;

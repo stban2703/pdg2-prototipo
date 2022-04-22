@@ -141,7 +141,7 @@ export async function createImproveActionComment(subjectId, period, userInfo, co
     const newComment = {
         id: commentRef.id,
         principalId: userInfo.id,
-        principaName: userInfo.name + " " + userInfo.lastname,
+        principalName: userInfo.name + " " + userInfo.lastname,
         subjectId: subjectId,
         period: period,
         comment: comment,

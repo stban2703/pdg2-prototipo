@@ -4,7 +4,7 @@ import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "
 import { submitNote } from "./createnote.js";
 import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderListHome, showShortcuts } from "./home.js";
-import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton } from "./improveactions.js";
+import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton, renderImproveActionComment } from "./improveactions.js";
 import { changeMemoseeAnswerTab, getInitialMemoseeSubjects, renderMemoseeAnswersQuestions, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { getInitialMeetings, renderMeetingDetails } from "./meetings.js";
@@ -183,6 +183,7 @@ function addPageFuncions() {
     getInitialImproveActions() // LISTO
     renderGoToImproveActionHistoryButton()
     getInitialHistoryImproveActions()
+    renderImproveActionComment(currentPeriod)
 
     // Progress funtions
     getInitialProgressInfo(currentPeriod) // LISTO
