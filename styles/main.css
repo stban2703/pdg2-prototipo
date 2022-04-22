@@ -2372,23 +2372,23 @@ input[type=button] {
   gap: 1.5rem;
 }
 
-.week-note-item--keep .board-note-item__color {
+.week-note-item--keep .week-note-item__color {
   background-color: #CCF3C6;
 }
 
-.week-note-item--keep .board-note-item__moveBtn--left {
+.week-note-item--keep .week-note-item__moveBtn--left {
   visibility: hidden;
 }
 
-.week-note-item--improve .board-note-item__color {
+.week-note-item--improve .week-note-item__color {
   background-color: #FFEAD6;
 }
 
-.week-note-item--remove .board-note-item__color {
+.week-note-item--remove .week-note-item__color {
   background-color: #FFEFEF;
 }
 
-.week-note-item--remove .board-note-item__moveBtn--right {
+.week-note-item--remove .week-note-item__moveBtn--right {
   visibility: hidden;
 }
 
@@ -2407,6 +2407,7 @@ input[type=button] {
       -ms-flex-pack: center;
           justify-content: center;
   height: 18rem;
+  padding: 3rem;
 }
 
 .week-note-item__emptyContent {
@@ -2428,6 +2429,11 @@ input[type=button] {
   font-size: 1.5rem;
   color: #A0A0A0;
   max-width: 19.3rem;
+}
+
+.week-note-item a {
+  margin-left: auto;
+  max-width: 13rem;
 }
 
 .memo-reminder {

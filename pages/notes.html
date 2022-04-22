@@ -95,31 +95,6 @@
         <section class="note-week__week">
             <h5 class="note-week__title">Semana 1</h5>
             <section class="note-week__list" id="note-week-1">
-                <div class="week-note-item hidden">
-                    <div class="week-note-item__color">
-                    </div>
-                    <section class="week-note-item__info">
-                        <section class="week-note-item__header">
-                            <img class="week-note-item__type"
-                                src="./images/board${note.fileType}type-${note.category}.svg" alt="">
-                            <h4 class="week-note-item__title">${note.name}</h4>
-                        </section>
-                        <div class="week-note-item__summary">
-                            <section class="week-note-item__details">
-                                <p class="week-note-item__subtitle">Curso: <span>${note.subject}</span></p>
-                                <p class="week-note-item__subtitle">Fecha:
-                                    <span>${parseTimestampToDate(note.date)}</span>
-                                </p>
-                                <p class="week-note-item__subtitle">Semana: <span>${note.week}</span></p>
-                            </section>
-                            <section class="week-note-item__controls">
-                                <a class="week-note-item__editBtn board-edit-button" href='#notesdetails?${note.id}'>
-                                    <p>Ver detalle</p>
-                                </a>
-                            </section>
-                        </div>
-                    </section>
-                </div>
                 <div class="week-note-item week-note-item--empty">
                     <section class="week-note-item__emptyContent">
                         <img src="./images/emptyweekicon.svg" alt="">

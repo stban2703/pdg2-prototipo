@@ -1,6 +1,7 @@
 import { getNotes } from "./modules/firestore.js"
 import { renderNotesBoard } from "./noteboard.js"
 import { renderNotesListView } from "./notelist.js"
+import { renderNotesWeek } from "./noteweek.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByWeek } from "./utils/sort.js"
 
@@ -95,6 +96,7 @@ function renderNotesList(userId, list) {
     hideLoader()
     renderNotesBoard(userId, list)
     renderNotesListView(list)
+    renderNotesWeek(list)
     /*switch (currentNoteView) {
         case "tablero":
             renderNotesBoard(userId, list)

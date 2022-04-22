@@ -81,25 +81,25 @@
     }
 
     &--keep {
-        .board-note-item__color {
+        .week-note-item__color {
             background-color: $keep-light;
         }
-        .board-note-item__moveBtn--left {
+        .week-note-item__moveBtn--left {
             visibility: hidden;
         }
     }
 
     &--improve {
-        .board-note-item__color {
+        .week-note-item__color {
             background-color: $improve-light;
         }
     }
 
     &--remove {
-        .board-note-item__color {
+        .week-note-item__color {
             background-color: $remove-light;
         }
-        .board-note-item__moveBtn--right {
+        .week-note-item__moveBtn--right {
             visibility: hidden;
         }
     }
@@ -110,6 +110,7 @@
         align-items: center;
         justify-content: center;
         height: 18rem;
+        padding: 3rem;
     }
 
     &__emptyContent {
@@ -124,5 +125,10 @@
         font-size: 1.5rem;
         color: $silver;
         max-width: 19.3rem;
+    }
+
+    a {
+        margin-left: auto;
+        max-width: 13rem;
     }
 }
