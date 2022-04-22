@@ -156,7 +156,7 @@ export async function getInitialGeneralDepartments() {
 
 
         departments.forEach(department => {
-            const href = urlParts[1] ? `#generalall?department_${department.id}`: `#generalcareer?${department.id}`
+            const href = urlParts[1] ? `#generalall?department_${department.id}` : `#generalcareer?${department.id}`
             const departmentItem = document.createElement("div")
             departmentItem.className = "memo-subject"
             departmentItem.innerHTML = `
@@ -167,6 +167,7 @@ export async function getInitialGeneralDepartments() {
             `
             generalDepartmentListContainer.appendChild(departmentItem)
         })
+        hideLoader()
     }
 }
 
@@ -334,7 +335,7 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo) {
 
         const commentSection = document.querySelector(".improve-actions__comments")
         userInfo.role.forEach(role => {
-            if(role === "principal") {
+            if (role === "principal") {
                 commentSection.classList.remove("hidden")
             }
         })
@@ -406,7 +407,12 @@ async function renderGeneralAllCharts(currentPeriod) {
             initialTitle = "Departamento de "
             break;
     }
-    document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${initialTitle}${viewInfo.name}`
+    console.log(viewId)
+    if (viewId === "general") {
+        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>Facultad de ingeniería`
+    } else {
+        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${initialTitle}${viewInfo.name}`
+    }
     document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
     let allAnswers = []
