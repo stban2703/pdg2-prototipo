@@ -23,6 +23,7 @@ import { firebase } from "./modules/firebase.js";
 import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { sortByDateDescending } from "./utils/sort.js";
 const firestore = getFirestore(firebase)
 
 
@@ -134,16 +135,21 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
             notifications.push(change.doc.data());
         }
         if (change.type === "modified") {
-            console.log("Modified: ", change.doc.data());
-            //displayNotificationCounter()
+            console.log(change.doc.data().id)
+            console.log(notifications)
+            const modifiedIndex = notifications.findIndex(elem => {
+                return elem.id === change.doc.data().id
+            })
+            console.log(modifiedIndex)
+            notifications[modifiedIndex] = change.doc.data()
         }
         if (change.type === "removed") {
-            console.log("Removed: ", change.doc.data());
-            //displayNotificationCounter()
+            //console.log("Removed: ", change.doc.data());
         }
     });
     ///
     displayNotificationCounter(notifications)
+    renderNotificationWindowList(notifications)
 });
 
 
@@ -155,6 +161,7 @@ let observer = new MutationObserver(function (mutationsList, observer) {
         if (e.addedNodes.length > 0) {
             addPageFuncions()
             displayNotificationCounter(notifications)
+            renderNotificationWindowList(notifications)
         }
     })
 });
@@ -289,6 +296,43 @@ function displayNotificationCounter(notificationList) {
         } else {
             notificationCounterContainer.classList.add("hidden")
         }
+    }
+}
+
+function renderNotificationWindowList(notificationList) {
+    const notificationWindowList = document.querySelector(".notification-window__list")
+    if(notificationWindowList) {
+        const copy = [...notificationList].sort(sortByDateDescending)
+        notificationWindowList.innerHTML = ``
+        copy.forEach(elem => {
+            const item = document.createElement("div")
+            item.className = `notification-item${elem.status === 'read' ? ' notification-item--read' : ''}`
+
+            let previewMessage = ""
+
+            switch(elem.type) {
+                case "meeting":
+                    previewMessage = `
+                    Tu bloque ${elem.group} ha programado una reunión reflexiva
+                    `
+                    break;
+                default:
+                    previewMessage = `
+                    Vista previa de una notificación en la ventana
+                    `
+                    break;
+            }
+
+            item.innerHTML = `
+            <p class="notification-item__summary">
+                ${previewMessage}
+            </p>
+            <a href="#notification?${elem.id}" class="small-button small-button--secondary">
+                <span>Ver más</span>
+            </a>
+            `
+            notificationWindowList.appendChild(item)
+        })
     }
 }
 

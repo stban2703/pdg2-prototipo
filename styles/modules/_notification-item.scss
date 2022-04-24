@@ -31,9 +31,17 @@
 
     &--read {
         background-color: $white;
+        border: 1px solid $main-color;
 
         .notification-item__summary {
             color: $boulder;
+        }
+
+        a {
+            background-color: $white;
+            border: 1px solid $secondary-color;
+            color: $secondary-color;
+            box-shadow: none;
         }
     }
 }
