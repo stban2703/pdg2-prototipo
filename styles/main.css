@@ -4462,7 +4462,7 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   background-color: #979DFF;
   padding: 2rem;
   border-radius: 15px;
@@ -4477,6 +4477,9 @@ input[type=button] {
 .notification-item a {
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
+  max-width: 15rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .notification-item--read {
@@ -6966,7 +6969,7 @@ input[type=button] {
 }
 
 .notification-window__list::-webkit-scrollbar-thumb {
-  background-color: #FDB572;
+  background-color: #EFF0FF;
   border-radius: 15px;
 }
 
@@ -8299,22 +8302,33 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
-  max-width: 25rem;
-  height: 68vh;
-  padding-right: 1rem;
-  overflow-y: auto;
+  max-width: 26rem;
+  height: 70vh;
 }
 
-.notification-screen__list::-webkit-scrollbar {
+.notification-screen__listContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.notification-screen__listContainer::-webkit-scrollbar {
   width: 1em;
 }
 
-.notification-screen__list::-webkit-scrollbar-track {
+.notification-screen__listContainer::-webkit-scrollbar-track {
   background-color: #FAFCFF;
 }
 
-.notification-screen__list::-webkit-scrollbar-thumb {
-  background-color: #FDB572;
+.notification-screen__listContainer::-webkit-scrollbar-thumb {
+  background-color: #EFF0FF;
   border-radius: 15px;
 }
 
@@ -8345,6 +8359,7 @@ input[type=button] {
           box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
   width: 100%;
   max-width: 58rem;
+  gap: 3rem;
 }
 
 .notification-screen__detailsText {
@@ -8352,6 +8367,17 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: 300;
   width: 100%;
+}
+
+.notification-screen__detailsControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 2rem;
 }
 
 html {
