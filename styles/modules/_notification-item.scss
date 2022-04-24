@@ -19,6 +19,16 @@
         align-self: flex-end;
     }
 
+    &--empty {
+        background-color: $white;
+
+        .notification-item__summary {
+            font-weight: $semibold;
+            color: $boulder;
+            text-align: center;
+        }
+    }
+
     &--read {
         background-color: $white;
 
