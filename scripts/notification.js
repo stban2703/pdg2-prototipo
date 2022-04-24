@@ -1,5 +1,3 @@
-import { getNotifications } from "./modules/firestore.js";
-
 export function displayNotificationWindow() {
     const notificationWindow = document.querySelector(".notification-window")
     const notificationHeader = document.querySelector(".notificationHeader")
@@ -27,8 +25,4 @@ function onClickOutsideNotificationWindow(event) {
             document.removeEventListener('click', onClickOutsideNotificationWindow)
         }
     }
-}
-
-export function nofiticationsListener(userInfo) {
-    getNotifications(userInfo.id)
 }

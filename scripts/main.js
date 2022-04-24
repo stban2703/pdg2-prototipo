@@ -17,7 +17,14 @@ import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
 import { getInitialMyGroupSubjects } from "./mygroup.js";
-import { displayNotificationWindow, nofiticationsListener } from "./notification.js";
+import { displayNotificationWindow } from "./notification.js";
+
+import { firebase } from "./modules/firebase.js";
+import {
+    getFirestore, collection, query, onSnapshot
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+const firestore = getFirestore(firebase)
+
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -69,7 +76,7 @@ currentUser.role.forEach(role => {
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentdashboard`)
         document.querySelector('#navgeneral').classList.remove('hidden')
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${role}_general`)
-        
+
     }
 })
 
@@ -113,16 +120,46 @@ window.addEventListener("hashchange", function () {
 }, false)
 
 
+
+// Notification
+const notifications = []
+const q = query(collection(firestore, `users/${currentUser.id}/notifications`));
+const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    /*querySnapshot.forEach((doc) => {
+        notifications.push(doc.data());
+    });
+    console.log("listener")*/
+    querySnapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+            notifications.push(change.doc.data());
+        }
+        if (change.type === "modified") {
+            console.log("Modified: ", change.doc.data());
+            //displayNotificationCounter()
+        }
+        if (change.type === "removed") {
+            console.log("Removed: ", change.doc.data());
+            //displayNotificationCounter()
+        }
+    });
+    ///
+    displayNotificationCounter(notifications)
+});
+
+
+
 // Detectar cambios de pantalla
 const pageContent = document.querySelector(".page-content")
 let observer = new MutationObserver(function (mutationsList, observer) {
     mutationsList.forEach(e => {
         if (e.addedNodes.length > 0) {
             addPageFuncions()
+            displayNotificationCounter(notifications)
         }
     })
 });
 observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
+
 
 
 // Mostrar nombre del usuario en pantalla principal
@@ -132,7 +169,6 @@ function displayHomeUserName() {
         homeWelcome.innerText = localUser.name
     }
 }
-
 
 // Agrega las funciones de cada pantalla
 function addPageFuncions() {
@@ -216,7 +252,6 @@ function addPageFuncions() {
 
     // Notification
     displayNotificationWindow()
-    nofiticationsListener(currentUser)
 
     // Back-return
     goBack()
@@ -241,6 +276,21 @@ function checkCurrentTab() {
     //addPageFuncions()
 }
 
+function displayNotificationCounter(notificationList) {
+    const notificationCounterContainer = document.querySelector(".header__notificationNumber")
+    const notificationCounter = document.querySelector(".header__notificationNumber span")
+    if (notificationCounter) {
+        const unreadList = [...notificationList].filter((elem) => {
+            return elem.status === "unread"
+        })
+        notificationCounter.innerHTML = unreadList.length
+        if (unreadList.length > 0) {
+            notificationCounterContainer.classList.remove("hidden")
+        } else {
+            notificationCounterContainer.classList.add("hidden")
+        }
+    }
+}
 
 function goBack() {
     const backButton = document.querySelector(".back-button")

@@ -26,13 +26,6 @@ export async function getCurrentPeriod() {
 }
 
 // Notifications
-export function getNotifications(userId) {
-    const unsub = onSnapshot(doc(firestore, "users", userId), (doc) => {
-        const user = doc.data()
-        console.log(user.name)
-    });
-}
-
 export async function createNotification(userId, date, time, group, type, meetingId) {
     const notificationRef = doc(collection(firestore, `users/${userId}/notifications`))
     const newNotification = {
@@ -44,12 +37,12 @@ export async function createNotification(userId, date, time, group, type, meetin
         status: 'unread'
     }
 
-    if(type === "meeting") {
+    if (type === "meeting") {
         newNotification.meetingId = meetingId
     }
 
     await setDoc(notificationRef, newNotification).then(() => {
-        
+
     }).catch((error) => {
         console.log(error)
     });
@@ -70,7 +63,7 @@ export async function updateNotificationStatus(userId, notificationID, status) {
     await updateDoc(userNotificationRef, {
         status: status
     }).then(() => {
-        
+
     })
 }
 
