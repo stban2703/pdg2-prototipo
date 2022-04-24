@@ -6847,7 +6847,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 2rem;
+  padding: 2rem 0;
   background-color: #FFFFFF;
   border-radius: 15px;
   -webkit-box-shadow: 0px 6px 10px 2px rgba(148, 154, 252, 0.23);
@@ -6874,6 +6874,40 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
+  padding: 0 2rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.notification-window__list::-webkit-scrollbar {
+  width: 1em;
+}
+
+.notification-window__list::-webkit-scrollbar-track {
+  background-color: #FAFCFF;
+}
+
+.notification-window__list::-webkit-scrollbar-thumb {
+  background-color: #FDB572;
+  border-radius: 15px;
+}
+
+.notification-window__controls {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notification-window__controls a {
+  max-width: 15rem;
 }
 
 .signinup-screen {
