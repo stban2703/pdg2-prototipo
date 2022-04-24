@@ -17,7 +17,7 @@ import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
 import { getInitialMyGroupSubjects } from "./mygroup.js";
-import { displayNotificationWindow } from "./notification.js";
+import { displayNotificationWindow, nofiticationsListener } from "./notification.js";
 
 // Verifica si el usuario ha  iniciado sesion
 let ls = window.localStorage;
@@ -216,6 +216,7 @@ function addPageFuncions() {
 
     // Notification
     displayNotificationWindow()
+    nofiticationsListener(currentUser)
 
     // Back-return
     goBack()

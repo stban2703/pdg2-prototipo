@@ -1,6 +1,6 @@
 import { firebase } from "./firebase.js";
 import {
-    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc
+    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader, showLoader } from "../utils/loader.js";
@@ -23,6 +23,14 @@ export async function getCurrentPeriod() {
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
+}
+
+// Notification
+export function getNotifications(userId) {
+    const unsub = onSnapshot(doc(firestore, "users", userId), (doc) => {
+        const user = doc.data()
+        console.log(user.name)
+    });
 }
 
 // General function
