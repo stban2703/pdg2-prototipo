@@ -1,0 +1,53 @@
+.notification-screen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+    
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 25rem;
+        height: 68vh;
+        padding-right: 1rem;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 1em;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $zircon;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $secondary-color;
+            border-radius: 15px;
+        }
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 4rem;
+    }
+
+    &__detailsWindow {
+        display: flex;
+        flex-direction: column;
+        padding: 3rem;
+        background-color: $white;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(148, 154, 252, 0.2);
+        width: 100%;
+        max-width: 58rem;
+    }
+
+    &__detailsText {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $light;
+        width: 100%;
+    }
+}
