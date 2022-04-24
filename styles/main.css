@@ -4692,6 +4692,10 @@ input[type=button] {
   color: #FFFFFF;
 }
 
+.header__notificationNumber:hover {
+  cursor: pointer;
+}
+
 .header__icon {
   position: relative;
   display: -webkit-box;

@@ -35,6 +35,10 @@
             font-weight: $semibold;
             color: $white;
         }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__icon {
