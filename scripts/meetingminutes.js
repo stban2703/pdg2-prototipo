@@ -70,7 +70,7 @@ export async function renderMeetingMinutesDetails() {
                 <div class="assistant__icon">
                     <img src="./images/assistantgenericicon.svg" alt="">
                 </div>
-                <p class="assistant__name">${e}</p>
+                <p class="assistant__name">${e.name}</p>
             `
             assistantItemsSection.appendChild(assistantDiv)
         })

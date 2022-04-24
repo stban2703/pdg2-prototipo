@@ -13,15 +13,15 @@ export async function getInitialMeetings(userInfo) {
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
-        
+
 
         const meetingList = await getMeetings()
         meetingList.sort(sortByDateDescending)
         let listCopy = [...meetingList]
 
-        if(userInfo.groups) {
+        if (userInfo.groups) {
             listCopy = meetingList.filter(meeting => {
-                return userInfo.groups.includes(meeting.group) 
+                return userInfo.groups.includes(meeting.group)
             })
         }
 
@@ -30,13 +30,13 @@ export async function getInitialMeetings(userInfo) {
         const departments = []
 
         meetingList.forEach((meeting) => {
-            if(!groups.includes(meeting.group)) {
+            if (!groups.includes(meeting.group)) {
                 groups.push(meeting.group)
             }
-            if(!careers.includes(meeting.career)) {
+            if (!careers.includes(meeting.career)) {
                 careers.push(meeting.career)
             }
-            if(!departments.includes(meeting.department)) {
+            if (!departments.includes(meeting.department)) {
                 departments.push(meeting.department)
             }
         })
@@ -238,6 +238,18 @@ export async function renderMeetingDetails() {
         const meeting = await getMeetingDetails(meetingId)
 
         addMeetingMinutesBtn.href = `#createmeetingminutes?${meetingId}`
+
+
+        const participantsCopy = [...meeting.confirmedParticipants]
+
+        const currentParticipant = participantsCopy.find((m) => {
+            return m.id == userInfo.id
+        })
+
+        if (currentParticipant) {
+            document.querySelector(".confirmMeetingBtn").classList.remove("meetingNoSelected")
+        }
+
         confirmMeetingAssistance(meeting)
 
         if (meeting) {
@@ -246,7 +258,7 @@ export async function renderMeetingDetails() {
             })
             if (leaderRole && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
-                confirmRejectMeetingSection.classList.add("hidden")
+                //confirmRejectMeetingSection.classList.add("hidden")
             }
 
             if (confirmRejectMeetingSection && meeting.minutesId.length > 0) {
@@ -309,23 +321,20 @@ function confirmMeetingAssistance(meeting) {
             const participantsCopy = [...meeting.confirmedParticipants]
 
             const currentParticipant = participantsCopy.find((m) => {
-                return m == userInfo.name + " " + userInfo.lastname
+                return m.id == userInfo.id
             })
 
-            const userGroup = userInfo.groups.find((e) => {
-                return e == meeting.group
-            })
-
-            if (!currentParticipant && userGroup) {
+            if (!currentParticipant) {
                 showLoader()
-                participantsCopy.push(userInfo.name + " " + userInfo.lastname)
+                participantsCopy.push({
+                    id: userInfo.id,
+                    name: userInfo.name + " " + userInfo.lastname
+                })
                 updateMeetingAssistants(meeting.id, participantsCopy).then(() => {
                     hideLoader()
                     assistanceModal.classList.remove("hidden")
                     //location.reload()
                 })
-            } else if (!userGroup) {
-                alert("Parece que no estás asignado a este bloque")
             } else if (currentParticipant) {
                 alert("Ya confirmaste tu participación")
             }
@@ -336,7 +345,7 @@ function confirmMeetingAssistance(meeting) {
             const participantsCopy = [...meeting.confirmedParticipants]
 
             const currentParticipantIndex = participantsCopy.findIndex((m) => {
-                return m == userInfo.name + " " + userInfo.lastname
+                return m.id == userInfo.id
             })
 
             if (currentParticipantIndex < 0) {

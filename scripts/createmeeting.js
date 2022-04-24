@@ -1,4 +1,4 @@
-import { createMeeting, getCareerByGroup, getDepartmentInfo } from "./modules/firestore.js"
+import { createMeeting, getCareerByGroup, getDepartmentInfo, getGroupInfo } from "./modules/firestore.js"
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 
@@ -44,6 +44,7 @@ export async function submitMeeting(userInfo) {
         const inPersonMeetingSection = document.querySelector('.createmeeting-form__section--inperson')
         const careerInfo = await getCareerByGroup(userInfo.leaderGroup)
         const deparmentInfo = await getDepartmentInfo(careerInfo.departmentId)
+        const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
         hideLoader()
 
         createMeetingForm.addEventListener('submit', (event) => {
@@ -64,11 +65,11 @@ export async function submitMeeting(userInfo) {
             if (inPersonMeetingSection.classList.contains("hidden") && userInfo.leaderGroup) {
                 console.log("Es virtual")
                 showLoader()
-                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup, careerInfo, deparmentInfo)
+                createMeeting(name, timestamp, standarTime, duration, mode, null, platform, url, userInfo.leaderGroup, careerInfo, deparmentInfo, groupInfo.teachers)
             } else if (virtualMeetingSection.classList.contains("hidden")) {
                 console.log("Es presencial")
                 showLoader()
-                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup, careerInfo, deparmentInfo)
+                createMeeting(name, timestamp, standarTime, duration, mode, place, null, null, userInfo.leaderGroup, careerInfo, deparmentInfo, groupInfo.teachers)
             }
         })
     }

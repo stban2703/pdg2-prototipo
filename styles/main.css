@@ -2773,6 +2773,14 @@ input[type=button] {
   gap: 1rem;
 }
 
+.confirm-reject-meeting .meetingNoSelected {
+  border: 1px solid #FDB572;
+  background-color: #FFFFFF;
+  color: #FDB572;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .agreement {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -94,6 +94,17 @@ export async function getMeetingInfoForMinute() {
         <p class="meeting__subtitle subtitle subtitle--semibold">Modalidad: <span>${meetingInfo.mode}</span></p>
         <p class="meeting__subtitle subtitle subtitle--semibold meeting__platform">${meetingInfo.mode == "Virtual" ? "Medio" : "Lugar"}: <span>${meetingInfo.mode == "Virtual" ? meetingInfo.platform : meetingInfo.place}</span></p>
         `
+
+        const participantListSection = document.querySelector(".createmeetingminutes-form__assistantsList")
+        meetingInfo.totalParticipants.forEach(elem => {
+            const participantItem = document.createElement("label")
+            participantItem.className = "checkbox-input"
+            participantItem.innerHTML = `
+            <input id="${elem.id}" type="checkbox" name="assistants[]" value="${elem.name}" />
+                ${elem.name}
+            `
+            participantListSection.appendChild(participantItem)
+        })
     }
 }
 
@@ -113,7 +124,10 @@ export function submitMeetingMinutes() {
             let assistantsList = []
             assistants.forEach(e => {
                 if (e.checked) {
-                    assistantsList.push(e.value)
+                    assistantsList.push({
+                        id: e.id,
+                        name: e.value
+                    })
                 }
             })
 

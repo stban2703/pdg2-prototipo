@@ -323,7 +323,7 @@ export async function deleteNote(userId, noteId, type) {
 }
 
 // Meetings functions
-export async function createMeeting(name, date, time, duration, mode, place, platform, url, group, careerInfo, departmentInfo) {
+export async function createMeeting(name, date, time, duration, mode, place, platform, url, group, careerInfo, departmentInfo, teacherList) {
     const meetingRef = doc(collection(firestore, "meetings"))
 
     const newMeeting = {
@@ -338,7 +338,7 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         url: url,
         //status: date < Date.now() ? "finished" : "pending",
         group: group,
-        totalParticipants: ["Maria Juliana Ortiz", "Carlos Ramirez", "Wilson Lopez", "Jennifer Velez", "Roberto Martinez"],
+        totalParticipants: teacherList,
         confirmedParticipants: [],
         minutesId: "",
         career: careerInfo.name,

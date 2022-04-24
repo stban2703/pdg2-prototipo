@@ -17,4 +17,11 @@
         justify-content: center;
         gap: 1rem;
     }
+
+    .meetingNoSelected {
+        border: 1px solid $secondary-color;
+        background-color: $white;
+        color: $secondary-color;
+        box-shadow: none;
+    }
 }
