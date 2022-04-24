@@ -25,12 +25,53 @@ export async function getCurrentPeriod() {
     }
 }
 
-// Notification
+// Notifications
 export function getNotifications(userId) {
     const unsub = onSnapshot(doc(firestore, "users", userId), (doc) => {
         const user = doc.data()
         console.log(user.name)
     });
+}
+
+export async function createNotification(userId, date, time, group, type, meetingId) {
+    const notificationRef = doc(collection(firestore, `users/${userId}/notifications`))
+    const newNotification = {
+        id: notificationRef.id,
+        type: type,
+        group: group,
+        date: date,
+        time: time,
+        status: 'unread'
+    }
+
+    if(type === "meeting") {
+        newNotification.meetingId = meetingId
+    }
+
+    await setDoc(notificationRef, newNotification).then(() => {
+        
+    }).catch((error) => {
+        console.log(error)
+    });
+
+}
+
+export async function sendNotifications(teacherList, date, time, group, type, meetingId) {
+    for (let index = 0; index < teacherList.length; index++) {
+        const teacher = teacherList[index];
+        await createNotification(teacher.id, date, time, group, type, meetingId)
+    }
+    hideLoader()
+    window.location = "index.html#meetinglist"
+}
+
+export async function updateNotificationStatus(userId, notificationID, status) {
+    const userNotificationRef = doc(firestore, `users/${userId}/notifications`, notificationID)
+    await updateDoc(userNotificationRef, {
+        status: status
+    }).then(() => {
+        
+    })
 }
 
 // General function
@@ -345,8 +386,9 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
         department: departmentInfo.name
     }
     await setDoc(meetingRef, newMeeting).then(() => {
-        hideLoader()
-        window.location = "index.html#meetinglist"
+        //hideLoader()
+        //window.location = "index.html#meetinglist"
+        sendNotifications(teacherList, date, time, group, "meeting", meetingRef.id)
     }).catch((error) => {
         console.log(error)
     });
