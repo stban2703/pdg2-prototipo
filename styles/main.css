@@ -4695,7 +4695,7 @@ input[type=button] {
   max-width: none;
 }
 
-.header__icon:hover {
+.header__icon img:hover {
   cursor: pointer;
 }
 
@@ -6913,6 +6913,19 @@ input[type=button] {
   z-index: 10;
   right: 0;
   min-width: 30rem;
+  -webkit-transform: scale(0, 0);
+          transform: scale(0, 0);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.notification-window--show {
+  -webkit-transform: scale(100%, 100%);
+          transform: scale(100%, 100%);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .notification-window__title {
