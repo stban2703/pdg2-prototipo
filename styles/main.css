@@ -4490,6 +4490,11 @@ input[type=button] {
       align-self: flex-end;
 }
 
+.notification-item--selected {
+  -webkit-box-shadow: 0px 5px 7px rgba(114, 184, 255, 0.4);
+          box-shadow: 0px 5px 7px rgba(114, 184, 255, 0.4);
+}
+
 .notification-item--empty {
   background-color: #FFFFFF;
 }
@@ -8326,6 +8331,7 @@ input[type=button] {
   gap: 2rem;
   overflow-y: auto;
   padding-right: 1rem;
+  padding-bottom: 1rem;
 }
 
 .notification-screen__listContainer::-webkit-scrollbar {
@@ -8376,6 +8382,7 @@ input[type=button] {
   font-size: 1.5rem;
   font-weight: 300;
   width: 100%;
+  color: #757575;
 }
 
 .notification-screen__detailsControls {
@@ -8386,7 +8393,18 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  gap: 2rem;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 1rem;
+}
+
+.notification-screen__detailsControls button {
+  max-width: 24rem;
+}
+
+.notification-screen__detailsControls a {
+  max-width: 24rem;
 }
 
 html {

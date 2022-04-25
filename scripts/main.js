@@ -17,13 +17,13 @@ import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
 import { getInitialMyGroupSubjects } from "./mygroup.js";
-import { displayNotificationWindow } from "./notification.js";
+import { displayNotificationCounter, displayNotificationWindow, renderNotificationDetails, renderNotificationScreenList, renderNotificationWindowList } from "./notification.js";
 
 import { firebase } from "./modules/firebase.js";
 import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
-import { sortByDateDescending } from "./utils/sort.js";
+
 const firestore = getFirestore(firebase)
 
 
@@ -150,6 +150,8 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
     ///
     displayNotificationCounter(notifications)
     renderNotificationWindowList(notifications)
+    renderNotificationScreenList(notifications)
+    renderNotificationDetails(notifications)
 });
 
 
@@ -162,6 +164,8 @@ let observer = new MutationObserver(function (mutationsList, observer) {
             addPageFuncions()
             displayNotificationCounter(notifications)
             renderNotificationWindowList(notifications)
+            renderNotificationScreenList(notifications)
+            renderNotificationDetails(notifications)
         }
     })
 });
@@ -283,58 +287,6 @@ function checkCurrentTab() {
     //addPageFuncions()
 }
 
-function displayNotificationCounter(notificationList) {
-    const notificationCounterContainer = document.querySelector(".header__notificationNumber")
-    const notificationCounter = document.querySelector(".header__notificationNumber span")
-    if (notificationCounter) {
-        const unreadList = [...notificationList].filter((elem) => {
-            return elem.status === "unread"
-        })
-        notificationCounter.innerHTML = unreadList.length
-        if (unreadList.length > 0) {
-            notificationCounterContainer.classList.remove("hidden")
-        } else {
-            notificationCounterContainer.classList.add("hidden")
-        }
-    }
-}
-
-function renderNotificationWindowList(notificationList) {
-    const notificationWindowList = document.querySelector(".notification-window__list")
-    if(notificationWindowList) {
-        const copy = [...notificationList].sort(sortByDateDescending)
-        notificationWindowList.innerHTML = ``
-        copy.forEach(elem => {
-            const item = document.createElement("div")
-            item.className = `notification-item${elem.status === 'read' ? ' notification-item--read' : ''}`
-
-            let previewMessage = ""
-
-            switch(elem.type) {
-                case "meeting":
-                    previewMessage = `
-                    Tu bloque ${elem.group} ha programado una reunión reflexiva
-                    `
-                    break;
-                default:
-                    previewMessage = `
-                    Vista previa de una notificación en la ventana
-                    `
-                    break;
-            }
-
-            item.innerHTML = `
-            <p class="notification-item__summary">
-                ${previewMessage}
-            </p>
-            <a href="#notification?${elem.id}" class="small-button small-button--secondary">
-                <span>Ver más</span>
-            </a>
-            `
-            notificationWindowList.appendChild(item)
-        })
-    }
-}
 
 function goBack() {
     const backButton = document.querySelector(".back-button")
