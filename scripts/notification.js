@@ -1,6 +1,6 @@
 import { updateNotificationStatus } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
-import { sortByDateDescending } from "./utils/sort.js";
+import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js";
 import { asteriskToBold } from "./utils/text-format.js";
 
 export function displayNotificationCounter(notificationList) {
@@ -22,7 +22,9 @@ export function displayNotificationCounter(notificationList) {
 export function renderNotificationWindowList(notificationList) {
     const notificationWindowList = document.querySelector(".notification-window__list")
     if (notificationWindowList) {
-        const copy = [...notificationList].sort(sortByDateDescending)
+        console.log(notificationList)
+        const copy = [...notificationList].sort(sortByDateAscending)
+        console.log(copy)
         if (copy.length > 0) {
             notificationWindowList.innerHTML = ``
             copy.forEach(elem => {
@@ -34,7 +36,7 @@ export function renderNotificationWindowList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es esta semana el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
                         `
                         break;
 
@@ -80,7 +82,7 @@ export function renderNotificationWindowList(notificationList) {
 export function renderNotificationScreenList(notificationList) {
     const notificationScreenList = document.querySelector(".notification-screen__listContainer")
     if (notificationScreenList) {
-        const copy = [...notificationList].sort(sortByDateDescending)
+        const copy = [...notificationList].sort(sortByDateAscending)
 
         if (copy.length > 0) {
             notificationScreenList.innerHTML = ``
@@ -98,7 +100,7 @@ export function renderNotificationScreenList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es esta semana el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
                     `
                         break;
 

@@ -16,7 +16,7 @@ export async function getInitialMeetings(userInfo) {
 
 
         const meetingList = await getMeetings()
-        meetingList.sort(sortByDateDescending)
+        meetingList.sort(sortByDateAscending)
         let listCopy = [...meetingList]
 
         if (userInfo.groups) {
