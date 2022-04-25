@@ -8579,7 +8579,7 @@ body {
         font-size: 2rem;
     }
 }*/
-.testmemoform {
+.testform {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8593,7 +8593,11 @@ body {
   gap: 3rem;
 }
 
-.testmemoform div {
+.testform h2 {
+  font-size: 3rem;
+}
+
+.testform div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

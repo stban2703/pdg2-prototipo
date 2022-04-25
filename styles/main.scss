@@ -209,13 +209,17 @@ body {
     }
 }*/
 
-.testmemoform {
+.testform {
     display: flex;
     flex-direction: column;
     max-width: 50rem;
     font-size: 1.8rem;
     font-family: $poppins;
     gap: 3rem;
+
+    h2 {
+        font-size: 3rem;
+    }
 
     div {
         display: flex;

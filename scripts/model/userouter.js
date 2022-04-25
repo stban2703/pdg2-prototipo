@@ -15,7 +15,7 @@ const router = new Router(
         memoselectsubject: new Layout(new Page("memoselectsubject.html")),
         memosections: new Layout(new Page("memosections.html")),
         memoquestion: new Layout(new Page("memoquestion.html")),
-        testmemoform: new Layout(new Page("testmemoform.html")),
+        testform: new Layout(new Page("testform.html")),
         memoimproveactions: new Layout(new Page("memoimproveactions.html")),
         memohistoryimproveactions: new Layout(new Page("memohistoryimproveactions.html")),
         progressselectsubject: new Layout(new Page("progressselectsubject.html")),
