@@ -1,3 +1,4 @@
+import { updateNotificationStatus } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { sortByDateDescending } from "./utils/sort.js";
 import { asteriskToBold } from "./utils/text-format.js";
@@ -138,7 +139,7 @@ export function renderNotificationScreenList(notificationList) {
     }
 }
 
-export function renderNotificationDetails(notificationList) {
+export function renderNotificationDetails(notificationList, userId) {
     const notificationDetailsSection = document.querySelector(".notification-screen__details")
 
     if (notificationDetailsSection) {
@@ -203,6 +204,10 @@ export function renderNotificationDetails(notificationList) {
             </section>
         `
             notificationDetailsSection.appendChild(notificationWindow)
+            const readNotificationButton = notificationWindow.querySelector(".readNotificationButton")
+            readNotificationButton.addEventListener('click', () => {
+                updateNotificationStatus(userId, info.id, "read")
+            })
         }
     }
 }

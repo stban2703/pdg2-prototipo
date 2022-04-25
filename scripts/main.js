@@ -151,7 +151,7 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
     displayNotificationCounter(notifications)
     renderNotificationWindowList(notifications)
     renderNotificationScreenList(notifications)
-    renderNotificationDetails(notifications)
+    renderNotificationDetails(notifications, currentUser.id)
 });
 
 
@@ -165,7 +165,7 @@ let observer = new MutationObserver(function (mutationsList, observer) {
             displayNotificationCounter(notifications)
             renderNotificationWindowList(notifications)
             renderNotificationScreenList(notifications)
-            renderNotificationDetails(notifications)
+            renderNotificationDetails(notifications, currentUser.id)
         }
     })
 });
