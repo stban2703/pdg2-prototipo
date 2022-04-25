@@ -17,7 +17,7 @@ import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
 import { getInitialMyGroupSubjects } from "./mygroup.js";
-import { displayNotificationCounter, displayNotificationWindow, renderNotificationDetails, renderNotificationScreenList, renderNotificationWindowList } from "./notification.js";
+import { displayNotificationCounter, displayNotificationWindow, renderNotificationDetails, renderNotificationScreenList, renderNotificationWindowList, setAllNotificationAsRead } from "./notification.js";
 
 import { firebase } from "./modules/firebase.js";
 import {
@@ -152,6 +152,8 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
     renderNotificationWindowList(notifications)
     renderNotificationScreenList(notifications)
     renderNotificationDetails(notifications, currentUser.id)
+    setAllNotificationAsRead(notifications, currentUser.id)
+
 });
 
 
@@ -166,6 +168,7 @@ let observer = new MutationObserver(function (mutationsList, observer) {
             renderNotificationWindowList(notifications)
             renderNotificationScreenList(notifications)
             renderNotificationDetails(notifications, currentUser.id)
+            setAllNotificationAsRead(notifications, currentUser.id)
         }
     })
 });

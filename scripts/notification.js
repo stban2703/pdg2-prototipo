@@ -1,5 +1,6 @@
 import { updateNotificationStatus } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
+import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js";
 import { asteriskToBold } from "./utils/text-format.js";
 
@@ -22,9 +23,7 @@ export function displayNotificationCounter(notificationList) {
 export function renderNotificationWindowList(notificationList) {
     const notificationWindowList = document.querySelector(".notification-window__list")
     if (notificationWindowList) {
-        console.log(notificationList)
         const copy = [...notificationList].sort(sortByDateAscending)
-        console.log(copy)
         if (copy.length > 0) {
             notificationWindowList.innerHTML = ``
             copy.forEach(elem => {
@@ -146,7 +145,6 @@ export function renderNotificationDetails(notificationList, userId) {
 
     if (notificationDetailsSection) {
         const notificationId = window.location.hash.split("?")[1]
-        console.log(notificationId)
         const info = notificationList.find(elem => {
             return elem.id === notificationId
         })
@@ -211,6 +209,24 @@ export function renderNotificationDetails(notificationList, userId) {
                 updateNotificationStatus(userId, info.id, "read")
             })
         }
+    }
+}
+
+async function onSetAllNotificationAsRead(notificationList, userId) {
+    showLoader()
+    for (let index = 0; index < notificationList.length; index++) {
+        const element = notificationList[index];
+        await updateNotificationStatus(userId, element.id, "read")
+    }
+    hideLoader()
+}
+
+export function setAllNotificationAsRead(notificationList, userId) {
+    const setAllNotificationAsReadButton = document.querySelector(".setAllNotificationAsReadButton")
+    if (setAllNotificationAsReadButton) {
+        setAllNotificationAsReadButton.addEventListener('click', () => {
+            onSetAllNotificationAsRead(notificationList, userId)
+        })
     }
 }
 
