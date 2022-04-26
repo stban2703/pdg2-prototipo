@@ -38,7 +38,12 @@ export async function getInititalAccomplishmentDepartmentList() {
                 t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
             })
 
-            departmentProgress = Math.round((completeCounter / (completeCounter + incompleteCounter)) * 100)
+            let totalCounter = completeCounter + incompleteCounter
+            if (totalCounter > 0) {
+                departmentProgress = Math.round((completeCounter / totalCounter) * 100)
+            } else {
+                departmentProgress = 0
+            }
 
             const object = {
                 name: department.name,
@@ -81,7 +86,7 @@ function renderAccomplishmentDepartmentList(list) {
         circle.initial()
     })
 
-    
+
     allDepartmentsProgress = Math.round((allDepartmentsProgress / (list.length * 100)) * 100)
     const generalItem = document.createElement('div')
     generalItem.className = "accomplishment-department"
@@ -176,6 +181,8 @@ export async function getInitialAccomplishmentList(userInfo) {
                 groups: [],
             }
 
+            console.log(t)
+
             subjects.forEach(subject => {
                 const q = t.subjects.find(ts => {
                     return ts === subject.id
@@ -237,7 +244,6 @@ function renderAccomplishmentFilters(accomplishmentList, subjectList, role) {
     })
 
     accomplishmentListControls.alphabetic.classList.remove("hidden")
-    console.log(role)
     switch (role) {
         case "boss":
             accomplishmentListControls.career.classList.remove("hidden")

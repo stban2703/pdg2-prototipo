@@ -199,7 +199,6 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                 const department = departments[index];
                 const subjects = await getSubjectsByView(`departmentId`, department.id)
                 const teachersIds = []
-
                 subjects.forEach(subject => {
                     const q = teachersIds.find(id => {
                         return subject.teacherId === id
@@ -224,7 +223,12 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                     t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
                 })
 
-                departmentProgress = Math.round((completeCounter / (completeCounter + incompleteCounter)) * 100)
+                let totalCounter = completeCounter + incompleteCounter
+                if (totalCounter > 0) {
+                    departmentProgress = Math.round((completeCounter / totalCounter) * 100)
+                } else {
+                    departmentProgress = 0
+                }
 
                 const object = {
                     name: department.name,
