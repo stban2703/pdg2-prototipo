@@ -181,8 +181,6 @@ export async function getInitialAccomplishmentList(userInfo) {
                 groups: [],
             }
 
-            console.log(t)
-
             subjects.forEach(subject => {
                 const q = t.subjects.find(ts => {
                     return ts === subject.id

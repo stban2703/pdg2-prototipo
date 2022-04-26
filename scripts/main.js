@@ -207,7 +207,7 @@ function addPageFuncions() {
 
     // Minutes functions
     createAgreement()
-    getMeetingInfoForMinute()
+    getMeetingInfoForMinute(currentUser)
     submitMeetingMinutes()
     renderMeetingMinutesDetails()
 

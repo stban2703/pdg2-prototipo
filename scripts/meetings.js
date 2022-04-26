@@ -136,9 +136,9 @@ function renderMeetingsForAdmin(list) {
 
     finishedListAdmin.innerHTML = ``
 
-    const copy = list.filter(elem => {
+    const copy = [...list]/*.filter(elem => {
         return elem.minutesId.length > 0
-    })
+    })*/
 
     copy.forEach(meeting => {
         const meetingItem = document.createElement("div")

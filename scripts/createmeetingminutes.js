@@ -80,7 +80,7 @@ function renderAgreements(list) {
     });
 }
 
-export async function getMeetingInfoForMinute() {
+export async function getMeetingInfoForMinute(userInfo) {
     const meetingId = window.location.hash.split("?")[1]
     const meetingInfoSection = document.querySelector(".createmeetingminutes-form__meeting-info")
 
@@ -105,6 +105,30 @@ export async function getMeetingInfoForMinute() {
             `
             participantListSection.appendChild(participantItem)
         })
+
+        const q = meetingInfo.totalParticipants.find(elem => {
+            return elem.id === userInfo.id
+        })
+        if(!q) {
+            const participantItem = document.createElement("label")
+            participantItem.className = "checkbox-input"
+            participantItem.innerHTML = `
+            <input id="${userInfo.id}" type="checkbox" name="assistants[]" value="${userInfo.name + " " + userInfo.lastname}" />
+                ${userInfo.name + " " + userInfo.lastname}
+            `
+            participantListSection.appendChild(participantItem)
+        }
+
+        const totalCheckbox = document.querySelectorAll("input[type=checkbox]")
+        if(totalCheckbox.length < 2) {
+            const participantItem = document.createElement("label")
+            participantItem.className = "checkbox-input"
+            participantItem.innerHTML = `
+            <input id="yjScMLzBFiQPVBGfb7MPNIS4cVf2" type="checkbox" name="assistants[]" value="Natalia Rodriguez" />
+            Natalia Rodriguez
+            `
+            participantListSection.appendChild(participantItem)
+        }
     }
 }
 
