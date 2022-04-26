@@ -52,7 +52,9 @@ export async function createNotification(userId, date, time, group, type, meetin
 export async function sendNotifications(teacherList, date, time, group, type, meetingId) {
     for (let index = 0; index < teacherList.length; index++) {
         const teacher = teacherList[index];
-        await createNotification(teacher.id, date, time, group, type, meetingId)
+        if (teacher.id) {
+            await createNotification(teacher.id, date, time, group, type, meetingId)
+        }
     }
     hideLoader()
     window.location = "index.html#meetinglist"
