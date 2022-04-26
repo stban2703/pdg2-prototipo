@@ -23,6 +23,7 @@ import { firebase } from "./modules/firebase.js";
 import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { submitTestSubject } from "./modules/firestore.js";
 
 const firestore = getFirestore(firebase)
 
@@ -270,6 +271,10 @@ function addPageFuncions() {
     // Back-return
     goBack()
     memoQuestionGoBack()
+
+
+    // Test
+    //submitTestSubject()
 }
 
 

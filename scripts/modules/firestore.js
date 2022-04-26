@@ -886,3 +886,27 @@ export const submitTestMemoQuestion = async function (questionObject) {
         console.log(error)
     });
 }
+
+export async function submitTestSubject() {
+    const subjectRef = doc(collection(firestore, "subjects"))
+
+    const subject = {
+        career: "Apoyo",
+        careerId: "SBcLczJGEkP94G9uYNQt",
+        department: "Ciencias físicas y tecnología",
+        departmentId: "q0An1pL1RIjeFsSlib7F",
+        group: "Bioquímica",
+        groupId: "1Q9gLGG4QuJCxf8eggV5",
+        id: subjectRef.id,
+        name: "Termodinámica",
+        teacher: "Nombre",
+        teacherId: "BNaTCIRtmhTUsAcp6gWJqU0Rk2113"
+    }
+
+    await setDoc(subjectRef, subject).then(() => {
+        console.log("Materia subida")
+    }).catch((error) => {
+        console.log(error)
+    });
+
+}
