@@ -488,7 +488,7 @@ export async function getMemoTemplate(targetPath) {
 
     await createNewMemoQuestions(templateQuestions, targetPath).then(() => {
         console.log("Subido")
-        window.location.reload()
+        //window.location.reload()
     }).catch((error) => {
         console.log(error)
     });
@@ -891,16 +891,16 @@ export async function submitTestSubject() {
     const subjectRef = doc(collection(firestore, "subjects"))
 
     const subject = {
-        career: "Apoyo",
-        careerId: "SBcLczJGEkP94G9uYNQt",
+        career: "Ingeniería telemática",
+        careerId: "COnKQIW96G8CLgwSJ3tJ",
         department: "Ciencias físicas y tecnología",
         departmentId: "q0An1pL1RIjeFsSlib7F",
-        group: "Bioquímica",
-        groupId: "1Q9gLGG4QuJCxf8eggV5",
+        group: "Ciencias",
+        groupId: "5hLUTL1v1TqymDLiyv8Q",
         id: subjectRef.id,
-        name: "Termodinámica",
-        teacher: "Nombre",
-        teacherId: "BNaTCIRtmhTUsAcp6gWJqU0Rk2113"
+        name: "Lógica digital y Laboratorio",
+        teacher: "Juan Manuel Alvarez",
+        teacherId: "8LmCXpchLmQLVBskYvOHeNerf3l2"
     }
 
     await setDoc(subjectRef, subject).then(() => {
