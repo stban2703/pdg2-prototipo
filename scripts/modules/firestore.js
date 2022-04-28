@@ -764,7 +764,9 @@ export const createUser = async function (uid, name, lastname, email, role) {
         name: name,
         lastname: lastname,
         email: email,
-        role: [role]
+        role: [role],
+        leaderGroup: "",
+        accomplishment: 0
     }
     await setDoc(userRef, newUser).then(() => {
         localStorage.setItem('currentuser', JSON.stringify(newUser))
@@ -897,12 +899,12 @@ export async function submitTestSubject() {
         careerId: "ryNPmvun0rcUQmM4Ph6G",
         department: "Diseño e Innovación",
         departmentId: "iOdeot79u3raGVUllUoA",
-        group: "Fundamentos",
-        groupId: "1Q9gLGG4QuJCxf8eggV5",
+        group: "Comunicación",
+        groupId: "V3L7xBsdLVvrOEueEqUr",
         id: subjectRef.id,
-        name: "Diseño 4D",
-        teacher: "Carlos Andrés Cajigas",
-        teacherId: "e1nf6qH7WHNhyqL2ZUCXToNAaU72"
+        name: "Procesos de manufactura II",
+        teacher: "Carlos Araujo",
+        teacherId: "RtdfiyQn2sZjGfXMhNtz0LDlqBL2"
     }
 
     await setDoc(subjectRef, subject).then(() => {
