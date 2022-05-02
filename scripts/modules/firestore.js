@@ -902,13 +902,14 @@ export async function submitTestSubject() {
         group: "Comunicación",
         groupId: "V3L7xBsdLVvrOEueEqUr",
         id: subjectRef.id,
-        name: "Procesos de manufactura II",
-        teacher: "Carlos Araujo",
-        teacherId: "RtdfiyQn2sZjGfXMhNtz0LDlqBL2"
+        name: "Historia del Diseño y la comunicación visual",
+        teacher: "Charo Pacheco",
+        teacherId: "wuf0Paq4WFRd9z210sINRFTwAsC2"
     }
 
     await setDoc(subjectRef, subject).then(() => {
         console.log("Materia subida")
+        console.log(subject.id)
     }).catch((error) => {
         console.log(error)
     });
