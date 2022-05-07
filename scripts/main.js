@@ -24,18 +24,16 @@ import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { createNotification, submitTestSubject } from "./modules/firestore.js";
+import { localPeriod, localRole, localSubjects, localUser } from "./utils/ls.js";
 
 const firestore = getFirestore(firebase)
 
 
 // Verifica si el usuario ha  iniciado sesion
-let ls = window.localStorage;
-let localUser = JSON.parse(ls.getItem('currentuser'))
-let localSubjects = JSON.parse(ls.getItem('subjectList'))
-let localPeriod = JSON.parse(ls.getItem('currentPeriod'))
 let currentUser = localUser
 let currentSubjects = localSubjects
 let currentPeriod = localPeriod
+let currentRole = localRole
 
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
@@ -181,7 +179,7 @@ observer.observe(pageContent, { characterData: false, childList: true, attribute
 function displayHomeUserName() {
     const homeWelcome = document.querySelector(".header__userName")
     if (homeWelcome) {
-        homeWelcome.innerText = localUser.name
+        homeWelcome.innerText = currentUser.name
     }
 }
 

@@ -6,6 +6,7 @@ import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader, showLoader } from "../utils/loader.js";
 import { getInitialNoteList } from "../notes.js";
 import { submitUserAccomplishment } from "../accomplishment.js";
+import { setLocalStorage } from "../utils/ls.js";
 
 const firestore = getFirestore(firebase)
 export const firestoreDb = firestore
@@ -16,7 +17,7 @@ export async function getCurrentPeriod() {
     const docSnap = await getDoc(periodRef)
     if (docSnap.exists()) {
         const period = docSnap.data()
-        localStorage.setItem('currentPeriod', JSON.stringify(period.period))
+        setLocalStorage('currentPeriod', JSON.stringify(period.period))
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -767,7 +768,7 @@ export const createUser = async function (uid, name, lastname, email, role) {
         accomplishment: 0
     }
     await setDoc(userRef, newUser).then(() => {
-        localStorage.setItem('currentuser', JSON.stringify(newUser))
+        setLocalStorage('currentuser', JSON.stringify(newUser))
         getCurrentPeriod()
         getUserSubjects(uid)
     }).catch((error) => {
@@ -781,7 +782,7 @@ export const getUserFromDb = async function (uid) {
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
         const user = docSnap.data()
-        localStorage.setItem('currentuser', JSON.stringify(user))
+        setLocalStorage('currentuser', JSON.stringify(user))
         //hideLoader()
         //window.location = 'index.html'
         console.log("Document data: " + user.name + ", " + user.role);
@@ -794,7 +795,7 @@ export async function getUserSubjects(teacherId) {
     const q = query(collection(firestore, "subjects"), where("teacherId", "==", "" + teacherId))
     const querySnapshot = await getDocs(q);
     const subjectList = querySnapshot.docs.map(doc => doc.data());
-    localStorage.setItem('subjectList', JSON.stringify(subjectList))
+    setLocalStorage('subjectList', JSON.stringify(subjectList))
     hideLoader()
     
     let ls = window.localStorage;
@@ -804,7 +805,7 @@ export async function getUserSubjects(teacherId) {
         console.log("Multiple roles detected")
         window.location = 'role.html'
     } else {
-        localStorage.setItem('role', JSON.stringify(localUser.role[0]))
+        setLocalStorage('role', JSON.stringify(localUser.role[0]))
         window.location = 'index.html'
     }
     //window.location = 'index.html'
