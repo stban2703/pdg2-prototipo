@@ -24,7 +24,7 @@ import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { createNotification, submitTestSubject } from "./modules/firestore.js";
-import { localPeriod, localRole, localSubjects, localUser } from "./utils/ls.js";
+import { localPeriod, localRole, localSubjects, localUser, setLocalStorage } from "./utils/ls.js";
 import { hideItem, showItem } from "./utils/display-items.js";
 
 const firestore = getFirestore(firebase)
@@ -46,8 +46,10 @@ if (currentUser != null || getCurrentSignedInUser() != null) {
 export const userInfo = currentUser
 export const userSubjects = currentSubjects
 
-// Check user role
+const roleTitle = document.querySelector(".roleTitle")
+const changeRoleButton = document.querySelector(".changeRoleButton")
 
+// Check user role
 if (currentRole !== 'teacher') {
     showItem('#navaccomplishment')
     showItem('#navgeneral')
@@ -60,22 +62,28 @@ if (currentRole !== 'teacher') {
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
         document.querySelector('#navmygroup').setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
         showItem('#navmygroup')
+        roleTitle.innerHTML = 'Rol Líder de bloque'
     }
 
     if (currentRole === 'principal') {
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.principalCareerId}`)
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?career_${userInfo.principalCareerId}`)
+        roleTitle.innerHTML = 'Rol Director de programa'
     }
 
     if (currentRole === 'boss') {
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.bossDepartment}`)
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?department_${userInfo.bossDepartmentId}`)
+        roleTitle.innerHTML = 'Rol Jefe de departamento'
     }
 
     if (currentRole === 'admin') {
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentdashboard`)
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_general`)
+        roleTitle.innerHTML = 'Directora MECA'
     }
+} else {
+    roleTitle.innerHTML = "Rol Docente"
 }
 
 
@@ -105,6 +113,7 @@ let memoProperties = {
     ]
 }
 
+
 // Cerrar sesion
 const logoutButton = document.querySelector('.logoutButton')
 logoutButton.addEventListener('click', function () {
@@ -117,7 +126,6 @@ checkCurrentTab()
 window.addEventListener("hashchange", function () {
     checkCurrentTab()
 }, false)
-
 
 
 // Notification
@@ -153,7 +161,6 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
     setAllNotificationAsRead(notifications, currentUser.id)
 
 });
-
 
 
 // Detectar cambios de pantalla
@@ -293,6 +300,23 @@ function checkCurrentTab() {
     //addPageFuncions()
 }
 
+changeRole()
+function changeRole() {
+    changeRoleButton.addEventListener('click', () => {
+        const roleIndex = currentUser.role.findIndex(role => {
+            return role === currentRole
+        })
+
+        if (roleIndex === currentUser.role.length - 1) {
+            currentRole = currentUser.role[0]
+        } else {
+            currentRole = currentUser.role[roleIndex + 1]
+        }
+        setLocalStorage('currentRole', currentRole)
+        window.location = "index.html"
+        console.log(currentRole)
+    })
+}
 
 function goBack() {
     const backButton = document.querySelector(".back-button")

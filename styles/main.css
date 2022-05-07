@@ -4650,14 +4650,39 @@ input[type=button] {
           flex-direction: column;
   background-color: #FFFFFF;
   padding: 6rem 4rem;
-  gap: 2rem;
+  gap: 0.5rem;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 10;
 }
 
+.navigation-menu__roleSelect {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navigation-menu__roleSelect button {
+  max-width: 12.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.navigation-menu__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #979DFF;
+}
+
 .navigation-menu__tabs {
+  margin-top: 2rem;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
