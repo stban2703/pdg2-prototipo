@@ -14,11 +14,9 @@ export const firestoreDb = firestore
 export async function getCurrentPeriod() {
     const periodRef = doc(firestore, "memos", "template")
     const docSnap = await getDoc(periodRef)
-    console.log(docSnap)
     if (docSnap.exists()) {
         const period = docSnap.data()
         localStorage.setItem('currentPeriod', JSON.stringify(period.period))
-        console.log(period)
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -798,7 +796,17 @@ export async function getUserSubjects(teacherId) {
     const subjectList = querySnapshot.docs.map(doc => doc.data());
     localStorage.setItem('subjectList', JSON.stringify(subjectList))
     hideLoader()
-    window.location = 'index.html'
+    let ls = window.localStorage;
+    let localUser = JSON.parse(ls.getItem('currentuser'))
+
+    if(localUser.role.length > 1) {
+        console.log("Multiple roles detected")
+        window.location = 'role.html'
+    } else {
+        localStorage.setItem('role', JSON.stringify(localUser.role[0]))
+        window.location = 'index.html'
+    }
+    //window.location = 'index.html'
     //return subjectList
 }
 
