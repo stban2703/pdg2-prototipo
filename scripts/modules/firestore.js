@@ -899,12 +899,12 @@ export async function submitTestSubject() {
         careerId: "uxskEpCmz3V8MzSL0t0F",
         department: "Tecnologías de Información y Comunicaciones",
         departmentId: "MAVz6dkETWG7cb0MM4Of",
-        group: "Comunicaciones",
-        groupId: "ubZfxta3J0wTxqb3G1tL",
+        group: "Programación",
+        groupId: "9oJ4SBaMk6mp1dE53PNj",
         id: subjectRef.id,
-        name: "Comunicaciones digitales",
-        teacher: "Gonzalo Llano",
-        teacherId: "Auygr4WlSzSj48NlNiWntNzQPZs2"
+        name: "Programación web",
+        teacher: "Juan Jose Gonzales",
+        teacherId: "dYQEjiQcQDQoBPCTkpVATCBjPi22"
     }
 
     await setDoc(subjectRef, subject).then(() => {

@@ -25,6 +25,25 @@
         justify-content: space-around;
     }
 
+    &__description {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $light;
+        color: $boulder;
+    }
+
+    &__roleSection {
+        width: 100%;
+        max-width: 48rem;
+    }
+
+    &__selectRole {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+        margin-top: 1rem;
+    }
+
     &__dots {
         width: 100%;
         max-width: 150px;

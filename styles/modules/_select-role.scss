@@ -1,0 +1,42 @@
+.select-role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $main-color;
+    padding: 4rem 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 22rem;
+    gap: 3rem;
+    background-position: center;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $bold;
+        color: $white;
+        text-align: center;
+    }
+
+    &__icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 6.5rem;
+        height: 6.5rem;
+        border-radius: 100%;
+        background-color: #EFF0FF;
+    }
+
+    a {
+        max-width: none;
+    }
+}
