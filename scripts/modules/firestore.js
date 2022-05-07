@@ -796,6 +796,7 @@ export async function getUserSubjects(teacherId) {
     const subjectList = querySnapshot.docs.map(doc => doc.data());
     localStorage.setItem('subjectList', JSON.stringify(subjectList))
     hideLoader()
+    
     let ls = window.localStorage;
     let localUser = JSON.parse(ls.getItem('currentuser'))
 
