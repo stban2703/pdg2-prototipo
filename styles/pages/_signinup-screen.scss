@@ -10,6 +10,11 @@
         align-items: center;
         justify-content: center;
         gap: 2rem;
+
+        &--top {
+            justify-content: flex-start;
+            margin-top: 8rem;
+        }
     }
 
     &__logo {

@@ -7119,6 +7119,13 @@ input[type=button] {
   gap: 2rem;
 }
 
+.signinup-screen__article--top {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-top: 8rem;
+}
+
 .signinup-screen__logo {
   width: 100%;
   max-width: 38rem;
