@@ -4584,7 +4584,11 @@ input[type=button] {
   background-color: #EFF0FF;
 }
 
-.select-role a {
+.select-role__controls {
+  margin-top: auto;
+}
+
+.select-role button {
   max-width: none;
 }
 

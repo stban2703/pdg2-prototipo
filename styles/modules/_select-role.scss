@@ -36,7 +36,11 @@
         background-color: #EFF0FF;
     }
 
-    a {
+    &__controls {
+        margin-top: auto;
+    }
+
+    button {
         max-width: none;
     }
 }
