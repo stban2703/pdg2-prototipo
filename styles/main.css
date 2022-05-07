@@ -4584,6 +4584,10 @@ input[type=button] {
   background-color: #EFF0FF;
 }
 
+.select-role__icon--special {
+  background-color: #FFFBEF;
+}
+
 .select-role__controls {
   margin-top: auto;
 }

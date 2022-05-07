@@ -34,6 +34,10 @@
         height: 6.5rem;
         border-radius: 100%;
         background-color: #EFF0FF;
+
+        &--special {
+            background-color: #FFFBEF;
+        }
     }
 
     &__controls {
