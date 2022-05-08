@@ -1,0 +1,47 @@
+.profile-select-role {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $main-color;
+    padding: 4rem;
+    border-radius: 15px;
+    width: 100%;
+    gap: 3rem;
+    background-position: center;
+    width: fit-content;
+
+    &__infoSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $bold;
+        color: $white;
+        text-align: center;
+    }
+
+    &__icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 6.5rem;
+        height: 6.5rem;
+        border-radius: 100%;
+        background-color: #EFF0FF;
+
+        &--special {
+            background-color: #FFFBEF;
+        }
+    }
+
+    button {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}

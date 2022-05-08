@@ -4687,6 +4687,79 @@ input[type=button] {
   color: #757575;
 }
 
+.profile-select-role {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #979DFF;
+  padding: 4rem;
+  border-radius: 15px;
+  width: 100%;
+  gap: 3rem;
+  background-position: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.profile-select-role__infoSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-select-role__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.profile-select-role__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 100%;
+  background-color: #EFF0FF;
+}
+
+.profile-select-role__icon--special {
+  background-color: #FFFBEF;
+}
+
+.profile-select-role button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
