@@ -182,7 +182,24 @@ export async function renderMemoQuestion() {
                         renderMemoOption(positiveOptions, checkboxAnswerQuestion, answers)
                     } else {
                         if (answers.length > 0) {
+
+                            let question2Answers = []
+                            if (parseInt(currentQuestion.index) === 4) {
+                                question2Answers = await getOptionsFromAnswers("jLpNRX7L6AoHlUMc0HyZ", subjectId, period)
+                                console.log(question2Answers)
+                            }
+
                             answers.forEach(answer => {
+                                const q = currentQuestion.options.find(elem => {
+                                    return elem === answer
+                                })
+
+                                if (!q) {
+                                    currentQuestion.options.push(answer)
+                                }
+                            })
+
+                            question2Answers.forEach(answer => {
                                 const q = currentQuestion.options.find(elem => {
                                     return elem === answer
                                 })
