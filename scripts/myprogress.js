@@ -20,6 +20,7 @@ export async function getInitialProgressInfo(currentPeriod) {
 
         // First questions
         const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, currentPeriod)
+
         const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
         const firtQuestionAllDataSet = []
         const firstQuestionUserDataSet = []
@@ -38,7 +39,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                 firstQuestionUserDataSet[index] = 1
             }
         });
-        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'chartFirstQuestionParent')
+        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'chartFirstQuestionParent', firstQuestionAnswers.length)
 
 
         // Third question
@@ -56,7 +57,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             }
 
         });
-        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent')
+        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
 
         // Fourth question
         const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
@@ -101,7 +102,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                 fourthQuestionAllDataSet[labelIndex]--
             })
         }
-        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'chartFourthQuestionParent')
+        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'chartFourthQuestionParent', fourthQuestionAnswers.length)
 
 
         // Fifth answers
@@ -131,7 +132,8 @@ export async function getInitialProgressInfo(currentPeriod) {
                 fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
             });
         }
-        renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
+        console.log(fifthQuestionAnswers)
+        renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent', 1)
 
 
         // Sixth question
@@ -162,7 +164,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             });
         }
 
-        renderLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
+        renderLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent', 1)
 
 
         // Seventh question
@@ -193,7 +195,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                 seventhQuestionDataSet[labelIndex]++
             })
         })
-        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '' , false)
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '', false, seventhQuestionAnwers.length)
 
 
         // Eigth question
@@ -213,7 +215,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             return answer.subjectId === subjectId
         })
 
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
+        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent', eigthQuestionAnswers.length)
 
         document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
 
@@ -251,7 +253,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
 
-        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false)
+        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, improveActionsAnswers.length)
 
         // Question 11
         if (document.querySelector(".chartElevenQuestionParent")) {
@@ -275,11 +277,11 @@ export async function getInitialProgressInfo(currentPeriod) {
                     document.querySelector('.progress-section__11And12Container').classList.add('hidden')
                 } else {
                     // Question 12
-                    const twelveQuestionAnswer = await getAllAnswersByQuestionAndSubject(12, subjectId)
+                    const twelveQuestionAnswers = await getAllAnswersByQuestionAndSubject(12, subjectId)
                     const twelveQuestionLabels = ['']
                     const twelveQuestionDataSet = [0]
 
-                    const currentPeriodAnswer12 = twelveQuestionAnswer.filter(answer => {
+                    const currentPeriodAnswer12 = twelveQuestionAnswers.filter(answer => {
                         return answer.period === currentPeriod
                     })
 
@@ -287,20 +289,20 @@ export async function getInitialProgressInfo(currentPeriod) {
                         const answerValue12 = currentPeriodAnswer12[0].answerValue[0]
                         twelveQuestionLabels[0] = answerValue12
                         twelveQuestionDataSet[0] = 1
-                        renderPieChart(twelveQuestionLabels, twelveQuestionDataSet, 'twelveQuestionChart', 'Tipo de apoyo', 'Respuestas del docente de la materia', 'chartTwelveQuestionParent')
+                        renderPieChart(twelveQuestionLabels, twelveQuestionDataSet, 'twelveQuestionChart', 'Tipo de apoyo', 'Respuestas del docente de la materia', 'chartTwelveQuestionParent', twelveQuestionAnswers.length)
                     }
                 }
             } else {
                 document.querySelector('.progress-section__11And12Container').classList.add('hidden')
             }
 
-            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent')
+            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent', elevenQuestionAnswers.length)
         }
         hideLoader()
     }
 }
 
-export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend, parentNodeClass, title, displayTitle) {
+export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend, parentNodeClass, title, displayTitle, total) {
     const data = {
         labels: labels,
         datasets: [{
@@ -356,6 +358,12 @@ export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, l
                     },
                     footerFont: {
                         family: 'Poppins'
+                    },
+                    callbacks: {
+                        display: false,
+                        footer: (tooltipItems) => {
+                            return 'Total de docentes: ' + total;
+                        }
                     }
                 }
             },
@@ -404,7 +412,7 @@ export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, l
     renderChart(config, chartId, parentNodeClass)
 }
 
-export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId, parentNodeClass) {
+export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLabel, yLabel, chartId, parentNodeClass, total) {
     const location = window.location.hash.split("?")[0]
     const data = {
         labels: labels,
@@ -467,6 +475,12 @@ export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLab
                     },
                     footerFont: {
                         family: 'Poppins'
+                    },
+                    callbacks: {
+                        display: false,
+                        footer: (tooltipItems) => {
+                            return 'Total de docentes: ' + total;
+                        }
                     }
                 }
             },
@@ -515,7 +529,7 @@ export function renderDoubleBarChart(labels, allDataSet, userDataSet, yMax, xLab
     renderChart(config, chartId, parentNodeClass)
 }
 
-export function renderLineChart(labels, dataSet, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
+export function renderLineChart(labels, dataSet, yMax, xLabel, yLabel, chartId, legend, parentNodeClass, total) {
     const data = {
         labels: labels,
         datasets: [{
@@ -571,6 +585,12 @@ export function renderLineChart(labels, dataSet, yMax, xLabel, yLabel, chartId, 
                     },
                     footerFont: {
                         family: 'Poppins'
+                    },
+                    callbacks: {
+                        display: false,
+                        footer: (tooltipItems) => {
+                            return 'Total de docentes: ' + total;
+                        }
                     }
                 }
             },
@@ -615,7 +635,7 @@ export function renderLineChart(labels, dataSet, yMax, xLabel, yLabel, chartId, 
     renderChart(config, chartId, parentNodeClass)
 }
 
-export function renderPieChart(labels, allDataSet, chartId, title, subtitle, parentNodeClass) {
+export function renderPieChart(labels, allDataSet, chartId, title, subtitle, parentNodeClass, total) {
     const data = {
         labels: labels,
         datasets: [{
@@ -677,6 +697,12 @@ export function renderPieChart(labels, allDataSet, chartId, title, subtitle, par
                     },
                     footerFont: {
                         family: 'Poppins'
+                    },
+                    callbacks: {
+                        display: false,
+                        footer: (tooltipItems) => {
+                            return 'Total de docentes: ' + total;
+                        }
                     }
                 }
             },

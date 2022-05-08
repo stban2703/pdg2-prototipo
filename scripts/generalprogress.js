@@ -533,7 +533,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         improveActionsDataSet[index] = percent
     })
 
-    renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false)
+    renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, allHistoryImproveActionAnswers.length)
 
 
     const totalsQuestions = 12
@@ -555,7 +555,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         })
         firtQuestionAllDataSet[index] = answerList.length
     });
-    renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent', '', false)
+    renderBarChart(firstQuestionLabels, firtQuestionAllDataSet, 10, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'Docentes', 'chartFirstQuestionParent', '', false, answersArray[0].length)
 
 
 
@@ -580,7 +580,7 @@ async function renderGeneralAllCharts(currentPeriod) {
             thirdQuestionDataSet[index] = 0
         }
     });
-    renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent')
+    renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent', allThirdQuestionAnswers.length)
 
 
     // Fourth question
@@ -611,7 +611,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         })
     })
 
-    renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'Docentes', 'chartFourthQuestionParent', '', false)
+    renderBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'Docentes', 'chartFourthQuestionParent', '', false, answersArray[3].length)
 
 
     // Fifth question
@@ -647,7 +647,7 @@ async function renderGeneralAllCharts(currentPeriod) {
             fifthQuestionDataSet[index] = dataSetValue
         })
     }
-    renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent')
+    renderLineChart(fifthQuestionLabels, fifthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent', answersArray[4].length)
 
 
     // Sixth question
@@ -684,7 +684,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         })
     }
 
-    renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent')
+    renderLineChart(sixthQuestionLabels, sixthQuestionDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent', answersArray[5].length)
 
 
     // Seventh question
@@ -715,7 +715,7 @@ async function renderGeneralAllCharts(currentPeriod) {
             })
         })
 
-        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '', false)
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, answersArray[6].length, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '', false, answersArray[6].length)
     }
 
 
@@ -730,7 +730,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         eigthQuestionDataSet[labelIndex]++
     })
 
-    renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent')
+    renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent', answersArray[7].length)
 
 
     // Eleven question
@@ -746,7 +746,7 @@ async function renderGeneralAllCharts(currentPeriod) {
             elevenQuestionDataSet[labelIndex]++
         })
     }
-    renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿Los docentes necesitan apoyo por parte de la', 'universidad para el desarrollo de las acciones de mejora?'], 'Respuestas en general de los docentes', 'chartElevenQuestionParent')
+    renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿Los docentes necesitan apoyo por parte de la', 'universidad para el desarrollo de las acciones de mejora?'], 'Respuestas en general de los docentes', 'chartElevenQuestionParent', answersArray[10].length)
 
 
     // Twelve question
@@ -765,7 +765,7 @@ async function renderGeneralAllCharts(currentPeriod) {
         })
     }
 
-    renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent', 'Tipo de apoyo', true)
+    renderBarChart(twelveQuestionLabels, twelveQuestionDataSet, answersArray[11].length, 'Tipo de apoyo', 'Respuestas de los docentes', 'twelveQuestionChart', 'Docentes', 'chartTwelveQuestionParent', 'Tipo de apoyo', true, answersArray[11].length)
 
     hideLoader()
 }
