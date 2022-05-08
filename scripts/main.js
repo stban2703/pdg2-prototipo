@@ -259,7 +259,7 @@ function addPageFuncions() {
     getInitialGeneralSelect(currentUser, currentRole)
     getInitialGeneralCareer()
     getInitialGeneralSubjets(currentRole)
-    renderImproveActionsForSpecificGeneral(currentPeriod, currentUser)
+    renderImproveActionsForSpecificGeneral(currentPeriod, currentRole)
     onSubmitImproveActionComment(currentUser, currentPeriod)
     getInitialGeneralAll(currentPeriod)
     onFilterGeneralAllByPeriod()

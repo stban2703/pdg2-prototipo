@@ -327,7 +327,7 @@ function renderGeneralSubjects(list) {
 }
 
 // Specific general
-export async function renderImproveActionsForSpecificGeneral(period, userInfo) {
+export async function renderImproveActionsForSpecificGeneral(period, currentRole) {
 
     const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
 
@@ -377,11 +377,10 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo) {
         const addCommentForm = document.querySelector(".addCommentForm")
 
         const commentSection = document.querySelector(".improve-actions__comments")
-        userInfo.role.forEach(role => {
-            if (role === "principal") {
-                commentSection.classList.remove("hidden")
-            }
-        })
+
+        if (currentRole === "principal" || currentRole === "leader") {
+            commentSection.classList.remove("hidden")
+        }
 
         openAddCommentButton.addEventListener('click', () => {
             addCommentForm.classList.remove("hidden")
