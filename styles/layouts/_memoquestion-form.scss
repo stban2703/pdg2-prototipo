@@ -25,6 +25,13 @@
         max-width: 82rem;
     }
 
+    &__previousSection {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        position: relative;
+    }
+
     &__questionHeader {
         display: flex;
         flex-direction: row;

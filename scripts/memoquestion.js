@@ -504,7 +504,6 @@ export async function renderMemoQuestion() {
             }
 
             // Render columns
-
             const columnsTitles = document.querySelectorAll(".memoquestion-form__strategiesSubtitle")
             columnsTitles[0].innerHTML = q5Description
             columnsTitles[1].innerHTML = q6Description
@@ -580,6 +579,12 @@ export async function renderMemoQuestion() {
             const question8Answer = await getOptionsFromAnswers("jvLjdfeVkm6JnQMgrO6C", subjectId, period)
             const question8Container = document.querySelector(".improve-action-question8")
             question8Container.innerHTML = question8Answer[0]
+
+
+            setTimeout(() => {
+                const smallLoader = document.querySelector(".small-loader")
+                smallLoader.classList.add("hidden")
+            }, 2000)
 
             // Notes from user
             const memoModalNotes = document.querySelector(".memo-question-modal--notes")
