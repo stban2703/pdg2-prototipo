@@ -52,6 +52,12 @@
             <p class="progresssubject-screen__info">Semestre: <span
                     class="progresssubject-screen__info--subjectPeriod"></span></p>
         </div>
+        <div class="memoprogress-item memoprogress-item--improveactions">
+            <p class="memoprogress-item__title">Progreso de mejoras:</p>
+            <div class="pie custom-pie"
+                data-pie='{ "colorSlice": "#979DFF", "percent": 0, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10}'>
+            </div>
+        </div>
     </section>
     <section class="progresssubject-screen__improveActions">
         <div
@@ -98,16 +104,53 @@
                         <div class="text-area-input text-area-input--secondary">
                             <label class="text-area-input__label" for="comment">Agregar comentario</label>
                             <textarea class="text-area-input__field" name="comment" id="comment" rows="5"
-                            placeholder="Escribe aquí tu texto..." required></textarea>
+                                placeholder="Escribe aquí tu texto..." required></textarea>
                         </div>
                         <button class="main-button main-button--primary addCommentButton">
                             <span>Guardar</span>
                         </button>
                     </form>
                     <div class="improve-actions__commentContainer hidden">
-                        
+
                     </div>
                 </div>
+            </div>
+        </div>
+        <div
+            class="improve-actions improve-actions-content progresssubject-screen__improveActionsContainer generalHistoryImproveActionsContainer">
+            <h5 class="improve-actions__subtitle">Historial de acciones de mejora</h5>
+            <table class="improve-actions__table">
+                <thead class="improve-actions__header">
+                    <tr>
+                        <td class="improve-actions__headerTag">No.</td>
+                        <td class="improve-actions__headerTag">Acción</td>
+                        <td class="improve-actions__headerTag">Descripción breve</td>
+                        <td class="improve-actions__headerTag improve-actions__headerTag--daterow">Fecha de mejora</td>
+                    </tr>
+                </thead>
+                <tbody class="improve-actions__list improve-actions__list--history hidden">
+                    <tr class="improve-action-item">
+                        <td>
+                            <div class="improve-action-item__number">
+                                <span>1</span>
+                            </div>
+                        </td>
+                        <td class="improve-action-item__title">
+                            <h5>Mejorar la exposición final</h5>
+                        </td>
+                        <td class="improve-action-item__description improve-action-item__description--bigger">
+                            <p>Para que los estudiantes puedan aplicar los conocimientos adquiridos de forma libre</p>
+                        </td>
+                        <td class="improve-action-item__date">
+                            <p>12/12/2000</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="improve-actions__empty">
+                <p class="improve-actions__emptyText">El docente de la materia aún no ha implementado acciones de
+                    mejora.
+                </p>
             </div>
         </div>
     </section>

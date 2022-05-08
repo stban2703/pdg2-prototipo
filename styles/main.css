@@ -8605,6 +8605,7 @@ input[type=button] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 3rem;
 }
 
 .progresssubject-screen__improveActionsContainer {
