@@ -159,7 +159,7 @@ export function renderMemoseeAnswerTab() {
     }
 }
 
-export async function renderMemoseeAnswersQuestions(currentPeriod) {
+export async function renderMemoseeAnswersQuestions(currentPeriod, currentRole) {
     const sections = document.querySelectorAll(".memo-summary__section")
     if (sections && window.location.href.includes("#memoseeanswers")) {
         showLoader()
@@ -174,17 +174,38 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         subjectInfoTitles[1].innerHTML = currentPeriod
         subjectInfoTitles[2].innerHTML = subectInfo.teacher
 
-        
+
         const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
 
-        const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
-        goToImproveActionsButton.setAttribute('href', `#generalimproveactions?${subjectId}`)
+        const seeImproveActionSection = document.querySelector(".memo-improve-actions")
 
-        /*goToImproveActionsButton.addEventListener('click', () => {
-            currentMemoseeAnswerTab = 2
-            renderMemoseeAnswerTab()
-            answersHolders[9].scrollIntoView(true)
-        })*/
+        if (currentRole === "leader") {
+            seeImproveActionSection.innerHTML = `
+                <section class="memo-improve-actions__header">
+                    <img src="./images/improveactionscommentsicon.svg" alt="">
+                    <p class="memo-improve-actions__title">Agregar comentario</p>
+                </section>
+                <a href="#generalimproveactions?${subjectId}" class="small-button small-button--secondary goToImproveActionsButton">
+                    <span>Ir</span>
+                </a>
+            `
+        } else if (currentRole === "admin") {
+            seeImproveActionSection.innerHTML = `
+                <section class="memo-improve-actions__header">
+                    <img src="./images/improveactionsicon.svg" alt="">
+                    <p class="memo-improve-actions__title">Ver acciones de mejora</p>
+                </section>
+                <a class="small-button small-button--secondary goToImproveActionsButton">
+                    <span>Ver</span>
+                </a>
+            `
+            const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
+            goToImproveActionsButton.addEventListener('click', () => {
+                currentMemoseeAnswerTab = 2
+                renderMemoseeAnswerTab()
+                answersHolders[9].scrollIntoView(true)
+            })
+        }
 
         // First
         if (answers[0] && answers[0].answerValue[0]) {

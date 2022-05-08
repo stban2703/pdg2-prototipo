@@ -243,7 +243,7 @@ function addPageFuncions() {
     getInitialMemoseeSubjects()
     changeMemoseeAnswerTab()
     renderMemoseeAnswerTab()
-    renderMemoseeAnswersQuestions(currentPeriod)
+    renderMemoseeAnswersQuestions(currentPeriod, currentRole)
 
     // Improve actions functions
     renderGoToImproveActionsButton()
