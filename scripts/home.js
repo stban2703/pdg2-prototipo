@@ -43,10 +43,10 @@ export function renderMemoProgressTitles(role) {
 
 export async function renderListHome(subjectList, currentPeriod, roles, userInfo) {
     const homeScreen = document.querySelector(".home-screen")
-    const homescreenSubjectList = homeScreen.querySelector(".home-screen__subjectList")
-    const homeDepartmentList = homeScreen.querySelector(".home-screen__departmentList")
 
-    if (homescreenSubjectList) {
+    if (homeScreen) {
+        const homescreenSubjectList = homeScreen.querySelector(".home-screen__subjectList")
+        const homeDepartmentList = homeScreen.querySelector(".home-screen__departmentList")
         showLoader()
 
         if (roles === "teacher") {
