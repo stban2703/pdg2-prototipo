@@ -155,6 +155,14 @@ export function submitMeetingMinutes() {
                 }
             })
 
+            const agreementValue = document.querySelector('.newagreement').value
+
+            if (agreementValue.length > 0) {
+                agreementsList.push(agreementValue)
+                document.querySelector('.newagreement').value = ""
+                renderAgreements(agreementsList)
+            }
+
             if (agreementsList.length > 0 && assistantsList.length > 0) {
                 showLoader()
                 createMeeingMinutes(summary, assistantsList, agreementsList, meetingId)
