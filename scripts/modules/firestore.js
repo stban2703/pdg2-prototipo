@@ -463,6 +463,19 @@ export async function createMeeingMinutes(summary, assistants, agreements, meeti
     });
 }
 
+export async function updateMeetingMinutes(meetingMinutesId, summary, assistantsList, agreementsList) {
+    const minutesRef = doc(firestore, "minutes", meetingMinutesId)
+    await updateDoc(minutesRef, {
+        summary: summary,
+        agreements: agreementsList,
+        assistants: assistantsList
+    }).then(() => {
+        console.log("Acta actualizada")
+        hideLoader()
+        window.location = "index.html#meetingminutesdetails?" + meetingMinutesId
+    })
+}
+
 export async function getMeetingMinutes(id) {
     const minutesRef = doc(firestore, "minutes", id)
     const docSnap = await getDoc(minutesRef)
@@ -806,11 +819,11 @@ export async function getUserSubjects(teacherId) {
     const subjectList = querySnapshot.docs.map(doc => doc.data());
     setLocalStorage('subjectList', JSON.stringify(subjectList))
     hideLoader()
-    
+
     let ls = window.localStorage;
     let localUser = JSON.parse(ls.getItem('currentuser'))
 
-    if(localUser.role.length > 1) {
+    if (localUser.role.length > 1) {
         console.log("Multiple roles detected")
         window.location = 'role.html'
     } else {

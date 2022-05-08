@@ -7,8 +7,7 @@ export async function renderMeetingMinutesDetails() {
     if (meetingMinutesSection && window.location.href.includes("#meetingminutesdetails")) {
         const minutesId = window.location.hash.split("?")[1]
         const meetingMinutes = await getMeetingMinutes(minutesId)
-        const meetingInfo = await getMeetingDetails(meetingMinutes.meetingId)
-
+        const meetingInfo = await getMeetingDetails(meetingMinutes.meetingId)        
 
         let iconSrc = ""
         if (meetingInfo.platform) {
@@ -28,7 +27,7 @@ export async function renderMeetingMinutesDetails() {
             <button type="button" class="meetingminutes__controls"
                 style="background-image: url('./images/3dots.svg');">
             </button>
-            <ul class="meetingminutes__settings meetingminutes__settings">
+            <ul class="meetingminutes__settings meetingminutes__settings--hidden">
             <li class="meetingminutes__settings-item edit-meetingminutes">
                 <img class="meetingminutes__settings-item__normal-icon" src="./images/editicon.svg">
                 <img class="meetingminutes__settings-item__hover-icon" src="./images/editiconwhite.svg">
@@ -36,6 +35,18 @@ export async function renderMeetingMinutesDetails() {
             </li>
             </ul>
         `
+
+        const showMinutesControls = document.querySelector(".meetingminutes__controls")
+        const minutesSettings = document.querySelector(".meetingminutes__settings")
+        showMinutesControls.addEventListener('click', () => {
+            showMinutesControls.classList.toggle("meetingminutes__controls--activated")
+            minutesSettings.classList.toggle("meetingminutes__settings--hidden")
+        })
+
+        const editMinutesButton = document.querySelector(".edit-meetingminutes")
+        editMinutesButton.addEventListener('click', () => {
+            window.location = `index.html#createmeetingminutes?${meetingMinutes.meetingId}_${minutesId}`
+        })
 
         const meetingSummarySection = document.querySelector(".meetingminutes__summary")
         meetingSummarySection.innerHTML = `

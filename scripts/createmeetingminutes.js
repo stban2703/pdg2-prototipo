@@ -1,6 +1,6 @@
-import { createMeeingMinutes, getMeetingDetails } from "./modules/firestore.js"
+import { createMeeingMinutes, getMeetingDetails, getMeetingMinutes, updateMeetingMinutes } from "./modules/firestore.js"
 import { parseTimestampToDate } from "./utils/date-format.js"
-import { showLoader } from "./utils/loader.js"
+import { hideLoader, showLoader } from "./utils/loader.js"
 
 let agreementsList = []
 
@@ -80,14 +80,16 @@ function renderAgreements(list) {
     });
 }
 
-export async function getMeetingInfoForMinute(userInfo) {    
+export async function getMeetingInfoForMinute(userInfo) {
     const meetingInfoSection = document.querySelector(".createmeetingminutes-form__meeting-info")
 
     if (meetingInfoSection && window.location.href.includes("#createmeetingminutes")) {
+        showLoader()
         const urlParts = window.location.hash.split("?")[1].split("_")
         const meetingId = urlParts[0]
-        const minuteId = urlParts[1]
+        const minutesId = urlParts[1]
         const meetingInfo = await getMeetingDetails(meetingId)
+
         meetingInfoSection.innerHTML = `
         <p class="meeting__subtitle subtitle subtitle--semibold">Nombre: <span>${meetingInfo.name}</span></p>
         <p class="meeting__subtitle subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingInfo.date)}</span></p>
@@ -111,7 +113,7 @@ export async function getMeetingInfoForMinute(userInfo) {
         const q = meetingInfo.totalParticipants.find(elem => {
             return elem.id === userInfo.id
         })
-        if(!q) {
+        if (!q) {
             const participantItem = document.createElement("label")
             participantItem.className = "checkbox-input"
             participantItem.innerHTML = `
@@ -122,7 +124,7 @@ export async function getMeetingInfoForMinute(userInfo) {
         }
 
         const totalCheckbox = document.querySelectorAll("input[type=checkbox]")
-        if(totalCheckbox.length < 2) {
+        if (totalCheckbox.length < 2) {
             const participantItem = document.createElement("label")
             participantItem.className = "checkbox-input"
             participantItem.innerHTML = `
@@ -131,6 +133,28 @@ export async function getMeetingInfoForMinute(userInfo) {
             `
             participantListSection.appendChild(participantItem)
         }
+
+        if (minutesId) {
+
+            const title = document.querySelector(".header__title")
+            title.innerHTML = "Editar acta"
+
+            const minutesInfo = await getMeetingMinutes(minutesId)
+            const createMeetingMinutesForm = document.querySelector('.createmeetingminutes-form')
+            createMeetingMinutesForm.summary.value = minutesInfo.summary
+            agreementsList = minutesInfo.agreements
+
+            minutesInfo.assistants.forEach(a => {
+                const assistants = createMeetingMinutesForm.elements['assistants[]']
+                assistants.forEach(b => {
+                    if (a.name === b.value)
+                        b.checked = true
+                })
+            })
+
+            renderAgreements(agreementsList)
+        }
+        hideLoader()
     }
 }
 
@@ -167,7 +191,13 @@ export function submitMeetingMinutes() {
 
             if (agreementsList.length > 0 && assistantsList.length > 0) {
                 showLoader()
-                createMeeingMinutes(summary, assistantsList, agreementsList, meetingId)
+                const urlParts = window.location.hash.split("?")[1].split("_")
+                const minutesId = urlParts[1]
+                if (minutesId) {
+                    updateMeetingMinutes(minutesId, summary, assistantsList, agreementsList)
+                } else {
+                    createMeeingMinutes(summary, assistantsList, agreementsList, meetingId)
+                }
             } else if (agreementsList.length == 0) {
                 alert("Debes agregar por lo menos un acuerdo")
             } else if (assistantsList.length == 0) {

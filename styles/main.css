@@ -5909,11 +5909,11 @@ input[type=button] {
   cursor: pointer;
 }
 
-.meetingminutes__settings-item:hover .improve-action-item__settings-item__normal-icon {
+.meetingminutes__settings-item:hover .meetingminutes__settings-item__normal-icon {
   display: none;
 }
 
-.meetingminutes__settings-item:hover .improve-action-item__settings-item__hover-icon {
+.meetingminutes__settings-item:hover .meetingminutes__settings-item__hover-icon {
   display: block;
 }
 
