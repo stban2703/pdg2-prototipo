@@ -1,6 +1,6 @@
-import { getHistoryImproveActions, getImproveActionComment, getImproveActions, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
+import { getHistoryImproveActions, getImproveActionComment, getImproveActions, setCommentAsRead, submitCheckedImproveAction, updateImproveActions } from "./modules/firestore.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
-import { showLoader } from "./utils/loader.js";
+import { hideLoader, showLoader } from "./utils/loader.js";
 
 let editAnswerTarget = ""
 let improveActionIndex = 0
@@ -9,6 +9,7 @@ let historyImproveActions = []
 export async function getInitialImproveActions() {
     const memoimproveactionsScreen = document.querySelector(".memoimproveactions-screen")
     if (memoimproveactionsScreen && window.location.href.includes("#memoimproveactions")) {
+        showLoader()
         const subjectId = window.location.hash.split("?")[1].split("_")[0]
         const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         renderImproveActions(improveActionsAnswers)
@@ -37,11 +38,17 @@ export async function renderImproveActionComment(currentPeriod) {
                 <h5 class="improveaction-comment__name">${c.userName}</h5>
                 <p class="improveaction-comment__date">${parseTimestampToDate(c.date)}</p>
                 <p class="improveaction-comment__comment">${c.comment}</p>
-                <button class="small-button small-button--secondary setAsReadButton"> 
+                <button class="small-button small-button--secondary setAsReadButton${c.status === "read" ? " hidden" : ""}"> 
                     <span>Marcar como leído</span>
                 </button>
                 `
                 commentListSection.appendChild(commentItem)
+
+                const setAsReadButton = commentItem.querySelector(".setAsReadButton")
+                setAsReadButton.addEventListener('click', () => {
+                    showLoader()
+                    setCommentAsRead(c.id)
+                })
             })
         }
 
@@ -49,6 +56,7 @@ export async function renderImproveActionComment(currentPeriod) {
             const commentSection = document.querySelector(".memoimproveactions-screen__commentSection")
             commentSection.scrollIntoView(true)
         }
+        hideLoader()
     }
 }
 

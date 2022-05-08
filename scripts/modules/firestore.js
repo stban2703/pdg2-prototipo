@@ -207,6 +207,16 @@ export async function getImproveActionComment(subjectId, currentPeriod) {
     return commentsList
 }
 
+export async function setCommentAsRead(commentId) {
+    const commenRef = doc(firestore, `improveactionscomments`, commentId)
+    await updateDoc(commenRef, {
+        status: "read"
+    }).then(() => {
+        window.location.reload()
+        hideLoader()
+    })
+}
+
 export async function getAllAnswersByQuestion(questionIndex) {
     const q = query(collection(firestore, "memos/answers/answers"), where("questionIndex", "==", questionIndex))
     const querySnapshot = await getDocs(q);
