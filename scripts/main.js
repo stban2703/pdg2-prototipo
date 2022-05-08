@@ -26,7 +26,7 @@ import {
 import { createNotification, submitTestSubject } from "./modules/firestore.js";
 import { localPeriod, localRole, localSubjects, localUser, setLocalStorage } from "./utils/ls.js";
 import { hideItem, showItem } from "./utils/display-items.js";
-import { renderProfileInfo } from "./profile.js";
+import { renderAlternativeRole, renderProfileInfo } from "./profile.js";
 
 const firestore = getFirestore(firebase)
 
@@ -280,9 +280,9 @@ function addPageFuncions() {
     displayNotificationWindow()
     //createNotification("6XHfR56cSNQMKwoERRIhdSXpN5r2", 1655751600000, "2:00 p.m.", "Comunicación", "note", "gKdFdQRSj7jMkxesx2TE")
 
-
     // Profile
     renderProfileInfo(userInfo, currentRole)
+    renderAlternativeRole(userInfo, currentRole)
 
     // Back-return
     goBack()

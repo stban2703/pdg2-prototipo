@@ -4644,6 +4644,10 @@ input[type=button] {
   border-radius: 100%;
 }
 
+.profile-info__icon--special {
+  background-color: #FFFBEF;
+}
+
 .profile-info__role {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -4717,9 +4721,6 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   gap: 0.5rem;
 }
 
@@ -4728,7 +4729,6 @@ input[type=button] {
   font-size: 2rem;
   font-weight: 700;
   color: #FFFFFF;
-  text-align: center;
 }
 
 .profile-select-role__icon {
