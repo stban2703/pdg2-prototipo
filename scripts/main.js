@@ -52,7 +52,7 @@ const changeRoleButton = document.querySelector(".changeRoleButton")
 
 
 // Check user role
-if(userInfo.role.length === 1) {
+if (userInfo.role.length === 1) {
     hideItem(".changeRoleButton")
 }
 
@@ -61,8 +61,11 @@ if (currentRole !== 'teacher') {
     showItem('#navgeneral')
     hideItem('#navnotes')
     hideItem('#navprogress')
-    hideItem('#navmemo')
     document.querySelector('#navmeeting p').innerHTML = "Reuniones reflexivas"
+
+    if (currentRole !== "admin") {
+        hideItem('#navmemo')
+    }
 
     if (currentRole === 'leader') {
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
