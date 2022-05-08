@@ -80,7 +80,11 @@
 
     &--row {
         flex-direction: row;
-        gap: 1rem;
+        gap: 3rem;
+
+        .memo-thumbnail {
+            height: 100% !important;
+        }
 
         .home-screen {
 

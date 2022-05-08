@@ -197,3 +197,62 @@
         }
     }
 }
+
+.roleShortcut-thumbnail {
+    display: flex;
+    flex-direction: row;
+    background-color: $main-color;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 15px;
+    padding: 2rem 4rem;
+    gap: 4rem;
+    min-height: 17rem;
+    
+    &__abbreviation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title {
+        font-family: $poppins;
+        font-size: 3rem;
+        font-weight: $bold;
+        color: $white;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &__titles {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__subtitle {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $bold;
+        color: $white;
+    }
+
+    &__name {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $light;
+        color: $white;
+    }
+
+    a {
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+        max-width: 13rem;
+    }
+}

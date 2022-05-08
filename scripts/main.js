@@ -3,7 +3,7 @@ import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
 import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
-import { renderListHome, showShortcuts } from "./home.js";
+import { renderListHome, renderMemoProgressTitles, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton, renderImproveActionComment } from "./improveactions.js";
 import { changeMemoseeAnswerTab, getInitialMemoseeSubjects, renderMemoseeAnswersQuestions, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
@@ -200,6 +200,7 @@ function addPageFuncions() {
     displayHomeUserName()
     showShortcuts(currentRole)
     renderListHome(currentSubjects, currentPeriod, currentRole, userInfo)///Sin actualizar
+    renderMemoProgressTitles(currentRole)
 
     //Note functions
     submitNote(currentUser, currentSubjects)// Sin problemas

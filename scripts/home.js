@@ -19,6 +19,28 @@ export function showShortcuts(role) {
     }
 }
 
+export function renderMemoProgressTitles(role) {
+    const homeScreen = document.querySelector(".home-screen")
+
+    if (homeScreen) {
+        const memoTitle = document.querySelector(".memo-thumbnail__title")
+
+        switch (role) {
+            case "leader":
+                memoTitle.innerHTML = "Memorandos reflexivos de tu bloque"
+                break;
+
+            case "principal":
+                memoTitle.innerHTML = "Memorandos reflexivos de la carrera"
+                break;
+
+            case "boss":
+                memoTitle.innerHTML = "Memorandos reflexivos del departamento"
+                break;
+        }
+    }
+}
+
 export async function renderListHome(subjectList, currentPeriod, roles, userInfo) {
     const homeScreen = document.querySelector(".home-screen")
     const homescreenSubjectList = homeScreen.querySelector(".home-screen__subjectList")
@@ -109,7 +131,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
             circle.initial()
         }
 
-        if(roles === "principal" || roles === "leader") {
+        if (roles === "principal" || roles === "leader") {
             homeScreen.classList.add("home-screen--row")
         }
 
@@ -151,7 +173,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                 })
 
             }
-            
+
             if (roles === "principal") {
                 roleItems = await getCareerInfo(userInfo.principalCareerId)
                 roleShortcutsTitle.innerHTML = `Tu carrera`
@@ -173,9 +195,9 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                         </a>
                     </section>`
                 roleShortCutSectionList.appendChild(roleElement)
-                
+
             }
-            
+
             if (roles === "leader") {
                 roleItems = await getGroupInfo(userInfo.leaderGroupId)
                 roleShortcutsTitle.innerHTML = `Tu bloque`
