@@ -23,7 +23,7 @@ export function displayNotificationCounter(notificationList) {
 export function renderNotificationWindowList(notificationList) {
     const notificationWindowList = document.querySelector(".notification-window__list")
     if (notificationWindowList) {
-        const copy = [...notificationList].sort(sortByDateAscending)
+        const copy = [...notificationList].sort(sortByDateDescending)
         if (copy.length > 0) {
             notificationWindowList.innerHTML = ``
             copy.forEach(elem => {
@@ -81,7 +81,7 @@ export function renderNotificationWindowList(notificationList) {
 export function renderNotificationScreenList(notificationList) {
     const notificationScreenList = document.querySelector(".notification-screen__listContainer")
     if (notificationScreenList) {
-        const copy = [...notificationList].sort(sortByDateAscending)
+        const copy = [...notificationList].sort(sortByDateDescending)
 
         if (copy.length > 0) {
             notificationScreenList.innerHTML = ``
