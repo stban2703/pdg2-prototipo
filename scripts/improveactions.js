@@ -41,6 +41,9 @@ export async function renderImproveActionComment(currentPeriod) {
                 <button class="small-button small-button--secondary setAsReadButton${c.status === "read" ? " hidden" : ""}"> 
                     <span>Marcar como leído</span>
                 </button>
+                <div class="improve-actions__commentStatus improve-actions__commentStatus--read${c.status === "unread" ? " hidden" : ""}">
+                    <p>Leído</p>
+                </div>
                 `
                 commentListSection.appendChild(commentItem)
 
