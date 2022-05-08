@@ -1,7 +1,7 @@
 .progress-section {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
 
     &__titleItem {
         display: flex;
@@ -42,7 +42,6 @@
         color: $main-color;
         font-weight: $semibold;
         margin-right: 1rem;
-        margin-left: 1rem;
 
     }
 
@@ -82,5 +81,14 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 4.1rem;
+    }
+
+    &__scaleValues {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+        margin-left: 4rem;
+        gap: 2.8rem;
     }
 }
