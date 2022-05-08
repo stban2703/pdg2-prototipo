@@ -197,17 +197,22 @@ export function renderNotificationDetails(notificationList, userId) {
                 ${message}
             </p>
             <section class="notification-screen__detailsControls">
-                <button class="small-button small-button--primary readNotificationButton">
+                ${info.status === "unread" ? `<button class="small-button small-button--primary readNotificationButton">
                     <span>Marcar como leído</span>
-                </button>
+                </button>` : ``}
                 ${addionalButton}
             </section>
-        `
+            `
+            /*<div class="improve-actions__commentStatus improve-actions__commentStatus--read">
+                <p>Leído</p>
+                </div>*/
             notificationDetailsSection.appendChild(notificationWindow)
             const readNotificationButton = notificationWindow.querySelector(".readNotificationButton")
-            readNotificationButton.addEventListener('click', () => {
-                updateNotificationStatus(userId, info.id, "read")
-            })
+            if (readNotificationButton) {
+                readNotificationButton.addEventListener('click', () => {
+                    updateNotificationStatus(userId, info.id, "read")
+                })
+            }
         }
     }
 }
