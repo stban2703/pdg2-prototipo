@@ -7355,6 +7355,34 @@ input[type=button] {
   grid-gap: 3rem;
 }
 
+.home-screen--row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+}
+
+.home-screen--row .home-screen__shortcuts {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  max-width: 43rem;
+}
+
+.home-screen--row .home-screen__roleShortcuts {
+  margin-top: 4rem;
+  gap: 1rem;
+}
+
+.home-screen--row .home-screen__roleShortcutsList {
+  display: block;
+}
+
+.home-screen--row .home-screen__roleShortcuts .roleShortcut-thumbnail {
+  max-width: 30rem;
+}
+
 .note-screen {
   display: -webkit-box;
   display: -ms-flexbox;

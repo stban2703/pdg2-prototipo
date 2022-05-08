@@ -20,12 +20,14 @@ export function showShortcuts(role) {
 }
 
 export async function renderListHome(subjectList, currentPeriod, roles, userInfo) {
-    const homescreenSubjectList = document.querySelector(".home-screen__subjectList")
-    const homeDepartmentList = document.querySelector(".home-screen__departmentList")
+    const homeScreen = document.querySelector(".home-screen")
+    const homescreenSubjectList = homeScreen.querySelector(".home-screen__subjectList")
+    const homeDepartmentList = homeScreen.querySelector(".home-screen__departmentList")
 
     if (homescreenSubjectList) {
         showLoader()
-        if (!roles.includes("admin")) {
+
+        if (roles === "teacher") {
             const subjectSummary = []
 
             for (let index = 0; index < subjectList.length; index++) {
@@ -70,23 +72,23 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                 subjectThumbnail.setAttribute('href', `#memosections?${subject.id}`)
                 subjectThumbnail.className = "subject-thumbnail " + subject.id
                 subjectThumbnail.innerHTML = `
-            <section class="subject-thumbnail__info">
-                <section class="subject-thumbnail__icon-title">
-                    <img class="subject-thumbnail__icon" src="./images/subjectgenericicon.svg" alt="">
-                    <h5 class="subject-thumbnail__title">${subject.name}</h5>
+                <section class="subject-thumbnail__info">
+                    <section class="subject-thumbnail__icon-title">
+                        <img class="subject-thumbnail__icon" src="./images/subjectgenericicon.svg" alt="">
+                        <h5 class="subject-thumbnail__title">${subject.name}</h5>
+                    </section>
+                    <p class="subject-thumbnail__percent">
+                        ${subject.progress}%
+                    </p>
                 </section>
-                <p class="subject-thumbnail__percent">
-                    ${subject.progress}%
-                </p>
-            </section>
-            <section class="subject-thumbnail__progress">
-                <p class="subject-thumbnail__subtitle">Memorando completado</p>
-                <div class="subject-thumbnail__progressBar">
-                    <div class="subject-thumbnail__currentBar" style="width: ${subject.progress}%">
+                <section class="subject-thumbnail__progress">
+                    <p class="subject-thumbnail__subtitle">Memorando completado</p>
+                    <div class="subject-thumbnail__progressBar">
+                        <div class="subject-thumbnail__currentBar" style="width: ${subject.progress}%">
+                        </div>
                     </div>
-                </div>
-            </section>
-            `
+                </section>
+                `
                 homescreenSubjectList.appendChild(subjectThumbnail)
             });
 
@@ -99,97 +101,108 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
 
             const progressContainer = document.querySelector(".memo-thumbnail__progress")
             progressContainer.innerHTML = `
-        <div class="memo-pie custom-pie"
-            data-pie='{ "colorSlice": "#979DFF", "percent": ${allSubjectsProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
-        </div>
-            `
+            <div class="memo-pie custom-pie"
+                data-pie='{ "colorSlice": "#979DFF", "percent": ${allSubjectsProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+            </div>
+                `
             const circle = new CircularProgressBar(`memo-pie`)
             circle.initial()
+        }
 
-            if (roles.includes("boss") || roles.includes("principal") || roles.includes("leader")) {
-                const roleShortcutSection = document.querySelector(".home-screen__roleShortcuts")
-                roleShortcutSection.classList.remove("hidden")
-                const roleShortcutsTitle = document.querySelector(".roleShortcutsTitle")
-                const roleShortCutSectionList = document.querySelector(".home-screen__roleShortcutsList")
+        if(roles === "principal" || roles === "leader") {
+            homeScreen.classList.add("home-screen--row")
+        }
 
-                roleShortCutSectionList.innerHTML = ``
+        if (roles === "boss" || roles === "principal" || roles === "leader") {
+            const roleShortcutSection = document.querySelector(".home-screen__roleShortcuts")
+            roleShortcutSection.classList.remove("hidden")
+            const roleShortcutsTitle = document.querySelector(".roleShortcutsTitle")
+            const roleShortCutSectionList = document.querySelector(".home-screen__roleShortcutsList")
 
-                let roleItems = []
-                let initialHref = ""
+            roleShortCutSectionList.innerHTML = ``
 
-                if (roles.includes("boss")) {
-                    roleShortcutsTitle.innerHTML = `Departamento de ${userInfo.bossDepartment}`
-                    roleItems = await getDepartmentCareers(userInfo.bossDepartmentId)
-                    initialHref = "#generalsubjects?"
-                    roleItems.forEach(item => {
-                        const roleElement = document.createElement("div")
-                        roleElement.className = "roleShortcut-thumbnail"
+            let roleItems = []
+            let initialHref = ""
 
-                        roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
-                        roleElement.innerHTML = `
-                        <section class="roleShortcut-thumbnail__abbreviation">
-                            <h4 class="roleShortcut-thumbnail__title">${item.abbreviation}</h4>
-                        </section>
-                        <section class="roleShortcut-thumbnail__info">
-                            <section class="roleShortcut-thumbnail__titles">
-                                <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
-                                <p class="roleShortcut-thumbnail__name">${item.name}</p>
-                            </section>
-                            <a class="small-button small-button--secondary" href="${initialHref}${item.id}">
-                                <span>Ver</span>
-                            </a>
-                        </section>
-                        `
-                        roleShortCutSectionList.appendChild(roleElement)
-                    })
-
-                } else if (roles.includes("principal")) {
-                    roleItems = await getCareerInfo(userInfo.principalCareerId)
-                    roleShortcutsTitle.innerHTML = `Tu carrera`
+            if (roles === "boss") {
+                roleShortcutsTitle.innerHTML = `Departamento de ${userInfo.bossDepartment}`
+                roleItems = await getDepartmentCareers(userInfo.bossDepartmentId)
+                initialHref = "#generalsubjects?"
+                roleItems.forEach(item => {
                     const roleElement = document.createElement("div")
                     roleElement.className = "roleShortcut-thumbnail"
-                    initialHref = "#generalsubjects?"
+
                     roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
                     roleElement.innerHTML = `
-                        <section class="roleShortcut-thumbnail__abbreviation">
-                            <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
+                    <section class="roleShortcut-thumbnail__abbreviation">
+                        <h4 class="roleShortcut-thumbnail__title">${item.abbreviation}</h4>
+                    </section>
+                    <section class="roleShortcut-thumbnail__info">
+                        <section class="roleShortcut-thumbnail__titles">
+                            <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
+                            <p class="roleShortcut-thumbnail__name">${item.name}</p>
                         </section>
-                        <section class="roleShortcut-thumbnail__info">
-                            <section class="roleShortcut-thumbnail__titles">
-                                <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
-                                <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
-                            </section>
-                            <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
-                                <span>Ver</span>
-                            </a>
-                        </section>`
+                        <a class="small-button small-button--secondary" href="${initialHref}${item.id}">
+                            <span>Ver</span>
+                        </a>
+                    </section>
+                    `
                     roleShortCutSectionList.appendChild(roleElement)
-                } else if (roles.includes("leader")) {
-                    roleItems = await getGroupInfo(userInfo.leaderGroupId)
-                    roleShortcutsTitle.innerHTML = `Tu bloque`
+                })
 
-                    const roleElement = document.createElement("div")
-                    roleElement.className = "roleShortcut-thumbnail"
-                    initialHref = "#mygroup?"
-                    roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
-
-                    roleElement.innerHTML = `
-                        <section class="roleShortcut-thumbnail__abbreviation">
-                            <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
-                        </section>
-                        <section class="roleShortcut-thumbnail__info">
-                            <section class="roleShortcut-thumbnail__titles">
-                                <h5 class="roleShortcut-thumbnail__subtitle">Bloque</h5>
-                                <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
-                            </section>
-                            <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
-                                <span>Ver</span>
-                            </a>
-                        </section>`
-                    roleShortCutSectionList.appendChild(roleElement)
-                }
             }
-        } else if (roles.includes("admin")) {
+            
+            if (roles === "principal") {
+                roleItems = await getCareerInfo(userInfo.principalCareerId)
+                roleShortcutsTitle.innerHTML = `Tu carrera`
+                const roleElement = document.createElement("div")
+                roleElement.className = "roleShortcut-thumbnail"
+                initialHref = "#generalsubjects?"
+                roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
+                roleElement.innerHTML = `
+                    <section class="roleShortcut-thumbnail__abbreviation">
+                        <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
+                    </section>
+                    <section class="roleShortcut-thumbnail__info">
+                        <section class="roleShortcut-thumbnail__titles">
+                            <h5 class="roleShortcut-thumbnail__subtitle">Cursos</h5>
+                            <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
+                        </section>
+                        <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
+                            <span>Ver</span>
+                        </a>
+                    </section>`
+                roleShortCutSectionList.appendChild(roleElement)
+                
+            }
+            
+            if (roles === "leader") {
+                roleItems = await getGroupInfo(userInfo.leaderGroupId)
+                roleShortcutsTitle.innerHTML = `Tu bloque`
+
+                const roleElement = document.createElement("div")
+                roleElement.className = "roleShortcut-thumbnail"
+                initialHref = "#mygroup?"
+                roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
+
+                roleElement.innerHTML = `
+                    <section class="roleShortcut-thumbnail__abbreviation">
+                        <h4 class="roleShortcut-thumbnail__title">${roleItems.abbreviation}</h4>
+                    </section>
+                    <section class="roleShortcut-thumbnail__info">
+                        <section class="roleShortcut-thumbnail__titles">
+                            <h5 class="roleShortcut-thumbnail__subtitle">Bloque</h5>
+                            <p class="roleShortcut-thumbnail__name">${roleItems.name}</p>
+                        </section>
+                        <a class="small-button small-button--secondary" href="${initialHref}${roleItems.id}">
+                            <span>Ver</span>
+                        </a>
+                    </section>`
+                roleShortCutSectionList.appendChild(roleElement)
+            }
+        }
+
+        if (roles === "admin") {
             const departments = await getDepartments()
             const departmentProgressList = []
 
@@ -266,7 +279,6 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                 homeDepartmentList.appendChild(departmentThumbnail)
             })
 
-
             let sum = 0
             departmentProgressList.forEach(d => {
                 sum += d.progress
@@ -276,10 +288,10 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
 
             const progressContainer = document.querySelector(".memo-thumbnail__progress")
             progressContainer.innerHTML = `
-        <div class="memo-pie custom-pie"
-            data-pie='{ "colorSlice": "#979DFF", "percent": ${allDepartmentProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
-        </div>
-        `
+            <div class="memo-pie custom-pie"
+                data-pie='{ "colorSlice": "#979DFF", "percent": ${allDepartmentProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+            </div>
+            `
             const circle = new CircularProgressBar(`memo-pie`)
             circle.initial()
         }

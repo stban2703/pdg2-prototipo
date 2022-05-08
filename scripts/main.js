@@ -199,7 +199,7 @@ function addPageFuncions() {
     // Home functions
     displayHomeUserName()
     showShortcuts(currentRole)
-    renderListHome(currentSubjects, currentPeriod, currentUser.role, userInfo)///Sin actualizar
+    renderListHome(currentSubjects, currentPeriod, currentRole, userInfo)///Sin actualizar
 
     //Note functions
     submitNote(currentUser, currentSubjects)// Sin problemas

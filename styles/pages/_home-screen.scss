@@ -48,7 +48,7 @@
     &__subjectList {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 3rem
+        grid-gap: 3rem;
     }
 
     &__departments {
@@ -61,7 +61,7 @@
     &__departmentList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3rem
+        grid-gap: 3rem;
     }
 
     &__roleShortcuts {
@@ -75,6 +75,32 @@
     &__roleShortcutsList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3rem
+        grid-gap: 3rem;
+    }
+
+    &--row {
+        flex-direction: row;
+        gap: 1rem;
+
+        .home-screen {
+
+            &__shortcuts {
+                align-items: flex-start;
+                max-width: 43rem;
+            }
+
+            &__roleShortcuts {
+                margin-top: 4rem;
+                gap: 1rem;
+
+                &List{
+                    display: block;
+                }
+
+                .roleShortcut-thumbnail {
+                    max-width: 30rem;
+                }
+            }
+        }
     }
 }
