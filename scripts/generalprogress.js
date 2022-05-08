@@ -327,11 +327,12 @@ function renderGeneralSubjects(list) {
 }
 
 // Specific general
-export async function renderImproveActionsForSpecificGeneral(period, currentRole) {
+export async function renderImproveActionsForSpecificGeneral(period, userInfo, currentRole) {
 
     const generalImproveActionsContainer = document.querySelector('.generalImproveActionsContainer')
 
     if (generalImproveActionsContainer && window.location.href.includes("#generalimproveactions")) {
+        showLoader()
         const subjectTitle = document.querySelector('.progresssubject-screen__info--subjectName')
         const periodTitle = document.querySelector('.progresssubject-screen__info--subjectPeriod')
 
@@ -387,20 +388,25 @@ export async function renderImproveActionsForSpecificGeneral(period, currentRole
             openAddCommentButton.classList.add("hidden")
         })
 
-
-        const comment = await getImproveActionComment(subjectId, period)
-        if (comment.length > 0) {
-            openAddCommentButton.classList.add("hidden")
-            const commentContainer = document.querySelector(".improve-actions__commentContainer")
-            commentContainer.classList.remove("hidden")
-            commentContainer.innerHTML = `
-            <p>${comment[0].comment}</p>
-            `
+        const comments = await getImproveActionComment(subjectId, period)
+        if (comments.length > 0) {
+            const userComment = comments.find(comment => {
+                return comment.userId === userInfo.id
+            })
+            if (userComment) {
+                openAddCommentButton.classList.add("hidden")
+                const commentContainer = document.querySelector(".improve-actions__commentContainer")
+                commentContainer.classList.remove("hidden")
+                commentContainer.innerHTML = `
+                <p>${userComment.comment}</p>
+                `
+            }
         }
+        hideLoader()
     }
 }
 
-export async function onSubmitImproveActionComment(userInfo, period) {
+export async function onSubmitImproveActionComment(userInfo, period, currentRole) {
     const addCommentForm = document.querySelector(".addCommentForm")
 
     if (addCommentForm && window.location.href.includes("#generalimproveactions")) {
@@ -408,7 +414,7 @@ export async function onSubmitImproveActionComment(userInfo, period) {
             event.preventDefault()
             const subjectId = window.location.hash.split("?")[1]
             showLoader()
-            createImproveActionComment(subjectId, period, userInfo, addCommentForm.comment.value)
+            createImproveActionComment(subjectId, period, userInfo, currentRole, addCommentForm.comment.value)
         })
     }
 }

@@ -23,20 +23,20 @@ export async function renderImproveActionComment(currentPeriod) {
         const subjectId = window.location.hash.split("?")[1].split("_")[0]
         const queryComment = window.location.hash.split("?")[1].split("_")[1]
 
-        const comment = await getImproveActionComment(subjectId, currentPeriod)
+        const comments = await getImproveActionComment(subjectId, currentPeriod)
         const commentEmpty = document.querySelector(".commentEmpty")
         const commentName = document.querySelector(".commentName")
         const commentDate = document.querySelector(".commentDate")
         const commentText = document.querySelector(".commentText")
 
-        if(comment[0]) {
+        if(comments[0]) {
             commentEmpty.classList.add("hidden")
             commentName.classList.remove("hidden")
-            commentName.innerHTML = comment[0].principalName
+            commentName.innerHTML = comments[0].userName
             commentDate.classList.remove("hidden")
-            commentDate.innerHTML = parseTimestampToDate(comment[0].date)
+            commentDate.innerHTML = parseTimestampToDate(comments[0].date)
             commentText.classList.remove("hidden")
-            commentText.innerHTML = comment[0].comment
+            commentText.innerHTML = comments[0].comment
         }
 
         if(queryComment) {

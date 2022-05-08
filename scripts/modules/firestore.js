@@ -177,14 +177,15 @@ export async function getTeachersByGroupName(groupName) {
 }
 
 // Improve actions
-export async function createImproveActionComment(subjectId, period, userInfo, comment) {
+export async function createImproveActionComment(subjectId, period, userInfo, role, comment) {
     const commentRef = doc(collection(firestore, "improveactionscomments"))
     const newComment = {
         id: commentRef.id,
-        principalId: userInfo.id,
-        principalName: userInfo.name + " " + userInfo.lastname,
+        userId: userInfo.id,
+        userName: userInfo.name + " " + userInfo.lastname,
         subjectId: subjectId,
         period: period,
+        role: role,
         comment: comment,
         date: Date.now()
     }
@@ -201,9 +202,8 @@ export async function createImproveActionComment(subjectId, period, userInfo, co
 export async function getImproveActionComment(subjectId, currentPeriod) {
     const q = query(collection(firestore, "improveactionscomments"), where("subjectId", "==", "" + subjectId), where("period", "==", currentPeriod))
     const querySnapshot = await getDocs(q);
-    const commentsLiST = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
-    return commentsLiST
+    const commentsList = querySnapshot.docs.map(doc => doc.data());
+    return commentsList
 }
 
 export async function getAllAnswersByQuestion(questionIndex) {
