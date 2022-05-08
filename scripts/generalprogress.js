@@ -399,6 +399,9 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
                 commentContainer.classList.remove("hidden")
                 commentContainer.innerHTML = `
                 <p>${userComment.comment}</p>
+                <div class="improve-actions__commentStatus${userComment.status === 'read' ? ' improve-actions__commentStatus--read' : ''}">
+                    <p>${userComment.status === 'read' ? 'Leído por el docente' : 'No leído por el docente'}</p>
+                </div>
                 `
             }
         }

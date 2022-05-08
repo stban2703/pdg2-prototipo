@@ -6648,6 +6648,45 @@ input[type=button] {
   color: #363636;
 }
 
+.improve-actions__commentStatus {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #eff0ff;
+  padding: 0.5rem 3rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+
+.improve-actions__commentStatus p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #979DFF;
+}
+
+.improve-actions__commentStatus--read {
+  background-color: #FFEAD6;
+}
+
+.improve-actions__commentStatus--read p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #FDB572;
+}
+
 .note-list {
   background-color: #FFFFFF;
   border-radius: 15px;
