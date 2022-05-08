@@ -193,7 +193,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                 seventhQuestionDataSet[labelIndex]++
             })
         })
-        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent')
+        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '' , false)
 
 
         // Eigth question
@@ -251,7 +251,7 @@ export async function getInitialProgressInfo(currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
 
-        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent')
+        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false)
 
         // Question 11
         if (document.querySelector(".chartElevenQuestionParent")) {
@@ -300,7 +300,7 @@ export async function getInitialProgressInfo(currentPeriod) {
     }
 }
 
-export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend, parentNodeClass) {
+export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, legend, parentNodeClass, title, displayTitle) {
     const data = {
         labels: labels,
         datasets: [{
@@ -320,8 +320,8 @@ export function renderBarChart(labels, dataset, yMax, xLabel, yLabel, chartId, l
                     fontSize: 0
                 },
                 title: {
-                    display: false,
-                    text: 'Chart.js Bar Chart - Stacked',
+                    display: displayTitle,
+                    text: title,
                     font: {
                         size: 20,
                         family: 'Poppins'

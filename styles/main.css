@@ -6977,7 +6977,6 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 4rem;
 }
 
 .progress-section__titleItem {
@@ -6992,6 +6991,7 @@ input[type=button] {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .progress-section__number {
@@ -7033,7 +7033,8 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .progress-section__questionNumber {
@@ -7097,8 +7098,6 @@ input[type=button] {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-top: 1rem;
-  margin-bottom: 3rem;
   margin-left: 4rem;
   gap: 2.8rem;
 }
