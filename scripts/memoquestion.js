@@ -447,6 +447,7 @@ export async function renderMemoQuestion() {
             document.querySelectorAll(".memoquestion-form__subtitle")[0].classList.add("hidden")
             document.querySelector(".memoquestion-form__question").classList.add("hidden")
             document.querySelector(".memoquestion-form__information").classList.remove("hidden")
+
         } else if (currentQuestion.type === "improveactions") {
             // Recover previous answers
             const question5Answers = await getOptionsFromAnswers("YsVpQwlC6PXwgAS2IW7r", subjectId, period)
@@ -461,9 +462,9 @@ export async function renderMemoQuestion() {
                     tag: parts[0],
                     value: parseInt(parts[parts.length - 1])
                 }
-                if (object.value < 4) {
-                    optionsQ5.push(object.tag)
-                }
+                //if (object.value < 4) {
+                optionsQ5.push(object)
+                //}
             })
 
             question6Answers.forEach((elem) => {
@@ -472,29 +473,81 @@ export async function renderMemoQuestion() {
                     tag: parts[0],
                     value: parseInt(parts[parts.length - 1])
                 }
-                if (object.value < 4) {
-                    optionsQ6.push(object.tag)
-                }
+                //if (object.value < 4) {
+                optionsQ6.push(object)
+                //}
             })
 
+            let q5Description = "Estrategias E-A adecuadas medianamente a los objetivos"
+            let q6Description = "Estrategias E-A acogidas medianamente por los estudiantes"
+            let q5Low = false
+            let q6Low = false
+
+            for (let index = 0; index < optionsQ5.length; index++) {
+                const element = optionsQ5[index];
+
+                if (element.value < 4) {
+                    q5Description = "Estrategias E-A poco adecuadas a los objetivos de la clase"
+                    q5Low = true
+                    break;
+                }
+            }
+
+            for (let index = 0; index < optionsQ6.length; index++) {
+                const element = optionsQ6[index];
+
+                if (element.value < 4) {
+                    q6Description = "Estrategias E-A poco acogidas por los estudiantes"
+                    q6Low = true
+                    break;
+                }
+            }
+
             // Render columns
+
+            const columnsTitles = document.querySelectorAll(".memoquestion-form__strategiesSubtitle")
+            columnsTitles[0].innerHTML = q5Description
+            columnsTitles[1].innerHTML = q6Description
+
             if (optionsQ5.length > 0) {
                 document.querySelector(".improve-action-question5").innerHTML = ``
-                optionsQ5.forEach(tag => {
-                    const newItem = document.createElement("p")
-                    newItem.className = "memoquestion-form__strategyItem"
-                    newItem.innerHTML = tag
-                    document.querySelector(".improve-action-question5").appendChild(newItem)
+                optionsQ5.forEach(item => {
+                    if (q5Low) {
+                        if (item.value < 4) {
+                            const newItem = document.createElement("p")
+                            newItem.className = "memoquestion-form__strategyItem"
+                            newItem.innerHTML = item.tag
+                            document.querySelector(".improve-action-question5").appendChild(newItem)
+                        }
+                    } else {
+                        if (item.value >= 4 && item.value < 6) {
+                            const newItem = document.createElement("p")
+                            newItem.className = "memoquestion-form__strategyItem"
+                            newItem.innerHTML = item.tag
+                            document.querySelector(".improve-action-question5").appendChild(newItem)
+                        }
+                    }
                 })
             }
 
             if (optionsQ6.length > 0) {
                 document.querySelector(".improve-action-question6").innerHTML = ``
-                optionsQ6.forEach(tag => {
-                    const newItem = document.createElement("p")
-                    newItem.className = "memoquestion-form__strategyItem"
-                    newItem.innerHTML = tag
-                    document.querySelector(".improve-action-question6").appendChild(newItem)
+                optionsQ6.forEach(item => {
+                    if (q6Low) {
+                        if (item.value < 4) {
+                            const newItem = document.createElement("p")
+                            newItem.className = "memoquestion-form__strategyItem"
+                            newItem.innerHTML = item.tag
+                            document.querySelector(".improve-action-question6").appendChild(newItem)
+                        }
+                    } else {
+                        if (item.value >= 4 && item.value < 6) {
+                            const newItem = document.createElement("p")
+                            newItem.className = "memoquestion-form__strategyItem"
+                            newItem.innerHTML = item.tag
+                            document.querySelector(".improve-action-question6").appendChild(newItem)
+                        }
+                    }
                 })
             }
 
