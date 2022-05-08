@@ -1,25 +1,53 @@
-import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
 // Select view general
-export async function getInitialGeneralSelect(userInfo) {
+export async function getInitialGeneralSelect(userInfo, currentRole) {
     const generalselectScreen = document.querySelector(".generalselect-screen--select")
 
     if (generalselectScreen && window.location.href.includes("#generalselect")) {
         const generalSelectSectionTitle = document.querySelector(".section-banner__title")
         const generalselectScreenList = generalselectScreen.querySelector(".generalselect-screen__list")
 
-        let currentRole = ""
-
-        userInfo.role.forEach(role => {
-            if (role === "principal" || role === "boss" || role === "admin") {
-                currentRole = role
-            }
-        });
-
         switch (currentRole) {
+            case "leader":
+                const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
+                generalSelectSectionTitle.innerHTML = `Progreso general<br>${groupInfo.name}`
+
+                generalselectScreenList.innerHTML = `
+                
+                <div class="visualization-item">
+                    <section class="visualization-item__header">
+                    <h5 class="visualization-item__title">Visualización general</h5>
+                    <a class="small-button small-button--secondary" href="#generalall?group_${groupInfo.id}">
+                        <span>Ver</span>
+                    </a>
+                    </section>
+                    <section class="visualization-item__content">
+                    <p class="visualization-item__description">
+                        Datos a <span style="font-weight: 600;">nivel global</span> sobre los <span style="font-weight: 600;">docentes</span> del bloque <span style="font-weight: 600;">${groupInfo.name}</span>.
+                    </p>
+                    </section>
+                </div>
+                <div class="visualization-item visualization-item--pink">
+                    <section class="visualization-item__header">
+                    <h5 class="visualization-item__title">Visualización específica</h5>
+                    <a class="small-button small-button--secondary" href="#generalsubjects?${groupInfo.id}">
+                        <span>Ver</span>
+                    </a>
+                    </section>
+                    <section class="visualization-item__content">
+                    <p class="visualization-item__description">
+                        Datos de forma <span style="font-weight: 600;">detallada</span> por cada curso del bloque de <span style="font-weight: 600;">${groupInfo.name}</span>.
+                    </p>
+                    </section>
+                </div>
+
+                `
+                break;
+
             case "principal":
                 const careerInfo = await getCareerInfo(userInfo.principalCareerId)
                 generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
@@ -170,7 +198,6 @@ export async function getInitialGeneralDepartments() {
         hideLoader()
     }
 }
-
 
 // Career general
 export async function getInitialGeneralCareer() {
@@ -397,8 +424,14 @@ async function renderGeneralAllCharts(currentPeriod) {
     let viewInfo = {}
     if (view === 'career') {
         viewInfo = await getCareerInfo(viewId)
-    } else if (view === 'department') {
+    } 
+    
+    if (view === 'department') {
         viewInfo = await getDepartmentInfo(viewId)
+    }
+
+    if(view === 'group') {
+        viewInfo = await getGroupInfo(viewId)
     }
 
     let initialTitle = ""
@@ -406,8 +439,12 @@ async function renderGeneralAllCharts(currentPeriod) {
         case 'department':
             initialTitle = "Departamento de "
             break;
+
+        case 'group':
+            initialTitle = "Grupo de "
+            break;
     }
-    console.log(viewId)
+
     if (viewId === "general") {
         document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>Facultad de ingeniería`
     } else {

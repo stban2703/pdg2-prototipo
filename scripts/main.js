@@ -68,6 +68,7 @@ if (currentRole !== 'teacher') {
     }
 
     if (currentRole === 'leader') {
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.leaderGroupId}`)
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
         document.querySelector('#navmygroup').setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
         showItem('#navmygroup')
@@ -81,7 +82,7 @@ if (currentRole !== 'teacher') {
     }
 
     if (currentRole === 'boss') {
-        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.bossDepartment}`)
+        document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.bossDepartmentId}`)
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?department_${userInfo.bossDepartmentId}`)
         roleTitle.innerHTML = 'Rol Jefe de departamento'
     }
@@ -255,7 +256,7 @@ function addPageFuncions() {
     getInitialProgressInfo(currentPeriod) // LISTO
 
     // General progress functions
-    getInitialGeneralSelect(currentUser)
+    getInitialGeneralSelect(currentUser, currentRole)
     getInitialGeneralCareer()
     getInitialGeneralSubjets()
     renderImproveActionsForSpecificGeneral(currentPeriod, currentUser)
