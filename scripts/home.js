@@ -1,21 +1,19 @@
 import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getDepartmentCareers, getDepartments, getGroupInfo, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
+import { hideItem } from "./utils/display-items.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
-export function showShortcuts(roles) {
+export function showShortcuts(role) {
     const homeScreenShortCuts = document.querySelector(".home-screen__shortcuts")
-
     if (homeScreenShortCuts) {
-        if (roles.includes("admin")) {
-            const lastSubjectShortcut = homeScreenShortCuts.querySelector(".home-screen__lastSubject")
-            lastSubjectShortcut.classList.add("hidden")
+        if (role !== "teacher") {
+            hideItem(".home-screen__lastSubject")
+            hideItem(".home-screen__notes")
+            hideItem(".home-screen__subjects")
+            hideItem(".home-screen__content")
+        }
 
-            const notesShortcut = homeScreenShortCuts.querySelector(".home-screen__notes")
-            notesShortcut.classList.add("hidden")
-
-            const homeSubjects = document.querySelector(".home-screen__subjects")
-            homeSubjects.classList.add("hidden")
-
+        if (role === "admin") {
             document.querySelector('.home-screen__departments').classList.remove("hidden")
         }
     }

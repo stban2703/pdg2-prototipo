@@ -49,7 +49,12 @@ export const userSubjects = currentSubjects
 const roleTitle = document.querySelector(".roleTitle")
 const changeRoleButton = document.querySelector(".changeRoleButton")
 
+
 // Check user role
+if(userInfo.role.length === 1) {
+    hideItem(".changeRoleButton")
+}
+
 if (currentRole !== 'teacher') {
     showItem('#navaccomplishment')
     showItem('#navgeneral')
@@ -193,7 +198,7 @@ function displayHomeUserName() {
 function addPageFuncions() {
     // Home functions
     displayHomeUserName()
-    showShortcuts(currentUser.role)
+    showShortcuts(currentRole)
     renderListHome(currentSubjects, currentPeriod, currentUser.role, userInfo)///Sin actualizar
 
     //Note functions

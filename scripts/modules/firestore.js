@@ -805,7 +805,7 @@ export async function getUserSubjects(teacherId) {
         console.log("Multiple roles detected")
         window.location = 'role.html'
     } else {
-        setLocalStorage('role', JSON.stringify(localUser.role[0]))
+        setLocalStorage('currentRole', localUser.role[0])
         window.location = 'index.html'
     }
     //window.location = 'index.html'
