@@ -185,13 +185,13 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         })
 
         // First
-        if (answers[0].answerValue[0]) {
+        if (answers[0] && answers[0].answerValue[0]) {
             answersHolders[0].innerHTML = answers[0].answerValue[0]
         }
 
         // Second
         answersHolders[1].innerHTML = ``
-        if (answers[1].answerValue.length > 0) {
+        if (answers[1] && answers[1].answerValue.length > 0) {
             answers[1].answerValue.forEach(value => {
                 const optionItem = document.createElement("li")
                 optionItem.className = "memo-summary__answerItem"
@@ -209,14 +209,14 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
             "Medio-alto",
             "Alto (Aproximadamente un 90% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)"
         ]
-        if (answers[2].answerValue) {
+        if (answers[2] && answers[2].answerValue) {
             answersHolders[2].innerHTML = `${answers[2].answerValue[0]}. ${scaleValues[parseInt(answers[2].answerValue[0]) - 1]}`
             document.querySelector(".improve-action-question3").innerHTML = answers[2].answerValue[0]
         }
 
         // Fourth
         answersHolders[3].innerHTML = ``
-        if (answers[3].answerValue.length > 0) {
+        if (answers[3] && answers[3].answerValue.length > 0) {
             answers[3].answerValue.forEach(value => {
                 const optionItem = document.createElement("li")
                 optionItem.className = "memo-summary__answerItem"
@@ -227,7 +227,7 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
 
         // Fifth
         document.querySelector(".improve-action-question5").innerHTML = ``
-        if (answers[4].answerValue.length > 0) {
+        if (answers[4] && answers[4].answerValue.length > 0) {
             answers[4].answerValue.forEach((value) => {
                 const itemValue = parseInt(value.split("|")[1])
 
@@ -253,7 +253,7 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
 
         // Sixth
         document.querySelector(".improve-action-question6").innerHTML = ``
-        if (answers[5].answerValue.length > 0) {
+        if (answers[5] && answers[5].answerValue.length > 0) {
             answers[5].answerValue.forEach((value) => {
                 const itemValue = parseInt(value.split("|")[1])
 
@@ -279,7 +279,7 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
 
         // Seventh
         answersHolders[6].innerHTML = ``
-        if (answers[6].answerValue.length > 0) {
+        if (answers[6] && answers[6].answerValue.length > 0) {
             answers[6].answerValue.forEach(value => {
                 const optionItem = document.createElement("li")
                 optionItem.className = "memo-summary__answerItem"
@@ -289,18 +289,18 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         }
 
         // Eigth
-        if (answers[7].answerValue) {
+        if (answers[7] && answers[7].answerValue) {
             answersHolders[7].innerHTML = answers[7].answerValue[0]
             document.querySelector(".improve-action-question8").innerHTML = answers[7].answerValue[0]
         }
 
         // Ninth
-        if (answers[8].answerValue) {
+        if (answers[8] && answers[8].answerValue) {
             answersHolders[8].innerHTML = answers[8].answerValue[0]
         }
 
         // Improve actions
-        if (answers[9].answerValue.length > 0) {
+        if (answers[9] && answers[9].answerValue.length > 0) {
             answers[9].answerValue.forEach((elem, index) => {
                 const improveActionItem = document.createElement("tr")
                 improveActionItem.className = 'improve-action-item'
@@ -324,17 +324,17 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         }
 
         // Eleven
-        if (answers[10].answerValue) {
+        if (answers[10] && answers[10].answerValue) {
             answersHolders[10].innerHTML = answers[10].answerValue[0]
         }
 
         // Eleven
-        if (answers[11].answerValue) {
+        if (answers[11] && answers[11].answerValue) {
             answersHolders[11].innerHTML = answers[11].answerValue[0]
         }
 
         // Twelve
-        if (answers[11].justification) {
+        if (answers[11] && answers[11].justification) {
             document.querySelector(".memo-summary__answerJustification").innerHTML = `
                 <span style="font-weight: 600;">Descripción: </span>${answers[11].justification}
             `
