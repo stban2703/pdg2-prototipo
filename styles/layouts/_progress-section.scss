@@ -38,12 +38,20 @@
         gap: 1rem;
     }
 
+    &__questionNumber {
+        color: $main-color;
+        font-weight: $semibold;
+        margin-right: 1rem;
+        margin-left: 1rem;
+
+    }
+
     &__question {
         font-family: $poppins;
         font-size: 1.8rem;
         font-weight: $light;
         color: $boulder;
-        margin-left: 3.1rem;
+        //margin-left: 3.1rem;
     }
 
     &__graphicContainer {

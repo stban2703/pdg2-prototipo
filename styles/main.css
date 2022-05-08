@@ -6990,12 +6990,18 @@ input[type=button] {
   gap: 1rem;
 }
 
+.progress-section__questionNumber {
+  color: #979DFF;
+  font-weight: 600;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
 .progress-section__question {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   font-weight: 300;
   color: #757575;
-  margin-left: 3.1rem;
 }
 
 .progress-section__graphicContainer {
