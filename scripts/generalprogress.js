@@ -1,5 +1,6 @@
 import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getGroupSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
+import { parseTimestampToDate } from "./utils/date-format.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
 
@@ -345,8 +346,8 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
         const improveActions = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         if (improveActions.length > 0) {
             if (improveActions[0].answerValue.length > 0) {
-                const improveActionsContainer = document.querySelector(".improve-actions__list")
-                const emptyContainer = document.querySelector(".improve-actions__empty")
+                const improveActionsContainer = document.querySelector(".improve-actions__list--current")
+                const emptyContainer = document.querySelector(".improve-actions__empty--current")
 
                 improveActionsContainer.innerHTML = ``
                 improveActionsContainer.classList.remove("hidden")
@@ -372,6 +373,40 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
                     improveActionsContainer.appendChild(actionItem)
                 })
             }
+        }
+
+        const historyImproveActions = await getHistoryImproveActions(subjectId)
+        if (historyImproveActions.length > 0) {
+            console.log(historyImproveActions)
+            const historyImproveActionsContainer = document.querySelector(".improve-actions__list--history")
+            const historyEmptyContainer = document.querySelector(".improve-actions__empty--history")
+
+            historyImproveActionsContainer.innerHTML = ``
+            historyImproveActionsContainer.classList.remove("hidden")
+            historyEmptyContainer.classList.add("hidden")
+
+            historyImproveActions.forEach((action, index) => {
+                console.log(action)
+                const actionItem = document.createElement('tr')
+                actionItem.className = "improve-action-item"
+                actionItem.innerHTML = `
+                        <td>
+                            <div class="improve-action-item__number">
+                                <span>${index + 1}</span>
+                            </div>
+                        </td>
+                        <td class="improve-action-item__title">
+                            <h5>${action.name}</h5>
+                        </td>
+                        <td class="improve-action-item__description">
+                            <p>${action.description}</p>
+                        </td>
+                        <td class="improve-action-item__date">
+                            <p>${parseTimestampToDate(action.date)}</p>
+                        </td>
+                    `
+                historyImproveActionsContainer.appendChild(actionItem)
+            })
         }
 
         const openAddCommentButton = document.querySelector(".openAddCommentButton")
