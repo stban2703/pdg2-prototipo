@@ -5,6 +5,7 @@
     align-items: center;
     gap: 2rem;
     width: fit-content;
+    max-width: 43rem;
     padding: 4rem 2.5rem;
 
     &__progress {
@@ -20,6 +21,7 @@
 
     a {
         margin-top: 0.5rem;
+        max-width: 17rem;
     }
     
     button {

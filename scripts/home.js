@@ -1,4 +1,4 @@
-import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getDepartmentCareers, getDepartments, getGroupInfo, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
+import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getDepartmentCareers, getDepartments, getGroupInfo, getGroupSubjects, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
 import { hideItem } from "./utils/display-items.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
@@ -131,6 +131,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
             circle.initial()
         }
 
+        // Views
         if (roles === "principal" || roles === "leader") {
             homeScreen.classList.add("home-screen--row")
         }
@@ -222,6 +223,20 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                     </section>`
                 roleShortCutSectionList.appendChild(roleElement)
             }
+        }
+
+        // Render progress
+        if (roles === "boss") {
+            await getViewProgress('departmentId', userInfo.bossDepartmentId)
+        }
+
+        if (roles === "principal") {
+            await getViewProgress('careerId', userInfo.principalCareerId)
+        }
+
+        if (roles === "leader") {
+            const groupSubjects = await getGroupSubjects(userInfo.leaderGroupId)
+            await renderViewProgress(groupSubjects)
         }
 
         if (roles === "admin") {
@@ -321,3 +336,50 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
     }
 }
 
+async function getViewProgress(viewTag, viewId) {
+    const subjects = await getSubjectsByView(viewTag, viewId)
+    await renderViewProgress(subjects)
+}
+
+async function renderViewProgress(subjects) {
+    const teachersIds = []
+    subjects.forEach(subject => {
+        const q = teachersIds.find(id => {
+            return subject.teacherId === id
+        })
+        if (!q) {
+            teachersIds.push(subject.teacherId)
+        }
+    })
+
+    const teachers = []
+    for (let index = 0; index < teachersIds.length; index++) {
+        const id = teachersIds[index];
+        const q = await getTeacherById(id)
+        teachers.push(q)
+    }
+
+    let viewProgress = 0
+    let completeCounter = 0
+    let incompleteCounter = 0
+
+    teachers.forEach(t => {
+        t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
+    })
+
+    let totalCounter = completeCounter + incompleteCounter
+    if (totalCounter > 0) {
+        viewProgress = Math.round((completeCounter / totalCounter) * 100)
+    } else {
+        viewProgress = 0
+    }
+
+    const progressContainer = document.querySelector(".memo-thumbnail__progress")
+    progressContainer.innerHTML = `
+            <div class="memo-pie custom-pie"
+                data-pie='{ "colorSlice": "#979DFF", "percent": ${viewProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+            </div>
+            `
+    const circle = new CircularProgressBar(`memo-pie`)
+    circle.initial()
+}

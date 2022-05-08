@@ -94,7 +94,6 @@ export async function getDepartmentCareers(departmentId) {
     const q = query(collection(firestore, "careers"), where("departmentId", "==", "" + departmentId))
     const querySnapshot = await getDocs(q);
     const careerList = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
     return careerList
 }
 
@@ -124,7 +123,6 @@ export async function getGroupSubjects(groupId) {
     const q = query(collection(firestore, "subjects"), where("groupId", "==", "" + groupId))
     const querySnapshot = await getDocs(q);
     const subjectList = querySnapshot.docs.map(doc => doc.data());
-    hideLoader()
     return subjectList
 }
 

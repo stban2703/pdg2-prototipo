@@ -1738,6 +1738,7 @@ input[type=button] {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 43rem;
   padding: 4rem 2.5rem;
 }
 
@@ -1757,6 +1758,7 @@ input[type=button] {
 
 .memo-thumbnail a {
   margin-top: 0.5rem;
+  max-width: 17rem;
 }
 
 .memo-thumbnail button {
