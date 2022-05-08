@@ -25,6 +25,16 @@ export async function renderMeetingMinutesDetails() {
         meetingMinutesHeader.innerHTML = `
             <h4 class="meetingminutes__title subtitle subtitle--semibold">Detalle del acta</h4>
             <p class="meetingminutes__date subtitle subtitle--semibold">Fecha: <span>${parseTimestampToDate(meetingInfo.date)}</span></p>
+            <button type="button" class="meetingminutes__controls"
+                style="background-image: url('./images/3dots.svg');">
+            </button>
+            <ul class="meetingminutes__settings meetingminutes__settings">
+            <li class="meetingminutes__settings-item edit-meetingminutes">
+                <img class="meetingminutes__settings-item__normal-icon" src="./images/editicon.svg">
+                <img class="meetingminutes__settings-item__hover-icon" src="./images/editiconwhite.svg">
+                <span>Editar</span>
+            </li>
+            </ul>
         `
 
         const meetingSummarySection = document.querySelector(".meetingminutes__summary")

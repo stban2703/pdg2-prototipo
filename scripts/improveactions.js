@@ -156,16 +156,16 @@ function renderImproveActions(list) {
                     </button>
                 </td>
                 <ul class="improve-action-item__settings improve-action-item__settings--hidden">
-                <li class="improve-action-item__settings-item delete-improve-action-item">
-                    <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
-                    <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
-                    <span>Eliminar</span>
-                </li>
-                <li class="improve-action-item__settings-item edit-improve-action-item">
-                    <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
-                    <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
-                    <span>Editar</span>
-                </li>
+                    <li class="improve-action-item__settings-item delete-improve-action-item">
+                        <img class="improve-action-item__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                        <img class="improve-action-item__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                        <span>Eliminar</span>
+                    </li>
+                    <li class="improve-action-item__settings-item edit-improve-action-item">
+                        <img class="improve-action-item__settings-item__normal-icon" src="./images/editicon.svg">
+                        <img class="improve-action-item__settings-item__hover-icon" src="./images/editiconwhite.svg">
+                        <span>Editar</span>
+                    </li>
                 </ul>
                 `
                 improveActionList.appendChild(actionItem)

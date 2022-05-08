@@ -80,11 +80,13 @@ function renderAgreements(list) {
     });
 }
 
-export async function getMeetingInfoForMinute(userInfo) {
-    const meetingId = window.location.hash.split("?")[1]
+export async function getMeetingInfoForMinute(userInfo) {    
     const meetingInfoSection = document.querySelector(".createmeetingminutes-form__meeting-info")
 
     if (meetingInfoSection && window.location.href.includes("#createmeetingminutes")) {
+        const urlParts = window.location.hash.split("?")[1].split("_")
+        const meetingId = urlParts[0]
+        const minuteId = urlParts[1]
         const meetingInfo = await getMeetingDetails(meetingId)
         meetingInfoSection.innerHTML = `
         <p class="meeting__subtitle subtitle subtitle--semibold">Nombre: <span>${meetingInfo.name}</span></p>

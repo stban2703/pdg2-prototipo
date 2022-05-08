@@ -5710,10 +5710,16 @@ input[type=button] {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  position: relative;
 }
 
 .meetingminutes__title {
   color: #979DFF;
+}
+
+.meetingminutes__date {
+  margin-left: auto;
+  margin-right: 2rem;
 }
 
 .meetingminutes__date span {
@@ -5816,6 +5822,108 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
+}
+
+.meetingminutes__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  border: none;
+  min-width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+}
+
+.meetingminutes__controls--activated {
+  background-color: #fafafa;
+}
+
+.meetingminutes__settings {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  right: 0rem;
+  margin: 3rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  -webkit-box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+          box-shadow: 0px 5px 10px rgba(208, 208, 208, 0.2);
+  border-radius: 5px;
+  padding: 0.6rem;
+  z-index: 5;
+}
+
+.meetingminutes__settings-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 0.4em;
+  color: #757575;
+  padding: 0.4em 0.8em;
+  border-radius: 3px;
+}
+
+.meetingminutes__settings-item__normal-icon {
+  display: block;
+}
+
+.meetingminutes__settings-item__hover-icon {
+  display: none;
+}
+
+.meetingminutes__settings-item:hover {
+  background-color: #979DFF;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.meetingminutes__settings-item:hover .improve-action-item__settings-item__normal-icon {
+  display: none;
+}
+
+.meetingminutes__settings-item:hover .improve-action-item__settings-item__hover-icon {
+  display: block;
+}
+
+.meetingminutes__settings--hidden {
+  -webkit-transform: scale(0, 0);
+          transform: scale(0, 0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 .audio-player-container {
