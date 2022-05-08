@@ -632,6 +632,7 @@ async function renderGeneralAllCharts(currentPeriod) {
 
         fifthQuestionLabels.forEach((label, index) => {
             let sum = 0
+            let totalSum = 0
             let dataSetValue = 0
 
             answersArray[4].forEach(answer => {
@@ -641,9 +642,10 @@ async function renderGeneralAllCharts(currentPeriod) {
                 if (labelAnswer.length > 0) {
                     const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
                     sum += value
+                    totalSum++
                 }
             })
-            dataSetValue = (sum / answersArray[4].length).toFixed(1)
+            dataSetValue = (sum / totalSum).toFixed(1)
             fifthQuestionDataSet[index] = dataSetValue
         })
     }
@@ -668,6 +670,7 @@ async function renderGeneralAllCharts(currentPeriod) {
 
         sixthQuestionLabels.forEach((label, index) => {
             let sum = 0
+            let totalSum = 0
             let dataSetValue = 0
 
             answersArray[5].forEach(answer => {
@@ -677,9 +680,10 @@ async function renderGeneralAllCharts(currentPeriod) {
                 if (labelAnswer.length > 0) {
                     const value = parseInt(labelAnswer[0].split("|")[labelAnswer[0].split("|").length - 1])
                     sum += value
+                    totalSum++
                 }
             })
-            dataSetValue = (sum / answersArray[5].length).toFixed(1)
+            dataSetValue = (sum / totalSum).toFixed(1)
             sixthQuestionDataSet[index] = dataSetValue
         })
     }

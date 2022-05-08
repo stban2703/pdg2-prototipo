@@ -132,7 +132,6 @@ export async function getInitialProgressInfo(currentPeriod) {
                 fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
             });
         }
-        console.log(fifthQuestionAnswers)
         renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent', 1)
 
 
