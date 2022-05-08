@@ -104,9 +104,9 @@ export async function getMeetingInfoForMinute(userInfo) {
             const participantItem = document.createElement("label")
             participantItem.className = "checkbox-input"
             participantItem.innerHTML = `
-            <input id="${elem.id}" type="checkbox" name="assistants[]" value="${elem.name}" />
+            <input id="${elem.id}" type="checkbox" name="assistants[]" value="${elem.name}" ${elem.id === userInfo.id ? 'checked' : ''} />
                 ${elem.name}
-            `
+            ` 
             participantListSection.appendChild(participantItem)
         })
 
@@ -117,7 +117,7 @@ export async function getMeetingInfoForMinute(userInfo) {
             const participantItem = document.createElement("label")
             participantItem.className = "checkbox-input"
             participantItem.innerHTML = `
-            <input id="${userInfo.id}" type="checkbox" name="assistants[]" value="${userInfo.name + " " + userInfo.lastname}" />
+            <input id="${userInfo.id}" type="checkbox" name="assistants[]" value="${userInfo.name + " " + userInfo.lastname}" checked />
                 ${userInfo.name + " " + userInfo.lastname}
             `
             participantListSection.appendChild(participantItem)
