@@ -78,7 +78,7 @@ export async function renderMemoQuestion() {
                     const radioAnswerQuestion = document.createElement('div')
                     radioAnswerQuestion.className = "memoquestion-form__radio-checkbox memoquestion-form__radio-checkbox--radio"
 
-                    if(parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11) {
+                    if (parseInt(currentQuestion.index) === 8 || parseInt(currentQuestion.index) === 11) {
                         radioAnswerQuestion.classList.add("memoquestion-form__radio-checkbox--row")
                     }
 
@@ -204,6 +204,14 @@ export async function renderMemoQuestion() {
                             checkboxList[targetIndex].checked = true
                         }
                     })
+
+                    // Prevent submit by Enter
+                    function submitOptionByEnterKey(e) {
+                        if (e.keyCode == 13) {
+                            e.preventDefault()
+                        }
+                    }
+                    memoQuestionForm.addEventListener("keypress", submitOptionByEnterKey);
                     break;
 
                 case "scale":
@@ -606,7 +614,7 @@ function addImproveAction(improveactionname, improveactiondescription) {
             name: improveactionname,
             description: improveactiondescription
         }
-    } else if(improveActionEditIndex === null) {
+    } else if (improveActionEditIndex === null) {
         improveActionsList.push({
             name: improveactionname,
             description: improveactiondescription
@@ -709,6 +717,7 @@ function renderImproveActions(list) {
 function addMemoOption(list, checkboxAnswerQuestion, value, answers) {
     const newOption = value
     list.push(newOption)
+    console.log(list)
     const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
 
     allOptions.forEach((elem, index) => {
@@ -718,6 +727,7 @@ function addMemoOption(list, checkboxAnswerQuestion, value, answers) {
     })
     renderMemoOption(list, checkboxAnswerQuestion, answers)
 }
+
 
 function renderMemoOption(list, checkboxAnswerQuestion, answers) {
     checkboxAnswerQuestion.innerHTML = ``
@@ -774,6 +784,7 @@ function renderMemoOption(list, checkboxAnswerQuestion, answers) {
 
     checkboxAnswerQuestion.appendChild(openAddOptionButton)
     checkboxAnswerQuestion.appendChild(addOptionControls)
+
     openAddOptionButton.addEventListener('click', () => {
         addOptionControls.classList.remove("hidden")
         openAddOptionButton.classList.add("hidden")
@@ -794,6 +805,7 @@ export async function submitMemoQuestionForm(userSubjects) {
     const memoQuestionForm = document.querySelector(".memoquestion-form")
 
     if (memoQuestionForm && window.location.href.includes("#memoquestion")) {
+
         memoQuestionForm.addEventListener('submit', (event) => {
             event.preventDefault()
             const urlQuery = window.location.hash.split("?")[1]
