@@ -6298,6 +6298,14 @@ input[type=button] {
   border: none;
 }
 
+.memoquestion-form__openAddOptionButton--big {
+  gap: 1rem;
+}
+
+.memoquestion-form__openAddOptionButton--big .add-item-input__icon {
+  min-width: 3.5rem;
+}
+
 .memoquestion-form__addOptionControls {
   display: -webkit-box;
   display: -ms-flexbox;

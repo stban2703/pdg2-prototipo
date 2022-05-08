@@ -111,6 +111,14 @@
         background: none;
         padding: 0;
         border: none;
+
+        &--big {
+            gap: 1rem;
+
+            .add-item-input__icon {
+                min-width: 3.5rem;
+            }
+        }
     }
 
     &__addOptionControls {

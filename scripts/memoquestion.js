@@ -613,22 +613,24 @@ export async function renderMemoQuestion() {
             })
 
             // Open add improve action
-            const openAddImproveActionButton = document.querySelector(".openAddImproveActionButton")
+            const openAddImproveActionButton = document.querySelectorAll(".openAddImproveActionButton")
             const memoNextQuestionButton = document.querySelector(".memoquestion-form__nextButton")
             const memoquestionFormBack = document.querySelector(".memoquestion-form__back")
             const newImproveActionForm = document.querySelector(".memoquestion-form__container--newimproveaction")
 
-            openAddImproveActionButton.addEventListener('click', () => {
-                improveActionEditIndex = null
-                improveActionContainers.forEach((e) => {
-                    e.classList.add("hidden")
+            openAddImproveActionButton.forEach(button => {
+                button.addEventListener('click', () => {
+                    improveActionEditIndex = null
+                    improveActionContainers.forEach((e) => {
+                        e.classList.add("hidden")
+                    })
+                    memoNextQuestionButton.classList.add("hidden")
+                    returnToImproveActionButton.classList.remove("hidden")
+                    memoquestionFormBack.classList.add("hidden")
+                    newImproveActionForm.classList.remove("hidden")
+                    memoQuestionForm.improveactionname.value = ""
+                    memoQuestionForm.improveactiondescription.value = ""
                 })
-                memoNextQuestionButton.classList.add("hidden")
-                returnToImproveActionButton.classList.remove("hidden")
-                memoquestionFormBack.classList.add("hidden")
-                newImproveActionForm.classList.remove("hidden")
-                memoQuestionForm.improveactionname.value = ""
-                memoQuestionForm.improveactiondescription.value = ""
             })
 
             // Close add improve action
