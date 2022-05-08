@@ -178,11 +178,13 @@ export async function renderMemoseeAnswersQuestions(currentPeriod) {
         const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
 
         const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
-        goToImproveActionsButton.addEventListener('click', () => {
+        goToImproveActionsButton.setAttribute('href', `#generalimproveactions?${subjectId}`)
+
+        /*goToImproveActionsButton.addEventListener('click', () => {
             currentMemoseeAnswerTab = 2
             renderMemoseeAnswerTab()
             answersHolders[9].scrollIntoView(true)
-        })
+        })*/
 
         // First
         if (answers[0] && answers[0].answerValue[0]) {
