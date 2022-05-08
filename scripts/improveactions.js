@@ -24,22 +24,28 @@ export async function renderImproveActionComment(currentPeriod) {
         const queryComment = window.location.hash.split("?")[1].split("_")[1]
 
         const comments = await getImproveActionComment(subjectId, currentPeriod)
-        const commentEmpty = document.querySelector(".commentEmpty")
-        const commentName = document.querySelector(".commentName")
-        const commentDate = document.querySelector(".commentDate")
-        const commentText = document.querySelector(".commentText")
 
-        if(comments[0]) {
-            commentEmpty.classList.add("hidden")
-            commentName.classList.remove("hidden")
-            commentName.innerHTML = comments[0].userName
-            commentDate.classList.remove("hidden")
-            commentDate.innerHTML = parseTimestampToDate(comments[0].date)
-            commentText.classList.remove("hidden")
-            commentText.innerHTML = comments[0].comment
+        const commentListSection = document.querySelector(".memoimproveactions-screen__commentList")
+
+
+        if (comments.length > 0) {
+            commentListSection.innerHTML = ``
+            comments.forEach(c => {
+                const commentItem = document.createElement('div')
+                commentItem.className = 'improveaction-comment'
+                commentItem.innerHTML = `
+                <h5 class="improveaction-comment__name">${c.userName}</h5>
+                <p class="improveaction-comment__date">${parseTimestampToDate(c.date)}</p>
+                <p class="improveaction-comment__comment">${c.comment}</p>
+                <button class="small-button small-button--secondary setAsReadButton"> 
+                    <span>Marcar como leído</span>
+                </button>
+                `
+                commentListSection.appendChild(commentItem)
+            })
         }
 
-        if(queryComment) {
+        if (queryComment) {
             const commentSection = document.querySelector(".memoimproveactions-screen__commentSection")
             commentSection.scrollIntoView(true)
         }

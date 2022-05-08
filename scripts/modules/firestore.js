@@ -187,6 +187,7 @@ export async function createImproveActionComment(subjectId, period, userInfo, ro
         period: period,
         role: role,
         comment: comment,
+        status: "unread",
         date: Date.now()
     }
 
