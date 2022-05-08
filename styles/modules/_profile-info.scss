@@ -1,0 +1,60 @@
+.profile-info {
+    display: flex;
+    flex-direction: row;
+
+    &__iconSection {
+        display: flex;
+        flex-direction: column;
+        background-color: $main-color;
+        border-radius: 15px 0 0 15px;
+        align-items: center;
+        padding: 4rem;
+    }
+
+    &__icon {
+        background-color: #EFF0FF;
+        width: 6.5rem;
+        height: 6.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+    }
+
+    &__role {
+        font-family: $poppins;
+        font-size: 2rem;
+        font-weight: $bold;
+        color: $white;
+    }
+
+    &__detailSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: $white;
+        border-radius: 0 15px 15px 0;
+        padding: 4rem;
+    }
+
+    &__name {
+        font-family: $poppins;
+        font-size: 2.2rem;
+        font-weight: $semibold;
+        color: $main-color;
+    }
+
+    &__department {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $semibold;
+        color: $boulder;
+    }
+
+    &__email {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        color: $boulder;
+    }
+}

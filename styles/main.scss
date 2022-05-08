@@ -42,6 +42,7 @@
 @import "modules/roleShortcut-thumbnail";
 @import "modules/notification-item";
 @import "modules/select-role";
+@import "modules/profile-info";
 
 @import "layouts/signinup-form";
 @import "layouts/navigation-menu";
@@ -86,6 +87,7 @@
 @import "pages/accomplishment-screen";
 @import "pages/memosee-screen";
 @import "pages/notification-screen";
+@import "pages/profile-screen";
 
 html {
     font-size: 62.5%;
