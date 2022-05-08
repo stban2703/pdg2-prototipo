@@ -258,7 +258,7 @@ function addPageFuncions() {
     // General progress functions
     getInitialGeneralSelect(currentUser, currentRole)
     getInitialGeneralCareer()
-    getInitialGeneralSubjets()
+    getInitialGeneralSubjets(currentRole)
     renderImproveActionsForSpecificGeneral(currentPeriod, currentUser)
     onSubmitImproveActionComment(currentUser, currentPeriod)
     getInitialGeneralAll(currentPeriod)

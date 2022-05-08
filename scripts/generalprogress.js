@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getGroupSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
@@ -230,41 +230,57 @@ export async function getInitialGeneralCareer() {
 }
 
 // Subject general
-export async function getInitialGeneralSubjets() {
+export async function getInitialGeneralSubjets(currentRole) {
     const generalselectScreenSubjects = document.querySelector(".generalselect-screen--subjects")
     if (generalselectScreenSubjects && window.location.href.includes("#generalsubjects")) {
         showLoader()
-        const careerId = window.location.href.split("?")[1]
-        const careerInfo = await getCareerInfo(careerId)
-        const subjects = await getCareerSubjects(careerId)
-        hideLoader()
+
+        const viewId = window.location.href.split("?")[1]
+        let viewInfo = {}
+        let subjects = []
+
+        if (currentRole !== "leader") {
+            viewInfo = await getCareerInfo(viewId)
+            subjects = await getCareerSubjects(viewId)
+        } else {
+            viewInfo = await getGroupInfo(viewId)
+            subjects = await getGroupSubjects(viewId)
+        }
 
         const generalSelectSectionTitle = document.querySelector(".section-banner__title")
-        generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
+        generalSelectSectionTitle.innerHTML = `Progreso general<br>${viewInfo.name}`
 
         const generalSelectSectionDescription = document.querySelector(".generalselect-screen__description")
-        generalSelectSectionDescription.innerHTML = `Selecciona el <span style="font-weight: 600;">curso de ${careerInfo.name}</span> que deseas observar el progreso`
+        generalSelectSectionDescription.innerHTML = `Selecciona el <span style="font-weight: 600;">curso de ${viewInfo.name}</span> que deseas observar el progreso`
 
         const subjectsForm = generalselectScreenSubjects.querySelector(".memoselectsubject-screen__controls")
-        careerInfo.groups.forEach(group => {
-            const option = document.createElement('option')
-            option.value = group
-            option.innerHTML = group
-            subjectsForm.group.appendChild(option)
-        })
+
+        if (currentRole !== "leader") {
+            viewInfo.groups.forEach(group => {
+                const option = document.createElement('option')
+                option.value = group
+                option.innerHTML = group
+                subjectsForm.group.appendChild(option)
+            })
+        }
 
         const copy = [...subjects].sort(sortByAlphabeticAscending)
         renderGeneralSubjects(copy)
-        onSortFilterGeneralSubjectListener(subjects)
+        onSortFilterGeneralSubjectListener(subjects, currentRole)
+        hideLoader()
     }
 }
 
-function onSortFilterGeneralSubjectListener(subjects) {
+function onSortFilterGeneralSubjectListener(subjects, currentRole) {
     const generalSubjectsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--general")
 
     if (window.location.href.includes("#generalsubjects") && generalSubjectsSettingsForm) {
         const subjectsSortSelect = generalSubjectsSettingsForm.alphabetic
         const subjectsFilterSelect = generalSubjectsSettingsForm.group
+
+        if (currentRole) {
+            subjectsFilterSelect.classList.add("hidden")
+        }
 
         generalSubjectsSettingsForm.addEventListener('input', () => {
             sortFilterGeneralSubjects(subjects, subjectsSortSelect, subjectsFilterSelect)
@@ -424,13 +440,13 @@ async function renderGeneralAllCharts(currentPeriod) {
     let viewInfo = {}
     if (view === 'career') {
         viewInfo = await getCareerInfo(viewId)
-    } 
-    
+    }
+
     if (view === 'department') {
         viewInfo = await getDepartmentInfo(viewId)
     }
 
-    if(view === 'group') {
+    if (view === 'group') {
         viewInfo = await getGroupInfo(viewId)
     }
 
