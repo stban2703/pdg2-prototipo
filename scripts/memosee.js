@@ -216,6 +216,7 @@ export async function getInitialMemoSeeAnswersQuestions(currentPeriod, currentRo
 }
 
 async function getAllAnswerOnSelectPeriod(subjectId, period) {
+    showLoader()
     const periodAnswers = await getAllAnswersBySubjectAndPeriod(subjectId, period)
     periodAnswers.sort(sortByQuestionIndex)
     renderMemoseeAnswersQuestions(periodAnswers)
@@ -223,6 +224,10 @@ async function getAllAnswerOnSelectPeriod(subjectId, period) {
 
 function renderMemoseeAnswersQuestions(answers) {
     const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
+
+    if(answers.length === 0) {
+        document.querySelector(".memosee-screen__emptyMemo").classList.remove("hidden")
+    }
 
     answersHolders[0].innerHTML = ''
     // First
