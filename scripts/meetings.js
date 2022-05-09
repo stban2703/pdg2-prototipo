@@ -65,9 +65,9 @@ export async function getInitialMeetings(userInfo) {
             groupFilterSelect.appendChild(option)
         })
 
-        if (userInfo.role.includes("leader")) {
+        /*if (userInfo.role.includes("leader")) {
             createMeetingButton.classList.remove("hidden")
-        }
+        }*/
 
         if (userInfo.role.includes("admin")) {
             document.querySelector(".section-banner__description").classList.add("hidden")
