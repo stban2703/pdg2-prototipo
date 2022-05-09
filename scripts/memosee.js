@@ -159,7 +159,7 @@ export function renderMemoseeAnswerTab() {
     }
 }
 
-export async function renderMemoseeAnswersQuestions(currentPeriod, currentRole) {
+export async function getInitialMemoSeeAnswersQuestions(currentPeriod, currentRole) {
     const sections = document.querySelectorAll(".memo-summary__section")
     if (sections && window.location.href.includes("#memoseeanswers")) {
         showLoader()
@@ -176,7 +176,6 @@ export async function renderMemoseeAnswersQuestions(currentPeriod, currentRole) 
 
 
         const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
-
         const seeImproveActionSection = document.querySelector(".memo-improve-actions")
 
         if (currentRole === "leader") {
@@ -206,128 +205,160 @@ export async function renderMemoseeAnswersQuestions(currentPeriod, currentRole) 
                 answersHolders[9].scrollIntoView(true)
             })
         }
+        renderMemoseeAnswersQuestions(answers)
 
-        // First
-        if (answers[0] && answers[0].answerValue[0]) {
-            answersHolders[0].innerHTML = answers[0].answerValue[0]
-        }
+        const periodSelect = document.querySelector(".change-period-memo-select")
+        periodSelect.addEventListener('input', (event) => {
+            const newPeriod = event.target.value
+            getAllAnswerOnSelectPeriod(subjectId, newPeriod)
+        })
+    }
+}
 
-        // Second
-        answersHolders[1].innerHTML = ``
-        if (answers[1] && answers[1].answerValue.length > 0) {
-            answers[1].answerValue.forEach(value => {
-                const optionItem = document.createElement("li")
-                optionItem.className = "memo-summary__answerItem"
-                optionItem.innerHTML = value
-                answersHolders[1].appendChild(optionItem)
-            })
-        }
+async function getAllAnswerOnSelectPeriod(subjectId, period) {
+    const periodAnswers = await getAllAnswersBySubjectAndPeriod(subjectId, period)
+    periodAnswers.sort(sortByQuestionIndex)
+    renderMemoseeAnswersQuestions(periodAnswers)
+}
 
-        // Third
-        const scaleValues = [
-            "Bajo (Aproximadamente solo un 10% evidencian en sus resultados el logro de los objetivos del curso)",
-            "Deficiente",
-            "Medio-bajo",
-            "Medio (Aproximadamente un 60% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)",
-            "Medio-alto",
-            "Alto (Aproximadamente un 90% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)"
-        ]
-        if (answers[2] && answers[2].answerValue) {
-            answersHolders[2].innerHTML = `${answers[2].answerValue[0]}. ${scaleValues[parseInt(answers[2].answerValue[0]) - 1]}`
-            document.querySelector(".improve-action-question3").innerHTML = answers[2].answerValue[0]
-        }
+function renderMemoseeAnswersQuestions(answers) {
+    const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
 
-        // Fourth
-        answersHolders[3].innerHTML = ``
-        if (answers[3] && answers[3].answerValue.length > 0) {
-            answers[3].answerValue.forEach(value => {
-                const optionItem = document.createElement("li")
-                optionItem.className = "memo-summary__answerItem"
-                optionItem.innerHTML = value
-                answersHolders[3].appendChild(optionItem)
-            })
-        }
+    answersHolders[0].innerHTML = ''
+    // First
+    if (answers[0] && answers[0].answerValue[0]) {
+        answersHolders[0].innerHTML = answers[0].answerValue[0]
+    }
 
-        // Fifth
-        document.querySelector(".improve-action-question5").innerHTML = ``
-        if (answers[4] && answers[4].answerValue.length > 0) {
-            answers[4].answerValue.forEach((value) => {
-                const itemValue = parseInt(value.split("|")[1])
+    // Second
+    answersHolders[1].innerHTML = ``
+    if (answers[1] && answers[1].answerValue.length > 0) {
+        answers[1].answerValue.forEach(value => {
+            const optionItem = document.createElement("li")
+            optionItem.className = "memo-summary__answerItem"
+            optionItem.innerHTML = value
+            answersHolders[1].appendChild(optionItem)
+        })
+    }
 
-                const optionTag = document.createElement("li")
-                optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
-                optionTag.innerHTML = value.split("|")[0]
+    // Third
+    const scaleValues = [
+        "Bajo (Aproximadamente solo un 10% evidencian en sus resultados el logro de los objetivos del curso)",
+        "Deficiente",
+        "Medio-bajo",
+        "Medio (Aproximadamente un 60% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)",
+        "Medio-alto",
+        "Alto (Aproximadamente un 90% de los estudiantes evidencian en sus resultados el logro de los objetivos del curso)"
+    ]
 
-                const optionValue = document.createElement("li")
-                optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
-                optionValue.innerHTML = value.split("|")[1]
+    answersHolders[2].innerHTML = ``
+    if (answers[2] && answers[2].answerValue) {
+        answersHolders[2].innerHTML = `${answers[2].answerValue[0]}. ${scaleValues[parseInt(answers[2].answerValue[0]) - 1]}`
+        document.querySelector(".improve-action-question3").innerHTML = answers[2].answerValue[0]
+    }
 
-                answersHolders[4].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
-                answersHolders[4].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+    // Fourth
+    answersHolders[3].innerHTML = ``
+    if (answers[3] && answers[3].answerValue.length > 0) {
+        answers[3].answerValue.forEach(value => {
+            const optionItem = document.createElement("li")
+            optionItem.className = "memo-summary__answerItem"
+            optionItem.innerHTML = value
+            answersHolders[3].appendChild(optionItem)
+        })
+    }
 
-                if (itemValue <= 3) {
-                    const previousAnswerItem = document.createElement("p")
-                    previousAnswerItem.className = "memo-summary__strategyItem"
-                    previousAnswerItem.innerHTML = value.split("|")[0]
-                    document.querySelector(".improve-action-question5").appendChild(previousAnswerItem)
-                }
-            })
-        }
 
-        // Sixth
-        document.querySelector(".improve-action-question6").innerHTML = ``
-        if (answers[5] && answers[5].answerValue.length > 0) {
-            answers[5].answerValue.forEach((value) => {
-                const itemValue = parseInt(value.split("|")[1])
+    // Fifth
+    answersHolders[4].querySelectorAll(".memo-summary__answerList")[0].innerHTML = ''
+    answersHolders[4].querySelectorAll(".memo-summary__answerList")[1].innerHTML = ''
 
-                const optionTag = document.createElement("li")
-                optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
-                optionTag.innerHTML = value.split("|")[0]
+    document.querySelector(".improve-action-question5").innerHTML = ``
+    if (answers[4] && answers[4].answerValue.length > 0) {
+        answers[4].answerValue.forEach((value) => {
+            const itemValue = parseInt(value.split("|")[1])
 
-                const optionValue = document.createElement("li")
-                optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
-                optionValue.innerHTML = value.split("|")[1]
+            const optionTag = document.createElement("li")
+            optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
+            optionTag.innerHTML = value.split("|")[0]
 
-                answersHolders[5].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
-                answersHolders[5].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+            const optionValue = document.createElement("li")
+            optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
+            optionValue.innerHTML = value.split("|")[1]
 
-                if (itemValue <= 3) {
-                    const previousAnswerItem = document.createElement("p")
-                    previousAnswerItem.className = "memo-summary__strategyItem"
-                    previousAnswerItem.innerHTML = value.split("|")[0]
-                    document.querySelector(".improve-action-question6").appendChild(previousAnswerItem)
-                }
-            })
-        }
+            answersHolders[4].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
+            answersHolders[4].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
 
-        // Seventh
-        answersHolders[6].innerHTML = ``
-        if (answers[6] && answers[6].answerValue.length > 0) {
-            answers[6].answerValue.forEach(value => {
-                const optionItem = document.createElement("li")
-                optionItem.className = "memo-summary__answerItem"
-                optionItem.innerHTML = value
-                answersHolders[6].appendChild(optionItem)
-            })
-        }
+            if (itemValue <= 3) {
+                const previousAnswerItem = document.createElement("p")
+                previousAnswerItem.className = "memo-summary__strategyItem"
+                previousAnswerItem.innerHTML = value.split("|")[0]
+                document.querySelector(".improve-action-question5").appendChild(previousAnswerItem)
+            }
+        })
+    }
 
-        // Eigth
-        if (answers[7] && answers[7].answerValue) {
-            answersHolders[7].innerHTML = answers[7].answerValue[0]
-            document.querySelector(".improve-action-question8").innerHTML = answers[7].answerValue[0]
-        }
 
-        // Ninth
-        if (answers[8] && answers[8].answerValue) {
-            answersHolders[8].innerHTML = answers[8].answerValue[0]
-        }
+    // Sixth
+    answersHolders[5].querySelectorAll(".memo-summary__answerList")[0].innerHTML = ''
+    answersHolders[5].querySelectorAll(".memo-summary__answerList")[1].innerHTML = ''
 
-        // Improve actions
-        if (answers[9] && answers[9].answerValue.length > 0) {
-            answers[9].answerValue.forEach((elem, index) => {
-                const improveActionItem = document.createElement("tr")
-                improveActionItem.className = 'improve-action-item'
-                improveActionItem.innerHTML = `
+    document.querySelector(".improve-action-question6").innerHTML = ``
+    if (answers[5] && answers[5].answerValue.length > 0) {
+        answers[5].answerValue.forEach((value) => {
+            const itemValue = parseInt(value.split("|")[1])
+
+            const optionTag = document.createElement("li")
+            optionTag.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative' : ''}`
+            optionTag.innerHTML = value.split("|")[0]
+
+            const optionValue = document.createElement("li")
+            optionValue.className = `memo-summary__answerItem${itemValue <= 3 ? ' memo-summary__answerItem--negative memo-summary__answerItem--semibold' : ''}`
+            optionValue.innerHTML = value.split("|")[1]
+
+            answersHolders[5].querySelectorAll(".memo-summary__answerList")[0].appendChild(optionTag)
+            answersHolders[5].querySelectorAll(".memo-summary__answerList")[1].appendChild(optionValue)
+
+            if (itemValue <= 3) {
+                const previousAnswerItem = document.createElement("p")
+                previousAnswerItem.className = "memo-summary__strategyItem"
+                previousAnswerItem.innerHTML = value.split("|")[0]
+                document.querySelector(".improve-action-question6").appendChild(previousAnswerItem)
+            }
+        })
+    }
+
+    // Seventh
+    answersHolders[6].innerHTML = ``
+    if (answers[6] && answers[6].answerValue.length > 0) {
+        answers[6].answerValue.forEach(value => {
+            const optionItem = document.createElement("li")
+            optionItem.className = "memo-summary__answerItem"
+            optionItem.innerHTML = value
+            answersHolders[6].appendChild(optionItem)
+        })
+    }
+
+    // Eigth
+    answersHolders[7].innerHTML = ''
+    if (answers[7] && answers[7].answerValue) {
+        answersHolders[7].innerHTML = answers[7].answerValue[0]
+        document.querySelector(".improve-action-question8").innerHTML = answers[7].answerValue[0]
+    }
+
+    // Ninth
+    answersHolders[8].innerHTML = ''
+    if (answers[8] && answers[8].answerValue) {
+        answersHolders[8].innerHTML = answers[8].answerValue[0]
+    }
+
+    // Improve actions
+    document.querySelector(".improve-actions__list").innerHTML = ''
+    if (answers[9] && answers[9].answerValue.length > 0) {
+        answers[9].answerValue.forEach((elem, index) => {
+            const improveActionItem = document.createElement("tr")
+            improveActionItem.className = 'improve-action-item'
+            improveActionItem.innerHTML = `
                 <td>
                     <div class="improve-action-item__number">
                         <span>${index + 1}</span>
@@ -340,28 +371,31 @@ export async function renderMemoseeAnswersQuestions(currentPeriod, currentRole) 
                     <p>${elem.description}</p>
                 </td>
                 `
-                document.querySelector(".improve-actions__list").appendChild(improveActionItem)
-            })
-            const empty = document.querySelector(".improve-actions__empty")
-            empty.classList.add("hidden")
-        }
+            document.querySelector(".improve-actions__list").appendChild(improveActionItem)
+        })
+        const empty = document.querySelector(".improve-actions__empty")
+        empty.classList.add("hidden")
+    }
 
-        // Eleven
-        if (answers[10] && answers[10].answerValue) {
-            answersHolders[10].innerHTML = answers[10].answerValue[0]
-        }
+    // Eleven
+    answersHolders[10].innerHTML =  ''
+    if (answers[10] && answers[10].answerValue) {
+        answersHolders[10].innerHTML = answers[10].answerValue[0]
+    }
 
-        // Eleven
-        if (answers[11] && answers[11].answerValue) {
-            answersHolders[11].innerHTML = answers[11].answerValue[0]
-        }
+    // Eleven
+    answersHolders[11].innerHTML = '' 
+    if (answers[11] && answers[11].answerValue) {
+        answersHolders[11].innerHTML = answers[11].answerValue[0]
+    }
 
-        // Twelve
-        if (answers[11] && answers[11].justification) {
-            document.querySelector(".memo-summary__answerJustification").innerHTML = `
+    // Twelve
+    document.querySelector(".memo-summary__answerJustification").innerHTML = ''
+    if (answers[11] && answers[11].justification) {
+        document.querySelector(".memo-summary__answerJustification").innerHTML = `
                 <span style="font-weight: 600;">Descripción: </span>${answers[11].justification}
             `
-        }
-        hideLoader()
     }
+    hideLoader()
+
 }
