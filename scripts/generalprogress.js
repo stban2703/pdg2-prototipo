@@ -517,7 +517,7 @@ async function renderGeneralAllCharts(currentPeriod) {
             break;
 
         case 'group':
-            initialTitle = "Grupo de "
+            initialTitle = "Bloque de "
             break;
     }
 
