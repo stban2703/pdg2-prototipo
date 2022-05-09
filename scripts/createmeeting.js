@@ -2,6 +2,13 @@ import { createMeeting, getCareerByGroup, getDepartmentInfo, getGroupInfo } from
 import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 
+export function initialCreateMeetingSettings() {
+    const createMeetingForm = document.querySelector('.createmeeting-form')
+    if (createMeetingForm && window.location.href.includes("#createmeeting")) {
+        
+    }
+}
+
 export function onSelectMeetingMode() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
     if (createMeetingForm && window.location.href.includes("#createmeeting")) {

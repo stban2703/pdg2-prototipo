@@ -1,5 +1,5 @@
 import { getInitialAccomplishmentList, getInititalAccomplishmentDepartmentList } from "./accomplishment.js";
-import { onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
+import { initialCreateMeetingSettings, onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
 import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
@@ -217,6 +217,7 @@ function addPageFuncions() {
     getInitialMeetings(currentUser)
     renderMeetingDetails(currentRole)
     onSelectMeetingMode()
+    initialCreateMeetingSettings()
     submitMeeting(currentUser)
 
     // Minutes functions
