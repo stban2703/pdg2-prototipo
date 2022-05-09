@@ -299,7 +299,7 @@ function renderAccomplishmentTeachers(list) {
         const teacherItem = document.createElement('div')
         teacherItem.className = `accomplishment-teacher${teacher.accomplishment === 100 ? ' accomplishment-teacher--secondary' : ''}`
         teacherItem.innerHTML = `
-        <img src="./images/accomplishmentteacher.svg" alt="">
+        <img src="./images/accomplishmentteacher${teacher.accomplishment === 100 ? '' : 'incomplete'}.svg" alt="">
         <section class="accomplishment-teacher__info">
             <h5 class="accomplishment-teacher__name">${teacher.name}</h5>
             <p class="accomplishment-teacher__subject">${teacher.subjectsNames.join("<br>")}</p>
