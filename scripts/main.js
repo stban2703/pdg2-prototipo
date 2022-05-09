@@ -135,6 +135,7 @@ addPageFuncions()
 checkCurrentTab()
 window.addEventListener("hashchange", function () {
     checkCurrentTab()
+    this.window.scrollTo(0, 0)
 }, false)
 
 
@@ -188,8 +189,6 @@ let observer = new MutationObserver(function (mutationsList, observer) {
     })
 });
 observer.observe(pageContent, { characterData: false, childList: true, attributes: false });
-
-
 
 // Mostrar nombre del usuario en pantalla principal
 function displayHomeUserName() {
@@ -296,7 +295,6 @@ function addPageFuncions() {
     // Test
     //submitTestSubject()
 }
-
 
 // Verifica la pantalla actual
 function checkCurrentTab() {
