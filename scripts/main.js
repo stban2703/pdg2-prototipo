@@ -216,7 +216,7 @@ function addPageFuncions() {
 
     // Meeting functions
     getInitialMeetings(currentUser)
-    renderMeetingDetails()
+    renderMeetingDetails(currentRole)
     onSelectMeetingMode()
     submitMeeting(currentUser)
 

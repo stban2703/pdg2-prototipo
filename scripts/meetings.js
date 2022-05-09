@@ -226,10 +226,10 @@ function sortFilterMeetings(meetings, meetingSort, departmentFilter, careerFilte
     renderMeetingsForAdmin(filterCopy)
 }
 
-export async function renderMeetingDetails() {
+export async function renderMeetingDetails(role) {
     const meetingInfoColumns = document.querySelectorAll(".meeting__info-column")
     const meetingAssistants = document.querySelector(".meeting__assistants")
-    const addMeetingMinutesBtn = document.querySelector(".addMeetingMinutesBtn")
+    const addMeetingMinutesBtn = document.querySelector(".alternativeCreateMinutesButton")
     const confirmRejectMeetingSection = document.querySelector(".confirm-reject-meeting")
 
     if (meetingInfoColumns.length > 0 && window.location.href.includes("#meetingdetails")) {
@@ -253,10 +253,7 @@ export async function renderMeetingDetails() {
         confirmMeetingAssistance(meeting)
 
         if (meeting) {
-            const leaderRole = userInfo.role.find(role => {
-                return role === 'leader'
-            })
-            if (leaderRole && userInfo.leaderGroup == meeting.group) {
+            if (role === "leader" && userInfo.leaderGroup == meeting.group) {
                 addMeetingMinutesBtn.classList.remove("hidden")
                 //confirmRejectMeetingSection.classList.add("hidden")
             }

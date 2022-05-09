@@ -1687,6 +1687,10 @@ input[type=button] {
   margin: 1.5rem 0;
 }
 
+.alternativeCreateMinutesButton {
+  margin-bottom: 0;
+}
+
 .link {
   color: #A0A0A0;
 }
