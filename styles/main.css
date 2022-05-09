@@ -2690,6 +2690,7 @@ input[type=button] {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  font-size: 1.5rem;
 }
 
 .meeting-item .seeMeetingBtn p {
