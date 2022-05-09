@@ -383,7 +383,7 @@ input[type=button] {
   color: #757575;
 }
 
-.select-input__field, .scale-select-input {
+.select-input__field, .scale-select-input, .change-period-memo-select {
   background-color: #FFFFFF;
   border: 1px solid #A0A0A0;
   font-family: "Poppins", sans-serif;
@@ -401,11 +401,11 @@ input[type=button] {
   background-position-y: 50%;
 }
 
-.select-input__field:focus, .scale-select-input:focus {
+.select-input__field:focus, .scale-select-input:focus, .change-period-memo-select:focus {
   border-color: #979DFF;
 }
 
-.select-input__field[required] option:first-child, .scale-select-input[required] option:first-child {
+.select-input__field[required] option:first-child, .scale-select-input[required] option:first-child, .change-period-memo-select[required] option:first-child {
   border-color: #979DFF;
 }
 
@@ -1339,6 +1339,20 @@ input[type=button] {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.change-period-memo-select {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  padding-right: 5rem;
+  font-size: 1.8rem;
+  color: #A0A0A0;
+}
+
+.change-period-memo-select:hover {
+  cursor: pointer;
 }
 
 .main-button--primary {

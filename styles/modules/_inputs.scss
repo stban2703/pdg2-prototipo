@@ -568,3 +568,16 @@
         white-space: nowrap;
     }
 }
+
+.change-period-memo-select {
+    @include select-input();
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    padding-right: 5rem;
+    font-size: 1.8rem;
+    color: $silver;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
