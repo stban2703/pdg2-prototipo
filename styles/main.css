@@ -1669,6 +1669,24 @@ input[type=button] {
           animation: rotate 4s linear infinite;
 }
 
+.alternativeAddMeetingButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.8rem 3rem;
+  margin: 1.5rem 0;
+}
+
 .link {
   color: #A0A0A0;
 }
@@ -2587,7 +2605,7 @@ input[type=button] {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  max-width: 38rem;
+  max-width: 45rem;
   background-color: #FFFFFF;
   border-radius: 15px;
   padding: 2rem 2.5rem;

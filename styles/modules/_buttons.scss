@@ -236,3 +236,13 @@
         animation: rotate 4s linear infinite;
     }
 }
+
+.alternativeAddMeetingButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: fit-content;
+    padding: 0.8rem 3rem;
+    margin: 1.5rem 0;
+}
