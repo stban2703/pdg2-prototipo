@@ -42,6 +42,7 @@
 .board-edit-button {
     @include main-button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
     text-align: center;
+    font-size: 1.5rem;
 }
 
 .confirm-reject-button {
