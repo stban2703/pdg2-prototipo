@@ -699,6 +699,7 @@ function addImproveAction(improveactionname, improveactiondescription) {
     }
     renderImproveActions(improveActionsList)
     document.querySelector(".returnToImproveActionButton").click()
+    document.querySelector(".improve-actions").scrollIntoView(true)
 }
 
 function removeImproveAction(index) {
@@ -804,7 +805,6 @@ function addMemoOption(list, checkboxAnswerQuestion, value, answers) {
     })
     renderMemoOption(list, checkboxAnswerQuestion, answers)
 }
-
 
 function renderMemoOption(list, checkboxAnswerQuestion, answers) {
     checkboxAnswerQuestion.innerHTML = ``
