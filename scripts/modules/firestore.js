@@ -927,16 +927,16 @@ export async function submitTestSubject() {
     const subjectRef = doc(collection(firestore, "subjects"))
 
     const subject = {
-        career: "Ingeniería en sistemas",
-        careerId: "uxskEpCmz3V8MzSL0t0F",
+        career: "Ingeniería telemática",
+        careerId: "COnKQIW96G8CLgwSJ3tJ",
         department: "Tecnologías de Información y Comunicaciones",
         departmentId: "MAVz6dkETWG7cb0MM4Of",
-        group: "Programación",
-        groupId: "9oJ4SBaMk6mp1dE53PNj",
+        group: "Comunicaciones",
+        groupId: "ubZfxta3J0wTxqb3G1tL",
         id: subjectRef.id,
-        name: "Programación web",
-        teacher: "Juan Jose Gonzales",
-        teacherId: "dYQEjiQcQDQoBPCTkpVATCBjPi22"
+        name: "Computación y estructuras discretas I",
+        teacher: "Uram Anibal Sosa",
+        teacherId: "BrYDGTcBclMBdX5DnrTD32PP2Vr1"
     }
 
     await setDoc(subjectRef, subject).then(() => {

@@ -214,7 +214,7 @@ function addPageFuncions() {
     changeNotesView()
 
     // Meeting functions
-    getInitialMeetings(currentUser)
+    getInitialMeetings(currentUser, currentRole)
     renderMeetingDetails(currentRole)
     onSelectMeetingMode()
     initialCreateMeetingSettings()

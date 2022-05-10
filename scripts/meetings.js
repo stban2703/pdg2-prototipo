@@ -4,16 +4,18 @@ import { parseTimestampToDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js"
 
-export async function getInitialMeetings(userInfo) {
+export async function getInitialMeetings(userInfo, currentRole) {
     const meetinglistScreen = document.querySelector(".meetinglist-screen")
-    const createMeetingButton = document.querySelector(".addMeetingBtn")
-    const meetingListSection = document.querySelector(".meetinglist-screen__meetings")
-    const meetingListSectionAdmin = document.querySelector(".meetinglist-screen__meetings--admin")
-    const meetingsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--meetings")
 
     if (meetinglistScreen && window.location.href.includes("#meetinglist")) {
         showLoader()
 
+        const createMeetingButton = document.querySelector(".addMeetingBtn")
+        const alternativeCreateMeetingButton = document.querySelector(".alternativeAddMeetingButton")
+
+        const meetingListSection = document.querySelector(".meetinglist-screen__meetings")
+        const meetingListSectionAdmin = document.querySelector(".meetinglist-screen__meetings--admin")
+        const meetingsSettingsForm = document.querySelector(".memoselectsubject-screen__controls--meetings")
 
         const meetingList = await getMeetings()
         meetingList.sort(sortByDateAscending)
@@ -65,11 +67,12 @@ export async function getInitialMeetings(userInfo) {
             groupFilterSelect.appendChild(option)
         })
 
-        /*if (userInfo.role.includes("leader")) {
-            createMeetingButton.classList.remove("hidden")
-        }*/
+        if (currentRole === "leader") {
+            alternativeCreateMeetingButton.classList.remove("hidden")
 
-        if (userInfo.role.includes("admin")) {
+        }
+
+        if (currentRole === "admin") {
             document.querySelector(".section-banner__description").classList.add("hidden")
             meetingListSectionAdmin.classList.remove("hidden")
             meetingListSection.classList.add("hidden")
