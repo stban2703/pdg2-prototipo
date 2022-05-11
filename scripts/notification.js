@@ -35,7 +35,7 @@ export function renderNotificationWindowList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.meetingDate)} a las ${elem.time}!
                         `
                         break;
 
@@ -99,7 +99,7 @@ export function renderNotificationScreenList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.date)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.meetingDate)} a las ${elem.time}!
                     `
                         break;
 

@@ -25,19 +25,20 @@ export async function getCurrentPeriod() {
 }
 
 // Notifications
-export async function createNotification(userId, date, time, group, type, meetingId) {
+export async function createNotification(userId, time, group, type, meetingId, meetingDate) {
     const notificationRef = doc(collection(firestore, `users/${userId}/notifications`))
     const newNotification = {
         id: notificationRef.id,
         type: type,
         group: group,
-        date: date,
+        date: Date.now(),
         time: time,
         status: 'unread'
     }
 
     if (type === "meeting") {
         newNotification.meetingId = meetingId
+        newNotification.meetingDate = meetingDate
     }
 
     await setDoc(notificationRef, newNotification).then(() => {
@@ -48,11 +49,11 @@ export async function createNotification(userId, date, time, group, type, meetin
 
 }
 
-export async function sendNotifications(teacherList, date, time, group, type, meetingId) {
+export async function sendNotifications(teacherList, time, group, type, meetingId, meetingDate) {
     for (let index = 0; index < teacherList.length; index++) {
         const teacher = teacherList[index];
         if (teacher.id) {
-            await createNotification(teacher.id, date, time, group, type, meetingId)
+            await createNotification(teacher.id, time, group, type, meetingId, meetingDate)
         }
     }
     hideLoader()
@@ -391,7 +392,7 @@ export async function createMeeting(name, date, time, duration, mode, place, pla
     await setDoc(meetingRef, newMeeting).then(() => {
         //hideLoader()
         //window.location = "index.html#meetinglist"
-        sendNotifications(teacherList, date, time, group, "meeting", meetingRef.id)
+        sendNotifications(teacherList, time, group, "meeting", meetingRef.id, date)
     }).catch((error) => {
         console.log(error)
     });
@@ -927,16 +928,16 @@ export async function submitTestSubject() {
     const subjectRef = doc(collection(firestore, "subjects"))
 
     const subject = {
-        career: "Ingeniería telemática",
-        careerId: "COnKQIW96G8CLgwSJ3tJ",
-        department: "Tecnologías de Información y Comunicaciones",
-        departmentId: "MAVz6dkETWG7cb0MM4Of",
-        group: "Comunicaciones",
-        groupId: "ubZfxta3J0wTxqb3G1tL",
+        career: "Diseño de medios interactivos",
+        careerId: "ryNPmvun0rcUQmM4Ph6G",
+        department: "Diseño e Innovación",
+        departmentId: "iOdeot79u3raGVUllUoA",
+        group: "Programación",
+        groupId: "9oJ4SBaMk6mp1dE53PNj",
         id: subjectRef.id,
-        name: "Computación y estructuras discretas I",
-        teacher: "Uram Anibal Sosa",
-        teacherId: "BrYDGTcBclMBdX5DnrTD32PP2Vr1"
+        name: "Fundamentos de Programación para Diseño",
+        teacher: "Sebastian Velasco Borrero",
+        teacherId: "KNbee4LoweWN1tI3K13XnsFo6ii1"
     }
 
     await setDoc(subjectRef, subject).then(() => {

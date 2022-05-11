@@ -282,7 +282,7 @@ function addPageFuncions() {
 
     // Notification
     displayNotificationWindow()
-    //createNotification("6XHfR56cSNQMKwoERRIhdSXpN5r2", 1655751600000, "2:00 p.m.", "Comunicación", "note", "gKdFdQRSj7jMkxesx2TE")
+    //createNotification("6XHfR56cSNQMKwoERRIhdSXpN5r2", "2:00 p.m.", "Comunicación", "note", "gKdFdQRSj7jMkxesx2TE", 1655751600000)
 
     // Profile
     renderProfileInfo(userInfo, currentRole)
