@@ -211,13 +211,13 @@ body {
     p {
         font-family: $poppins;
         color: $boulder;
-        font-size: 2rem;
-        margin-top: 2rem;
+        font-size: 1.8rem;
+        margin-top: 1rem;
     }
 
     .loader {
-        width: 20rem;
-        height: 20rem;
+        width: 15rem;
+        height: 15rem;
         border-radius: 50%;
         position: relative;
         animation: rotate 1s linear infinite;
