@@ -932,12 +932,12 @@ export async function submitTestSubject() {
         careerId: "ryNPmvun0rcUQmM4Ph6G",
         department: "Diseño e Innovación",
         departmentId: "iOdeot79u3raGVUllUoA",
-        group: "Programación",
-        groupId: "9oJ4SBaMk6mp1dE53PNj",
+        group: "Interacción",
+        groupId: "1r3C3LAJ8GpCvf3gIE4Q",
         id: subjectRef.id,
-        name: "Fundamentos de Programación para Diseño",
-        teacher: "Sebastian Velasco Borrero",
-        teacherId: "KNbee4LoweWN1tI3K13XnsFo6ii1"
+        name: "Interacción Hombre Computador",
+        teacher: "Mario Rios",
+        teacherId: "oId5UuAM3pcV0zfF4CqUeX4JXf12"
     }
 
     await setDoc(subjectRef, subject).then(() => {

@@ -179,10 +179,19 @@ export async function renderMemoQuestion() {
                             const negativeIndex = positiveOptions.indexOf(elem)
                             positiveOptions.splice(negativeIndex, 1)
                         })
+
+                        answers.forEach(answer => {
+                            const q = positiveOptions.find(elem => {
+                                return elem === answer
+                            })
+                            if (!q) {
+                                positiveOptions.push(answer)
+                            }
+                        })
                         renderMemoOption(positiveOptions, checkboxAnswerQuestion, answers)
                     } else {
                         if (answers.length > 0) {
-
+    
                             let question2Answers = []
                             if (parseInt(currentQuestion.index) === 4) {
                                 question2Answers = await getOptionsFromAnswers("jLpNRX7L6AoHlUMc0HyZ", subjectId, period)
@@ -193,7 +202,6 @@ export async function renderMemoQuestion() {
                                 const q = currentQuestion.options.find(elem => {
                                     return elem === answer
                                 })
-
                                 if (!q) {
                                     currentQuestion.options.push(answer)
                                 }
@@ -796,13 +804,15 @@ function addMemoOption(list, checkboxAnswerQuestion, value, answers) {
     const newOption = value
     list.push(newOption)
     console.log(list)
-    const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
-
-    allOptions.forEach((elem, index) => {
-        if (elem.checked) {
-            selectedOptions.push(index)
-        }
-    })
+    //const allOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
+    const allOptions = document.querySelectorAll("input")
+    if (allOptions) {
+        allOptions.forEach((elem, index) => {
+            if (elem.checked) {
+                selectedOptions.push(index)
+            }
+        })
+    }
     renderMemoOption(list, checkboxAnswerQuestion, answers)
 }
 
@@ -947,7 +957,7 @@ export async function submitMemoQuestionForm(userSubjects) {
                         }
                         break;
                     case "checkbox":
-                        const checkboxOptions = document.querySelector(".memoquestion-form").elements['checkbox[]']
+                        const checkboxOptions = document.querySelectorAll("input")
                         let selectedChecboxOptions = []
 
                         checkboxOptions.forEach(e => {
