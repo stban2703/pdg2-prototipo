@@ -110,19 +110,6 @@ export async function getMeetingInfoForMinute(userInfo) {
             participantListSection.appendChild(participantItem)
         })
 
-        const q = meetingInfo.totalParticipants.find(elem => {
-            return elem.id === userInfo.id
-        })
-        if (!q) {
-            const participantItem = document.createElement("label")
-            participantItem.className = "checkbox-input"
-            participantItem.innerHTML = `
-            <input id="${userInfo.id}" type="checkbox" name="assistants[]" value="${userInfo.name + " " + userInfo.lastname}" checked />
-                ${userInfo.name + " " + userInfo.lastname}
-            `
-            participantListSection.appendChild(participantItem)
-        }
-
         const totalCheckbox = document.querySelectorAll("input[type=checkbox]")
         if (totalCheckbox.length < 2) {
             const participantItem = document.createElement("label")

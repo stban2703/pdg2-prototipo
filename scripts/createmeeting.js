@@ -64,7 +64,6 @@ export async function submitMeeting(userInfo) {
         const deparmentInfo = await getDepartmentInfo(careerInfo.departmentId)
         const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
         hideLoader()
-        //'20:10'
 
         createMeetingForm.addEventListener('submit', (event) => {
             event.preventDefault()
