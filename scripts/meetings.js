@@ -83,14 +83,14 @@ export async function getInitialMeetings(userInfo, currentRole) {
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
             document.querySelector(".meetinglist-screen__header").classList.add("hidden")
-            renderMeetings(listCopy)
+            renderMeetings(listCopy, currentRole)
         }
 
         hideLoader()
     }
 }
 
-function renderMeetings(list) {
+function renderMeetings(list, currentRole) {
     const pendingList = document.querySelector(".meetinglist-screen__list--pending")
     const finishedList = document.querySelector(".meetinglist-screen__list--finished")
 
@@ -113,16 +113,19 @@ function renderMeetings(list) {
                     <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
                     <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
                 </section>
-                <section class="meeting-item__controls">
+            </section>
+            <section class="meeting-item__controls">
+                    ${meeting.minutesId.length === 0 && currentRole === 'leader' ?
+                    `<a href="#createmeetingminutes?${meeting.id}" class="createMeetingMinutesBtn board-edit-button--secondary">
+                        <p>Crear acta</p>
+                    </a>` : ``}
                     ${meeting.minutesId.length > 0 ?
-                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                    `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
                         <p>Ver acta</p>
                     </a>`:
-                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                    `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                         <p>Ver detalle</p>
-                    </a>`}
-                    
-                </section>
+                    </a>`}                    
             </section>
         `
 
@@ -159,16 +162,15 @@ function renderMeetingsForAdmin(list) {
                     <p class="meeting-item__subtitle">Modalidad: <span>${meeting.mode}</span></p>
                     <p class="meeting-item__subtitle">${meeting.mode == 'Virtual' ? 'Medio' : 'Lugar'}: <span>${meeting.mode == 'Virtual' ? meeting.platform : meeting.place}</span></p>
                 </section>
-                <section class="meeting-item__controls">
+            </section>
+            <section class="meeting-item__controls">
                     ${meeting.minutesId.length > 0 ?
-                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                    `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
                         <p>Ver acta</p>
                     </a>`:
-                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                    `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                         <p>Ver detalle</p>
-                    </a>`}
-                    
-                </section>
+                    </a>`}                    
             </section>
         `
 

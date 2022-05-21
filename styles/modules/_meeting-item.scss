@@ -54,8 +54,21 @@
 
     &__controls {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        //align-items: flex-end;
+    }
+
+    .createMeetingMinutesBtn {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-top: auto;
+        width: fit-content;
+        font-size: 1.5rem;
+        p {
+            white-space: nowrap;
+        }
     }
 
     .seeMeetingBtn {

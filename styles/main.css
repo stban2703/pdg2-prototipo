@@ -242,7 +242,7 @@ input[type=button] {
   zoom: 1;
 }
 
-.submit-file-input .seudoInputButton, .main-button--primary, .main-button--secondary, .small-button--primary, .small-button--secondary, .board-edit-button, .confirm-reject-button, .notes-view-button, .listen-audio-button, .record-audio-again-button {
+.submit-file-input .seudoInputButton, .main-button--primary, .main-button--secondary, .small-button--primary, .small-button--secondary, .board-edit-button, .board-edit-button--secondary, .confirm-reject-button, .notes-view-button, .listen-audio-button, .record-audio-again-button {
   width: 100%;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -1442,6 +1442,20 @@ input[type="time"]:valid:before {
 
 .board-edit-button:hover {
   background-color: #646dff;
+}
+
+.board-edit-button--secondary {
+  background-color: #FDB572;
+  -webkit-box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+          box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.board-edit-button--secondary:hover {
+  background-color: #fc9b40;
 }
 
 .confirm-reject-button {
@@ -2712,13 +2726,28 @@ input[type="time"]:valid:before {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 1rem;
+}
+
+.meeting-item .createMeetingMinutesBtn {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1.5rem;
+}
+
+.meeting-item .createMeetingMinutesBtn p {
+  white-space: nowrap;
 }
 
 .meeting-item .seeMeetingBtn {
