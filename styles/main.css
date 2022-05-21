@@ -1359,6 +1359,11 @@ input[type="time"]:focus:before {
   content: "";
 }
 
+input[type="time"]:valid:before {
+  width: 0;
+  content: "";
+}
+
 .change-period-memo-select {
   width: -webkit-fit-content;
   width: -moz-fit-content;

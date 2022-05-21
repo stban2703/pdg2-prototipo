@@ -587,6 +587,11 @@ input[type="time"]:focus:before {
     content: "";
 }
 
+input[type="time"]:valid:before {
+    width: 0;
+    content: "";
+}
+
 .change-period-memo-select {
     @include select-input();
     width: fit-content;
