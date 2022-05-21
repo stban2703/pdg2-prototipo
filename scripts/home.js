@@ -1,6 +1,7 @@
 import { getAllAnswersBySubjectAndPeriod, getCareerInfo, getDepartmentCareers, getDepartments, getGroupInfo, getGroupSubjects, getSubjectsByDepartmentId, getSubjectsByView, getTeacherById } from "./modules/firestore.js";
 import { hideItem } from "./utils/display-items.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
+import { setLocalStorage } from "./utils/ls.js";
 import { sortByQuestionIndex } from "./utils/sort.js";
 
 export function showShortcuts(role) {
@@ -256,58 +257,61 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
             homeGoToMemoButton.innerHTML = `
             <span>Ver memorandos</span>
             `
-            const departments = await getDepartments()
-            const departmentProgressList = []
+            const localHomeProgress = localStorage.getItem('homeprogress')
 
-            for (let index = 0; index < departments.length; index++) {
-                const department = departments[index];
-                const subjects = await getSubjectsByView(`departmentId`, department.id)
-                const teachersIds = []
-                subjects.forEach(subject => {
-                    const q = teachersIds.find(id => {
-                        return subject.teacherId === id
+            if (!localHomeProgress) {
+                const departments = await getDepartments()
+                const departmentProgressList = []
+
+                for (let index = 0; index < departments.length; index++) {
+                    const department = departments[index];
+                    const subjects = await getSubjectsByView(`departmentId`, department.id)
+                    const teachersIds = []
+                    subjects.forEach(subject => {
+                        const q = teachersIds.find(id => {
+                            return subject.teacherId === id
+                        })
+                        if (!q) {
+                            teachersIds.push(subject.teacherId)
+                        }
                     })
-                    if (!q) {
-                        teachersIds.push(subject.teacherId)
+
+                    const teachers = []
+                    for (let index = 0; index < teachersIds.length; index++) {
+                        const id = teachersIds[index];
+                        const q = await getTeacherById(id)
+                        teachers.push(q)
                     }
-                })
 
-                const teachers = []
-                for (let index = 0; index < teachersIds.length; index++) {
-                    const id = teachersIds[index];
-                    const q = await getTeacherById(id)
-                    teachers.push(q)
+                    let departmentProgress = 0
+                    let completeCounter = 0
+                    let incompleteCounter = 0
+
+                    teachers.forEach(t => {
+                        t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
+                    })
+
+                    let totalCounter = completeCounter + incompleteCounter
+                    if (totalCounter > 0) {
+                        departmentProgress = Math.round((completeCounter / totalCounter) * 100)
+                    } else {
+                        departmentProgress = 0
+                    }
+
+                    const object = {
+                        name: department.name,
+                        id: department.id,
+                        progress: departmentProgress
+                    }
+                    departmentProgressList.push(object)
                 }
 
-                let departmentProgress = 0
-                let completeCounter = 0
-                let incompleteCounter = 0
+                homeDepartmentList.innerHTML = ``
 
-                teachers.forEach(t => {
-                    t.accomplishment >= 100 ? completeCounter++ : incompleteCounter++
-                })
-
-                let totalCounter = completeCounter + incompleteCounter
-                if (totalCounter > 0) {
-                    departmentProgress = Math.round((completeCounter / totalCounter) * 100)
-                } else {
-                    departmentProgress = 0
-                }
-
-                const object = {
-                    name: department.name,
-                    id: department.id,
-                    progress: departmentProgress
-                }
-                departmentProgressList.push(object)
-            }
-
-            homeDepartmentList.innerHTML = ``
-
-            departmentProgressList.forEach(department => {
-                const departmentThumbnail = document.createElement("div")
-                departmentThumbnail.className = "deparment-thumbnail"
-                departmentThumbnail.innerHTML = `
+                departmentProgressList.forEach(department => {
+                    const departmentThumbnail = document.createElement("div")
+                    departmentThumbnail.className = "deparment-thumbnail"
+                    departmentThumbnail.innerHTML = `
                     <section class="deparment-thumbnail__info">
                         <section class="deparment-thumbnail__icon-title">
                             <h5 class="deparment-thumbnail__title">${department.name}</h5>
@@ -329,24 +333,37 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
                         </a>
                     </section>
                 `
-                homeDepartmentList.appendChild(departmentThumbnail)
-            })
+                    homeDepartmentList.appendChild(departmentThumbnail)
+                })
 
-            let sum = 0
-            departmentProgressList.forEach(d => {
-                sum += d.progress
-            })
+                let sum = 0
+                departmentProgressList.forEach(d => {
+                    sum += d.progress
+                })
 
-            let allDepartmentProgress = Math.round((sum / (departmentProgressList.length * 100)) * 100)
+                let allDepartmentProgress = Math.round((sum / (departmentProgressList.length * 100)) * 100)
 
-            const progressContainer = document.querySelector(".memo-thumbnail__progress")
-            progressContainer.innerHTML = `
-            <div class="memo-pie custom-pie"
-                data-pie='{ "colorSlice": "#979DFF", "percent": ${allDepartmentProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
-            </div>
-            `
-            const circle = new CircularProgressBar(`memo-pie`)
-            circle.initial()
+
+                setLocalStorage('homeprogress', allDepartmentProgress)
+                const progressContainer = document.querySelector(".memo-thumbnail__progress")
+                progressContainer.innerHTML = `
+                <div class="memo-pie custom-pie"
+                    data-pie='{ "colorSlice": "#979DFF", "percent": ${allDepartmentProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+                </div>
+                `
+                const circle = new CircularProgressBar(`memo-pie`)
+                circle.initial()
+                
+            } else {
+                const progressContainer = document.querySelector(".memo-thumbnail__progress")
+                progressContainer.innerHTML = `
+                <div class="memo-pie custom-pie"
+                    data-pie='{ "colorSlice": "#979DFF", "percent": ${localHomeProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+                </div>
+                `
+                const circle = new CircularProgressBar(`memo-pie`)
+                circle.initial()
+            }
         }
         hideLoader()
     }
