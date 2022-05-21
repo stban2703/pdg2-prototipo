@@ -47,6 +47,8 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
     if (homeScreen) {
         const homescreenSubjectList = homeScreen.querySelector(".home-screen__subjectList")
         const homeDepartmentList = homeScreen.querySelector(".home-screen__departmentList")
+        const homeGoToMemoButton = document.querySelector(".homeGoToMemoButton")
+
         showLoader()
 
         if (roles === "teacher") {
@@ -141,7 +143,6 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
             roleShortcutSection.classList.remove("hidden")
             const roleShortcutsTitle = document.querySelector(".roleShortcutsTitle")
             const roleShortCutSectionList = document.querySelector(".home-screen__roleShortcutsList")
-
             roleShortCutSectionList.innerHTML = ``
 
             let roleItems = []
@@ -227,19 +228,34 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
 
         // Render progress
         if (roles === "boss") {
+            homeGoToMemoButton.setAttribute('href', `#generalselect?boss_${userInfo.bossDepartmentId}`)
+            homeGoToMemoButton.innerHTML = `
+            <span>Ver estadísticas</span>
+            `
             await getViewProgress('departmentId', userInfo.bossDepartmentId)
         }
 
         if (roles === "principal") {
+            homeGoToMemoButton.setAttribute('href', `#generalselect?principal_${userInfo.principalCareerId}`)
+            homeGoToMemoButton.innerHTML = `
+            <span>Ver estadísticas</span>
+            `
             await getViewProgress('careerId', userInfo.principalCareerId)
         }
 
         if (roles === "leader") {
+            homeGoToMemoButton.setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
+            homeGoToMemoButton.innerHTML = `
+            <span>Ver memorandos</span>
+            `
             const groupSubjects = await getGroupSubjects(userInfo.leaderGroupId)
             await renderViewProgress(groupSubjects)
         }
 
         if (roles === "admin") {
+            homeGoToMemoButton.innerHTML = `
+            <span>Ver memorandos</span>
+            `
             const departments = await getDepartments()
             const departmentProgressList = []
 
