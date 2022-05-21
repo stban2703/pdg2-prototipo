@@ -28,3 +28,18 @@ export function parseMilitaryTimeToStandard(time) {
     let timeValue = standarHour + formattedMinutes + (hours >= 12 ? " p.m." : " a.m.")
     return timeValue
 }
+
+export function parseDateFromPickerToTimestamp(date, time) {
+    const monthList = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    const dateParts = date.split(" ")
+    const day = dateParts[0]
+    const monthIndex = monthList.findIndex(m => {
+        return m === dateParts[1]
+    })
+    const month = (monthIndex + 1 < 10) ? "0" + (monthIndex + 1) : "" + (monthIndex + 1)
+    const year = dateParts[2]
+    const stringDate = year + "-" + month + "-" + day
+    const formattedDate = new Date(stringDate + "T" + time + ":00")
+    const timestamp = formattedDate.getTime()
+    return timestamp
+}

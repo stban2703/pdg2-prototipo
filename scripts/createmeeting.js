@@ -1,11 +1,22 @@
 import { createMeeting, getCareerByGroup, getDepartmentInfo, getGroupInfo } from "./modules/firestore.js"
-import { parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
+import { parseDateFromPickerToTimestamp, parseDateToTimestamp, parseMilitaryTimeToStandard } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 
 export function initialCreateMeetingSettings() {
     const createMeetingForm = document.querySelector('.createmeeting-form')
     if (createMeetingForm && window.location.href.includes("#createmeeting")) {
-        
+        const meetingDatePicker = new Vue({
+            el: '#meeting-date-picker',
+            data() {
+                return {
+                    es: vdp_translation_es.js
+                }
+            },
+            components: {
+                vuejsDatepicker
+            }
+        })
+
     }
 }
 
@@ -65,7 +76,8 @@ export async function submitMeeting(userInfo) {
             const url = createMeetingForm.url.value
             const place = createMeetingForm.place.value
 
-            let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
+            //let timestamp = parseDateToTimestamp(new Date("" + date + "T" + time + ":00"))
+            let timestamp = parseDateFromPickerToTimestamp(date, time)
             let standarTime = parseMilitaryTimeToStandard(time)
 
             //console.log(new Date(("" + date + "T" + time + ":00").replace(/-/g, '\/').replace(/T.+/, '')))

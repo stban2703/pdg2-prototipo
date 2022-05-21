@@ -1,0 +1,29 @@
+.date-picker {
+    position: relative;
+    width: 100%;
+
+    &__label {
+        position: absolute;
+        transform: translate(0%, -50%);
+        top: 0;
+        left: 0.5rem;
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+        font-weight: $bold;
+        @include input-label($input-label-color);
+        color: $input-label-valid-color;
+    }
+
+    input {
+        @include date-time-input();
+        outline-color: $main-color;
+    }
+
+    .vdp-datepicker__calendar {
+        width: 100%;
+        min-width: 30rem;
+        font-family: $poppins;
+        font-size: 1.6rem;
+        color: $boulder;
+    }
+}

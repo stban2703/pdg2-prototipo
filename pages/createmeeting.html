@@ -46,16 +46,20 @@
                     autocomplete="off">
                 <label class="text-input__label" for="name">Nombre</label>
             </div>
-            <div class="date-time-input createmeeting-form__dateInput">
+            <div id="meeting-date-picker" class="date-picker">
+                <vuejs-datepicker :language="es" name="date"></vuejs-datepicker>
+                <label class="date-picker__label" for="time">Fecha</label>
+            </div>
+            <!--<div class="date-time-input createmeeting-form__dateInput">
                 <input id="date" class="date-time-input__field" type="date" name="date" placeholder=" " required
                     autocomplete="off">
                 <label class="date-time-input__label" for="date">Fecha</label>
-            </div>
+            </div>-->
         </section>
         <section class="createmeeting-form__section">
             <div class="date-time-input createmeeting-form__timeInput">
-                <input id="time" class="date-time-input__field meeting-time-input" type="time" name="time" placeholder=" " required
-                    autocomplete="off">
+                <input id="time" class="date-time-input__field meeting-time-input" type="time" name="time"
+                    placeholder=" " required autocomplete="off">
                 <label class="date-time-input__label" for="time">Hora</label>
             </div>
             <div class="select-input createmeeting-form__select">
