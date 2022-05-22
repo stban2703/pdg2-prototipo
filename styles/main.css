@@ -7323,6 +7323,14 @@ input[type="time"]:valid:before {
   color: #979DFF;
 }
 
+.memo-summary__title--pink {
+  color: #FF89D0;
+}
+
+.memo-summary__title--big {
+  font-size: 2.6rem;
+}
+
 .memo-summary__subsection {
   margin-left: 4.2rem;
   display: -webkit-box;
