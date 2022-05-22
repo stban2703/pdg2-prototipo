@@ -336,12 +336,14 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
         showLoader()
         const subjectTitle = document.querySelector('.progresssubject-screen__info--subjectName')
         const periodTitle = document.querySelector('.progresssubject-screen__info--subjectPeriod')
+        const teacherTitle = document.querySelector('.progresssubject-screen__info--subjectTeacher')
 
         const subjectId = window.location.hash.split("?")[1]
         const subjectInfo = await getSubcjectInfo(subjectId)
 
         subjectTitle.innerHTML = subjectInfo.name
         periodTitle.innerHTML = period
+        teacherTitle.innerHTML = subjectInfo.teacher
 
         const improveActions = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
         if (improveActions.length > 0) {

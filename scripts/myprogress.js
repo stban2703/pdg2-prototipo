@@ -11,6 +11,10 @@ export async function getInitialProgressInfo(currentPeriod) {
         document.querySelector(".progresssubject-screen__info--subjectName").innerHTML = subject.name
         document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
+        const teacherTitle = document.querySelector('.progresssubject-screen__info--subjectTeacher')
+        if(teacherTitle) {
+            teacherTitle.innerHTML = subject.teacher
+        }
 
         // Add href to go to improve action
         const goToImproveActionsButtons = progressSubjectScreen.querySelectorAll(".goToImproveActionsButton")
