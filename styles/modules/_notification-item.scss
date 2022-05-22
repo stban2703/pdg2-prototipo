@@ -46,6 +46,10 @@
             border: 1px solid $secondary-color;
             color: $secondary-color;
             box-shadow: none;
+
+            &:hover {
+                color: $white;
+            }
         }
     }
 }

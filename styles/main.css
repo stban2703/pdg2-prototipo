@@ -3933,6 +3933,13 @@ input[type="time"]:valid:before {
       align-self: flex-end;
 }
 
+.memo-improve-actions--alt {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
 .memo-section-progress-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4615,6 +4622,10 @@ input[type="time"]:valid:before {
   color: #FDB572;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.notification-item--read a:hover {
+  color: #FFFFFF;
 }
 
 .select-role {
@@ -7187,6 +7198,7 @@ input[type="time"]:valid:before {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 2rem;
 }
 
 .progress-section__chartcontainer {

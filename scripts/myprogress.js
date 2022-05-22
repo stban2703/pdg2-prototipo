@@ -13,9 +13,11 @@ export async function getInitialProgressInfo(currentPeriod) {
 
 
         // Add href to go to improve action
-        const goToImproveActionsButton = progressSubjectScreen.querySelector(".goToImproveActionsButton")
-        if (goToImproveActionsButton && window.location.href.includes("#generalspecific")) {
-            goToImproveActionsButton.setAttribute('href', `#generalimproveactions?${subjectId}`)
+        const goToImproveActionsButtons = progressSubjectScreen.querySelectorAll(".goToImproveActionsButton")
+        if (goToImproveActionsButtons && window.location.href.includes("#generalspecific")) {
+            goToImproveActionsButtons.forEach(button => {
+                button.setAttribute('href', `#generalimproveactions?${subjectId}`)
+            })
         }
 
         // First questions

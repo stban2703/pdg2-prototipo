@@ -144,6 +144,7 @@ export function renderNotificationDetails(notificationList, userId) {
     const notificationDetailsSection = document.querySelector(".notification-screen__details")
 
     if (notificationDetailsSection) {
+        showLoader()
         const notificationId = window.location.hash.split("?")[1]
         const info = notificationList.find(elem => {
             return elem.id === notificationId
@@ -214,6 +215,7 @@ export function renderNotificationDetails(notificationList, userId) {
                 })
             }
         }
+        hideLoader()
     }
 }
 

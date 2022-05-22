@@ -56,4 +56,8 @@
             align-self: flex-end;
         }
     }
+
+    &--alt {
+        flex-direction: row;
+    }
 }
