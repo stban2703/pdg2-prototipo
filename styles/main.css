@@ -7577,6 +7577,25 @@ input[type="time"]:valid:before {
   gap: 2rem;
 }
 
+.memo-summary__answerControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.memo-summary__answerControls a {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 .note-week {
   display: -webkit-box;
   display: -ms-flexbox;

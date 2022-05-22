@@ -184,7 +184,7 @@ export async function getInitialMemoSeeAnswersQuestions(currentPeriod, currentRo
                     <img src="./images/improveactionscommentsicon.svg" alt="">
                     <p class="memo-improve-actions__title">Agregar comentario</p>
                 </section>
-                <a href="#generalimproveactions?${subjectId}" class="small-button small-button--secondary goToImproveActionsButton">
+                <a class="small-button small-button--secondary goToImproveActionsButton">
                     <span>Ir</span>
                 </a>
             `
@@ -198,13 +198,17 @@ export async function getInitialMemoSeeAnswersQuestions(currentPeriod, currentRo
                     <span>Ver</span>
                 </a>
             `
-            const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
-            goToImproveActionsButton.addEventListener('click', () => {
+            //const goToImproveActionsButton = document.querySelector(".goToImproveActionsButton")
+            /*goToImproveActionsButton.addEventListener('click', () => {
                 currentMemoseeAnswerTab = 2
                 renderMemoseeAnswerTab()
                 answersHolders[9].scrollIntoView(true)
-            })
+            })*/
         }
+        const goToImproveActionsButtons = document.querySelectorAll(".goToImproveActionsButton")
+        goToImproveActionsButtons.forEach(button => {
+            button.setAttribute('href', `#generalimproveactions?${subjectId}`)
+        })
         renderMemoseeAnswersQuestions(answers)
 
         const periodSelect = document.querySelector(".change-period-memo-select")
