@@ -15,7 +15,7 @@ export async function getInitialGeneralSelect(userInfo, currentRole) {
         switch (currentRole) {
             case "leader":
                 const groupInfo = await getGroupInfo(userInfo.leaderGroupId)
-                generalSelectSectionTitle.innerHTML = `Progreso general<br>${groupInfo.name}`
+                generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>${groupInfo.name}`
 
                 generalselectScreenList.innerHTML = `
                 
@@ -51,7 +51,7 @@ export async function getInitialGeneralSelect(userInfo, currentRole) {
 
             case "principal":
                 const careerInfo = await getCareerInfo(userInfo.principalCareerId)
-                generalSelectSectionTitle.innerHTML = `Progreso general<br>${careerInfo.name}`
+                generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>${careerInfo.name}`
 
                 generalselectScreenList.innerHTML = `
                 
@@ -87,7 +87,7 @@ export async function getInitialGeneralSelect(userInfo, currentRole) {
 
             case "boss":
                 const departmentInfo = await getDepartmentInfo(userInfo.bossDepartmentId)
-                generalSelectSectionTitle.innerHTML = `Progreso general<br>Departamento de ${departmentInfo.name}`
+                generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>Departamento de ${departmentInfo.name}`
 
                 generalselectScreenList.innerHTML = `
                 
@@ -122,7 +122,7 @@ export async function getInitialGeneralSelect(userInfo, currentRole) {
                 break;
 
             case "admin":
-                generalSelectSectionTitle.innerHTML = `Progreso general<br>Facultad de Ingeniería`
+                generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>Facultad de Ingeniería`
 
                 generalselectScreenList.innerHTML = `
                 
@@ -211,7 +211,7 @@ export async function getInitialGeneralCareer() {
         hideLoader()
 
         const generalSelectSectionTitle = document.querySelector(".section-banner__title")
-        generalSelectSectionTitle.innerHTML = `Progreso general<br>Departamento de ${departmentInfo.name}`
+        generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>Departamento de ${departmentInfo.name}`
 
         const generalCareerListContainer = document.querySelector(".generalselect-screen__list--subjects")
         generalCareerListContainer.innerHTML = ``
@@ -249,10 +249,10 @@ export async function getInitialGeneralSubjets(currentRole) {
         }
 
         const generalSelectSectionTitle = document.querySelector(".section-banner__title")
-        generalSelectSectionTitle.innerHTML = `Progreso general<br>${viewInfo.name}`
+        generalSelectSectionTitle.innerHTML = `Estadísticas generales<br>${viewInfo.name}`
 
         const generalSelectSectionDescription = document.querySelector(".generalselect-screen__description")
-        generalSelectSectionDescription.innerHTML = `Selecciona el <span style="font-weight: 600;">curso de ${viewInfo.name}</span> que deseas observar el progreso`
+        generalSelectSectionDescription.innerHTML = `Selecciona el <span style="font-weight: 600;">curso de ${viewInfo.name}</span> que deseas observar`
 
         const subjectsForm = generalselectScreenSubjects.querySelector(".memoselectsubject-screen__controls")
 
@@ -549,9 +549,9 @@ async function renderGeneralAllCharts(currentPeriod) {
     }
 
     if (viewId === "general") {
-        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>Facultad de ingeniería`
+        document.querySelector(".section-banner__title").innerHTML = `Estadísticas generales<br>Facultad de ingeniería`
     } else {
-        document.querySelector(".section-banner__title").innerHTML = `Progreso general<br>${initialTitle}${viewInfo.name}`
+        document.querySelector(".section-banner__title").innerHTML = `Estadísticas generales<br>${initialTitle}${viewInfo.name}`
     }
     document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 

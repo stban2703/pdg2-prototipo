@@ -258,7 +258,7 @@ async function renderMemoSections(memoQuestions, groupList, memoPeriod, subjectI
     const generalMemoProgressPercent = (firstSectionPercent + secondSectionPercent + thirdSectionPercent) / 3;
     const progressContainer = document.querySelector(".memoprogress-item--general")
     progressContainer.innerHTML = `
-    <p class="memoprogress-item__title">Avance del curso:</p>
+    <p class="memoprogress-item__title">Avance del memorando:</p>
     <div class="pie custom-pie" data-pie='{ "colorSlice": "#FDB572", "percent": ${generalMemoProgressPercent}, "colorCircle": "#FFF2E5", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#FDB572", "round": true, "stroke": 10}'></div>
     `
     const circle = new CircularProgressBar("pie");
