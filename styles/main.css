@@ -7260,6 +7260,7 @@ input[type="time"]:valid:before {
       -ms-flex-align: center;
           align-items: center;
   gap: 2rem;
+  margin-left: 4rem;
 }
 
 .progress-section__chartcontainer {
