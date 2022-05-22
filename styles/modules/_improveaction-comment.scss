@@ -37,6 +37,23 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    position: relative;
+
+    &__deleteButton {
+        padding: 0;
+        position: absolute;
+        width: fit-content;
+        right: 0;
+        background: none;
+        border: none;
+        opacity: 0;
+
+        img {
+            max-width: none;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
 
     &__date {
         font-family: $poppins;
@@ -50,5 +67,11 @@
         font-size: 1.8rem;
         font-weight: $light;
         color: $mineshaft;
+    }
+
+    &:hover {
+        .improveaction-user-comment__deleteButton {
+            opacity: 1;
+        }
     }
 }

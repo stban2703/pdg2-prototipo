@@ -4916,6 +4916,25 @@ input[type="time"]:valid:before {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+}
+
+.improveaction-user-comment__deleteButton {
+  padding: 0;
+  position: absolute;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  right: 0;
+  background: none;
+  border: none;
+  opacity: 0;
+}
+
+.improveaction-user-comment__deleteButton img {
+  max-width: none;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .improveaction-user-comment__date {
@@ -4930,6 +4949,10 @@ input[type="time"]:valid:before {
   font-size: 1.8rem;
   font-weight: 300;
   color: #363636;
+}
+
+.improveaction-user-comment:hover .improveaction-user-comment__deleteButton {
+  opacity: 1;
 }
 
 .progress-scale-value {

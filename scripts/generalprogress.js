@@ -1,4 +1,4 @@
-import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getGroupSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { createImproveActionComment, deleteComment, getAllAnswersByPeriod, getAllAnswersByQuestion, getAllAnswersByQuestionAndPeriod, getAllAnswersByViewTypeAndPeriod, getAllAnswersByViewTypeAndQuestion, getCareerInfo, getCareerSubjects, getDepartmentCareers, getDepartmentInfo, getDepartments, getGroupInfo, getGroupSubjects, getHistoryImproveActions, getImproveActionComment, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
@@ -453,7 +453,7 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
             })
 
             userComments.sort(sortByDateDescending)
-            if (userComments) {
+            if (userComments.length > 0) {
                 //openAddCommentButton.classList.add("hidden")
                 const commentContainer = document.querySelector(".improve-actions__commentContainer")
                 commentContainer.classList.remove("hidden")
@@ -462,14 +462,21 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
                     const commentItem = document.createElement('div')
                     commentItem.className = "improveaction-user-comment"
                     commentItem.innerHTML = `
+                    <button class="improveaction-user-comment__deleteButton">
+                        <img src="./images/deleteagreement.svg" alt="" />
+                    </button>
                     <p class="improveaction-user-comment__date">${parseTimestampToDate(c.date)}</p>
                     <p class="improveaction-user-comment__comment">${c.comment}</p>
                     <div class="improve-actions__commentStatus${c.status === 'read' ? ' improve-actions__commentStatus--read' : ''}">
                         <p>${c.status === 'read' ? 'Leído por el docente' : 'No leído por el docente'}</p>
                     </div>
                     `
-
                     commentContainer.appendChild(commentItem)
+                    const deleteCommentButton = commentItem.querySelector(".improveaction-user-comment__deleteButton")
+                    deleteCommentButton.addEventListener('click', () => {
+                        showLoader()
+                        deleteComment(c.id)
+                    })
                 })
                 //commentContainer.innerHTML = 
             }

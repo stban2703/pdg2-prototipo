@@ -201,6 +201,15 @@ export async function createImproveActionComment(subjectId, period, userInfo, ro
     });
 }
 
+export async function deleteComment(commentId) {
+    await deleteDoc(doc(firestore, "improveactionscomments", commentId)).then(() => {
+        hideLoader()
+        window.location.reload()
+    }).catch(error => {
+        console.log(error)
+    });
+}
+
 export async function getImproveActionComment(subjectId, currentPeriod) {
     const q = query(collection(firestore, "improveactionscomments"), where("subjectId", "==", "" + subjectId), where("period", "==", currentPeriod))
     const querySnapshot = await getDocs(q);
