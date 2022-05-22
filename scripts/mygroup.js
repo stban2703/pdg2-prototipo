@@ -25,6 +25,7 @@ function renderMyGroupSubjects(list) {
         subjectItem.className = "memo-subject"
         subjectItem.innerHTML = `
         <h5 class="memo-subject__title">${subject.name}</h5>
+        <p class="memo-subject__teacher">${subject.teacher}</p>
         <a class="memo-subject__button small-button small-button--secondary" href="#memoseeanswers?${subject.id}">
             <span>Seleccionar</span>
         </a>
