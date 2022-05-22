@@ -7,6 +7,14 @@ export function parseTimestampToDate(timestamp) {
     return `${day} ${month} ${year}`
 }
 
+export function parseTimestampToIcsDate(timestamp, time) {
+    let date = new Date(timestamp)
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+    return `${month}/${day}/${year} ${time}`
+}
+
 export function parseTimestampToFullDate(timestamp) {
     let date = new Date(timestamp)
     let weekDays = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"]
@@ -36,7 +44,7 @@ export function parseMilitaryTimeToStandard(time) {
         standarHour = "12";
     }
     let formattedMinutes = (minutes < 10) ? ":0" + minutes : ":" + minutes
-    let timeValue = standarHour + formattedMinutes + (hours >= 12 ? " p.m." : " a.m.")
+    let timeValue = standarHour + formattedMinutes + (hours >= 12 ? " pm" : " am")
     return timeValue
 }
 

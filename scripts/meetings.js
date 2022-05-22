@@ -1,6 +1,6 @@
 import { userInfo } from "./main.js"
 import { getMeetingDetails, getMeetings, updateMeetingAssistants } from "./modules/firestore.js"
-import { parseTimestampToDate } from "./utils/date-format.js"
+import { parseTimestampToDate, parseTimestampToIcsDate } from "./utils/date-format.js"
 import { hideLoader, showLoader } from "./utils/loader.js"
 import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js"
 
@@ -244,9 +244,7 @@ export async function renderMeetingDetails(role) {
 
         addMeetingMinutesBtn.href = `#createmeetingminutes?${meetingId}`
 
-
         const participantsCopy = [...meeting.confirmedParticipants]
-
         const currentParticipant = participantsCopy.find((m) => {
             return m.id == userInfo.id
         })
@@ -308,6 +306,39 @@ export async function renderMeetingDetails(role) {
         } else {
             meetingInfoColumns[0].innerHTML = `<p class="subtitle subtitle--semibold"><span>No se encontró la reunión</span></p>`
         }
+
+        const downloadMeetingButton = document.querySelector(".downloadMeetingBtn")
+        downloadMeetingButton.addEventListener('click', () => {
+            const parsedIcsStartDate = parseTimestampToIcsDate(meeting.date, meeting.time)
+            //console.log(parsedIcsStartDate)
+
+            let startTimeHour = parseInt(meeting.time.split(":")[0])
+            let durationValue = parseInt(meeting.duration.split(" ")[0])
+            let amPm = meeting.time.split(" ")[1]
+
+            let endTimeHour = startTimeHour + durationValue
+            let timeArray = [13, 14]
+            let index = 0
+            if(endTimeHour > 12) {
+                index = timeArray.findIndex(e => {
+                    return e === endTimeHour
+                })
+                endTimeHour = index + 1
+                amPm = "pm"
+            }
+
+            let stringEndTime = endTimeHour + ":" + meeting.time.split(":")[1].split(" ")[0] + " " + amPm
+            const parsedIcsEndDate = parseTimestampToIcsDate(meeting.date, stringEndTime)
+
+            console.log(parsedIcsStartDate)
+            console.log(parsedIcsEndDate)
+
+            let cal = ics();
+            cal.addEvent(meeting.name, `Reunión reflexiva del bloque ${meeting.group}`, 
+            `${meeting.mode == "Virtual" ? meeting.platform + ": " + meeting.url : meeting.place}`, parsedIcsStartDate, parsedIcsEndDate);
+            cal.download('reunionReflexiva');
+        })
+
         hideLoader()
     }
 }
