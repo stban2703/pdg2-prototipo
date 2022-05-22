@@ -61,9 +61,13 @@
         //align-items: flex-end;
     }
 
-    .downloadMeetBtn {
-        width: 100%;
-        max-width: 30rem;
+    .downloadMeetingBtn {
+        width: fit-content;
+        gap: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
 
     .seeMinutesBtn {

@@ -330,9 +330,6 @@ export async function renderMeetingDetails(role) {
             let stringEndTime = endTimeHour + ":" + meeting.time.split(":")[1].split(" ")[0] + " " + amPm
             const parsedIcsEndDate = parseTimestampToIcsDate(meeting.date, stringEndTime)
 
-            console.log(parsedIcsStartDate)
-            console.log(parsedIcsEndDate)
-
             let cal = ics();
             cal.addEvent(meeting.name, `Reunión reflexiva del bloque ${meeting.group}`, 
             `${meeting.mode == "Virtual" ? meeting.platform + ": " + meeting.url : meeting.place}`, parsedIcsStartDate, parsedIcsEndDate);
