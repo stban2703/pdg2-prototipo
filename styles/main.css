@@ -3218,7 +3218,6 @@ input[type="time"]:valid:before {
 
 .memo-module__patcheditable {
   display: inline-block;
-  z-index: 2;
 }
 
 .memo-module__name {
