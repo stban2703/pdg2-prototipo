@@ -7,6 +7,17 @@ export function parseTimestampToDate(timestamp) {
     return `${day} ${month} ${year}`
 }
 
+export function parseTimestampToFullDate(timestamp) {
+    let date = new Date(timestamp)
+    let weekDays = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"]
+    let dayOfWeek = weekDays[date.getDay()]
+    let day = date.getDate()
+    let monthList = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "Noviembre", "diciembre"]
+    let month = monthList[date.getMonth()]
+    let year = date.getFullYear()
+    return `${dayOfWeek} ${day} de ${month} del ${year}`
+}
+
 export function parseDateToTimestamp(date) {
     let timestamp = date.getTime()
     return timestamp

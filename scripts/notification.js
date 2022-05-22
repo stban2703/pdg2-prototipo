@@ -1,5 +1,5 @@
 import { updateNotificationStatus } from "./modules/firestore.js";
-import { parseTimestampToDate } from "./utils/date-format.js";
+import { parseTimestampToDate, parseTimestampToFullDate } from "./utils/date-format.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 import { sortByDateAscending, sortByDateDescending } from "./utils/sort.js";
 import { asteriskToBold } from "./utils/text-format.js";
@@ -35,7 +35,7 @@ export function renderNotificationWindowList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.meetingDate)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToFullDate(elem.meetingDate)} a las ${elem.time}!
                         `
                         break;
 
@@ -99,7 +99,7 @@ export function renderNotificationScreenList(notificationList) {
                 switch (elem.type) {
                     case "meeting":
                         previewMessage = `
-                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToDate(elem.meetingDate)} a las ${elem.time}!
+                        ¡Recuerda que la reunión reflexiva es el día ${parseTimestampToFullDate(elem.meetingDate)} a las ${elem.time}!
                     `
                         break;
 
@@ -158,7 +158,7 @@ export function renderNotificationDetails(notificationList, userId) {
 
             switch (info.type) {
                 case 'meeting':
-                    message = asteriskToBold(`Tu *bloque ${info.group}* ha programado una *reunión reflexiva* para el día *${parseTimestampToDate(info.date)}* a las *${info.time}* ¡Te esperamos, para juntos seguir *mejorando la calidad* de la *educación* brindada por la universidad!`)
+                    message = asteriskToBold(`Tu *bloque ${info.group}* ha programado una *reunión reflexiva* para el día *${parseTimestampToFullDate(info.date)}* a las *${info.time}* ¡Te esperamos, para juntos seguir *mejorando la calidad* de la *educación* brindada por la universidad!`)
 
                     addionalButton = `
                 <a href="#meetingdetails?${info.meetingId}" class="small-button small-button--secondary">
