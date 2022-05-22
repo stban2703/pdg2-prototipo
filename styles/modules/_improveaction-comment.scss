@@ -32,3 +32,23 @@
         max-width: 20rem !important;
     }
 }
+
+.improveaction-user-comment {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__date {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $regular;
+        color: $main-color;
+    }
+
+    &__comment {
+        font-family: $poppins;
+        font-size: 1.8rem;
+        font-weight: $light;
+        color: $mineshaft;
+    }
+}

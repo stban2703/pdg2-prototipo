@@ -79,6 +79,7 @@
         flex-direction: column;
         margin-top: 2rem;
         gap: 2rem;
+        margin-bottom: 2rem;
     }
 
     &__subtitle {
@@ -91,7 +92,7 @@
     &__subsectionQuestions {
         display: flex;
         flex-direction: column;
-        gap: 3.5rem;
+        gap: 4rem;
     }
 
     &__questionAnswerSection {

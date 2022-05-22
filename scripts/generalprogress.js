@@ -2,7 +2,7 @@ import { createImproveActionComment, getAllAnswersByPeriod, getAllAnswersByQuest
 import { renderBarChart, renderLineChart, renderPieChart } from "./myprogress.js";
 import { parseTimestampToDate } from "./utils/date-format.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
-import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/sort.js";
+import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByDateDescending } from "./utils/sort.js";
 
 // Select view general
 export async function getInitialGeneralSelect(userInfo, currentRole) {
@@ -448,19 +448,30 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
 
         const comments = await getImproveActionComment(subjectId, period)
         if (comments.length > 0) {
-            const userComment = comments.find(comment => {
+            const userComments = comments.filter(comment => {
                 return comment.userId === userInfo.id
             })
-            if (userComment) {
-                openAddCommentButton.classList.add("hidden")
+
+            userComments.sort(sortByDateDescending)
+            if (userComments) {
+                //openAddCommentButton.classList.add("hidden")
                 const commentContainer = document.querySelector(".improve-actions__commentContainer")
                 commentContainer.classList.remove("hidden")
-                commentContainer.innerHTML = `
-                <p>${userComment.comment}</p>
-                <div class="improve-actions__commentStatus${userComment.status === 'read' ? ' improve-actions__commentStatus--read' : ''}">
-                    <p>${userComment.status === 'read' ? 'Leído por el docente' : 'No leído por el docente'}</p>
-                </div>
-                `
+
+                userComments.forEach(c => {
+                    const commentItem = document.createElement('div')
+                    commentItem.className = "improveaction-user-comment"
+                    commentItem.innerHTML = `
+                    <p class="improveaction-user-comment__date">${parseTimestampToDate(c.date)}</p>
+                    <p class="improveaction-user-comment__comment">${c.comment}</p>
+                    <div class="improve-actions__commentStatus${c.status === 'read' ? ' improve-actions__commentStatus--read' : ''}">
+                        <p>${c.status === 'read' ? 'Leído por el docente' : 'No leído por el docente'}</p>
+                    </div>
+                    `
+
+                    commentContainer.appendChild(commentItem)
+                })
+                //commentContainer.innerHTML = 
             }
         }
         hideLoader()

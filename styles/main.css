@@ -4907,6 +4907,31 @@ input[type="time"]:valid:before {
   max-width: 20rem !important;
 }
 
+.improveaction-user-comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.improveaction-user-comment__date {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #979DFF;
+}
+
+.improveaction-user-comment__comment {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #363636;
+}
+
 .progress-scale-value {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6939,6 +6964,14 @@ input[type="time"]:valid:before {
 
 .improve-actions__addCommentSection {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
 }
 
 .improve-actions .addCommentButton {
@@ -6947,11 +6980,16 @@ input[type="time"]:valid:before {
       align-self: flex-end;
 }
 
-.improve-actions__commentContainer p {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 300;
-  color: #363636;
+.improve-actions__commentContainer {
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4rem;
 }
 
 .improve-actions__commentStatus {
@@ -7354,6 +7392,7 @@ input[type="time"]:valid:before {
           flex-direction: column;
   margin-top: 2rem;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .memo-summary__subtitle {
@@ -7371,7 +7410,7 @@ input[type="time"]:valid:before {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 3.5rem;
+  gap: 4rem;
 }
 
 .memo-summary__questionAnswerSection {
