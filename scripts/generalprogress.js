@@ -515,6 +515,7 @@ export function onFilterGeneralAllByPeriod() {
 export function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
     if (generalAllScreen && window.location.href.includes("generalall")) {
+        downloadResults()
         renderGeneralAllCharts(currentPeriod)
     }
 }
@@ -853,3 +854,18 @@ async function renderGeneralAllCharts(currentPeriod) {
     hideLoader()
 }
 
+export function downloadResults() {
+    const downloadResultsButton = document.querySelector(".downloadResultsButton")
+
+    if (downloadResultsButton) {
+        downloadResultsButton.addEventListener('click', () => {
+            const resultsContainer = document.querySelector(".progresssubject-screen")
+            //window.jsPDF = window.jspdf.jsPDF;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.html(resultsContainer).then(() => {
+                doc.save('estadisticasgenerales.pdf');
+            });
+        })
+    }
+}

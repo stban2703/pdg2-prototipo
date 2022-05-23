@@ -19,6 +19,10 @@
 }
 
 .small-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     text-align: center;
     &--primary {
         @include main-button(
