@@ -1,3 +1,4 @@
+import { logOut } from "./modules/auth.js";
 import { setLocalStorage } from "./utils/ls.js";
 
 
@@ -38,8 +39,16 @@ export function renderProfileInfo(userInfo, currentRole) {
             <h5 class="profile-info__name">${userInfo.name} ${userInfo.lastname}</h5>
             <p class="profile-info__department">Departamento de Diseño de Innovación</p>
             <p class="profile-info__email">${userInfo.email}</p>
+            <button class="small-button small-button--secondary profileLogoutButton">
+                <span>Cerrar sesión</span>
+            </button>
         </section>
         `
+
+        const profileLogoutButton = document.querySelector(".profileLogoutButton")
+        profileLogoutButton.addEventListener('click', () => {
+            logOut()
+        })
     }
 }
 
@@ -79,9 +88,10 @@ export function renderAlternativeRole(userInfo, currentRole) {
                 break;
         }
 
-        const alternativeRoleItem = document.createElement("div")
-        alternativeRoleItem.className = "profile-select-role"
-        alternativeRoleItem.innerHTML = `
+        if (userInfo.role.length > 1) {
+            const alternativeRoleItem = document.createElement("div")
+            alternativeRoleItem.className = "profile-select-role"
+            alternativeRoleItem.innerHTML = `
             <section class="profile-select-role__iconSection">
                 <div class="profile-select-role__icon${alternativeRole !== 'teacher' ? ' profile-select-role__icon--special' : ''}">
                     <img src="./images/${alternativeRole !== 'teacher' ? 'special' : 'teacher'}roleicon.svg" alt="">
@@ -93,13 +103,16 @@ export function renderAlternativeRole(userInfo, currentRole) {
                     <span>Cambiar</span>
                 </button>
             </section>
-        `
-        document.querySelector(".profile-screen__alternativeRoles").appendChild(alternativeRoleItem)
+            `
+            document.querySelector(".profile-screen__alternativeRoles").appendChild(alternativeRoleItem)
 
-        const changeRoleButton = alternativeRoleItem.querySelector(".selectRoleButton")
-        changeRoleButton.addEventListener('click', () => {
-            setLocalStorage('currentRole', alternativeRole)
-            window.location.reload()
-        })
+            const changeRoleButton = alternativeRoleItem.querySelector(".selectRoleButton")
+            changeRoleButton.addEventListener('click', () => {
+                setLocalStorage('currentRole', alternativeRole)
+                window.location.reload()
+            })
+        } else {
+            document.querySelectorAll(".profile-screen__section")[1].classList.add("hidden")
+        }
     }
 }

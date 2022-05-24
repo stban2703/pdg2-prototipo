@@ -8,7 +8,9 @@
         background-color: $main-color;
         border-radius: 15px 0 0 15px;
         align-items: center;
+        justify-content: center;
         padding: 4rem;
+        gap: 1rem;
     }
 
     &__icon {
@@ -31,6 +33,7 @@
         font-size: 2rem;
         font-weight: $bold;
         color: $white;
+        text-align: center;
     }
 
     &__detailSection {
@@ -40,6 +43,7 @@
         background-color: $white;
         border-radius: 0 15px 15px 0;
         padding: 4rem;
+        gap: 0.5rem;
     }
 
     &__name {
@@ -60,5 +64,10 @@
         font-family: $poppins;
         font-size: 1.5rem;
         color: $boulder;
+    }
+
+    .profileLogoutButton {
+        max-width: 16rem;
+        margin-top: 1rem;
     }
 }
