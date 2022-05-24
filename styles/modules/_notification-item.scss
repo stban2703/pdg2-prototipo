@@ -20,7 +20,7 @@
     }
 
     &--selected {
-        box-shadow: 0px 5px 7px rgba($color: $alt-color, $alpha: 0.4);
+        box-shadow: 0px 0px 0px 5px rgba($color: $secondary-color, $alpha: 0.4);
     }
 
     &--empty {

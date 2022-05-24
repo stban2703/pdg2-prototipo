@@ -17,8 +17,9 @@
         flex-direction: column;
         gap: 2rem;
         overflow-y: auto;
-        padding-right: 1rem;
-        padding-bottom: 1rem;
+        //padding-right: 1rem;
+        //padding-bottom: 1rem;
+        padding: 1rem;
 
         &::-webkit-scrollbar {
             width: 1em;

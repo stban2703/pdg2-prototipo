@@ -4639,8 +4639,8 @@ input[type="time"]:valid:before {
 }
 
 .notification-item--selected {
-  -webkit-box-shadow: 0px 5px 7px rgba(114, 184, 255, 0.4);
-          box-shadow: 0px 5px 7px rgba(114, 184, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(253, 181, 114, 0.4);
+          box-shadow: 0px 0px 0px 5px rgba(253, 181, 114, 0.4);
 }
 
 .notification-item--empty {
@@ -9199,8 +9199,7 @@ input[type="time"]:valid:before {
           flex-direction: column;
   gap: 2rem;
   overflow-y: auto;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 
 .notification-screen__listContainer::-webkit-scrollbar {
