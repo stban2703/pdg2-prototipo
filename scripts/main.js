@@ -27,6 +27,7 @@ import { createNotification, submitTestSubject } from "./modules/firestore.js";
 import { localPeriod, localRole, localSubjects, localUser, setLocalStorage } from "./utils/ls.js";
 import { hideItem, showItem } from "./utils/display-items.js";
 import { renderAlternativeRole, renderProfileInfo } from "./profile.js";
+import { changeFontSize } from "./settings.js";
 
 const firestore = getFirestore(firebase)
 
@@ -294,6 +295,9 @@ function addPageFuncions() {
     // Download
     downloadResults()
     downloadMemo()
+
+    // Settings
+    changeFontSize()
 
     // Back-return
     goBack()
