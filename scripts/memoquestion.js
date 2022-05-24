@@ -486,8 +486,8 @@ export async function renderMemoQuestion() {
                 //}
             })
 
-            let q5Description = "Estrategias E-A adecuadas medianamente a los objetivos"
-            let q6Description = "Estrategias E-A acogidas medianamente por los estudiantes"
+            let q5Description = `Estrategias E-A <span style="color: #979DFF; font-weight: 600;">adecuadas</span> medianamente a los objetivos`
+            let q6Description = `Estrategias E-A <span style="color: #979DFF; font-weight: 600;">acogidas</span> medianamente por los estudiantes`
             let q5Low = false
             let q6Low = false
 
@@ -495,7 +495,7 @@ export async function renderMemoQuestion() {
                 const element = optionsQ5[index];
 
                 if (element.value < 4) {
-                    q5Description = "Estrategias E-A poco adecuadas a los objetivos de la clase"
+                    q5Description = `Estrategias E-A poco <span style="color: #979DFF; font-weight: 600;">adecuadas</span> a los objetivos de la clase`
                     q5Low = true
                     break;
                 }
@@ -505,7 +505,7 @@ export async function renderMemoQuestion() {
                 const element = optionsQ6[index];
 
                 if (element.value < 4) {
-                    q6Description = "Estrategias E-A poco acogidas por los estudiantes"
+                    q6Description = `Estrategias E-A poco <span style="color: #979DFF; font-weight: 600;">acogidas</span> por los estudiantes`
                     q6Low = true
                     break;
                 }
