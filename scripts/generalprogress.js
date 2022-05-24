@@ -378,20 +378,20 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
             }
         }
 
-        if (currentRole === "admin") {
-            const historyImproveActions = await getHistoryImproveActions(subjectId)
-            if (historyImproveActions.length > 0) {
-                const historyImproveActionsContainer = document.querySelector(".improve-actions__list--history")
-                const historyEmptyContainer = document.querySelector(".improve-actions__empty--history")
+        //if (currentRole === "admin") {
+        const historyImproveActions = await getHistoryImproveActions(subjectId)
+        if (historyImproveActions.length > 0) {
+            const historyImproveActionsContainer = document.querySelector(".improve-actions__list--history")
+            const historyEmptyContainer = document.querySelector(".improve-actions__empty--history")
 
-                historyImproveActionsContainer.innerHTML = ``
-                historyImproveActionsContainer.classList.remove("hidden")
-                historyEmptyContainer.classList.add("hidden")
+            historyImproveActionsContainer.innerHTML = ``
+            historyImproveActionsContainer.classList.remove("hidden")
+            historyEmptyContainer.classList.add("hidden")
 
-                historyImproveActions.forEach((action, index) => {
-                    const actionItem = document.createElement('tr')
-                    actionItem.className = "improve-action-item"
-                    actionItem.innerHTML = `
+            historyImproveActions.forEach((action, index) => {
+                const actionItem = document.createElement('tr')
+                actionItem.className = "improve-action-item"
+                actionItem.innerHTML = `
                         <td>
                             <div class="improve-action-item__number">
                                 <span>${index + 1}</span>
@@ -407,32 +407,32 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
                             <p>${parseTimestampToDate(action.date)}</p>
                         </td>
                     `
-                    historyImproveActionsContainer.appendChild(actionItem)
-                })
-            }
+                historyImproveActionsContainer.appendChild(actionItem)
+            })
+        }
 
-            let percent = 0
-            let totalActions = historyImproveActions.length + improveActions[0].answerValue.length
-            if (totalActions.length === 0) {
-                percent = 0
-            } else {
-                percent = (historyImproveActions.length / totalActions) * 100
-            }
+        let percent = 0
+        let totalActions = historyImproveActions.length + improveActions[0].answerValue.length
+        if (totalActions.length === 0) {
+            percent = 0
+        } else {
+            percent = (historyImproveActions.length / totalActions) * 100
+        }
 
-            // Render progress chart
-            const progressContainer = document.querySelector(".memoprogress-item--improveactions")
-            progressContainer.innerHTML = `
+        // Render progress chart
+        const progressContainer = document.querySelector(".memoprogress-item--improveactions")
+        progressContainer.innerHTML = `
             <p class="memoprogress-item__title">Progreso de mejoras:</p>
             <div class="pie custom-pie" data-pie='{ "colorSlice": "#979DFF", "percent": ${percent}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10}'></div>
             `
-            const circle = new CircularProgressBar("pie");
-            circle.initial();
-        } else {
-            const generalHistoryImproveActionsContainer = document.querySelector(".generalHistoryImproveActionsContainer")
-            const improveActionProgressContainer = document.querySelector(".memoprogress-item--improveactions")
-            generalHistoryImproveActionsContainer.classList.add("hidden")
-            improveActionProgressContainer.classList.add("hidden")
-        }
+        const circle = new CircularProgressBar("pie");
+        circle.initial();
+        //} else {
+        /*const generalHistoryImproveActionsContainer = document.querySelector(".generalHistoryImproveActionsContainer")
+        const improveActionProgressContainer = document.querySelector(".memoprogress-item--improveactions")
+        generalHistoryImproveActionsContainer.classList.add("hidden")
+        improveActionProgressContainer.classList.add("hidden")*/
+        //}
 
         // Comments
         const openAddCommentButton = document.querySelector(".openAddCommentButton")
@@ -863,11 +863,11 @@ export function downloadResults() {
             const resultsControls = document.querySelector(".progresssubject-screen__controls")
             const improveActionsButtons = document.querySelectorAll(".memo-improve-actions")
 
-            if(resultsControls) {
+            if (resultsControls) {
                 resultsControls.classList.add("hidden")
             }
 
-            if(improveActionsButtons.length > 0) {
+            if (improveActionsButtons.length > 0) {
                 improveActionsButtons.forEach(b => {
                     b.classList.add("hidden")
                 })
@@ -880,11 +880,11 @@ export function downloadResults() {
                 const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
                 doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
                 doc.save('estadisticas.pdf');
-                if(resultsControls) {
+                if (resultsControls) {
                     resultsControls.classList.remove("hidden")
                 }
 
-                if(improveActionsButtons.length > 0) {
+                if (improveActionsButtons.length > 0) {
                     improveActionsButtons.forEach(b => {
                         b.classList.remove("hidden")
                     })
