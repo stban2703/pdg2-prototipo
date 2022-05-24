@@ -5268,7 +5268,7 @@ input[type="time"]:valid:before {
 }
 
 .navigation-menu {
-  width: 36rem;
+  width: 33rem;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5278,7 +5278,7 @@ input[type="time"]:valid:before {
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #FFFFFF;
-  padding: 6rem 4rem;
+  padding: 6rem 2rem;
   gap: 0.5rem;
   position: fixed;
   left: 0;
@@ -9500,7 +9500,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 6rem 3rem;
-  margin-left: 36rem;
+  margin-left: 33rem;
 }
 
 .page-content__container {

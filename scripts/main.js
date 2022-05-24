@@ -37,7 +37,8 @@ let currentSubjects = localSubjects
 let currentPeriod = localPeriod
 let currentRole = localRole
 
-console.log(window.innerWidth)
+console.log("Ancho de pantalla:" + window.innerWidth)
+console.log("Alto de pantalla:" + window.innerHeight)
 
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
