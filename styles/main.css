@@ -5235,6 +5235,7 @@ input[type="time"]:valid:before {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2rem;
+  z-index: 5;
 }
 
 .signinup-form__section {
@@ -8046,6 +8047,7 @@ input[type="time"]:valid:before {
 .signinup-screen__roleSection {
   width: 100%;
   max-width: 48rem;
+  z-index: 5;
 }
 
 .signinup-screen__selectRole {
