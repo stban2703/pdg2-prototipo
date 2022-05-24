@@ -859,13 +859,56 @@ export function downloadResults() {
 
     if (downloadResultsButton) {
         downloadResultsButton.addEventListener('click', () => {
+            showLoader()
             const resultsContainer = document.querySelector(".progresssubject-screen")
+            const resultsControls = document.querySelector(".progresssubject-screen__controls")
+
+            if(resultsControls) {
+                resultsControls.classList.add("hidden")
+            }
+
             //window.jsPDF = window.jspdf.jsPDF;
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.html(resultsContainer).then(() => {
+            html2canvas(resultsContainer).then(canvas => {
+                //saveAs(canvas.toDataURL(), 'estadisticas.png');
+                const uri = canvas.toDataURL('image/png')
+                console.log(canvas.width)
+                const { jsPDF } = window.jspdf;
+                //const doc = new jsPDF('p', 'px', [parseInt(canvas.width.replace('px', '')), parseInt(canvas.height.replace('px', ''))]);
+                const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
+                doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
                 doc.save('estadisticasgenerales.pdf');
+
+                if(resultsControls) {
+                    resultsControls.classList.remove("hidden")
+                }
+
+                /*doc.html(`<html><head><title>Prueba</title></head><body>` + resultsContainer.innerHTML + `</body></html>`).then(() => {
+                    //doc.save('estadisticasgenerales.pdf');
+                    //doc.output('dataurlnewwindow');
+                });*/
+                hideLoader()
             });
         })
     }
 }
+
+/*function saveAs(uri, filename) {
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+        window.open(uri);
+    }
+}*/
