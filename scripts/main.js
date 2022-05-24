@@ -70,8 +70,8 @@ if (currentRole !== 'teacher') {
     if (currentRole === 'leader') {
         document.querySelector('#navgeneral').setAttribute('href', `#generalselect?${currentRole}_${userInfo.leaderGroupId}`)
         document.querySelector('#navaccomplishment').setAttribute('href', `#accomplishmentlist?group_${userInfo.leaderGroupId}`)
-        document.querySelector('#navmygroup').setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
-        showItem('#navmygroup')
+        document.querySelector('#navmemogroup').setAttribute('href', `#memogroup?${userInfo.leaderGroupId}`)
+        showItem('#navmemogroup')
         roleTitle.innerHTML = 'Rol Líder de bloque'
     }
 
@@ -304,11 +304,19 @@ function addPageFuncions() {
 function checkCurrentTab() {
     const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
+    if(currentTab.includes("memogroup")) {
+
+    }
     tabs.forEach(t => {
-        if (currentTab.includes(t.id.replace("nav", ""))) {
+        const tabName = t.id.replace("nav", "")
+        if (currentTab.includes(tabName)) {
             t.classList.add("navigation-menu__item--selected")
         } else {
             t.classList.remove("navigation-menu__item--selected")
+        }
+
+        if(tabName.includes("memogroup") && currentTab.includes("memoseeanswers")) {
+            t.classList.add("navigation-menu__item--selected")
         }
     })
     if (!window.location.hash) {

@@ -6,7 +6,7 @@ import { sortByAlphabeticAscending, sortByAlphabeticDescending } from "./utils/s
 export async function getInitialMyGroupSubjects() {
     const myGroupSubjects = document.querySelector(".memosee-screen__selectList--groupSubjects")
 
-    if (myGroupSubjects && window.location.href.includes("#mygroup")) {
+    if (myGroupSubjects && window.location.href.includes("#memogroup")) {
         showLoader()
         const groupId = window.location.hash.split("?")[1]
         const subjects = await getGroupSubjects(groupId)
@@ -37,7 +37,7 @@ function renderMyGroupSubjects(list) {
 function onSortMygroupSubjectListener(subjects) {
     const myGroupSubjectsControl = document.querySelector(".memoselectsubject-screen__controls--mygroup")
 
-    if (window.location.href.includes("#mygroup") && myGroupSubjectsControl) {
+    if (window.location.href.includes("#memogroup") && myGroupSubjectsControl) {
         const subjectsSortSelect = myGroupSubjectsControl.alphabetic
 
         myGroupSubjectsControl.addEventListener('input', () => {

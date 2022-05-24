@@ -33,7 +33,7 @@ const router = new Router(
         memoseecareers: new Layout(new Page("memoseecareers.html")),
         memoseesubjects: new Layout(new Page("memoseesubjects.html")),
         memoseeanswers: new Layout(new Page("memoseeanswers.html")),
-        mygroup: new Layout(new Page("mygroup.html")),
+        memogroup: new Layout(new Page("memogroup.html")),
         profile: new Layout(new Page("profile.html")),
         notification: new Layout(new Page("notification.html")),
         "#default": new Page("home.html"),
