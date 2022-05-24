@@ -27,7 +27,8 @@ export function renderNotificationWindowList(notificationList) {
         if (copy.length > 0) {
             notificationWindowList.innerHTML = ``
             copy.forEach(elem => {
-                const item = document.createElement("div")
+                const item = document.createElement("a")
+                item.setAttribute('href', `#notification?${elem.id}`)
                 item.className = `notification-item${elem.status === 'read' ? ' notification-item--read' : ''}`
 
                 let previewMessage = ""
@@ -86,7 +87,8 @@ export function renderNotificationScreenList(notificationList) {
         if (copy.length > 0) {
             notificationScreenList.innerHTML = ``
             copy.forEach(elem => {
-                const item = document.createElement("div")
+                const item = document.createElement("a")
+                item.setAttribute('href', `#notification?${elem.id}`)
                 item.className = `notification-item${elem.status === 'read' ? ' notification-item--read' : ''}`
 
                 const notificationId = window.location.hash.split("?")[1]
