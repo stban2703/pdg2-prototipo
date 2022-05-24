@@ -214,6 +214,7 @@ export async function getInitialMemoSeeAnswersQuestions(currentPeriod, currentRo
         const periodSelect = document.querySelector(".change-period-memo-select")
         periodSelect.addEventListener('input', (event) => {
             const newPeriod = event.target.value
+            subjectInfoTitles[1].innerHTML = newPeriod
             getAllAnswerOnSelectPeriod(subjectId, newPeriod)
         })
     }
@@ -421,7 +422,11 @@ export function downloadMemo() {
             const memotabGuide = document.querySelector(".memosee-screen__tabGuide")
             const improveActionsButtons = document.querySelectorAll(".memo-improve-actions")
             const answersControls = document.querySelector(".memo-summary__answerControls")
+            const subjectInfoTitles = document.querySelectorAll(".subjectTitle")
+            const changePeriodSelect = document.querySelector(".change-period-memo-select")
 
+            subjectInfoTitles[1].classList.remove("hidden")
+            changePeriodSelect.classList.add("hidden")
             memotabsSection.classList.add("hidden")
             memotabGuide.classList.add("hidden")
             memoControls.classList.add("hidden")
@@ -442,6 +447,8 @@ export function downloadMemo() {
                 doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
                 doc.save('memo.pdf');
 
+                subjectInfoTitles[1].classList.add("hidden")
+                changePeriodSelect.classList.remove("hidden")
                 memotabsSection.classList.remove("hidden")
                 memotabGuide.classList.remove("hidden")
                 memoControls.classList.remove("hidden")
