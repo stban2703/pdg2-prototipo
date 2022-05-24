@@ -70,7 +70,7 @@ export function renderMemoIntro(user) {
             memoLastEdit.classList.remove("hidden")
             memointroProgress.classList.add("hidden")
             memointroSeeAdmin.classList.remove("hidden")
-            memoSeeMemosAdmin.classList.remove("hidden")
+            memoSeeMemosAdmin.classList.remove("invisible")
         } else {
             memoIntroTitle.innerHTML = `<span style="font-weight: 600;">${user.name}</span>, es momento de realizar tu reflexión.</h5>`
             memoLastEdit.classList.add("hidden")

@@ -130,6 +130,10 @@ body {
     display: none !important;
 }
 
+.invisible {
+    opacity: 0;
+}
+
 .custom-loader {
     position: fixed;
     height: 100vh;

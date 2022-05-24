@@ -8,6 +8,8 @@
     border-radius: 15px;
     padding: 4rem 2rem;
     gap: 2rem;
+    min-width: 29rem;
+    max-width: 29rem;
 
     &__title {
         font-family: $poppins;
@@ -29,6 +31,6 @@
 }
 
 .memo-intro-progress {
-    min-width: 23rem;
+    //min-width: 23rem;
     padding: 2rem 2rem;
 }

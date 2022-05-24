@@ -3195,6 +3195,8 @@ input[type="time"]:valid:before {
   border-radius: 15px;
   padding: 4rem 2rem;
   gap: 2rem;
+  min-width: 29rem;
+  max-width: 29rem;
 }
 
 .memo-edit-info__title {
@@ -3216,7 +3218,6 @@ input[type="time"]:valid:before {
 }
 
 .memo-intro-progress {
-  min-width: 23rem;
   padding: 2rem 2rem;
 }
 
@@ -9530,6 +9531,10 @@ body {
 
 .hidden {
   display: none !important;
+}
+
+.invisible {
+  opacity: 0;
 }
 
 .custom-loader {
