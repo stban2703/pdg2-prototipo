@@ -1448,6 +1448,7 @@ input[type="time"]:valid:before {
           box-shadow: 0px 5px 6px rgba(151, 157, 255, 0.2);
   font-size: 1.2rem;
   color: #FFFFFF;
+  white-space: nowrap;
   text-align: center;
   font-size: 1.5rem;
 }
@@ -1462,6 +1463,7 @@ input[type="time"]:valid:before {
           box-shadow: 0px 4px 10px rgba(244, 156, 73, 0.4);
   font-size: 1.2rem;
   color: #FFFFFF;
+  white-space: nowrap;
   text-align: center;
   font-size: 1.5rem;
 }
@@ -4087,6 +4089,17 @@ input[type="time"]:valid:before {
 
 .memo-question-modal--notes {
   overflow-x: auto;
+}
+
+.memo-question-modal__starsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
 }
 
 .memo-question-modal__container {

@@ -45,12 +45,19 @@
 
 .board-edit-button {
     @include main-button($button-primary, $button-text-color-primary, $board-edit-text-btn, $button-primary-box-shadow);
+    white-space: nowrap;
     text-align: center;
     font-size: 1.5rem;
 }
 
 .board-edit-button--secondary {
-    @include main-button($button-secondary, $button-text-color-primary, $board-edit-text-btn, $button-secondary-box-shadow);
+    @include main-button(
+        $button-secondary,
+        $button-text-color-primary,
+        $board-edit-text-btn,
+        $button-secondary-box-shadow
+    );
+    white-space: nowrap;
     text-align: center;
     font-size: 1.5rem;
 }
