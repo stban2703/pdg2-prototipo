@@ -5,7 +5,7 @@ import { submitNote } from "./createnote.js";
 import { downloadResults, getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderListHome, renderMemoProgressTitles, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton, renderImproveActionComment } from "./improveactions.js";
-import { changeMemoseeAnswerTab, getInitialMemoSeeAnswersQuestions, getInitialMemoseeSubjects, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
+import { changeMemoseeAnswerTab, downloadMemo, getInitialMemoSeeAnswersQuestions, getInitialMemoseeSubjects, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
 import { renderMeetingMinutesDetails } from "./meetingminutes.js";
 import { getInitialMeetings, renderMeetingDetails } from "./meetings.js";
 import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListener, getMemoSectionInfo, renderGoToImproveActionsButton, getAllSubjectsProgress } from "./memo.js";
@@ -290,6 +290,7 @@ function addPageFuncions() {
 
     // Download
     downloadResults()
+    downloadMemo()
 
     // Back-return
     goBack()

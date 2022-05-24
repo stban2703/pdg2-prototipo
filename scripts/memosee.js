@@ -229,7 +229,7 @@ async function getAllAnswerOnSelectPeriod(subjectId, period) {
 function renderMemoseeAnswersQuestions(answers) {
     const answersHolders = document.querySelectorAll(".memo-summary__answerHolder")
 
-    if(answers.length === 0) {
+    if (answers.length === 0) {
         document.querySelector(".memosee-screen__emptyMemo").classList.remove("hidden")
     }
 
@@ -387,13 +387,13 @@ function renderMemoseeAnswersQuestions(answers) {
     }
 
     // Eleven
-    answersHolders[10].innerHTML =  ''
+    answersHolders[10].innerHTML = ''
     if (answers[10] && answers[10].answerValue) {
         answersHolders[10].innerHTML = answers[10].answerValue[0]
     }
 
     // Eleven
-    answersHolders[11].innerHTML = '' 
+    answersHolders[11].innerHTML = ''
     if (answers[11] && answers[11].answerValue) {
         answersHolders[11].innerHTML = answers[11].answerValue[0]
     }
@@ -406,5 +406,55 @@ function renderMemoseeAnswersQuestions(answers) {
             `
     }
     hideLoader()
+}
 
+export function downloadMemo() {
+    const downloadMemoButton = document.querySelector(".downloadMemoButton")
+
+    if (downloadMemoButton) {
+        downloadMemoButton.addEventListener('click', () => {
+            showLoader()
+            const memoContainer = document.querySelector(".memosee-screen")
+            const memoControls = document.querySelector(".memosee-screen__controls")
+            const memotabsSection = document.querySelector(".memo-summary__sectionTabs")
+            const memoSections = document.querySelectorAll(".memo-summary__section")
+            const memotabGuide = document.querySelector(".memosee-screen__tabGuide")
+            const improveActionsButtons = document.querySelectorAll(".memo-improve-actions")
+            const answersControls = document.querySelector(".memo-summary__answerControls")
+
+            memotabsSection.classList.add("hidden")
+            memotabGuide.classList.add("hidden")
+            memoControls.classList.add("hidden")
+            answersControls.classList.add("hidden")
+            improveActionsButtons.forEach(b => {
+                b.classList.add("hidden")
+            })
+
+            memoSections.forEach(s => {
+                s.classList.remove("hidden")
+            })
+
+            html2canvas(memoContainer).then(canvas => {
+                const uri = canvas.toDataURL('image/png')
+                console.log(canvas.width)
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
+                doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
+                doc.save('memo.pdf');
+
+                memotabsSection.classList.remove("hidden")
+                memotabGuide.classList.remove("hidden")
+                memoControls.classList.remove("hidden")
+                answersControls.classList.remove("hidden")
+                improveActionsButtons.forEach(b => {
+                    b.classList.remove("hidden")
+                })
+                memoSections.forEach(s => {
+                    s.classList.add("hidden")
+                })
+                renderMemoseeAnswerTab()
+                hideLoader()
+            });
+        })
+    }
 }
