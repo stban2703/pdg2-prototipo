@@ -2327,7 +2327,7 @@ input[type="time"]:valid:before {
 }
 
 .board-note-item__dotsBtn--activated {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .board-note-item__details {
@@ -2426,6 +2426,39 @@ input[type="time"]:valid:before {
 .board-note-item:active {
   cursor: -webkit-grabbing;
   cursor: grabbing;
+}
+
+.board-empty-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 3rem 3.5rem;
+  gap: 2rem;
+}
+
+.board-empty-item__message {
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: #757575;
+  text-align: center;
+}
+
+.board-empty-item__tip {
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #979DFF;
+  text-align: center;
 }
 
 .week-note-item {

@@ -117,7 +117,7 @@
         background-position: center;
 
         &--activated {
-            background-color: #FAFAFA;
+            background-color: #fafafa;
         }
     }
 
@@ -197,5 +197,31 @@
 
     &:active {
         cursor: grabbing;
+    }
+}
+
+.board-empty-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    border-radius: 15px;
+    padding: 3rem 3.5rem;
+    gap: 2rem;
+
+    &__message {
+        font-family: "Poppins";
+        font-weight: $light;
+        font-size: 1.8rem;
+        color: $boulder;
+        text-align: center;
+    }
+
+    &__tip {
+        font-family: "Poppins";
+        font-weight: $light;
+        font-size: 1.5rem;
+        color: $main-color;
+        text-align: center;
     }
 }

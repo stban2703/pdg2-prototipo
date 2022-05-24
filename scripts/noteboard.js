@@ -68,12 +68,13 @@ export async function renderNotesBoard(userId, list) {
         noteBoardListImprove.innerHTML = ""
         noteBoardListRemove.innerHTML = ""
 
-        list.forEach((note, index) => {
-            const noteItem = document.createElement("div")
-            noteItem.id = index + ""
-            noteItem.classList.add("board-note-item")
-            noteItem.setAttribute('draggable', 'true')
-            noteItem.innerHTML = `
+        if (list.length > 0) {
+            list.forEach((note, index) => {
+                const noteItem = document.createElement("div")
+                noteItem.id = index + ""
+                noteItem.classList.add("board-note-item")
+                noteItem.setAttribute('draggable', 'true')
+                noteItem.innerHTML = `
                 <div class="board-note-item__color">
                 </div>
                 <section class="board-note-item__info">
@@ -114,80 +115,88 @@ export async function renderNotesBoard(userId, list) {
                 </section>
             `
 
-            switch (note.category) {
-                case "keep":
-                    noteItem.classList.add("board-note-item--keep")
-                    noteBoardListKeep.appendChild(noteItem)
-                    break;
-                case "improve":
-                    noteItem.classList.add("board-note-item--improve")
-                    noteBoardListImprove.appendChild(noteItem)
-                    break;
-                case "remove":
-                    noteItem.classList.add("board-note-item--remove")
-                    noteBoardListRemove.appendChild(noteItem)
-                    break;
-            }
+                switch (note.category) {
+                    case "keep":
+                        noteItem.classList.add("board-note-item--keep")
+                        noteBoardListKeep.appendChild(noteItem)
+                        break;
+                    case "improve":
+                        noteItem.classList.add("board-note-item--improve")
+                        noteBoardListImprove.appendChild(noteItem)
+                        break;
+                    case "remove":
+                        noteItem.classList.add("board-note-item--remove")
+                        noteBoardListRemove.appendChild(noteItem)
+                        break;
+                }
 
-            // Drag item functions
-            noteItem.addEventListener('dragstart', e => {
-                noteItem.style.opacity = '0.3';
-                selectedBoardNote = note
+                // Drag item functions
+                noteItem.addEventListener('dragstart', e => {
+                    noteItem.style.opacity = '0.3';
+                    selectedBoardNote = note
+                });
+                noteItem.addEventListener('dragend', e => {
+                    noteItem.style.opacity = '1';
+                });
+
+
+                // Arrows functions
+                const boardNoteItemLeftBtn = noteItem.querySelector(".board-note-item__moveBtn--left")
+                const boardNoteItemRightBtn = noteItem.querySelector(".board-note-item__moveBtn--right")
+
+                boardNoteItemLeftBtn.addEventListener('click', () => {
+                    if (note.category == "improve") {
+                        updateNoteCategory(userId, note.id, note.category, "keep")
+                    }
+
+                    if (note.category == "remove") {
+                        updateNoteCategory(userId, note.id, note.category, "improve")
+                    }
+                })
+
+                boardNoteItemRightBtn.addEventListener('click', () => {
+                    if (note.category == "keep") {
+                        updateNoteCategory(userId, note.id, note.category, "improve")
+                    }
+
+                    if (note.category == "improve") {
+                        updateNoteCategory(userId, note.id, note.category, "remove")
+                    }
+                })
+
+
+                // Item settings menu
+                const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
+                const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
+
+                boardNoteItemDotsBtn.addEventListener('click', () => {
+                    boardNoteItemSettings.classList.toggle("board-note-item__settings--hidden")
+                    boardNoteItemDotsBtn.classList.toggle("board-note-item__dotsBtn--activated")
+                })
+
+                /*document.addEventListener('click', (event) => {
+                    if (event.target == boardNoteItemDotsBtn) {
+                        boardNoteItemSettings.classList.remove("board-note-item__settings--hidden")
+                    } else {
+                        boardNoteItemSettings.classList.add("board-note-item__settings--hidden")
+                    }
+                })*/
+
+                const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
+                deleteBoardNoteItemBtn.addEventListener('click', (e) => {
+                    showLoader()
+                    console.log(note.id)
+                    deleteNote(userId, note.id, note.fileType)
+                })
             });
-            noteItem.addEventListener('dragend', e => {
-                noteItem.style.opacity = '1';
-            });
-
-
-            // Arrows functions
-            const boardNoteItemLeftBtn = noteItem.querySelector(".board-note-item__moveBtn--left")
-            const boardNoteItemRightBtn = noteItem.querySelector(".board-note-item__moveBtn--right")
-
-            boardNoteItemLeftBtn.addEventListener('click', () => {
-                if (note.category == "improve") {
-                    updateNoteCategory(userId, note.id, note.category, "keep")
-                }
-
-                if (note.category == "remove") {
-                    updateNoteCategory(userId, note.id, note.category, "improve")
-                }
-            })
-
-            boardNoteItemRightBtn.addEventListener('click', () => {
-                if (note.category == "keep") {
-                    updateNoteCategory(userId, note.id, note.category, "improve")
-                }
-
-                if (note.category == "improve") {
-                    updateNoteCategory(userId, note.id, note.category, "remove")
-                }
-            })
-
-
-            // Item settings menu
-            const boardNoteItemDotsBtn = noteItem.querySelector(".board-note-item__dotsBtn")
-            const boardNoteItemSettings = noteItem.querySelector(".board-note-item__settings")
-
-            boardNoteItemDotsBtn.addEventListener('click', () => {
-                boardNoteItemSettings.classList.toggle("board-note-item__settings--hidden")
-                boardNoteItemDotsBtn.classList.toggle("board-note-item__dotsBtn--activated")
-            })
-
-            /*document.addEventListener('click', (event) => {
-                if (event.target == boardNoteItemDotsBtn) {
-                    boardNoteItemSettings.classList.remove("board-note-item__settings--hidden")
-                } else {
-                    boardNoteItemSettings.classList.add("board-note-item__settings--hidden")
-                }
-            })*/
-
-            const deleteBoardNoteItemBtn = noteItem.querySelector(".delete-board-note-item")
-            deleteBoardNoteItemBtn.addEventListener('click', (e) => {
-                showLoader()
-                console.log(note.id)
-                deleteNote(userId, note.id, note.fileType)
-            })
-        });
+        } else {
+            noteBoardListImprove.innerHTML = `
+            <div class="board-empty-item">
+                <p class="board-empty-item__message">Aún no tienes anotaciones agregadas</p>
+                <p class="board-empty-item__tip">Si deseas <span style="font-weight: 600;">agregar una anotación</span> da click en el botón de “Crear anotación”</p>
+            </div>
+            `   
+        }
     }
     getCategoryColumnsRect()
 }
