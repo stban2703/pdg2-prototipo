@@ -465,21 +465,53 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
                     const commentItem = document.createElement('div')
                     commentItem.className = "improveaction-user-comment"
                     commentItem.innerHTML = `
-                    <button class="improveaction-user-comment__deleteButton">
-                        <img src="./images/deleteagreement.svg" alt="" />
-                    </button>
-                    <p class="improveaction-user-comment__date">${parseTimestampToDate(c.date)}</p>
+                    <div class="improveaction-user-comment__header">
+                        <p class="improveaction-user-comment__date">${parseTimestampToDate(c.date)}</p>
+                        <button class="improveaction-user-comment__dotsBtn" style="background-image: url('./images/3dots.svg');">
+                        </button>
+                        <ul class="improveaction-user-comment__settings improveaction-user-comment__settings--hidden">
+                        <li class="improveaction-user-comment__settings-item delete-user-comment">
+                            <img class="improveaction-user-comment__settings-item__normal-icon" src="./images/deletenoteicon.svg">
+                            <img class="improveaction-user-comment__settings-item__hover-icon" src="./images/deletenoteiconwhite.svg">
+                            <span>Eliminar</span>
+                        </li>
+                    </ul>
+                    </div>
                     <p class="improveaction-user-comment__comment">${c.comment}</p>
                     <div class="improve-actions__commentStatus${c.status === 'read' ? ' improve-actions__commentStatus--read' : ''}">
                         <p>${c.status === 'read' ? 'Leído por el docente' : 'No leído por el docente'}</p>
                     </div>
                     `
                     commentContainer.appendChild(commentItem)
-                    const deleteCommentButton = commentItem.querySelector(".improveaction-user-comment__deleteButton")
+
+                    const commentItemDotsBtn = commentItem.querySelector(".improveaction-user-comment__dotsBtn")
+                    const commentItemItemSettings = commentItem.querySelector(".improveaction-user-comment__settings")
+
+                    commentItemDotsBtn.addEventListener('click', () => {
+                        commentItemItemSettings.classList.toggle("improveaction-user-comment__settings--hidden")
+                        commentItemDotsBtn.classList.toggle("improveaction-user-comment__dotsBtn--activated")
+                    })
+
+                    const deleteCommentButton = commentItem.querySelector(".delete-user-comment")
                     deleteCommentButton.addEventListener('click', () => {
                         showLoader()
                         deleteComment(c.id)
                     })
+
+                    /*const deleteCommentButton = commentItem.querySelector(".improveaction-user-comment__deleteButton")
+                    deleteCommentButton.addEventListener('click', () => {
+                        showLoader()
+                        deleteComment(c.id)
+                    })
+                    <li class="improveaction-user-comment__settings-item">
+                        <img class="improveaction-user-comment__settings-item__normal-icon" src="./images/editicon.svg">
+                        <img class="improveaction-user-comment__settings-item__hover-icon" src="./images/editiconwhite.svg">
+                        <span>Editar</span>
+                    </li>
+                    <button class="improveaction-user-comment__deleteButton">
+                        <img src="./images/deleteagreement.svg" alt="" />
+                    </button>
+                    */
                 })
                 //commentContainer.innerHTML = 
             }
