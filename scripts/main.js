@@ -2,7 +2,7 @@ import { getInitialAccomplishmentList, getInititalAccomplishmentDepartmentList }
 import { initialCreateMeetingSettings, onSelectMeetingMode, submitMeeting } from "./createmeeting.js";
 import { createAgreement, getMeetingInfoForMinute, submitMeetingMinutes } from "./createmeetingminutes.js";
 import { submitNote } from "./createnote.js";
-import { getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
+import { downloadResults, getInitialGeneralAll, getInitialGeneralCareer, getInitialGeneralDepartments, getInitialGeneralSelect, getInitialGeneralSubjets, onFilterGeneralAllByPeriod, onSubmitImproveActionComment, renderImproveActionsForSpecificGeneral } from "./generalprogress.js";
 import { renderListHome, renderMemoProgressTitles, showShortcuts } from "./home.js";
 import { getInitialHistoryImproveActions, getInitialImproveActions, renderGoToImproveActionHistoryButton, renderImproveActionComment } from "./improveactions.js";
 import { changeMemoseeAnswerTab, getInitialMemoSeeAnswersQuestions, getInitialMemoseeSubjects, renderMemoseeAnswerTab, renderMemoseeCareers, renderMemoseeDepartments } from "./memosee.js";
@@ -287,6 +287,9 @@ function addPageFuncions() {
     // Profile
     renderProfileInfo(userInfo, currentRole)
     renderAlternativeRole(userInfo, currentRole)
+
+    // Download
+    downloadResults()
 
     // Back-return
     goBack()

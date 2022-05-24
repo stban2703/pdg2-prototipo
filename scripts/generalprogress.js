@@ -515,7 +515,6 @@ export function onFilterGeneralAllByPeriod() {
 export function getInitialGeneralAll(currentPeriod) {
     const generalAllScreen = document.querySelector(".progresssubject-screen--generalAll")
     if (generalAllScreen && window.location.href.includes("generalall")) {
-        downloadResults()
         renderGeneralAllCharts(currentPeriod)
     }
 }
@@ -862,9 +861,16 @@ export function downloadResults() {
             showLoader()
             const resultsContainer = document.querySelector(".progresssubject-screen")
             const resultsControls = document.querySelector(".progresssubject-screen__controls")
+            const improveActionsButtons = document.querySelectorAll(".memo-improve-actions")
 
             if(resultsControls) {
                 resultsControls.classList.add("hidden")
+            }
+
+            if(improveActionsButtons.length > 0) {
+                improveActionsButtons.forEach(b => {
+                    b.classList.add("hidden")
+                })
             }
 
             html2canvas(resultsContainer).then(canvas => {
@@ -873,9 +879,15 @@ export function downloadResults() {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
                 doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
-                doc.save('estadisticasgenerales.pdf');
+                doc.save('estadisticas.pdf');
                 if(resultsControls) {
                     resultsControls.classList.remove("hidden")
+                }
+
+                if(improveActionsButtons.length > 0) {
+                    improveActionsButtons.forEach(b => {
+                        b.classList.remove("hidden")
+                    })
                 }
                 hideLoader()
             });
