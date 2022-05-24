@@ -36,6 +36,7 @@ const router = new Router(
         memogroup: new Layout(new Page("memogroup.html")),
         profile: new Layout(new Page("profile.html")),
         notification: new Layout(new Page("notification.html")),
+        settings: new Layout(new Page("settings.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

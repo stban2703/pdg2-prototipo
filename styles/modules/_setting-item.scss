@@ -1,0 +1,63 @@
+.setting-item {
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.1);
+    max-width: 53rem;
+
+    &__graphicSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $main-color;
+        padding: 4rem;
+    }
+
+    &__letterAsIcon {
+        font-family: $poppins;
+        font-size: 7rem;
+        font-weight: $bold;
+        color: $white;
+    }
+
+    &__detailsSection {
+        display: flex;
+        flex-direction: column;
+        background-color: $white;
+        justify-content: center;
+        padding: 0 4rem;
+        gap: 1rem;
+    }
+
+    &__description {
+        font-family: $poppins;
+        font-size: 1.5rem;
+        font-weight: $regular;
+        color: $boulder;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    &__button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $secondary-color;
+        border-radius: 15px;
+        box-shadow: 0px 5px 6px rgba(244, 156, 73, 0.2);
+        border: none;
+        min-width: 4.5rem;
+        min-height: 4.5rem;
+
+        img {
+            max-width: none;
+        }
+    }
+}
