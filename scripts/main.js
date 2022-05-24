@@ -37,6 +37,8 @@ let currentSubjects = localSubjects
 let currentPeriod = localPeriod
 let currentRole = localRole
 
+console.log(window.innerWidth)
+
 if (currentUser != null || getCurrentSignedInUser() != null) {
     currentUser = localUser
     displayHomeUserName()

@@ -1861,7 +1861,7 @@ input[type="time"]:valid:before {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding: 5rem 3rem;
+  padding: 4rem 2rem;
   -webkit-filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
           filter: drop-shadow(0px 5px 6px rgba(151, 157, 255, 0.2));
   gap: 1rem;
@@ -8081,7 +8081,7 @@ input[type="time"]:valid:before {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-top: 4rem;
-  gap: 7%;
+  gap: 2.5%;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;

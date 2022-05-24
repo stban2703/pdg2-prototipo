@@ -32,7 +32,7 @@
 .last-subject-thumbnail {
     display: flex;
     flex-direction: row;
-    padding: 5rem 3rem;
+    padding: 4rem 2rem;
     @include memo-subject-thumbnail($memo-thumb-drop-shadow);
     gap: 1rem;
     max-width: 23rem;
