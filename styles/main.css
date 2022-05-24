@@ -5796,6 +5796,10 @@ input[type="time"]:valid:before {
   max-width: 25rem;
 }
 
+.createmeeting-form__placeInput {
+  max-width: 52rem;
+}
+
 .createmeetingminutes-form {
   display: -webkit-box;
   display: -ms-flexbox;
