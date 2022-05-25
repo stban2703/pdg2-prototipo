@@ -21,9 +21,22 @@ export async function getInitialMeetings(userInfo, currentRole) {
         meetingList.sort(sortByDateAscending)
         let listCopy = [...meetingList]
 
-        if (userInfo.groups) {
+        if (userInfo.groups && (currentRole === "teacher" || currentRole === "leader")) {
             listCopy = meetingList.filter(meeting => {
                 return userInfo.groups.includes(meeting.group)
+            })
+        }
+
+        console.log(userInfo.principalCareer === listCopy[0].career)
+        if (currentRole === "principal") {
+            listCopy = meetingList.filter(meeting => {
+                return meeting.career === userInfo.principalCareer
+            })
+        }
+
+        if (currentRole === "boss") {
+            listCopy = meetingList.filter(meeting => {
+                return meeting.department === userInfo.bossDepartment
             })
         }
 
@@ -51,6 +64,10 @@ export async function getInitialMeetings(userInfo, currentRole) {
             departmentFilterSelect.appendChild(option)
         })
 
+        if(currentRole === "boss") {
+            departmentFilterSelect.classList.add("hidden")
+        }
+
         const careerFilterSelect = meetingsSettingsForm.career
         careers.forEach(elem => {
             const option = document.createElement("option")
@@ -58,6 +75,11 @@ export async function getInitialMeetings(userInfo, currentRole) {
             option.innerHTML = elem
             careerFilterSelect.appendChild(option)
         })
+
+        if(currentRole === "principal") {
+            departmentFilterSelect.classList.add("hidden")
+            careerFilterSelect.classList.add("hidden")
+        }
 
         const groupFilterSelect = meetingsSettingsForm.group
         groups.forEach(elem => {
@@ -69,17 +91,18 @@ export async function getInitialMeetings(userInfo, currentRole) {
 
         if (currentRole === "leader") {
             alternativeCreateMeetingButton.classList.remove("hidden")
-
         }
 
-        if (currentRole === "admin") {
+        if (currentRole !== "leader" && currentRole !== "teacher") {
+            console.log("director")
             document.querySelector(".section-banner__description").classList.add("hidden")
             meetingListSectionAdmin.classList.remove("hidden")
             meetingListSection.classList.add("hidden")
             document.querySelector(".meetinglist-screen__header").classList.remove("hidden")
             renderMeetingsForAdmin(listCopy)
             onSortFilterMeetingsListener(meetingList)
-        } else {
+        } else if(currentRole === "leader" || currentRole === "teacher") {
+            console.log("lider")
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
             document.querySelector(".meetinglist-screen__header").classList.add("hidden")
@@ -116,14 +139,14 @@ function renderMeetings(list, currentRole) {
             </section>
             <section class="meeting-item__controls">
                     ${meeting.minutesId.length === 0 && currentRole === 'leader' ?
-                    `<a href="#createmeetingminutes?${meeting.id}" class="createMeetingMinutesBtn board-edit-button--secondary">
+                `<a href="#createmeetingminutes?${meeting.id}" class="createMeetingMinutesBtn board-edit-button--secondary">
                         <p>Crear acta</p>
                     </a>` : ``}
                     ${meeting.minutesId.length > 0 ?
-                    `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
                         <p>Ver acta</p>
                     </a>`:
-                    `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                         <p>Ver detalle</p>
                     </a>`}                    
             </section>
@@ -165,10 +188,10 @@ function renderMeetingsForAdmin(list) {
             </section>
             <section class="meeting-item__controls">
                     ${meeting.minutesId.length > 0 ?
-                    `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
+                `<a href="#meetingminutesdetails?${meeting.minutesId}" class="seeMeetingBtn board-edit-button">
                         <p>Ver acta</p>
                     </a>`:
-                    `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
+                `<a href="#meetingdetails?${meeting.id}" class="seeMeetingBtn board-edit-button">
                         <p>Ver detalle</p>
                     </a>`}                    
             </section>
@@ -319,7 +342,7 @@ export async function renderMeetingDetails(role) {
             let endTimeHour = startTimeHour + durationValue
             let timeArray = [13, 14]
             let index = 0
-            if(endTimeHour > 12) {
+            if (endTimeHour > 12) {
                 index = timeArray.findIndex(e => {
                     return e === endTimeHour
                 })
@@ -331,8 +354,8 @@ export async function renderMeetingDetails(role) {
             const parsedIcsEndDate = parseTimestampToIcsDate(meeting.date, stringEndTime)
 
             let cal = ics();
-            cal.addEvent(meeting.name, `Reunión reflexiva del bloque ${meeting.group}`, 
-            `${meeting.mode == "Virtual" ? meeting.platform + ": " + meeting.url : meeting.place}`, parsedIcsStartDate, parsedIcsEndDate);
+            cal.addEvent(meeting.name, `Reunión reflexiva del bloque ${meeting.group}`,
+                `${meeting.mode == "Virtual" ? meeting.platform + ": " + meeting.url : meeting.place}`, parsedIcsStartDate, parsedIcsEndDate);
             cal.download('reunionReflexiva');
         })
 
