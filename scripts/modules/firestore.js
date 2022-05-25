@@ -735,6 +735,13 @@ export async function getAllAnswersByQuestionAndPeriod(questionIndex, period) {
     return answerList
 }
 
+export async function getAllAnswersByQuestionPeriodDepartmentId(questionIndex, period, departmentId) {
+    const q = query(collection(firestore, `memos/answers/answers`), where("questionIndex", "==", questionIndex), where("period", "==", period), where("departmentId", "==", departmentId))
+    const querySnapshot = await getDocs(q);
+    const answerList = querySnapshot.docs.map(doc => doc.data());
+    return answerList
+}
+
 export async function getAllAnswersByPeriod(period) {
     const q = query(collection(firestore, `memos/answers/answers`), where("period", "==", period))
     const querySnapshot = await getDocs(q);

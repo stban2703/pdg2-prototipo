@@ -1,4 +1,4 @@
-import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getHistoryImproveActions, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
+import { getAllAnswersByQuestionAndPeriod, getAllAnswersByQuestionAndSubject, getAllAnswersByQuestionPeriodDepartmentId, getHistoryImproveActions, getImproveActions, getSubcjectInfo } from "./modules/firestore.js";
 import { hideLoader, showLoader } from "./utils/loader.js";
 
 export async function getInitialProgressInfo(currentPeriod) {
@@ -25,7 +25,7 @@ export async function getInitialProgressInfo(currentPeriod) {
         }
 
         // First questions
-        const firstQuestionAnswers = await getAllAnswersByQuestionAndPeriod(1, currentPeriod)
+        const firstQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(1, currentPeriod, subject.departmentId)
 
         const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
         const firtQuestionAllDataSet = []
@@ -66,7 +66,7 @@ export async function getInitialProgressInfo(currentPeriod) {
         renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
 
         // Fourth question
-        const fourthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(4, currentPeriod)
+        const fourthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(4, currentPeriod, subject.departmentId)
         const fourtQuestionLabels = []
 
         fourthQuestionAnswers.forEach(q => {
@@ -173,7 +173,7 @@ export async function getInitialProgressInfo(currentPeriod) {
 
 
         // Seventh question
-        const seventhQuestionAnwers = await getAllAnswersByQuestionAndPeriod(7, currentPeriod)
+        const seventhQuestionAnwers = await getAllAnswersByQuestionPeriodDepartmentId(7, currentPeriod, subject.departmentId)
         const seventhQuestionLabels = []
 
         seventhQuestionAnwers.forEach(answer => {
@@ -204,7 +204,7 @@ export async function getInitialProgressInfo(currentPeriod) {
 
 
         // Eigth question
-        const eigthQuestionAnswers = await getAllAnswersByQuestionAndPeriod(8, currentPeriod)
+        const eigthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(8, currentPeriod, subject.departmentId)
         const eigthQuestionLabels = ['Sí', 'No']
         const eigthQuestionDataSet = [0, 0]
 
@@ -262,7 +262,7 @@ export async function getInitialProgressInfo(currentPeriod) {
 
         // Question 11
         if (document.querySelector(".chartElevenQuestionParent")) {
-            const elevenQuestionAnswers = await getAllAnswersByQuestionAndSubject(11, subjectId)
+            const elevenQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(11, subjectId, subject.departmentId)
             const elevenQuestionLabels = ['Sí', 'No']
             const elevenQuestionDataSet = [0, 0]
 
@@ -282,7 +282,7 @@ export async function getInitialProgressInfo(currentPeriod) {
                     document.querySelector('.progress-section__11And12Container').classList.add('hidden')
                 } else {
                     // Question 12
-                    const twelveQuestionAnswers = await getAllAnswersByQuestionAndSubject(12, subjectId)
+                    const twelveQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(12, subjectId, subject.departmentId)
                     const twelveQuestionLabels = ['']
                     const twelveQuestionDataSet = [0]
 
