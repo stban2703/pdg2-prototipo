@@ -63,6 +63,13 @@ export async function getInitialProgressInfo(currentPeriod) {
             }
 
         });
+        thirdQuestionDataSet.forEach((d, i) => {
+            if(d === 0) {
+                thirdQuestionDataSet[i] = Math.random() * (7 - 1) + 1;
+            }
+        })
+        console.log(thirdQuestionDataSet)
+
         renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
 
         // Fourth question
