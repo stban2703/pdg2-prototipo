@@ -37,6 +37,7 @@ const router = new Router(
         profile: new Layout(new Page("profile.html")),
         notification: new Layout(new Page("notification.html")),
         settings: new Layout(new Page("settings.html")),
+        help: new Layout(new Page("help.html")),
         "#default": new Page("home.html"),
     },
     document.querySelector(".page-content")

@@ -5337,6 +5337,72 @@ input[type="time"]:valid:before {
   max-width: none;
 }
 
+.help-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.1);
+          box-shadow: 0px 4px 10px rgba(112, 120, 253, 0.1);
+  overflow: hidden;
+}
+
+.help-item__graphicSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #979DFF;
+  padding: 3rem;
+}
+
+.help-item__graphicSection img {
+  max-width: none;
+}
+
+.help-item__detailsSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #FFFFFF;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.help-item__title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #757575;
+}
+
+.help-item__description {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #757575;
+}
+
 .signinup-form {
   width: 100%;
   max-width: 38rem;
@@ -9610,6 +9676,45 @@ input[type="time"]:valid:before {
   font-weight: 400;
   font-size: 2rem;
   color: #757575;
+}
+
+.help-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 3rem;
+}
+
+.help-screen__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+
+.help-screen__title {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 2rem;
+  color: #757575;
+}
+
+.help-screen__itemList {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  -webkit-column-gap: 2rem;
+          column-gap: 2rem;
 }
 
 html {

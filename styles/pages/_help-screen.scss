@@ -1,0 +1,25 @@
+.help-screen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    &__title {
+        font-family: "Poppins";
+        font-weight: $regular;
+        font-size: 2rem;
+        color: $boulder;
+    }
+
+    &__itemList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        column-gap: 2rem;
+    }
+}
