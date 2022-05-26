@@ -28,6 +28,7 @@ import { localPeriod, localRole, localSubjects, localUser, setLocalStorage } fro
 import { hideItem, showItem } from "./utils/display-items.js";
 import { renderAlternativeRole, renderProfileInfo } from "./profile.js";
 import { changeFontSize } from "./settings.js";
+import { renderHelp } from "./help.js";
 
 const firestore = getFirestore(firebase)
 
@@ -298,6 +299,9 @@ function addPageFuncions() {
 
     // Settings
     changeFontSize()
+
+    // Help
+    renderHelp(currentRole)
 
     // Back-return
     goBack()
