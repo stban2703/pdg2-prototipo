@@ -27,7 +27,7 @@ export async function getInitialMeetings(userInfo, currentRole) {
             })
         }
 
-        console.log(userInfo.principalCareer === listCopy[0].career)
+        //console.log(userInfo.principalCareer === listCopy[0].career)
         if (currentRole === "principal") {
             listCopy = meetingList.filter(meeting => {
                 return meeting.career === userInfo.principalCareer
@@ -102,7 +102,6 @@ export async function getInitialMeetings(userInfo, currentRole) {
             renderMeetingsForAdmin(listCopy)
             onSortFilterMeetingsListener(meetingList)
         } else if(currentRole === "leader" || currentRole === "teacher") {
-            console.log("lider")
             meetingListSectionAdmin.classList.add("hidden")
             meetingListSection.classList.remove("hidden")
             document.querySelector(".meetinglist-screen__header").classList.add("hidden")
