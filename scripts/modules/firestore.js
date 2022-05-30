@@ -1,6 +1,6 @@
 import { firebase } from "./firebase.js";
 import {
-    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc, onSnapshot
+    getFirestore, collection, doc, addDoc, setDoc, updateDoc, query, getDoc, getDocs, where, deleteDoc, onSnapshot, arrayUnion
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { deleteFile, submitFile } from "./storage.js";
 import { hideLoader, showLoader } from "../utils/loader.js";
@@ -944,23 +944,40 @@ export async function submitTestSubject() {
     const subjectRef = doc(collection(firestore, "subjects"))
 
     const subject = {
-        career: "Diseño de medios interactivos",
-        careerId: "ryNPmvun0rcUQmM4Ph6G",
+        career: "Diseño industrial",
+        careerId: "MOlMHsgkPgdc7SDaL599",
         department: "Diseño e Innovación",
         departmentId: "iOdeot79u3raGVUllUoA",
-        group: "Interacción",
-        groupId: "1r3C3LAJ8GpCvf3gIE4Q",
+        group: "Comunicación y validación",
+        groupId: "3PUL3p2XSYzOtlB4hbWD",
         id: subjectRef.id,
-        name: "Interacción Hombre Computador",
-        teacher: "Mario Rios",
-        teacherId: "oId5UuAM3pcV0zfF4CqUeX4JXf12"
+        name: "Diseño CAD - CAM",
+        teacher: "Jorge Elías Posada",
+        teacherId: "8bNXPiWufpdg0RZZLY9eJTZ0Pty1"
     }
 
     await setDoc(subjectRef, subject).then(() => {
         console.log("Materia subida")
         console.log(subject.id)
+        submitSubjectToTeacherAndCareer(subject.id, subject.teacherId, subject.careerId)
     }).catch((error) => {
         console.log(error)
     });
 
+}
+
+export async function submitSubjectToTeacherAndCareer(subjectId, teacherId, careerId) {
+    const userRef = doc(firestore, "users", teacherId);
+    await updateDoc(userRef, {
+        subjects: arrayUnion(subjectId)
+    }).then(() => {
+        console.log("Materia agregada al docente")
+    });
+
+    const careerRef = doc(firestore, "careers", careerId);
+    await updateDoc(careerRef, {
+        subjects: arrayUnion(subjectId)
+    }).then(() => {
+        console.log("Materia agregada a la carrera")
+    });
 }

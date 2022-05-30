@@ -309,6 +309,12 @@ function addPageFuncions() {
 
 
     // Test
+    const addSubjectButton = document.querySelector(".addSubjectButton")
+    if(addSubjectButton) {
+        addSubjectButton.addEventListener('click', () => {
+            //submitTestSubject()
+        })
+    }
     //submitTestSubject()
 }
 

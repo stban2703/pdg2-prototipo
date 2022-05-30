@@ -48,6 +48,10 @@
         color: $main-color;
         max-width: 14ch;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .subject-thumbnail {

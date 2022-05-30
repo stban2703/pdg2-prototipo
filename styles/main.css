@@ -1880,6 +1880,10 @@ input[type="time"]:valid:before {
   max-width: 14ch;
 }
 
+.last-subject-thumbnail:hover {
+  cursor: pointer;
+}
+
 .subject-thumbnail {
   display: -webkit-box;
   display: -ms-flexbox;
