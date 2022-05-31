@@ -920,6 +920,12 @@ export function downloadResults() {
             const resultsContainer = document.querySelector(".progresssubject-screen")
             const resultsControls = document.querySelector(".progresssubject-screen__controls")
             const improveActionsButtons = document.querySelectorAll(".memo-improve-actions")
+            const changePeriodSelect = document.querySelector(".change-period-memo-select")
+            const periodTitle = document.querySelector(".progresssubject-screen__info--subjectPeriod")
+
+            if(periodTitle) {
+                periodTitle.classList.remove("hidden")
+            }
 
             if (resultsControls) {
                 resultsControls.classList.add("hidden")
@@ -931,6 +937,10 @@ export function downloadResults() {
                 })
             }
 
+            if(changePeriodSelect) {
+                changePeriodSelect.classList.add("hidden")
+            }
+
             html2canvas(resultsContainer).then(canvas => {
                 const uri = canvas.toDataURL('image/png')
                 console.log(canvas.width)
@@ -938,6 +948,11 @@ export function downloadResults() {
                 const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
                 doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
                 doc.save('estadisticas.pdf');
+
+                if(changePeriodSelect) {
+                    changePeriodSelect.classList.remove("hidden")
+                }
+
                 if (resultsControls) {
                     resultsControls.classList.remove("hidden")
                 }
@@ -946,6 +961,10 @@ export function downloadResults() {
                     improveActionsButtons.forEach(b => {
                         b.classList.remove("hidden")
                     })
+                }
+
+                if(periodTitle) {
+                    periodTitle.classList.add("hidden")
                 }
                 hideLoader()
             });

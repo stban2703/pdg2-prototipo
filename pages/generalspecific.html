@@ -46,8 +46,12 @@
             <p class="progresssubject-screen__info">Visualización específica</p>
             <p class="progresssubject-screen__info">Curso: <span
                     class="progresssubject-screen__info--subjectName"></span></p>
-            <p class="progresssubject-screen__info">Semestre: <span
-                    class="progresssubject-screen__info--subjectPeriod"></span></p>
+            <p class="progresssubject-screen__info">Semestre: <select class="change-period-memo-select" name="period"
+                    id="">
+                    <option value="2022-1">2022-1</option>
+                    <option value="2021-2">2021-2</option>
+                    <option value="2021-1">2021-1</option>
+                </select><span class="progresssubject-screen__info--subjectPeriod hidden"></span></p>
             <p class="progresssubject-screen__info">Docente: <span
                     class="progresssubject-screen__info--subjectTeacher"></span></p>
         </div>
@@ -61,7 +65,8 @@
                     <span>Ver</span>
                 </a>
             </div>
-            <button class="small-button small-button--secondary downloadResultsButton" style="width: fit-content; align-self: flex-end;">
+            <button class="small-button small-button--secondary downloadResultsButton"
+                style="width: fit-content; align-self: flex-end;">
                 <img src="./images/downloadicon.svg" alt="">
                 <span>Descargar resultados</span>
             </button>
