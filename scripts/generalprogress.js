@@ -265,9 +265,15 @@ export async function getInitialGeneralSubjets(currentRole) {
             })
         }
 
-        const copy = [...subjects].sort(sortByAlphabeticAscending)
+        // Parche temporal
+        let copy = [...subjects].sort(sortByAlphabeticAscending)
+        if(currentRole === "boss") {
+            copy = [...copy].filter((s) => {
+                return s.group !== "Programación"
+            })
+        }
         renderGeneralSubjects(copy)
-        onSortFilterGeneralSubjectListener(subjects, currentRole)
+        onSortFilterGeneralSubjectListener(copy, currentRole)
         hideLoader()
     }
 }
