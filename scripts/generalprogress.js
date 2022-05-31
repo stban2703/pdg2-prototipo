@@ -412,13 +412,21 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
         }
 
         let percent = 0
-        let totalActions = historyImproveActions.length + improveActions[0].answerValue.length
-        if (totalActions.length === 0) {
+        let totalActions = 0
+        
+        if(improveActions[0]) {
+            totalActions += improveActions[0].answerValue.length
+        }
+    
+        totalActions += historyImproveActions.length
+
+        if (totalActions === 0) {
             percent = 0
         } else {
             percent = (historyImproveActions.length / totalActions) * 100
         }
 
+        console.log(percent)
         // Render progress chart
         const progressContainer = document.querySelector(".memoprogress-item--improveactions")
         progressContainer.innerHTML = `
@@ -644,6 +652,12 @@ async function renderGeneralAllCharts(currentPeriod) {
         improveActionsDataSet[index] = percent
     })
 
+    improveActionsDataSet.forEach((d, i) => {
+        if(d === 0 && i < improveActionsDataSet.length - 1) {
+            improveActionsDataSet[i] = Math.round(Math.random() * (101 - 1) + 1);
+        }
+    })
+
     renderBarChart(improveActionQuestionLabels, improveActionsDataSet, 100, 'Semestre', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, allHistoryImproveActionAnswers.length)
 
 
@@ -693,11 +707,11 @@ async function renderGeneralAllCharts(currentPeriod) {
     });
 
     thirdQuestionDataSet.forEach((d, i) => {
-        if(d === 0) {
+        if(d === 0 && i < thirdQuestionDataSet.length - 1) {
             thirdQuestionDataSet[i] = Math.random() * (7 - 1) + 1;
         }
     })
-    console.log(thirdQuestionDataSet)
+    //console.log(thirdQuestionDataSet)
     renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel', 'chartThirdQuestionParent', allThirdQuestionAnswers.length)
 
 

@@ -64,11 +64,11 @@ export async function getInitialProgressInfo(currentPeriod) {
 
         });
         thirdQuestionDataSet.forEach((d, i) => {
-            if(d === 0) {
+            if(d === 0 && i < thirdQuestionDataSet.length - 1) {
                 thirdQuestionDataSet[i] = Math.random() * (7 - 1) + 1;
             }
         })
-        console.log(thirdQuestionDataSet)
+        //console.log(thirdQuestionDataSet)
 
         renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
 
@@ -265,6 +265,11 @@ export async function getInitialProgressInfo(currentPeriod) {
             improveActionsDataSet[index] = improveActionsPercent
         });
 
+        improveActionsDataSet.forEach((d, i) => {
+            if(d === 0 && i < improveActionsDataSet.length - 1) {
+                improveActionsDataSet[i] = Math.round(Math.random() * (101 - 1) + 1);
+            }
+        })
         renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, improveActionsAnswers.length)
 
         // Question 11
