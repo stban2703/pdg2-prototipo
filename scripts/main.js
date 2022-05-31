@@ -24,7 +24,7 @@ import {
     getFirestore, collection, query, onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { createNotification, submitTestSubject } from "./modules/firestore.js";
-import { localPeriod, localRole, localSubjects, localUser, setLocalStorage } from "./utils/ls.js";
+import { localFontSize, localPeriod, localRole, localSubjects, localUser, setLocalStorage } from "./utils/ls.js";
 import { hideItem, showItem } from "./utils/display-items.js";
 import { renderAlternativeRole, renderProfileInfo } from "./profile.js";
 import { changeFontSize } from "./settings.js";
@@ -32,6 +32,13 @@ import { renderHelp } from "./help.js";
 
 const firestore = getFirestore(firebase)
 
+
+// Verifica tamaño de fuente actual
+let currentFonSize = localFontSize
+if (currentFonSize) {
+    const html = document.querySelector("html")
+    html.style.fontSize = currentFonSize
+}
 
 // Verifica si el usuario ha  iniciado sesion
 let currentUser = localUser
@@ -310,7 +317,7 @@ function addPageFuncions() {
 
     // Test
     const addSubjectButton = document.querySelector(".addSubjectButton")
-    if(addSubjectButton) {
+    if (addSubjectButton) {
         addSubjectButton.addEventListener('click', () => {
             //submitTestSubject()
         })
@@ -322,7 +329,7 @@ function addPageFuncions() {
 function checkCurrentTab() {
     const tabs = document.querySelectorAll(".navigation-menu__item")
     let currentTab = window.location.hash.replace("#", "")
-    if(currentTab.includes("memogroup")) {
+    if (currentTab.includes("memogroup")) {
 
     }
     tabs.forEach(t => {
@@ -333,7 +340,7 @@ function checkCurrentTab() {
             t.classList.remove("navigation-menu__item--selected")
         }
 
-        if(tabName.includes("memogroup") && currentTab.includes("memoseeanswers")) {
+        if (tabName.includes("memogroup") && currentTab.includes("memoseeanswers")) {
             t.classList.add("navigation-menu__item--selected")
         }
     })

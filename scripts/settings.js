@@ -1,3 +1,5 @@
+import { setLocalStorage } from "./utils/ls.js"
+
 export function changeFontSize() {
     const settingItemChangeFontSize = document.querySelector(".setting-item__changeFontSize")
 
@@ -12,6 +14,8 @@ export function changeFontSize() {
 
             if (fontSize < 20) {
                 html.style.fontSize = (fontSize + 0.5) + "px"
+                console.log(html.style.fontSize)
+                setLocalStorage("currentFontSize", html.style.fontSize)
             }
         })
 
@@ -22,6 +26,8 @@ export function changeFontSize() {
 
             if (fontSize > 1) {
                 html.style.fontSize = (fontSize - 0.5) + "px"
+                console.log(html.style.fontSize)
+                setLocalStorage("currentFontSize", html.style.fontSize)
             }
         })
     }
