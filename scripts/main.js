@@ -12,7 +12,7 @@ import { renderMemoIntro, getInitialMemoSubjects, onSortFilterMemoSubjectListene
 import { addMemoSectionFormFunctions, changeMemoEditFormPage, onContentEditableEnter, renderMemoEditValues, updateMemoPseudoInputsValueLocally } from "./memoedit.js";
 import { handleMemoAddActionForm, memoQuestionGoBack, renderMemoNotes, renderMemoQuestion, submitMemoQuestionForm } from "./memoquestion.js";
 import { logOut, getCurrentSignedInUser } from "./modules/auth.js";
-import { getInitialProgressInfo } from "./myprogress.js";
+import { downloadMyProgress, getInitialProgressInfo } from "./myprogress.js";
 import { renderNoteDetails } from "./notedetails.js";
 import { changeNotesView, getInitialNoteList, onFilterListener } from "./notes.js";
 import { submitQuestions } from "./testmemoform.js";
@@ -303,6 +303,7 @@ function addPageFuncions() {
     // Download
     downloadResults()
     downloadMemo()
+    downloadMyProgress()
 
     // Settings
     changeFontSize()

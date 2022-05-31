@@ -872,3 +872,35 @@ async function renderMyProgressCharts(subject, currentPeriod) {
         renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent', elevenQuestionAnswers.length)
     }
 }
+
+export function downloadMyProgress() {
+    const downloadMyProgressButton = document.querySelector(".downloadMyProgressButton")
+
+    if (downloadMyProgressButton) {
+        downloadMyProgressButton.addEventListener('click', () => {
+            showLoader()
+            const memoContainer = document.querySelector(".progresssubject-screen")
+            const memoControls = document.querySelector(".progresssubject-screen__controls")
+            const periodTitle = document.querySelector(".progresssubject-screen__info--subjectPeriod")
+            const changePeriodSelect = document.querySelector(".change-period-memo-select")
+
+            periodTitle.classList.remove("hidden")
+            changePeriodSelect.classList.add("hidden")
+            memoControls.classList.add("hidden")
+        
+            html2canvas(memoContainer).then(canvas => {
+                const uri = canvas.toDataURL('image/png')
+                console.log(canvas.width)
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'px', [canvas.width + 60, canvas.height + 40]);
+                doc.addImage(uri, "PNG", 30, 20, canvas.width, canvas.height)
+                doc.save('miprogreso.pdf');
+
+                periodTitle.classList.add("hidden")
+                changePeriodSelect.classList.remove("hidden")
+                memoControls.classList.remove("hidden")
+                hideLoader()
+            });
+        })
+    }
+}
