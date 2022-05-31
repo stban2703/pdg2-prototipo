@@ -207,7 +207,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
 
                 const roleElement = document.createElement("div")
                 roleElement.className = "roleShortcut-thumbnail"
-                initialHref = "#mygroup?"
+                initialHref = "#memogroup?"
                 roleElement.style.backgroundImage = "url('./images/rolethumbnailbackground.svg')"
 
                 roleElement.innerHTML = `
@@ -245,7 +245,7 @@ export async function renderListHome(subjectList, currentPeriod, roles, userInfo
         }
 
         if (roles === "leader") {
-            homeGoToMemoButton.setAttribute('href', `#mygroup?${userInfo.leaderGroupId}`)
+            homeGoToMemoButton.setAttribute('href', `#memogroup?${userInfo.leaderGroupId}`)
             homeGoToMemoButton.innerHTML = `
             <span>Ver memorandos</span>
             `
@@ -409,10 +409,10 @@ async function renderViewProgress(subjects) {
 
     const progressContainer = document.querySelector(".memo-thumbnail__progress")
     progressContainer.innerHTML = `
-            <div class="memo-pie custom-pie"
-                data-pie='{ "colorSlice": "#979DFF", "percent": ${viewProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
-            </div>
-            `
+    <div class="memo-pie custom-pie"
+        data-pie='{ "colorSlice": "#979DFF", "percent": ${viewProgress}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'>
+    </div>
+    `
     const circle = new CircularProgressBar(`memo-pie`)
     circle.initial()
 }

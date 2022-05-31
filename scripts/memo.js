@@ -1,55 +1,62 @@
 import { getAllAnswersBySubjectAndPeriod, getCurrentPeriod, getMemoTemplate, getOptionsFromAnswers, getSubjectMemo } from "./modules/firestore.js"
 import { getSubjectFromId } from "./utils/getters.js";
-import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex } from "./utils/sort.js"
+import { sortByAlphabeticAscending, sortByAlphabeticDescending, sortByIndex, sortByQuestionIndex } from "./utils/sort.js"
 
 export async function getAllSubjectsProgress(userSubjects, currentPeriod) {
     const allSubjectsProgress = document.querySelector(".allSubjectsProgress")
 
     if (allSubjectsProgress && window.location.href.includes("#memointro")) {
         if (userSubjects.length > 0) {
-            let allQuestionsAnswers = []
+            const subjectSummary = []
             for (let index = 0; index < userSubjects.length; index++) {
                 const subject = userSubjects[index];
-                const subjectAnswers = await getAllAnswersBySubjectAndPeriod(subject.id, currentPeriod)
-                allQuestionsAnswers = allQuestionsAnswers.concat(subjectAnswers)
-            }
-
-            let totalQuestions = 12 * userSubjects.length
-
-            let answeredQuestions = allQuestionsAnswers.length
-
-            // Optional answer
-            let totalOptionals = 2 * userSubjects.length
-            let actualOptionals = 0
-
-
-            let recoveredOptional = 0
-
-            allQuestionsAnswers.forEach(elem => {
-                if (elem.questionIndex === 8 || elem.questionIndex === 11) {
-                    recoveredOptional++
-                    if (elem.answerValue[0] === "No") {
-                        answeredQuestions--
-                        actualOptionals++
-                    }
+                const answers = await getAllAnswersBySubjectAndPeriod(subject.id, currentPeriod)
+                const object = {
+                    id: subject.id,
+                    name: subject.name,
+                    progress: 0
                 }
-            })
 
-            let totalPercent = 0
-            if (recoveredOptional !== totalOptionals) {
-                totalPercent = (answeredQuestions / (totalQuestions - actualOptionals - (totalOptionals - recoveredOptional)) * 100)
-            } else {
-                totalPercent = (answeredQuestions / (totalQuestions - actualOptionals) * 100)
+                if (answers.length > 0) {
+                    answers.sort(sortByQuestionIndex)
+
+                    let totalAnswers = 12
+                    let answeredQuestion = 0
+
+                    if (answers[7] && answers[7].answerValue[0] === "No") {
+                        totalAnswers--
+                    }
+
+                    if (answers[10] && answers[10].answerValue[0] === "No") {
+                        totalAnswers--
+                    }
+
+                    answers.forEach(answer => {
+                        if (answer.answerValue[0]) {
+                            answeredQuestion++
+                        }
+                    })
+
+                    const progress = Math.round((answeredQuestion / totalAnswers) * 100)
+                    object.progress = progress
+                }
+                subjectSummary.push(object)
             }
+
+            let sum = 0
+            subjectSummary.forEach(s => {
+                sum += s.progress
+            })
+            let totalPercent = Math.round((sum / (subjectSummary.length * 100)) * 100)
 
             allSubjectsProgress.innerHTML = `
-        <h4 class="memo-edit-info__title">Tu progeso:</h4>
-        <div class="pie custom-pie" data-pie='{ "colorSlice": "#979DFF", "percent": ${totalPercent}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'></div>
-        <p class="memo-edit-info__date">Completado</p>
-        <a href="#memoselectsubject" class="small-button small-button--primary">
-            <span>Continuar</span>
-        </a>
-        `
+            <h4 class="memo-edit-info__title">Tu progeso:</h4>
+            <div class="pie custom-pie" data-pie='{ "colorSlice": "#979DFF", "percent": ${totalPercent}, "colorCircle": "#EDF2FF", "strokeWidth": 15, "size": 100, "fontSize": "2.5rem", "fontWeight": 500, "fontColor": "#979DFF", "round": true, "stroke": 10 }'></div>
+            <p class="memo-edit-info__date">Completado</p>
+            <a href="#memoselectsubject" class="small-button small-button--primary">
+                <span>Continuar</span>
+            </a>
+            `
             const circle = new CircularProgressBar("pie");
             circle.initial();
         }
