@@ -9,10 +9,9 @@ export async function getInitialProgressInfo(currentPeriod) {
         const subject = await getSubcjectInfo(subjectId)
 
         document.querySelector(".progresssubject-screen__info--subjectName").innerHTML = subject.name
-        document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
 
         const teacherTitle = document.querySelector('.progresssubject-screen__info--subjectTeacher')
-        if(teacherTitle) {
+        if (teacherTitle) {
             teacherTitle.innerHTML = subject.teacher
         }
 
@@ -24,297 +23,8 @@ export async function getInitialProgressInfo(currentPeriod) {
             })
         }
 
-        // First questions
-        const firstQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(1, currentPeriod, subject.departmentId)
-
-        const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
-        const firtQuestionAllDataSet = []
-        const firstQuestionUserDataSet = []
-        firstQuestionLabels.forEach((label, index) => {
-            const answerList = [...firstQuestionAnswers].filter((answer) => {
-                return answer.answerValue[0] === label
-            })
-            const userAnswer = answerList.find(elem => {
-                return elem.subjectId === subjectId
-            })
-            if (!userAnswer) {
-                firtQuestionAllDataSet[index] = answerList.length
-                firstQuestionUserDataSet[index] = 0
-            } else {
-                firtQuestionAllDataSet[index] = answerList.length - 1
-                firstQuestionUserDataSet[index] = 1
-            }
-        });
-        renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'chartFirstQuestionParent', firstQuestionAnswers.length)
-
-
-        // Third question
-        const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
-        const thirdQuestionDataSet = []
-        const thirdQuestionAnswers = await getAllAnswersByQuestionAndSubject(3, subjectId)
-        thirdQuestionLabels.forEach((label, index) => {
-            const answerList = [...thirdQuestionAnswers].filter((answer) => {
-                return answer.period === label
-            })
-            if (answerList.length > 0) {
-                thirdQuestionDataSet[index] = parseInt(answerList[0].answerValue[0])
-            } else {
-                thirdQuestionDataSet[index] = 0
-            }
-
-        });
-        thirdQuestionDataSet.forEach((d, i) => {
-            if(d === 0 && i < thirdQuestionDataSet.length - 1) {
-                thirdQuestionDataSet[i] = Math.random() * (7 - 1) + 1;
-            }
-        })
-        //console.log(thirdQuestionDataSet)
-
-        renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
-
-        // Fourth question
-        const fourthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(4, currentPeriod, subject.departmentId)
-        const fourtQuestionLabels = []
-
-        fourthQuestionAnswers.forEach(q => {
-            const valueList = q.answerValue
-            valueList.forEach(value => {
-                const query = fourtQuestionLabels.find(elem => {
-                    return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
-                })
-                if (!query) {
-                    fourtQuestionLabels.push(value)
-                }
-            })
-        });
-
-        const fourthQuestionUserDataSet = []
-        const fourthQuestionAllDataSet = []
-        fourtQuestionLabels.forEach((elem, index) => {
-            fourthQuestionUserDataSet[index] = 0
-            fourthQuestionAllDataSet[index] = 0
-        })
-
-        fourthQuestionAnswers.forEach(answer => {
-            answer.answerValue.forEach(value => {
-                let labelIndex = fourtQuestionLabels.findIndex(label => {
-                    return label === value
-                })
-                fourthQuestionAllDataSet[labelIndex]++
-            })
-        })
-
-        const subjectAnswers = [...fourthQuestionAnswers].filter((answer) => {
-            return answer.subjectId === subjectId
-        })[0]
-
-        if (subjectAnswers) {
-            subjectAnswers.answerValue.forEach(value => {
-                const labelIndex = fourtQuestionLabels.indexOf(value)
-                fourthQuestionUserDataSet[labelIndex]++
-                fourthQuestionAllDataSet[labelIndex]--
-            })
-        }
-        renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'chartFourthQuestionParent', fourthQuestionAnswers.length)
-
-
-        // Fifth answers
-        const fifthQuestions = await getAllAnswersByQuestionAndSubject(5, subjectId)
-        const fifthQuestionAnswers = fifthQuestions.filter(answer => {
-            return answer.period == currentPeriod
-        })[0]
-
-        const fifthQuestionLabels = []
-        const fifthQuestionUserDataSet = []
-        if (fifthQuestionAnswers) {
-            fifthQuestionAnswers.answerValue.forEach(value => {
-                const q = fifthQuestionLabels.find(label => {
-                    return label === value.split('|')[0]
-                })
-                if (!q) {
-                    fifthQuestionLabels.push(value.split('|')[0])
-                }
-            })
-
-
-            fifthQuestionLabels.forEach((label, index) => {
-                const answer = [...fifthQuestionAnswers.answerValue].filter((answer) => {
-                    return answer.split('|')[0] === label
-                })[0]
-
-                fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
-            });
-        }
-        renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent', 1)
-
-
-        // Sixth question
-        const sixthQuestions = await getAllAnswersByQuestionAndSubject(6, subjectId)
-        const sixthQuestionAnswers = sixthQuestions.filter(answer => {
-            return answer.period == currentPeriod
-        })[0]
-
-        const sixthQuestionsLabels = []
-        const sixthQuestionUserDataSet = []
-
-        if (sixthQuestionAnswers) {
-            sixthQuestionAnswers.answerValue.forEach(value => {
-                const q = sixthQuestionsLabels.find(label => {
-                    return label === value.split('|')[0]
-                })
-                if (!q) {
-                    sixthQuestionsLabels.push(value.split('|')[0])
-                }
-            })
-
-            sixthQuestionsLabels.forEach((label, index) => {
-                const answer = [...sixthQuestionAnswers.answerValue].filter((answer) => {
-                    return answer.split('|')[0] === label
-                })[0]
-
-                sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
-            });
-        }
-
-        renderLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent', 1)
-
-
-        // Seventh question
-        const seventhQuestionAnwers = await getAllAnswersByQuestionPeriodDepartmentId(7, currentPeriod, subject.departmentId)
-        const seventhQuestionLabels = []
-
-        seventhQuestionAnwers.forEach(answer => {
-            answer.answerValue.forEach(value => {
-                const query = seventhQuestionLabels.find(label => {
-                    return label === value
-                })
-                if (!query) {
-                    seventhQuestionLabels.push(value)
-                }
-            })
-        })
-
-        const seventhQuestionDataSet = []
-        seventhQuestionLabels.forEach((label, index) => {
-            seventhQuestionDataSet[index] = 0
-        })
-
-        seventhQuestionAnwers.forEach((answer, index) => {
-            answer.answerValue.forEach(value => {
-                let labelIndex = seventhQuestionLabels.findIndex(label => {
-                    return label === value
-                })
-                seventhQuestionDataSet[labelIndex]++
-            })
-        })
-        renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '', false, seventhQuestionAnwers.length)
-
-
-        // Eigth question
-        const eigthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(8, currentPeriod, subject.departmentId)
-        const eigthQuestionLabels = ['Sí', 'No']
-        const eigthQuestionDataSet = [0, 0]
-
-        eigthQuestionAnswers.forEach(answer => {
-            const answerValue = answer.answerValue[0]
-            const labelIndex = eigthQuestionLabels.findIndex(label => {
-                return label === answerValue
-            })
-            eigthQuestionDataSet[labelIndex]++
-        })
-
-        const userAnswer = eigthQuestionAnswers.find(answer => {
-            return answer.subjectId === subjectId
-        })
-
-        renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent', eigthQuestionAnswers.length)
-
-        document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
-
-
-        // Improve actions answers 10
-        const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subjectId)
-        const checkedActionsList = await getHistoryImproveActions(subjectId)
-
-        const improveActionsLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
-
-        const improveActionsDataSet = []
-        improveActionsLabels.forEach((label, index) => {
-            const answerList = improveActionsAnswers.filter(answer => {
-                return answer.period === label
-            })
-            // Cambio raro
-            const checkedList = checkedActionsList.filter(action => {
-                return action.period === label
-            })
-
-            let improveActionsPercent = 0
-            let totalActionsBySemester = 0
-
-            if (answerList[0]) {
-                totalActionsBySemester = answerList[0].answerValue.length + checkedList.length
-            } else if (!answerList[0] && checkedActionsList.length > 0) {
-                totalActionsBySemester += checkedList.length
-            } else if (!answerList[0] && checkedList.length === 0) {
-                totalActionsBySemester = 0
-            }
-
-            if (totalActionsBySemester !== 0) {
-                improveActionsPercent = Math.round((checkedList.length / totalActionsBySemester) * 100)
-            }
-            improveActionsDataSet[index] = improveActionsPercent
-        });
-
-        improveActionsDataSet.forEach((d, i) => {
-            if(d === 0 && i < improveActionsDataSet.length - 1) {
-                improveActionsDataSet[i] = Math.round(Math.random() * (101 - 1) + 1);
-            }
-        })
-        renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, improveActionsAnswers.length)
-
-        // Question 11
-        if (document.querySelector(".chartElevenQuestionParent")) {
-            const elevenQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(11, subjectId, subject.departmentId)
-            const elevenQuestionLabels = ['Sí', 'No']
-            const elevenQuestionDataSet = [0, 0]
-
-            const currentPeriodAnswer11 = elevenQuestionAnswers.filter(answer => {
-                return answer.period === currentPeriod
-            })
-
-            if (currentPeriodAnswer11.length > 0) {
-                const answerValue = currentPeriodAnswer11[0].answerValue[0]
-                elevenQuestionLabels.forEach((label, index) => {
-                    if (label === answerValue) {
-                        elevenQuestionDataSet[index]++
-                    }
-                })
-
-                if (answerValue === 'No') {
-                    document.querySelector('.progress-section__11And12Container').classList.add('hidden')
-                } else {
-                    // Question 12
-                    const twelveQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(12, subjectId, subject.departmentId)
-                    const twelveQuestionLabels = ['']
-                    const twelveQuestionDataSet = [0]
-
-                    const currentPeriodAnswer12 = twelveQuestionAnswers.filter(answer => {
-                        return answer.period === currentPeriod
-                    })
-
-                    if (currentPeriodAnswer12.length > 0) {
-                        const answerValue12 = currentPeriodAnswer12[0].answerValue[0]
-                        twelveQuestionLabels[0] = answerValue12
-                        twelveQuestionDataSet[0] = 1
-                        renderPieChart(twelveQuestionLabels, twelveQuestionDataSet, 'twelveQuestionChart', 'Tipo de apoyo', 'Respuestas del docente de la materia', 'chartTwelveQuestionParent', twelveQuestionAnswers.length)
-                    }
-                }
-            } else {
-                document.querySelector('.progress-section__11And12Container').classList.add('hidden')
-            }
-
-            renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent', elevenQuestionAnswers.length)
-        }
+        onFilterByPeriod(subject)
+        renderMyProgressCharts(subject, currentPeriod)
         hideLoader()
     }
 }
@@ -857,4 +567,308 @@ export function testChart() {
         document.getElementById('myChart'),
         config
     );*/
+}
+
+function onFilterByPeriod(subject) {
+    const periodSelect = document.querySelector(".change-period-memo-select")
+    periodSelect.addEventListener("input", (event) => {
+        console.log(event.target.value)
+        renderMyProgressCharts(subject, event.target.value)
+    })
+}
+
+async function renderMyProgressCharts(subject, currentPeriod) {
+    document.querySelector(".progresssubject-screen__info--subjectPeriod").innerHTML = currentPeriod
+
+    // First questions
+    const firstQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(1, currentPeriod, subject.departmentId)
+
+    const firstQuestionLabels = ['Nunca', 'Al final del semestre', 'Cada corte', 'Mensualmente', 'Semanalmente', 'Cada clase']
+    const firtQuestionAllDataSet = []
+    const firstQuestionUserDataSet = []
+    firstQuestionLabels.forEach((label, index) => {
+        const answerList = [...firstQuestionAnswers].filter((answer) => {
+            return answer.answerValue[0] === label
+        })
+        const userAnswer = answerList.find(elem => {
+            return elem.subjectId === subject.id
+        })
+        if (!userAnswer) {
+            firtQuestionAllDataSet[index] = answerList.length
+            firstQuestionUserDataSet[index] = 0
+        } else {
+            firtQuestionAllDataSet[index] = answerList.length - 1
+            firstQuestionUserDataSet[index] = 1
+        }
+    });
+    renderDoubleBarChart(firstQuestionLabels, firtQuestionAllDataSet, firstQuestionUserDataSet, firstQuestionAnswers.length, 'Frecuencia', 'Cantidad de respuestas', 'firstQuestionChart', 'chartFirstQuestionParent', firstQuestionAnswers.length)
+
+
+    // Third question
+    const thirdQuestionLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+    const thirdQuestionDataSet = []
+    const thirdQuestionAnswers = await getAllAnswersByQuestionAndSubject(3, subject.id)
+    thirdQuestionLabels.forEach((label, index) => {
+        const answerList = [...thirdQuestionAnswers].filter((answer) => {
+            return answer.period === label
+        })
+        if (answerList.length > 0) {
+            thirdQuestionDataSet[index] = parseInt(answerList[0].answerValue[0])
+        } else {
+            thirdQuestionDataSet[index] = 0
+        }
+
+    });
+    thirdQuestionDataSet.forEach((d, i) => {
+        if (d === 0 && i < thirdQuestionDataSet.length - 1) {
+            thirdQuestionDataSet[i] = Math.random() * (7 - 1) + 1;
+        }
+    })
+    //console.log(thirdQuestionDataSet)
+
+    renderLineChart(thirdQuestionLabels, thirdQuestionDataSet, 7, 'Semestres', 'Nivel del logro', 'thirdQuestionChart', 'Nivel de logro', 'chartThirdQuestionParent', thirdQuestionAnswers.length)
+
+    // Fourth question
+    const fourthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(4, currentPeriod, subject.departmentId)
+    const fourtQuestionLabels = []
+
+    fourthQuestionAnswers.forEach(q => {
+        const valueList = q.answerValue
+        valueList.forEach(value => {
+            const query = fourtQuestionLabels.find(elem => {
+                return elem.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
+            })
+            if (!query) {
+                fourtQuestionLabels.push(value)
+            }
+        })
+    });
+
+    const fourthQuestionUserDataSet = []
+    const fourthQuestionAllDataSet = []
+    fourtQuestionLabels.forEach((elem, index) => {
+        fourthQuestionUserDataSet[index] = 0
+        fourthQuestionAllDataSet[index] = 0
+    })
+
+    fourthQuestionAnswers.forEach(answer => {
+        answer.answerValue.forEach(value => {
+            let labelIndex = fourtQuestionLabels.findIndex(label => {
+                return label === value
+            })
+            fourthQuestionAllDataSet[labelIndex]++
+        })
+    })
+
+    const subjectAnswers = [...fourthQuestionAnswers].filter((answer) => {
+        return answer.subjectId === subject.id
+    })[0]
+
+    if (subjectAnswers) {
+        subjectAnswers.answerValue.forEach(value => {
+            const labelIndex = fourtQuestionLabels.indexOf(value)
+            fourthQuestionUserDataSet[labelIndex]++
+            fourthQuestionAllDataSet[labelIndex]--
+        })
+    }
+    renderDoubleBarChart(fourtQuestionLabels, fourthQuestionAllDataSet, fourthQuestionUserDataSet, 10, 'Estrategias', 'Cantidad de respuestas', 'fourthQuestionChart', 'chartFourthQuestionParent', fourthQuestionAnswers.length)
+
+
+    // Fifth answers
+    const fifthQuestions = await getAllAnswersByQuestionAndSubject(5, subject.id)
+    const fifthQuestionAnswers = fifthQuestions.filter(answer => {
+        return answer.period == currentPeriod
+    })[0]
+
+    const fifthQuestionLabels = []
+    const fifthQuestionUserDataSet = []
+    if (fifthQuestionAnswers) {
+        fifthQuestionAnswers.answerValue.forEach(value => {
+            const q = fifthQuestionLabels.find(label => {
+                return label === value.split('|')[0]
+            })
+            if (!q) {
+                fifthQuestionLabels.push(value.split('|')[0])
+            }
+        })
+
+
+        fifthQuestionLabels.forEach((label, index) => {
+            const answer = [...fifthQuestionAnswers.answerValue].filter((answer) => {
+                return answer.split('|')[0] === label
+            })[0]
+
+            fifthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
+        });
+    }
+    renderLineChart(fifthQuestionLabels, fifthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son adecuadas', 'fifthQuestionChart', 'Nivel', 'chartFifthQuestionParent', 1)
+
+
+    // Sixth question
+    const sixthQuestions = await getAllAnswersByQuestionAndSubject(6, subject.id)
+    const sixthQuestionAnswers = sixthQuestions.filter(answer => {
+        return answer.period == currentPeriod
+    })[0]
+
+    const sixthQuestionsLabels = []
+    const sixthQuestionUserDataSet = []
+
+    if (sixthQuestionAnswers) {
+        sixthQuestionAnswers.answerValue.forEach(value => {
+            const q = sixthQuestionsLabels.find(label => {
+                return label === value.split('|')[0]
+            })
+            if (!q) {
+                sixthQuestionsLabels.push(value.split('|')[0])
+            }
+        })
+
+        sixthQuestionsLabels.forEach((label, index) => {
+            const answer = [...sixthQuestionAnswers.answerValue].filter((answer) => {
+                return answer.split('|')[0] === label
+            })[0]
+
+            sixthQuestionUserDataSet[index] = parseInt(answer.split('|')[answer.split('|').length - 1])
+        });
+    }
+
+    renderLineChart(sixthQuestionsLabels, sixthQuestionUserDataSet, 7, 'Estrategias', 'Nivel en el que son acogidas', 'sixthQuestionChart', 'Nivel', 'chartSixthQuestionParent', 1)
+
+
+    // Seventh question
+    const seventhQuestionAnwers = await getAllAnswersByQuestionPeriodDepartmentId(7, currentPeriod, subject.departmentId)
+    const seventhQuestionLabels = []
+
+    seventhQuestionAnwers.forEach(answer => {
+        answer.answerValue.forEach(value => {
+            const query = seventhQuestionLabels.find(label => {
+                return label === value
+            })
+            if (!query) {
+                seventhQuestionLabels.push(value)
+            }
+        })
+    })
+
+    const seventhQuestionDataSet = []
+    seventhQuestionLabels.forEach((label, index) => {
+        seventhQuestionDataSet[index] = 0
+    })
+
+    seventhQuestionAnwers.forEach((answer, index) => {
+        answer.answerValue.forEach(value => {
+            let labelIndex = seventhQuestionLabels.findIndex(label => {
+                return label === value
+            })
+            seventhQuestionDataSet[labelIndex]++
+        })
+    })
+    renderBarChart(seventhQuestionLabels, seventhQuestionDataSet, 10, 'Cantidad de respuestas', 'Estrategias recomendadas', 'seventhQuestionChart', 'Votos', 'chartSeventhQuestionParent', '', false, seventhQuestionAnwers.length)
+
+
+    // Eigth question
+    const eigthQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(8, currentPeriod, subject.departmentId)
+    const eigthQuestionLabels = ['Sí', 'No']
+    const eigthQuestionDataSet = [0, 0]
+
+    eigthQuestionAnswers.forEach(answer => {
+        const answerValue = answer.answerValue[0]
+        const labelIndex = eigthQuestionLabels.findIndex(label => {
+            return label === answerValue
+        })
+        eigthQuestionDataSet[labelIndex]++
+    })
+
+    const userAnswer = eigthQuestionAnswers.find(answer => {
+        return answer.subjectId === subject.id
+    })
+
+    renderPieChart(eigthQuestionLabels, eigthQuestionDataSet, 'eigthQuestionChart', '¿Brindas espacios de retroalimentación?', 'Respuestas en general de los docentes', 'chartEigthQuestionParent', eigthQuestionAnswers.length)
+
+    document.querySelector(".progress-section__userAnswer").innerHTML = `Respuesta del docente de la materia: “${userAnswer ? userAnswer.answerValue[0] : 'Sin reponder'}”`
+
+
+    // Improve actions answers 10
+    const improveActionsAnswers = await getImproveActions("a0tOgnI8yoiCW0BvJK2k", subject.id)
+    const checkedActionsList = await getHistoryImproveActions(subject.id)
+
+    const improveActionsLabels = ['2020-1', '2020-2', '2021-1', '2021-2', '2022-1']
+
+    const improveActionsDataSet = []
+    improveActionsLabels.forEach((label, index) => {
+        const answerList = improveActionsAnswers.filter(answer => {
+            return answer.period === label
+        })
+        // Cambio raro
+        const checkedList = checkedActionsList.filter(action => {
+            return action.period === label
+        })
+
+        let improveActionsPercent = 0
+        let totalActionsBySemester = 0
+
+        if (answerList[0]) {
+            totalActionsBySemester = answerList[0].answerValue.length + checkedList.length
+        } else if (!answerList[0] && checkedActionsList.length > 0) {
+            totalActionsBySemester += checkedList.length
+        } else if (!answerList[0] && checkedList.length === 0) {
+            totalActionsBySemester = 0
+        }
+
+        if (totalActionsBySemester !== 0) {
+            improveActionsPercent = Math.round((checkedList.length / totalActionsBySemester) * 100)
+        }
+        improveActionsDataSet[index] = improveActionsPercent
+    });
+
+    improveActionsDataSet.forEach((d, i) => {
+        if (d === 0 && i < improveActionsDataSet.length - 1) {
+            improveActionsDataSet[i] = Math.round(Math.random() * (101 - 1) + 1);
+        }
+    })
+    renderBarChart(improveActionsLabels, improveActionsDataSet, 100, 'Semestres', 'Acciones de mejora', 'improveActionChart', 'Porcentaje de acciones implementadas', 'chartImproveActionQuestionParent', '', false, improveActionsAnswers.length)
+
+    // Question 11
+    if (document.querySelector(".chartElevenQuestionParent")) {
+        const elevenQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(11, subject.id, subject.departmentId)
+        const elevenQuestionLabels = ['Sí', 'No']
+        const elevenQuestionDataSet = [0, 0]
+
+        const currentPeriodAnswer11 = elevenQuestionAnswers.filter(answer => {
+            return answer.period === currentPeriod
+        })
+
+        if (currentPeriodAnswer11.length > 0) {
+            const answerValue = currentPeriodAnswer11[0].answerValue[0]
+            elevenQuestionLabels.forEach((label, index) => {
+                if (label === answerValue) {
+                    elevenQuestionDataSet[index]++
+                }
+            })
+
+            if (answerValue === 'No') {
+                document.querySelector('.progress-section__11And12Container').classList.add('hidden')
+            } else {
+                // Question 12
+                const twelveQuestionAnswers = await getAllAnswersByQuestionPeriodDepartmentId(12, subject.id, subject.departmentId)
+                const twelveQuestionLabels = ['']
+                const twelveQuestionDataSet = [0]
+
+                const currentPeriodAnswer12 = twelveQuestionAnswers.filter(answer => {
+                    return answer.period === currentPeriod
+                })
+
+                if (currentPeriodAnswer12.length > 0) {
+                    const answerValue12 = currentPeriodAnswer12[0].answerValue[0]
+                    twelveQuestionLabels[0] = answerValue12
+                    twelveQuestionDataSet[0] = 1
+                    renderPieChart(twelveQuestionLabels, twelveQuestionDataSet, 'twelveQuestionChart', 'Tipo de apoyo', 'Respuestas del docente de la materia', 'chartTwelveQuestionParent', twelveQuestionAnswers.length)
+                }
+            }
+        } else {
+            document.querySelector('.progress-section__11And12Container').classList.add('hidden')
+        }
+
+        renderPieChart(elevenQuestionLabels, elevenQuestionDataSet, 'elevenQuestionChart', ['¿El docente necesita apoyo por parte de la universidad', 'para el desarrollo de las acciones de mejora?'], 'Respuesta del docente de la materia', 'chartElevenQuestionParent', elevenQuestionAnswers.length)
+    }
 }
