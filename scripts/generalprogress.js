@@ -426,7 +426,6 @@ export async function renderImproveActionsForSpecificGeneral(period, userInfo, c
             percent = (historyImproveActions.length / totalActions) * 100
         }
 
-        console.log(percent)
         // Render progress chart
         const progressContainer = document.querySelector(".memoprogress-item--improveactions")
         progressContainer.innerHTML = `
